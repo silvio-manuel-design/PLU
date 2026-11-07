@@ -1,0 +1,88 @@
+/**
+ * 05-components/chapter-card.css — Kapitel-Karten (js-classic 2.0)
+ *
+ * Responsives Grid (1 / 2 / auto-fit ab 768), Karte mit Modul-Akzent-Rand,
+ * Hover/Focus-raise, Fortschrittsring links oben, Statuszeile.
+ */
+
+.jsc-chapter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--jsc-space-4);
+  margin: var(--jsc-space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .jsc-chapter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .jsc-chapter-grid {
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+}
+
+.jsc-chapter-card {
+  border: 1px solid var(--jsc-color-border);
+  border-left: 0.25rem solid var(--module-accent, var(--jsc-color-accent));
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-1);
+  transition:
+    transform var(--jsc-duration-fast) var(--jsc-ease-out),
+    box-shadow var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-chapter-card:hover,
+.jsc-chapter-card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: var(--jsc-shadow-2), 0 0 1.25rem var(--module-accent-glow, transparent);
+}
+
+.jsc-chapter-card__link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'ring nr'
+    'ring title'
+    'ring status';
+  column-gap: var(--jsc-space-3);
+  align-items: center;
+  height: 100%;
+  padding: var(--jsc-space-4);
+  color: var(--jsc-color-ink);
+  text-decoration: none;
+}
+
+.jsc-chapter-card__ring {
+  grid-area: ring;
+}
+
+.jsc-chapter-card__nr {
+  grid-area: nr;
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+.jsc-chapter-card__title {
+  grid-area: title;
+  font-weight: var(--jsc-weight-semibold);
+  font-size: var(--jsc-text-1);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-chapter-card__status {
+  grid-area: status;
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-chapter-card.is-done .jsc-chapter-card__status {
+  color: var(--jsc-color-success);
+  font-weight: var(--jsc-weight-medium);
+}

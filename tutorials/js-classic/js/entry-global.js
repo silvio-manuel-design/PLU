@@ -18,12 +18,14 @@ import '@phosphor-icons/web/regular';
 import { initI18n, setLanguage, getLanguage, t, onLangChange } from './modules/i18n.js';
 import { initTheme } from './modules/theme.js';
 import { initNavigation } from './modules/navigation.js';
+import { initHome } from './modules/home.js';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
 initI18n(de, en);
 initTheme();
 initNavigation();
+initHome();
 
 /* ------------------------------------------------------------------ */
 /* Sprach-Umschalter (P1-Demo für smoke-test*.html; Persistenz via     */

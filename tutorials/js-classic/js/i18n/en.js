@@ -17,6 +17,8 @@ export default {
   'ui.common.next': 'Next',
   'ui.common.prev': 'Back',
   'ui.progress.chapter': 'Chapter',
+  'ui.progress.done': 'completed',
+  'ui.progress.pending': 'not completed yet',
 
   /* Navigation (P2) */
   'ui.nav.home': 'Course',

@@ -122,6 +122,29 @@ i18n-Dictionaries.
   Pfeiltasten, Escape, Tab-raus-schließt; States per `:has()` am Wrapper — §5.9);
   Kapitelübersicht = `<dialog>` mit Focus-Trap, Backdrop-Klick und Return-of-Focus.
 
+## Fortschritt & Speicher-Schema
+
+**Kapitel-Fortschritt** (`js/modules/progress.js`, verbindliches Schema):
+
+- localStorage-Key `jsc-progress` (via `storage.js`, Namespace-Präfix `jsc-`), JSON:
+  `{ "chapters": { "01": true, … } }`
+- API: `isDone(nr)` · `markDone(nr)` · `unmarkDone(nr)` · `doneCount()`
+- Jede Änderung feuert `window.dispatchEvent(new CustomEvent('plu:progress'))` —
+  UI-Komponenten (z. B. Karten-Ringe) lauschen und aktualisieren live.
+- `progress.js`/`home.js` setzen **kein** `documentElement lang/dir` — Seitensprache steht
+  authored im HTML; die i18n-Engine steuert ausschließlich Chrome-Strings.
+
+Weitere Speicher-Keys: `jsc-theme` (Theme, siehe Site-Chrome), `plu-language` (i18n, PLU-weit).
+
+## Bild-Ablage
+
+- Ablage: `assets/img/<bereich>/` (Homepage: `assets/img/home/`).
+- Pipeline-Standard (Pilsl): AVIF + WebP + JPG, Raster 768/1440/2560 (Hero/Sektionen)
+  bzw. 480/800/1200 (Karten); `<picture>` mit AVIF→WebP→JPG, `srcset` + `sizes`,
+  `width`/`height` immer gesetzt (kein CLS).
+- Hero: `fetchpriority="high"`, ohne `loading` (eager). Alles below the fold:
+  `loading="lazy"`. Beim Server-Deploy: EXIF/Cache-Header beachten.
+
 ## QA-Gates
 
 - `vite build` exit 0; Smoke-/Kapitel-Seiten rendern DE + EN.
@@ -144,3 +167,9 @@ i18n-Dictionaries.
   hreflang-Sprach-Switcher), Chrome-CSS in Layer 02/03/04/09, neuer Token
   `--jsc-color-accent-ink` für Akzent-Normaltext auf Light (4.54:1), P1-Nachzüger
   (package-lock-Regel in `tutorials/.gitignore` dauerhaft gefixt).
+- **P3** (08.11.2026): Homepage DE+EN — Hero (full-bleed `<picture>`, Overlay-Gradient,
+  CTAs), Kursübersicht mit Fortschrittsringen aus `chaptersMeta` (clientseitig gerendert,
+  `<ol>`-Mount bleibt valides leeres HTML ohne JS), Lernziele, KI-Teaser; neue Module
+  `progress.js` (`jsc-progress`-Schema + `plu:progress`-Event) und `home.js`; Hero-Bilder
+  (18 Assets, AVIF/WebP/JPG × 768/1440/2560) unter `assets/img/home/`. Erste
+  Bestandsdatei-Ersetzung: `index.html` (Altstand bleibt im Git-Verlauf).
