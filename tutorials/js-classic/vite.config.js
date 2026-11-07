@@ -16,6 +16,8 @@ export default defineConfig({
       input: {
         smokeTest: resolve(__dirname, 'labs/smoke-test.html'),
         smokeTestEn: resolve(__dirname, 'labs/smoke-test-en.html'),
+        p2Fundament: resolve(__dirname, 'labs/p2-fundament.html'),
+        p2FundamentEn: resolve(__dirname, 'labs/p2-fundament-en.html'),
       },
     },
   },

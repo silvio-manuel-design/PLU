@@ -1,0 +1,39 @@
+/**
+ * 04-components/skip-link.css — Skip-Links (js-classic 2.0)
+ *
+ * Visuell verborgen bis Fokus — oberste Ebene via z-Token.
+ */
+
+.jsc-skip-links {
+  position: fixed;
+  top: var(--jsc-space-2);
+  left: var(--jsc-space-2);
+  z-index: var(--jsc-z-skip-link);
+}
+
+/* Beide Links absolut im Container gestapelt — nur der fokussierte
+   wird sichtbar; ohne Fokus sind beide vollständig außerhalb. */
+.jsc-skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-s);
+  background: var(--jsc-color-accent);
+  color: oklch(8.3% 0.003 282); /* dunkler Text auf Akzent-Fläche */
+  font-weight: var(--jsc-weight-semibold);
+  text-decoration: none;
+  white-space: nowrap;
+  transform: translateY(calc(-100% - var(--jsc-space-6)));
+  transition: transform var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-skip-link:focus-visible {
+  transform: translateY(0);
+  outline-offset: 2px;
+}
+
+/* Zweiter Link legt sich unter den ersten, wenn beide fokussiert sichtbar */
+.jsc-skip-link + .jsc-skip-link:focus-visible {
+  top: calc(100% + var(--jsc-space-1));
+}
