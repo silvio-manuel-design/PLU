@@ -1,0 +1,147 @@
+/**
+ * 04-components/nav.css — Hauptnavigation mit Dropdowns (js-classic 2.0)
+ *
+ * Mobile-first: horizontale Scroll-Leiste unter dem Header.
+ * ≥769px: frei horizontal im Header.
+ * Dropdown-State: :has() auf dem Item-Wrapper (§5.9, Baseline widely
+ * available) — JS setzt nur aria-expanded am Button.
+ */
+
+.jsc-nav__list {
+  display: flex;
+  gap: var(--jsc-space-1);
+  align-items: center;
+  padding: 0;
+  list-style: none;
+}
+
+/* Mobil: Nav als scrollbarer Balken, kein Umbruch der Items */
+.jsc-nav {
+  flex-basis: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.jsc-nav__list {
+  width: max-content;
+  min-width: 100%;
+}
+
+.jsc-nav__link,
+.jsc-nav__btn {
+  display: inline-flex;
+  gap: var(--jsc-space-1);
+  align-items: center;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-m);
+  color: var(--jsc-color-ink-muted);
+  font-weight: var(--jsc-weight-medium);
+  font-size: var(--jsc-text-0);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  transition:
+    color var(--jsc-duration-fast) var(--jsc-ease-out),
+    background var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-nav__link:hover,
+.jsc-nav__btn:hover,
+.jsc-nav__btn[aria-expanded="true"] {
+  color: var(--jsc-color-accent);
+  background: var(--jsc-color-accent-dim);
+}
+
+.jsc-nav__link.is-current,
+.jsc-nav__btn.is-current {
+  color: var(--jsc-color-accent);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+/* Light: Akzent-Text in der Nav = Normaltext → accent-ink */
+html[data-theme="light"] .jsc-nav__link:hover,
+html[data-theme="light"] .jsc-nav__btn:hover,
+html[data-theme="light"] .jsc-nav__btn[aria-expanded="true"],
+html[data-theme="light"] .jsc-nav__link.is-current,
+html[data-theme="light"] .jsc-nav__btn.is-current {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-nav__caret {
+  font-size: var(--jsc-text--1);
+  transition: transform var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+/* Dropdown — State per :has() (§5.9): JS setzt nur aria-expanded */
+.jsc-nav-item {
+  position: relative;
+}
+
+.jsc-nav-item:has(> .jsc-nav__btn[aria-expanded="true"]) > .jsc-nav__caret,
+.jsc-nav-item:has(> .jsc-nav__btn[aria-expanded="true"]) > .jsc-nav__btn > .jsc-nav__caret {
+  transform: rotate(180deg);
+}
+
+.jsc-nav__sub {
+  position: absolute;
+  top: calc(100% + var(--jsc-space-1));
+  left: 0;
+  z-index: var(--jsc-z-overlay);
+  display: none;
+  min-width: 14rem;
+  margin: 0;
+  padding: var(--jsc-space-2);
+  list-style: none;
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-1);
+  box-shadow: var(--jsc-shadow-2);
+}
+
+.jsc-nav-item:has(> .jsc-nav__btn[aria-expanded="true"]) > .jsc-nav__sub {
+  display: block;
+}
+
+.jsc-nav__sub-link {
+  display: block;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-s);
+  color: var(--jsc-color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.jsc-nav__sub-link:hover,
+.jsc-nav__sub-link:focus-visible {
+  background: var(--jsc-color-accent-dim);
+  color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-nav__sub-link:hover,
+html[data-theme="light"] .jsc-nav__sub-link:focus-visible {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-nav__sub-link[aria-current="page"] {
+  color: var(--jsc-color-accent);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+html[data-theme="light"] .jsc-nav__sub-link[aria-current="page"] {
+  color: var(--jsc-color-accent-ink);
+}
+
+/* Desktop ≥769px: Header in einer Zeile, Nav ohne Scroll */
+@media (min-width: 769px) {
+  .jsc-nav {
+    flex-basis: auto;
+    overflow: visible;
+  }
+
+  .jsc-nav__list {
+    width: auto;
+    min-width: 0;
+  }
+}

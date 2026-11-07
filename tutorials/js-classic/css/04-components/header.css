@@ -1,0 +1,98 @@
+/**
+ * 04-components/header.css — Site-Header (js-classic 2.0)
+ *
+ * Mobile-first: Zeile bricht um, Nav scrollbar (Details in nav.css).
+ * ≥769px: horizontale Ausrichtung (nav.css).
+ */
+
+.jsc-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--jsc-z-header);
+  background: var(--jsc-color-surface-1);
+  border-bottom: 1px solid var(--jsc-color-border);
+}
+
+.jsc-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-3);
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--jsc-space-3);
+}
+
+.jsc-header__brand {
+  display: inline-flex;
+  gap: var(--jsc-space-2);
+  align-items: baseline;
+  font-weight: var(--jsc-weight-bold);
+  font-size: var(--jsc-text-1);
+  color: var(--jsc-color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.jsc-header__brand-sub {
+  color: var(--jsc-color-ink-muted);
+  font-weight: var(--jsc-weight-medium);
+  font-size: var(--jsc-text--1);
+}
+
+/* Light: Brand-Text nicht in reinem Gelb (AA-Normaltext) */
+html[data-theme="light"] .jsc-header__brand {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-header__brand-icon {
+  font-weight: var(--jsc-weight-bold);
+}
+
+.jsc-header__actions {
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  margin-left: auto;
+}
+
+.jsc-theme-toggle {
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-2);
+  color: var(--jsc-color-ink);
+  cursor: pointer;
+  transition: background var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-theme-toggle:hover {
+  background: var(--jsc-color-accent-dim);
+}
+
+.jsc-theme-toggle[aria-pressed="true"] {
+  border-color: var(--jsc-color-accent);
+  box-shadow: var(--jsc-glow-accent);
+}
+
+.jsc-lang-switcher__link {
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-pill);
+  color: var(--jsc-color-ink-muted);
+  text-decoration: none;
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  transition:
+    color var(--jsc-duration-fast) var(--jsc-ease-out),
+    border-color var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-lang-switcher__link:hover {
+  color: var(--jsc-color-accent);
+  border-color: var(--jsc-color-accent);
+}
+
+/* Light: Zielsprache als Link-Text = Normaltext → accent-ink */
+html[data-theme="light"] .jsc-lang-switcher__link:hover {
+  color: var(--jsc-color-accent-ink);
+}

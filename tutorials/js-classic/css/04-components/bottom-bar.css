@@ -1,0 +1,132 @@
+/**
+ * 04-components/bottom-bar.css — mobile Kapitelnavigation (js-classic 2.0)
+ *
+ * Sichtbar ≤768px (Thumb-Zone, safe-area-inset beachten),
+ * hidden darüber. Desktop-Navigation läuft über den Header.
+ */
+
+.jsc-bottom-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--jsc-z-bottom-bar);
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--jsc-space-2) var(--jsc-space-3)
+    calc(var(--jsc-space-2) + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--jsc-color-border);
+  background: var(--jsc-color-surface-1);
+}
+
+.jsc-bottom-bar__btn,
+.jsc-bottom-bar__toc {
+  display: inline-flex;
+  gap: var(--jsc-space-1);
+  align-items: center;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-2);
+  color: var(--jsc-color-ink);
+  font-weight: var(--jsc-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-bottom-bar__btn:hover,
+.jsc-bottom-bar__toc:hover {
+  background: var(--jsc-color-accent-dim);
+}
+
+.jsc-bottom-bar__btn.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.jsc-bottom-bar__arrow {
+  font-weight: var(--jsc-weight-bold);
+}
+
+/* Kapitelübersicht (<dialog>) */
+.jsc-toc-dialog {
+  width: min(24rem, calc(100vw - 2 * var(--jsc-container-gutter)));
+  max-height: min(32rem, 80dvh);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-1);
+  color: var(--jsc-color-ink);
+  box-shadow: var(--jsc-shadow-3);
+}
+
+.jsc-toc-dialog::backdrop {
+  background: oklch(0% 0 0 / 0.6);
+}
+
+.jsc-toc-dialog__head {
+  display: flex;
+  gap: var(--jsc-space-3);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--jsc-space-4) var(--jsc-space-4) var(--jsc-space-2);
+}
+
+.jsc-toc-dialog__title {
+  font-size: var(--jsc-text-2);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-toc-dialog__close {
+  padding: var(--jsc-space-1) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-2);
+  color: var(--jsc-color-ink);
+  font-size: var(--jsc-text-2);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.jsc-toc-dialog__list {
+  margin: 0;
+  padding: 0 var(--jsc-space-4) var(--jsc-space-4);
+  list-style: none;
+  overflow-y: auto;
+}
+
+.jsc-toc-dialog__link {
+  display: block;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-s);
+  color: var(--jsc-color-ink);
+  text-decoration: none;
+}
+
+.jsc-toc-dialog__link:hover,
+.jsc-toc-dialog__link:focus-visible {
+  background: var(--jsc-color-accent-dim);
+  color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-toc-dialog__link:hover,
+html[data-theme="light"] .jsc-toc-dialog__link:focus-visible {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-toc-dialog__nr {
+  color: var(--jsc-color-ink-muted);
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text--1);
+}
+
+/* ≥769px: Bottom-Bar hidden, Desktop-Nav im Header */
+@media (min-width: 769px) {
+  .jsc-bottom-bar {
+    display: none;
+  }
+}

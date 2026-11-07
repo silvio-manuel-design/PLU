@@ -1,54 +1,34 @@
 /**
- * entry-global.js — globaler Einstieg (js-classic 2.0, P1)
+ * entry-global.js — globaler Einstieg (js-classic 2.0)
  *
  * - Lädt Schrift (Inter Variable) und Icons (Phosphor) LOKAL — kein CDN.
- * - Initialisiert die i18n-Engine (Port aus js-modern): Zero-Dep, DE-Fallback,
- *   Browser-Erkennung, localStorage-Key `plu-language` (PLU-weit), setzt
- *   `lang` + `dir` inkl. RTL-Logik.
- * - Theme-Demo: Klick toggelt `data-theme` auf <html> (Dark = kein Attribut;
- *   Persistenz folgt erst in P2 — reine Demo).
- * - P1-Demos: Sprach-Umschalter, Copy-Button (alle via data-Attribute,
- *   0 Inline-Scripts/0 Inline-Eventhandler).
+ * - Initialisiert die i18n-Engine (1:1-Port aus js-modern): Zero-Dep,
+ *   DE-Fallback, Browser-Erkennung, localStorage-Key `plu-language`
+ *   (PLU-weit konsistent), setzt `lang` + `dir` inkl. RTL-Logik.
+ * - Theme-Steuerung via modules/theme.js (persistiert `jsc-theme`, Dark first).
+ * - Site-Chrome via modules/navigation.js, wenn die Seite
+ *   `<div data-component="jsc-site-chrome"></div>` anbietet (P2-Vertrag).
+ * - P1-Demo-Handler (smoke-test*.html): Sprach-Toggle, Copy, Print —
+ *   die Theme-Demo-Buttons bedient jetzt modules/theme.js.
  */
 
 import '@fontsource-variable/inter/index.css';
-import '@phosphor-icons/web/regular/style.css';
+import '@phosphor-icons/web/regular';
 
 import { initI18n, setLanguage, getLanguage, t, onLangChange } from './modules/i18n.js';
+import { initTheme } from './modules/theme.js';
+import { initNavigation } from './modules/navigation.js';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
 initI18n(de, en);
+initTheme();
+initNavigation();
 
 /* ------------------------------------------------------------------ */
-/* Theme-Demo (P1)                                                     */
-/* ------------------------------------------------------------------ */
-
-const themeToggle = document.querySelector('[data-theme-toggle]');
-
-function syncThemeToggle() {
-  if (!themeToggle) return;
-  const isLight = document.documentElement.dataset.theme === 'light';
-  themeToggle.dataset.i18n = isLight ? 'ui.theme.toDark' : 'ui.theme.toLight';
-  themeToggle.textContent = t(themeToggle.dataset.i18n);
-}
-
-if (themeToggle) {
-  syncThemeToggle();
-  themeToggle.addEventListener('click', () => {
-    const root = document.documentElement;
-    if (root.dataset.theme === 'light') {
-      root.removeAttribute('data-theme'); // Dark = Default ohne Attribut
-    } else {
-      root.dataset.theme = 'light';
-    }
-    syncThemeToggle();
-  });
-  onLangChange(syncThemeToggle);
-}
-
-/* ------------------------------------------------------------------ */
-/* Sprach-Umschalter (P1-Demo; Persistenz via Engine: plu-language)    */
+/* Sprach-Umschalter (P1-Demo für smoke-test*.html; Persistenz via     */
+/* Engine: plu-language) — P2-Seiten nutzen den hreflang-Switcher      */
+/* aus modules/navigation.js.                                          */
 /* ------------------------------------------------------------------ */
 
 const langToggle = document.querySelector('[data-lang-toggle]');
@@ -60,7 +40,7 @@ if (langToggle) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Drucken (P1)                                                        */
+/* Drucken (P1-Demo)                                                   */
 /* ------------------------------------------------------------------ */
 
 document.querySelectorAll('[data-print]').forEach((btn) => {

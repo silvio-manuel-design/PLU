@@ -101,6 +101,27 @@ tutorials/js-classic/
 12. **QA je Paket:** `npm run build` exit 0, 0 Konsolen-Fehler, Screenshots an allen
     Breakpoints (360/768/1024/1440), DE+EN-Check, Kontrast-Beleg bei Token-Änderungen.
 
+## Site-Chrome & Komponenten-Vertrag
+
+**Rendering-Vertrag (verbindlich):** Seiten binden Header, Footer und Bottom-Bar
+künftig ausschließlich über `<div data-component="jsc-site-chrome"></div>` im Markup
+plus `entry-global.js` — kein kopiertes Chrome-Markup mehr (behebt den Befund
+„Header in 25+ Dateien dupliziert"). Der Chrome wird aus der zentralen
+Navigationsdatenquelle `js/data/nav.js` gerendert; sämtliche Labels kommen aus den
+i18n-Dictionaries.
+
+- **Nav-Datenquelle:** `js/data/nav.js` (`NAV`, `chaptersMeta`, `infoPages`) —
+  liefert gleichzeitig die Prev/Next-Sequenz der Bottom-Bar (Reihenfolge = Kurssequenz).
+- **Theme-Key:** `jsc-theme` in localStorage (via `js/modules/storage.js`,
+  Namespace `jsc-`). Dark ist Default ohne Attribut; kein `prefers-color-scheme`-Auto-Switch.
+- **Sprach-Switcher:** verlinkt aufs hreflang-Pendant der Seite; ohne Pendant ausgeblendet.
+- **Neuer Token `--jsc-color-accent-ink`** (`#8A7500`, 4.54:1 auf Light): verbindlich für
+  Akzent-**Normaltext** auf Light (kleine Labels/Links). `accent-strong` bleibt für große
+  Texte/Flächen, reines `accent` auf Light nur für Flächen/Glow/Icons.
+- **Interaktionen:** Dropdowns = Disclosure-Pattern (Button `aria-expanded`,
+  Pfeiltasten, Escape, Tab-raus-schließt; States per `:has()` am Wrapper — §5.9);
+  Kapitelübersicht = `<dialog>` mit Focus-Trap, Backdrop-Klick und Return-of-Focus.
+
 ## QA-Gates
 
 - `vite build` exit 0; Smoke-/Kapitel-Seiten rendern DE + EN.
@@ -115,5 +136,11 @@ tutorials/js-classic/
   Workflow-Doku `docs/08-GITHUB-WORKFLOW.md`.
 - **P1** (07.11.2026): Technisches Fundament js-classic 2.0 — Vite-7-Setup
   (Multi-Page, lokale Fonts/Icons), ITCSS-Layer-Gerüst (00–09), `jsc-tokens.css`
-  auf OKLCH-Basis (Dark first, light-dark() mit Fallback), i18n-Engine 1:1 aus
+  auf OKLCH-Basis (Dark first, Override-Fallback statt light-dark()), i18n-Engine 1:1 aus
   js-modern portiert (de/en Start-Dictionary), PROJEKT.md, DE/EN-Smoke-Tests in `labs/`.
+- **P2** (07.11.2026): Site-Chrome-Fundament — zentrale Nav-Datenquelle
+  (`js/data/nav.js`), Dictionary-Erweiterung (Nav/A11y), Module storage/theme/navigation
+  (Persistenz `jsc-theme`, Disclosure-Dropdowns, TOC-Dialog mit Focus-Trap, Skip-Links,
+  hreflang-Sprach-Switcher), Chrome-CSS in Layer 02/03/04/09, neuer Token
+  `--jsc-color-accent-ink` für Akzent-Normaltext auf Light (4.54:1), P1-Nachzüger
+  (package-lock-Regel in `tutorials/.gitignore` dauerhaft gefixt).

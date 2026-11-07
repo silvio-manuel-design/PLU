@@ -1,0 +1,27 @@
+/**
+ * 02-layout/site.css — Seiten-Grundgerüst (js-classic 2.0)
+ *
+ * Body = Flex-Spalte, `main` wächst → Footer bleibt unten,
+ * auch wenn der Seiteninhalt kurz ist.
+ */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ≤768px: Platz für die fixed Bottom-Bar schaffen (Footer bleibt erreichbar) */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.jsc-footer {
+  flex-shrink: 0;
+}
