@@ -1,0 +1,244 @@
+/**
+ * 00-settings/jsc-tokens.css — Design-Tokens js-classic 2.0
+ *
+ * - Dark Mode first: Default ohne Attribut; Light nur via html[data-theme="light"].
+ * - Alle Farbwerte in OKLCH; die Hex-Kommentare sind die verbindliche Referenz.
+ * - Ableitungen (dim/glow) ausschließlich via color-mix(), keine Handpaletten.
+ * - Theme-Mechanik: konkrete Dark-Baseline in :root + Pflicht-Override-Blöcke
+ *   unter html[data-theme="light"] (§5.9-Pflicht-Fallback).
+ *
+ * HINWEIS light-dark() (§5.9): geprüft und verworfen — Edge 156 löst light-dark()
+ * gegen prefers-color-scheme auf, nicht gegen die per data-theme gesetzte
+ * color-scheme-Eigenschaft (Probe: light-dark(red, blue) mit color-scheme: dark
+ * → blue, solange das OS light bevorzugt). Für ein attribut-gesteuertes
+ * Theme-System würde das den Dark-first-Default brechen. Der Override-Fallback
+ * ist die verbindliche Mechanik; siehe P1-Report (Abweichung mit Nachweis).
+ */
+
+/* ------------------------------------------------------------------ */
+/* Theme-Modellierung                                                  */
+/* ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------ */
+/* Baseline: Dark (funktioniert in jedem Browser)                      */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-color-surface-0: oklch(4.354% 0.0023 281.5); /* #0E0F13 */
+  --jsc-color-surface-1: oklch(7.777% 0.0046 279.8); /* #15171D */
+  --jsc-color-surface-2: oklch(11.779% 0.0059 278.7); /* #1C1F27 */
+  --jsc-color-border: oklch(18.936% 0.007 277.7); /* #2A2E38 */
+  --jsc-color-ink: oklch(96.514% 0.0011 271.3); /* #F4F5F7 */
+  --jsc-color-ink-muted: oklch(69.92% 0.0051 274); /* #A7ABB4 */
+}
+
+/* Pflicht-Fallback Light (deckt auch Browser ohne light-dark()) */
+html[data-theme="light"] {
+  --jsc-color-surface-0: oklch(100% 0 0); /* #FFFFFF */
+  --jsc-color-surface-1: oklch(97.209% 0.0011 271.3); /* #F6F7F9 */
+  --jsc-color-surface-2: oklch(94.401% 0.0022 271.4); /* #EDEFF3 */
+  --jsc-color-border: oklch(87.72% 0.0038 274.2); /* #D9DCE3 */
+  --jsc-color-ink: oklch(8.3% 0.003 282); /* #17181C */
+  --jsc-color-ink-muted: oklch(38.585% 0.007 274.7); /* #565B66 */
+}
+
+/* ------------------------------------------------------------------ */
+/* Semantik — beide Themes identisch (Dark-first-Kontrast belegt)      */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-color-accent: oklch(88.279% 0.0848 96.1); /* #F7DF1E JS-Markengelb */
+  --jsc-color-progress: oklch(76.922% 0.0455 181.7); /* #2DD4BF Teal = Fortschritt */
+  --jsc-color-success: oklch(79.187% 0.0689 149.6); /* #4ADE80 */
+  --jsc-color-cta: oklch(63.798% 0.0666 33.7); /* #FF6B5C Coral */
+  --jsc-color-achievement: oklch(82.665% 0.0721 83.2); /* #FFC53D Gold */
+
+  /* Light-Text-Akzent statt reinem Gelb (#A98F00).
+     Achtung: auf Light nur für GROSSE Texte (AA ≥ 3.0) — siehe Kontrast-Tabelle
+     im P1-Report; für Normaltext auf Light: --jsc-color-ink/ink-muted. */
+  --jsc-color-accent-strong: oklch(59.962% 0.0643 91.9); /* #A98F00 */
+}
+
+/* Ableitungen — einmal generisch, theme-übergreifend via Token-Auflösung */
+:root {
+  --jsc-color-accent-dim: color-mix(
+    in oklch,
+    var(--jsc-color-accent) 18%,
+    var(--jsc-color-surface-0)
+  );
+  --jsc-color-accent-glow: color-mix(
+    in oklch,
+    var(--jsc-color-accent) 35%,
+    transparent
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Modul-Akzente (Dark-Neon, pro Kapitel via data-module="m01…m10")    */
+/* ------------------------------------------------------------------ */
+
+[data-module="m01"] {
+  --module-accent: oklch(88.279% 0.0848 96.1); /* #F7DF1E */
+}
+[data-module="m02"] {
+  --module-accent: oklch(84.296% 0.0861 121.8); /* #A3E635 */
+}
+[data-module="m03"] {
+  --module-accent: oklch(80.854% 0.0475 180.5); /* #34E0C8 */
+}
+[data-module="m04"] {
+  --module-accent: oklch(72.234% 0.0424 247.8); /* #38BDF8 */
+}
+[data-module="m05"] {
+  --module-accent: oklch(61.877% 0.0643 293.1); /* #7C8CFF */
+}
+[data-module="m06"] {
+  --module-accent: oklch(59.245% 0.0928 317.2); /* #C95CFF */
+}
+[data-module="m07"] {
+  --module-accent: oklch(62.286% 0.0761 335.5); /* #F05CD0 */
+}
+[data-module="m08"] {
+  --module-accent: oklch(61.934% 0.0662 15.4); /* #FF5C7A */
+}
+[data-module="m09"] {
+  --module-accent: oklch(69.312% 0.0705 56.4); /* #FF8A3D */
+}
+[data-module="m10"] {
+  --module-accent: oklch(82.665% 0.0721 83.2); /* #FFC53D */
+}
+
+/* Generische Modul-Derivate — einmal für alle Module */
+[data-module] {
+  --module-accent-dim: color-mix(
+    in oklch,
+    var(--module-accent) 18%,
+    var(--jsc-color-surface-0)
+  );
+  --module-accent-glow: color-mix(
+    in oklch,
+    var(--module-accent) 35%,
+    transparent
+  );
+  --module-accent-text: var(--module-accent);
+}
+
+/* Modul-Akzent als Text auf Light: abdunkeln Richtung Ink (AA) */
+html[data-theme="light"] [data-module] {
+  --module-accent-text: color-mix(
+    in oklch,
+    var(--module-accent),
+    var(--jsc-color-ink) 25%
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Typografie                                                          */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-font-sans: "Inter Variable", Inter, system-ui, sans-serif;
+  --jsc-font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  /* Skala (Schritte -1…5) */
+  --jsc-text--1: 0.875rem;
+  --jsc-text-0: 1rem;
+  --jsc-text-1: 1.125rem;
+  --jsc-text-2: 1.375rem;
+  --jsc-text-3: 1.75rem;
+  --jsc-text-4: 2.25rem;
+  --jsc-text-5: clamp(2.5rem, 5vw, 3.5rem);
+
+  --jsc-weight-regular: 400;
+  --jsc-weight-medium: 500;
+  --jsc-weight-semibold: 600;
+  --jsc-weight-bold: 700;
+
+  --jsc-leading-body: 1.6;
+  --jsc-leading-heading: 1.15;
+}
+
+/* ------------------------------------------------------------------ */
+/* Abstand (4px-Basis)                                                 */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-space-1: 0.25rem;
+  --jsc-space-2: 0.5rem;
+  --jsc-space-3: 0.75rem;
+  --jsc-space-4: 1rem;
+  --jsc-space-5: 1.5rem;
+  --jsc-space-6: 2rem;
+  --jsc-space-7: 3rem;
+  --jsc-space-8: 4rem;
+  --jsc-space-9: 6rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Radius                                                              */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-radius-s: 0.375rem;
+  --jsc-radius-m: 0.625rem;
+  --jsc-radius-l: 1rem;
+  --jsc-radius-pill: 999px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Schatten & Glow (auf Dark dezent)                                   */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-shadow-1:
+    0 1px 2px oklch(0% 0 0 / 0.25),
+    0 1px 3px oklch(0% 0 0 / 0.2);
+  --jsc-shadow-2:
+    0 2px 6px oklch(0% 0 0 / 0.28),
+    0 4px 12px oklch(0% 0 0 / 0.22);
+  --jsc-shadow-3:
+    0 4px 12px oklch(0% 0 0 / 0.32),
+    0 12px 32px oklch(0% 0 0 / 0.28);
+
+  --jsc-glow-accent: 0 0 1.5rem var(--jsc-color-accent-glow);
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-duration-fast: 150ms;
+  --jsc-duration-base: 250ms;
+  --jsc-duration-slow: 400ms;
+  --jsc-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Layout                                                              */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-container-max: 72rem;
+  --jsc-container-gutter: clamp(1rem, 4vw, 2rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* z-index (verbindliche Staffel)                                      */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --jsc-z-header: 100;
+  --jsc-z-bottom-bar: 100;
+  --jsc-z-overlay: 200;
+  --jsc-z-modal: 300;
+  --jsc-z-skip-link: 400;
+}

@@ -1,0 +1,214 @@
+/**
+ * labs/smoke-test.css — TEMPORÄRE Demo-Styles für die P1-Smoke-Tests.
+ *
+ * ⚠️ P3 ersetzt/entsorgt diese Datei — die Labs-Seiten fliegen mit der
+ * echten Homepage-Überarbeitung raus. Alles hier dient nur dem Nachweis,
+ * dass Tokens/i18n/Theme/Fonts funktionieren.
+ */
+
+body {
+  background: var(--jsc-color-surface-0);
+  color: var(--jsc-color-ink);
+  font-family: var(--jsc-font-sans);
+  font-size: var(--jsc-text-0);
+  line-height: var(--jsc-leading-body);
+}
+
+/* Skip-Link (z-index-Staffel beachten) */
+.smoke-skip {
+  position: fixed;
+  top: var(--jsc-space-2);
+  left: var(--jsc-space-2);
+  z-index: var(--jsc-z-skip-link);
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-s);
+  background: var(--jsc-color-accent);
+  color: oklch(8.3% 0.003 282); /* dunkler Text auf Gelb */
+  font-weight: var(--jsc-weight-semibold);
+  transform: translateY(calc(-100% - var(--jsc-space-4)));
+  transition: transform var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.smoke-skip:focus-visible {
+  transform: translateY(0);
+}
+
+.smoke-topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--jsc-z-header);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-3);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--jsc-space-3) var(--jsc-container-gutter);
+  background: var(--jsc-color-surface-1);
+  border-bottom: 1px solid var(--jsc-color-border);
+}
+
+.smoke-brand {
+  display: inline-flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  font-weight: var(--jsc-weight-bold);
+  color: var(--jsc-color-accent);
+}
+
+/* Light: Brand-Text klein → kein rein-gelber Text; Icon darf Akzent bleiben */
+html[data-theme="light"] .smoke-brand {
+  color: var(--jsc-color-ink);
+}
+
+.smoke-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-2);
+}
+
+.smoke-actions button,
+.smoke-nav button {
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-2);
+  color: var(--jsc-color-ink);
+  cursor: pointer;
+  transition:
+    background var(--jsc-duration-fast) var(--jsc-ease-out),
+    box-shadow var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.smoke-actions button:hover,
+.smoke-nav button:hover {
+  background: var(--jsc-color-accent-dim);
+  box-shadow: var(--jsc-glow-accent);
+}
+
+.smoke-main {
+  max-width: var(--jsc-container-max);
+  margin-inline: auto;
+  padding: var(--jsc-space-7) var(--jsc-container-gutter);
+}
+
+.smoke-title {
+  font-size: var(--jsc-text-5);
+  line-height: var(--jsc-leading-heading);
+  color: var(--jsc-color-accent);
+  text-shadow: 0 0 2rem var(--jsc-color-accent-glow);
+}
+
+/* Light: reines Gelb nicht als Text (Paket-Regel) — Titel groß → accent-strong */
+html[data-theme="light"] .smoke-title {
+  color: var(--jsc-color-accent-strong);
+}
+
+.smoke-lead {
+  max-width: 46rem;
+  margin-top: var(--jsc-space-3);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text-1);
+}
+
+.smoke-grid {
+  display: grid;
+  gap: var(--jsc-space-4);
+  margin-top: var(--jsc-space-6);
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.smoke-demo {
+  padding: var(--jsc-space-5);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-1);
+  box-shadow: var(--jsc-shadow-1);
+}
+
+.smoke-demo h2 {
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  font-size: var(--jsc-text-2);
+  line-height: var(--jsc-leading-heading);
+}
+
+.smoke-demo p {
+  margin-top: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+/* Akzent-Fläche: JS-Gelb, dunkler Text */
+.smoke-demo--accent {
+  background: var(--jsc-color-accent);
+  border-color: transparent;
+  box-shadow: var(--jsc-glow-accent);
+}
+
+.smoke-demo--accent h2,
+.smoke-demo--accent p {
+  color: oklch(8.3% 0.003 282);
+}
+
+/* Modul-Chips: Modul-Akzent-Derivate */
+.smoke-chip {
+  display: inline-block;
+  padding: var(--jsc-space-1) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-pill);
+  background: var(--module-accent-dim);
+  color: var(--module-accent-text);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+.smoke-demo[data-module] h2 {
+  color: var(--module-accent-text);
+}
+
+.smoke-demo[data-module] {
+  box-shadow: 0 0 1.25rem var(--module-accent-glow);
+}
+
+/* Surface-Leiter */
+.smoke-surface-0 {
+  background: var(--jsc-color-surface-0);
+}
+
+.smoke-surface-1 {
+  background: var(--jsc-color-surface-1);
+}
+
+.smoke-surface-2 {
+  background: var(--jsc-color-surface-2);
+}
+
+/* Mono & Icons */
+.smoke-mono {
+  font-family: var(--jsc-font-mono);
+}
+
+.ph {
+  font-size: 1.25em;
+}
+
+/* Demo-Navigation */
+.smoke-nav {
+  display: flex;
+  gap: var(--jsc-space-3);
+  justify-content: space-between;
+  margin-top: var(--jsc-space-6);
+}
+
+.smoke-footer {
+  padding: var(--jsc-space-4) var(--jsc-container-gutter);
+  border-top: 1px solid var(--jsc-color-border);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .smoke-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
