@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Quest | JavaScript Abenteuer</title>
+  <meta name="description" content="Gamified JavaScript Tutorial. Lerne spielerisch Programmieren mit XP, Leveln und Badges!">
+  <meta name="theme-color" content="#F1C40F">
+
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="header">
+    <div class="site-header__container">
+      <a href="index.html" class="brand">
+        <img src="../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span class="brand__name">JavaScript <span class="brand__name--quest">Quest</span></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html" class="nav-link"><i class="ph ph-house"></i> <span data-i18n="nav.hub">Hub</span></a>
+        <a href="#welten" class="nav-link"><i class="ph ph-globe-hemisphere-west"></i> <span data-i18n="nav.worlds">Welten</span></a>
+        <a href="#badges" class="nav-link"><i class="ph ph-trophy"></i> <span data-i18n="nav.badges">Badges</span></a>
+        <a href="tools.html" class="nav-link"><i class="ph ph-wrench"></i> <span data-i18n="nav.tools">Tools</span></a>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="lang-switcher__btn" aria-label="Sprache wählen" aria-expanded="false">
+            <span class="lang-switcher__code" id="lang-current">DE</span>
+            <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="lang-switcher__dropdown">
+            <button data-lang="de" class="lang-switcher__option is-active">Deutsch</button>
+            <button data-lang="en" class="lang-switcher__option">English</button>
+          </div>
+        </div>
+
+        <button class="header-btn header-btn--top" id="header-top" aria-label="Nach oben" title="Nach oben scrollen">
+          <i class="ph ph-arrow-up"></i>
+        </button>
+
+        <button class="theme-toggle" id="theme-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">
+          <i class="ph ph-moon"></i>
+        </button>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menü öffnen" aria-expanded="false">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html"><i class="ph ph-house"></i> <span data-i18n="nav.hub">Hub</span></a>
+      <a href="#welten"><i class="ph ph-globe-hemisphere-west"></i> <span data-i18n="nav.worlds">Welten</span></a>
+      <a href="#badges"><i class="ph ph-trophy"></i> <span data-i18n="nav.badges">Badges</span></a>
+      <a href="tools.html"><i class="ph ph-wrench"></i> <span data-i18n="nav.toolsSetup">Tools & Setup</span></a>
+      <a href="#" class="mobile-nav__scroll-top" data-scroll-top><i class="ph ph-arrow-up"></i> <span data-i18n="nav.scrollUp">Nach oben</span></a>
+      <hr class="mobile-nav__divider">
+      <a href="/tutorials/"><i class="ph ph-arrow-left"></i> <span data-i18n="nav.pluHub">PLU Hub</span></a>
+      <a href="/tutorials/js-classic/"><i class="ph ph-book-open"></i> <span data-i18n="nav.classicTutorial">Classic Tutorial</span></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== HERO ==================== -->
+    <section class="quest-hero">
+      <div class="quest-hero__bg">
+        <picture>
+          <source srcset="../assets/images/hero/hero-main.webp" type="image/webp">
+          <img src="../assets/images/hero/hero-main.jpg" alt="" loading="eager">
+        </picture>
+      </div>
+      <div class="quest-hero__particles">
+        <div class="quest-hero__particles-accent"></div>
+      </div>
+      <div class="quest-hero__content">
+        <div class="quest-hero__eyebrow">
+          <i class="ph ph-game-controller"></i>
+          <span data-i18n="hub.title">JavaScript Abenteuer</span>
+        </div>
+        <h1 class="quest-hero__title">
+          <span data-i18n="hub.subtitle">Beherrsche das</span> <span class="quest-hero__title-accent">Web</span>
+        </h1>
+        <p class="quest-hero__subtitle" data-i18n="hub.description">
+          Lerne JavaScript wie in einem Spiel. 5 Welten. 19 Quests. Echte Projekte. Dein Weg zum Programmierer startet hier.
+        </p>
+        <div class="quest-hero__stats">
+          <div class="quest-hero__stat">
+            <span class="quest-hero__stat-icon"><i class="ph ph-sword"></i></span>
+            <span class="quest-hero__stat-value" id="stat-quests">0</span>
+            <span class="quest-hero__stat-label" data-i18n="hub.statQuests">Quests</span>
+          </div>
+          <div class="quest-hero__stat">
+            <span class="quest-hero__stat-icon"><i class="ph ph-globe-hemisphere-west"></i></span>
+            <span class="quest-hero__stat-value" id="stat-worlds">0/5</span>
+            <span class="quest-hero__stat-label" data-i18n="hub.statWorlds">Welten</span>
+          </div>
+          <div class="quest-hero__stat">
+            <span class="quest-hero__stat-icon"><i class="ph ph-trophy"></i></span>
+            <span class="quest-hero__stat-value" id="stat-badges">0</span>
+            <span class="quest-hero__stat-label" data-i18n="hub.statBadges">Badges</span>
+          </div>
+          <div class="quest-hero__stat">
+            <span class="quest-hero__stat-icon"><i class="ph ph-lightning"></i></span>
+            <span class="quest-hero__stat-value" id="stat-xp">0</span>
+            <span class="quest-hero__stat-label" data-i18n="hub.statXp">XP</span>
+          </div>
+          <div class="quest-hero__stat">
+            <span class="quest-hero__stat-icon"><i class="ph ph-star"></i></span>
+            <span class="quest-hero__stat-value" id="stat-level">0</span>
+            <span class="quest-hero__stat-label" data-i18n="hub.statLevel">Level</span>
+          </div>
+        </div>
+        <div class="quest-hero__cta">
+          <a href="#welten" class="quest-btn quest-btn--primary quest-btn--large" id="hero-cta-main">
+            <i class="ph ph-rocket-launch"></i> <span data-i18n="hub.cta">Abenteuer starten</span>
+          </a>
+        </div>
+        <div class="quest-hero__continue u-hidden" id="hero-continue">
+          <span class="quest-hero__continue-text" data-i18n="hub.welcomeBack">Willkommen zurück, Entwickler!</span>
+          <a href="#" class="quest-hero__continue-link" id="hero-continue-link">
+            <i class="ph ph-play-circle"></i>
+            <span data-i18n="hub.continue">Weiterspielen</span>
+          </a>
+        </div>
+      </div>
+      <a href="#how-it-works" class="quest-hero__scroll">
+        <span data-i18n="hub.scroll">Scroll</span>
+        <i class="ph ph-caret-down"></i>
+      </a>
+    </section>
+
+    <!-- ==================== SO FUNKTIONIERT'S ==================== -->
+    <section class="section section--warm u-reveal">
+      <div class="u-container">
+        <div class="section__header">
+          <h2 class="section__title" data-i18n="hub.howItWorks">Wie JS Quest funktioniert</h2>
+          <p class="section__subtitle">
+            <span data-i18n="hub.howItWorksDesc"></span>
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-card__step">1</span>
+            <div class="feature-card__icon"><i class="ph ph-globe-hemisphere-west"></i></div>
+            <h3 class="feature-card__title" data-i18n="hub.feature.worlds">Erkunde 4 Welten</h3>
+            <p class="feature-card__text">
+              <span data-i18n="hub.feature.worldsDesc"></span>
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-card__step">2</span>
+            <div class="feature-card__icon"><i class="ph ph-sword"></i></div>
+            <h3 class="feature-card__title" data-i18n="hub.feature.quests">Meistere Quests</h3>
+            <p class="feature-card__text">
+              <span data-i18n="hub.feature.questsDesc"></span>
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-card__step">3</span>
+            <div class="feature-card__icon"><i class="ph ph-trophy"></i></div>
+            <h3 class="feature-card__title" data-i18n="hub.feature.xp">Sammle XP & Badges</h3>
+            <p class="feature-card__text">
+              <span data-i18n="hub.feature.xpDesc"></span>
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-card__step">4</span>
+            <div class="feature-card__icon"><i class="ph ph-code"></i></div>
+            <h3 class="feature-card__title" data-i18n="hub.feature.projects">Baue echte Projekte</h3>
+            <p class="feature-card__text">
+              <span data-i18n="hub.feature.projectsDesc"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== WELTEN ==================== -->
+    <section id="welten" class="section u-reveal">
+      <div class="u-container">
+        <div class="section__header">
+          <h2 class="section__title" data-i18n="hub.chooseWorld">Wähle deine Welt</h2>
+          <p class="section__subtitle">
+            <span data-i18n="hub.chooseWorldDesc"></span>
+          </p>
+        </div>
+
+        <div class="worlds-grid u-reveal u-reveal--delay-2" id="worlds-container">
+          <!-- Wird per JavaScript gefüllt -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== BADGES ==================== -->
+    <section id="badges" class="section section--gold u-reveal">
+      <div class="u-container">
+        <div class="badge-section-card u-reveal u-reveal--delay-1">
+          <div class="section__header">
+            <h2 class="section__title" data-i18n="hub.badges">Deine Sammlung</h2>
+            <p class="section__subtitle">
+              <span data-i18n="hub.badgesDesc"></span>
+            </p>
+          </div>
+
+          <div class="badge-grid u-reveal u-reveal--delay-3" id="badges-container">
+            <!-- Wird per JavaScript gefüllt -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== W3SCHOOLS PARTNER ==================== -->
+    <section class="section section--cool u-reveal">
+      <div class="u-container">
+        <div class="section__header">
+          <h2 class="section__title" data-i18n="hub.partner">Dein Lern-Partner</h2>
+          <p class="section__subtitle">
+            <span data-i18n="hub.partnerDesc"></span>
+          </p>
+        </div>
+
+        <div class="w3schools-card u-reveal u-reveal--delay-2">
+          <div class="w3schools-card__header">
+            <div class="w3schools-card__badge">
+              <i class="ph ph-handshake"></i> <span>Powered by W3Schools</span>
+            </div>
+            <div class="w3schools-card__icon"><i class="ph ph-book-open-text"></i></div>
+            <h3 class="w3schools-card__title" data-i18n="hub.w3schools">Vertiefung auf W3Schools</h3>
+            <p class="w3schools-card__text" data-i18n-html="hub.w3schoolsDesc">
+              In jeder Quest findest du direkte Links zu W3Schools — damit du die Theorie sofort ausprobieren kannst, bevor du im <strong>VS Code</strong> codierst.
+            </p>
+          </div>
+
+          <div class="w3schools-card__resources">
+            <span class="w3schools-card__resource"><i class="ph ph-code"></i> <span data-i18n="hub.jsRef">JS Referenz</span></span>
+            <span class="w3schools-card__resource"><i class="ph ph-function"></i> <span data-i18n="hub.jsTutorial">JS Tutorial</span></span>
+            <span class="w3schools-card__resource"><i class="ph ph-brackets-curly"></i> <span data-i18n="hub.domRef">DOM Referenz</span></span>
+            <span class="w3schools-card__resource"><i class="ph ph-play-circle"></i> <span data-i18n="hub.tryItEditor">Try-it Editor</span></span>
+          </div>
+
+          <div class="w3schools-card__cta">
+            <a href="https://www.w3schools.com/js/" target="_blank" rel="noopener" class="quest-btn quest-btn--secondary">
+              <i class="ph ph-arrow-square-out"></i> <span data-i18n="hub.openW3schools">W3Schools öffnen</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <a href="/tutorials/" class="site-footer__logo">
+            <img src="../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="site-footer__logo-text">
+              <span class="site-footer__logo-title">PANTAM</span>
+              <span class="site-footer__logo-subtitle">LEARNING UNIVERSE</span>
+            </div>
+          </a>
+          <p class="site-footer__tagline" data-i18n="footer.slogan">Mit KI denken. Menschlich handeln.</p>
+        </div>
+
+        <div class="site-footer__links">
+          <div class="site-footer__col">
+            <h4 data-i18n="footer.platform">Plattform</h4>
+            <nav>
+              <a href="/tutorials/">PLU Hub</a>
+              <a href="/tutorials/pages/lexikon.html">KI-Lexikon</a>
+              <a href="/tutorials/pages/vision.html">Vision</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4 data-i18n="footer.learn">Lernen</h4>
+            <nav>
+              <a href="/tutorials/html-css-classic/">HTML/CSS Classic</a>
+              <a href="/tutorials/backend-modern/">Backend Quest</a>
+              <a href="/tutorials/js-classic/">JavaScript</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4 data-i18n="footer.legal">Rechtliches</h4>
+            <nav>
+              <a href="/tutorials/pages/impressum.html">Impressum</a>
+              <a href="/tutorials/pages/datenschutz.html">Datenschutz</a>
+              <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__legal">
+          <span>Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
+          <span>•</span>
+          <span>Code: <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a></span>
+        </div>
+        <div class="site-footer__meta">
+          <span>© Pantam, Art & Culture – Austria</span>
+          <a href="/tutorials/pages/spenden.html" class="site-footer__support">
+            <i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FAB ==================== -->
+  <div class="fab-container" aria-label="Werkzeuge">
+    <button class="fab-btn fab-btn--classroom" id="classroom-toggle" data-i18n="fab.classroom" data-tooltip="Classroom Mode (Shift+C)" aria-label="Classroom Mode umschalten" aria-pressed="false">
+      <i class="ph ph-presentation"></i>
+      <span class="fab-btn__label" data-i18n="fab.classroom">Classroom</span>
+    </button>
+
+    <div class="fab-quest-progress u-hidden" id="fab-progress">
+      <span class="fab-quest-label" data-i18n="fab.quests">Quests</span>
+      <div id="fab-dots"></div>
+    </div>
+
+    <a href="#welten" class="fab-btn" data-i18n="fab.worlds" data-tooltip="Zu den Welten" aria-label="Zu den Welten springen">
+      <i class="ph ph-globe-hemisphere-west"></i>
+      <span class="fab-btn__label" data-i18n="fab.worlds">Welten</span>
+    </a>
+    <button class="fab-btn fab-btn--backtop" id="back-to-top" data-i18n="fab.top" data-tooltip="Nach oben" aria-label="Nach oben scrollen">
+      <i class="ph ph-arrow-up"></i>
+      <span class="fab-btn__label" data-i18n="fab.top">Top</span>
+    </button>
+  </div>
+
+  <!-- Portal Transition Overlay -->
+  <div class="portal-overlay" id="portal-overlay">
+    <img class="portal-overlay__image" id="portal-image" src="" alt="">
+    <div class="portal-overlay__soft-fade"></div>
+    <div class="portal-overlay__vignette"></div>
+    <div class="portal-overlay__color" id="portal-color"></div>
+    <div class="portal-overlay__title" id="portal-title"></div>
+    <div class="portal-overlay__entering" data-i18n="portal.entering">Betrete die Welt...</div>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

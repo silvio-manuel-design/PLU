@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Übung: Physik des Schalls | Audio-Tutorial | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="../kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="../kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="../kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="../kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="../kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="../uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="../uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="../tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="../tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="../tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="../tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="../ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="../ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="../ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="../ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="../ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>✏️ Übung: Physik des Schalls</h1>
+      <p class="hero-subtitle">Verstehe die grundlegenden physikalischen Prinzipien von Schall</p>
+    </section>
+
+    <section>
+      <h2>Lernziele</h2>
+      <p>
+        In dieser Übung wirst du:
+      </p>
+      <ul>
+        <li>Die physikalischen Grundlagen von Schall verstehen</li>
+        <li>Die Beziehung zwischen Frequenz, Wellenlänge und Schallgeschwindigkeit kennenlernen</li>
+        <li>Die Bedeutung von Amplitude und Phase für den Klang verstehen</li>
+        <li>Praktische Messungen mit Audacity durchführen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Voraussetzungen</h2>
+      <ul>
+        <li>Grundkenntnisse in Physik (Schwingungen, Wellen)</li>
+        <li>Audacity installiert</li>
+        <li>Beispiel-Audiodateien</li>
+        <li>Grundkenntnisse in Mathematik</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Theoretische Grundlagen</h2>
+
+      <h3>Schall als mechanische Welle</h3>
+      <p>
+        Schall ist eine mechanische Welle, die sich durch ein Medium (Luft, Wasser, Festkörper) ausbreitet.
+        Dabei werden Moleküle periodisch verdichtet und verdünnt, was Druckänderungen erzeugt.
+      </p>
+
+      <figure class="illustration-center">
+        <svg width="100%" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="welle-title welle-desc">
+          <title id="welle-title">Schallwelle - Darstellung von Verdichtung und Verdünnung</title>
+          <desc id="welle-desc">Schema einer longitudinalen Schallwelle mit Verdichtungen (hoher Druck) und Verdünnungen (niedriger Druck)</desc>
+
+          <!-- Hintergrund -->
+          <rect x="0" y="0" width="800" height="250" fill="#e0f7fa" />
+
+          <!-- Moleküle in Ruheposition -->
+          <g id="molekuel">
+            <circle cx="0" cy="125" r="4" fill="#004d40" />
+            <circle cx="10" cy="125" r="4" fill="#004d40" />
+            <circle cx="20" cy="125" r="4" fill="#004d40" />
+            <circle cx="30" cy="125" r="4" fill="#004d40" />
+            <circle cx="40" cy="125" r="4" fill="#004d40" />
+          </g>
+
+          <!-- Verdichtungen und Verdünnungen entlang der Welle -->
+          <g transform="translate(50,125)">
+            <!-- Welle zeichnen -->
+            <path d="M 0 0
+                     C 100 -50, 200 50, 300 0
+                     S 500 -50, 600 0"
+                  stroke="#00bcd4" stroke-width="3" fill="none" />
+
+            <!-- Moleküle entlang der Welle -->
+            <!-- Verdichtungsbereiche -->
+            <use href="#molekuel" x="0" y="-10" />
+            <use href="#molekuel" x="20" y="-5" />
+            <use href="#molekuel" x="40" y="0" />
+            <use href="#molekuel" x="60" y="5" />
+            <use href="#molekuel" x="80" y="10" />
+            <use href="#molekuel" x="100" y="15" />
+            <use href="#molekuel" x="120" y="10" />
+            <use href="#molekuel" x="140" y="5" />
+            <use href="#molekuel" x="160" y="0" />
+            <use href="#molekuel" x="180" y="-5" />
+            <use href="#molekuel" x="200" y="-10" />
+            <use href="#molekuel" x="220" y="-5" />
+            <use href="#molekuel" x="240" y="0" />
+            <use href="#molekuel" x="260" y="5" />
+            <use href="#molekuel" x="280" y="10" />
+            <use href="#molekuel" x="300" y="15" />
+            <use href="#molekuel" x="320" y="10" />
+            <use href="#molekuel" x="340" y="5" />
+            <use href="#molekuel" x="360" y="0" />
+            <use href="#molekuel" x="380" y="-5" />
+            <use href="#molekuel" x="400" y="-10" />
+            <use href="#molekuel" x="420" y="-5" />
+            <use href="#molekuel" x="440" y="0" />
+            <use href="#molekuel" x="460" y="5" />
+            <use href="#molekuel" x="480" y="10" />
+            <use href="#molekuel" x="500" y="15" />
+            <use href="#molekuel" x="520" y="10" />
+            <use href="#molekuel" x="540" y="5" />
+            <use href="#molekuel" x="560" y="0" />
+            <use href="#molekuel" x="580" y="-5" />
+            <use href="#molekuel" x="600" y="-10" />
+          </g>
+
+          <!-- Beschriftungen -->
+          <text x="400" y="40" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Longitudinale Schallwelle</text>
+          <text x="400" y="60" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">Verdichtungen und Verdünnungen in der Luft</text>
+
+          <!-- Frequenz und Wellenlänge -->
+          <line x1="100" y1="200" x2="300" y2="200" stroke="#004d40" stroke-width="2" marker-start="url(#arrow-reverse)" marker-end="url(#arrow)" />
+          <text x="200" y="220" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Wellenlänge (λ)</text>
+
+          <!-- Amplitude -->
+          <line x1="50" y1="125" x2="50" y2="75" stroke="#004d40" stroke-width="2" stroke-dasharray="5,5" />
+          <text x="50" y="65" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Amplitude</text>
+
+          <!-- Pfeildefinitionen -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#004d40" />
+            </marker>
+            <marker id="arrow-reverse" markerWidth="10" markerHeight="10" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M9,0 L9,6 L0,3 z" fill="#004d40" />
+            </marker>
+            <g id="molekuel">
+              <circle cx="0" cy="0" r="4" fill="#004d40" />
+              <circle cx="10" cy="0" r="4" fill="#004d40" />
+              <circle cx="20" cy="0" r="4" fill="#004d40" />
+              <circle cx="30" cy="0" r="4" fill="#004d40" />
+              <circle cx="40" cy="0" r="4" fill="#004d40" />
+            </g>
+          </defs>
+        </svg>
+        <figcaption class="illustration-caption">
+          Schema einer longitudinalen Schallwelle mit Verdichtungen (hoher Druck) und Verdünnungen (niedriger Druck).
+          Die Wellenlänge (λ) ist der Abstand zwischen zwei Verdichtungen.
+        </figcaption>
+      </figure>
+
+      <h3>Wichtige Parameter</h3>
+      <ul>
+        <li><strong>Frequenz (f):</strong> Anzahl der Schwingungen pro Sekunde, gemessen in Hertz (Hz)</li>
+        <li><strong>Amplitude (A):</strong> Maximale Auslenkung der Welle, beeinflusst die Lautstärke</li>
+        <li><strong>Wellenlänge (λ):</strong> Abstand zwischen zwei gleichen Phasenpunkten</li>
+        <li><strong>Schallgeschwindigkeit (c):</strong> Geschwindigkeit der Wellenausbreitung (ca. 343 m/s in Luft)</li>
+      </ul>
+
+      <h3>Grundlegende Formel</h3>
+      <p>
+        c = f × λ (Schallgeschwindigkeit = Frequenz × Wellenlänge)
+      </p>
+    </section>
+
+    <section>
+      <h2>Aufgabenstellung</h2>
+      
+      <h3>Aufgabe 1: Frequenzmessung</h3>
+      <p>
+        Öffne die bereitgestellte Audiodatei mit Audacity und messe die Frequenz verschiedener Töne:
+      </p>
+      <ol>
+        <li>Öffne die Datei "reine_toene.wav" in Audacity</li>
+        <li>Wähle einen Ausschnitt mit einem reinen Ton (Sinuswelle)</li>
+        <li>Verwende das Analyse-Menü um die Frequenz zu bestimmen</li>
+        <li>Notiere die Frequenzwerte für jeden Ton</li>
+        <li>Vergleiche die gemessenen Werte mit den bekannten Frequenzen (z.B. A4 = 440 Hz)</li>
+      </ol>
+      
+      <h3>Aufgabe 2: Amplitudenanalyse</h3>
+      <p>
+        Analysiere die Amplituden verschiedener Schallereignisse:
+      </p>
+      <ol>
+        <li>Öffne die Datei "laut-leise-vergleich.wav"</li>
+        <li>Verwende das Auswahlwerkzeug um verschiedene Abschnitte zu markieren</li>
+        <li>Beobachte die Amplitudenunterschiede in der Wellenform-Anzeige</li>
+        <li>Verwende "Effect > Normalize" um die maximale Amplitude zu messen</li>
+        <li>Vergleiche die relativen Lautstärken</li>
+      </ol>
+      
+      <h3>Aufgabe 3: Schallgeschwindigkeit berechnen</h3>
+      <p>
+        Nutze die gemessenen Frequenzen und bekannte Wellenlängen um die Schallgeschwindigkeit zu berechnen:
+      </p>
+      <ol>
+        <li>Verwende die Formel c = f × λ</li>
+        <li>Berechne die Schallgeschwindigkeit für jeden gemessenen Ton</li>
+        <li>Vergleiche die Ergebnisse mit dem Literaturwert (343 m/s)</li>
+        <li>Berechne den Durchschnitt und die Abweichung</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Praktische Anwendung</h2>
+      
+      <h3>Erzeugung reiner Töne</h3>
+      <p>
+        Erzeuge in Audacity verschiedene reine Töne und beobachte deren Eigenschaften:
+      </p>
+      <ol>
+        <li>Gehe zu "Generate > Tone"</li>
+        <li>Erzeuge Töne mit verschiedenen Frequenzen (z.B. 220 Hz, 440 Hz, 880 Hz)</li>
+        <li>Beobachte die Unterschiede in der Wellenform</li>
+        <li>Verändere die Amplitude und beobachte den Lautstärkeeffekt</li>
+        <li>Speichere die erzeugten Töne als Dateien</li>
+      </ol>
+      
+      <h3>Überlagerung von Wellen</h3>
+      <p>
+        Erzeuge und überlagere verschiedene Töne:
+      </p>
+      <ol>
+        <li>Erzeuge zwei Töne mit leicht unterschiedlichen Frequenzen</li>
+        <li>Lege sie in separaten Spuren ab</li>
+        <li>Beobachte die Interferenzeffekte</li>
+        <li>Analysiere die resultierende Wellenform</li>
+        <li>Verändere die Phase eines Tons und beobachte die Auswirkungen</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Auswertung und Dokumentation</h2>
+      
+      <h3>Zu dokumentierende Ergebnisse</h3>
+      <ul>
+        <li>Gemessene Frequenzen und deren Abweichungen vom Sollwert</li>
+        <li>Berechnete Schallgeschwindigkeiten und deren Vergleich mit Literaturwerten</li>
+        <li>Beobachtungen zur Wellenform und Amplitude</li>
+        <li>Effekte der Wellenüberlagerung</li>
+        <li>Erklärungen für beobachtete Phänomene</li>
+      </ul>
+      
+      <h3>Auswertung</h3>
+      <p>
+        Beantworte folgende Fragen in deiner Dokumentation:
+      </p>
+      <ol>
+        <li>Wie genau waren deine Frequenzmessungen?</li>
+        <li>Welche Faktoren könnten die Messgenauigkeit beeinflusst haben?</li>
+        <li>Wie verhält sich die Amplitude zur wahrgenommenen Lautstärke?</li>
+        <li>Welche Effekte beobachtest du bei der Überlagerung von Wellen?</li>
+        <li>Wie könnte dieses Wissen in der Audio-Programmierung angewandt werden?</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Vertiefung</h2>
+      
+      <h3>Erweiterungsaufgaben</h3>
+      <ul>
+        <li>Analysiere komplexe Klänge (z.B. Stimme, Musikinstrumente) und identifiziere deren Obertonstruktur</li>
+        <li>Untersuche die Auswirkungen von Filtern auf verschiedene Frequenzbereiche</li>
+        <li>Erstelle eine Frequenzanalyse mit dem Spectrum Analyzer in Audacity</li>
+        <li>Untersuche die Auswirkungen von Kompression auf die Wellenform</li>
+        <li>Analysiere die Dynamik verschiedener Musikstücke</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Hinweise zur Durchführung</h2>
+      <ul>
+        <li>Stelle sicher, dass Audacity korrekt kalibriert ist</li>
+        <li>Verwende qualitativ hochwertige Kopfhörer oder Lautsprecher</li>
+        <li>Führe Messungen mehrfach durch und bilde Durchschnitte</li>
+        <li>Dokumentiere alle Schritte und Ergebnisse</li>
+        <li>Verwende geeignete mathematische Werkzeuge für Berechnungen</li>
+      </ul>
+    </section>
+
+
+    <section class="kapitel-navigation">
+      <p>Du hast die physikalischen Grundlagen von Schall kennengelernt!</p>
+      <a href="02-audio-schnitt.html" class="nav-button">→ Weiter zu Audio-Schnitt</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

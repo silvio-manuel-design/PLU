@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Modul 05: Farbkorrektur & Color Grading. LUTs, Color Wheels, Curves, Farbharmonien und professionelles Grading für YouTube, Film und Dokumentation.">
+
+  <title>Modul 05 — Farbkorrektur &amp; Color Grading | Pansonic Video Lab</title>
+
+
+
+  <!-- Favicon -->
+
+  <link rel="icon" type="image/svg+xml" href="/tutorials/pansonic-video-lab/assets/icons/favicon.svg">
+
+  <meta property="og:title" content="Pansonic Video Lab">
+
+  <meta property="og:description" content="Videoproduktion für Einsteiger. Von der Idee bis zum fertigen Cut. Mit DaVinci Resolve, KI-Tools und menschlicher Kreativität.">
+
+  <meta property="og:image" content="/tutorials/pansonic-video-lab/assets/images/video-hero-1.jpg">
+
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="apple-touch-icon" href="/tutorials/pansonic-video-lab/assets/icons/favicon.svg">
+
+
+
+  <!-- Preconnect -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Icons -->
+
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+
+
+  <!-- Design System -->  <link rel="stylesheet" href="/tutorials/pansonic-video-lab/css/video-lab.css" />
+
+</head>
+
+<body data-module="m05">
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <noscript>
+    <div class="video-noscript-banner" role="alert">
+      <p><strong>⚠️ JavaScript ist deaktiviert</strong></p>
+      <p>Die interaktiven Funktionen dieser Seite — wie Checklisten, Playlist, Simulationen und Animationen — benötigen JavaScript. Der Lerninhalt ist aber weiterhin vollständig lesbar.</p>
+    </div>
+  </noscript>
+  <noscript>
+    <nav class="video-noscript-nav" aria-label="Navigation">
+      <a href="04-schnitt.html" class="video-noscript-nav__link">← Vorheriges Modul</a>
+      <a href="../index.html" class="video-noscript-nav__link video-noscript-nav__link--center">Zur Übersicht</a>
+      <a href="06-audio-sound.html" class="video-noscript-nav__link">Nächstes Modul →</a>
+    </nav>
+  </noscript>
+
+
+>Zum Hauptinhalt springen</a>
+
+
+
+
+
+  <!-- Scroll Progress -->
+
+  <div class="video-chapter-progress">
+
+    <div class="video-chapter-progress__bar" id="progressBar"></div>
+
+  </div>
+
+
+
+  <!-- Header -->
+
+  <header class="video-header" id="header" role="banner">
+
+    <div class="video-header__container">
+
+    <div class="video-header__left">
+
+      <a href="/tutorials/pansonic-video-lab/index.html" class="video-header__logo" aria-label="Pansonic Video Lab Startseite">
+
+        <div class="video-header__logo-icon" aria-hidden="true">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+
+            <rect x="2" y="6" width="14" height="12" rx="2"/>
+
+            <polygon points="18 10 22 8 22 16 18 14"/>
+
+          </svg>
+
+        </div>
+
+        <span class="video-header__logo-text">PAN<span>SONIC</span></span>
+
+      </a>
+
+
+
+      <nav class="video-header__nav" aria-label="Hauptnavigation">
+
+        <a href="/tutorials/pansonic-video-lab/index.html" class="video-header__nav-link">Start</a>
+
+        <div class="video-header__dropdown">
+
+          <a href="#" class="video-header__nav-link is-active" `onclick="return false;">Module</a>
+
+          <div class="video-header__dropdown-menu video-header__dropdown-menu--mega">
+
+            <a href="00-willkommen.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 00 — Willkommen</span>
+
+              <span class="video-header__dropdown-desc">Setup &amp; erste Schritte</span>
+
+            </a>
+
+            <a href="01-kamera-basics.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 01 — Kamera-Basics</span>
+
+              <span class="video-header__dropdown-desc">Bildrate, Auflösung &amp; Formate</span>
+
+            </a>
+
+            <a href="02-licht.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 02 — Licht</span>
+
+              <span class="video-header__dropdown-desc">Natürlich &amp; künstlich</span>
+
+            </a>
+
+            <a href="03-komposition.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 03 — Komposition</span>
+
+              <span class="video-header__dropdown-desc">Bildgestaltung &amp; Perspektive</span>
+
+            </a>
+
+            <a href="04-schnitt.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 04 — Schnitt</span>
+
+              <span class="video-header__dropdown-desc">Timeline &amp; Rhythmus</span>
+
+            </a>
+
+            <a href="05-farbkorrektur.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 05 — Farbkorrektur</span>
+
+              <span class="video-header__dropdown-desc">LUTs &amp; Color Grading</span>
+
+            </a>
+
+            <a href="06-audio-sound.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 06 — Audio &amp; Sound</span>
+
+              <span class="video-header__dropdown-desc">Ton aufnehmen &amp; mischen</span>
+
+            </a>
+
+            <a href="07-motion-graphics.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 07 — Motion Graphics</span>
+
+              <span class="video-header__dropdown-desc">Titel, Animationen &amp; Effekte</span>
+
+            </a>
+
+            <a href="08-ki-workflows.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 08 — KI-Workflows</span>
+
+              <span class="video-header__dropdown-desc">Automatisierung &amp; KI-Tools</span>
+
+            </a>
+
+            <a href="09-export.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 09 — Export</span>
+
+              <span class="video-header__dropdown-desc">Rendern für YouTube, TikTok &amp; Co.</span>
+
+            </a>
+
+            <a href="10-storytelling.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 10 — Storytelling</span>
+
+              <span class="video-header__dropdown-desc">Struktur, Emotion &amp; Spannung</span>
+
+            </a>
+
+            <a href="11-capstone.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Modul 11 — Capstone</span>
+
+              <span class="video-header__dropdown-desc">Dein Abschlussprojekt</span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="video-header__dropdown">
+
+          <a href="#" class="video-header__nav-link">Tools</a>
+
+          <div class="video-header__dropdown-menu">
+
+            <a href="/tutorials/pansonic-video-lab/pages/glossar.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Glossar</span>
+
+              <span class="video-header__dropdown-desc">Video-Fachbegriffe A–Z</span>
+
+            </a>
+
+            <a href="/tutorials/pansonic-video-lab/tools/davinci-resolve.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">DaVinci Resolve</span>
+
+              <span class="video-header__dropdown-desc">Prof. Video Editing</span>
+
+            </a>
+
+            <a href="/tutorials/pansonic-video-lab/tools/shotcut.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">Shotcut</span>
+
+              <span class="video-header__dropdown-desc">Open Source Editor</span>
+
+            </a>
+
+            <a href="/tutorials/pansonic-video-lab/tools/ki-video.html" class="video-header__dropdown-item">
+
+              <span class="video-header__dropdown-name">KI Video</span>
+
+              <span class="video-header__dropdown-desc">AI-Generierung</span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+        <a href="/tutorials/pansonic-video-lab/pages/bibliothek.html" class="video-header__nav-link">Video Bibliothek</a>
+
+      </nav>
+
+    </div>
+
+
+
+    <div class="video-header__right">
+
+      <button class="video-header__btn video-header__btn--theme video-theme-toggle" aria-label="Farbschema wechseln" title="Theme (T)">
+
+        <i class="ph ph-moon"></i>
+
+      </button>
+
+      <button class="video-header__btn video-header__btn--top video-back-to-top" aria-label="Nach oben" title="Nach oben">
+
+        <i class="ph ph-arrow-up"></i>
+
+      </button>
+
+      <nav class="video-lang-switch" aria-label="Sprache wählen">
+
+        <a href="05-farbkorrektur.html" class="video-lang-btn is-active" aria-current="page">DE</a>
+
+        <a href="05-color.html" class="video-lang-btn">EN</a>
+
+      </nav>
+
+      <a href="/tutorials/pansonic-video-lab/pages/player.html" target="_blank" class="video-header__btn video-header__btn--player" aria-label="Video Player" title="Player">
+
+        <i class="ph ph-play-circle"></i><span class="video-header__player-label">Player</span>
+
+      </a>
+
+      <button class="video-header__toggle" id="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+      </button>
+
+    </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- Mobile Navigation Backdrop -->
+
+  <div class="video-mobile-nav__backdrop" aria-hidden="true"></div>
+
+
+
+  <nav class="video-mobile-nav" id="mobile-nav" aria-hidden="true" aria-label="Mobile Navigation">
+
+    <div class="video-mobile-nav__items">
+
+      <a href="/tutorials/pansonic-video-lab/index.html" class="video-mobile-nav__link">Start</a>
+
+      
+
+      <div class="video-mobile-nav__group">
+
+        <button class="video-mobile-nav__heading" aria-expanded="false" aria-controls="mobile-modules">
+
+          Module
+
+          <i class="ph ph-caret-down video-nav-caret"></i>
+
+        </button>
+
+        <div class="video-mobile-nav__sub" id="mobile-modules" hidden>
+
+          <a data-module="m00" href="00-willkommen.html" class="video-mobile-nav__sublink">Willkommen</a>
+
+          <a data-module="m01" href="01-kamera-basics.html" class="video-mobile-nav__sublink">Kamera-Basics</a>
+
+          <a data-module="m02" href="02-licht.html" class="video-mobile-nav__sublink">Licht</a>
+
+          <a data-module="m03" href="03-komposition.html" class="video-mobile-nav__sublink">Komposition</a>
+
+          <a data-module="m04" href="04-schnitt.html" class="video-mobile-nav__sublink">Schnitt</a>
+
+          <a data-module="m05" href="05-farbkorrektur.html" class="video-mobile-nav__sublink">Farbkorrektur</a>
+
+          <a data-module="m06" href="06-audio-sound.html" class="video-mobile-nav__sublink">Audio &amp; Sound</a>
+
+          <a data-module="m07" href="07-motion-graphics.html" class="video-mobile-nav__sublink">Motion Graphics</a>
+
+          <a data-module="m08" href="08-ki-workflows.html" class="video-mobile-nav__sublink">KI-Workflows</a>
+
+          <a data-module="m09" href="09-export.html" class="video-mobile-nav__sublink">Export</a>
+
+          <a data-module="m10" href="10-storytelling.html" class="video-mobile-nav__sublink">Storytelling</a>
+
+          <a data-module="m11" href="11-capstone.html" class="video-mobile-nav__sublink">Capstone</a>
+
+        </div>
+
+      </div>
+
+      
+
+      <div class="video-mobile-nav__group">
+
+        <button class="video-mobile-nav__heading" aria-expanded="false" aria-controls="mobile-tools">
+
+          Tools
+
+          <i class="ph ph-caret-down video-nav-caret"></i>
+
+        </button>
+
+        <div class="video-mobile-nav__sub" id="mobile-tools" hidden>
+
+          <a href="/tutorials/pansonic-video-lab/pages/glossar.html" class="video-mobile-nav__sublink">Glossar</a>
+
+          <a href="/tutorials/pansonic-video-lab/tools/davinci-resolve.html" class="video-mobile-nav__sublink">DaVinci Resolve</a>
+
+          <a href="/tutorials/pansonic-video-lab/tools/shotcut.html" class="video-mobile-nav__sublink">Shotcut</a>
+
+          <a href="/tutorials/pansonic-video-lab/tools/ki-video.html" class="video-mobile-nav__sublink">KI Video</a>
+
+        </div>
+
+      </div>
+
+      
+
+      <a href="/tutorials/pansonic-video-lab/pages/bibliothek.html" class="video-mobile-nav__link">Video Bibliothek</a>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- Chapter Hero -->
+
+  <header class="video-chapter-header">
+
+    <div class="video-chapter-header__inner">
+
+      <nav class="video-chapter-breadcrumb" aria-label="Breadcrumb">
+
+        <a href="00-willkommen.html">Pansonic Video Lab</a>
+
+        <span>/</span>
+
+        <span>Modul 05</span>
+
+      </nav>
+
+      <span class="video-chapter-number">Modul 05</span>
+
+      <h1 class="video-chapter-title">Farbkorrektur &amp; Color Grading</h1>
+
+      <p class="video-chapter-lead">
+
+        Farbe ist die Emotion deines Films. Ein gut geschnittener Film mit schlechten Farben wirkt immer noch amateurhaft. Wer LUTs, Color Wheels und Curves beherrscht, verwandelt flache Aufnahmen in cinematische Bilder.
+
+      </p>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- Content -->
+
+  <main id="main-content" class="video-chapter-content">
+
+
+
+    <!-- Section 1: Farbkorrektur ist die Emotion -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>Farbkorrektur ist die Emotion des Films</h2>
+
+      <p>
+
+        Bevor du in teurere Kameras investierst, investiere in das Verständnis von Farbe. Farbe steuert, was der Zuschauer fühlt — ohne dass er es bemerkt. Warme Töne vermitteln Geborgenheit. Kühle Töne vermitteln Distanz. Sättigung steuert Energie. Kontrast steuert Dramatik.
+
+      </p>
+
+
+
+      <div class="video-setup video-setup--cards">
+
+    <div class="video-setup__stack">
+
+      <div class="video-setup__card">
+
+        <span class="video-setup__card-num">01</span>
+
+        <i class="ph ph-camera video-setup__card-icon" aria-hidden="true"></i>
+
+        <span class="video-setup__card-label">Aufnahme</span>
+
+      </div>
+
+      <div class="video-setup__card">
+
+        <span class="video-setup__card-num">02</span>
+
+        <i class="ph ph-sliders-horizontal video-setup__card-icon" aria-hidden="true"></i>
+
+        <span class="video-setup__card-label">Korrektur</span>
+
+      </div>
+
+      <div class="video-setup__card">
+
+        <span class="video-setup__card-num">03</span>
+
+        <i class="ph ph-palette video-setup__card-icon" aria-hidden="true"></i>
+
+        <span class="video-setup__card-label">Grading</span>
+
+      </div>
+
+      <div class="video-setup__card">
+
+        <span class="video-setup__card-num">04</span>
+
+        <i class="ph ph-sparkle video-setup__card-icon" aria-hidden="true"></i>
+
+        <span class="video-setup__card-label">Look</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+      </div>
+
+
+
+      <p>
+
+        <strong>Der Unterschied zwischen Korrektur und Grading:</strong> <strong>Korrektur</strong> macht das Bild "richtig" — ausgewogene Belichtung, natürliche Hauttöne, neutrale Farben. <strong>Grading</strong> macht das Bild "deins" — ein Look, eine Stimmung, eine eigene Handschrift. Beide Schritte sind unverzichtbar.
+
+      </p>
+
+
+
+      <div class="video-tip-box">
+
+        <strong>Die Farb-Regel:</strong> Gutes Licht macht schöne Bilder. Gute Farbkorrektur macht aus schönen Bildern cinematische Bilder. Aber: Schlechtes Licht kann keine Color Grading retten. Grading ist das Gewürz — nicht das Gericht.
+
+      </div>
+
+
+
+      <div class="video-track-callout" data-track="indoor">
+
+        <div class="video-track-callout__label"><i class="ph ph-house" aria-hidden="true"></i> Indoor-Tipp</div>
+
+        <p>Kontrollierte Indoor-Beleuchtung liefert konsistente Farben — das macht Color Grading einfacher. Achte auf Weißabgleich vor dem Dreh, sonst musst du jeden Clip einzeln korrigieren. Ein grauer Color-Checker im ersten Shot spart Stunden.</p>
+
+      </div>
+
+      <div class="video-track-callout" data-track="outdoor">
+
+        <div class="video-track-callout__label"><i class="ph ph-globe" aria-hidden="true"></i> Outdoor-Tipp</div>
+
+        <p>Draußen ändern sich Farbtemperatur und Lichtqualität ständig. Der gleiche Ort sieht bei Sonnenaufgang, Mittag und Sonnenuntergang komplett anders aus. Drehe einen Color-Checker-Shot bei jedem Lichtwechsel — sonst ist kein Clip mit dem anderen konsistent.</p>
+
+      </div>
+
+      <div class="video-track-callout" data-track="both">
+
+        <div class="video-track-callout__label"><i class="ph ph-fire" aria-hidden="true"></i> Hybrid-Tipp</div>
+
+        <p>Das größte Grading-Problem bei Hybrid-Produktionen: Indoor (warm, künstlich) trifft auf Outdoor (kalt, natürlich). Einheitlicher Look erfordert entweder künstliches Tageslicht-LED-Indoor oder bewusste Farbkontraste als Stilmittel.</p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Section 2: Farbräder & Harmonien -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>Farbräder &amp; Harmonien</h2>
+
+      <p>
+
+        Farben wirken nicht isoliert — sie wirken im Kontext. Das Farbrad zeigt die Beziehungen zwischen Farben. Diese Beziehungen bestimmen, ob ein Bild harmonisch wirkt, spannungsgeladen oder unruhig.
+
+      </p>
+
+
+
+      <div class="video-tool-grid video-tool-grid--triad">
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--coral"><i class="ph ph-arrows-left-right" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Komplementär</div>
+
+          <div class="video-tool-card__desc">Gegenüberliegende Farben am Rad: Orange vs. Blau, Rot vs. Grün. Maximaler Kontrast, maximale Spannung. Das berühmteste Film-Paar: Orange-Teal für warme Hauttöne vor kühlem Hintergrund.</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--violet"><i class="ph ph-flow-arrow" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Analog</div>
+
+          <div class="video-tool-card__desc">Benachbarte Farben am Rad: Blau, Cyan, Grün. Sanfter Übergang, harmonisch, beruhigend. Perfekt für Naturdokumentationen, Landschaften und meditative Szenen.</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--teal"><i class="ph ph-triangle" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Triade</div>
+
+          <div class="video-tool-card__desc">Drei gleich verteilte Farben am Rad: Rot, Gelb, Blau. Dynamisch und ausgewogen. Verwendet in Superhelden-Filmen und Animationen für maximale visuelle Energie.</div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="video-protip-box">
+
+        <strong><i class="ph ph-lightbulb" aria-hidden="true"></i> Pro-Tipp:</strong> Jede Szene in Orange-Teal graden, nur weil es im Kino trendy ist. Orange-Teal funktioniert, weil es natürlich ist — aber nicht für jedes Projekt. Ein romantisches Drama braucht vielleicht warme Analog-Töne. Ein Horrorfilm braucht kühle Komplementär-Kontraste.
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Section 3: LUTs & Looks -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>LUTs &amp; Looks</h2>
+
+      <p>
+
+        LUT steht für "Look-Up Table" — eine mathematische Vorschrift, die jeden Farbwert in einen neuen verwandelt. LUTs sind wie Instagram-Filter für Profis. Sie können Zeit sparen oder Zeit stehlen, je nachdem, wie du sie einsetzt.
+
+      </p>
+
+
+
+      <div class="video-visual-comparison">
+
+        <div class="video-visual-comparison__side video-visual-comparison__side--before">
+
+          <div class="video-visual-comparison__label video-visual-comparison__label--before"><i class="ph ph-image" aria-hidden="true"></i> Flaches Log/RAW</div>
+
+          <div class="video-visual-comparison__title">Graustichig, kontrastarm, langweilig</div>
+
+          <div class="video-visual-comparison__text">
+
+            <p>Log-Profile und RAW-Aufnahmen sehen absichtlich flach aus. Sie bewahren maximale Dynamik und Farbinformation für die Nachbearbeitung.</p>
+
+            <ul>
+
+              <li>Maximale Flexibilität beim Grading</li>
+
+              <li>Mehr Spielraum für Highlights und Schatten</li>
+
+              <li>Erfordert immer Color Grading</li>
+
+              <li>Nicht für direkte Ausgabe geeignet</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <div class="video-visual-comparison__side video-visual-comparison__side--after">
+
+          <div class="video-visual-comparison__label video-visual-comparison__label--after"><i class="ph ph-sparkle" aria-hidden="true"></i> Mit LUT/Grading</div>
+
+          <div class="video-visual-comparison__title">Sättigung, Kontrast, Stimmung</div>
+
+          <div class="video-visual-comparison__text">
+
+            <p>Ein LUT oder manuelles Grading verwandelt das flache Material in einen fertigen Look. Hauttöne werden warm, der Himmel tiefblau, die Schatten filmisch.</p>
+
+            <ul>
+
+              <li>Konsistenter Look über alle Clips</li>
+
+              <li>Weniger Arbeit bei gutem Ausgangsmaterial</li>
+
+              <li>Kann bei schlechtem Material artefaktieren</li>
+
+              <li>Sollte auf 10-Bit-Material angewendet werden</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="video-tool-grid video-tool-grid--spaced">
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--coral"><i class="ph ph-film-strip" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Kreative LUTs</div>
+
+          <div class="video-tool-card__desc">Fertige Looks von Filmemachern und Studios. Schnell, konsistent, aber nicht immer passend. Gut als Startpunkt, schlecht als Endpunkt.</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--violet"><i class="ph ph-sliders" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Technische LUTs</div>
+
+          <div class="video-tool-card__desc">Wandeln Log-Profile in Rec.709 um. Kein "Look", nur Korrektur. Der erste Schritt in jedem Log-Workflow, bevor das kreative Grading beginnt.</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--teal"><i class="ph ph-palette" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Eigene LUTs</div>
+
+          <div class="video-tool-card__desc">Du erstellst deinen Look in DaVinci Resolve und exportierst ihn als LUT. Wiederverwendbar über alle Projekte — deine eigene Handschrift.</div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="video-tip-box">
+
+        <strong>Pro-Tipp:</strong> LUTs sind keine Wunderwaffe. Ein LUT, der auf Tageslicht-Material erstellt wurde, funktioniert oft schlecht bei Kunstlicht. Und ein LUT kann keine überbelichteten Highlights oder unterbelichtete Schatten retten. LUTs verstärken — sie reparieren nicht.
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Section 4: Color Wheels & Curves -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>Color Wheels &amp; Curves</h2>
+
+      <p>
+
+        Wenn LUTs die Abkürzung sind, dann sind Color Wheels und Curves der direkte Weg. Hier kontrollierst du jeden Aspekt der Farbe pixelgenau. Es braucht Übung — aber die Kontrolle ist unvergleichlich.
+
+      </p>
+
+
+
+      <div class="video-tool-grid video-tool-grid--spaced">
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--coral"><i class="ph ph-circle" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Color Wheels</div>
+
+          <div class="video-tool-card__desc">Drei Räder für Schatten, Mitten und Highlights. Verschiebe den Mittelpunkt, um Farbstiche zu korrigieren. Lift (Schatten), Gamma (Mitten), Gain (Highlights).</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--violet"><i class="ph ph-chart-line-up" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Curves</div>
+
+          <div class="video-tool-card__desc">RGB-Kurven steuern Kontrast und Farbbalance. Eine S-Kurve erhöht Kontrast. Eine einzelne Farb-Kurve korrigiert Farbstiche präziser als jedes Wheel.</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--teal"><i class="ph ph-eyedropper" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Qualifiers</div>
+
+          <div class="video-tool-card__desc">Selektive Farbkorrektur. Wähle nur die Hauttöne, nur den Himmel, nur das Grün. Jede Farbe einzeln anpassen — ohne den Rest des Bildes zu beeinflussen.</div>
+
+        </div>
+
+        <div class="video-tool-card video-tool-card--static">
+
+          <div class="video-tool-card__icon video-tool-card__icon--coral"><i class="ph ph-drop-half" aria-hidden="true"></i></div>
+
+          <div class="video-tool-card__name">Saturation</div>
+
+          <div class="video-tool-card__desc">Nicht alles muss bunt sein. Reduziere die Sättigung im Hintergrund, um das Motiv hervorzuheben. Oder steigere sie für energetische Szenen. Weniger ist oft mehr.</div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="video-protip-box">
+
+        <strong><i class="ph ph-lightbulb" aria-hidden="true"></i> Pro-Tipp:</strong> Color Wheels drastisch in alle Richtungen drehen. Jede extreme Verschiebung zerstört natürliche Hauttöne. Der subtile Ansatz gewinnt: kleine Bewegungen, große Wirkung.
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Section 5: Farbkorrektur in der Praxis -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>Farbkorrektur in der Praxis</h2>
+
+      <p>
+
+        Theorie ist wichtig — aber am Ende zählt der Viewer. Wähle dein Szenario und wir zeigen dir den idealen Grading-Workflow für YouTube, Dokumentation oder Kurzfilm.
+
+      </p>
+
+
+
+      <div class="video-scenario-tabs" id="scenarioTabs">
+
+        <button class="video-scenario-tab is-active" data-scenario="youtube"><i class="ph ph-youtube-logo" aria-hidden="true"></i> YouTube / Vlog</button>
+
+        <button class="video-scenario-tab" data-scenario="doku"><i class="ph ph-film-strip" aria-hidden="true"></i> Dokumentation</button>
+
+        <button class="video-scenario-tab" data-scenario="kurzfilm"><i class="ph ph-clapperboard" aria-hidden="true"></i> Kurzfilm</button>
+
+      </div>
+
+
+
+      <!-- YOUTUBE PANEL -->
+
+      <div class="video-scenario-panel is-active" id="panel-youtube">
+
+        <div class="video-setup-card">
+
+          <div class="video-setup-card__header">
+
+            <div class="video-setup-card__icon"><i class="ph ph-youtube-logo" aria-hidden="true"></i></div>
+
+            <div>
+
+              <div class="video-setup-card__title">YouTube &amp; Vlog-Grading</div>
+
+              <div class="video-setup-card__subtitle">Schnell, konsistent, wiederverkennbar</div>
+
+            </div>
+
+          </div>
+
+          <p class="video-setup-card__text">
+
+            YouTube-Zuschauer konsumieren auf Smartphones und Tablets. Dein Grading muss auf kleinen Displays funktionieren — subtile Nuancen gehen verloren. Priorität: Hauttöne, Kontrast, Wiedererkennung.
+
+          </p>
+
+
+
+          <h3 class="video-setup-card__heading">YouTube-Grading-Workflow</h3>
+
+          <ul class="video-checklist-static">
+
+            <li><strong>Technische LUT:</strong> Log → Rec.709 als Basis. Jeder Clip startet neutral und ausgewogen.</li>
+
+            <li><strong>Weißabgleich:</strong> Nutze den Eyedropper auf etwas Weißem oder Grauem im Bild. Korrigiere Farbstiche pro Clip.</li>
+
+            <li><strong>Hauttöne:</strong> Qualifier auf Haut, leicht warm nach Orange verschoben. Das ist der "gesunde Glow".</li>
+
+            <li><strong>Kontrast-S-Kurve:</strong> Leichte S-Kurve für Punch ohne verbrannte Highlights. YouTube mag kontrastreiche Bilder.</li>
+
+            <li><strong>Signature LUT:</strong> Ein eigener, dezenter LUT, der auf allen Clips liegt. Dein "Look" — wiedererkennbar über alle Videos.</li>
+
+          </ul>
+
+
+
+          <h3 class="video-setup-card__heading">YouTube-Grading-Checkliste</h3>
+
+          <ul class="video-interactive-checklist" data-storage-key="grading-check-yt">
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Technische LUT als Basis angewendet</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Weißabgleich pro Clip korrigiert</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Hauttöne warm und natürlich</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Kontrast-S-Kurve für Punch</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Signature LUT konsistent über alle Clips</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Auf Smartphone getestet (nicht nur Monitor)</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Keine übermäßige Sättigung</span></li>
+
+          </ul>
+
+
+
+          <div class="video-progress-ring is-hidden" id="gradingProgressYt">
+
+            <svg class="video-progress-ring__svg" viewBox="0 0 60 60">
+
+              <circle class="video-progress-ring__circle" cx="30" cy="30" r="26"/>
+
+              <circle class="video-progress-ring__circle--fill" cx="30" cy="30" r="26" stroke-dasharray="163.36" stroke-dashoffset="163.36"/>
+
+            </svg>
+
+            <div>
+
+              <div class="video-progress-ring__text" id="gradingPercentYt">0%</div>
+
+              <div class="video-progress-ring__label">Grading bereit</div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="video-tip-box">
+
+          <strong>YouTube-Pro-Tipp:</strong> Exportiere einen kurzen Test-Clip und schaue ihn auf deinem Smartphone an. Was auf dem kalibrierten Monitor perfekt aussieht, kann auf einem OLED-Handy zu dunkel oder zu gesättigt wirken.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- DOKU PANEL -->
+
+      <div class="video-scenario-panel" id="panel-doku">
+
+        <div class="video-setup-card">
+
+          <div class="video-setup-card__header">
+
+            <div class="video-setup-card__icon"><i class="ph ph-film-strip" aria-hidden="true"></i></div>
+
+            <div>
+
+              <div class="video-setup-card__title">Doku-Grading</div>
+
+              <div class="video-setup-card__subtitle">Authentisch, unaufdringlich, ehrlich</div>
+
+            </div>
+
+          </div>
+
+          <p class="video-setup-card__text">
+
+            Dokumentationen leben von Authentizität. Das Grading darf nicht manipulativ wirken. Es sollte die Realität verstärken, nicht ersetzen. Natürliche Hauttöne sind heilig.
+
+          </p>
+
+
+
+          <h3 class="video-setup-card__heading">Doku-Grading-Strategien</h3>
+
+          <ul class="video-checklist-static">
+
+            <li><strong>Minimalistisch:</strong> Korrektur ja, Grading dezent. Der Zuschauer sollte nicht merken, dass gegradet wurde. Wenn er es merkt, war es zu viel.</li>
+
+            <li><strong>Konsistenz über Szenen:</strong> Ein Interview am Morgen und B-Roll am Abend müssen farblich zusammenpassen. Color-Matching ist hier die Hauptaufgabe.</li>
+
+            <li><strong>Stimmungs-Segmente:</strong> Traurige Szenen leicht bläulich. Hoffnungsvolle Szenen leicht warm. Aber subtil — 5% Verschiebung reicht.</li>
+
+            <li><strong>Archiv-Material anpassen:</strong> Handy-Footage, alte Fotos, Screenshots — alles muss in den gleichen Farbraum gebracht werden.</li>
+
+          </ul>
+
+
+
+          <h3 class="video-setup-card__heading">Doku-Grading-Checkliste</h3>
+
+          <ul class="video-interactive-checklist" data-storage-key="grading-check-doku">
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Natürliche Hauttöne bewahrt</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Alle Szenen farblich gematcht</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Stimmungs-Segmente subtil (max. 5%)</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Archiv-Material angeglichen</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Kein übermäßiger "Hollywood-Look"</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Grading ist auf dem Handy unsichtbar</span></li>
+
+          </ul>
+
+
+
+          <div class="video-progress-ring is-hidden" id="gradingProgressDoku">
+
+            <svg class="video-progress-ring__svg" viewBox="0 0 60 60">
+
+              <circle class="video-progress-ring__circle" cx="30" cy="30" r="26"/>
+
+              <circle class="video-progress-ring__circle--fill" cx="30" cy="30" r="26" stroke-dasharray="163.36" stroke-dashoffset="163.36"/>
+
+            </svg>
+
+            <div>
+
+              <div class="video-progress-ring__text" id="gradingPercentDoku">0%</div>
+
+              <div class="video-progress-ring__label">Doku-Grading bereit</div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="video-tip-box">
+
+          <strong>Doku-Pro-Tipp:</strong> Wenn du mit mehreren Kameras oder über mehrere Tage drehst, fotografiere einen Color-Checker oder ein graues Kartonstück bei jedem Setup. Das erspart dir stundenlanges Color-Matching im Schnitt.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- KURZFILM PANEL -->
+
+      <div class="video-scenario-panel" id="panel-kurzfilm">
+
+        <div class="video-setup-card">
+
+          <div class="video-setup-card__header">
+
+            <div class="video-setup-card__icon"><i class="ph ph-clapperboard" aria-hidden="true"></i></div>
+
+            <div>
+
+              <div class="video-setup-card__title">Kurzfilm-Grading</div>
+
+              <div class="video-setup-card__subtitle">Dramaturgie, Stil, Emotion</div>
+
+            </div>
+
+          </div>
+
+          <p class="video-setup-card__text">
+
+            Im Kurzfilm ist das Grading ein dramaturgisches Instrument. Jede Szene kann einen anderen Look haben — solange es eine Absicht hat. Das Grading folgt der Emotion, nicht der Realität.
+
+          </p>
+
+
+
+          <h3 class="video-setup-card__heading">Kurzfilm-Grading-Prinzipien</h3>
+
+          <ul class="video-checklist-static">
+
+            <li><strong>Look-Bibel:</strong> Definiere vor dem Schnitt 3–5 Looks für verschiedene Emotionen. Tragödie = kühles Blau. Romantik = warmes Gold. Spannung = desaturiertes Grün.</li>
+
+            <li><strong>Szene-für-Szene:</strong> Jede Szene wird individuell gegradet. Ein Flashback bekommt einen anderen Look als die Gegenwart. Ein Traum bekommt einen dritten.</li>
+
+            <li><strong>Vignetten:</strong> Dunkle Ränder lenken den Blick ins Zentrum. Subtil eingesetzt: filmisch. Stark eingesetzt: stilistisch. Sehr stark: Horror.</li>
+
+            <li><strong>Film Grain:</strong> Digitale Aufnahmen können klinisch wirken. Ein dezenter Film-Grain verleiht organische Textur und "Seele".</li>
+
+          </ul>
+
+
+
+          <h3 class="video-setup-card__heading">Kurzfilm-Grading-Checkliste</h3>
+
+          <ul class="video-interactive-checklist" data-storage-key="grading-check-film">
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Look-Bibel mit 3–5 definierten Looks</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Jede Szene individuell gegradet</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Flashbacks/Träume visuell unterschieden</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Vignetten subtil und bewusst eingesetzt</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Film-Grain als organische Textur</span></li>
+
+            <li><span class="video-check-circle"></span><span class="video-interactive-checklist__text">Hauttöne trotz Stil-Look natürlich</span></li>
+
+          </ul>
+
+
+
+          <div class="video-progress-ring is-hidden" id="gradingProgressFilm">
+
+            <svg class="video-progress-ring__svg" viewBox="0 0 60 60">
+
+              <circle class="video-progress-ring__circle" cx="30" cy="30" r="26"/>
+
+              <circle class="video-progress-ring__circle--fill" cx="30" cy="30" r="26" stroke-dasharray="163.36" stroke-dashoffset="163.36"/>
+
+            </svg>
+
+            <div>
+
+              <div class="video-progress-ring__text" id="gradingPercentFilm">0%</div>
+
+              <div class="video-progress-ring__label">Kurzfilm-Grading bereit</div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="video-tip-box video-tip-box--tight">
+
+          <strong>Creative Break:</strong> Schau dir die Farbpaletten von Filmen an, die du liebst. Blade Runner 2049 (Orange-Teal + Neon), The Matrix (Grün-Monochrom), La La Land (Primär-Farben). Jeder Look erzählt eine Geschichte — was erzählt deiner?
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Section 6: Mut zur Praxis -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>Mut zur Praxis</h2>
+
+      <p>
+
+        Color Grading kann man nicht nur lesen — man muss es sehen. Jede Aufnahme reagiert anders auf Curves und Wheels. Grade jetzt. Experimentiere. Mach Fehler.
+
+      </p>
+
+
+
+      <div class="video-practice-box">
+
+        <h3><i class="ph ph-target" aria-hidden="true"></i> Übung A: Der gleiche Clip, drei Looks</h3>
+
+        <ol>
+
+          <li>Nimm einen einzigen 10-Sekunden-Clip (am besten Log oder flaches Profil)</li>
+
+          <li>Grade ihn dreimal mit völlig unterschiedlichen Stimmungen:
+
+            <ul class="video-u-list-spaced">
+
+              <li><strong>Look 1:</strong> Warm und einladend — goldene Mitten, leichtes Teal in den Schatten, hohe Sättigung</li>
+
+              <li><strong>Look 2:</strong> Kalt und distanziert — blaue Schatten, desaturierte Hauttöne, niedriger Kontrast</li>
+
+              <li><strong>Look 3:</strong> Dramatisch und kontrastreich — tiefe Schatten, helle Highlights, selektive Sättigung (nur Haut und ein Akzent)</li>
+
+            </ul>
+
+          </li>
+
+          <li>Zeige alle drei Versionen jemandem. Welche Emotion weckt jeder Look?</li>
+
+        </ol>
+
+        <p><strong>Ziel:</strong> Verstehen, dass identisches Material durch Color Grading komplett unterschiedliche Gefühle erzeugt. Der Look ist der unsichtbare Schauspieler.</p>
+
+      </div>
+
+
+
+      <div class="video-practice-box video-practice-box--teal">
+
+        <h3><i class="ph ph-target" aria-hidden="true"></i> Übung B: Der LUT-Vergleich</h3>
+
+        <ol>
+
+          <li>Downloade 5 kostenlose LUTs von verschiedenen Quellen (z.B. GroundControl, Triune Films)</li>
+
+          <li>Wende jede LUT auf denselben Clip an</li>
+
+          <li>Bewerte jede LUT nach vier Kriterien:
+
+            <ul class="video-u-list-spaced">
+
+              <li>Hauttöne: Sehen natürlich aus?</li>
+
+              <li>Kontrast: Zu flach, zu krass oder perfekt?</li>
+
+              <li>Farbverschiebung: Unbeabsichtigte Farbstiche?</li>
+
+              <li>Wiederverwendbarkeit: Funktioniert sie auf mehreren Clips?</li>
+
+            </ul>
+
+          </li>
+
+          <li>Wähle die beste LUT als Basis und passe sie mit Curves an</li>
+
+        </ol>
+
+        <p><strong>Ziel:</strong> Nicht jede LUT ist gut. Lerne, Qualität zu erkennen. Die beste LUT ist die, die du nur leicht anpassen musst — nicht die, die alles allein "repariert".</p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Section 7: Was kommt als Nächstes? -->
+
+    <section class="video-content-section" data-reveal>
+
+      <h2>Was kommt als Nächstes?</h2>
+
+      <p>
+
+        Du beherrscht jetzt die visuelle Emotion deines Films. Als Nächstes lernst du, den Ton zu meistern — denn ein wunderschön gegradeter Film mit schlechtem Ton ist immer noch unprofessionell.
+
+      </p>
+
+
+
+      <ul class="video-next-modules">
+
+        <li>
+
+          <a href="04-schnitt.html">
+
+            <span class="video-next-modules__num">&larr; 04</span>
+
+            Schnitt &amp; Timeline — Timeline &amp; Rhythmus
+
+          </a>
+
+        </li>
+
+        <li>
+
+          <a href="06-audio-sound.html">
+
+            <span class="video-next-modules__num">06</span>
+
+            Audio &amp; Sound — Ton aufnehmen &amp; mischen
+
+          </a>
+
+        </li>
+
+        <li>
+
+          <a href="07-motion-graphics.html">
+
+            <span class="video-next-modules__num">07</span>
+
+            Motion Graphics — Titel, Animationen &amp; Effekte
+
+          </a>
+
+        </li>
+
+        <li>
+
+          <a href="08-ki-workflows.html">
+
+            <span class="video-next-modules__num">08</span>
+
+            KI-Workflows — Automatisierung &amp; KI-Tools
+
+          </a>
+
+        </li>
+
+        <li>
+
+          <a href="09-export.html">
+
+            <span class="video-next-modules__num">09</span>
+
+            Export — Rendern für YouTube, TikTok &amp; Co.
+
+          </a>
+
+        </li>
+
+        <li>
+
+          <a href="10-storytelling.html">
+
+            <span class="video-next-modules__num">10</span>
+
+            Storytelling — Struktur, Emotion &amp; Spannung
+
+          </a>
+
+        </li>
+
+        <li>
+
+          <a href="11-capstone.html">
+
+            <span class="video-next-modules__num">11</span>
+
+            Capstone — Dein Abschlussprojekt
+
+          </a>
+
+        </li>
+
+      </ul>
+
+    </section>
+
+
+
+    <!-- Module Checklist -->
+
+    <section class="video-checklist" data-reveal data-module="m05">
+
+      <div class="video-checklist__header">
+
+        <div class="video-checklist__title-group">
+
+          <h2 class="video-checklist__title">Dein Lernfortschritt</h2>
+
+          <p class="video-checklist__subtitle">Hake die Punkte ab, die du verstanden hast.</p>
+
+          <span class="video-checklist__completed-badge"><i class="ph ph-check-circle" aria-hidden="true"></i> Modul abgeschlossen</span>
+
+        </div>
+
+        <div class="video-checklist__ring">
+
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+
+            <defs>
+
+              <linearGradient id="checklistGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+
+                <stop offset="0%" />
+
+                <stop offset="100%" />
+
+              </linearGradient>
+
+            </defs>
+
+            <circle class="video-checklist__ring-track" cx="40" cy="40" r="36" />
+
+            <circle class="video-checklist__ring-fill" cx="40" cy="40" r="36" />
+
+          </svg>
+
+          <span class="video-checklist__ring-text">0%</span>
+
+        </div>
+
+      </div>
+
+      <div class="video-checklist__list">
+
+        <div class="video-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+
+          <div class="video-checklist__checkbox">
+
+            <svg class="video-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+
+              <path d="M2 7l4 4 6-6" />
+
+            </svg>
+
+          </div>
+
+          <span class="video-checklist__label">Ich kann LUTs anwenden und verstehe, was sie technisch tun</span>
+
+        </div>
+
+        <div class="video-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+
+          <div class="video-checklist__checkbox">
+
+            <svg class="video-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+
+              <path d="M2 7l4 4 6-6" />
+
+            </svg>
+
+          </div>
+
+          <span class="video-checklist__label">Ich beherrsche die Color Wheels in DaVinci Resolve</span>
+
+        </div>
+
+        <div class="video-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+
+          <div class="video-checklist__checkbox">
+
+            <svg class="video-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+
+              <path d="M2 7l4 4 6-6" />
+
+            </svg>
+
+          </div>
+
+          <span class="video-checklist__label">Ich kann einen eigenen, konsistenten Look entwickeln</span>
+
+        </div>
+
+      </div>
+
+      <div class="video-checklist__footer">
+
+        <button class="video-checklist__btn" disabled><span>Modul abschließen</span></button>
+
+      </div>
+
+    </section>
+
+    <div id="moduleReflection"></div>
+    <noscript>
+      <div class="video-reflection__fallback" role="note">
+        <p>Die interaktive Lern-Reflexion erfordert JavaScript. Der gesamte Lerninhalt ist vollständig ohne Reflexion nutzbar.</p>
+      </div>
+    </noscript>
+
+
+
+  <!-- sim-05 -->
+
+
+
+    <!-- 🎮 Color-Grading Swipe -->
+
+    <section class="video-content-section" data-reveal>
+
+      <span class="video-section-eyebrow">Interaktiv</span>
+
+      <h2>Color-Grading Swipe</h2>
+
+      <p>Vergleiche ungradetes Log-Material mit verschiedenen LUT-Looks. Ziehe den Slider oder wähle einen Look.</p>
+
+      <div class="sim-color-swipe" data-sim-color-swipe>
+
+        <div class="sim-color-swipe__frame">
+
+          <div class="sim-color-swipe__before">
+
+            <span class="sim-color-swipe__label sim-color-swipe__label--before">Before</span>
+
+          </div>
+
+          <div class="sim-color-swipe__after" data-lut="neutral">
+
+            <span class="sim-color-swipe__label sim-color-swipe__label--after">After</span>
+
+          </div>
+
+          <div class="sim-color-swipe__handle">
+
+            <div class="sim-color-swipe__handle-line"></div>
+
+            <div class="sim-color-swipe__handle-knob"><i class="ph ph-arrows-horizontal"></i></div>
+
+          </div>
+
+        </div>
+
+        <div class="sim-color-swipe__luts">
+
+          <button class="sim-color-swipe__lut is-active" data-sim-lut="neutral">
+
+            <div class="sim-color-swipe__lut-preview sim-color-swipe__lut-preview--neutral"></div>
+
+            <span class="sim-color-swipe__lut-name">Neutral</span>
+
+          </button>
+
+          <button class="sim-color-swipe__lut" data-sim-lut="teal-orange">
+
+            <div class="sim-color-swipe__lut-preview sim-color-swipe__lut-preview--teal-orange"></div>
+
+            <span class="sim-color-swipe__lut-name">Teal/Orange</span>
+
+          </button>
+
+          <button class="sim-color-swipe__lut" data-sim-lut="vintage">
+
+            <div class="sim-color-swipe__lut-preview sim-color-swipe__lut-preview--vintage"></div>
+
+            <span class="sim-color-swipe__lut-name">Vintage</span>
+
+          </button>
+
+          <button class="sim-color-swipe__lut" data-sim-lut="high-contrast">
+
+            <div class="sim-color-swipe__lut-preview sim-color-swipe__lut-preview--high-contrast"></div>
+
+            <span class="sim-color-swipe__lut-name">High Contrast</span>
+
+          </button>
+
+        </div>
+
+        <div class="sim-color-swipe__info">
+
+          <h4 class="sim-color-swipe__info-title" data-sim-lut-title>Neutral</h4>
+
+          <p class="sim-color-swipe__info-text" data-sim-lut-desc>Leichte Kontrast- und Sättigungserhöhung — der sicherste Einstieg. Lift, Gamma und Gain bleiben nahe am Ursprung.</p>
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- Module Quiz -->
+    <section class="video-content-section" id="moduleQuiz" data-reveal></section>
+
+
+
+
+  </main>
+
+
+
+  <!-- Bottom Nav -->
+
+  <nav class="video-module-nav-footer" aria-label="Modul-Navigation">
+
+    <div class="video-nav-bottom-inner">
+
+      <a href="04-schnitt.html" class="video-nav-btn-premium video-prev">
+
+        <span>&larr;</span>
+
+        <span class="video-nav-label">Schnitt &amp; Timeline</span>
+
+      </a>
+
+      <div class="video-nav-progress-indicator">
+
+        <div class="video-nav-progress-bar">
+
+          <div class="video-nav-progress-fill" data-base="6"></div>
+
+        </div>
+
+        <span class="video-nav-progress-text"><strong>Modul 05</strong> — Farbkorrektur &amp; Color Grading</span>
+
+      </div>
+
+      <a href="06-audio-sound.html" class="video-nav-btn-premium video-next">
+
+        <span class="video-nav-label">Audio &amp; Sound</span>
+
+        <span>&rarr;</span>
+
+      </a>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- Footer -->
+
+  <footer class="video-footer--premium" role="contentinfo">
+
+    <div class="video-container">
+
+      <div class="video-footer__main">
+
+        <div class="video-footer__brand-wrap">
+
+          <div class="video-footer__logo">
+
+            <img src="/tutorials/pansonic-video-lab/assets/icons/favicon.svg" alt="" width="48" height="48" loading="lazy">
+
+            <div class="video-footer__logo-text">
+
+              <span class="video-footer__logo-title">PANTAM</span>
+
+              <span class="video-footer__logo-subtitle">LEARNING UNIVERSE</span>
+
+            </div>
+
+          </div>
+
+          <p class="video-footer__tagline">Mit KI denken. Menschlich handeln.</p>
+
+        </div>
+
+        <div class="video-footer__links-grid">
+
+          <div class="video-footer__col">
+
+            <h4>Video Lab</h4>
+
+            <nav>
+
+              <a href="/tutorials/pansonic-video-lab/index.html">Startseite</a>
+
+              <a href="/tutorials/pansonic-video-lab/pages/glossar.html">Glossar</a>
+
+              <a href="/tutorials/pansonic-video-lab/pages/player.html">Player</a>
+
+              <a href="/tutorials/pansonic-video-lab/pages/bibliothek.html">Bibliothek</a>
+
+            </nav>
+
+          </div>
+
+          <div class="video-footer__col">
+
+            <h4>PLU Ökosystem</h4>
+
+            <nav>
+
+              <a href="/tutorials/">PLU Hub</a>
+
+              <a href="/tutorials/pages/vision.html">KI Vision</a>
+
+              <a href="/tutorials/pages/ki-charter.html">KI Charter</a>
+
+              <a href="/tutorials/pages/lexikon.html">KI-Lexikon</a>
+
+            </nav>
+
+          </div>
+
+          <div class="video-footer__col">
+
+            <h4>Weitere Academies</h4>
+
+            <nav>
+
+              <a href="/tutorials/pansonic-audio-lab/"><i class="ph ph-speaker-high" aria-hidden="true"></i> Audio Lab</a>
+
+              <a href="/tutorials/ki-academy-premium/"><i class="ph ph-brain" aria-hidden="true"></i> KI Premium</a>
+
+              <a href="/tutorials/backend-modern/"><i class="ph ph-code" aria-hidden="true"></i> Backend Development</a>
+
+              <a href="/tutorials/grafik-modern/"><i class="ph ph-paint-brush" aria-hidden="true"></i> Grafik &amp; Design</a>
+
+            </nav>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="video-footer__bottom">
+
+        <div class="video-footer__legal">
+
+          <a href="/tutorials/pages/impressum.html">Impressum</a>
+
+          <span class="video-footer__dot">•</span>
+
+          <a href="/tutorials/pages/datenschutz.html">Datenschutz</a>
+
+          <span class="video-footer__dot">•</span>
+
+          <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+
+          <span class="video-footer__dot">•</span>
+
+          <span>Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+
+          <span class="video-footer__dot">•</span>
+
+          <span>Code: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></span>
+
+        </div>
+
+        <div class="video-footer__meta">
+
+          <span>© Pantam, Art &amp; Culture – Austria</span>
+
+          <a href="/tutorials/pages/spenden.html" class="video-footer__support-link"><i class="ph ph-heart" aria-hidden="true"></i> Unterstützen</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- Floating Action Buttons -->
+
+  <div class="video-fab-container" role="group" aria-label="Schnellaktionen">
+
+    <button class="video-fab video-theme-toggle" aria-label="Farbschema wechseln" title="Theme (T)">
+
+      <i class="ph ph-moon"></i>
+
+    </button>
+
+    <button class="video-fab video-classroom-toggle" aria-label="Classroom Mode" title="Classroom (C)">
+
+      <i class="ph ph-presentation"></i>
+
+    </button>
+
+    <button class="video-fab video-back-to-top" aria-label="Nach oben" title="Nach oben">
+
+      <i class="ph ph-arrow-up"></i>
+
+    </button>
+
+  </div>
+
+
+
+  <!-- Scripts -->
+
+  <script type="module" src="/tutorials/pansonic-video-lab/js/entry-chapter.js"></script>
+
+  <div id="mobileBottomBar" class="video-bottom-bar"></div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,835 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modul 3: Dialog-Grundlagen - Die 5 Bausteine perfekter Prompts. Lernen Sie effektive KI-Kommunikation.">
+  <meta name="keywords" content="Prompt Engineering, KI Dialog, Prompt Bausteine, KI für Senioren">
+  
+  <meta property="og:title" content="Modul 3: Dialog-Grundlagen | KI Academy Senior">
+  <meta property="og:description" content="Die 5 Bausteine perfekter Prompts - Ihr Schlüssel zur KI-Kommunikation">
+  <meta property="og:image" content="../../../assets/images/sprints/m03_hero.jpg">
+  <meta property="og:type" content="website">
+  
+  <title>Modul 3: Dialog-Grundlagen | KI Academy Senior</title>
+<meta name="theme-color" content="#F4A261">
+  <link rel="icon" type="image/svg+xml" href="../../../assets/images/icons/favicon-ki.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../../../css/main.css?v=56">
+  <link rel="stylesheet" href="../../../css/layout.css?v=58">
+  <link rel="stylesheet" href="../../../css/components.css?v=56">
+  <link rel="stylesheet" href="../../../css/premium-startpage.css?v=15">
+  <link rel="stylesheet" href="../../../css/responsive.css?v=58">
+  <link rel="stylesheet" href="../../module-styles-m03.css?v=34">
+  <!-- Fallback: Falls JavaScript nicht lädt, bleiben Inhalte sichtbar -->
+  <noscript>
+    <style>
+      .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-delay-3 {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    </style>
+  </noscript>
+
+</head>
+
+<body class="module-page">
+  <!-- Progress Indicator -->
+  <div class="module-progress">
+    <div class="module-progress-bar" id="progress-bar"></div>
+  </div>
+  
+  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  
+  <!-- Navigation -->
+  <nav class="main-nav" role="navigation" aria-label="Hauptnavigation">
+    <div class="nav-container">
+      <a href="../../../index.html" class="nav-logo" aria-label="KI Academy Startseite">
+        <img src="../../../assets/images/icons/logo-ki-academy.svg" alt="" class="logo-icon" width="40" height="40" onerror="this.style.display='none'">
+        <span class="logo-text">KI Academy</span>
+      </a>
+
+      <div class="nav-controls nav-controls-desktop">
+        <div class="language-switcher" role="group" aria-label="Sprachauswahl">
+          <button class="lang-btn active" data-lang="de" aria-label="Deutsch">DE</button>
+          <span class="lang-divider">|</span>
+          <a href="../../en/03-dialog-basics/module-03-en.html" class="lang-btn" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="theme-toggle" aria-label="Dark Mode umschalten" title="Dark Mode">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          </svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="classroom-toggle" aria-label="Klassenraummodus umschalten" title="Präsentationsmodus: Größere Schrift für Vorträge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="module-dropdown nav-module-dropdown nav-module-dropdown-desktop">
+        <button class="module-dropdown-toggle" aria-expanded="false" aria-controls="module-menu" aria-label="Module auswählen">
+          <span class="current-module-label">Modul 03</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <nav class="module-dropdown-menu" id="module-menu" aria-label="Modul-Navigation">
+          <a href="../../../index.html" class="module-dropdown-item module-dropdown-home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="module-dropdown-name">Startseite</span>
+          </a>
+          <div class="module-dropdown-divider"></div>
+          <div class="module-dropdown-section">Sprint 1: Verstehen</div>
+          <a href="../00-willkommen/module-00.html" class="module-dropdown-item"><span class="module-dropdown-num">0</span><span class="module-dropdown-name">Willkommen</span></a>
+          <a href="../01-grundlagen/module-01.html" class="module-dropdown-item"><span class="module-dropdown-num">1</span><span class="module-dropdown-name">Grundlagen</span></a>
+          <a href="../02-alltag/module-02.html" class="module-dropdown-item"><span class="module-dropdown-num">2</span><span class="module-dropdown-name">Alltag</span></a>
+          <div class="module-dropdown-section">Sprint 2: Anwenden</div>
+          <a href="module-03.html" class="module-dropdown-item active" aria-current="page"><span class="module-dropdown-num">3</span><span class="module-dropdown-name">Dialog-Grundlagen</span></a>
+          <a href="../04-system-prompts/module-04.html" class="module-dropdown-item"><span class="module-dropdown-num">4</span><span class="module-dropdown-name">System-Prompts <small style="opacity:0.6;font-weight:400">(KI-Anweisungen)</small></span></a>
+          <a href="../05-chain-of-thought/module-05.html" class="module-dropdown-item"><span class="module-dropdown-num">5</span><span class="module-dropdown-name">Chain of Thought <small style="opacity:0.6;font-weight:400">(Schritt-für-Schritt)</small></span></a>
+          <div class="module-dropdown-section">Sprint 3: Meistern</div>
+          <a href="../06-kreativitaet/module-06.html" class="module-dropdown-item"><span class="module-dropdown-num">6</span><span class="module-dropdown-name">Kreativität</span></a>
+          <a href="../07-kritisches-denken/module-07.html" class="module-dropdown-item"><span class="module-dropdown-num">7</span><span class="module-dropdown-name">Kritisches Denken</span></a>
+          <a href="../08-glossar/module-08.html" class="module-dropdown-item"><span class="module-dropdown-num">8</span><span class="module-dropdown-name">Glossar</span></a>
+          <div class="module-dropdown-divider"></div>
+          <a href="../09-abschluss/module-09.html" class="module-dropdown-item module-dropdown-highlight"><span class="module-dropdown-num">✓</span><span class="module-dropdown-name">Zertifikat</span></a>
+        </nav>
+      </div>
+
+      <div class="nav-controls nav-controls-mobile">
+        <div class="language-switcher" role="group" aria-label="Sprachauswahl">
+          <button class="lang-btn active" data-lang="de" aria-label="Deutsch">DE</button>
+          <a href="../../en/03-dialog-basics/module-03-en.html" class="lang-btn" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="theme-toggle" aria-label="Dark Mode umschalten" title="Dark Mode">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="back-to-top-nav" aria-label="Nach oben scrollen" title="Nach oben" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Navigation öffnen"><span class="hamburger"></span></button>
+
+      <ul id="nav-menu" class="nav-menu" role="menubar">
+        <li role="none"><a href="../../../index.html" class="nav-link" role="menuitem">Startseite</a></li>
+        <li role="none" class="nav-menu-section">Sprint 1: Verstehen</li>
+        <li role="none"><a href="../00-willkommen/module-00.html" class="nav-link" role="menuitem">0 Willkommen</a></li>
+        <li role="none"><a href="../01-grundlagen/module-01.html" class="nav-link" role="menuitem">1 Grundlagen</a></li>
+        <li role="none"><a href="../02-alltag/module-02.html" class="nav-link" role="menuitem">2 Alltag</a></li>
+        <li role="none" class="nav-menu-section">Sprint 2: Anwenden</li>
+        <li role="none"><a href="module-03.html" class="nav-link active" role="menuitem" aria-current="page">3 Dialog-Grundlagen</a></li>
+        <li role="none"><a href="../04-system-prompts/module-04.html" class="nav-link" role="menuitem">4 System-Prompts</a></li>
+        <li role="none"><a href="../05-chain-of-thought/module-05.html" class="nav-link" role="menuitem">5 Chain of Thought</a></li>
+        <li role="none" class="nav-menu-section">Sprint 3: Meistern</li>
+        <li role="none"><a href="../06-kreativitaet/module-06.html" class="nav-link" role="menuitem">6 Kreativität</a></li>
+        <li role="none"><a href="../07-kritisches-denken/module-07.html" class="nav-link" role="menuitem">7 Kritisches Denken</a></li>
+        <li role="none"><a href="../08-glossar/module-08.html" class="nav-link" role="menuitem">8 Glossar</a></li>
+        <li role="none" class="nav-menu-section">Abschluss</li>
+        <li role="none"><a href="../09-abschluss/module-09.html" class="nav-link" role="menuitem">Zertifikat</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <button class="back-to-top" aria-label="Zurück zum Seitenanfang">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- HERO SECTION -->
+  <section class="m03-hero" id="hero" role="banner">
+    <div class="m03-hero-bg">
+      <picture>
+        <source srcset="../../../assets/images/sprints/m03_hero.webp" type="image/webp">
+        <img src="../../../assets/images/sprints/m03_hero.jpg" alt="Offenes Buch mit goldenen Schlüsseln" id="hero-bg-img" loading="eager">
+      </picture>
+    </div>
+    <div class="m03-hero-overlay"></div>
+    
+    <div class="m03-hero-content">
+      <div class="m03-hero-badge">
+        <i class="ph ph-key"></i>
+        <span>Modul 03 · Sprint 2 · 10 Minuten</span>
+      </div>
+      
+      <h1 class="m03-hero-title reveal">
+        Die 5 Bausteine<br><em>perfekter Dialoge</em>
+      </h1>
+      
+      <p class="m03-hero-subtitle reveal reveal-delay-1">
+        Wie Sie KI verstehen und nutzen lernen. Der Schlüssel zu effektiver Kommunikation mit Künstlicher Intelligenz.
+      </p>
+      
+      <a href="#intro" class="m03-hero-cta">
+        <span>Jetzt starten</span>
+        <i class="ph ph-arrow-down"></i>
+      </a>
+      
+      <div class="hero-content-outline">
+        <div class="outline-label">
+          <i class="ph ph-list-checks"></i>
+          Was Sie in diesem Modul entdecken
+        </div>
+        <div class="outline-steps">
+          <span class="outline-step"><i class="ph ph-puzzle-piece"></i> Die 5 Bausteine</span>
+          <span class="outline-step"><i class="ph ph-eye"></i> Vorher / Nachher</span>
+          <span class="outline-step"><i class="ph ph-sliders"></i> Prompt Builder</span>
+          <span class="outline-step"><i class="ph ph-check-square"></i> Wissens-Check</span>
+          <span class="outline-step"><i class="ph ph-arrow-right"></i> Weiter zu Modul 04</span>
+        </div>
+        <p class="outline-time"><i class="ph ph-clock"></i> ca. 10 Minuten Lesezeit</p>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <!-- SECTION 1: INTRO -->
+    <section class="section-intro" id="intro">
+      <div class="intro-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-lightbulb"></i>
+            Die Grundlage
+          </span>
+          <h2 class="section-title-premium">Was ist ein Prompt?</h2>
+          <p class="section-subtitle-premium">
+            Ein Prompt ist Ihre Anweisung an die KI - vergleichbar mit einer Bestellung im Restaurant
+          </p>
+        </div>
+        
+        <div class="analogy-card">
+          <div class="analogy-visual">
+            <div class="analogy-icon">
+              <i class="ph ph-bowl-food"></i>
+            </div>
+          </div>
+          <div class="analogy-content">
+            <h3>Die Restaurant-Analogie</h3>
+            <p>
+              Stellen Sie sich vor, Sie bestellen im Restaurant. Je genauer Sie sagen, was Sie möchten 
+              - "Ein saftiges Steak, medium, mit Kräuterbutter und Gemüse der Saison" - desto besser 
+              wird Ihr Gericht. Genauso funktioniert es mit der KI.
+            </p>
+            <div class="analogy-example">
+              <strong>Beispiel eines guten Prompts:</strong>
+              <p>„Erkläre mir, was ein Prompt ist, als wäre ich ein 10-Jähriger. Nutze ein einfaches Beispiel aus dem Alltag.“</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DIE 5 BAUSTEINE -->
+    <section class="section-bausteine detektiv-section" id="bausteine">
+      <div class="bausteine-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-puzzle-piece"></i>
+            Die 5 Bausteine
+          </span>
+          <h2 class="section-title-premium">Der perfekte Prompt setzt sich zusammen aus:</h2>
+          <p class="section-subtitle-premium">Jeder Baustein erfüllt eine spezifische Funktion. Klicken Sie auf die Karten für Beispiele.</p>
+        </div>
+        
+        <div class="detektiv-progress">
+          <div class="detektiv-progress-bar"></div>
+          <span class="detektiv-progress-text">0 von 5 Bausteinen entdeckt</span>
+        </div>
+        
+        <div class="bausteine-grid">
+          <!-- Kontext -->
+          <div class="baustein-card" data-baustein="kontext" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">1</div>
+            <div class="baustein-icon"><i class="ph ph-map-pin"></i></div>
+            <h4>Kontext</h4>
+            <p>Der Rahmen Ihrer Anfrage</p>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Der Kontext ist wie die Einleitung eines Gesprächs. Wenn Sie jemandem helfen wollen, erzählen Sie zuerst, wer Sie sind und was Sie brauchen. Je persönlicher der Kontext, desto besser die Antwort. Probieren Sie es: "Ich bin 70, interessiere mich für Gartenarbeit und möchte..."</p>
+            </div>
+            <div class="baustein-example">
+              „Ich bin 68 Jahre alt, Rentner und möchte KI für meine Hobby-Fotografie nutzen...“
+            </div>
+          </div>
+          
+          <!-- Rolle -->
+          <div class="baustein-card" data-baustein="rolle" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">2</div>
+            <div class="baustein-icon"><i class="ph ph-user-circle"></i></div>
+            <h4>Rolle</h4>
+            <p>Wen soll die KI spielen?</p>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Die Rolle ist der wichtigste Trick! Sagen Sie der KI, wen sie spielen soll: "Du bist ein geduldiger Lehrer", "Du bist ein Reiseexperte für Senioren", "Du bist mein Enkel, der mir Technik erklärt". Jede Rolle bringt eine andere Perspektive.</p>
+            </div>
+            <div class="baustein-example">
+              „Du bist ein geduldiger Fotografie-Lehrer mit Erfahrung in der Seniorenbildung...“
+            </div>
+          </div>
+          
+          <!-- Aufgabe -->
+          <div class="baustein-card" data-baustein="aufgabe" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">3</div>
+            <div class="baustein-icon"><i class="ph ph-target"></i></div>
+            <h4>Aufgabe</h4>
+            <p>Was soll erreicht werden?</p>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Seien Sie konkret! "Erkläre mir KI" ist zu vage. "Erkläre mir in 3 Sätzen, wie KI meine Fotos sortiert" ist präzise. Stellen Sie sich vor, Sie geben einen Auftrag an einen Handwerker – je genauer, desto besser das Ergebnis.</p>
+            </div>
+            <div class="baustein-example">
+              „Erkläre mir Schritt für Schritt, wie ich meine Landschaftsfotos mit KI verbessern kann...“
+            </div>
+          </div>
+          
+          <!-- Format -->
+          <div class="baustein-card" data-baustein="format" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">4</div>
+            <div class="baustein-icon"><i class="ph ph-list-dashes"></i></div>
+            <h4>Format</h4>
+            <p>Wie soll die Antwort aussehen?</p>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Das Format ist Ihr Wunschzettel! Möchten Sie eine nummerierte Liste? Eine Tabelle? Eine Geschichte? Einfache Sprache ohne Fachbegriffe? Sagen Sie es der KI – sie kann fast jedes Format liefern.</p>
+            </div>
+            <div class="baustein-example">
+              „Nutze einfache Sprache, nummerierte Schritte und konkrete Beispiele aus dem Alltag.“
+            </div>
+          </div>
+          
+          <!-- Einschränkungen -->
+          <div class="baustein-card" data-baustein="einschraenkungen" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">5</div>
+            <div class="baustein-icon"><i class="ph ph-warning-circle"></i></div>
+            <h4>Einschränkungen</h4>
+            <p>Was soll vermieden werden?</p>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Grenzen sind Freiheit! "Maximal 200 Wörter", "Keine teuren Geräte empfehlen", "Nur österreichische Beispiele". Je mehr Grenzen Sie setzen, desto zielgerichteter wird die Antwort. Das ist nicht böse gemeint – das ist präzise.</p>
+            </div>
+            <div class="baustein-example">
+              „Vermeide Fachbegriffe ohne Erklärung und bleibe unter 300 Wörtern.“
+            </div>
+          </div>
+        </div>
+        
+        <div class="detektiv-reveal">
+          <div class="detektiv-reveal-icon">
+            <i class="ph ph-trophy"></i>
+          </div>
+          <h3>Wunderbar! Sie haben alle 5 Bausteine entdeckt!</h3>
+          <p>Jeder Baustein ist ein Schlüssel zu besseren KI-Antworten. Kombinieren Sie sie für den perfekten Dialog.</p>
+          <div class="detektiv-counter">
+            <i class="ph ph-check-circle"></i>
+            <span>0 von 5 Bausteinen entdeckt</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE 1 -->
+    <section class="parallax-quote-section" id="parallax-quote-1">
+      <div class="parallax-bg parallax-bg-1" role="img" aria-label="Hände formen Worte aus Licht"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content">
+        <i class="ph ph-quotes"></i>
+        <blockquote>
+          „Ein guter Prompt ist wie ein guter <em>Gesprächseinstieg</em> - 
+          er öffnet die Tür zu einem produktiven Dialog."
+        </blockquote>
+        <a href="#quiz" class="parallax-cta-btn">Zum Wissens-Check <i class="ph ph-arrow-down"></i></a>
+      </div>
+    </section>
+
+    <!-- SECTION 3: BEISPIELE -->
+    <section class="section-examples" id="examples">
+      <div class="examples-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-eye"></i>
+            Vorher / Nachher
+          </span>
+          <h2 class="section-title-premium">So verbessern Sie Ihre Prompts</h2>
+          <p class="section-subtitle-premium">Konkrete Beispiele aus der Praxis mit den 5 Bausteinen</p>
+        </div>
+        
+        <div class="examples-grid">
+          <!-- Beispiel 1: Fotografie -->
+          <div class="example-card">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-image"></i>
+              </div>
+              <h4>Fotografie-Tipp</h4>
+            </div>
+            
+            <div class="example-comparison">
+              <div class="example-side example-weak">
+                <div class="example-badge weak">
+                  <i class="ph ph-x-circle"></i> Schwach
+                </div>
+                <div class="example-prompt weak-prompt">
+                  Wie mache ich bessere Fotos?
+                </div>
+                <div class="example-problems">
+                  <span class="problem-tag"><i class="ph ph-question"></i> Zu allgemein</span>
+                  <span class="problem-tag"><i class="ph ph-user"></i> Keine Rolle</span>
+                  <span class="problem-tag"><i class="ph ph-target"></i> Kein Format</span>
+                </div>
+              </div>
+              
+              <div class="example-arrow">
+                <i class="ph ph-arrow-right"></i>
+                <span>+5 Bausteine</span>
+              </div>
+              
+              <div class="example-side example-strong">
+                <div class="example-badge strong">
+                  <i class="ph ph-check-circle"></i> Stark
+                </div>
+                <div class="example-prompt strong-prompt">
+                  <div class="prompt-block kontext">
+                    <span class="block-label"><i class="ph ph-map-pin"></i> Kontext</span>
+                    <p>Ich bin Anfänger in der Landschaftsfotografie.</p>
+                  </div>
+                  <div class="prompt-block rolle">
+                    <span class="block-label"><i class="ph ph-user-circle"></i> Rolle</span>
+                    <p>Du bist ein erfahrener Fotograf.</p>
+                  </div>
+                  <div class="prompt-block aufgabe">
+                    <span class="block-label"><i class="ph ph-target"></i> Aufgabe</span>
+                    <p>Gib mir 5 konkrete Tipps für bessere Aufnahmen bei Sonnenaufgang.</p>
+                  </div>
+                  <div class="prompt-block format">
+                    <span class="block-label"><i class="ph ph-list-dashes"></i> Format</span>
+                    <p>Nutze nummerierte Listen mit Beispielfotos.</p>
+                  </div>
+                  <div class="prompt-block einschraenkung">
+                    <span class="block-label"><i class="ph ph-warning-circle"></i> Einschränkung</span>
+                    <p>Vermeide teure Spezialausrüstung.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Beispiel 2: E-Mail -->
+          <div class="example-card">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-envelope"></i>
+              </div>
+              <h4>E-Mail schreiben</h4>
+            </div>
+            
+            <div class="example-comparison">
+              <div class="example-side example-weak">
+                <div class="example-badge weak">
+                  <i class="ph ph-x-circle"></i> Schwach
+                </div>
+                <div class="example-prompt weak-prompt">
+                  Schreib eine E-Mail an den Vermieter.
+                </div>
+                <div class="example-problems">
+                  <span class="problem-tag"><i class="ph ph-question"></i> Kein Kontext</span>
+                  <span class="problem-tag"><i class="ph ph-notepad"></i> Keine Details</span>
+                </div>
+              </div>
+              
+              <div class="example-arrow">
+                <i class="ph ph-arrow-right"></i>
+                <span>+5 Bausteine</span>
+              </div>
+              
+              <div class="example-side example-strong">
+                <div class="example-badge strong">
+                  <i class="ph ph-check-circle"></i> Stark
+                </div>
+                <div class="example-prompt strong-prompt">
+                  <div class="prompt-block kontext">
+                    <span class="block-label"><i class="ph ph-map-pin"></i> Kontext</span>
+                    <p>Ich bin Mieter in einer Wohnung mit defektem Heizkörper.</p>
+                  </div>
+                  <div class="prompt-block rolle">
+                    <span class="block-label"><i class="ph ph-user-circle"></i> Rolle</span>
+                    <p>Du bist ein höflicher, aber bestimmter Kommunikationsexperte.</p>
+                  </div>
+                  <div class="prompt-block aufgabe">
+                    <span class="block-label"><i class="ph ph-target"></i> Aufgabe</span>
+                    <p>Schreibe eine höfliche Beschwerde-E-Mail an den Vermieter.</p>
+                  </div>
+                  <div class="prompt-block format">
+                    <span class="block-label"><i class="ph ph-list-dashes"></i> Format</span>
+                    <p>Maximal 150 Wörter, professioneller Ton, mit Bitte um schnelle Reparatur.</p>
+                  </div>
+                  <div class="prompt-block einschraenkung">
+                    <span class="block-label"><i class="ph ph-warning-circle"></i> Einschränkung</span>
+                    <p>Keine juristischen Drohungen.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Beispiel 3: Gesundheit -->
+          <div class="example-card">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-heart"></i>
+              </div>
+              <h4>Gesundheitstipp</h4>
+            </div>
+            
+            <div class="example-comparison">
+              <div class="example-side example-weak">
+                <div class="example-badge weak">
+                  <i class="ph ph-x-circle"></i> Schwach
+                </div>
+                <div class="example-prompt weak-prompt">
+                  Was hilft gegen Rückenschmerzen?
+                </div>
+                <div class="example-problems">
+                  <span class="problem-tag"><i class="ph ph-warning"></i> Zu unspezifisch</span>
+                  <span class="problem-tag"><i class="ph ph-user"></i> Keine Zielgruppe</span>
+                </div>
+              </div>
+              
+              <div class="example-arrow">
+                <i class="ph ph-arrow-right"></i>
+                <span>+5 Bausteine</span>
+              </div>
+              
+              <div class="example-side example-strong">
+                <div class="example-badge strong">
+                  <i class="ph ph-check-circle"></i> Stark
+                </div>
+                <div class="example-prompt strong-prompt">
+                  <div class="prompt-block kontext">
+                    <span class="block-label"><i class="ph ph-map-pin"></i> Kontext</span>
+                    <p>Ich bin 70 Jahre alt, habe leichte Rückenschmerzen beim Gärtnern und möchte keine Medikamente nehmen.</p>
+                  </div>
+                  <div class="prompt-block rolle">
+                    <span class="block-label"><i class="ph ph-user-circle"></i> Rolle</span>
+                    <p>Du bist ein Physiotherapeut mit Senioren-Erfahrung.</p>
+                  </div>
+                  <div class="prompt-block aufgabe">
+                    <span class="block-label"><i class="ph ph-target"></i> Aufgabe</span>
+                    <p>Empfiehl 3 sanfte Übungen für den unteren Rücken.</p>
+                  </div>
+                  <div class="prompt-block format">
+                    <span class="block-label"><i class="ph ph-list-dashes"></i> Format</span>
+                    <p>Einfache Anleitungen mit Bildbeschreibungen.</p>
+                  </div>
+                  <div class="prompt-block einschraenkung">
+                    <span class="block-label"><i class="ph ph-warning-circle"></i> Einschränkung</span>
+                    <p>Keine anstrengenden Übungen, immer mit Hinweis: Bei stärkeren Schmerzen Arzt konsultieren.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE 2 -->
+    <section class="parallax-quote-section" id="parallax-quote-2">
+      <div class="parallax-bg parallax-bg-2" role="img" aria-label="Brücke aus Worten"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content">
+        <i class="ph ph-quotes"></i>
+        <blockquote>
+          „Je <em>klarer</em> Ihre Anfrage, desto <em>besser</em> die Antwort."
+        </blockquote>
+        <a href="#quiz" class="parallax-cta-btn">Zum Wissens-Check <i class="ph ph-arrow-down"></i></a>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PROMPT BUILDER -->
+    <section class="section-builder" id="builder">
+      <div class="builder-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-wrench"></i>
+            Interaktive Übung
+          </span>
+          <h2 class="section-title-premium">Bauen Sie Ihren eigenen Prompt</h2>
+          <p class="section-subtitle-premium">Füllen Sie die Bausteine aus und sehen Sie Ihren perfekten Prompt entstehen</p>
+        </div>
+        
+        <div class="builder-workspace">
+          <div class="builder-inputs">
+            <div class="builder-field">
+              <label><i class="ph ph-map-pin"></i> 1. Kontext</label>
+              <input type="text" id="builder-kontext" placeholder="z.B.: Ich bin Rentner und interessiere mich für Gartengestaltung...">
+            </div>
+            <div class="builder-field">
+              <label><i class="ph ph-user-circle"></i> 2. Rolle</label>
+              <input type="text" id="builder-rolle" placeholder="z.B.: Du bist ein erfahrener Gärtner...">
+            </div>
+            <div class="builder-field">
+              <label><i class="ph ph-target"></i> 3. Aufgabe</label>
+              <textarea id="builder-aufgabe" placeholder="z.B.: Erkläre mir, welche Kräuter ich im Frühling anpflanzen sollte..."></textarea>
+            </div>
+            <div class="builder-field">
+              <label><i class="ph ph-list-dashes"></i> 4. Format</label>
+              <input type="text" id="builder-format" placeholder="z.B.: Nutze einfache Sprache und eine nummerierte Liste...">
+            </div>
+            <div class="builder-field">
+              <label><i class="ph ph-warning-circle"></i> 5. Einschränkungen</label>
+              <input type="text" id="builder-einschraenkungen" placeholder="z.B.: Vermeide Fachbegriffe ohne Erklärung...">
+            </div>
+          </div>
+          
+          <div class="builder-result">
+            <h4><i class="ph ph-check-circle"></i> Ihr fertiger Prompt:</h4>
+            <div class="builder-result-text" id="builder-result">
+[Context] 
+[Role] 
+[Task] 
+[Format] 
+[Constraints]
+            </div>
+          </div>
+          
+          <div class="builder-actions">
+            <button class="builder-btn builder-btn-secondary" id="builder-clear">
+              <i class="ph ph-trash"></i> Zurücksetzen
+            </button>
+            <button class="builder-btn builder-btn-primary" id="builder-copy">
+              <i class="ph ph-copy"></i> Kopieren
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: QUIZ -->
+    <section class="section-quiz" id="quiz">
+      <div class="quiz-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-check-circle"></i>
+            Wissen testen
+          </span>
+          <h2 class="section-title-premium">Wie gut kennen Sie die 5 Bausteine?</h2>
+          <p class="section-subtitle-premium">Testen Sie Ihr Verständnis – jeder Versuch zählt!</p>
+        </div>
+
+        <div class="quiz-progress-wrapper">
+          <div class="quiz-progress-header">
+            <span class="quiz-progress-label">Ihr Fortschritt</span>
+            <span class="quiz-progress-count" id="quiz-progress-count">Frage 1 von 3</span>
+          </div>
+          <div class="quiz-progress-bar-track">
+            <div class="quiz-progress-bar-fill" id="quiz-progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card" id="quiz-q1" data-question="1">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">1</span>
+              <h4 class="quiz-card-title">Welcher Baustein definiert, wen die KI spielen soll?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 1)">Rolle</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 1)">Kontext</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 1)">Format</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 1)">
+                💬 Ich sehe das anders...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-1"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card" id="quiz-q2" data-question="2">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">2</span>
+              <h4 class="quiz-card-title">Wozu dient der Kontext-Baustein?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 2)">Die Antwortlänge zu begrenzen</button>
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 2)">Den Rahmen der Anfrage zu setzen</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 2)">Die KI in eine Rolle zu versetzen</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 2)">
+                💬 Ich sehe das anders...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-2"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card" id="quiz-q3" data-question="3">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">3</span>
+              <h4 class="quiz-card-title">Welcher Baustein sollte NIE fehlen?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 3)">Die Einschränkungen</button>
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 3)">Die Aufgabe</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 3)">Das Format</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 3)">
+                💬 Ich sehe das anders...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-3"></div>
+          </div>
+        </div>
+
+        <div id="quiz-result" class="quiz-result-box">
+          <div class="quiz-result-icon" id="quiz-result-icon"><i class="ph ph-trophy"></i></div>
+          <h3 class="quiz-result-title" id="quiz-result-title">Fantastisch!</h3>
+          <p class="quiz-result-text" id="quiz-result-text">Sie haben alle Fragen richtig beantwortet. Sie beherrschen die 5 Bausteine perfekter Prompts!</p>
+          <div class="quiz-result-score" id="quiz-result-score">0 von 3 richtig</div>
+          <div class="quiz-result-badges" id="quiz-result-badges"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section-roadmap">
+      <div class="container-premium">
+        <div class="section-roadmap-header">
+          <span class="section-roadmap-tag">
+            <i class="ph ph-compass"></i>
+            Sprint 2 von 3
+          </span>
+          <h2 class="section-roadmap-title">Ihr Fortschritt</h2>
+          <p class="section-roadmap-subtitle">Sprint 2: 3 Module · Dialog & Prompting · Schritt für Schritt</p>
+        </div>
+        
+        <div class="roadmap-grid">
+          <div class="roadmap-card current">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-eye"></i>Aktuell
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-puzzle-piece"></i>
+            </div>
+            <h4 class="roadmap-card-title">Dialog-Grundlagen</h4>
+            <p class="roadmap-card-desc">Modul 03 · Die 5 Bausteine</p>
+          </div>
+          
+          <div class="roadmap-card upcoming">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-clock"></i>Demnächst
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-user-gear"></i>
+            </div>
+            <h4 class="roadmap-card-title">System-Prompts</h4>
+            <p class="roadmap-card-desc">Modul 04 · Rollen & Kontext</p>
+          </div>
+          
+          <div class="roadmap-card upcoming">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-clock"></i>Demnächst
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-brain"></i>
+            </div>
+            <h4 class="roadmap-card-title">Chain of Thought</h4>
+            <p class="roadmap-card-desc">Modul 05 · Strukturiertes Denken</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+       FINAL CTA SECTION
+       ============================================ -->
+    <section class="section-light section-final-cta">
+      <div class="container-premium">
+        <div class="final-cta-container">
+          <div class="final-cta-icon">
+            <i class="ph ph-check-circle"></i>
+          </div>
+          <h2 class="final-cta-title">Modul 03 gemeistert!</h2>
+          <p class="final-cta-text">
+            Sie kennen jetzt die 5 Bausteine perfekter Prompts. 
+            Zeit für System-Prompts und Rollendefinition!
+          </p>
+          <a href="../04-system-prompts/module-04.html" class="btn-final-cta">
+            <span>Zu Modul 04: System-Prompts</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+          <div class="final-cta-links">
+            <a href="../../../index.html">
+              <i class="ph ph-house"></i> Zurück zur Startseite
+            </a>
+            <span class="final-cta-divider">|</span>
+            <a href="../02-alltag/module-02.html">
+              <i class="ph ph-arrow-left"></i> Vorheriges Modul
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav-senior" aria-label="Modul Navigation">
+    <div class="bottom-nav-inner">
+      <a href="../../../index.html" class="bottom-nav-btn home" title="Zurück zur Startseite">
+        <i class="ph ph-house"></i>
+        <span>Start</span>
+      </a>
+      <a href="../02-alltag/module-02.html" class="bottom-nav-btn nav-prev">
+        <i class="ph ph-caret-left"></i>
+        <span>Zurück</span>
+      </a>
+      <div class="bottom-nav-progress">
+        <span class="bottom-nav-progress-label">Sprint 2 · Modul 03</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 33%"></div>
+        </div>
+      </div>
+      <a href="../04-system-prompts/module-04.html" class="bottom-nav-btn nav-next">
+        <i class="ph ph-caret-right"></i>
+        <span>Weiter</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- FOOTER -->
+  <footer class="main-footer footer-premium">
+    <div class="container-premium">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="../../../assets/images/icons/logo-ki-academy.svg" alt="" width="36" height="36">
+          <span>KI Academy</span>
+        </div>
+        <p class="footer-license">Ein Projekt des <a href="https://pantam.at" target="_blank">Pantam Learning Universe</a></p>
+        <nav class="footer-nav">
+          <a href="../../../index.html">Startseite</a>
+          <a href="../../../index.html#sprints">Lernpfad</a>
+          <a href="https://pantam.at/tutorials/pages/spenden.html" target="_blank">Unterstützen</a>
+          <a href="../../../pages/impressum.html">Impressum</a>
+          <a href="../../../pages/datenschutz.html">Datenschutz</a>
+        </nav>
+        <p class="footer-copyright">© Pantam, Art & Culture – Austria</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="../../../js/theme.js"></script>
+  <script src="../../../js/back-to-top.js"></script>
+  <script src="../../../js/navigation.js"></script>
+  <script src="../../../js/premium-parallax.js"></script>
+  <script src="../../js/module-03.js?v=5"></script>
+</body>
+</html>
+

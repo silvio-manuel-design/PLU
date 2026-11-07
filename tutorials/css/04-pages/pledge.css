@@ -1,0 +1,1519 @@
+/* ==========================================================================
+   PLEDGE PAGE - Premium Styles
+   ITCSS Architecture: Settings → Generic → Elements → Objects → Components → Utilities
+   BEM Methodology: Block__Element--Modifier
+   Mobile-First Approach
+   ========================================================================== */
+
+/* ==========================================================================
+   1. SETTINGS - CSS Custom Properties
+   ========================================================================== */
+
+:root {
+  /* Pledge-specific spacing */
+  --pledge-section-gap: var(--space-12);
+  --pledge-container-narrow: 800px;
+  --pledge-timeline-gap: var(--space-10);
+  --pledge-step-gap: var(--space-6);
+  --pledge-step-gap-desktop: var(--space-8);
+  
+  /* Pledge-specific icon sizes */
+  --pledge-icon-size: 72px;
+  --pledge-icon-icon-size: 32px;
+  --pledge-step-number-size: 28px;
+  
+  /* Charter card */
+  --charter-max-width: 800px;
+  --charter-padding: var(--space-8);
+  --charter-padding-mobile: var(--space-6);
+  --charter-header-icon-size: 48px;
+  --charter-border-radius: var(--radius-2xl);
+  
+  /* Why grid */
+  --why-grid-gap: var(--space-6);
+  --why-card-padding: var(--space-6);
+  --why-icon-size: 56px;
+}
+
+/* ==========================================================================
+   2. EDITORIAL CONTENT
+   Premium card design for introduction section
+   ========================================================================== */
+
+.editorial-section {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.editorial-content {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.04) 50%,
+    rgba(30, 41, 59, 0.3) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.15);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+}
+
+.editorial-content::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .editorial-content {
+    padding: var(--space-10) var(--space-8);
+  }
+}
+
+.editorial-lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+  position: relative;
+  z-index: 1;
+}
+
+.editorial-lead strong {
+  color: var(--text-primary);
+  font-weight: var(--font-bold);
+}
+
+.editorial-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+.editorial-body strong {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+
+.editorial-highlight {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.15) 0%,
+    rgba(57, 208, 216, 0.1) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-4);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   3. GENERIC - Print Styles (Preserved)
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 12mm;
+  }
+  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  html, body {
+    background: white !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  /* Hide absolutely everything except the certificate */
+  .site-header, .mobile-nav, .fab-container, 
+  .section:not(.charter-section),
+  .charter-inputs, .charter-checkbox,
+  button, .btn, .commitment-timeline,
+  .section--support, .cta-section,
+  .section-header,
+  footer, .hero, .hero--page,
+  .hero__bg, .hero__picture, .hero__picture--dark,
+  .hero__picture--light, .hero__overlay,
+  .hero__content, .cursor-dot, .cursor-outline,
+  .skip-link {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Main content - only show charter */
+  main, #main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Show certificate section */
+  .charter-section {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+  }
+  
+  .charter-section .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .charter-section .grid {
+    margin: 0 !important;
+  }
+  
+  /* Certificate Card */
+  .charter-card {
+    border: 2px solid #1a1a2e !important;
+    border-radius: 6px !important;
+    background: white !important;
+    box-shadow: none !important;
+    padding: 26px 32px !important;
+    margin: 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    max-width: 100% !important;
+  }
+  
+  /* Certificate Header */
+  .charter-header {
+    margin-bottom: 18px !important;
+  }
+  
+  .charter-header__icon {
+    font-size: 40px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .charter-title {
+    font-size: 28pt !important;
+    color: #1a1a2e !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
+    border-bottom: 2px solid #c9a227 !important;
+    padding-bottom: 10px !important;
+    letter-spacing: 2px !important;
+  }
+  
+  /* Subtitle */
+  .charter-subtitle {
+    font-size: 11pt !important;
+    color: #555 !important;
+    font-style: italic !important;
+    margin: 4px 0 !important;
+  }
+  
+  /* Charter Text */
+  .charter-text {
+    margin: 18px 0 !important;
+  }
+  
+  .charter-text p {
+    font-size: 11.5pt !important;
+    line-height: 1.5 !important;
+    color: #333 !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .charter-text p strong {
+    color: #1a1a2e !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Check icons - hide in print */
+  .charter-list__icon {
+    display: none !important;
+  }
+  
+  /* Opening statement */
+  .charter-text > p:first-of-type {
+    margin-bottom: 14px !important;
+    font-size: 12.5pt !important;
+  }
+  
+  /* Quote at bottom */
+  .charter-text > p:last-of-type {
+    font-size: 12.5pt !important;
+    color: #1a1a2e !important;
+    border-top: 1px solid #ddd !important;
+    border-bottom: 1px solid #ddd !important;
+    padding: 12px !important;
+    margin-top: 18px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Print-only signature section */
+  .charter-confirmation.print-only {
+    display: block !important;
+    margin-top: 24px !important;
+  }
+  
+  .print-signature {
+    display: block !important;
+  }
+  
+  .print-signature__header {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 22px;
+  }
+  
+  .print-signature__label {
+    font-size: 10pt;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  
+  .print-signature__fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 70px;
+    margin-top: 24px;
+  }
+  
+  .print-signature__field {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .print-signature__value {
+    border-bottom: 1px solid #333;
+    height: 42px;
+    line-height: 42px;
+    font-size: 12.5pt;
+    color: #333;
+  }
+  
+  .print-signature__caption {
+    font-size: 9pt;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+  
+  /* Footer */
+  .print-signature__footer {
+    margin-top: 30px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    padding-top: 14px;
+  }
+  
+  .print-signature__logo {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 6px;
+    opacity: 0.7;
+  }
+  
+  .print-signature__brand {
+    font-size: 9pt;
+    color: #888;
+    margin: 3px 0;
+  }
+  
+  .print-signature__tagline {
+    font-size: 9pt;
+    color: #888;
+    margin: 3px 0;
+    font-style: italic;
+  }
+  
+  /* Hide interactive elements inside card */
+  .charter-actions,
+  .charter-inputs:not(.print-only),
+  .charter-checkbox:not(.print-only) {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   3. ELEMENTS - Screen-only base
+   ========================================================================== */
+
+.print-only {
+  display: none !important;
+}
+
+@media screen {
+  .print-signature {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   4. OBJECTS - Layout patterns
+   ========================================================================== */
+
+/* Narrow container for editorial content */
+.o-container--narrow {
+  max-width: var(--pledge-container-narrow);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section spacing */
+.o-section-gap {
+  margin-top: var(--pledge-section-gap);
+}
+
+/* ==========================================================================
+   5. COMPONENTS - Editorial Lead Section
+   ========================================================================== */
+
+/**
+ * Editorial Section
+ * Premium editorial layout for section intros
+ */
+.editorial-section {
+  max-width: var(--pledge-container-narrow);
+  margin: var(--space-10) auto 0;
+}
+
+.editorial-section--centered {
+  text-align: center;
+}
+
+/**
+ * Editorial Kicker
+ * Small uppercase text above headline
+ */
+.editorial-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-4);
+}
+
+.editorial-kicker i {
+  font-size: var(--text-base);
+}
+
+/**
+ * Editorial Headline
+ * Large display headline for editorial sections
+ */
+.editorial-headline {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .editorial-headline {
+    font-size: var(--text-4xl);
+  }
+}
+
+/**
+ * Editorial Lead
+ * Introductory paragraph styling
+ */
+.editorial-lead {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.editorial-lead:last-of-type {
+  margin-bottom: 0;
+}
+
+.editorial-lead--emphasis {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   6. COMPONENTS - Commitment Steps (4 Pillars Timeline)
+   ========================================================================== */
+
+/**
+ * Commitment Timeline
+ * Vertical timeline container for pledge steps
+ */
+.commitment-timeline {
+  position: relative;
+  max-width: var(--pledge-container-narrow);
+  margin: var(--space-12) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pledge-timeline-gap);
+}
+
+/**
+ * Commitment Step
+ * Individual step container with icon and card
+ */
+.commitment-step {
+  display: flex;
+  gap: var(--pledge-step-gap);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .commitment-step {
+    gap: var(--pledge-step-gap-desktop);
+  }
+  
+  .commitment-step:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+/**
+ * Commitment Step Icon
+ * 72px gradient circle icon container
+ */
+.commitment-step__icon {
+  flex-shrink: 0;
+  width: var(--pledge-icon-size);
+  height: var(--pledge-icon-size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commitment-step:hover .commitment-step__icon {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.commitment-step__icon i {
+  font-size: var(--pledge-icon-icon-size);
+  color: white;
+}
+
+/* Gradient variants */
+.commitment-step__icon--primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  box-shadow: 0 8px 32px rgba(88, 166, 255, 0.4);
+}
+
+.commitment-step__icon--cyan {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  box-shadow: 0 8px 32px rgba(57, 208, 216, 0.4);
+}
+
+.commitment-step__icon--violet {
+  background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4);
+}
+
+.commitment-step__icon--pink {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-red));
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.4);
+}
+
+/**
+ * Commitment Step Number Badge
+ * Small circular number indicator
+ */
+.commitment-step__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pledge-step-number-size);
+  height: var(--pledge-step-number-size);
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Number color variants */
+.commitment-step__number--primary {
+  background: var(--accent-primary);
+}
+
+.commitment-step__number--cyan {
+  background: var(--accent-cyan);
+}
+
+.commitment-step__number--violet {
+  background: var(--accent-violet);
+}
+
+.commitment-step__number--pink {
+  background: var(--accent-pink);
+}
+
+/**
+ * Commitment Step Card
+ * Card container for step content
+ */
+.commitment-step__card {
+  flex: 1;
+  margin: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commitment-step:hover .commitment-step__card {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/**
+ * Commitment Step Title Wrapper
+ * Flex container for number + title
+ */
+.commitment-step__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+/**
+ * Commitment Step Title
+ * Step heading with accent color
+ */
+.commitment-step__title {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.commitment-step__title--primary {
+  color: var(--accent-primary);
+}
+
+.commitment-step__title--cyan {
+  color: var(--accent-cyan);
+}
+
+.commitment-step__title--violet {
+  color: var(--accent-violet);
+}
+
+.commitment-step__title--pink {
+  color: var(--accent-pink);
+}
+
+/**
+ * Commitment Step Lead
+ * Bold introductory statement
+ */
+.commitment-step__lead {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-3);
+}
+
+.commitment-step__lead strong {
+  font-weight: 600;
+}
+
+/**
+ * Commitment Step Text
+ * Body text with secondary color
+ */
+.commitment-step__text {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-relaxed);
+}
+
+/* ==========================================================================
+   7. COMPONENTS - Charter Form Section
+   ========================================================================== */
+
+/**
+ * Charter Section
+ * Container for the pledge charter/signing area
+ */
+.charter-section {
+  /* Inherits from .section.section--alt */
+}
+
+/**
+ * Charter Card
+ * Premium card for the charter content
+ */
+.charter-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--charter-border-radius);
+  padding: var(--charter-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .charter-card {
+    padding: var(--charter-padding);
+  }
+}
+
+/* Decorative gradient orbs */
+.charter-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.charter-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.charter-card__content {
+  position: relative;
+  z-index: 1;
+}
+
+/**
+ * Charter Header
+ * Centered header with icon, title, and subtitle
+ */
+.charter-header {
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+
+.charter-header__icon {
+  font-size: var(--charter-header-icon-size);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+/**
+ * Charter Title
+ * Large display title for the charter
+ */
+.charter-title {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-2);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+  .charter-title {
+    font-size: var(--text-3xl);
+  }
+}
+
+/**
+ * Charter Subtitle
+ * Italic subtitle text
+ */
+.charter-subtitle {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: var(--text-base);
+}
+
+/**
+ * Charter Text
+ * Main body content of the charter
+ */
+.charter-text {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.charter-text p {
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-relaxed);
+}
+
+.charter-text p:last-of-type {
+  margin-bottom: 0;
+  text-align: center;
+  font-style: italic;
+  color: var(--accent-primary);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-primary);
+}
+
+/**
+ * Charter List
+ * Styled list for charter commitments
+ */
+.charter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.charter-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.charter-list__item:last-child {
+  margin-bottom: 0;
+}
+
+.charter-list__icon {
+  color: var(--accent-green);
+  flex-shrink: 0;
+  font-size: var(--text-lg);
+}
+
+/**
+ * Charter Divider
+ * Dashed separator between sections
+ */
+.charter-divider {
+  border-top: 2px dashed var(--border-primary);
+  padding-top: var(--space-6);
+}
+
+/**
+ * Charter Actions
+ * Button and action container
+ */
+.charter-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.charter-actions .btn {
+  flex: 1;
+  min-width: 200px;
+}
+
+/**
+ * Charter Checkbox
+ * Styled checkbox for pledge agreement
+ */
+.charter-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  cursor: pointer;
+}
+
+.charter-checkbox__input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+
+.charter-checkbox__label {
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  line-height: var(--leading-relaxed);
+}
+
+/**
+ * Charter Inputs
+ * Form input grid for name and date
+ */
+.charter-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .charter-inputs {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.charter-inputs__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.charter-inputs__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.charter-inputs__input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: var(--text-base);
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.charter-inputs__input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+}
+
+.charter-inputs__input::placeholder {
+  color: var(--text-muted);
+}
+
+/**
+ * Charter Confirmation
+ * Success message display
+ */
+.charter-confirmation {
+  display: none;
+  padding: var(--space-4);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--accent-green);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.charter-confirmation.is-visible {
+  display: block;
+}
+
+.charter-confirmation__icon {
+  color: var(--accent-green);
+  font-size: 24px;
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.charter-confirmation__title {
+  color: var(--accent-green);
+  margin: 0;
+  font-weight: 600;
+}
+
+.charter-confirmation__message {
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: normal;
+}
+
+/* ==========================================================================
+   8. COMPONENTS - Why Cards Section
+   ========================================================================== */
+
+/**
+ * Why Grid
+ * Grid layout for "Why" cards
+ */
+.why-grid {
+  display: grid;
+  gap: var(--why-grid-gap);
+  margin-top: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .why-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/**
+ * Why Card
+ * Card component for "Why" section
+ */
+.why-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--why-card-padding);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/**
+ * Why Card Icon
+ * Icon container with accent background
+ */
+.why-card__icon {
+  width: var(--why-icon-size);
+  height: var(--why-icon-size);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+}
+
+.why-card__icon i {
+  font-size: var(--text-2xl);
+  color: white;
+}
+
+/* Icon variants based on theme */
+.why-card[data-theme="social-skills"] .why-card__icon {
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+}
+
+.why-card[data-theme="cultural-expression"] .why-card__icon {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-violet));
+}
+
+.why-card[data-theme="language-diversity"] .why-card__icon {
+  background: linear-gradient(135deg, var(--accent-violet), var(--accent-primary));
+}
+
+/**
+ * Why Card Title
+ */
+.why-card__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+/**
+ * Why Card Text
+ */
+.why-card__text {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   9. COMPONENTS - Example Box (for commitment steps)
+   ========================================================================== */
+
+.example-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: rgba(88, 166, 255, 0.1);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.example-box i {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+/* Example box variants */
+.example-box--cyan {
+  background: rgba(57, 208, 216, 0.1);
+  border-left-color: var(--accent-cyan);
+}
+
+.example-box--cyan i {
+  color: var(--accent-cyan);
+}
+
+.example-box--violet {
+  background: rgba(139, 92, 246, 0.1);
+  border-left-color: var(--accent-violet);
+}
+
+.example-box--violet i {
+  color: var(--accent-violet);
+}
+
+.example-box--pink {
+  background: rgba(236, 72, 153, 0.1);
+  border-left-color: var(--accent-pink);
+}
+
+.example-box--pink i {
+  color: var(--accent-pink);
+}
+
+/* ==========================================================================
+   09. CTA SECTION
+   Premium call-to-action card
+   ========================================================================== */
+
+/**
+ * CTA Section
+ * Full-width section with centered card
+ */
+.cta-section {
+  padding: var(--space-8) 0;
+}
+
+@media (min-width: 768px) {
+  .cta-section {
+    padding: var(--space-12) 0;
+  }
+}
+
+/**
+ * CTA Card
+ * Premium gradient card with icon, title, text, and button
+ */
+.cta-card {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.05) 50%,
+    rgba(57, 208, 216, 0.03) 100%
+  );
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  padding: var(--space-10) var(--space-8);
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-12);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(88, 166, 255, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .cta-card {
+    padding: var(--space-12) var(--space-10);
+  }
+}
+
+/**
+ * CTA Card Icon
+ * Gradient circle icon with glow effect
+ */
+.cta-card__icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  box-shadow: 
+    0 8px 24px rgba(88, 166, 255, 0.3),
+    0 0 0 4px rgba(88, 166, 255, 0.1);
+  position: relative;
+}
+
+.cta-card__icon::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.2) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.cta-card__icon i {
+  font-size: 40px;
+  color: white;
+}
+
+/**
+ * CTA Card Title
+ */
+.cta-card__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-tight);
+}
+
+@media (min-width: 768px) {
+  .cta-card__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+/**
+ * CTA Card Text
+ */
+.cta-card__text {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .cta-card__text {
+    font-size: var(--text-lg);
+  }
+}
+
+/**
+ * CTA Card Buttons
+ * Centered button group
+ */
+.cta-card__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .cta-card__buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.cta-card__btn {
+  min-width: 200px;
+}
+
+.cta-card__btn--primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  border: none;
+  color: white;
+}
+
+.cta-card__btn--primary:hover {
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-card__btn--secondary {
+  background: transparent;
+  border: 1px solid var(--border-accent);
+  color: var(--accent-primary);
+}
+
+.cta-card__btn--secondary:hover {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: var(--accent-primary);
+}
+
+/* Light Theme - CTA Card */
+html.light-theme .cta-card {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.06) 0%,
+    rgba(139, 92, 246, 0.04) 50%,
+    rgba(57, 208, 216, 0.02) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.15);
+}
+
+html.light-theme .cta-card__icon {
+  box-shadow: 
+    0 8px 24px rgba(88, 166, 255, 0.25),
+    0 0 0 4px rgba(88, 166, 255, 0.08);
+}
+
+/* Light Theme - Editorial Content */
+html.light-theme .editorial-content {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.06) 0%,
+    rgba(139, 92, 246, 0.03) 50%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.12);
+}
+
+/* Light Theme - Why Cards */
+html.light-theme .why-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+html.light-theme .why-card:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   10. UTILITIES - Helper classes
+   ========================================================================== */
+
+/* Print signature styling for print view */
+.print-signature {
+  display: none;
+}
+
+/* Language notice utility */
+.lang-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: rgba(88, 166, 255, 0.05);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: var(--radius-xl);
+}
+
+.lang-notice__icon {
+  font-size: 24px;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.lang-notice__text {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* ==========================================================================
+   11. ACCESSIBILITY - Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-content,
+  .editorial-content::before,
+  .commitment-step__icon,
+  .commitment-step__card,
+  .why-card,
+  .cta-card,
+  .cta-card__btn--primary,
+  .cta-card__btn--secondary {
+    transition: none;
+  }
+  
+  .commitment-step:hover .commitment-step__icon,
+  .commitment-step:hover .commitment-step__card,
+  .why-card:hover,
+  .cta-card__btn--primary:hover,
+  .cta-card__btn--secondary:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   12. NAV DROPDOWN UTILITIES (for pledge.html navigation)
+   ========================================================================== */
+
+.nav-dropdown--wide {
+  min-width: 380px;
+  grid-template-columns: 1fr;
+}
+
+.nav-dropdown--compact {
+  min-width: 280px;
+  grid-template-columns: 1fr;
+}
+
+.nav-dropdown__section--bordered {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+}
+
+.nav-dropdown__title-icon {
+  margin-right: 6px;
+}
+
+/* ==========================================================================
+   13. LEGACY SUPPORT - Maintain backward compatibility
+   ========================================================================== */
+
+/* Map old class names to new BEM classes */
+.pledge-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: var(--space-12) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.pledge-schritt {
+  display: flex;
+  gap: var(--space-6);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .pledge-schritt {
+    gap: var(--space-8);
+  }
+  
+  .pledge-schritt:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+.pledge-icon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pledge-schritt:hover .pledge-icon {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.pledge-icon i {
+  font-size: 32px;
+  color: white;
+}
+
+.pledge-schritt .bridge-card {
+  flex: 1;
+  margin: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pledge-schritt:hover .bridge-card {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Legacy charter classes */
+.charter-form {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+}
+
+.charter-form::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.charter-form::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.charter-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Pledge page specific classes (formerly inline styles) */
+.pledge-title { font-size: var(--text-3xl); margin-bottom: var(--space-2); font-weight: 700; letter-spacing: 2px; }
+.pledge-subtitle { color: var(--text-secondary); font-style: italic; }
+.pledge-quote { font-size: var(--text-lg); text-align: center; font-style: italic; color: var(--accent-primary); margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--border-primary); }
+.print-signature-block { margin-top: 24px; text-align: center; border-top: 1px solid #333; padding-top: 22px; }
+.print-label { font-size: 10pt; color: #666; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+.print-signatures-row { display: flex; justify-content: space-between; gap: 70px; margin-top: 24px; }
+.print-signature-field { flex: 1; text-align: center; }
+.print-signature-line { border-bottom: 1px solid #333; height: 42px; line-height: 42px; font-size: 12.5pt; color: #333; }
+.print-signature-label { font-size: 9pt; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+.print-footer { margin-top: 30px; text-align: center; border-top: 1px solid #ddd; padding-top: 14px; }
+.print-logo { width: 34px; height: 34px; margin-bottom: 6px; opacity: 0.7; }
+.print-meta { font-size: 9pt; color: #888; margin: 3px 0; }
+.print-meta-italic { font-size: 9pt; color: #888; margin: 3px 0; font-style: italic; }
+.pledge-actions { display: flex; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap; }
+.pledge-action-btn { flex: 1; min-width: 200px; }

@@ -1,0 +1,335 @@
+/* ============================================
+   SONIC LAB - MODERNE NAVIGATION
+   Sidebar + Header Kombination
+   ============================================ */
+
+/* Header bleibt schlank */
+.header {
+  background: rgba(15, 15, 26, 0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 70px;
+}
+
+.header-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Logo vereinfacht */
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: var(--gradient-coral);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-coral);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.logo-text span {
+  color: var(--sonic-coral);
+}
+
+/* Hauptnavigation - Clean */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: var(--sonic-coral);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+/* Tools Dropdown - Mega Menu Style */
+.tools-dropdown {
+  position: relative;
+}
+
+.tools-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--studio-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: var(--space-md);
+  min-width: 320px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.tools-dropdown:hover .tools-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-sm);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.tool-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tool-card.audacity {
+  border-left: 3px solid var(--sonic-coral);
+}
+
+.tool-card.ai {
+  border-left: 3px solid var(--sonic-teal);
+}
+
+.tool-card.voice {
+  border-left: 3px solid var(--sonic-gold);
+}
+
+.tool-card.daw {
+  border-left: 3px solid #9b59b6;
+}
+
+.tool-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.tool-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Module Progress Navigation */
+.module-nav {
+  position: fixed;
+  left: 0;
+  top: 70px;
+  bottom: 0;
+  width: 280px;
+  background: var(--studio-bg-light);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--space-lg);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.module-nav-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.module-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.module-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+.module-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.module-item.active {
+  background: rgba(255, 107, 107, 0.15);
+}
+
+.module-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: var(--sonic-coral);
+  border-radius: 0 3px 3px 0;
+}
+
+.module-number {
+  width: 32px;
+  height: 32px;
+  background: var(--studio-surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.module-item.active .module-number {
+  background: var(--sonic-coral);
+  color: white;
+}
+
+.module-info {
+  flex: 1;
+}
+
+.module-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.module-status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Main Content with Sidebar */
+.main-with-sidebar {
+  margin-left: 280px;
+  min-height: calc(100vh - 70px);
+}
+
+@media (max-width: 1200px) {
+  .module-nav {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .module-nav.open {
+    transform: translateX(0);
+  }
+  
+  .main-with-sidebar {
+    margin-left: 0;
+  }
+  
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+/* PLU Actions */
+.plu-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.plu-link {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.plu-link:hover {
+  color: var(--sonic-teal);
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.support-btn {
+  background: var(--gradient-coral);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-coral);
+  transition: all 0.2s ease;
+}
+
+.support-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 107, 107, 0.4);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+  
+  .plu-actions {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+}

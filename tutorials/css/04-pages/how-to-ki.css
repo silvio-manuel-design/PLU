@@ -1,0 +1,1272 @@
+/* ==========================================================================
+   PLU v3.0 - HOW-TO KI PAGE STYLES
+   ITCSS Layer 4: Pages
+   
+   BEM Methodology: .block__element--modifier
+   - All values use CSS Custom Properties (Design Tokens)
+   - Mobile-first responsive design
+   - Reduced motion support for accessibility
+   ========================================================================== */
+
+/* ==========================================================================
+   01. EDITORIAL LEAD SECTION (Section 1)
+   Premium content styling for introduction
+   ========================================================================== */
+
+.editorial-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/**
+ * Editorial Content Card
+ * Premium card design for the Grundlagen section
+ */
+.editorial-content {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.04) 50%,
+    rgba(30, 41, 59, 0.3) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.15);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+}
+
+.editorial-content::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .editorial-content {
+    padding: var(--space-10) var(--space-8);
+  }
+}
+
+.editorial-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-4);
+}
+
+.editorial-kicker::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+.editorial-headline {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.editorial-lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+  position: relative;
+  z-index: 1;
+}
+
+.editorial-lead strong {
+  color: var(--text-primary);
+  font-weight: var(--font-bold);
+}
+
+.editorial-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+.editorial-body > * + * {
+  margin-top: var(--space-4);
+}
+
+.editorial-body strong {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+
+.editorial-highlight {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.15) 0%,
+    rgba(57, 208, 216, 0.1) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-4);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   02. METHOD TIMELINE (Section 3 - 5 Principles)
+   Premium step-by-step timeline with enhanced visuals
+   ========================================================================== */
+
+.method-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: var(--space-12) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+/* Individual Step Container */
+.method-step {
+  display: flex;
+  gap: var(--space-5);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .method-step {
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+  
+  .method-step:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Step Icon Container (72px circle with gradient) */
+.method-step__icon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition: transform var(--duration-normal) var(--ease-spring),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.method-step__icon i {
+  font-size: 32px;
+  color: white;
+}
+
+.method-step:hover .method-step__icon {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Step Number Badge (Circle with number) */
+.method-step__number {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: white;
+  color: var(--text-inverse);
+  font-size: 14px;
+  font-weight: var(--font-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Step Card (Bridge card style) */
+.method-step__card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.method-step:hover .method-step__card {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Step Header with Title and Number */
+.method-step__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.method-step__title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  margin: 0;
+}
+
+/* Step Lead/Intro Text */
+.method-step__lead {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+/* Step Description Text */
+.method-step__text {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* ==========================================================================
+   03. METHOD STEP THEMES (5 Different Accent Colors)
+   ========================================================================== */
+
+/* Step 1: Role (Primary Blue) */
+.method-step--role .method-step__icon {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  box-shadow: 0 8px 32px var(--accent-primary-glow);
+}
+
+.method-step--role .method-step__number {
+  background: var(--accent-primary);
+}
+
+.method-step--role .method-step__title {
+  color: var(--accent-primary);
+}
+
+/* Step 2: Goal (Cyan) */
+.method-step--goal .method-step__icon {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  box-shadow: 0 8px 32px var(--accent-cyan-glow);
+}
+
+.method-step--goal .method-step__number {
+  background: var(--accent-cyan);
+}
+
+.method-step--goal .method-step__title {
+  color: var(--accent-cyan);
+}
+
+/* Step 3: Format (Violet) */
+.method-step--format .method-step__icon {
+  background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink));
+  box-shadow: 0 8px 32px var(--accent-violet-glow);
+}
+
+.method-step--format .method-step__number {
+  background: var(--accent-violet);
+}
+
+.method-step--format .method-step__title {
+  color: var(--accent-violet);
+}
+
+/* Step 4: Context (Pink) */
+.method-step--context .method-step__icon {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+  box-shadow: 0 8px 32px var(--accent-pink-glow);
+}
+
+.method-step--context .method-step__number {
+  background: var(--accent-pink);
+}
+
+.method-step--context .method-step__title {
+  color: var(--accent-pink);
+}
+
+/* Step 5: Tone (Red/Orange) */
+.method-step--tone .method-step__icon {
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-pink));
+  box-shadow: 0 8px 32px var(--accent-red-glow);
+}
+
+.method-step--tone .method-step__number {
+  background: var(--accent-red);
+}
+
+.method-step--tone .method-step__title {
+  color: var(--accent-red);
+}
+
+/* ==========================================================================
+   04. EXAMPLE BOX
+   Enhanced callout box for examples within steps
+   ========================================================================== */
+
+.example-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: rgba(var(--accent-primary-rgb), 0.1);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-4);
+}
+
+.example-box i {
+  flex-shrink: 0;
+  color: var(--accent-primary);
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+/* Example Box Theme Variants */
+.example-box--cyan {
+  background: rgba(var(--accent-cyan-rgb), 0.1);
+  border-left-color: var(--accent-cyan);
+}
+
+.example-box--cyan i {
+  color: var(--accent-cyan);
+}
+
+.example-box--violet {
+  background: rgba(var(--accent-violet-rgb), 0.1);
+  border-left-color: var(--accent-violet);
+}
+
+.example-box--violet i {
+  color: var(--accent-violet);
+}
+
+.example-box--pink {
+  background: rgba(var(--accent-pink-rgb), 0.1);
+  border-left-color: var(--accent-pink);
+}
+
+.example-box--pink i {
+  color: var(--accent-pink);
+}
+
+.example-box--red {
+  background: rgba(var(--accent-red-rgb), 0.1);
+  border-left-color: var(--accent-red);
+}
+
+.example-box--red i {
+  color: var(--accent-red);
+}
+
+/* ==========================================================================
+   05. CODE BLOCK
+   Enhanced code display for prompt examples
+   ========================================================================== */
+
+.code-block {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Code Block with Glow Effect */
+.code-block--premium {
+  background: linear-gradient(
+    135deg,
+    var(--bg-tertiary) 0%,
+    rgba(var(--accent-primary-rgb), 0.05) 100%
+  );
+  border-color: rgba(var(--accent-primary-rgb), 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   06. DO & DON'T CARDS
+   Comparison cards for best practices
+   ========================================================================== */
+
+.do-dont-grid {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .do-dont-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Base Card Styles */
+.do-card,
+.dont-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: transform var(--duration-normal) var(--ease-spring),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.do-card:hover,
+.dont-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Do Card - Green Accent */
+.do-card {
+  border-left: 4px solid var(--accent-green);
+}
+
+.do-card h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--accent-green);
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-5) 0;
+}
+
+.do-card h3 i {
+  font-size: 24px;
+}
+
+/* Don't Card - Red Accent */
+.dont-card {
+  border-left: 4px solid var(--accent-red);
+}
+
+.dont-card h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--accent-red);
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-5) 0;
+}
+
+.dont-card h3 i {
+  font-size: 24px;
+}
+
+/* List Styles */
+.do-card ul,
+.dont-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.do-card li,
+.dont-card li {
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+
+.do-card li:last-child,
+.dont-card li:last-child {
+  margin-bottom: 0;
+}
+
+.do-card li i {
+  color: var(--accent-green);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.dont-card li i {
+  color: var(--accent-red);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   07. PROMPT COMPARISON
+   Before/After comparison for prompts
+   ========================================================================== */
+
+.prompt-comparison {
+  max-width: 800px;
+  margin: var(--space-10) auto 0;
+}
+
+.prompt-comparison__item {
+  margin-bottom: var(--space-6);
+}
+
+.prompt-comparison__item:last-child {
+  margin-bottom: 0;
+}
+
+.prompt-comparison__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.prompt-comparison__label--bad {
+  color: var(--accent-red);
+}
+
+.prompt-comparison__label--good {
+  color: var(--accent-green);
+}
+
+.prompt-comparison__example {
+  background: var(--bg-tertiary);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   08. WORKFLOW CARDS
+   Premium process/workflow step cards
+   ========================================================================== */
+
+/**
+ * Workflow Grid
+ * Responsive grid for workflow cards
+ */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .workflow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .workflow-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/**
+ * Workflow Card
+ * Individual workflow card with gradient accent
+ */
+.workflow-card {
+  background: linear-gradient(
+    135deg,
+    rgba(51, 65, 85, 0.4) 0%,
+    rgba(30, 41, 59, 0.2) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.workflow-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.workflow-card:hover::before {
+  opacity: 1;
+}
+
+/* Workflow Card Variants */
+.workflow-card--text::before {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+}
+
+.workflow-card--code::before {
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink));
+}
+
+.workflow-card--explain::before {
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+}
+
+/**
+ * Workflow Card Header
+ */
+.workflow-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.workflow-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-primary-rgb), 0.2) 0%,
+    rgba(var(--accent-cyan-rgb), 0.1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.workflow-card--code .workflow-card__icon {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-violet-rgb), 0.2) 0%,
+    rgba(var(--accent-pink-rgb), 0.1) 100%
+  );
+}
+
+.workflow-card--explain .workflow-card__icon {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-green-rgb), 0.2) 0%,
+    rgba(var(--accent-cyan-rgb), 0.1) 100%
+  );
+}
+
+.workflow-card__icon i {
+  font-size: 28px;
+  color: var(--accent-primary);
+}
+
+.workflow-card--code .workflow-card__icon i {
+  color: var(--accent-violet);
+}
+
+.workflow-card--explain .workflow-card__icon i {
+  color: var(--accent-green);
+}
+
+.workflow-card__title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/**
+ * Workflow Card Steps
+ */
+.workflow-card__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workflow-card__steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.workflow-card__steps li:last-child {
+  border-bottom: none;
+}
+
+.workflow-card__step-num {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(88, 166, 255, 0.15);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.workflow-card--code .workflow-card__step-num {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--accent-violet);
+}
+
+.workflow-card--explain .workflow-card__step-num {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+}
+
+/* ==========================================================================
+   09. UTILITY CLASSES (Page-specific)
+   ========================================================================== */
+
+/* Max width containers for content sections */
+.content-narrow {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section spacing utility */
+.section-spacer {
+  margin-top: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .section-spacer {
+    margin-top: var(--space-12);
+  }
+}
+
+/* Text color utilities */
+.text-primary {
+  color: var(--accent-primary);
+}
+
+/* Small section title */
+.section-title--small {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-6);
+  color: var(--text-primary);
+}
+
+/* CTA card extensions */
+.cta-card__text--emphasis {
+  margin-top: var(--space-4);
+}
+
+.cta-card__btn {
+  margin-top: var(--space-4);
+}
+
+/* ==========================================================================
+   09. CTA SECTION
+   Premium call-to-action card
+   ========================================================================== */
+
+/**
+ * CTA Section
+ * Full-width section with centered card
+ */
+.cta-section {
+  padding: var(--space-8) 0;
+}
+
+@media (min-width: 768px) {
+  .cta-section {
+    padding: var(--space-12) 0;
+  }
+}
+
+/**
+ * CTA Card
+ * Premium gradient card with icon, title, text, and button
+ */
+.cta-card {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.05) 50%,
+    rgba(57, 208, 216, 0.03) 100%
+  );
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  padding: var(--space-10) var(--space-8);
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-12);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(88, 166, 255, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .cta-card {
+    padding: var(--space-12) var(--space-10);
+  }
+}
+
+/**
+ * CTA Card Icon
+ * Gradient circle icon with glow effect
+ */
+.cta-card__icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  box-shadow: 
+    0 8px 24px rgba(88, 166, 255, 0.3),
+    0 0 0 4px rgba(88, 166, 255, 0.1);
+  position: relative;
+}
+
+.cta-card__icon::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.2) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.cta-card__icon i {
+  font-size: 40px;
+  color: white;
+}
+
+/**
+ * CTA Card Title
+ */
+.cta-card__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-tight);
+}
+
+@media (min-width: 768px) {
+  .cta-card__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+/**
+ * CTA Card Text
+ */
+.cta-card__text {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .cta-card__text {
+    font-size: var(--text-lg);
+  }
+}
+
+/* CTA card extensions */
+.cta-card__text--emphasis {
+  margin-top: var(--space-4);
+}
+
+/**
+ * CTA Card Buttons
+ * Centered button group
+ */
+.cta-card__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .cta-card__buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.cta-card__btn {
+  margin-top: var(--space-4);
+  min-width: 200px;
+}
+
+.cta-card__btn--primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  border: none;
+  color: white;
+}
+
+.cta-card__btn--primary:hover {
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-card__btn--secondary {
+  background: transparent;
+  border: 1px solid var(--border-accent);
+  color: var(--accent-primary);
+}
+
+.cta-card__btn--secondary:hover {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   10. LANGUAGE NOTICE
+   Summary box styling
+   ========================================================================== */
+
+.lang-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: rgba(88, 166, 255, 0.05);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: var(--radius-xl);
+  transition: border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.lang-notice:hover {
+  border-color: rgba(88, 166, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
+}
+
+.lang-notice i {
+  font-size: 24px;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.lang-notice p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.lang-notice strong {
+  color: var(--text-primary);
+}
+
+.lang-notice-wrapper {
+  max-width: 800px;
+  margin: var(--space-12) auto 0;
+}
+
+@media (min-width: 768px) {
+  .lang-notice {
+    padding: var(--space-6);
+  }
+
+  .lang-notice p {
+    font-size: var(--text-base);
+  }
+}
+
+/* Light Theme - CTA Card */
+html.light-theme .cta-card {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.06) 0%,
+    rgba(139, 92, 246, 0.04) 50%,
+    rgba(57, 208, 216, 0.02) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.15);
+}
+
+html.light-theme .cta-card__icon {
+  box-shadow: 
+    0 8px 24px rgba(88, 166, 255, 0.25),
+    0 0 0 4px rgba(88, 166, 255, 0.08);
+}
+
+/* ==========================================================================
+   10. DEPRECATED - Legacy Class Support
+   Maintain backward compatibility with existing HTML
+   ========================================================================== */
+
+/* Legacy mindset timeline (to be migrated) */
+.mindset-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: var(--space-12) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.mindset-schritt {
+  display: flex;
+  gap: var(--space-5);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .mindset-schritt {
+    gap: var(--space-8);
+  }
+  
+  .mindset-schritt:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+.mindset-icon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition: transform var(--duration-normal) var(--ease-spring),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.mindset-icon i {
+  font-size: 32px;
+  color: white;
+}
+
+.mindset-schritt:hover .mindset-icon {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.mindset-schritt .bridge-card {
+  flex: 1;
+  margin: 0;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.mindset-schritt:hover .bridge-card {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================================================
+   11. REDUCED MOTION SUPPORT
+   Respect user preferences for reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .method-step__icon,
+  .method-step__card,
+  .mindset-icon,
+  .mindset-schritt .bridge-card,
+  .do-card,
+  .dont-card,
+  .workflow-card,
+  .example-box,
+  .cta-card,
+  .cta-card__btn--primary,
+  .cta-card__btn--secondary {
+    transition: none;
+  }
+  
+  .method-step:hover .method-step__icon,
+  .method-step:hover .method-step__card,
+  .mindset-schritt:hover .mindset-icon,
+  .mindset-schritt:hover .bridge-card,
+  .do-card:hover,
+  .dont-card:hover,
+  .workflow-card:hover,
+  .cta-card__btn--primary:hover,
+  .cta-card__btn--secondary:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   12. LIGHT THEME OVERRIDES
+   ========================================================================== */
+
+html.light-theme .example-box {
+  background: rgba(var(--accent-primary-rgb), 0.08);
+}
+
+html.light-theme .example-box--cyan {
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+}
+
+html.light-theme .example-box--violet {
+  background: rgba(var(--accent-violet-rgb), 0.08);
+}
+
+html.light-theme .example-box--pink {
+  background: rgba(var(--accent-pink-rgb), 0.08);
+}
+
+html.light-theme .example-box--red {
+  background: rgba(var(--accent-red-rgb), 0.08);
+}
+
+html.light-theme .code-block {
+  background: var(--bg-tertiary);
+  border-color: var(--border-primary);
+}
+
+html.light-theme .method-step__number {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Light Theme - Workflow Cards */
+html.light-theme .workflow-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+html.light-theme .workflow-card:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+html.light-theme .workflow-card__steps li {
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+
+/* Light Theme - Editorial Content */
+html.light-theme .editorial-content {
+  background: linear-gradient(
+    135deg,
+    rgba(88, 166, 255, 0.06) 0%,
+    rgba(139, 92, 246, 0.03) 50%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.12);
+}
+
+/* Light Theme - Language Notice */
+html.light-theme .lang-notice {
+  background: rgba(88, 166, 255, 0.04);
+  border-color: rgba(88, 166, 255, 0.15);
+}
+
+html.light-theme .lang-notice:hover {
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+/* ==========================================================================
+   12. REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-content,
+  .editorial-content::before,
+  .lang-notice,
+  .lang-notice:hover {
+    transition: none;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* Mindset icon gradient variants */
+.mindset-icon--primary-cyan { background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan)); box-shadow: 0 8px 32px rgba(88, 166, 255, 0.4); }
+.mindset-icon--cyan-violet { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet)); box-shadow: 0 8px 32px rgba(57, 208, 216, 0.4); }
+.mindset-icon--violet-magenta { background: linear-gradient(135deg, var(--accent-violet), var(--accent-magenta)); box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4); }
+.mindset-icon--magenta-orange { background: linear-gradient(135deg, var(--accent-magenta), var(--accent-orange)); box-shadow: 0 8px 32px rgba(236, 72, 153, 0.4); }
+.mindset-icon--orange-green { background: linear-gradient(135deg, var(--accent-orange), var(--accent-green)); box-shadow: 0 8px 32px rgba(245, 158, 11, 0.4); }
+.mindset-icon--green-cyan { background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4); }
+.mindset-icon--pink-red { background: linear-gradient(135deg, var(--accent-pink), var(--accent-red)); box-shadow: 0 8px 32px rgba(236, 72, 153, 0.4); }
+.mindset-icon--red-primary { background: linear-gradient(135deg, var(--accent-red), var(--accent-primary)); box-shadow: 0 8px 32px rgba(239, 68, 68, 0.4); }
+
+/* Example box color variants */
+.example-box--cyan { border-left-color: var(--accent-cyan); background: rgba(57, 208, 216, 0.08); }
+.example-box--violet { border-left-color: var(--accent-violet); background: rgba(139, 92, 246, 0.08); }
+.example-box--pink { border-left-color: var(--accent-pink); background: rgba(236, 72, 153, 0.08); }
+.example-box--red { border-left-color: var(--accent-red); background: rgba(239, 68, 68, 0.08); }
+
+.mindset-icon--green-violet { background: linear-gradient(135deg, var(--accent-green), var(--accent-violet)); box-shadow: 0 8px 32px rgba(63, 185, 129, 0.4); }
+.mindset-icon--pink-orange { background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange)); box-shadow: 0 8px 32px rgba(236, 72, 153, 0.4); }
+
+.info-box--green { background: rgba(63, 185, 80, 0.1); }
+.info-box--pink { background: rgba(236, 72, 153, 0.1); }
+
+.tip-box { background: var(--bg-tertiary); padding: var(--space-4); border-radius: var(--radius-lg); font-style: italic; }
+.mindset-icon--cyan-green { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green)); box-shadow: 0 8px 32px rgba(57, 208, 216, 0.4); }

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🧠 Musterlösung: JavaScript-Quiz | JS-Tutorial</title>
+  <style>
+    /* === GLOBALE RESETS UND TYPOGRAPHIE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #2c3e50;
+      background-color: #f9fbfd;
+      padding: 20px;
+    }
+
+    .header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 0.8rem 0;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .main-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .main-content > section {
+      background: white;
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #eaeff5;
+    }
+
+    .main-content h1 {
+      font-size: 2.2rem;
+      margin-bottom: 24px;
+      color: #2c3e50;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .main-content h2 {
+      font-size: 1.6rem;
+      margin: 24px 0 18px 0;
+      color: #2980b9;
+    }
+
+    .regel {
+      background-color: #e8f4fc;
+      border-left: 4px solid #3498db;
+      padding: 16px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .warnung {
+      background-color: #fff8e1;
+      color: #5d4037;
+      padding: 16px;
+      border-left: 4px solid #ffc107;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* === QUIZ-SPEZIFISCHES DESIGN === */
+    .quiz-container {
+      text-align: center;
+    }
+
+    .frage {
+      font-size: 1.4rem;
+      margin: 24px 0;
+      line-height: 1.5;
+    }
+
+    .antworten {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .antwort-btn {
+      color: #2c3e50; /* Dunkelgraue Schrift für gute Lesbarkeit */
+      background: #f1f8ff;
+      border: 2px solid #3498db;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .antwort-btn:hover {
+      background: #e1f0ff;
+    }
+
+    .antwort-btn.richtig {
+      background: #d4edda;
+      border-color: #28a745;
+    }
+
+    .antwort-btn.falsch {
+      background: #f8d7da;
+      border-color: #dc3545;
+    }
+
+    .timer {
+      font-size: 1.2rem;
+      color: #e74c3c;
+      font-weight: bold;
+      margin: 16px 0;
+    }
+
+    .punkte {
+      font-size: 1.3rem;
+      margin: 16px 0;
+      color: #3498db;
+      font-weight: bold;
+    }
+
+    .ergebnis {
+      padding: 24px;
+      background: #e8f4fc;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin: 16px 0;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #7f8c8d;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../kapitel/02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../kapitel/03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="../kapitel/04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="../kapitel/05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="../kapitel/06-arrays.html">06. Arrays</a></li>
+        <li><a href="../kapitel/07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="../kapitel/08-objekte.html">08. Objekte</a></li>
+        <li><a href="../kapitel/09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="../kapitel/10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="quiz-container">
+      <h1>🧠 JavaScript-Quiz</h1>
+
+      <p class="regel">
+        💡 Teste dein Wissen zu allen JavaScript-Themen! Wähle die richtige Antwort – du hast 15 Sekunden pro Frage.
+      </p>
+
+      <div id="quiz-app">
+        <!-- Wird dynamisch gefüllt -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script>
+    /**
+     * ABSCHLUSSPROJEKT 3: JAVASCRIPT-QUIZ
+     * Vollständige, optimale Referenzimplementierung
+     */
+    const fragen = [
+      {
+        frage: "Welche Methode gibt Text in der Browser-Konsole aus?",
+        antworten: ["console.log()", "print()", "alert()", "document.write()"],
+        richtig: 0
+      },
+      {
+        frage: "Was ist der Unterschied zwischen '==' und '==='?",
+        antworten: [
+          "'==' vergleicht nur Werte, '===' Werte und Typen",
+          "'===' ist schneller als '=='",
+          "Es gibt keinen Unterschied",
+          "'==' ist sicherer als '==='"
+        ],
+        richtig: 0
+      },
+      {
+        frage: "Wie deklariert man eine Konstante in JavaScript?",
+        antworten: ["const", "let", "var", "constant"],
+        richtig: 0
+      },
+      {
+        frage: "Welche Schleife führt mindestens einmal aus?",
+        antworten: ["for", "while", "do...while", "forEach"],
+        richtig: 2
+      },
+      {
+        frage: "Wie greift man auf das erste Element eines Arrays zu?",
+        antworten: ["arr[0]", "arr[1]", "arr.first()", "arr.get(0)"],
+        richtig: 0
+      },
+      {
+        frage: "Was gibt typeof null in JavaScript zurück?",
+        antworten: ["'null'", "'object'", "'undefined'", "'number'"],
+        richtig: 1
+      },
+      {
+        frage: "Wie ruft man eine Funktion auf?",
+        antworten: ["meineFunktion", "meineFunktion()", "call(meineFunktion)", "run meineFunktion"],
+        richtig: 1
+      },
+      {
+        frage: "Welche Methode fügt ein Element am Ende eines Arrays hinzu?",
+        antworten: ["push()", "pop()", "shift()", "unshift()"],
+        richtig: 0
+      }
+    ];
+
+    // Zustand
+    let aktuelleFrageIndex = 0;
+    let punkte = 0;
+    let timer;
+    const zeitProFrage = 15; // Sekunden
+
+    const app = document.getElementById('quiz-app');
+
+    // Zeige Frage an
+    function zeigeFrage() {
+      const frage = fragen[aktuelleFrageIndex];
+      let zeit = zeitProFrage;
+
+      app.innerHTML = `
+        <div class="punkte">Punkte: ${punkte}</div>
+        <div class="timer">Zeit: <span id="zeit-anzeige">${zeit}</span>s</div>
+        <div class="frage">${frage.frage}</div>
+        <div class="antworten" id="antworten-container"></div>
+      `;
+
+      const antwortenContainer = document.getElementById('antworten-container');
+      frage.antworten.forEach((antwort, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'antwort-btn';
+        btn.textContent = `${String.fromCharCode(65 + index)}. ${antwort}`;
+        btn.onclick = () => beantworteFrage(index);
+        antwortenContainer.appendChild(btn);
+      });
+
+      // Timer starten
+      const zeitAnzeige = document.getElementById('zeit-anzeige');
+      timer = setInterval(() => {
+        zeit--;
+        zeitAnzeige.textContent = zeit;
+        if (zeit <= 0) {
+          clearInterval(timer);
+          beantworteFrage(-1); // Zeit abgelaufen
+        }
+      }, 1000);
+    }
+
+    // Frage beantworten
+    function beantworteFrage(gewaehlteAntwort) {
+      clearInterval(timer);
+      
+      const frage = fragen[aktuelleFrageIndex];
+      const antwortenBtns = document.querySelectorAll('.antwort-btn');
+      
+      // Richtige Antwort hervorheben
+      antwortenBtns.forEach((btn, index) => {
+        if (index === frage.richtig) {
+          btn.className = 'antwort-btn richtig';
+        } else if (index === gewaehlteAntwort) {
+          btn.className = 'antwort-btn falsch';
+        }
+        btn.disabled = true;
+      });
+
+      // Punkte vergeben
+      if (gewaehlteAntwort === frage.richtig) {
+        punkte++;
+      }
+
+      // Nächste Frage nach kurzer Pause
+      setTimeout(() => {
+        aktuelleFrageIndex++;
+        if (aktuelleFrageIndex < fragen.length) {
+          zeigeFrage();
+        } else {
+          zeigeErgebnis();
+        }
+      }, 1500);
+    }
+
+    // Ergebnis anzeigen
+    function zeigeErgebnis() {
+      const prozent = Math.round((punkte / fragen.length) * 100);
+      let feedback = '';
+      if (prozent >= 90) feedback = 'Hervorragend! 🌟';
+      else if (prozent >= 70) feedback = 'Gut gemacht! 👍';
+      else if (prozent >= 50) feedback = 'Nicht schlecht! 👌';
+      else feedback = 'Übe weiter! 💪';
+
+      app.innerHTML = `
+        <div class="ergebnis">
+          <h2>Quiz beendet!</h2>
+          <p>Du hast <strong>${punkte}</strong> von <strong>${fragen.length}</strong> Fragen richtig beantwortet.</p>
+          <p><strong>${prozent}%</strong> – ${feedback}</p>
+        </div>
+        <button id="neustart-btn">Quiz neu starten</button>
+      `;
+
+      document.getElementById('neustart-btn').onclick = () => {
+        aktuelleFrageIndex = 0;
+        punkte = 0;
+        zeigeFrage();
+      };
+    }
+
+    // Start
+    document.addEventListener('DOMContentLoaded', () => {
+      zeigeFrage();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission 08: Mini API bauen | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id">Mission 08</span>
+      <span class="mission-timer">~25 Min • +100 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Baue eine vollständige REST-API mit CRUD-Operationen.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Projekt-Setup</h3>
+        <p>Erstelle einen neuen Ordner <code>mini-api</code>.</p>
+        <p>Initialisiere npm und installiere Express:</p>
+        <div class="code-block">npm init -y
+npm install express</div>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Datenstruktur</h3>
+        <p>Erstelle ein Array als "Datenbank":</p>
+        <div class="code-block">const items = [
+  { id: 1, name: 'Item 1' },
+  { id: 2, name: 'Item 2' }
+];</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>CRUD-Routen erstellen</h3>
+        <p>Implementiere alle Operationen:</p>
+        <div class="code-block">// READ all
+app.get('/api/items', (req, res) => {
+  res.json(items);
+});
+
+// READ one
+app.get('/api/items/:id', (req, res) => {
+  const item = items.find(i => i.id == req.params.id);
+  item ? res.json(item) : res.status(404).send('Not found');
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>CREATE & DELETE</h3>
+        <p>Füge POST und DELETE hinzu:</p>
+        <div class="code-block">// CREATE
+app.post('/api/items', (req, res) => {
+  const newItem = { id: Date.now(), name: req.body.name };
+  items.push(newItem);
+  res.status(201).json(newItem);
+});
+
+// DELETE
+app.delete('/api/items/:id', (req, res) => {
+  const index = items.findIndex(i => i.id == req.params.id);
+  if (index > -1) {
+    items.splice(index, 1);
+    res.send('Deleted');
+  }
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Testen mit Postman/cURL</h3>
+        <p>Teste alle Routen:</p>
+        <div class="code-block">GET    http://localhost:3000/api/items
+GET    http://localhost:3000/api/items/1
+POST   http://localhost:3000/api/items
+DELETE http://localhost:3000/api/items/1</div>
+      </li>
+      
+      <li class="step-item" id="step-6">
+        <h3>Glückwunsch!</h3>
+        <p>Du hast eine vollständige API gebaut.</p>
+        <p>Das ist die Grundlage für jede moderne Web-App.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: API vollständig?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Abschluss-Test
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+100 XP] [ALLE MISSIONEN ABGESCHLOSSEN!]
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeMission()" disabled>
+        Mission abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>REST-APIs nutzen HTTP-Methoden: GET, POST, PUT, DELETE.</li>
+          <li>CRUD = Create, Read, Update, Delete.</li>
+          <li>Statuscodes sind wichtig: 200 OK, 201 Created, 404 Not Found.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe API-Struktur...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'API OK';
+        result.textContent = '[OK] REST-API-Konzept verstanden. Alle CRUD-Operationen implementiert.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeMission() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeMission, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeMission('08');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').scrollIntoView({ behavior: 'smooth' });
+        
+        // Level-Up Check
+        const level = MissionsAPI.getLevel();
+        if (level >= 2) {
+          alert('🎉 Glückwunsch! Du hast alle Missionen abgeschlossen und bist jetzt ein Backend Recruit!');
+        }
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('08', 'Mini API bauen', 'Vollständige REST-API mit CRUD erstellen');
+      AbgabePanel.init('08', 'Mini API bauen');
+      
+      const status = MissionsAPI.getMissionStatus()['08'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+100 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

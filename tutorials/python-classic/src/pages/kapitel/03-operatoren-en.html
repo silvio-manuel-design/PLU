@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate, compare, logically combine — the mathematical foundation of programming.">
+  <meta name="theme-color" content="#306998">
+  <title>03 – Operators | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/03-operatoren.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/03-operatoren-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index-en.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index-en.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index-en.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon-en.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt-en.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index-en.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="03-operatoren.html" class="py-classic-lang__btn " data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="03-operatoren-en.html" class="py-classic-lang__btn is-active" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index-en.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k03-operatoren.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index-en.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 03</span>
+      </nav>
+      <h1 class="py-classic-hero__title">Operators</h1>
+      <p class="py-classic-hero__subtitle">Calculate, compare, logically combine — the mathematical foundation of programming.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 40 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Leicht</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">You use arithmetic operators for calculations and understand the difference between / and //</li>
+        <li class="py-classic-learning-goals__item">You compare values with <code>==, !=, &lt;, &gt;</code> and combine conditions with and, or, not</li>
+        <li class="py-classic-learning-goals__item">You know the walrus operator := as a Python specialty</li>
+        <li class="py-classic-learning-goals__item">You expand PyBuddy with an XP calculator</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-plus"></i></span>
+          Arithmetic Operators
+        </h2>
+        <p>In Python you can calculate just like on a calculator. You know the basic arithmetic from math — but there are some Python specialties:</p><ul><li><code>+</code>, <code>-</code>, <code>*</code> — Addition, Subtraction, Multiplication</li><li><code>/</code> — Division (always returns <code>float</code>!)</li><li><code>//</code> — Integer division (rounded down)</li><li><code>%</code> — Modulo (remainder of a division)</li><li><code>**</code> — Exponentiation</li></ul><div class="py-classic-box py-classic-box--tip"><h3 class="py-classic-box__title"><i class="ph ph-lightbulb"></i> Pro Tip</h3><p class="py-classic-box__text">In games you often use <code>%</code> for wrap-around logic: When a player is at the end of the map and keeps walking, they appear back at the beginning.</p></div>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Arithmetic operators at a glance
+a = 17
+b = 5
+
+print(a + b)    # 22
+print(a - b)    # 12
+print(a * b)    # 85
+print(a / b)    # 3.4  (always float!)
+print(a // b)   # 3    (integer)
+print(a % b)    # 2    (remainder)
+print(a ** b)   # 1419857 (17 to the power of 5)
+
+# Practice: XP calculation
+basis_xp = 100
+bonus = 1.5
+gesamt = int(basis_xp * bonus + 25)
+print(f"You receive {gesamt} XP!")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            22
+12
+85
+3.4
+3
+2
+1419857
+You receive 175 XP!
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>print(17 // 5)   # 3
+print(17 % 5)    # 2
+print(2 ** 8)    # 256</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>console.log(Math.floor(17 / 5));  // 3
+console.log(17 % 5);                // 2
+console.log(Math.pow(2, 8));        // 256</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python has <code>//</code> and <code>**</code> directly as operators. In JavaScript you need <code>Math.floor()</code> and <code>Math.pow()</code> (or <code>**</code> with ES6).</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-scales"></i></span>
+          Comparison Operators
+        </h2>
+        <p>Comparison operators check relationships between values and always return <code>True</code> or <code>False</code>. They are the heart of conditions (which you will deepen in the next chapter).</p><ul><li><code>==</code> — equal</li><li><code>!=</code> — not equal</li><li><code>&lt;</code>, <code>&gt;</code> — less than, greater than</li><li><code>&lt;=</code>, <code>&gt;=</code> — less than or equal, greater than or equal</li></ul><p><strong>Important:</strong> <code>=</code> is assignment, <code>==</code> is comparison. Beginners often confuse these!</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Comparison operators
+level = 10
+print(level == 10)   # True
+print(level != 5)    # True
+print(level &gt; 20)    # False
+print(level &lt;= 15)   # True
+
+# Comparing strings
+name = "PyBuddy"
+print(name == "pybuddy")   # False (case sensitivity!)
+print(name == "PyBuddy")   # True</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            True
+True
+False
+True
+False
+True
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>print(level == 10)
+print(name != "Boss")</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>console.log(level === 10);
+console.log(name !== "Boss");</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python uses <code>==</code> and <code>!=</code>. JavaScript additionally has <code>===</code> and <code>!==</code> for strict type equality. Python compares values and types automatically and correctly.</div>
+          </div>
+        </div>
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Explain the difference between =, == and === in Python and JavaScript. Use a practical example with a login system."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-plug"></i></span>
+          Logical Operators
+        </h2>
+        <p>With logical operators you combine multiple conditions. They work like switches in circuit logic:</p><ul><li><code>and</code> — both conditions must be True</li><li><code>or</code> — at least one condition must be True</li><li><code>not</code> — reverses the value (True becomes False)</li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Logical operators
+hp = 75
+mana = 20
+level = 12
+
+# and: Both must be true
+print(hp &gt; 50 and mana &gt; 10)   # True
+
+# or: One is enough
+print(hp &gt; 100 or level &gt; 10)  # True (level matches)
+
+# not: Reversal
+print(not hp &gt; 50)             # False
+
+# Combined
+kann_zaubern = mana &gt;= 30 and level &gt;= 10
+print(f"Can cast spell: {kann_zaubern}")  # False (mana too low)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            True
+True
+False
+Can cast spell: False
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>print(hp &gt; 50 and mana &gt; 10)
+print(not hp &gt; 50)</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>console.log(hp &gt; 50 &amp;&amp; mana &gt; 10);
+console.log(!(hp &gt; 50));</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python writes out <code>and</code>, <code>or</code>, <code>not</code> — JavaScript uses symbols <code>&&</code>, <code>||</code>, <code>!</code>.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-code"></i></span>
+          The Walrus Operator :=
+        </h2>
+        <p>The walrus operator <code>:=</code> (because it looks like a walrus <i class="ph ph-code"></i>) is a Python specialty from version 3.8 onwards. It assigns a value to a variable <strong>and</strong> returns it at the same time.</p><p>This saves lines when you want to calculate a value and immediately check it.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Without walrus operator
+eingabe = input("Enter a number: ")
+zahl = int(eingabe)
+if zahl &gt; 10:
+    print(f"{zahl} is greater than 10")
+
+# With walrus operator (more compact!)
+if (zahl := int(input("Enter a number: "))) &gt; 10:
+    print(f"{zahl} is greater than 10")
+
+# Practice: Read text until it is not empty
+while (name := input("Name (Enter to finish): ")):
+    print(f"Hello {name}!")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Enter a number: 15
+15 is greater than 10
+Enter a number: 15
+15 is greater than 10
+Name (Enter to finish): Max
+Hello Max!
+Name (Enter to finish): 
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Show me 3 practical examples for the walrus operator := in Python. Explain when it makes code more readable and when it makes it more complicated."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-game-controller"></i></span>
+          Operators in Action: RPG Damage
+        </h2>
+        <p>Imagine you are programming a combat system for an RPG. You need to calculate damage, check if a hit was critical, and award XP. Operators are indispensable for this.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Combat system for a mini-RPG
+basis_schaden = 25
+kritisch = True
+gegner_level = 8
+spieler_level = 10
+
+# Critical hit doubles the damage
+schaden = basis_schaden * (2 if kritisch else 1)
+print(f"Damage: {schaden}")
+
+# Level advantage: 10% bonus per level difference
+level_diff = spieler_level - gegner_level
+if level_diff &gt; 0:
+    schaden = int(schaden * (1 + level_diff * 0.1))
+
+print(f"Total damage: {schaden}")
+
+# XP calculation with modulo
+xp = schaden * 2
+bonus_xp = xp % 50  # Remainder XP as bonus
+print(f"XP: {xp}, Bonus XP: {bonus_xp}")
+print(f"Level up: {xp &gt;= 100}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Damage: 50
+Total damage: 60
+XP: 120, Bonus XP: 20
+Level up: True
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Calculator</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Write a program <code>calculator.py</code> that reads two numbers and performs all basic arithmetic operations.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-1-1">
+            <label for="task-03-1-1" class="py-classic-exercise__task-text">Create calculator.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-1-2">
+            <label for="task-03-1-2" class="py-classic-exercise__task-text">Read two numbers with float(input())</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-1-3">
+            <label for="task-03-1-3" class="py-classic-exercise__task-text">Perform all 7 arithmetic operations</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-1-4">
+            <label for="task-03-1-4" class="py-classic-exercise__task-text">Output results with f-strings</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>a = float(input("First number: "))
+b = float(input("Second number: "))
+
+print(f"{a} + {b} = {a + b}")
+print(f"{a} - {b} = {a - b}")
+print(f"{a} * {b} = {a * b}")
+print(f"{a} / {b} = {a / b:.2f}")
+print(f"{a} // {b} = {a // b}")
+print(f"{a} % {b} = {a % b}")
+print(f"{a} ** {b} = {a ** b}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-03-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-03-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>a = float(input("First number: "))
+b = float(input("Second number: "))
+
+print(f"{a} + {b} = {a + b}")
+print(f"{a} - {b} = {a - b}")
+print(f"{a} * {b} = {a * b}")
+print(f"{a} / {b} = {a / b:.2f}")
+print(f"{a} // {b} = {a // b}")
+print(f"{a} % {b} = {a % b}")
+print(f"{a} ** {b} = {a ** b}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Dice Checker</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Simulate a dice roll (number 1-6). Check with logical operators whether the number is even, odd, or a 6 (critical hit).</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-2-1">
+            <label for="task-03-2-1" class="py-classic-exercise__task-text">Create dice.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-2-2">
+            <label for="task-03-2-2" class="py-classic-exercise__task-text">Import random and use randint(1, 6)</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-2-3">
+            <label for="task-03-2-3" class="py-classic-exercise__task-text">Check even/odd with modulo</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-2-4">
+            <label for="task-03-2-4" class="py-classic-exercise__task-text">Check critical hit with ==</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>import random
+wurf = random.randint(1, 6)
+print(f"Roll: {wurf}")
+print(f"Even: {wurf % 2 == 0}")
+print(f"Critical hit: {wurf == 6}")
+print(f"Normal hit: {wurf &gt;= 2 and wurf &lt;= 5}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-03-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-03-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import random
+wurf = random.randint(1, 6)
+print(f"Roll: {wurf}")
+print(f"Even: {wurf % 2 == 0}")
+print(f"Critical hit: {wurf == 6}")
+print(f"Normal hit: {wurf &gt;= 2 and wurf &lt;= 5}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy Checkpoint: XP Calculator</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy gets an XP calculator: Base XP × Multiplier + Bonus. Use arithmetic operators and output the result formatted.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-3-1">
+            <label for="task-03-3-1" class="py-classic-exercise__task-text">Open pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-3-2">
+            <label for="task-03-3-2" class="py-classic-exercise__task-text">Define basis_xp, multiplikator, bonus</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-3-3">
+            <label for="task-03-3-3" class="py-classic-exercise__task-text">Calculate gesamt_xp</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-03-3-4">
+            <label for="task-03-3-4" class="py-classic-exercise__task-text">Output result with f-strings</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+basis_xp = 100
+multiplikator = 1.5
+bonus = 50
+
+gesamt_xp = int(basis_xp * multiplikator + bonus)
+print(f"  Base XP: {basis_xp}")
+print(f" Multiplier: x{multiplikator}")
+print(f" Bonus: +{bonus}")
+print(f" Total XP: {gesamt_xp}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-03-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-03-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+basis_xp = 100
+multiplikator = 1.5
+bonus = 50
+
+gesamt_xp = int(basis_xp * multiplikator + bonus)
+print(f"  Base XP: {basis_xp}")
+print(f" Multiplier: x{multiplikator}")
+print(f" Bonus: +{bonus}")
+print(f" Total XP: {gesamt_xp}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Learning Break</span>
+        <p class="py-classic-funfact__text">In <strong>World of Warcraft</strong> the server calculates thousands of operations every second: Damage = Weapon damage × Crit multiplier + Buff bonus. These are nothing but the arithmetic operators you just learned — just with more zeros behind them!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-plus"></i></span><span>Arithmetic: +, -, *, /, //, %, ** for all calculations</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-scales"></i></span><span> Comparisons: &lt;code&gt;==, !=, &amp;lt;, &amp;gt;, &amp;lt;=, &amp;gt;=&lt;/code&gt; return True/False</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-plug"></i></span><span>Logic: and, or, not combine conditions</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-code"></i></span><span>Walrus := assigns and returns — saves lines</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-game-controller"></i></span><span>Operators are the foundation for calculations and decisions</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="02-strings-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">Input, Output & Strings</span>
+    </a>
+    <a href="04-bedingungen-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">Conditions</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Chapters</h4><nav><a href="../index-en.html#kapitel">All Chapters</a><a href="06-listen-en.html">06. Lists</a><a href="12-ki-cocoding-en.html">12. AI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Resources</h4><nav><a href="../lexikon-en.html">Glossary</a><a href="../abschlussprojekt-en.html">Final Project</a><a href="../../../../index-en.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Legal</h4><nav><a href="../../../../pages/impressum-en.html">Imprint</a><a href="../../../../pages/datenschutz-en.html">Privacy</a><a href="../../../../pages/disclaimer-en.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden-en.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Support</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

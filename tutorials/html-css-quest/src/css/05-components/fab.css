@@ -1,0 +1,146 @@
+@layer components {
+  /* ============================================================
+     FAB — Floating Action Buttons
+     Desktop: Runde Buttons rechts unten
+     Mobile: Bottom Bar mit Quest-Verlauf
+     ============================================================ */
+
+  .fab-container {
+    position: fixed;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    right: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .fab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+  }
+
+  .fab-btn:hover {
+    background: var(--quest-primary);
+    color: var(--quest-white);
+    border-color: var(--quest-primary);
+  }
+
+  .fab-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Active States */
+  .fab-btn--classroom.active {
+    background: linear-gradient(135deg, var(--quest-magic), var(--quest-accent));
+    color: var(--quest-white);
+    border-color: transparent;
+    animation: fabPulse 2s infinite;
+  }
+
+  @keyframes fabPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(155, 89, 182, 0); }
+  }
+
+  /* Back to Top */
+  .fab-btn--backtop {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  }
+  .fab-btn--backtop.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Tooltip (Desktop only) */
+  @media (min-width: 1024px) {
+    .fab-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-lg);
+    }
+    .fab-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .fab-btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: calc(100% + 12px);
+      top: 50%;
+      transform: translateY(-50%) translateX(10px);
+      padding: var(--space-2) var(--space-3);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      white-space: nowrap;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+    .fab-btn:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .fab-btn__label {
+      display: none;
+    }
+  }
+
+  /* ========== MOBILE: FAB completely hidden ========== */
+  @media (max-width: 1023px) {
+    body .fab-container {
+      display: none;
+    }
+  }
+
+  /* Classroom Mode Toast */
+  .classroom-toast {
+    position: fixed;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    font-weight: 600;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-light);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  .classroom-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 1023px) {
+    .classroom-toast {
+      bottom: 5rem;
+    }
+  }
+}

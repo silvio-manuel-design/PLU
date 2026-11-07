@@ -1,0 +1,234 @@
+/* ============================================================
+   Tools Page — Tool-Cards, KI-Tipps, DevTools-Section
+   ============================================================ */
+
+@layer components {
+  .tools-hero {
+    position: relative;
+    padding: var(--space-16) var(--space-4);
+    text-align: center;
+    border-radius: 0;
+    margin-bottom: var(--space-10);
+    overflow: hidden;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Background Image Layer */
+  .tools-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .tools-hero__bg img,
+  .tools-hero__bg picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    animation: heroZoomDetail 12s ease-out forwards;
+  }
+  .tools-hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 12, 16, 0.80) 0%,
+      rgba(10, 12, 16, 0.45) 40%,
+      rgba(10, 12, 16, 0.75) 100%
+    );
+    z-index: 1;
+  }
+  html.dark-mode .tools-hero__bg::after {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 17, 21, 0.85) 0%,
+      rgba(15, 17, 21, 0.55) 40%,
+      rgba(15, 17, 21, 0.80) 100%
+    );
+  }
+
+  .tools-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+  .tools-hero__icon {
+    font-size: var(--text-5xl);
+    color: var(--quest-primary);
+    margin-bottom: var(--space-4);
+    display: inline-block;
+  }
+  .tools-hero__title {
+    font-size: clamp(var(--text-2xl), 5vw, var(--text-3xl));
+    font-weight: 800;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+  }
+  .tools-hero__text {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: var(--leading-relaxed);
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media (min-width: 640px) {
+    .tools-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .tool-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-light);
+    padding: var(--space-6);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--quest-primary);
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--quest-primary), var(--quest-accent));
+    opacity: 0.7;
+  }
+  .tool-card__icon {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+    display: inline-block;
+  }
+  .tool-card:nth-child(1) .tool-card__icon { color: #007ACC; }
+  .tool-card:nth-child(2) .tool-card__icon { color: var(--quest-success); }
+  .tool-card:nth-child(3) .tool-card__icon { color: #04AA6D; }
+  .tool-card:nth-child(4) .tool-card__icon { color: var(--quest-magic); }
+  .tool-card:nth-child(5) .tool-card__icon { color: var(--quest-primary); }
+  .tool-card:nth-child(1):hover { border-color: #007ACC; }
+  .tool-card:nth-child(2):hover { border-color: var(--quest-success); }
+  .tool-card:nth-child(3):hover { border-color: #04AA6D; }
+  .tool-card:nth-child(4):hover { border-color: var(--quest-magic); }
+  .tool-card:nth-child(5):hover { border-color: var(--quest-primary); }
+
+  .tool-card__title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+    color: var(--text-primary);
+  }
+  .tool-card__text {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+  }
+  .tool-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+  }
+  .tool-card__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+  }
+  .tool-card__list li i {
+    color: var(--quest-success);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tool-card__cta {
+    margin-top: auto;
+  }
+  .tool-card__cta .quest-btn {
+    width: 100%;
+  }
+
+  /* KI-Tipps Section */
+  .ki-tips {
+    background: linear-gradient(135deg, rgba(155,89,182,0.06), rgba(243,156,18,0.04));
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    border: 1px solid var(--border-light);
+    margin-top: var(--space-8);
+  }
+  .ki-tips__title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .ki-tips__title i {
+    color: var(--quest-magic);
+  }
+  .ki-tips__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  @media (min-width: 640px) {
+    .ki-tips__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .ki-tip {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    border: 1px solid var(--border-light);
+  }
+  .ki-tip__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-2);
+  }
+  .ki-tip--do .ki-tip__label { color: var(--quest-success); }
+  .ki-tip--dont .ki-tip__label { color: var(--quest-accent); }
+  .ki-tip__text {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+  .ki-tip__example {
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(0,0,0,0.2);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+}

@@ -1,0 +1,196 @@
+/* ============================================================
+   COLOR WHEEL PLAYGROUND — Interaktiver Farbkreis
+   ============================================================ */
+
+.photo-color-playground {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-xl);
+  padding: var(--photo-space-6);
+  margin: var(--photo-space-6) 0;
+}
+
+/* Color Wheel Stage */
+.photo-color-playground__stage {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto var(--photo-space-6);
+  aspect-ratio: 1;
+}
+
+.photo-color-playground__wheel {
+  width: 100%;
+  height: 100%;
+}
+
+.photo-color-playground__wheel-segment {
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.photo-color-playground__wheel-segment:hover {
+  filter: brightness(1.2);
+}
+
+/* Dim non-harmony segments when a harmony is active */
+.photo-color-playground__wheel.is-harmony-active .photo-color-playground__wheel-segment {
+  opacity: 0.25;
+}
+
+.photo-color-playground__wheel.is-harmony-active .photo-color-playground__wheel-segment.is-active {
+  opacity: 1;
+  filter: brightness(1.15) drop-shadow(0 0 8px currentColor);
+}
+
+/* Center info circle */
+.photo-color-playground__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  height: 35%;
+  background: var(--photo-bg-elevated);
+  border-radius: 50%;
+  border: 2px solid var(--photo-border-default);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--photo-space-3);
+}
+
+.photo-color-playground__center-label {
+  font-size: var(--photo-text-xs);
+  color: var(--photo-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--photo-space-1);
+}
+
+.photo-color-playground__center-name {
+  font-size: var(--photo-text-lg);
+  font-weight: var(--photo-font-weight-bold);
+  color: var(--photo-text-primary);
+}
+
+/* Harmony controls */
+.photo-color-playground__controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--photo-space-3);
+  margin-bottom: var(--photo-space-5);
+}
+
+.photo-color-playground__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--photo-space-2);
+  padding: var(--photo-space-4) var(--photo-space-3);
+  background: var(--photo-bg-surface);
+  border: 2px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-lg);
+  color: var(--photo-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.photo-color-playground__btn:hover {
+  border-color: var(--photo-border-default);
+  color: var(--photo-text-primary);
+  transform: translateY(-2px);
+}
+
+.photo-color-playground__btn.is-active {
+  border-color: var(--photo-accent-violet);
+  background: var(--photo-accent-violet-dim);
+  color: var(--photo-accent-violet);
+}
+
+.photo-color-playground__btn-preview {
+  display: flex;
+  gap: 2px;
+  height: 24px;
+}
+
+.photo-color-playground__btn-preview span {
+  width: 16px;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.photo-color-playground__btn-label {
+  font-size: var(--photo-text-sm);
+  font-weight: var(--photo-font-weight-semibold);
+}
+
+/* Info panel */
+.photo-color-playground__info {
+  background: var(--photo-bg-surface);
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-5);
+  border: 1px solid var(--photo-border-subtle);
+}
+
+.photo-color-playground__info-title {
+  font-size: var(--photo-text-lg);
+  font-weight: var(--photo-font-weight-bold);
+  color: var(--photo-accent-violet);
+  margin-bottom: var(--photo-space-2);
+}
+
+.photo-color-playground__info-text {
+  font-size: var(--photo-text-base);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-relaxed);
+  margin-bottom: var(--photo-space-3);
+}
+
+.photo-color-playground__info-example {
+  display: flex;
+  align-items: center;
+  gap: var(--photo-space-3);
+  padding-top: var(--photo-space-3);
+  border-top: 1px solid var(--photo-border-subtle);
+}
+
+.photo-color-playground__info-example-label {
+  font-size: var(--photo-text-sm);
+  color: var(--photo-text-tertiary);
+  font-weight: var(--photo-font-weight-medium);
+}
+
+.photo-color-playground__info-example-swatches {
+  display: flex;
+  gap: var(--photo-space-2);
+}
+
+.photo-color-playground__info-example-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--photo-radius-full);
+  border: 2px solid var(--photo-border-subtle);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .photo-color-playground__controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .photo-color-playground {
+    padding: var(--photo-space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-color-playground__controls {
+    gap: var(--photo-space-2);
+  }
+  .photo-color-playground__btn {
+    padding: var(--photo-space-3) var(--photo-space-2);
+  }
+}

@@ -1,0 +1,325 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Sandbox Component (Pyodide-powered)
+   ========================================================================== */
+
+@layer components {
+  .py-quest-sandbox {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
+  }
+
+  @media (min-width: 1024px) {
+    .py-quest-sandbox {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Editor */
+  .py-quest-sandbox__editor {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    border-bottom: 1px solid var(--py-border-color);
+  }
+
+  @media (min-width: 1024px) {
+    .py-quest-sandbox__editor {
+      border-bottom: none;
+      border-right: 1px solid var(--py-border-color);
+    }
+  }
+
+  .py-quest-sandbox__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--py-space-2);
+    padding: var(--py-space-3) var(--py-space-4);
+    background: var(--py-bg-hover);
+    border-bottom: 1px solid var(--py-border-color);
+  }
+
+  .py-quest-sandbox__lang {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .py-quest-sandbox__lang::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--py-primary);
+    border-radius: var(--py-radius-full);
+  }
+
+  .py-quest-sandbox__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+  }
+
+  .py-quest-sandbox__btn {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    background: var(--py-bg-elevated);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-md);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-medium);
+    color: var(--py-text-secondary);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-sandbox__btn:hover:not(:disabled) {
+    background: var(--py-bg-hover);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-sandbox__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .py-quest-sandbox__btn--primary {
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-color: transparent;
+    color: var(--py-white);
+  }
+
+  .py-quest-sandbox__btn--primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--py-primary-light) 0%, var(--py-primary) 100%);
+    box-shadow: var(--py-shadow-glow);
+  }
+
+  /* Editor Body with Line Numbers */
+  .py-quest-sandbox__editor-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .py-quest-sandbox__line-numbers {
+    flex-shrink: 0;
+    width: 3rem;
+    padding: var(--py-space-4) var(--py-space-2);
+    background: var(--py-bg-sandbox);
+    border-right: 1px solid var(--py-border-color);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-sm);
+    line-height: var(--py-leading-normal);
+    color: var(--py-text-muted);
+    text-align: right;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .py-quest-sandbox__textarea {
+    flex: 1;
+    min-width: 0;
+    padding: var(--py-space-4);
+    background: var(--py-bg-sandbox);
+    border: none;
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-sm);
+    line-height: var(--py-leading-normal);
+    color: var(--py-text-code);
+    resize: none;
+    tab-size: 4;
+    overflow: auto;
+    white-space: pre;
+    word-wrap: normal;
+  }
+
+  .py-quest-sandbox__textarea:focus {
+    outline: none;
+  }
+
+  .py-quest-sandbox__textarea::placeholder {
+    color: var(--py-text-muted);
+    opacity: 0.5;
+  }
+
+  /* Output */
+  .py-quest-sandbox__output {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    background: var(--py-bg-sandbox);
+  }
+
+  .py-quest-sandbox__output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--py-space-3) var(--py-space-4);
+    background: var(--py-bg-hover);
+    border-bottom: 1px solid var(--py-border-color);
+  }
+
+  .py-quest-sandbox__output-label {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Problems Panel */
+  .py-quest-sandbox__problems {
+    padding: var(--py-space-3) var(--py-space-4);
+    background: rgba(239, 68, 68, 0.05);
+    border-bottom: 1px solid var(--py-border-color);
+    font-family: var(--py-font-mono);
+    max-height: 120px;
+    overflow-y: auto;
+  }
+
+  /* Output Content */
+  .py-quest-sandbox__output-content {
+    flex: 1;
+    padding: var(--py-space-4);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-sm);
+    line-height: var(--py-leading-normal);
+    color: var(--py-text-code);
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .py-quest-sandbox__output-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--py-space-3);
+    height: 100%;
+    color: var(--py-text-muted);
+    font-size: var(--py-text-sm);
+    text-align: center;
+  }
+
+  .py-quest-sandbox__output-empty i {
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+
+  .py-quest-sandbox__output-empty small {
+    font-size: var(--py-text-xs);
+    opacity: 0.7;
+  }
+
+  .py-quest-sandbox__output-line {
+    margin-bottom: 2px;
+    padding: 2px 0;
+  }
+
+  .py-quest-sandbox__output-line--stdout {
+    color: var(--py-text-secondary);
+  }
+
+  .py-quest-sandbox__output-line--stderr {
+    color: var(--py-error);
+  }
+
+  .py-quest-sandbox__output-line--result {
+    color: var(--py-success);
+    font-style: italic;
+  }
+
+  .py-quest-sandbox__error {
+    color: #f87171;
+    padding: var(--py-space-2);
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: var(--py-radius-md);
+    margin-top: var(--py-space-2);
+  }
+
+  .py-quest-sandbox__output-image {
+    max-width: 100%;
+    margin-top: var(--py-space-3);
+    border-radius: var(--py-radius-lg);
+    border: 1px solid var(--py-border-color);
+  }
+
+  /* Loading Overlay */
+  .py-quest-sandbox__loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--py-space-4);
+    background: var(--py-bg-body);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    color: var(--py-text-primary);
+    text-align: center;
+    padding: var(--py-space-6);
+  }
+
+  /* Dark Mode: Technischer Grid-Hintergrund während des Ladens */
+  html[data-theme="dark"] .py-quest-sandbox__loading {
+    background-image: url('../../assets/images/badges/code-editor-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(11, 17, 32, 0.85);
+    background-blend-mode: overlay;
+  }
+
+  .py-quest-sandbox__loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--py-border-color);
+    border-top-color: var(--py-primary);
+    border-radius: 50%;
+    animation: sandboxSpin 1s linear infinite;
+  }
+
+  .py-quest-sandbox__loading span {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-semibold);
+  }
+
+  .py-quest-sandbox__loading small {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-muted);
+  }
+
+  @keyframes sandboxSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .py-quest-sandbox__loading-spinner {
+      animation: none;
+      border-top-color: var(--py-border-color);
+      border: 3px solid var(--py-primary);
+    }
+  }
+}

@@ -1,0 +1,434 @@
+/* ==========================================================================
+   KI CHARTER COMPONENTS
+   Value cards with modal popup functionality
+   ========================================================================== */
+
+/* ========================================================================
+   CHARTER CARDS (4 Value Cards)
+   ======================================================================== */
+
+.charter-card {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(51, 65, 85, 0.5) 0%, 
+    rgba(30, 41, 59, 0.3) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.charter-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, 
+    var(--glow-color, var(--accent-primary)) 0%, 
+    var(--glow-color, var(--accent-primary)) 30%,
+    transparent 70%,
+    transparent 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .charter-card {
+    padding: var(--space-8);
+  }
+}
+
+@media (hover: hover) {
+  .charter-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--glow-color, var(--accent-primary));
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(0, 0, 0, 0.3),
+      0 0 0 1px var(--glow-color, var(--accent-primary));
+  }
+  
+  .charter-card:hover::before {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--glow-color, var(--accent-primary)));
+  }
+}
+
+.charter-card:active {
+  transform: translateY(-2px);
+}
+
+/* Icon */
+.charter-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .charter-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.charter-icon::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--radius-full);
+  background: var(--glow-color, var(--accent-primary));
+  opacity: 0.5;
+  filter: blur(16px);
+  transition: opacity 0.3s ease;
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+@keyframes iconGlow {
+  0%, 100% { 
+    opacity: 0.4; 
+    filter: blur(16px);
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    filter: blur(22px);
+    transform: scale(1.1);
+  }
+}
+
+@media (hover: hover) {
+  .charter-card:hover .charter-icon::before {
+    opacity: 0.9;
+    filter: blur(24px);
+    animation: none;
+  }
+}
+
+.charter-icon .ph {
+  font-size: 2rem;
+  color: var(--glow-color, var(--accent-primary));
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .charter-icon .ph {
+    font-size: 2.5rem;
+  }
+}
+
+/* Title */
+.charter-card h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .charter-card h3 {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Description */
+.charter-card p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .charter-card p {
+    font-size: var(--text-base);
+  }
+}
+
+/* Link */
+.charter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--accent-primary);
+  transition: gap 0.2s ease;
+}
+
+.charter-link .ph {
+  transition: transform 0.2s ease;
+}
+
+@media (hover: hover) {
+  .charter-card:hover .charter-link {
+    gap: var(--space-3);
+  }
+  
+  .charter-card:hover .charter-link .ph {
+    transform: translateX(4px);
+  }
+}
+
+/* ========================================================================
+   CHARTER QUOTE (Hero Quote)
+   ======================================================================== */
+
+.charter-quote {
+  max-width: 800px;
+  margin: 0 auto var(--space-12);
+  padding: var(--space-6);
+  text-align: center;
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.12) 0%, 
+    rgba(139, 92, 246, 0.08) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.25);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.charter-quote::before {
+  content: '"';
+  position: absolute;
+  top: -5px;
+  left: 24px;
+  font-size: 5rem;
+  font-family: Georgia, serif;
+  color: var(--accent-primary);
+  opacity: 0.5;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(88, 166, 255, 0.4);
+}
+
+@media (min-width: 768px) {
+  .charter-quote {
+    font-size: var(--text-xl);
+    padding: var(--space-8) var(--space-10);
+  }
+}
+
+/* ========================================================================
+   SECTION STYLES
+   ======================================================================== */
+
+.section--alt {
+  background: var(--bg-secondary);
+  position: relative;
+  z-index: 5; /* Über dem Parallax */
+}
+
+/* Ensure content is above background */
+.section--alt .container {
+  position: relative;
+  z-index: 2;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-12);
+}
+
+.section-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-4);
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-4);
+}
+
+.section-badge .ph {
+  font-size: 1.2em;
+}
+
+.section-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: var(--text-4xl);
+  }
+}
+
+.section-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* Text Gradient */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+
+
+
+/* ========================================================================
+   LIGHT MODE - Premium Charter Styling
+   ======================================================================== */
+
+/* Light Mode: Charter Cards - Frosted Glass Premium */
+html.light-theme .charter-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(88, 166, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(88, 166, 255, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+html.light-theme .charter-card:hover {
+  border-color: rgba(88, 166, 255, 0.35);
+  box-shadow: 
+    0 16px 48px rgba(88, 166, 255, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Light Mode: Charter Quote */
+html.light-theme .charter-quote {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(224, 242, 254, 0.7) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(88, 166, 255, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Light Mode: Section Badge */
+html.light-theme .section-badge {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.25);
+}
+
+
+/* ========================================================================
+   PREMIUM CHARTER LINK STYLING
+   ======================================================================== */
+
+/* Premium Charter Link */
+.charter-link {
+  position: relative;
+  padding: var(--space-2) var(--space-4);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.1), 
+    rgba(139, 92, 246, 0.05)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: var(--radius-full);
+  box-shadow: 
+    0 2px 8px rgba(88, 166, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.charter-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border-color: rgba(88, 166, 255, 0.4);
+  box-shadow: 
+    0 4px 16px rgba(88, 166, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Light Mode: Premium Charter Link */
+html.light-theme .charter-link {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08), 
+    rgba(139, 92, 246, 0.04)
+  );
+  border-color: rgba(88, 166, 255, 0.25);
+  color: #2563eb;
+}
+
+html.light-theme .charter-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.08)
+  );
+  border-color: rgba(88, 166, 255, 0.4);
+  color: #58a6ff;
+}
+/* ========================================================================
+   CHARTER ICON MODIFIERS - Glow Color Variants
+   Replaces CSS variable inline styles with semantic classes
+   ======================================================================== */
+
+.charter-icon--violet { --glow-color: var(--accent-violet); }
+.charter-icon--cyan { --glow-color: var(--accent-cyan); }
+.charter-icon--orange { --glow-color: var(--accent-orange); }
+.charter-icon--green { --glow-color: var(--accent-green); }
+.charter-icon--primary { --glow-color: var(--accent-primary); }
+.charter-icon--pink { --glow-color: var(--accent-pink); }
+.charter-icon--red { --glow-color: var(--accent-red); }

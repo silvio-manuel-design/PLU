@@ -1,0 +1,193 @@
+/* ============================================================
+   LIGHT PLAYGROUND — Interaktiver Lichtrichtung-Simulator
+   ============================================================ */
+
+.photo-light-playground {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-xl);
+  padding: var(--photo-space-6);
+  margin: var(--photo-space-6) 0;
+}
+
+/* Stage with SVG subject */
+.photo-light-playground__stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto var(--photo-space-6);
+  aspect-ratio: 4 / 3;
+  background: var(--photo-bg-elevated);
+  border-radius: var(--photo-radius-lg);
+  border: 1px solid var(--photo-border-subtle);
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
+
+/* Light direction affects stage background */
+.photo-light-playground__stage[data-direction="front"] {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.15) 0%, var(--photo-bg-elevated) 60%);
+}
+.photo-light-playground__stage[data-direction="side"] {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.2) 0%, var(--photo-bg-elevated) 50%, rgba(10, 12, 16, 0.5) 100%);
+}
+.photo-light-playground__stage[data-direction="back"] {
+  background: linear-gradient(180deg, rgba(251, 113, 133, 0.2) 0%, rgba(10, 12, 16, 0.8) 50%, var(--photo-bg-elevated) 100%);
+}
+.photo-light-playground__stage[data-direction="bottom"] {
+  background: linear-gradient(0deg, rgba(167, 139, 250, 0.2) 0%, var(--photo-bg-elevated) 60%);
+}
+
+/* SVG subject container */
+.photo-light-playground__subject {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.photo-light-playground__subject svg {
+  width: 60%;
+  height: auto;
+  max-height: 80%;
+  transition: filter 0.5s ease;
+}
+
+/* Direction-specific SVG filters */
+.photo-light-playground__stage[data-direction="front"] .photo-light-playground__subject svg {
+  filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.3));
+}
+.photo-light-playground__stage[data-direction="side"] .photo-light-playground__subject svg {
+  filter: drop-shadow(-15px 0 20px rgba(245, 158, 11, 0.4));
+}
+.photo-light-playground__stage[data-direction="back"] .photo-light-playground__subject svg {
+  filter: drop-shadow(0 0 30px rgba(251, 113, 133, 0.5)) brightness(0.7);
+}
+.photo-light-playground__stage[data-direction="bottom"] .photo-light-playground__subject svg {
+  filter: drop-shadow(0 10px 20px rgba(167, 139, 250, 0.4));
+}
+
+/* Controls */
+.photo-light-playground__controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--photo-space-3);
+  margin-bottom: var(--photo-space-5);
+}
+
+.photo-light-playground__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--photo-space-2);
+  padding: var(--photo-space-4) var(--photo-space-3);
+  background: var(--photo-bg-surface);
+  border: 2px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-lg);
+  color: var(--photo-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.photo-light-playground__btn:hover {
+  border-color: var(--photo-border-default);
+  color: var(--photo-text-primary);
+  transform: translateY(-2px);
+}
+
+.photo-light-playground__btn.is-active {
+  border-color: var(--photo-accent);
+  background: var(--photo-accent-dim);
+  color: var(--photo-accent);
+}
+
+.photo-light-playground__btn-icon {
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--photo-radius-full);
+  background: var(--photo-bg-elevated);
+  transition: background 0.2s ease;
+}
+
+.photo-light-playground__btn.is-active .photo-light-playground__btn-icon {
+  background: var(--photo-accent);
+  color: var(--photo-text-inverse);
+}
+
+.photo-light-playground__btn-label {
+  font-size: var(--photo-text-sm);
+  font-weight: var(--photo-font-weight-semibold);
+}
+
+/* Info panel */
+.photo-light-playground__info {
+  background: var(--photo-bg-surface);
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-5);
+  border: 1px solid var(--photo-border-subtle);
+}
+
+.photo-light-playground__info-title {
+  font-size: var(--photo-text-lg);
+  font-weight: var(--photo-font-weight-bold);
+  color: var(--photo-text-primary);
+  margin-bottom: var(--photo-space-2);
+}
+
+.photo-light-playground__info-text {
+  font-size: var(--photo-text-base);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-relaxed);
+}
+
+.photo-light-playground__info-tip {
+  margin-top: var(--photo-space-3);
+  padding-top: var(--photo-space-3);
+  border-top: 1px solid var(--photo-border-subtle);
+  font-size: var(--photo-text-sm);
+  color: var(--photo-accent);
+  font-weight: var(--photo-font-weight-medium);
+}
+
+/* Direction-specific accent colors for info */
+.photo-light-playground__info[data-direction="front"] .photo-light-playground__info-title { color: #F59E0B; }
+.photo-light-playground__info[data-direction="side"] .photo-light-playground__info-title { color: #F97316; }
+.photo-light-playground__info[data-direction="back"] .photo-light-playground__info-title { color: #FB7185; }
+.photo-light-playground__info[data-direction="bottom"] .photo-light-playground__info-title { color: #A78BFA; }
+
+.photo-light-playground__info[data-direction="front"] .photo-light-playground__info-tip { color: #F59E0B; }
+.photo-light-playground__info[data-direction="side"] .photo-light-playground__info-tip { color: #F97316; }
+.photo-light-playground__info[data-direction="back"] .photo-light-playground__info-tip { color: #FB7185; }
+.photo-light-playground__info[data-direction="bottom"] .photo-light-playground__info-tip { color: #A78BFA; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .photo-light-playground__controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .photo-light-playground {
+    padding: var(--photo-space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-light-playground__controls {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--photo-space-2);
+  }
+  .photo-light-playground__btn {
+    padding: var(--photo-space-3) var(--photo-space-2);
+  }
+  .photo-light-playground__btn-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}

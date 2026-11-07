@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KI Challenge — Kompendium</title>
+  <meta name="description" content="Das interaktive Kompendium für die KI Challenge. GitHub, Vite, ITCSS, BEM und mehr.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/05-components/glossary.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+  <a href="#main-content" class="u-sr-only skip-link">Zum Hauptinhalt springen</a>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="site-header__container u-container">
+      <a href="index.html" class="brand" aria-label="Zurück zur Evolution">
+        <span class="brand__logo">
+          <i class="ph ph-atom" aria-hidden="true"></i>
+        </span>
+        <span class="brand__name">KI-Challenge <span class="brand__name--highlight">Evolution</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="index.html" class="nav-link">Evolution</a>
+        <a href="glossary.html" class="nav-link is-active">Kompendium</a>
+        <a href="../../../projects/synthese/src/pages/index.html" class="nav-link">SYNTHESE</a>
+        <a href="../../../projects/prisma/src/pages/index.html" class="nav-link">PRISMA</a>
+      </nav>
+
+      <div class="header-actions">
+        <div id="lang-switcher" class="lang-switcher">
+          <button class="lang-switcher__btn" aria-haspopup="listbox" aria-expanded="false" id="lang-current">DE</button>
+          <div class="lang-switcher__options" role="listbox">
+            <button class="lang-switcher__option is-active" data-lang="de" role="option">DE</button>
+            <button class="lang-switcher__option" data-lang="en" role="option">EN</button>
+          </div>
+        </div>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Dunkelmodus aktivieren">
+          <i class="ph ph-moon" aria-hidden="true"></i>
+        </button>
+        <button id="menu-toggle" class="icon-btn icon-btn--mobile" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav__link">Evolution</a>
+      <a href="glossary.html" class="mobile-nav__link">Kompendium</a>
+      <a href="../../../projects/synthese/src/pages/index.html" class="mobile-nav__link">SYNTHESE</a>
+      <a href="../../../projects/prisma/src/pages/index.html" class="mobile-nav__link">PRISMA</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="glossary-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="glossary-sidebar" aria-label="Kompendium Navigation">
+      <div class="glossary-sidebar__header">
+        <i class="ph ph-books" aria-hidden="true"></i>
+        <h2>Kompendium</h2>
+      </div>
+
+      <!-- Search -->
+      <div class="glossary-search">
+        <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+        <input
+          type="search"
+          id="glossary-search"
+          placeholder="Begriff suchen..."
+          aria-label="Im Kompendium suchen"
+        >
+      </div>
+
+      <!-- Progress -->
+      <div class="glossary-progress" aria-label="Lernfortschritt">
+        <div class="glossary-progress__bar">
+          <div class="glossary-progress__fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+        <span class="glossary-progress__text" id="progress-text">0% gelesen</span>
+      </div>
+
+      <!-- Categories -->
+      <nav class="glossary-nav" aria-label="Kapitel">
+        <a href="#tools" class="glossary-nav__item" data-category="tools">
+          <i class="ph ph-wrench" aria-hidden="true"></i>
+          <span>Tools & Setup</span>
+        </a>
+        <a href="#design" class="glossary-nav__item" data-category="design">
+          <i class="ph ph-paint-brush" aria-hidden="true"></i>
+          <span>Design-Systeme</span>
+        </a>
+        <a href="#javascript" class="glossary-nav__item" data-category="javascript">
+          <i class="ph ph-code" aria-hidden="true"></i>
+          <span>JavaScript</span>
+        </a>
+        <a href="#i18n" class="glossary-nav__item" data-category="i18n">
+          <i class="ph ph-translate" aria-hidden="true"></i>
+          <span>i18n</span>
+        </a>
+        <a href="#a11y" class="glossary-nav__item" data-category="a11y">
+          <i class="ph ph-person" aria-hidden="true"></i>
+          <span>Accessibility</span>
+        </a>
+        <a href="#workflow" class="glossary-nav__item" data-category="workflow">
+          <i class="ph ph-rocket" aria-hidden="true"></i>
+          <span>Workflow</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Content Area -->
+    <div class="glossary-content">
+      <!-- Hero -->
+      <div class="glossary-content__hero">
+        <h1 class="glossary-content__title">Das Kompendium</h1>
+        <p class="glossary-content__subtitle">
+          Dein interaktives Nachschlagewerk für die KI Challenge. 
+          Suche Begriffe, lerne Konzepte, teste dein Wissen.
+        </p>
+      </div>
+
+      <!-- Section: Tools & Setup -->
+      <section id="tools" class="glossary-section" data-category="tools">
+        <h2 class="glossary-section__title">
+          <i class="ph ph-wrench" aria-hidden="true"></i>
+          Tools & Setup
+        </h2>
+
+        <article class="glossary-card" id="quickstart">
+          <h3 class="glossary-card__title">🚀 Quick Start — Erste Schritte</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Anfänger</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>Du hast noch nie eine Website erstellt? Kein Problem! Dieser Guide bringt dich in 10 Minuten auf den aktuellen Stand. Du brauchst nur einen Computer mit Internetzugang.</p>
+
+            <h4>Die 3 Säulen des Webs</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Technologie</th>
+                  <th>Aufgabe</th>
+                  <th>Dateiendung</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>HTML</strong></td>
+                  <td>Struktur — "Was steht auf der Seite?"</td>
+                  <td>.html</td>
+                </tr>
+                <tr>
+                  <td><strong>CSS</strong></td>
+                  <td>Design — "Wie sieht es aus?"</td>
+                  <td>.css</td>
+                </tr>
+                <tr>
+                  <td><strong>JavaScript</strong></td>
+                  <td>Interaktion — "Was passiert beim Klick?"</td>
+                  <td>.js</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>Merksatz:</strong> HTML ist das Skelett, CSS die Kleidung, JavaScript die Bewegung.</p>
+
+            <h4>Schritt 1: Ordner erstellen</h4>
+            <ol>
+              <li>Erstelle einen neuen Ordner auf deinem Desktop: <code>meine-erste-website</code></li>
+              <li>Öffne diesen Ordner in VS Code (Rechtsklick → "Mit Code öffnen")</li>
+            </ol>
+
+            <h4>Schritt 2: Erste HTML-Datei</h4>
+            <p>Erstelle eine neue Datei <code>index.html</code> und füge diesen Code ein:</p>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Meine erste Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hallo Welt!&lt;/h1&gt;
+  &lt;p&gt;Das ist meine erste Website.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <h4>Schritt 3: Im Browser öffnen</h4>
+            <ol>
+              <li>Installiere die Extension <strong>Live Server</strong> in VS Code</li>
+              <li>Klicke mit Rechtsklick auf <code>index.html</code> → "Open with Live Server"</li>
+              <li>Dein Browser öffnet sich automatisch</li>
+            </ol>
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Tipp:</strong> Ändere etwas in der Datei, speichere mit <kbd>Ctrl+S</kbd> und der Browser aktualisiert sich automatisch!
+            </div>
+
+            <h4>Schritt 4: CSS hinzufügen</h4>
+            <p>Erstelle <code>style.css</code> im gleichen Ordner:</p>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  color: #333;
+  padding: 2rem;
+}
+
+h1 {
+  color: #4F46E5;
+}</code></pre>
+            </div>
+            <p>Verknüpfe die CSS-Datei in deinem HTML (im <code>&lt;head&gt;</code>):</p>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+            </div>
+
+            <h4>Unsere Projekt-Struktur</h4>
+            <p>So ist ein typisches Projekt bei uns aufgebaut:</p>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>mein-projekt/
+├── src/
+│   ├── pages/
+│   │   └── index.html      ← Deine HTML-Seiten
+│   ├── css/
+│   │   ├── main.css        ← Import-Hub (alle CSS-Dateien)
+│   │   └── 05-components/
+│   │       └── header.css  ← Einzelne Komponenten
+│   ├── js/
+│   │   └── main.js         ← JavaScript-Logik
+│   └── translations/
+│       └── de.js           ← Sprachdateien
+├── dist/                   ← Build-Output (automatisch)
+├── package.json            ← Projektkonfiguration
+└── vite.config.js          ← Build-Tool-Konfiguration</code></pre>
+            </div>
+
+            <h4>Wichtige Begriffe für den Einstieg</h4>
+            <ul>
+              <li><strong>Browser</strong> — Das Programm, das Websites anzeigt (Chrome, Firefox, Edge, Safari)</li>
+              <li><strong>Editor</strong> — Das Programm, in dem du Code schreibst (VS Code)</li>
+              <li><strong>Server</strong> — Ein Computer, der deine Website im Internet bereitstellt</li>
+              <li><strong>localhost</strong> — Dein eigener Computer als Server (nur für dich sichtbar)</li>
+              <li><strong>Repository</strong> — Ein Projekt-Ordner mit Git-Historie</li>
+            </ul>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Goldene Regel:</strong> Wenn etwas nicht funktioniert, öffne die Browser DevTools mit <kbd>F12</kbd> und schau in die Console. Dort steht meistens genau, was falsch ist.
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="quickstart">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Welche Technologie ist für das Design (Aussehen) zuständig?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">HTML</button>
+                <button class="glossary-quiz__option" data-correct="true">CSS</button>
+                <button class="glossary-quiz__option" data-correct="false">JavaScript</button>
+                <button class="glossary-quiz__option" data-correct="false">GitHub</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+            <div class="glossary-quiz__question">
+              <p>Was passiert, wenn du im VS Code mit Live Server arbeitest und speicherst?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Nichts</button>
+                <button class="glossary-quiz__option" data-correct="true">Der Browser aktualisiert sich automatisch</button>
+                <button class="glossary-quiz__option" data-correct="false">Die Datei wird auf GitHub hochgeladen</button>
+                <button class="glossary-quiz__option" data-correct="false">VS Code schließt sich</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="github">
+          <h3 class="glossary-card__title">GitHub + VS Code</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Essential</span>
+            <span class="glossary-card__tag">Vorbereitung</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>GitHub ist die Plattform, auf der wir unseren Code speichern, versionieren und zusammenarbeiten. VS Code ist unser Editor. Zusammen bilden sie das Fundament moderner Webentwicklung.</p>
+
+            <h4>Schritt 1: GitHub Account erstellen</h4>
+            <ol>
+              <li>Öffne <a href="https://github.com" target="_blank" rel="noopener">github.com</a></li>
+              <li>Klicke auf "Sign up"</li>
+              <li>Wähle einen professionellen Nutzernamen (z.B. <code>vorname-nachname</code>)</li>
+              <li>Verifiziere deine E-Mail-Adresse</li>
+            </ol>
+
+            <h4>Schritt 2: Repository forken</h4>
+            <p>Dein Lehrer wird ein Repository mit dem Starter-Template erstellen. Du musst es "forken" (eine Kopie in deinem Account erstellen):</p>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code># 1. Auf GitHub den "Fork" Button klicken
+# 2. Warten, bis die Kopie erstellt ist
+# 3. Dein eigenes Repository ist jetzt unter:
+#    github.com/DEIN-NAME/ki-challenge-2026</code></pre>
+            </div>
+
+            <h4>Schritt 3: In VS Code öffnen</h4>
+            <ol>
+              <li>Installiere <a href="https://code.visualstudio.com" target="_blank" rel="noopener">VS Code</a></li>
+              <li>Installiere die GitHub-Erweiterung in VS Code</li>
+              <li>Öffne die Command Palette (<kbd>Ctrl+Shift+P</kbd>)</li>
+              <li>Gib ein: <code>Git: Clone</code></li>
+              <li>Füge die URL deines geforkten Repositories ein</li>
+            </ol>
+
+            <h4>Schritt 4: Änderungen hochladen</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code># Änderungen speichern (stagen)
+git add .
+
+# Änderungen committen (mit Beschreibung)
+git commit -m "Beschreibung der Änderung"
+
+# Änderungen hochladen (pushen)
+git push</code></pre>
+            </div>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Pro-Tipp:</strong> Commite oft und in kleinen Schritten. Ein Commit = eine logische Einheit (z.B. "Search-Bar implementiert").
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="github">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Welcher Befehl lädt deine Änderungen auf GitHub hoch?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">git save</button>
+                <button class="glossary-quiz__option" data-correct="false">git upload</button>
+                <button class="glossary-quiz__option" data-correct="true">git push</button>
+                <button class="glossary-quiz__option" data-correct="false">git send</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was macht "git commit -m "message""?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="true">Speichert Änderungen lokal mit einer Beschreibung</button>
+                <button class="glossary-quiz__option" data-correct="false">Lädt Änderungen auf GitHub hoch</button>
+                <button class="glossary-quiz__option" data-correct="false">Erstellt einen neuen Branch</button>
+                <button class="glossary-quiz__option" data-correct="false">Löscht die letzte Änderung</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="vscode">
+          <h3 class="glossary-card__title">VS Code — Optimal einrichten</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Editor</span>
+            <span class="glossary-card__tag">Setup</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>VS Code ist der beliebteste Code-Editor für Webentwickler. Mit den richtigen Extensions und Einstellungen wird er zu einer professionellen Entwicklungsumgebung.</p>
+
+            <h4>Essentielle Extensions</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Extension</th>
+                  <th>Zweck</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Live Server</strong></td>
+                  <td>Startet einen lokalen Server mit Live-Reload für statische HTML-Dateien</td>
+                </tr>
+                <tr>
+                  <td><strong>Prettier</strong></td>
+                  <td>Code-Formatter — sorgt für einheitliche Formatierung</td>
+                </tr>
+                <tr>
+                  <td><strong>ESLint</strong></td>
+                  <td>Findet JavaScript-Fehler und Code-Smells</td>
+                </tr>
+                <tr>
+                  <td><strong>CSS Peek</strong></td>
+                  <td>Springe direkt von HTML-Klasse zur CSS-Definition</td>
+                </tr>
+                <tr>
+                  <td><strong>GitHub Pull Requests</strong></td>
+                  <td>Erstelle und reviewe Pull Requests direkt in VS Code</td>
+                </tr>
+                <tr>
+                  <td><strong>GitLens</strong></td>
+                  <td>Erweiterte Git-Informationen inline im Code</td>
+                </tr>
+                <tr>
+                  <td><strong>Phosphor Icons</strong></td>
+                  <td>Zeigt Phosphor-Icons direkt im Editor an</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Live Server verwenden (für einfache Projekte)</h4>
+            <p>Für Projekte OHNE Vite (z.B. statische HTML-Seiten):</p>
+            <ol>
+              <li>Installiere die Extension <strong>Live Server</strong> von Ritwick Dey</li>
+              <li>Öffne eine HTML-Datei</li>
+              <li>Klicke unten rechts auf <strong>"Go Live"</strong></li>
+              <li>Der Browser öffnet sich automatisch bei <code>http://127.0.0.1:5500</code></li>
+            </ol>
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Wichtig:</strong> Für unsere Vite-Projekte nutze <code>npm run dev</code> statt Live Server! Live Server ist nur für klassische HTML/CSS/JS-Projekte ohne Build-Tool.
+            </div>
+
+            <h4>Wichtige Tastaturkürzel</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Kürzel</th>
+                  <th>Aktion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><kbd>Ctrl+Shift+P</kbd></td>
+                  <td>Command Palette (alle Befehle)</td>
+                </tr>
+                <tr>
+                  <td><kbd>Ctrl+P</kbd></td>
+                  <td>Datei schnell öffnen</td>
+                </tr>
+                <tr>
+                  <td><kbd>Ctrl+Shift+F</kbd></td>
+                  <td>Global suchen</td>
+                </tr>
+                <tr>
+                  <td><kbd>Ctrl+/</kbd></td>
+                  <td>Zeile kommentieren</td>
+                </tr>
+                <tr>
+                  <td><kbd>Alt+Shift+F</kbd></td>
+                  <td>Dokument formatieren (Prettier)</td>
+                </tr>
+                <tr>
+                  <td><kbd>Ctrl+`</kbd></td>
+                  <td>Terminal öffnen/schließen</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Terminal in VS Code</h4>
+            <p>Das integrierte Terminal ist dein bester Freund:</p>
+            <ol>
+              <li>Öffne mit <kbd>Ctrl+`</kbd> (Backtick-Taste, links neben der 1)</li>
+              <li>Es öffnet sich direkt im Projekt-Ordner</li>
+              <li>Führe hier alle <code>npm</code> und <code>git</code> Befehle aus</li>
+            </ol>
+
+            <h4>Einstellungen für Webdesign</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// .vscode/settings.json (im Projekt-Ordner)
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="vscode">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Welche Extension startet einen lokalen Server mit Live-Reload?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="true">Live Server</button>
+                <button class="glossary-quiz__option" data-correct="false">GitLens</button>
+                <button class="glossary-quiz__option" data-correct="false">ESLint</button>
+                <button class="glossary-quiz__option" data-correct="false">CSS Peek</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Welches Tastenkürzel öffnet das integrierte Terminal?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Ctrl + Shift + T</button>
+                <button class="glossary-quiz__option" data-correct="true">Ctrl + ` (Backtick)</button>
+                <button class="glossary-quiz__option" data-correct="false">Ctrl + Alt + T</button>
+                <button class="glossary-quiz__option" data-correct="false">F12</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="devtools">
+          <h3 class="glossary-card__title">Browser DevTools</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Debugging</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>Die Browser DevTools (Entwicklertools) sind das mächtigste Werkzeug für Webentwickler. Sie zeigen dir, was dein Code wirklich tut — nicht was du denkst, dass er tut.</p>
+
+            <h4>Öffnen</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Browser</th>
+                  <th>Tastenkürzel</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Chrome, Edge, Firefox</td>
+                  <td><kbd>F12</kbd> oder <kbd>Ctrl+Shift+I</kbd></td>
+                </tr>
+                <tr>
+                  <td>Chrome (Mac)</td>
+                  <td><kbd>Cmd+Option+I</kbd></td>
+                </tr>
+                <tr>
+                  <td>Safari</td>
+                  <td><kbd>Cmd+Option+C</kbd> (Entwicklermenu aktivieren!)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Die wichtigsten Tabs</h4>
+
+            <h5>1. Elements — DOM und Styles inspizieren</h5>
+            <ul>
+              <li>Rechtsklick auf ein Element → "Untersuchen"</li>
+              <li>Live-CSS bearbeiten (Änderungen sofort sichtbar!)</li>
+              <li>Computed Styles zeigen finale CSS-Werte</li>
+              <li>Box Model Visualisierung (Margin, Border, Padding, Content)</li>
+            </ul>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// Im Elements-Tab: Klicke auf ein Element
+// Rechts siehst du alle CSS-Regeln
+// Ändere Werte live: color: red; → color: blue;
+// Die Änderungen sind SOFORT sichtbar, aber nicht gespeichert!</code></pre>
+            </div>
+
+            <h5>2. Console — JavaScript ausführen und Fehler sehen</h5>
+            <ul>
+              <li>Rote Fehlermeldungen = dein Code hat Probleme</li>
+              <li>Gelbe Warnungen = Hinweise, keine kritischen Fehler</li>
+              <li>Du kannst JavaScript direkt eingeben und ausführen</li>
+              <li><code>console.log()</code> Ausgaben erscheinen hier</li>
+            </ul>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// In der Console eingeben:
+document.querySelector('.challenge-card')
+// → Zeigt das erste Element mit dieser Klasse
+
+console.log('Hello World')
+// → Gibt "Hello World" aus
+
+// Objekte inspizieren:
+console.table([{name: 'Max', age: 17}, {name: 'Lisa', age: 16}])</code></pre>
+            </div>
+
+            <h5>3. Network — Netzwerk-Anfragen analysieren</h5>
+            <ul>
+              <li>Zeigt alle geladenen Dateien (HTML, CSS, JS, Bilder)</li>
+              <li>Filtere nach Dateityp (JS, CSS, Img)</li>
+              <li>Prüfe Ladezeiten (rote = langsam)</li>
+              <li>Prüfe 404-Fehler (Dateien nicht gefunden)</li>
+            </ul>
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Tipp:</strong> Wenn Bilder nicht laden, öffne den Network-Tab und filtere nach "Img". Rote Einträge = Datei nicht gefunden.
+            </div>
+
+            <h5>4. Sources — JavaScript debuggen</h5>
+            <ul>
+              <li>Setze Breakpoints (Klick auf Zeilennummer)</li>
+              <li>Schritt für Schritt durch Code gehen</li>
+              <li>Variablen-Werte live beobachten</li>
+              <li>Call Stack verfolgen</li>
+            </ul>
+
+            <h5>5. Application — localStorage, Cookies, Cache</h5>
+            <ul>
+              <li><strong>Local Storage:</strong> Siehe alle gespeicherten Daten</li>
+              <li><strong>Session Storage:</strong> Temporäre Daten (bis Tab geschlossen)</li>
+              <li><strong>Cookies:</strong> Gespeicherte Cookie-Daten</li>
+              <li><strong>Cache:</strong> Zwischengespeicherte Dateien löschen</li>
+            </ul>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// Application → Local Storage → http://localhost:5173
+// Hier siehst du:
+// - challenge-dark-mode: true/false
+// - plu-language: "de" oder "en"
+// - challenge-classroom-mode: true/false
+// Du kannst Werte direkt bearbeiten oder löschen!</code></pre>
+            </div>
+
+            <h4>Mobile Device Simulation</h4>
+            <ol>
+              <li>DevTools öffnen (<kbd>F12</kbd>)</li>
+              <li>Klicke auf das Geräte-Symbol oben links (oder <kbd>Ctrl+Shift+M</kbd>)</li>
+              <li>Wähle ein Gerät (z.B. iPhone 14, iPad, Galaxy S21)</li>
+              <li>Teste dein responsives Design</li>
+              <li>Drehe das Gerät (Landscape/Portrait)</li>
+            </ol>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Golden Rule:</strong> Wenn etwas nicht funktioniert, öffne die Console (<kbd>F12</kbd> → Tab "Console"). In 90% der Fälle zeigt dir die Fehlermeldung genau, was falsch ist.
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="devtools">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>In welchem Tab siehst du JavaScript-Fehler?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Elements</button>
+                <button class="glossary-quiz__option" data-correct="true">Console</button>
+                <button class="glossary-quiz__option" data-correct="false">Network</button>
+                <button class="glossary-quiz__option" data-correct="false">Sources</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>In welchem Tab kannst du localStorage-Daten sehen?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Console</button>
+                <button class="glossary-quiz__option" data-correct="false">Network</button>
+                <button class="glossary-quiz__option" data-correct="true">Application</button>
+                <button class="glossary-quiz__option" data-correct="false">Sources</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="ai-tools">
+          <h3 class="glossary-card__title">KI-Tools für Studenten — Kostenlos & Lerntauglich</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Tools</span>
+            <span class="glossary-card__tag">Studenten</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>Du brauchst keine teuren Abos, um professionelle Ergebnisse zu erzielen. Diese Tools sind entweder komplett kostenlos oder bieten großzügige Studenten-Tarife. Alle funktionieren direkt im Browser oder als kostenlose VS Code-Extension.</p>
+
+            <h4>🎨 Bildgenerierung — Kostenlos</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Zweck</th>
+                  <th>Kosten</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><a href="https://copilot.microsoft.com/images" target="_blank" rel="noopener">Bing Image Creator</a></strong></td>
+                  <td>Bilder aus Textbeschreibungen mit DALL-E 3. Sehr gute Qualität, auch für Text in Bildern.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (mit Microsoft-Konto)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://leonardo.ai" target="_blank" rel="noopener">Leonardo AI</a></strong></td>
+                  <td>Photorealistische Bilder, Illustrationen, 3D-Styles. Unser empfohlenes Tool für Hero-Bilder.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (150 Tokens/Tag)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://ideogram.ai" target="_blank" rel="noopener">Ideogram</a></strong></td>
+                  <td>Besonders gut für Bilder MIT Text (Logos, Poster, Memes). Kostenlose Version verfügbar.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (tägliches Limit)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://playgroundai.com" target="_blank" rel="noopener">Playground AI</a></strong></td>
+                  <td>Mix aus realen und gemalten Stilen. Sehr intuitiv für Anfänger.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (500 Bilder/Tag)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://tensor.art" target="_blank" rel="noopener">Tensor.Art</a></strong></td>
+                  <td>100+ vorinstallierte Modelle. Kein Setup nötig, alles im Browser.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (tägliche Credits)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank" rel="noopener">Stable Diffusion (lokal)</a></strong></td>
+                  <td>Installiere auf deinem PC. Komplett kostenlos und offline nutzbar. Benötigt eine gute Grafikkarte.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (Open Source)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Tipp:</strong> Starte immer mit <strong>Bing Image Creator</strong> oder <strong>Leonardo AI</strong>. Beide sind für Studenten völlig ausreichend und liefern professionelle Ergebnisse.
+            </div>
+
+            <h4>💻 Code-Assistenten — Kostenlos oder Studenten-Tarif</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Zweck</th>
+                  <th>Kosten</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><a href="https://github.com/education" target="_blank" rel="noopener">GitHub Copilot</a></strong></td>
+                  <td>KI-gestützte Code-Vervollständigung in VS Code. Der bekannteste KI-Copilot.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> für Studenten!</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://codeium.com" target="_blank" rel="noopener">Codeium</a></strong></td>
+                  <td>Kostenlose Alternative zu GitHub Copilot. Funktioniert in VS Code, Browser, JetBrains.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (unbegrenzt)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://www.continue.dev" target="_blank" rel="noopener">Continue.dev</a></strong></td>
+                  <td>Open-Source KI-Assistent für VS Code. Nutzt kostenlose KI-Modelle im Hintergrund.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (Open Source)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a></strong></td>
+                  <td>Allzweck-KI für Erklärungen, Code-Reviews, Debugging-Hilfe, Texte schreiben.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (GPT-4o verfügbar)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></strong></td>
+                  <td>Besonders gut für lange Code-Analysen und komplexe Erklärungen. Sehr präzise.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (tägliches Limit)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>🖼️ Bildoptimierung & Assets — Kostenlos</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Zweck</th>
+                  <th>Kosten</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><a href="https://squoosh.app" target="_blank" rel="noopener">Squoosh</a></strong></td>
+                  <td>Google-Tool zur Bildkompression. Konvertiere PNG → WebP, verkleinere Dateien massiv. Unverzichtbar für Websites!</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://tinypng.com" target="_blank" rel="noopener">TinyPNG</a></strong></td>
+                  <td>Komprimiert PNG und JPEG. Einfach Bilder reinziehen, fertig.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (bis 20 Bilder)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://www.remove.bg" target="_blank" rel="noopener">Remove.bg</a></strong></td>
+                  <td>Entfernt automatisch den Hintergrund von Fotos. Perfekt für Product-Shots.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (1 Bild)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://www.svgrepo.com" target="_blank" rel="noopener">SVG Repo</a></strong></td>
+                  <td>Tausende kostenlose SVG-Icons. Filtere nach Lizenz (CC0 = komplett frei).</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></strong></td>
+                  <td>Kostenlose hochwertige Fotos für deine Website. Keine Attribution nötig.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Pro-Tipp:</strong> Nutze <strong>Squoosh</strong>, um deine generierten Bilder in WebP zu konvertieren. Deine Website lädt dann 50–80% schneller!
+            </div>
+
+            <h4>🎨 Design & Farben — Kostenlos</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Zweck</th>
+                  <th>Kosten</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><a href="https://www.figma.com" target="_blank" rel="noopener">Figma</a></strong></td>
+                  <td>Professionelles UI/UX-Design direkt im Browser. Kostenlos für Studenten.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (Education Plan)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://coolors.co" target="_blank" rel="noopener">Coolors</a></strong></td>
+                  <td>Generiere Farbpaletten mit einem Tastendruck. Exportiere als CSS-Variablen.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://fontjoy.com" target="_blank" rel="noopener">Fontjoy</a></strong></td>
+                  <td>KI-generierte Schriftpaarungen. Finde harmonische Kombinationen für deine Website.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://www.canva.com" target="_blank" rel="noopener">Canva</a></strong></td>
+                  <td>Einfaches Design von Social-Media-Posts, Präsentationen, Mockups.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (Grundfunktionen)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://uicolors.app" target="_blank" rel="noopener">UI Colors</a></strong></td>
+                  <td>Generiere komplette Farbsysteme mit Primary, Secondary, Accent und Grayscale.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>📝 Text & Recherche — Kostenlos</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Zweck</th>
+                  <th>Kosten</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><a href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity</a></strong></td>
+                  <td>KI-Suchmaschine mit Quellenangaben. Perfekt für Recherchen mit verifizierbaren Fakten.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a></strong></td>
+                  <td>Texte formulieren, Code erklären lassen, Konzepte vereinfachen, Brainstorming.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://deepl.com" target="_blank" rel="noopener">DeepL</a></strong></td>
+                  <td>Bessere Übersetzungen als Google Translate. Perfekt für i18n-Texte.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (Grundfunktionen)</td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://www.grammarly.com" target="_blank" rel="noopener">Grammarly</a></strong></td>
+                  <td>Rechtschreib- und Grammatikprüfung für deine Texte (auch auf Deutsch).</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span> (Grundfunktionen)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>🔧 Sonstige nützliche Tools</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Zweck</th>
+                  <th>Kosten</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong><a href="https://regex101.com" target="_blank" rel="noopener">Regex101</a></strong></td>
+                  <td>Teste und debugge Regular Expressions mit Echtzeit-Erklärungen.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://caniuse.com" target="_blank" rel="noopener">Can I Use</a></strong></td>
+                  <td>Prüfe, welche Browser eine CSS- oder JS-Funktion unterstützen.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://uiverse.io" target="_blank" rel="noopener">Uiverse</a></strong></td>
+                  <td>Tausende fertige UI-Elemente (Buttons, Cards, Loaders) mit Copy-Paste-Code.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+                <tr>
+                  <td><strong><a href="https://meshgradient.com" target="_blank" rel="noopener">Mesh Gradient</a></strong></td>
+                  <td>Generiere schöne Mesh-Gradienten als CSS oder Bild. Perfekt für Hero-Hintergründe.</td>
+                  <td><span style="color: var(--challenge-success); font-weight: 600;">Kostenlos</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>🎯 Empfohlene Tool-Kombination für die Challenge</h4>
+            <p>Wenn du nur 5 Tools nutzen willst, nimm diese:</p>
+            <ol>
+              <li><strong>Leonardo AI</strong> oder <strong>Bing Image Creator</strong> — Für alle Bilder</li>
+              <li><strong>Squoosh</strong> — Für Bildoptimierung (WebP-Konvertierung)</li>
+              <li><strong>ChatGPT</strong> oder <strong>Claude</strong> — Für Code-Erklärungen und Debugging</li>
+              <li><strong>Coolors</strong> — Für die Farbpalette</li>
+              <li><strong>GitHub Copilot</strong> (kostenlos als Student) oder <strong>Codeium</strong> — Für Code-Vervollständigung</li>
+            </ol>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Wichtig:</strong> Melde dich mit deiner <strong>Schul-E-Mail</strong> bei <strong>GitHub Education</strong> an. Dann bekommst du GitHub Copilot und viele weitere Pro-Tools <strong>komplett kostenlos</strong>!
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="ai-tools">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Welches Tool konvertiert Bilder in WebP und komprimiert sie?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Canva</button>
+                <button class="glossary-quiz__option" data-correct="true">Squoosh</button>
+                <button class="glossary-quiz__option" data-correct="false">Figma</button>
+                <button class="glossary-quiz__option" data-correct="false">TinyPNG</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+            <div class="glossary-quiz__question">
+              <p>Wie bekommst du GitHub Copilot als Student kostenlos?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Über einen Freund teilen</button>
+                <button class="glossary-quiz__option" data-correct="true">Mit Schul-E-Mail bei GitHub Education anmelden</button>
+                <button class="glossary-quiz__option" data-correct="false">Einfach herunterladen</button>
+                <button class="glossary-quiz__option" data-correct="false">Gibt es nicht kostenlos</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="vite">
+          <h3 class="glossary-card__title">Vite</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Build-Tool</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>Vite (französisch für "schnell") ist ein modernes Build-Tool für Webprojekte. Es ersetzt das manuelle Einbinden von CSS und JS durch ein intelligentes Modul-System.</p>
+
+            <h4>Warum Vite?</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Ohne Vite (klassisch)</th>
+                  <th>Mit Vite (modern)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>&lt;link rel="stylesheet" href="../../css/style.css"&gt;</code></td>
+                  <td><code>@import url('05-components/card.css')</code></td>
+                </tr>
+                <tr>
+                  <td><code>&lt;script src="../../js/main.js"&gt;&lt;/script&gt;</code></td>
+                  <td><code>import { initTheme } from './modules/theme.js';</code></td>
+                </tr>
+                <tr>
+                  <td>Manuelles Caching-Probleme</td>
+                  <td>Automatisches Cache-Busting</td>
+                </tr>
+                <tr>
+                  <td>Kein Live-Reload</td>
+                  <td>Instant Hot Module Replacement</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Wichtige Befehle</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code># Development Server starten (mit Live-Reload)
+npm run dev
+
+# Produktions-Build erstellen
+npm run build
+
+# Build lokal testen
+npm run preview</code></pre>
+            </div>
+
+            <h4>Projekt-Struktur in Vite</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>project/
+├── src/                    # Quellcode
+│   ├── pages/
+│   │   └── index.html      # Entry Point
+│   ├── css/
+│   │   └── main.css        # CSS Hub
+│   ├── js/
+│   │   ├── main.js         # JS Entry
+│   │   └── modules/        # Einzelne Module
+│   └── assets/             # Bilder, Fonts
+├── dist/                   # Build-Output (wird generiert)
+├── package.json            # Abhängigkeiten
+└── vite.config.js          # Konfiguration</code></pre>
+            </div>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Wichtig:</strong> Ändere nie etwas im <code>dist/</code>-Ordner! Das ist der automatisch generierte Output. Arbeite immer im <code>src/</code>-Ordner.
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="vite">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>In welchem Ordner arbeitest du als Entwickler?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="true">src/</button>
+                <button class="glossary-quiz__option" data-correct="false">dist/</button>
+                <button class="glossary-quiz__option" data-correct="false">node_modules/</button>
+                <button class="glossary-quiz__option" data-correct="false">build/</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Welcher Befehl startet den Vite-Entwicklungsserver?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">npm start</button>
+                <button class="glossary-quiz__option" data-correct="true">npm run dev</button>
+                <button class="glossary-quiz__option" data-correct="false">vite build</button>
+                <button class="glossary-quiz__option" data-correct="false">npm install vite</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Section: Design-Systeme -->
+      <section id="design" class="glossary-section" data-category="design">
+        <h2 class="glossary-section__title">
+          <i class="ph ph-paint-brush" aria-hidden="true"></i>
+          Design-Systeme
+        </h2>
+
+        <article class="glossary-card" id="itcss">
+          <h3 class="glossary-card__title">ITCSS — Inverted Triangle CSS</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Architektur</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>ITCSS ist eine Architektur-Methode für CSS, die den Code in logische Schichten organisiert. Die Idee: Spezifität steigt von oben nach unten — wie ein umgedrehtes Dreieck.</p>
+
+            <h4>Die 7 Schichten</h4>
+            <div class="glossary-triangle">
+              <div class="glossary-triangle__layer glossary-triangle__layer--1">
+                <strong>Settings</strong> — Variablen, Design Tokens
+              </div>
+              <div class="glossary-triangle__layer glossary-triangle__layer--2">
+                <strong>Tools</strong> — Mixins, Funktionen (optional)
+              </div>
+              <div class="glossary-triangle__layer glossary-triangle__layer--3">
+                <strong>Generic</strong> — Reset, Normalize
+              </div>
+              <div class="glossary-triangle__layer glossary-triangle__layer--4">
+                <strong>Elements</strong> — Bare HTML (h1, p, a)
+              </div>
+              <div class="glossary-triangle__layer glossary-triangle__layer--5">
+                <strong>Objects</strong> — Layout-Patterns (Grid, Flex)
+              </div>
+              <div class="glossary-triangle__layer glossary-triangle__layer--6">
+                <strong>Components</strong> — UI-Komponenten (Buttons, Cards)
+              </div>
+              <div class="glossary-triangle__layer glossary-triangle__layer--7">
+                <strong>Utilities</strong> — Helper-Klassen (.u-hidden)
+              </div>
+            </div>
+
+            <h4>In unserem Projekt</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>/* main.css — Der ITCSS Hub */
+
+@import url('00-settings/tokens.css') layer(settings);
+@import url('02-generic/reset.css') layer(generic);
+@import url('03-elements/base.css') layer(elements);
+@import url('05-components/header.css') layer(components);
+@import url('05-components/hero.css') layer(components);
+@import url('07-utilities/utilities.css') layer(utilities);
+@import url('08-modes/classroom-mode.css') layer(modes);</code></pre>
+            </div>
+
+            <h4>Warum @layer?</h4>
+            <p>CSS Cascade Layers garantieren, dass <code>layer(utilities)</code> immer <code>layer(components)</code> überschreibt — unabhängig von der Selektor-Spezifität. Das eliminiert Spezifitäts-Kämpfe.</p>
+
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>/* Ohne @layer — Spezifitätskampf */
+#header .nav { color: red; }    /* Gewinnt (100 Punkte) */
+.nav { color: blue; }           /* Verliert (10 Punkte) */
+
+/* Mit @layer — Layer gewinnt */
+@layer components { .nav { color: blue; } }
+@layer utilities  { .nav { color: red; } }  /* Gewinnt! */</code></pre>
+            </div>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Merksatz:</strong> Je weiter unten im Dreieck, desto spezifischer. Je weiter oben, desto globaler.
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="itcss">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>In welchem Layer liegen die Design Tokens (CSS-Variablen)?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="true">Settings</button>
+                <button class="glossary-quiz__option" data-correct="false">Components</button>
+                <button class="glossary-quiz__option" data-correct="false">Utilities</button>
+                <button class="glossary-quiz__option" data-correct="false">Generic</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Welcher Layer enthält Utility-Klassen wie .u-hidden?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Components</button>
+                <button class="glossary-quiz__option" data-correct="false">Objects</button>
+                <button class="glossary-quiz__option" data-correct="true">Utilities</button>
+                <button class="glossary-quiz__option" data-correct="false">Elements</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="bem">
+          <h3 class="glossary-card__title">BEM — Block Element Modifier</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Naming</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>BEM ist eine Namenskonvention für CSS-Klassen. Sie macht Code lesbar, wartbar und skalierbar — besonders wichtig, wenn 5–7 Personen gleichzeitig an einem Projekt arbeiten.</p>
+
+            <h4>Die drei Bausteine</h4>
+            <div class="glossary-bem">
+              <div class="glossary-bem__block">
+                <div class="glossary-bem__label">Block</div>
+                <code>.challenge-card</code>
+                <span>Die Komponente selbst</span>
+              </div>
+              <div class="glossary-bem__element">
+                <div class="glossary-bem__label">Element</div>
+                <code>.challenge-card__title</code>
+                <span>Ein Teil der Komponente</span>
+              </div>
+              <div class="glossary-bem__modifier">
+                <div class="glossary-bem__label">Modifier</div>
+                <code>.challenge-card--featured</code>
+                <span>Eine Variante der Komponente</span>
+              </div>
+            </div>
+
+            <h4>Beispiele</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>/* BLOCK */
+.challenge-btn { ... }
+
+/* ELEMENT */
+.challenge-btn__icon { ... }
+.challenge-btn__text { ... }
+
+/* MODIFIER */
+.challenge-btn--primary { ... }   /* Haupt-Action */
+.challenge-btn--secondary { ... } /* Sekundäre Action */
+.challenge-btn--large { ... }     /* Große Variante */
+
+/* HTML */
+&lt;button class="challenge-btn challenge-btn--primary challenge-btn--large"&gt;
+  &lt;i class="challenge-btn__icon"&gt;...&lt;/i&gt;
+  &lt;span class="challenge-btn__text"&gt;Klick mich&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+            </div>
+
+            <h4>Regeln</h4>
+            <ul>
+              <li>✅ <strong>Keine Element-Element-Ketten:</strong> ❌ <code>.card__header__title</code> → ✅ <code>.card__title</code></li>
+              <li>✅ <strong>Modifier kombinieren:</strong> <code>.btn--primary.btn--large</code></li>
+              <li>✅ <strong>Namespace verwenden:</strong> <code>.challenge-</code> vermeidet Kollisionen</li>
+              <li>✅ <strong>Keine IDs für Styling:</strong> Nur Klassen!</li>
+            </ul>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Für KI-Prompts:</strong> Wenn du KI nach Code fragst, füge immer hinzu: "Nutze BEM mit .challenge- Prefix. Keine IDs für Styling."
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="bem">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Wie heißt die Klasse für einen Titel INNERHALB einer Karte (Block: card)?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">.card-title</button>
+                <button class="glossary-quiz__option" data-correct="true">.card__title</button>
+                <button class="glossary-quiz__option" data-correct="false">.card--title</button>
+                <button class="glossary-quiz__option" data-correct="false">#card-title</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was bedeutet der Modifier in .button--primary?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">button</button>
+                <button class="glossary-quiz__option" data-correct="true">primary</button>
+                <button class="glossary-quiz__option" data-correct="false">.button--primary</button>
+                <button class="glossary-quiz__option" data-correct="false">--primary</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="mobile-first">
+          <h3 class="glossary-card__title">Mobile-First</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Responsive</span>
+            <span class="glossary-card__tag">Workflow</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>Mobile-First bedeutet: Du designst zuerst für das kleinste Gerät (Smartphone) und erweiterst dann für größere Bildschirme. Das spart Code und zwingt zur Priorisierung.</p>
+
+            <h4>Warum Mobile-First?</h4>
+            <ul>
+              <li>Über 60% des Web-Traffics kommt von mobilen Geräten</li>
+              <li>Es ist einfacher, Layouts zu erweitern als zu reduzieren</li>
+              <li>Es zwingt dich, Inhalte zu priorisieren (was ist wirklich wichtig?)</li>
+            </ul>
+
+            <h4>Richtig vs. Falsch</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>/* ✅ RICHTIG — Mobile-First */
+.challenge-grid {
+  grid-template-columns: 1fr;        /* Mobile: 1 Spalte */
+}
+
+@media (min-width: 768px) {
+  .challenge-grid {
+    grid-template-columns: 1fr 1fr;  /* Tablet: 2 Spalten */
+  }
+}
+
+@media (min-width: 1024px) {
+  .challenge-grid {
+    grid-template-columns: 1fr 1fr 1fr; /* Desktop: 3 Spalten */
+  }
+}
+
+/* ❌ FALSCH — Desktop-First */
+.challenge-grid {
+  grid-template-columns: 1fr 1fr 1fr; /* Desktop zuerst */
+}
+
+@media (max-width: 1024px) {
+  .challenge-grid {
+    grid-template-columns: 1fr 1fr;   /* Dann reduzieren */
+  }
+}
+
+@media (max-width: 768px) {
+  .challenge-grid {
+    grid-template-columns: 1fr;       /* Dann reduzieren */
+  }
+}</code></pre>
+            </div>
+
+            <h4>Unsere Breakpoints</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Breakpoint</th>
+                  <th>Gerät</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mobile (Default)</td>
+                  <td>—</td>
+                  <td>Smartphone</td>
+                </tr>
+                <tr>
+                  <td>sm</td>
+                  <td>640px</td>
+                  <td>Große Smartphones</td>
+                </tr>
+                <tr>
+                  <td>md</td>
+                  <td>768px</td>
+                  <td>Tablet</td>
+                </tr>
+                <tr>
+                  <td>lg</td>
+                  <td>1024px</td>
+                  <td>Desktop</td>
+                </tr>
+                <tr>
+                  <td>xl</td>
+                  <td>1280px</td>
+                  <td>Große Desktop</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="mobile-first">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Warum ist Mobile-First besser als Desktop-First?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="true">Weil es einfacher ist, Layouts zu erweitern als zu reduzieren</button>
+                <button class="glossary-quiz__option" data-correct="false">Weil Desktop-Computer langsamer sind</button>
+                <button class="glossary-quiz__option" data-correct="false">Weil Smartphones mehr Pixel haben</button>
+                <button class="glossary-quiz__option" data-correct="false">Weil es weniger Code braucht (immer)</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was ist der Hauptvorteil von Mobile-First?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Man muss weniger Code schreiben</button>
+                <button class="glossary-quiz__option" data-correct="true">Man fokussiert auf den wichtigsten Content</button>
+                <button class="glossary-quiz__option" data-correct="false">Es funktioniert nur auf Handys</button>
+                <button class="glossary-quiz__option" data-correct="false">Desktop-Nutzer sehen mehr Werbung</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Section: JavaScript -->
+      <section id="javascript" class="glossary-section" data-category="javascript">
+        <h2 class="glossary-section__title">
+          <i class="ph ph-code" aria-hidden="true"></i>
+          JavaScript
+        </h2>
+
+        <article class="glossary-card" id="es6-modules">
+          <h3 class="glossary-card__title">ES6 Modules</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">JavaScript</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>ES6 Modules (ECMAScript 2015) ermöglichen es, JavaScript-Code in separate Dateien aufzuteilen und sie über <code>import</code> und <code>export</code> zu verbinden. Das ist die Grundlage unserer Architektur.</p>
+
+            <h4>Export</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// theme.js — Ein Modul exportiert Funktionen
+export function initTheme() {
+  // ... Logik
+}
+
+export function toggleTheme() {
+  // ... Logik
+}
+
+// Oder alles am Ende exportieren
+export { initTheme, toggleTheme };</code></pre>
+            </div>
+
+            <h4>Import</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// main.js — Ein Modul importiert Funktionen
+import { initTheme, toggleTheme } from './modules/theme.js';
+
+// Aufrufen
+initTheme();
+
+// Mit Alias
+import { initTheme as startTheme } from './modules/theme.js';
+startTheme();</code></pre>
+            </div>
+
+            <h4>Regeln in unserem Projekt</h4>
+            <ul>
+              <li>✅ <strong>0 Inline-Scripts:</strong> Kein <code>&lt;button onclick="..."&gt;</code></li>
+              <li>✅ <strong>Keine globalen Variablen:</strong> Alles wird exportiert/importiert</li>
+              <li>✅ <strong>Ein Modul = eine Verantwortung:</strong> <code>theme.js</code> kümmert sich nur um Theme</li>
+              <li>✅ <strong>Event Delegation:</strong> Ein Event Listener für dynamische Elemente</li>
+            </ul>
+
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// ❌ FALSCH — Inline Script
+&lt;button onclick="doSomething()"&gt;Click&lt;/button&gt;
+
+// ✅ RICHTIG — Modul-basiert
+// HTML
+&lt;button id="my-btn"&gt;Click&lt;/button&gt;
+
+// JS (in main.js)
+import { handleClick } from './modules/actions.js';
+document.getElementById('my-btn').addEventListener('click', handleClick);</code></pre>
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="es6">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Wie importierst du eine Funktion aus einem anderen Modul?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">include initTheme from './theme.js';</button>
+                <button class="glossary-quiz__option" data-correct="true">import { initTheme } from './theme.js';</button>
+                <button class="glossary-quiz__option" data-correct="false">require('./theme.js').initTheme;</button>
+                <button class="glossary-quiz__option" data-correct="false">load './theme.js' as initTheme;</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was macht "import { fn } from "./module.js""?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Lädt die gesamte Datei</button>
+                <button class="glossary-quiz__option" data-correct="true">Importiert nur die Funktion "fn"</button>
+                <button class="glossary-quiz__option" data-correct="false">Exportiert "fn" aus der Datei</button>
+                <button class="glossary-quiz__option" data-correct="false">Erstellt eine Kopie der Datei</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="glossary-card" id="localstorage">
+          <h3 class="glossary-card__title">localStorage</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">JavaScript</span>
+            <span class="glossary-card__tag">Persistenz</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>localStorage speichert Daten im Browser — auch nach dem Schließen des Tabs. Wir nutzen es für Theme, Sprache und Fortschritt.</p>
+
+            <h4>API</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// Speichern
+localStorage.setItem('challenge-dark-mode', 'true');
+
+// Lesen
+const isDark = localStorage.getItem('challenge-dark-mode'); // 'true' oder null
+
+// Löschen
+localStorage.removeItem('challenge-dark-mode');
+
+// Alles löschen
+localStorage.clear();</code></pre>
+            </div>
+
+            <h4>Wichtig: Nur Strings!</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>// ❌ FALSCH — Objekte werden zu String "[object Object]"
+localStorage.setItem('user', { name: 'Max' });
+
+// ✅ RICHTIG — JSON verwenden
+localStorage.setItem('user', JSON.stringify({ name: 'Max' }));
+
+// Lesen und parsen
+const user = JSON.parse(localStorage.getItem('user'));
+console.log(user.name); // 'Max'</code></pre>
+            </div>
+
+            <h4>Erlaubte Keys in unserem Projekt</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Zweck</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>challenge-dark-mode</code></td>
+                  <td>Dark/Light Theme</td>
+                </tr>
+                <tr>
+                  <td><code>challenge-classroom-mode</code></td>
+                  <td>Classroom Mode</td>
+                </tr>
+                <tr>
+                  <td><code>plu-language</code></td>
+                  <td>Sprache (de/en)</td>
+                </tr>
+                <tr>
+                  <td><code>synthese-bookmarks</code></td>
+                  <td>SYNTHESE Lesezeichen</td>
+                </tr>
+                <tr>
+                  <td><code>prisma-moodboard</code></td>
+                  <td>PRISMA Moodboard</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="localstorage">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Wie speicherst du ein JavaScript-Objekt korrekt im localStorage?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">localStorage.setItem('key', obj);</button>
+                <button class="glossary-quiz__option" data-correct="true">localStorage.setItem('key', JSON.stringify(obj));</button>
+                <button class="glossary-quiz__option" data-correct="false">localStorage.saveObject('key', obj);</button>
+                <button class="glossary-quiz__option" data-correct="false">localStorage.set('key', obj);</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was ist der Unterschied zwischen localStorage und sessionStorage?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">localStorage ist schneller</button>
+                <button class="glossary-quiz__option" data-correct="true">sessionStorage wird beim Schließen des Tabs gelöscht</button>
+                <button class="glossary-quiz__option" data-correct="false">Es gibt keinen Unterschied</button>
+                <button class="glossary-quiz__option" data-correct="false">sessionStorage ist für Bilder</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Section: i18n -->
+      <section id="i18n" class="glossary-section" data-category="i18n">
+        <h2 class="glossary-section__title">
+          <i class="ph ph-translate" aria-hidden="true"></i>
+          Internationalisierung (i18n)
+        </h2>
+
+        <article class="glossary-card" id="i18n-engine">
+          <h3 class="glossary-card__title">i18n-Engine</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">JavaScript</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>i18n steht für "Internationalization" (18 Buchstaben zwischen I und N). Unsere Engine übersetzt die Website dynamisch zwischen Deutsch und Englisch — ohne die Seite neu zu laden.</p>
+
+            <h4>Wie es funktioniert</h4>
+            <ol>
+              <li><strong>Translation Files:</strong> Jede Sprache hat eine JS-Datei mit Key-Value-Paaren</li>
+              <li><strong>HTML-Attribute:</strong> Elemente bekommen <code>data-i18n="key"</code></li>
+              <li><strong>Engine:</strong> Liest das Attribut, sucht den Text, aktualisiert das Element</li>
+              <li><strong>Speicherung:</strong> Die gewählte Sprache wird in localStorage gespeichert</li>
+            </ol>
+
+            <h4>HTML</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>&lt;!-- Einfacher Text --&gt;
+&lt;span data-i18n="hero.title"&gt;Fallback Text&lt;/span&gt;
+
+&lt;!-- HTML-Inhalt --&gt;
+&lt;div data-i18n-html="hero.description"&gt;
+  Fallback mit &lt;strong&gt;HTML&lt;/strong&gt;
+&lt;/div&gt;
+
+&lt;!-- Input Placeholder --&gt;
+&lt;input data-i18n="search.placeholder" placeholder="Suchen..."&gt;
+
+&lt;!-- ARIA Label --&gt;
+&lt;button data-i18n="btn.close" aria-label="Schließen"&gt;×&lt;/button&gt;</code></pre>
+            </div>
+
+            <h4>Translation File (de.js)</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>export default {
+  'hero.title': 'Willkommen bei SYNTHESE',
+  'hero.subtitle': 'Das Medien-Kompendium',
+  'search.placeholder': 'Thema suchen...',
+  'btn.close': 'Schließen',
+  
+  // Mit Variablen
+  'welcome.user': 'Willkommen, {{name}}!'
+};</code></pre>
+            </div>
+
+            <h4>JavaScript</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>import { t, onLangChange } from './modules/i18n.js';
+
+// Übersetzung holen
+const title = t('hero.title'); // 'Willkommen bei SYNTHESE'
+
+// Mit Variablen
+const message = t('welcome.user', { name: 'Max' });
+// 'Willkommen, Max!'
+
+// Auf Sprachwechsel reagieren
+onLangChange((lang) => {
+  console.log('Sprache gewechselt zu:', lang);
+  renderContent(); // Inhalte neu rendern
+});</code></pre>
+            </div>
+
+            <h4>Key-Struktur</h4>
+            <p>Verwende immer die Struktur: <code>feature.subfeature.element</code></p>
+            <ul>
+              <li><code>hero.title</code> — Hero-Bereich, Titel</li>
+              <li><code>card.readMore</code> — Karten-Komponente, "Mehr lesen"-Button</li>
+              <li><code>filter.category</code> — Filter-Funktion, Kategorie-Label</li>
+            </ul>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Wichtig:</strong> Jeder sichtbare Text auf der Seite MUSS einen <code>data-i18n</code> Key haben. Das ist eine harte Regel!
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="i18n">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Wie markierst du einen Text für die Übersetzung?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">&lt;span translate="yes"&gt;Text&lt;/span&gt;</button>
+                <button class="glossary-quiz__option" data-correct="true">&lt;span data-i18n="hero.title"&gt;Text&lt;/span&gt;</button>
+                <button class="glossary-quiz__option" data-correct="false">&lt;span i18n="hero.title"&gt;Text&lt;/span&gt;</button>
+                <button class="glossary-quiz__option" data-correct="false">&lt;span lang="hero.title"&gt;Text&lt;/span&gt;</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Welches HTML-Attribut wird für i18n-Text verwendet?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">data-translate</button>
+                <button class="glossary-quiz__option" data-correct="true">data-i18n</button>
+                <button class="glossary-quiz__option" data-correct="false">lang</button>
+                <button class="glossary-quiz__option" data-correct="false">i18n-key</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Section: Accessibility -->
+      <section id="a11y" class="glossary-section" data-category="a11y">
+        <h2 class="glossary-section__title">
+          <i class="ph ph-person" aria-hidden="true"></i>
+          Accessibility (a11y)
+        </h2>
+
+        <article class="glossary-card" id="aria">
+          <h3 class="glossary-card__title">ARIA & Semantisches HTML</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">HTML</span>
+            <span class="glossary-card__tag">Essential</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>ARIA (Accessible Rich Internet Applications) ergänzt HTML um Informationen für Screenreader und andere Hilfsmittel. Kombiniert mit semantischem HTML ist es die Grundlage für barrierefreie Websites.</p>
+
+            <h4>Semantische HTML-Tags</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Zweck</th>
+                  <th>Richtig</th>
+                  <th>Falsch</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hauptnavigation</td>
+                  <td><code>&lt;nav&gt;</code></td>
+                  <td><code>&lt;div class="nav"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td>Hauptinhalt</td>
+                  <td><code>&lt;main&gt;</code></td>
+                  <td><code>&lt;div class="main"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td>Artikel/Karte</td>
+                  <td><code>&lt;article&gt;</code></td>
+                  <td><code>&lt;div class="card"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td>Button</td>
+                  <td><code>&lt;button&gt;</code></td>
+                  <td><code>&lt;div class="btn"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td>Überschrift</td>
+                  <td><code>&lt;h1&gt;–&lt;h6&gt;</code></td>
+                  <td><code>&lt;div class="h1"&gt;</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>ARIA-Attribute</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>&lt;!-- Label für Screenreader --&gt;
+&lt;button aria-label="Menü öffnen"&gt;
+  &lt;i class="ph ph-list" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;/button&gt;
+
+&lt;!-- Erweiterte Status-Mitteilung --&gt;
+&lt;button aria-expanded="false" aria-controls="menu"&gt;
+  Optionen
+&lt;/button&gt;
+
+&lt;!-- Live-Region für dynamische Updates --&gt;
+&lt;div role="status" aria-live="polite"&gt;
+  3 neue Benachrichtigungen
+&lt;/div&gt;
+
+&lt;!-- Modal --&gt;
+&lt;div role="dialog" aria-modal="true" aria-labelledby="modal-title"&gt;
+  &lt;h2 id="modal-title"&gt;Bestätigung&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <h4>Die wichtigsten ARIA-Attribute</h4>
+            <table class="glossary-table">
+              <thead>
+                <tr>
+                  <th>Attribut</th>
+                  <th>Zweck</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>aria-label</code></td>
+                  <td>Beschreibt ein Element für Screenreader</td>
+                </tr>
+                <tr>
+                  <td><code>aria-hidden</code></td>
+                  <td>Versteckt Elemente vor Screenreadern</td>
+                </tr>
+                <tr>
+                  <td><code>aria-expanded</code></td>
+                  <td>Zeigt an, ob etwas ausgeklappt ist</td>
+                </tr>
+                <tr>
+                  <td><code>aria-controls</code></td>
+                  <td>Verknüpft Steuerung mit Ziel</td>
+                </tr>
+                <tr>
+                  <td><code>aria-live</code></td>
+                  <td>Liest Updates vor (polite/assertive)</td>
+                </tr>
+                <tr>
+                  <td><code>role</code></td>
+                  <td>Definiert die Rolle eines Elements</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Skip-Link</h4>
+            <p>Ein Skip-Link ermöglicht es Tastatur-Benutzern, direkt zum Hauptinhalt zu springen:</p>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>&lt;!-- Ganz oben im Body --&gt;
+&lt;a href="#main-content" class="skip-link"&gt;
+  Zum Hauptinhalt springen
+&lt;/a&gt;
+
+&lt;!-- Der Hauptinhalt --&gt;
+&lt;main id="main-content"&gt;...&lt;/main&gt;</code></pre>
+            </div>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Merksatz:</strong> Wenn du mit der Maus nicht auf ein Element klicken kannst, ist es wahrscheinlich nicht barrierefrei.
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="aria">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Welches ARIA-Attribut beschreibt ein Element für Screenreader?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">aria-hidden</button>
+                <button class="glossary-quiz__option" data-correct="true">aria-label</button>
+                <button class="glossary-quiz__option" data-correct="false">aria-expanded</button>
+                <button class="glossary-quiz__option" data-correct="false">aria-controls</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was bedeutet ARIA?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Advanced Responsive Internet Applications</button>
+                <button class="glossary-quiz__option" data-correct="true">Accessible Rich Internet Applications</button>
+                <button class="glossary-quiz__option" data-correct="false">Automatic Rendering Interface API</button>
+                <button class="glossary-quiz__option" data-correct="false">Advanced Responsive Interface Architecture</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Section: Workflow -->
+      <section id="workflow" class="glossary-section" data-category="workflow">
+        <h2 class="glossary-section__title">
+          <i class="ph ph-rocket" aria-hidden="true"></i>
+          Workflow
+        </h2>
+
+        <article class="glossary-card" id="dev-workflow">
+          <h3 class="glossary-card__title">Der Challenge-Workflow</h3>
+          <div class="glossary-card__tags">
+            <span class="glossary-card__tag">Prozess</span>
+            <span class="glossary-card__tag">Teamwork</span>
+          </div>
+          <div class="glossary-card__content">
+            <p>So arbeitest du während der KI Challenge effizient im Team — mit KI-Unterstützung und sauberer Architektur.</p>
+
+            <h4>Der KI-Prompt-Workflow</h4>
+            <ol>
+              <li><strong>System-Prompt senden:</strong> Kopiere den Kontext aus <code>docs/PROMPTING-GUIDE.md</code></li>
+              <li><strong>Spezifische Anfrage stellen:</strong> "Erstelle mir eine BEM-Komponente für..."</li>
+              <li><strong>Code überprüfen:</strong> Prüfe, ob KI die Architektur-Regeln eingehalten hat</li>
+              <li><strong>In Projekt integrieren:</strong> Kopiere den Code in die richtige Datei</li>
+              <li><strong>Testen:</strong> <code>npm run dev</code> und im Browser prüfen</li>
+              <li><strong>Committen:</strong> <code>git add . && git commit -m "..." && git push</code></li>
+            </ol>
+
+            <h4>Team-Workflow (5–7 Personen)</h4>
+            <div class="code-block">
+              <button class="code-block__copy" type="button" aria-label="Code kopieren">
+                <i class="ph ph-copy" aria-hidden="true"></i>
+              </button>
+              <pre><code>08:00 — Daily Standup (5 Min.)
+        Jeder sagt: Was mache ich heute?
+
+08:05 — Arbeit in Sub-Teams
+        • Content-Curator: JSON-Daten füllen
+        • UI-Designer: CSS-Komponenten bauen
+        • JS-Developer: Interaktivität programmieren
+        • QA: Testet auf Mobile und Accessibility
+
+10:00 — Pause (15 Min.)
+
+10:15 — Code-Review im Team
+        • Zeigt euch gegenseitig den Code
+        • Nutzt KI für Reviews: "Finde Bugs in diesem Code"
+
+11:30 — Integration-Test
+        • Alle Module zusammenführen
+        • Build testen: npm run build
+
+12:00 — Ende</code></pre>
+            </div>
+
+            <h4>Debug-Workflow</h4>
+            <p>Wenn etwas nicht funktioniert:</p>
+            <ol>
+              <li>Browser-Konsole öffnen (<kbd>F12</kbd> → Tab "Console")</li>
+              <li>Fehlermeldung lesen und verstehen</li>
+              <li>KI fragen: "Dieser Code hat folgenden Fehler: [Fehlermeldung]"</li>
+              <li>Fix implementieren und testen</li>
+              <li>Wenn nix hilft: Team-Mitglied fragen oder Lehrer rufen</li>
+            </ol>
+
+            <div class="glossary-card__tip">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <strong>Golden Rule:</strong> Committe nach JEDEM funktionierenden Schritt. Besser 10 kleine Commits als 1 großer, der alles zerstört.
+            </div>
+          </div>
+
+          <div class="glossary-quiz" data-quiz="workflow">
+            <h4 class="glossary-quiz__title">🧠 Teste dich selbst</h4>
+            <div class="glossary-quiz__question">
+              <p>Welcher Befehl startet den Development-Server mit Live-Reload?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">npm start</button>
+                <button class="glossary-quiz__option" data-correct="true">npm run dev</button>
+                <button class="glossary-quiz__option" data-correct="false">npm run server</button>
+                <button class="glossary-quiz__option" data-correct="false">npm run live</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          
+            <div class="glossary-quiz__question">
+              <p>Was ist der letzte Schritt im Workflow?</p>
+              <div class="glossary-quiz__options">
+                <button class="glossary-quiz__option" data-correct="false">Code schreiben</button>
+                <button class="glossary-quiz__option" data-correct="true">Auf GitHub veröffentlichen (git push)</button>
+                <button class="glossary-quiz__option" data-correct="false">Bilder generieren</button>
+                <button class="glossary-quiz__option" data-correct="false">CSS kompilieren</button>
+              </div>
+              <p class="glossary-quiz__feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__main">
+        <div class="site-footer__brand-wrap">
+          <div class="site-footer__logo">
+            <span class="site-footer__logo-icon"><i class="ph ph-atom" aria-hidden="true"></i></span>
+            <div class="site-footer__logo-text">
+              <span class="site-footer__logo-title">Evolution</span>
+              <span class="site-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="site-footer__tagline">Mit KI denken. Menschlich handeln.</p>
+        </div>
+        <div class="site-footer__links-grid">
+          <div class="site-footer__col">
+            <h4>Projekt</h4>
+            <nav>
+              <a href="index.html">Evolution Showcase</a>
+              <a href="../../../projects/synthese/src/pages/index.html">SYNTHESE Kompendium</a>
+              <a href="../../../projects/prisma/src/pages/index.html">PRISMA Workshop</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4>PLU</h4>
+            <nav>
+              <a href="/tutorials/" target="_blank" rel="noopener">PLU Hub</a>
+              <a href="/tutorials/python-classic/src/pages/index.html" target="_blank" rel="noopener">Python Classic</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4>Rechtliches</h4>
+            <nav>
+              <a href="/tutorials/pages/impressum.html">Impressum</a>
+              <a href="/tutorials/pages/datenschutz.html">Datenschutz</a>
+              <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div class="site-footer__legal">
+          <span>© PANTAM Learning Universe</span>
+          <span class="site-footer__dot">·</span>
+          <a href="#">MIT License</a>
+          <span class="site-footer__dot">·</span>
+          <a href="#">CC BY-NC-SA 4.0</a>
+        </div>
+        <div class="site-footer__meta">
+          <a href="/tutorials/pages/spenden.html" class="site-footer__support-link"><i class="ph ph-heart"></i> Unterstützen</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB -->
+  <div class="fab" role="group" aria-label="Schnellaktionen">
+    <button id="classroom-toggle" class="fab__btn" type="button" aria-pressed="false" data-tooltip="Classroom Mode (Shift+C)">
+      <i class="ph ph-presentation" aria-hidden="true"></i>
+    </button>
+    <button id="back-to-top" class="fab__btn" type="button" aria-label="Zum Seitenanfang">
+      <i class="ph ph-arrow-up" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/glossary.js"></script>
+</body>
+</html>

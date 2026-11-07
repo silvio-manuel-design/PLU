@@ -1,0 +1,121 @@
+/* =========================================
+   COMPONENT: Spec Cards
+   For lens specifications — camera spec sheet aesthetic
+   Colored left-border stripes per type
+   ========================================= */
+
+.photo-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--photo-space-4);
+  margin-block: var(--photo-space-6);
+}
+
+.photo-spec-card {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-left: 4px solid var(--spec-color, var(--photo-accent));
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-5) var(--photo-space-6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: var(--photo-space-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-spec-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--spec-color, var(--photo-accent));
+}
+
+.photo-spec-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.photo-spec-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--photo-space-3);
+}
+
+.photo-spec-card__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--photo-radius-md);
+  background: var(--photo-surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--spec-color, var(--photo-accent));
+  flex-shrink: 0;
+}
+
+.photo-spec-card__range {
+  font-size: var(--photo-font-size-xl);
+  font-weight: var(--photo-font-weight-black);
+  color: var(--photo-text-primary);
+  line-height: 1;
+}
+
+.photo-spec-card__range span {
+  font-size: var(--photo-font-size-sm);
+  font-weight: var(--photo-font-weight-normal);
+  color: var(--photo-text-muted);
+}
+
+.photo-spec-card__name {
+  font-weight: var(--photo-font-weight-bold);
+  font-size: var(--photo-font-size-base);
+  color: var(--photo-text-primary);
+}
+
+.photo-spec-card__desc {
+  font-size: var(--photo-font-size-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-body);
+}
+
+/* Color variants */
+.photo-spec-card--wide   { --spec-color: #5b9bd5; }
+.photo-spec-card--normal { --spec-color: var(--photo-accent); }
+.photo-spec-card--tele   { --spec-color: var(--photo-accent-secondary); }
+.photo-spec-card--macro  { --spec-color: #4a9b7f; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .photo-spec-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--photo-space-3);
+  }
+  .photo-spec-card {
+    padding: var(--photo-space-4);
+  }
+  .photo-spec-card__range {
+    font-size: var(--photo-font-size-lg);
+  }
+  .photo-spec-card__name {
+    font-size: var(--photo-font-size-sm);
+  }
+  .photo-spec-card__desc {
+    font-size: var(--photo-font-size-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 400px) {
+  .photo-spec-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,239 @@
+/* ==========================================================================
+   PYTHON CLASSIC — Classroom Mode
+   Beamer-optimiert: größere Schrift, maximale Breite, dekorative Ränder
+   Nach Pansonic Photo Lab Vorbild
+   ========================================================================== */
+
+@layer components {
+  /* ── Basis-Typografie im Classroom Mode ─────────────────────────────── */
+  html.is-classroom-mode {
+    --py-text-md: 1.15rem;
+    --py-text-lg: 1.35rem;
+    --py-text-xl: 1.6rem;
+    --py-text-2xl: 2rem;
+    --py-text-3xl: 2.5rem;
+    --py-text-4xl: clamp(2.5rem, 7vw, 4rem);
+    --py-leading-normal: 1.8;
+    --py-leading-relaxed: 2;
+    --py-leading-tight: 1.3;
+  }
+
+  /* Maximale Breite mit optischem Abstand */
+  html.is-classroom-mode .py-classic-header__container,
+  html.is-classroom-mode .py-classic-content,
+  html.is-classroom-mode .py-classic-footer__container {
+    max-width: 100%;
+    padding-inline: 64px;
+  }
+
+  /* Chapter-Artikel im Classroom Mode auf volle Breite */
+  html.is-classroom-mode .py-classic-chapter {
+    max-width: 100%;
+  }
+
+  /* Dekorative Seitenbalken für optische Orientierung */
+  html.is-classroom-mode .py-classic-chapter {
+    position: relative;
+  }
+
+  html.is-classroom-mode .py-classic-chapter::before,
+  html.is-classroom-mode .py-classic-chapter::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--py-primary), var(--py-accent), transparent);
+    opacity: 0.15;
+  }
+
+  html.is-classroom-mode .py-classic-chapter::before {
+    left: -32px;
+  }
+
+  html.is-classroom-mode .py-classic-chapter::after {
+    right: -32px;
+  }
+
+  /* Header im Classroom Mode */
+  html.is-classroom-mode .py-classic-header {
+    height: 5.5rem;
+  }
+
+  html.is-classroom-mode .py-classic-logo {
+    font-size: 1.6rem;
+  }
+
+  html.is-classroom-mode .py-classic-logo__icon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  /* Nicht-essentielle Elemente ausblenden — Footer bleibt für Kontext sichtbar */
+  html.is-classroom-mode .py-classic-nav,
+  html.is-classroom-mode .py-classic-chapter-nav,
+  html.is-classroom-mode .py-classic-back-to-top,
+  html.is-classroom-mode .py-classic-scroll-progress,
+  html.is-classroom-mode .py-classic-mobile-nav__backdrop,
+  html.is-classroom-mode .py-classic-mobile-nav {
+    display: none;
+  }
+
+  /* Footer im Classroom Mode: minimalistisch, breit, groß */
+  html.is-classroom-mode .py-classic-footer {
+    padding: var(--py-space-6) 0;
+  }
+
+  html.is-classroom-mode .py-classic-footer__main {
+    display: none;
+  }
+
+  html.is-classroom-mode .py-classic-footer__bottom {
+    border-top: none;
+    padding-top: 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--py-space-4);
+  }
+
+  html.is-classroom-mode .py-classic-footer__legal {
+    font-size: var(--py-text-lg);
+  }
+
+  html.is-classroom-mode .py-classic-footer__support-link {
+    font-size: var(--py-text-lg);
+  }
+
+  /* Hero im Classroom Mode */
+  html.is-classroom-mode .py-classic-hero {
+    padding: var(--py-space-16) var(--py-space-4);
+  }
+
+  html.is-classroom-mode .py-classic-hero__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  html.is-classroom-mode .py-classic-hero__subtitle {
+    font-size: clamp(1.15rem, 3vw, 1.5rem);
+    max-width: 900px;
+  }
+
+  /* Content-Sektionen vergrößern */
+  html.is-classroom-mode .py-classic-section {
+    margin-bottom: 80px;
+  }
+
+  html.is-classroom-mode .py-classic-section__title {
+    font-size: 2rem;
+  }
+
+  html.is-classroom-mode .py-classic-section__text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+
+  /* Text-Lesbarkeit im Classroom Mode — breiter für große Smart Displays */
+  html.is-classroom-mode .py-classic-chapter p,
+  html.is-classroom-mode .py-classic-chapter li {
+    max-width: 120ch;
+  }
+
+  html.is-classroom-mode .py-classic-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: var(--py-space-5);
+    max-width: 120ch;
+  }
+
+  html.is-classroom-mode .py-classic-content ul,
+  html.is-classroom-mode .py-classic-content ol {
+    margin-bottom: var(--py-space-5);
+    padding-left: var(--py-space-8);
+  }
+
+  html.is-classroom-mode .py-classic-content li {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: var(--py-space-3);
+  }
+
+  /* Code-Blöcke vergrößern und auf volle Breite */
+  html.is-classroom-mode .py-classic-code-block {
+    max-width: 100%;
+  }
+
+  html.is-classroom-mode .py-classic-code-block__pre {
+    font-size: 1.1rem;
+    padding: var(--py-space-6);
+  }
+
+  html.is-classroom-mode .py-classic-code-block__header {
+    padding: var(--py-space-4) var(--py-space-6);
+  }
+
+  /* Übungen vergrößern und auf volle Breite */
+  html.is-classroom-mode .py-classic-exercise {
+    padding: var(--py-space-8);
+    max-width: 100%;
+  }
+
+  html.is-classroom-mode .py-classic-exercise__title {
+    font-size: 1.5rem;
+  }
+
+  html.is-classroom-mode .py-classic-exercise__task-text {
+    font-size: 1.1rem;
+  }
+
+  /* Boxen vergrößern */
+  html.is-classroom-mode .py-classic-box {
+    padding: var(--py-space-6);
+  }
+
+  html.is-classroom-mode .py-classic-box__title {
+    font-size: var(--py-text-lg);
+  }
+
+  html.is-classroom-mode .py-classic-box__text {
+    font-size: 1.1rem;
+  }
+
+  /* Steps vergrößern */
+  html.is-classroom-mode .py-classic-steps__item {
+    padding-left: var(--py-space-14);
+  }
+
+  html.is-classroom-mode .py-classic-steps__item::before {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: var(--py-text-base);
+  }
+
+  html.is-classroom-mode .py-classic-steps__text {
+    font-size: 1.1rem;
+    padding-top: var(--py-space-2);
+  }
+
+  /* Buttons vergrößern */
+  html.is-classroom-mode .py-classic-btn {
+    padding: var(--py-space-4) var(--py-space-8);
+    font-size: var(--py-text-lg);
+  }
+
+  /* Hero-Metadaten vergrößern */
+  html.is-classroom-mode .py-classic-hero__meta-item {
+    font-size: var(--py-text-base);
+    padding: var(--py-space-2) var(--py-space-4);
+  }
+
+  /* No-JS: Classroom Mode funktioniert auch ohne JS */
+  @media (scripting: none) {
+    html.is-classroom-mode .py-classic-nav,
+    html.is-classroom-mode .py-classic-chapter-nav,
+    html.is-classroom-mode .py-classic-back-to-top {
+      display: none;
+    }
+  }
+
+  /* Classroom Mode toggle is in the footer — no fixed indicator needed */
+}

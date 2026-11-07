@@ -1,0 +1,94 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Floating Action Buttons
+   ========================================================================== */
+
+@layer components {
+  .py-quest-fab {
+    position: fixed;
+    bottom: calc(var(--py-space-6) + 60px);
+    right: var(--py-space-6);
+    z-index: var(--py-z-dropdown);
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-3);
+  }
+
+  @media (max-width: 1023px) {
+    .py-quest-fab {
+      display: none;
+    }
+  }
+
+  .py-quest-fab__btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: 50%;
+    color: var(--py-text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all var(--py-transition-base);
+    box-shadow: var(--py-shadow-md);
+  }
+
+  .py-quest-fab__btn:hover {
+    background: var(--py-primary);
+    border-color: var(--py-primary);
+    color: var(--py-white);
+    transform: translateY(-2px);
+    box-shadow: var(--py-shadow-lg);
+  }
+
+  .py-quest-fab__btn:focus-visible {
+    outline: 2px solid var(--py-primary);
+    outline-offset: 2px;
+  }
+
+  .py-quest-fab__btn--classroom:hover {
+    background: var(--py-ki);
+    border-color: var(--py-ki);
+  }
+
+  .py-quest-fab__btn--top {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all var(--py-transition-base);
+  }
+
+  .py-quest-fab__btn--top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Tooltip */
+  .py-quest-fab__tooltip {
+    position: absolute;
+    right: calc(100% + var(--py-space-3));
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    padding: var(--py-space-1) var(--py-space-3);
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-md);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-medium);
+    color: var(--py-text-secondary);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--py-transition-fast);
+    box-shadow: var(--py-shadow-sm);
+  }
+
+  .py-quest-fab__btn:hover .py-quest-fab__tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}

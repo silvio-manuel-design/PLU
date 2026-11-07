@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zweitägiger Workshop für professionelle LLM-Kommunikation: Persona, Kontext, Chain of Thought, Systemprompts und kreative Projekte.">
+  <meta name="author" content="HTL Traun - Medientechnik">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <title>KI-Creative Lab Workshop | HTL Traun</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+</head>
+<body>
+  <div class="ki-lab-scroll-progress" data-scroll-progress role="progressbar" aria-label="Seitenfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+  <a href="#main-content" class="ki-lab-skip-link" data-i18n="skipLink">Zum Hauptinhalt springen</a>
+
+  <header class="ki-lab-header" role="banner">
+    <div class="ki-lab-container ki-lab-header__inner">
+      <a href="#" class="ki-lab-logo" aria-label="KI-Creative Lab Workshop Startseite">
+        <svg class="ki-lab-logo__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        <span class="ki-lab-logo__text">KI-Creative <span class="ki-lab-logo__accent">Lab</span></span>
+      </a>
+
+      <nav class="ki-lab-nav" role="navigation" aria-label="Hauptnavigation">
+        <a href="#llm-crashkurs" class="ki-lab-nav__link" data-i18n="nav.crashkurs">LLM-Crashkurs</a>
+        <a href="#quiz" class="ki-lab-nav__link" data-i18n="nav.quiz">Quiz</a>
+        <a href="#projects" class="ki-lab-nav__link" data-i18n="nav.projects">Projekte</a>
+        <a href="#prompts" class="ki-lab-nav__link" data-i18n="nav.prompts">Prompt-Karten</a>
+        <a href="#timer" class="ki-lab-nav__link" data-i18n="nav.timer">Timer</a>
+        <a href="#pitch" class="ki-lab-nav__link" data-i18n="nav.pitch">Pitch-Guide</a>
+        <a href="#ethics" class="ki-lab-nav__link" data-i18n="nav.ethics">KI-Ethik</a>
+        <a href="#awards" class="ki-lab-nav__link" data-i18n="nav.awards">Awards</a>
+      </nav>
+
+      <div class="ki-lab-header__actions">
+        <button class="ki-lab-lang-toggle" data-lang-toggle aria-label="Switch to English">
+          <span class="ki-lab-lang-toggle__label" data-i18n="lang.current">DE</span>
+        </button>
+
+        <button class="ki-lab-classroom-toggle" data-classroom-toggle role="switch" aria-label="Classroom Mode aktivieren" aria-checked="false">
+          <i class="ph ph-desktop" aria-hidden="true"></i>
+          <span class="ki-lab-sr-only" data-i18n="classroom.enable">Classroom Mode</span>
+        </button>
+
+        <button class="ki-lab-theme-toggle" data-theme-toggle role="switch" aria-label="Zum Light-Mode wechseln" aria-checked="false">
+          <svg class="ki-lab-theme-toggle__icon ki-lab-theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="ki-lab-theme-toggle__icon ki-lab-theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <span class="ki-lab-sr-only" data-i18n="theme.light">Zum Light-Mode wechseln</span>
+        </button>
+
+        <button class="ki-lab-mobile-toggle" data-mobile-toggle aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="ki-lab-mobile-toggle__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ki-lab-mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile Navigation" aria-hidden="true">
+      <a href="#llm-crashkurs" class="ki-lab-mobile-menu__link" data-i18n="nav.crashkurs">LLM-Crashkurs</a>
+      <a href="#quiz" class="ki-lab-mobile-menu__link" data-i18n="nav.quiz">Quiz</a>
+      <a href="#projects" class="ki-lab-mobile-menu__link" data-i18n="nav.projects">Projekte</a>
+      <a href="#prompts" class="ki-lab-mobile-menu__link" data-i18n="nav.prompts">Prompt-Karten</a>
+      <a href="#timer" class="ki-lab-mobile-menu__link" data-i18n="nav.timer">Timer</a>
+      <a href="#pitch" class="ki-lab-mobile-menu__link" data-i18n="nav.pitch">Pitch-Guide</a>
+      <a href="#ethics" class="ki-lab-mobile-menu__link" data-i18n="nav.ethics">KI-Ethik</a>
+      <a href="#awards" class="ki-lab-mobile-menu__link" data-i18n="nav.awards">Awards</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="ki-lab-hero" aria-label="Willkommen">
+      <div class="ki-lab-hero__background">
+        <picture data-hero-dark>
+          <source srcset="assets/images/hero-dark.webp" type="image/webp">
+          <img class="ki-lab-hero__bg-image ki-lab-hero__bg-image--dark" src="assets/images/hero-dark.jpg" alt="" loading="eager" aria-hidden="true">
+        </picture>
+        <picture data-hero-light hidden>
+          <source srcset="assets/images/hero-light.webp" type="image/webp">
+          <img class="ki-lab-hero__bg-image ki-lab-hero__bg-image--light" src="assets/images/hero-light.jpg" alt="" loading="eager" aria-hidden="true">
+        </picture>
+      </div>
+      <div class="ki-lab-hero__overlay" aria-hidden="true"></div>
+
+      <div class="ki-lab-container ki-lab-hero__content">
+        <span class="ki-lab-hero__badge" data-i18n="hero.badge">HTL Traun | Medientechnik | 29.–30. Juni 2026</span>
+        <h1 class="ki-lab-hero__title" data-i18n="hero.title">KI-Creative Lab</h1>
+        <p class="ki-lab-hero__subtitle" data-i18n="hero.subtitle">Zwei Tage, neun Gruppen, unendlich viele Ideen. Lerne, wie du mit ChatGPT, Gemini und Grok professionell kommunizierst – und entwickle ein Konzept, das begeistert.</p>
+
+        <div class="ki-lab-hero__actions">
+          <a href="#projects" class="ki-lab-btn ki-lab-btn--primary" data-i18n="hero.ctaPrimary">Projekt wählen</a>
+          <a href="#llm-crashkurs" class="ki-lab-btn ki-lab-btn--secondary" data-i18n="hero.ctaSecondary">LLM-Crashkurs</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ki-lab-section ki-lab-section--compact" aria-labelledby="checklist-title">
+      <div class="ki-lab-container">
+        <div class="ki-lab-workshop-checklist" data-workshop-checklist>
+          <h2 id="checklist-title" class="ki-lab-workshop-checklist__title" data-i18n="checklist.title">Workshop-Checkliste</h2>
+          <ul class="ki-lab-workshop-checklist__items">
+            <li>
+              <a href="#llm-crashkurs" class="ki-lab-workshop-checklist__link">
+                <i class="ph ph-brain"></i>
+                <span data-i18n="checklist.items.crashkurs">LLM-Grundlagen</span>
+              </a>
+            </li>
+            <li>
+              <a href="#projects" class="ki-lab-workshop-checklist__link">
+                <i class="ph ph-folder-open"></i>
+                <span data-i18n="checklist.items.project">Projekt wählen</span>
+              </a>
+            </li>
+            <li>
+              <a href="#prompts" class="ki-lab-workshop-checklist__link">
+                <i class="ph ph-cards"></i>
+                <span data-i18n="checklist.items.prompts">Prompts nutzen</span>
+              </a>
+            </li>
+            <li>
+              <a href="#pitch" class="ki-lab-workshop-checklist__link">
+                <i class="ph ph-presentation"></i>
+                <span data-i18n="checklist.items.pitch">Pitch vorbereiten</span>
+              </a>
+            </li>
+            <li>
+              <a href="#ethics" class="ki-lab-workshop-checklist__link">
+                <i class="ph ph-shield-check"></i>
+                <span data-i18n="checklist.items.ethics">KI-Ethik prüfen</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="llm-crashkurs" class="ki-lab-section ki-lab-section--parallax ki-lab-section--llm" aria-labelledby="crashkurs-title">
+      <div class="ki-lab-section__overlay" aria-hidden="true"></div>
+      <div class="ki-lab-container ki-lab-section__content">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="crashkurs.eyebrow">LLM-Crashkurs</span>
+          <h2 id="crashkurs-title" class="ki-lab-section__title" data-i18n="crashkurs.title">So sprichst du mit KI</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="crashkurs.subtitle">Sechs Begriffe, die deine Ergebnisse sofort besser machen. Klicke auf eine Karte, um ein Beispiel zu sehen.</p>
+        </header>
+
+        <div class="ki-lab-concept-grid" data-concept-grid>
+          <!-- Concept cards rendered by JS -->
+        </div>
+
+        <div class="ki-lab-checklist" data-wframework>
+          <h3 class="ki-lab-checklist__title" data-i18n="crashkurs.wframework.title">Die 5-W-Checkliste</h3>
+          <p class="ki-lab-checklist__subtitle" data-i18n="crashkurs.wframework.subtitle">Bevor du einen Prompt abschickst, prüfe diese fünf Fragen.</p>
+          <ul class="ki-lab-checklist__items" data-wframework-items>
+            <!-- Rendered by JS -->
+          </ul>
+        </div>
+
+        <div class="ki-lab-resource-box">
+          <h3 class="ki-lab-resource-box__title" data-i18n="crashkurs.resources.title">Vertiefung im PLU</h3>
+          <p class="ki-lab-resource-box__text" data-i18n="crashkurs.resources.description">Im PLU Hub findest du ein KI-Lexikon und weitere KI-Akademien.</p>
+          <div class="ki-lab-resource-box__actions">
+            <a href="https://www.pantam.at/tutorials/pages/lexikon.html" class="ki-lab-btn ki-lab-btn--secondary" data-i18n="crashkurs.resources.lexikon" target="_blank" rel="noopener noreferrer">KI-Lexikon öffnen</a>
+            <a href="https://www.pantam.at/tutorials/ki-academy-premium/index.html" class="ki-lab-btn ki-lab-btn--secondary" data-i18n="crashkurs.resources.academy" target="_blank" rel="noopener noreferrer">KI-Akademie Premium öffnen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="ki-lab-section ki-lab-section--alt" aria-labelledby="quiz-title">
+      <div class="ki-lab-container ki-lab-section__content">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="quiz.eyebrow">Interaktive Übung</span>
+          <h2 id="quiz-title" class="ki-lab-section__title" data-i18n="quiz.title">Gut oder schlecht?</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="quiz.subtitle">Entscheide, welcher Prompt das bessere Ergebnis liefert. Klicke auf die richtige Antwort.</p>
+        </header>
+
+        <div class="ki-lab-quiz" data-quiz>
+          <!-- Quiz rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="ki-lab-section ki-lab-section--parallax ki-lab-section--projects" aria-labelledby="projects-title">
+      <div class="ki-lab-section__overlay" aria-hidden="true"></div>
+      <div class="ki-lab-container ki-lab-section__content">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="projects.eyebrow">Projekte</span>
+          <h2 id="projects-title" class="ki-lab-section__title" data-i18n="projects.title">Wählt euer Thema</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="projects.subtitle">Jedes Projekt ist bewusst keine Website. Es geht um Konzepte, Inhalte, Branding und eine überzeugende Präsentation.</p>
+        </header>
+
+        <div class="ki-lab-project-grid" data-project-grid role="list" aria-label="Projektliste">
+          <!-- Project cards rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="prompts" class="ki-lab-section ki-lab-section--parallax ki-lab-section--prompts" aria-labelledby="prompts-title">
+      <div class="ki-lab-section__overlay" aria-hidden="true"></div>
+      <div class="ki-lab-container ki-lab-section__content">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="prompts.eyebrow">Prompt-Karten</span>
+          <h2 id="prompts-title" class="ki-lab-section__title" data-i18n="prompts.title">Fertige Prompt-Vorlagen</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="prompts.subtitle">Klickt auf „Kopieren“ und fügt den Prompt in ChatGPT, Gemini oder Grok ein. Ersetzt die Platzhalter in [Klammern].</p>
+        </header>
+
+        <div class="ki-lab-filter-bar" data-prompt-filters role="tablist" aria-label="Prompt-Kategorien">
+          <!-- Filter buttons rendered by JS -->
+        </div>
+
+        <div class="ki-lab-prompt-grid" data-prompt-grid role="list" aria-label="Prompt-Liste">
+          <!-- Prompt cards rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="timer" class="ki-lab-section ki-lab-section--alt" aria-labelledby="timer-title">
+      <div class="ki-lab-container">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="timer.eyebrow">Workshop-Timer</span>
+          <h2 id="timer-title" class="ki-lab-section__title" data-i18n="timer.title">Phasen im Blick behalten</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="timer.subtitle">Wählt eine Phase oder startet einen freien Countdown.</p>
+        </header>
+
+        <div class="ki-lab-timer">
+          <div class="ki-lab-timer__display" data-timer-display>25:00</div>
+
+          <div class="ki-lab-timer__presets">
+            <button class="ki-lab-btn ki-lab-btn--secondary ki-lab-btn--small" data-timer-preset="25" data-i18n="timer.presets.focus">Fokus-Phase (25 min)</button>
+            <button class="ki-lab-btn ki-lab-btn--secondary ki-lab-btn--small" data-timer-preset="45" data-i18n="timer.presets.work">Arbeitsphase (45 min)</button>
+            <button class="ki-lab-btn ki-lab-btn--secondary ki-lab-btn--small" data-timer-preset="10" data-i18n="timer.presets.pitch">Pitch-Probe (10 min)</button>
+          </div>
+
+          <div class="ki-lab-timer__controls">
+            <button class="ki-lab-btn ki-lab-btn--primary" data-timer-start data-i18n="timer.start">Start</button>
+            <button class="ki-lab-btn ki-lab-btn--secondary" data-timer-pause data-i18n="timer.pause">Pause</button>
+            <button class="ki-lab-btn ki-lab-btn--ghost" data-timer-reset data-i18n="timer.reset">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pitch" class="ki-lab-section ki-lab-section--parallax ki-lab-section--pitch" aria-labelledby="pitch-title">
+      <div class="ki-lab-section__overlay" aria-hidden="true"></div>
+      <div class="ki-lab-container ki-lab-section__content">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="pitch.eyebrow">Pitch-Guide</span>
+          <h2 id="pitch-title" class="ki-lab-section__title" data-i18n="pitch.title">So präsentiert ihr euer Projekt</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="pitch.subtitle">3 Minuten, 5 Schritte. Nutzt diese Struktur für einen klaren und überzeugenden Pitch.</p>
+        </header>
+
+        <div class="ki-lab-pitch-grid" data-pitch-grid>
+          <!-- Pitch steps rendered by JS -->
+        </div>
+
+        <div class="ki-lab-pitch-tools" data-pitch-tools>
+          <!-- Presentation tools rendered by JS -->
+        </div>
+
+        <div class="ki-lab-pitch-tips" data-pitch-tips>
+          <!-- Pitch tips rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="ethics" class="ki-lab-section ki-lab-section--alt" aria-labelledby="ethics-title">
+      <div class="ki-lab-container">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="ethics.eyebrow">KI-Ethik</span>
+          <h2 id="ethics-title" class="ki-lab-section__title" data-i18n="ethics.title">Klug nutzen, fair bleiben</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="ethics.subtitle">Bevor ihr Ergebnisse aus LLMs übernehmt, prüft diese fünf Punkte.</p>
+        </header>
+
+        <ul class="ki-lab-ethics-list" data-ethics-list>
+          <!-- Ethics checks rendered by JS -->
+        </ul>
+      </div>
+    </section>
+
+    <section id="awards" class="ki-lab-section ki-lab-section--parallax ki-lab-section--awards" aria-labelledby="awards-title">
+      <div class="ki-lab-section__overlay" aria-hidden="true"></div>
+      <div class="ki-lab-container ki-lab-section__content">
+        <header class="ki-lab-section__header">
+          <span class="ki-lab-section__eyebrow" data-i18n="awards.eyebrow">Awards</span>
+          <h2 id="awards-title" class="ki-lab-section__title" data-i18n="awards.title">Die PLU Golden Prompt Awards</h2>
+          <p class="ki-lab-section__subtitle" data-i18n="awards.subtitle">Fünf Kategorien – fünf Chancen, ausgezeichnet zu werden.</p>
+        </header>
+
+        <div class="ki-lab-awards__intro" data-i18n="awards.intro">Die Jury bewertet jeden Pitch nach transparenten Kriterien. Jede Kategorie wird einzeln ausgezeichnet – so gewinnt jede Gruppe auf ihre Stärke hin.</div>
+
+        <div class="ki-lab-awards__grid" data-awards-grid>
+          <!-- Award cards rendered by JS -->
+        </div>
+
+        <div class="ki-lab-awards__scorecard" data-awards-scorecard>
+          <!-- Scorecard rendered by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ki-lab-footer" role="contentinfo">
+    <div class="ki-lab-container">
+      <div class="ki-lab-footer__top">
+        <div>
+          <p class="ki-lab-footer__title" data-i18n="footer.title">KI-Creative Lab Workshop 2026</p>
+          <p class="ki-lab-footer__subtitle" data-i18n="footer.subtitle">HTL Traun | Medientechnik | Fachschule für IT</p>
+        </div>
+        <nav class="ki-lab-footer__nav" aria-label="Footer-Navigation">
+          <a href="https://www.pantam.at/tutorials/pages/impressum.html" class="ki-lab-footer__link" target="_blank" rel="noopener noreferrer" data-i18n="footer.imprint">Impressum</a>
+          <a href="https://www.pantam.at/tutorials/pages/datenschutz.html" class="ki-lab-footer__link" target="_blank" rel="noopener noreferrer" data-i18n="footer.privacy">Datenschutz</a>
+          <a href="https://www.pantam.at" class="ki-lab-footer__link" target="_blank" rel="noopener noreferrer" data-i18n="footer.plu">PLU Hub</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <button class="ki-lab-fab ki-lab-fab--backtop" data-back-to-top aria-label="Zurück zum Seitenanfang" hidden>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M12 19V5"/>
+      <path d="M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <div class="ki-lab-notification" data-notification role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/workshop.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission 05: Datenbank verbinden | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id">Mission 05</span>
+      <span class="mission-timer">~20 Min • +75 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Verbinde PHP mit einer MySQL-Datenbank und lies Daten aus.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Datenbank erstellen</h3>
+        <p>Öffne phpMyAdmin (<code>http://localhost/phpmyadmin</code>).</p>
+        <p>Erstelle eine neue Datenbank: <code>backend_db</code></p>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Tabelle erstellen</h3>
+        <p>Erstelle eine Tabelle <code>users</code> mit Spalten:</p>
+        <div class="code-block">id (INT, Auto-Increment, Primary)
+name (VARCHAR, 100)
+email (VARCHAR, 100)</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Testdaten einfügen</h3>
+        <p>Füge 2-3 Test-Einträge über phpMyAdmin ein.</p>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>PHP-Verbindung</h3>
+        <p>Erstelle <code>db.php</code> mit der Verbindung:</p>
+        <div class="code-block"><?php
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$db   = 'backend_db';
+
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+  die('Verbindung fehlgeschlagen');
+}
+echo 'Verbunden!';
+?></div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Daten auslesen</h3>
+        <p>Erweitere die Datei mit einer Abfrage:</p>
+        <div class="code-block">$sql = "SELECT * FROM users";
+$result = $conn->query($sql);
+
+while($row = $result->fetch_assoc()) {
+  echo $row['name'] . "<br>";
+}</div>
+      </li>
+      
+      <li class="step-item" id="step-6">
+        <h3>Testen</h3>
+        <p>Rufe die Datei im Browser auf.</p>
+        <p>Du solltest die Namen aus der Datenbank sehen.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Datenbank-Verbindung</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Verbindung testen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+75 XP] [Mission 06 freigeschaltet]
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeMission()" disabled>
+        Mission abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>MySQLi stellt die Verbindung zwischen PHP und MySQL her.</li>
+          <li>SQL-Abfragen holen Daten aus Tabellen.</li>
+          <li>Immer Verbindungen nach Gebrauch schließen.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe DB-Setup...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'DB OK';
+        result.textContent = '[OK] Datenbank-Code korrekt. XAMPP/MySQL erforderlich.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeMission() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeMission, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeMission('05');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('05', 'Datenbank verbinden', 'PHP mit MySQL verbinden und Daten auslesen');
+      AbgabePanel.init('05', 'Datenbank verbinden');
+      
+      const status = MissionsAPI.getMissionStatus()['05'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+75 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

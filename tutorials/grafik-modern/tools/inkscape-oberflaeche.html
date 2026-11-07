@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <script>
+    if (!localStorage.getItem('darkMode')) {
+      localStorage.setItem('darkMode', 'true');
+    }
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inkscape – Oberfläche & Werkzeuge | Grafik Quest</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/cyberpunk-theme.css">
+  <link rel="stylesheet" href="../css/light-theme.css">
+  <link rel="stylesheet" href="../css/gamification.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html" class="brand">
+          <img src="../assets/logo.svg" alt="PLU" width="40" height="40">
+          <span class="brand__name">
+            Grafik <span class="brand__name--quest">Quest</span>
+          </span>
+        </a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten">🌓</button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../index.html" class="nav-link">🏠 HQ</a></li>
+<li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 LEVELS ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen</a></li>
+                <li><a href="../kapitel/01-pixel-vs-vektor.html">01. Pixel vs. Vektor</a></li>
+                <li><a href="../kapitel/02-gimp-grundlagen.html">02. GIMP Basics</a></li>
+                <li><a href="../kapitel/03-inkscape-grundlagen.html">03. Inkscape Basics</a></li>
+                <li><a href="../kapitel/04-dateiformate-web.html">04. Formate & Web</a></li>
+                <li><a href="../kapitel/05-projekt-logo.html">05. Boss: Logo</a></li>
+                <li><a href="../kapitel/06-animierte-grafiken.html">06. Animationen</a></li>
+              </ul>
+            </li>
+            <li><a href="../dashboard.html" class="nav-link">🎮 DASHBOARD</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️ INTEL</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- ANIMIERTER HERO-BEREICH -->
+    <section class="hero-section">
+      <h1>🖼️ Inkscape – Canvas & Werkzeuge</h1>
+      <p class="hero-subtitle">Deine Werkstatt für skalierbare Vektorgrafiken</p>
+    </section>
+
+    <section>
+      <h2>🖥️ 1. Die Hauptbereiche</h2>
+      <p>
+        Beim Start zeigt Inkscape eine klare Struktur:
+      </p>
+      <figure class="illustration-center">
+        <svg width="100%" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="inkscape-ui-title inkscape-ui-desc">
+          <title id="inkscape-ui-title">Inkscape-Oberfläche</title>
+          <desc id="inkscape-ui-desc">Links die Werkzeugleiste, in der Mitte die Zeichenfläche, rechts die Objekteigenschaften.</desc>
+          
+          <!-- Zeichenfläche -->
+          <rect x="150" y="30" width="300" height="140" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+          <text x="300" y="110" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#666">Zeichenfläche</text>
+          
+          <!-- Werkzeugleiste links -->
+          <rect x="20" y="30" width="100" height="140" fill="#e0e0e0" stroke="#bbb" stroke-width="1" rx="6"/>
+          <text x="70" y="60" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#333">Werkzeuge</text>
+          <circle cx="40" cy="90" r="6" fill="#d4a017"/>
+          <rect x="50" y="84" width="12" height="12" fill="#d4a017"/>
+          <path d="M70,84 L82,96 M82,84 L70,96" stroke="#d4a017" stroke-width="2"/>
+          
+          <!-- Eigenschaften rechts -->
+          <rect x="470" y="30" width="110" height="140" fill="#e0e0e0" stroke="#bbb" stroke-width="1" rx="6"/>
+          <text x="525" y="60" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#333">Eigenschaften</text>
+          <rect x="480" y="80" width="90" height="10" fill="#d4a017" opacity="0.6"/>
+          <rect x="480" y="95" width="70" height="10" fill="#d4a017" opacity="0.6"/>
+        </svg>
+        <figcaption class="screenshot-caption">
+          (1) Werkzeugleiste links<br>
+          (2) Zeichenfläche in der Mitte<br>
+          (3) Objekteigenschaften rechts
+        </figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>🛠️ 2. Wichtige Werkzeuggruppen</h2>
+      <p>
+        Die linke Werkzeugleiste enthält alle Funktionen. Hier die wichtigsten:
+      </p>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Werkzeug</th>
+              <th>Symbol</th>
+              <th>Funktion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Auswahl & Transformation</strong></td>
+              <td>↖️</td>
+              <td>Objekte verschieben, drehen, skalieren</td>
+            </tr>
+            <tr>
+              <td><strong>Formen</strong></td>
+              <td>▭</td>
+              <td>Rechtecke, Ellipsen, Sterne zeichnen</td>
+            </tr>
+            <tr>
+              <td><strong>Pfad bearbeiten</strong></td>
+              <td>✎</td>
+              <td>Knoten und Kurven von Pfaden verändern</td>
+            </tr>
+            <tr>
+              <td><strong>Text</strong></td>
+              <td>T</td>
+              <td>Text hinzufügen und formatieren</td>
+            </tr>
+            <tr>
+              <td><strong>Farbe füllen</strong></td>
+              <td>🎨</td>
+              <td>Flächenfarbe und Konturfarbe ändern</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>🎨 3. Die Paletten: Farben & Ebenen</h2>
+      <p>
+        Unten und rechts findest du <strong>Paletten</strong> mit wichtigen Funktionen:
+      </p>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Palette</th>
+              <th>Position</th>
+              <th>Funktion</th>
+              <th>Tastenkürzel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Farbpalette</strong></td>
+              <td>Unten</td>
+              <td>Schnelles Einfärben von Flächen und Konturen</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><strong>Ebenen</strong></td>
+              <td>Rechts (Ctrl+Shift+L)</td>
+              <td>Objekte in Ebenen organisieren, Sichtbarkeit steuern</td>
+              <td><kbd>Ctrl+Shift+L</kbd></td>
+            </tr>
+            <tr>
+              <td><strong>Ausrichten</strong></td>
+              <td>Rechts</td>
+              <td>Objekte präzise ausrichten (links, rechts, zentriert)</td>
+              <td><kbd>Ctrl+Shift+A</kbd></td>
+            </tr>
+            <tr>
+              <td><strong>Füllung & Kontur</strong></td>
+              <td>Rechts</td>
+              <td>Farben, Verläufe, Strichstärke einstellen</td>
+              <td><kbd>Ctrl+Shift+F</kbd></td>
+            </tr>
+            <tr>
+              <td><strong>Text & Schrift</strong></td>
+              <td>Rechts</td>
+              <td>Schriftart, Größe, Ausrichtung ändern</td>
+              <td><kbd>Ctrl+Shift+T</kbd></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="regel">
+        <strong>💡 Tipp:</strong> Klicke auf die kleinen Dreiecke rechts, um Paletten ein- und auszuklappen. So hast du mehr Platz für die Zeichenfläche!
+      </div>
+    </section>
+
+    <section>
+      <h2>⚙️ 4. Werkzeug-Optionen verstehen</h2>
+      <p>
+        Jedes Werkzeug hat oben in der Menüleiste spezifische Einstellungen:
+      </p>
+      <div class="card" style="margin-top: 16px;">
+        <h4 style="color: var(--neon-magenta);">Beispiel: Rechteck-Werkzeug (F4)</h4>
+        <ul style="color: var(--text-secondary);">
+          <li><strong>Eckenradius:</strong> Abgerundete Ecken (0 = scharf, höher = runder)</li>
+          <li><strong>Breite/Höhe:</strong> Exakte Maße in Pixel oder mm</li>
+          <li><strong>X/Y-Position:</strong> Präzise Positionierung auf der Zeichenfläche</li>
+          <li><strong>Füllung:</strong> Farbe oder Verlauf direkt beim Zeichnen</li>
+        </ul>
+      </div>
+      <p style="margin-top: 16px;">
+        📝 <strong>Merke:</strong> Die Einstellungen gelten nur für das aktive Werkzeug und bleiben für die nächste Verwendung gespeichert!
+      </p>
+    </section>
+
+    <section>
+      <h2>⌨️ 5. Die wichtigsten Tastenkürzel</h2>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tastenkürzel</th>
+              <th>Funktion</th>
+              <th>Wann nützlich?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><kbd>F1</kbd></td>
+              <td>Auswahl-Werkzeug</td>
+              <td>Objekte verschieben (am häufigsten)</td>
+            </tr>
+            <tr>
+              <td><kbd>F4</kbd></td>
+              <td>Rechteck-Werkzeug</td>
+              <td>Schnell Rechtecke zeichnen</td>
+            </tr>
+            <tr>
+              <td><kbd>F5</kbd></td>
+              <td>Ellipsen-Werkzeug</td>
+              <td>Kreise und Ovale</td>
+            </tr>
+            <tr>
+              <td><kbd>F6</kbd></td>
+              <td>Polygon/Stern</td>
+              <td>Sterne und Vielecke</td>
+            </tr>
+            <tr>
+              <td><kbd>F2</kbd></td>
+              <td>Pfad bearbeiten</td>
+              <td>Knoten verschieben</td>
+            </tr>
+            <tr>
+              <td><kbd>Ctrl+D</kbd></td>
+              <td>Duplizieren</td>
+              <td>Objekte kopieren</td>
+            </tr>
+            <tr>
+              <td><kbd>Ctrl+G</kbd></td>
+              <td>Gruppieren</td>
+              <td>Mehrere Objekte zusammenfassen</td>
+            </tr>
+            <tr>
+              <td><kbd>Ctrl+Shift+G</kbd></td>
+              <td>Gruppierung aufheben</td>
+              <td>Gruppe einzeln bearbeiten</td>
+            </tr>
+            <tr>
+              <td><kbd>Ctrl+Shift+C</kbd></td>
+              <td>Objekt in Pfad umwandeln</td>
+              <td>Text/Formen bearbeitbar machen</td>
+            </tr>
+            <tr>
+              <td><kbd>Leertaste</kbd></td>
+              <td>Auswahl-Werkzeug (temporär)</td>
+              <td>Während dem Zeichnen verschieben</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warnung">
+        ⚠️ <strong>Wichtig:</strong> Tastenkürzel funktionieren nur, wenn das Inkscape-Fenster aktiv ist!
+      </div>
+    </section>
+
+    <section>
+      <h2>✏️ 6. Mit Pfaden arbeiten</h2>
+      <p>
+        Alles in Inkscape ist ein <strong>Pfad</strong> – auch Text und Formen.
+        Du kannst Pfade jederzeit bearbeiten:
+      </p>
+      <ol>
+        <li>Wähle das <strong>Pfad bearbeiten-Werkzeug</strong> (Knotensymbol)</li>
+        <li>Klicke auf ein Objekt → es zeigt blaue Knotenpunkte</li>
+        <li>Ziehe an den Knoten oder Steuerpunkten, um die Form zu verändern</li>
+      </ol>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Nur mit dem Pfad-Werkzeug kannst du die Form eines Objekts verändern!<br>
+        Das Auswahl-Werkzeug bewegt nur das gesamte Objekt.
+      </div>
+    </section>
+
+    <section>
+      <h2>🔤 7. Text hinzufügen</h2>
+      <p>
+        So fügst du Text hinzu:
+      </p>
+      <ol>
+        <li>Klicke auf das <strong>Text-Werkzeug</strong> (T)</li>
+        <li>Klicke auf die Zeichenfläche und gib deinen Text ein</li>
+        <li>Wähle im rechten Eigenschaften-Fenster Schriftart, Größe und Farbe</li>
+      </ol>
+      <p>
+        🔗 <a href="inkscape-text-pfade.html">→ Weiter: Text in Pfade umwandeln</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>➡️ 8. Vorbereitung auf das Logo-Projekt</h2>
+      <p>
+        Im nächsten Schritt lernst du, wie du Text in einen Pfad umwandelst – 
+        damit Logos überall gleich aussehen, auch ohne installierte Schriftarten.
+      </p>
+      <p>
+        Danach erstellst du dein eigenes Logo – skalierbar, professionell und webtauglich.
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kennst du die Werkstatt für Vektorgrafiken!</p>
+      <a href="../kapitel/03-inkscape-grundlagen.html" class="nav-button" style="background: var(--neon-magenta); color: var(--bg-void);">→ Zurück zu Level 03: Inkscape Basics</a>
+      <div style="margin-top: 16px;">
+        <a href="inkscape-text-pfade.html" class="nav-button btn-secondary" style="font-size: 0.9rem;">Optional: Text als Pfad & Formen →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+<script src="../js/gamification.js"></script>
+  <script src="../js/classroom-mode.js"></script>
+<script src="../js/reflection-form.js"></script>
+<script src="../js/quest-log.js"></script>
+</body>
+</html>

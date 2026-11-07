@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How Python stores and processes data, and why it's so much easier than you think.">
+  <meta name="theme-color" content="#306998">
+  <title>01 – Variables & Data Types | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/01-variablen.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/01-variablen-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index-en.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index-en.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index-en.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon-en.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt-en.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index-en.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="01-variablen.html" class="py-classic-lang__btn " data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="01-variablen-en.html" class="py-classic-lang__btn is-active" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index-en.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k01-variablen.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index-en.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 01</span>
+      </nav>
+      <h1 class="py-classic-hero__title">Variables & Data Types</h1>
+      <p class="py-classic-hero__subtitle">How Python stores and processes data, and why it's so much easier than you think.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 45 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Leicht</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">You explain what a variable is and how it works</li>
+        <li class="py-classic-learning-goals__item">You distinguish the 4 most important data types in Python</li>
+        <li class="py-classic-learning-goals__item">You use type conversions (castings) appropriately</li>
+        <li class="py-classic-learning-goals__item">You store the PyBuddy user in a variable</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-package"></i></span>
+          Variables — Labeled Boxes
+        </h2>
+        <p>A variable is like a <strong>labeled box</strong> in the warehouse of your computer. You write on it what's inside (<code>name</code>), throw something in (<code>"Max"</code>), and can find it later via the label.</p><p>In JavaScript, you created variables with <code>let</code> or <code>const</code>. In Python, you <strong>don't need any keyword</strong> — just name, equals sign, value. Done.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Python — einfach und direkt
+name = "Max"
+alter = 16
+pi = 3.14159
+spieler_aktiv = True</code></pre>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>name = "Max"
+alter = 16</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>let name = "Max";
+let alter = 16;</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python doesn't need `let`, `const`, or `var`. Simply name = value. Types are recognized automatically!</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-hash"></i></span>
+          The 4 Data Types You Need to Know
+        </h2>
+        <p>Python recognizes the data type <strong>automatically</strong>. You don't have to declare anything. But you should know which types exist:</p><ul><li><code>str</code> (String): Text in quotes — <code>"Hallo"</code></li><li><code>int</code> (Integer): Whole numbers — <code>42</code></li><li><code>float</code> (Floating Point): Decimal numbers — <code>3.14</code></li><li><code>bool</code> (Boolean): True/False — <code>True</code> or <code>False</code></li></ul><p>With <code>type()</code>, you can check at any time which type is inside a variable.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>name = "Python"
+alter = 30
+groesse = 1.75
+aktiv = True
+
+print(type(name))    # &lt;class 'str'&gt;
+print(type(alter))   # &lt;class 'int'&gt;
+print(type(groesse)) # &lt;class 'float'&gt;
+print(type(aktiv))   # &lt;class 'bool'&gt;</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            &lt;class 'str'&gt;
+&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'bool'&gt;
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"I come from JavaScript and understand the string, number, and boolean data types. Explain the differences to me — especially why Python has int and float instead of number."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-arrows-clockwise"></i></span>
+          Type Conversion — When Python Doesn't Play Along
+        </h2>
+        <p>Sometimes you need to convert one type into another. Example: <code>input()</code> always returns a string. If you want to calculate with it, you first have to convert it to <code>int</code> or <code>float</code>.</p><p>This is called <strong>Type Casting</strong> — in Python with <code>int()</code>, <code>float()</code>, <code>str()</code>, or <code>bool()</code>.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># input() liefert immer einen String!
+alter_text = "16"
+
+# So geht es NICHT:
+# alter_text + 5  → Fehler!
+
+# So geht es RICHTIG:
+alter_zahl = int(alter_text)
+print(alter_zahl + 5)   # 21
+
+# Und zurück:
+preis = 19.99
+preis_text = str(preis)
+print("Der Preis ist: " + preis_text)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            21
+Der Preis ist: 19.99
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>zahl = int("16")
+text = str(19.99)</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>let zahl = parseInt("16");
+let text = String(19.99);</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python uses `int()` and `str()` directly as functions — in JavaScript, you need `parseInt()` or `String()`.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-game-controller"></i></span>
+          Variables in Action: Gaming Example
+        </h2>
+        <p>Imagine you're programming a small RPG. Every player has values that change — variables are perfect for exactly that.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Spieler-Status in einem RPG
+spieler_name = "DragonSlayer99"
+level = 5
+hp = 100
+mana = 50.5
+ist_online = True
+
+print(f"  Spieler: {spieler_name}")
+print(f" Level: {level}")
+print(f"  HP: {hp}")
+print(f" Mana: {mana}")
+print(f" Online: {ist_online}")
+
+# Level-Up!
+level = level + 1
+hp = hp + 20
+print(f" Level-Up! Du bist jetzt Level {level}!")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+              Spieler: DragonSlayer99
+ Level: 5
+  HP: 100
+ Mana: 50.5
+ Online: True
+ Level-Up! Du bist jetzt Level 6!
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Create a Python RPG example with variables for name, level, HP, and mana. Show a battle where HP decreases and XP increases."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-tag"></i></span>
+          Good Names — The Art of Variable Names
+        </h2>
+        <p>In Python, there are conventions for variable names. They help you and others read the code. Here are the most important rules:</p><ul><li>Only lowercase letters, numbers, and underscores: <code>spieler_name</code></li><li>No numbers at the beginning: <code>1name</code> is forbidden</li><li>No spaces — use underscores instead: <code>mein_name</code></li><li>Be descriptive: <code>alter</code> instead of <code>a</code></li><li>No reserved words: <code>print</code>, <code>if</code>, <code>for</code> are off-limits</li></ul><p>This is called <strong>snake_case</strong> — the Python standard notation.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>#  Gute Namen
+spieler_name = "Max"
+aktuelles_level = 42
+ist_angemeldet = True
+
+#  Schlechte Namen
+# x = "Max"        → zu kurz
+# 1name = "Max"    → Zahl am Anfang
+# mein Name = "Max" → Leerzeichen!
+# print = 5        → reserviertes Wort!</code></pre>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Variable Quiz</h2>
+        </div>
+        <p class="py-classic-exercise__text">Write a program <code>variablen.py</code> that defines 4 variables with different data types and outputs their type with <code>type()</code>.</p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-1-1">
+            <label for="task-01-1-1" class="py-classic-exercise__task-text">Create variablen.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-1-2">
+            <label for="task-01-1-2" class="py-classic-exercise__task-text">Define 4 variables</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-1-3">
+            <label for="task-01-1-3" class="py-classic-exercise__task-text">Use type() for each variable</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-1-4">
+            <label for="task-01-1-4" class="py-classic-exercise__task-text">Run the program</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>name = "Python"
+version = 3.11
+ist_cool = True
+anteil = 0.85
+
+print(type(name))
+print(type(version))
+print(type(ist_cool))
+print(type(anteil))</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-01-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-01-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>name = "Python"
+version = 3.11
+ist_cool = True
+anteil = 0.85
+
+print(type(name))
+print(type(version))
+print(type(ist_cool))
+print(type(anteil))</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Currency Converter</h2>
+        </div>
+        <p class="py-classic-exercise__text">Write a currency converter that converts euros to dollars. Use <code>float(input())</code> for the input. Exchange rate: 1€ = 1.08$</p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-2-1">
+            <label for="task-01-2-1" class="py-classic-exercise__task-text">Create waehrung.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-2-2">
+            <label for="task-01-2-2" class="py-classic-exercise__task-text">Input with float(input())</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-2-3">
+            <label for="task-01-2-3" class="py-classic-exercise__task-text">Calculate Euro × 1.08</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-2-4">
+            <label for="task-01-2-4" class="py-classic-exercise__task-text">Output result with 2 decimal places</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>euro = float(input("Betrag in Euro: "))
+dollar = euro * 1.08
+print(f"{euro}€ = {dollar:.2f}$")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-01-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-01-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>euro = float(input("Betrag in Euro: "))
+dollar = euro * 1.08
+print(f"{euro}€ = {dollar:.2f}$")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy Checkpoint: User Profile</h2>
+        </div>
+        <p class="py-classic-exercise__text">Expand PyBuddy: Store the user's name in a variable and output a personalized greeting. This is the first building block of your assistant!</p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-3-1">
+            <label for="task-01-3-1" class="py-classic-exercise__task-text">Open pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-3-2">
+            <label for="task-01-3-2" class="py-classic-exercise__task-text">Create variable nutzer_name</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-3-3">
+            <label for="task-01-3-3" class="py-classic-exercise__task-text">Use f-string for greeting</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-01-3-4">
+            <label for="task-01-3-4" class="py-classic-exercise__task-text">Test with different names</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+nutzer_name = "Max"
+
+print(f" Hallo {nutzer_name}!")
+print("Ich bin PyBuddy, dein digitaler Assistent.")
+print(f"Bereit für deine Befehle, {nutzer_name}!")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-01-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-01-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+nutzer_name = "Max"
+
+print(f" Hallo {nutzer_name}!")
+print("Ich bin PyBuddy, dein digitaler Assistent.")
+print(f"Bereit für deine Befehle, {nutzer_name}!")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Learning Break</span>
+        <p class="py-classic-funfact__text">In <strong>The Sims</strong>, every character has variables for hunger, energy, fun, and social. From a programming perspective, it's nothing other than <code>hunger = 80</code> — and when your Sim eats, the value is increased. You're currently programming the basics for your own game!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-package"></i></span><span>Variables = labeled boxes for data</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-hash"></i></span><span>The 4 main types: str, int, float, bool</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-arrows-clockwise"></i></span><span>Type conversion with int(), float(), str(), bool()</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-game-controller"></i></span><span>Variables change during the program (level up!)</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-tag"></i></span><span>Snake_case: spieler_name, aktuelles_level</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="00-setup-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">00 – Setup & Erste Schritte</span>
+    </a>
+    <a href="02-strings-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">Input, Output & Strings</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Chapters</h4><nav><a href="../index-en.html#kapitel">All Chapters</a><a href="06-listen-en.html">06. Lists</a><a href="12-ki-cocoding-en.html">12. AI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Resources</h4><nav><a href="../lexikon-en.html">Glossary</a><a href="../abschlussprojekt-en.html">Final Project</a><a href="../../../../index-en.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Legal</h4><nav><a href="../../../../pages/impressum-en.html">Imprint</a><a href="../../../../pages/datenschutz-en.html">Privacy</a><a href="../../../../pages/disclaimer-en.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden-en.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Support</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

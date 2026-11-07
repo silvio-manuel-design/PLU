@@ -1,0 +1,130 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — Back to Top (only remaining FAB)
+   Theme moved to header, Classroom moved to footer
+   ============================================================ */
+
+.video-fab-container {
+  position: fixed;
+  bottom: var(--video-space-6);
+  right: var(--video-space-6);
+  z-index: var(--video-z-fab);
+  display: flex;
+  flex-direction: column;
+  gap: var(--video-space-3);
+}
+
+/* Only show back-to-top; hide legacy theme/classroom buttons */
+.video-fab-container .video-theme-toggle,
+.video-fab-container .video-classroom-toggle {
+  display: none !important;
+}
+
+/* ============================================================
+   HEADER BACK-TO-TOP
+   Inherits .video-header__btn base styles from header.css.
+   Override FAB-specific styles so it matches other header buttons.
+   ============================================================ */
+
+.video-header .video-back-to-top {
+  /* Match header button sizing exactly */
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1rem;
+}
+
+.video-header .video-back-to-top:hover {
+  transform: scale(1.05);
+  color: var(--video-text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.video-header .video-back-to-top:active {
+  transform: scale(0.95);
+}
+
+/* Light mode header back-to-top */
+[data-theme="light"] .video-header .video-back-to-top {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--video-text-primary);
+}
+
+[data-theme="light"] .video-header .video-back-to-top:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   MOBILE: scroll-triggered visibility (same as other pages)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .video-header .video-back-to-top {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all var(--video-transition-base);
+  }
+
+  .video-header .video-back-to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* ============================================================
+   DESKTOP: always visible in header
+   ============================================================ */
+@media (min-width: 1024px) {
+  .video-header .video-back-to-top {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* ============================================================
+   STANDALONE FAB BACK-TO-TOP (non-header, e.g. chapter pages)
+   ============================================================ */
+.video-back-to-top {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--video-radius-full);
+  background: var(--video-bg-elevated);
+  border: 1px solid var(--video-border-subtle);
+  color: var(--video-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all var(--video-transition-base);
+  box-shadow: var(--video-shadow-md);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.video-back-to-top:hover {
+  transform: translateY(0) scale(1.1);
+  color: var(--video-text-primary);
+  border-color: var(--video-border-active);
+}
+
+.video-back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Mobile: Hide FABs completely (buttons move to header) */
+@media (max-width: 768px) {
+  .video-fab-container {
+    display: none !important;
+  }
+}

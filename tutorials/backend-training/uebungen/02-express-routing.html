@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01. Node.js | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>02. Express-Routing 🌐</h1>
+      <p class="hero-subtitle">Dein erster Webserver mit mehreren Seiten</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Ziel dieser Übung</h2>
+      <p>
+        Du lernst:
+      </p>
+      <ul>
+        <li>Einen Express-Webserver zu starten</li>
+        <li>Mehrere Routen (<code>/</code>, <code>/ueber</code>) zu definieren</li>
+        <li>JSON-Daten als API bereitzustellen</li>
+        <li>Den Unterschied zwischen HTML-Seite und API zu verstehen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🛠️ 2. Vorbereitung</h2>
+      <ol>
+        <li>Erstelle einen Ordner: <code>C:\NodeJS\express-uebung\</code></li>
+        <li>Führe im Terminal aus:<br>
+           <code>npm init -y</code><br>
+           <code>npm install express</code></li>
+        <li>Erstelle eine Datei <code>server.js</code></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>🌐 3. Aufgabe 1: Webserver mit zwei Routen</h2>
+      <p>
+        Dein Server soll folgende Routen haben:
+      </p>
+      <ul>
+        <li><code>GET /</code> → Zeigt eine HTML-Seite mit „Willkommen!“</li>
+        <li><code>GET /ueber</code> → Zeigt „Über diese Seite“ mit einem Absatz</li>
+      </ul>
+      <p>
+        Starte den Server auf Port <code>3000</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>🔌 4. Aufgabe 2: Einfache API</h2>
+      <p>
+        Füge eine dritte Route hinzu:
+      </p>
+      <ul>
+        <li><code>GET /api/zeit</code> → Liefert die aktuelle Uhrzeit als JSON</li>
+      </ul>
+      <p>
+        Beispiel-Antwort:<br>
+        <code>{"zeit": "14:30:22"}</code>
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 5. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Beantworte auf Papier:
+      </p>
+      <ol>
+        <li>Was ist der Unterschied zwischen einer HTML-Seite und einer API?</li>
+        <li>Warum verwendet man bei APIs meistens JSON?</li>
+        <li>Was passiert, wenn du zwei Routen mit demselben Pfad definierst?</li>
+      </ol>
+      <p>
+        Danach formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, warum man bei Express immer <code>res.send()</code> oder <code>res.json()</code> aufrufen muss.
+      </p>
+    </section>
+
+    <section>
+      <h2>✅ 6. Abgabe</h2>
+      <p>
+        Lade folgende Dateien hoch:
+      </p>
+      <ul>
+        <li><code>server.js</code></li>
+        <li><code>package.json</code></li>
+        <li>Screenshots aller drei Routen im Browser</li>
+      </ul>
+      <p>
+        Gib einen Freigabelink auf den Ordner in Moodle ab.
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Dein erster Webserver mit Routen ist fertig!</p>
+      <a href="../musterloesungen/02-express-routing-loesung.html" class="nav-button">🔍 Musterlösung ansehen (Lehrkräfte)</a>
+      <a href="03-php-formular.html" class="nav-button">→ 03. PHP-Formular</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

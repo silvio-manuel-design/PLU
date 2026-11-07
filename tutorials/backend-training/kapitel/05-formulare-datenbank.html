@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01 – Was ist Backend? | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>05 – Formulare & Datenbank 💾</h1>
+      <p class="hero-subtitle">Vom HTML-Formular zur sicheren Datenspeicherung</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Warum Formulare wichtig sind</h2>
+      <p>
+        Formulare sind die <strong>einzige Möglichkeit</strong>, wie Besucher Daten an deinen Server senden können:
+      </p>
+      <ul>
+        <li>Kontaktanfragen</li>
+        <li>Login-Daten</li>
+        <li>Bestellungen</li>
+        <li>Umfragen</li>
+      </ul>
+      <p>
+        Ohne korrektes HTML-Formular kommt <em>nichts</em> beim Backend an!
+      </p>
+    </section>
+
+    <section>
+      <h2>📝 2. Ein einfaches HTML-Formular</h2>
+      <p>
+        Jedes Formular braucht drei Dinge:
+      </p>
+      <ol>
+        <li>Das <code>&lt;form&gt;</code>-Tag mit <code>action</code> und <code>method</code></li>
+        <li>Eingabefelder mit <code>name</code>-Attribut</li>
+        <li>Einen Absende-Button</li>
+      </ol>
+      <pre><code class="js-code">&lt;form action="verarbeiten.php" method="POST"&gt;
+  &lt;label for="name"&gt;Name:&lt;/label&gt;
+  &lt;input type="text" id="name" name="name" required&gt;
+
+  &lt;label for="email"&gt;E-Mail:&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" required&gt;
+
+  &lt;label for="nachricht"&gt;Nachricht:&lt;/label&gt;
+  &lt;textarea id="nachricht" name="nachricht" required&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;Senden&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Das <code>name</code>-Attribut ist entscheidend!  
+        Nur Felder mit <code>name</code> werden gesendet – <code>id</code> dient nur der Verknüpfung mit <code>&lt;label&gt;</code>.
+      </div>
+    </section>
+
+    <section>
+      <h2>🔍 3. Clientseitige Prüfung (im Browser)</h2>
+      <p>
+        HTML5 bietet eingebaute Prüfungen – aber: <strong>Sie sind nicht sicher!</strong>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Attribut</th>
+            <th>Wirkung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>required</code></td>
+            <td>Feld muss ausgefüllt sein</td>
+            <td><code>&lt;input required&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>type="email"</code></td>
+            <td>Prüft auf gültige E-Mail</td>
+            <td><code>&lt;input type="email"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>minlength</code></td>
+            <td>Mindestlänge festlegen</td>
+            <td><code>&lt;input minlength="3"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>pattern</code></td>
+            <td>RegEx-Muster (z. B. nur Zahlen)</td>
+            <td><code>&lt;input pattern="[0-9]{4}"&gt;</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Diese Prüfungen können leicht umgangen werden!  
+        Die <em>wirkliche Sicherheit</em> passiert erst im Backend.
+      </div>
+    </section>
+
+    <section>
+      <h2>✅ 4. Formularprüfung mit JavaScript</h2>
+      <p>
+        Mit JavaScript kannst du <em>komplexere</em> Validierungen durchführen – z. B.:
+      </p>
+      <ul>
+        <li>Prüfen, ob zwei Passwörter übereinstimmen</li>
+        <li>Überprüfen, ob ein Name mindestens zwei Wörter enthält</li>
+        <li>Eine benutzerfreundliche Fehlermeldung anzeigen (ohne nerviges <code>alert()</code>)</li>
+      </ul>
+      <p>
+        Beispiel: Ein Registrierungsformular mit Name und Passwort.
+      </p>
+      <pre><code class="js-code">&lt;form id="registrierung"&gt;
+  &lt;label for="name"&gt;Name (mind. 2 Zeichen):&lt;/label&gt;
+  &lt;input type="text" id="name" name="name" required&gt;
+
+  &lt;label for="passwort"&gt;Passwort:&lt;/label&gt;
+  &lt;input type="password" id="passwort" name="passwort" required&gt;
+
+  &lt;label for="passwort2"&gt;Passwort wiederholen:&lt;/label&gt;
+  &lt;input type="password" id="passwort2" name="passwort2" required&gt;
+
+  &lt;div id="fehler" style="color: red; margin: 10px 0;"&gt;&lt;/div&gt;
+
+  &lt;button type="submit"&gt;Registrieren&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+document.getElementById('registrierung').addEventListener('submit', function(e) {
+  const name = document.getElementById('name').value;
+  const pass1 = document.getElementById('passwort').value;
+  const pass2 = document.getElementById('passwort2').value;
+  const fehlerDiv = document.getElementById('fehler');
+  fehlerDiv.textContent = ''; // Fehler zurücksetzen
+
+  let fehler = false;
+
+  if (name.length &lt; 2) {
+    fehlerDiv.textContent += '• Der Name muss mindestens 2 Zeichen lang sein.\n';
+    fehler = true;
+  }
+
+  if (pass1 !== pass2) {
+    fehlerDiv.textContent += '• Die Passwörter stimmen nicht überein.\n';
+    fehler = true;
+  }
+
+  if (fehler) {
+    e.preventDefault(); // Absenden verhindern
+  }
+});
+&lt;/script&gt;</code></pre>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Auch JavaScript-Prüfungen sind <em>nicht sicher</em> – 
+        sie können deaktiviert oder umgangen werden. Die endgültige Prüfung passiert <em>immer im Backend</em>.
+      </div>
+    </section>
+
+    <section>
+      <h2>🔄 5. Der Request – was wird gesendet?</h2>
+      <p>
+        Wenn du das Formular abschickst, sendet der Browser eine <strong>POST-Anfrage</strong> an die URL in <code>action</code>.
+      </p>
+      <p>
+        Gesendet werden nur die Werte der Felder mit <code>name</code>:
+      </p>
+      <pre><code>name=Max+Mustermann&passwort=geheim123&passwort2=geheim123</code></pre>
+      <p>
+        Dein Backend (PHP oder Node.js) empfängt diese Daten und kann sie verarbeiten – 
+        aber <em>nur dort</em> kannst du sicher sein, dass sie nicht manipuliert wurden.
+      </p>
+    </section>
+
+    <section>
+      <h2>🛡️ 6. Warum Backend-Prüfung unverzichtbar ist</h2>
+      <p>
+        Ein Angreifer kann:
+      </p>
+      <ul>
+        <li>Die HTML-Seite ändern und <code>required</code> entfernen</li>
+        <li>Mit Tools wie Postman beliebige Daten senden</li>
+        <li>SQL-Befehle in das Formular eingeben (SQL-Injection)</li>
+      </ul>
+      <p>
+        Deshalb musst du <em>immer</em> im Backend prüfen:
+      </p>
+      <ul>
+        <li>Ist die E-Mail wirklich eine E-Mail?</li>
+        <li>Enthält der Text gefährliche Zeichen?</li>
+        <li>Ist der Name nicht leer?</li>
+      </ul>
+      <div class="regel">
+        💡 <strong>Regel:</strong> Vertraue niemals den Daten aus dem Browser – 
+        prüfe und bereinige sie <em>immer</em> im Backend.
+      </div>
+    </section>
+
+    <section>
+      <h2>🧠 7. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Zeichne zuerst auf Papier ein Registrierungsformular mit:
+      </p>
+      <ul>
+        <li>Name (Pflicht, min. 2 Zeichen)</li>
+        <li>E-Mail (Pflicht, gültiges Format)</li>
+        <li>Passwort (Pflicht, min. 6 Zeichen)</li>
+        <li>Passwort-Wiederholung</li>
+      </ul>
+      <p>
+        Danach formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um das HTML-Formular mit JavaScript-Validierung zu erstellen – 
+        aber <em>nicht</em> den gesamten Code zu kopieren.
+      </p>
+    </section>
+
+    <section>
+      <h2>➡️ 8. Nächste Schritte</h2>
+      <p>
+        In den folgenden Kapiteln lernst du:
+      </p>
+      <ul>
+        <li>Wie du die Formulardaten in PHP sicher empfängst</li>
+        <li>Wie du sie in Node.js mit Express verarbeitest</li>
+        <li>Wie du sie sicher in der Datenbank speicherst</li>
+      </ul>
+      <p>
+        Aber zuerst: Wie unterscheiden sich beide Technologien?
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt verstehst du, wie HTML-Formulare und JavaScript zusammenarbeiten!</p>
+      <a href="./06-vergleich-node-php.html" class="nav-button">→ Zu Modul 06: Node.js vs. PHP</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

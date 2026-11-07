@@ -1,0 +1,230 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────
+     Filter Playground — M10
+     Interactive CSS filter simulator for editing basics
+     ────────────────────────────────────────────── */
+
+  .photo-filter-playground {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-6) 0;
+    overflow: hidden;
+  }
+
+  /* ── Stage ── */
+  .photo-filter-playground__stage {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--photo-space-6);
+    margin-bottom: var(--photo-space-5);
+  }
+
+  /* Image preview */
+  .photo-filter-playground__preview {
+    position: relative;
+    border-radius: var(--photo-radius-lg);
+    overflow: hidden;
+    background: #1a1a2e;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-filter-playground__preview svg {
+    width: 100%;
+    height: 100%;
+    max-height: 360px;
+    transition: filter 0.15s ease;
+    display: block;
+  }
+
+  /* Before/After split overlay */
+  .photo-filter-playground__preview-label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-family: var(--photo-font-mono, monospace);
+    font-size: var(--photo-font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: var(--photo-radius-full);
+    background: rgba(0,0,0,0.6);
+    color: var(--photo-accent);
+    z-index: 2;
+  }
+
+  /* ── Controls Panel ── */
+  .photo-filter-playground__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--photo-space-4);
+  }
+
+  .photo-filter-playground__panel-title {
+    font-family: var(--photo-font-display);
+    font-size: var(--photo-font-size-lg);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-1);
+  }
+
+  /* Individual slider control */
+  .photo-filter-playground__control {
+    display: flex;
+    flex-direction: column;
+    gap: var(--photo-space-2);
+  }
+
+  .photo-filter-playground__control-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .photo-filter-playground__control-label {
+    font-size: var(--photo-font-size-sm);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+  }
+
+  .photo-filter-playground__control-label i {
+    color: var(--photo-accent);
+    font-size: 1rem;
+  }
+
+  .photo-filter-playground__control-value {
+    font-family: var(--photo-font-mono, monospace);
+    font-size: var(--photo-font-size-sm);
+    font-weight: 700;
+    color: var(--photo-accent);
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* Range slider styling */
+  .photo-filter-playground__slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--photo-border-subtle);
+    border-radius: var(--photo-radius-full);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .photo-filter-playground__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--photo-accent);
+    border: 3px solid var(--photo-bg-elevated);
+    box-shadow: 0 0 0 2px var(--photo-accent), 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .photo-filter-playground__slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .photo-filter-playground__slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--photo-accent);
+    border: 3px solid var(--photo-bg-elevated);
+    box-shadow: 0 0 0 2px var(--photo-accent), 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+
+  /* Action buttons */
+  .photo-filter-playground__actions {
+    display: flex;
+    gap: var(--photo-space-2);
+    margin-top: var(--photo-space-2);
+  }
+
+  .photo-filter-playground__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+    padding: var(--photo-space-2) var(--photo-space-4);
+    border-radius: var(--photo-radius-md);
+    font-size: var(--photo-font-size-sm);
+    font-weight: 600;
+    border: 1px solid var(--photo-border-subtle);
+    background: var(--photo-bg-surface);
+    color: var(--photo-text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .photo-filter-playground__btn:hover {
+    border-color: var(--photo-border-default);
+    background: var(--photo-bg-card);
+  }
+
+  .photo-filter-playground__btn.is-active {
+    background: var(--photo-accent);
+    color: #1a1a1a;
+    border-color: var(--photo-accent);
+  }
+
+  /* Info bar */
+  .photo-filter-playground__info {
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-4) var(--photo-space-5);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-3);
+  }
+
+  .photo-filter-playground__info i {
+    color: var(--photo-accent);
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .photo-filter-playground__info span {
+    font-size: var(--photo-font-size-sm);
+    color: var(--photo-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .photo-filter-playground {
+      padding: var(--photo-space-4);
+    }
+
+    .photo-filter-playground__stage {
+      grid-template-columns: 1fr;
+    }
+
+    .photo-filter-playground__preview {
+      min-height: 240px;
+    }
+
+    .photo-filter-playground__panel {
+      gap: var(--photo-space-3);
+    }
+  }
+}

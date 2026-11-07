@@ -1,0 +1,132 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Mobile Navigation
+   ========================================================================== */
+
+@layer components {
+  .py-quest-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-md);
+    color: var(--py-text-secondary);
+    font-size: var(--py-text-lg);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-mobile-toggle:hover {
+    background: var(--py-bg-hover);
+    color: var(--py-text-primary);
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-mobile-toggle {
+      display: none;
+    }
+  }
+
+  .py-quest-mobile-nav__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: var(--py-z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--py-transition-base);
+  }
+
+  .py-quest-mobile-nav__backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .py-quest-mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--py-bg-card);
+    border-bottom: 1px solid var(--py-border-color);
+    border-radius: 0 0 var(--py-radius-2xl) var(--py-radius-2xl);
+    padding: var(--py-space-6);
+    z-index: var(--py-z-modal);
+    transform: translateY(-100%);
+    transition: transform var(--py-transition-slow);
+    box-shadow: var(--py-shadow-xl);
+  }
+
+  .py-quest-mobile-nav.is-open {
+    transform: translateY(0);
+  }
+
+  .py-quest-mobile-nav__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-mobile-nav__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-mobile-nav__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--py-bg-hover);
+    border: none;
+    border-radius: var(--py-radius-md);
+    color: var(--py-text-secondary);
+    font-size: var(--py-text-lg);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-mobile-nav__close:hover {
+    background: var(--py-border-color);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-mobile-nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-1);
+  }
+
+  .py-quest-mobile-nav__link {
+    display: flex;
+    align-items: center;
+    padding: var(--py-space-3) var(--py-space-4);
+    border-radius: var(--py-radius-lg);
+    font-size: var(--py-text-base);
+    font-weight: var(--py-weight-medium);
+    color: var(--py-text-secondary);
+    text-decoration: none;
+    transition: all var(--py-transition-fast);
+    border-left: 3px solid transparent;
+  }
+
+  .py-quest-mobile-nav__link:hover {
+    background: var(--py-bg-hover);
+    color: var(--py-text-primary);
+    border-left-color: var(--py-primary);
+  }
+
+  .py-quest-mobile-nav__link.is-active {
+    background: var(--py-bg-hover);
+    color: var(--py-primary);
+    border-left-color: var(--py-primary);
+    font-weight: var(--py-weight-semibold);
+  }
+}

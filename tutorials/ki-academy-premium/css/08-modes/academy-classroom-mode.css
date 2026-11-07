@@ -1,0 +1,233 @@
+/* ==========================================================================
+   ACADEMY CLASSROOM MODE - KI Academy Premium Classroom Overrides
+   
+   ITCSS Layer: 08 - Modes (Trumps)
+   
+   Diese Datei enthält ALLE Academy-spezifischen Classroom-Mode-Overrides.
+   Sie wird NACH der Basis classroom-mode.css und NACH academy-components.css
+   geladen, um spezifische Academy-Komponenten im Präsentationsmodus
+   anzupassen (größere Schrift, mehr Padding, optimierte Animationen).
+   
+   Architektur-Prinzip:
+   - Basis classroom-mode.css enthält NUR generische PLU-Regeln
+   - Diese Datei enthält NUR Academy-Komponenten-Regeln
+   - Keine Kreuzreferenzen zwischen Basis und Submodule
+   ========================================================================== */
+
+/* ========================================================================
+   TOKEN SCALING (Academy-specific)
+   ======================================================================== */
+
+html.classroom-mode {
+  --text-xs: clamp(0.875rem, 1.2vw, 1rem);
+  --text-sm: clamp(1rem, 1.4vw, 1.25rem);
+  --text-base: clamp(1.25rem, 1.8vw, 1.75rem);
+  --text-lg: clamp(1.5rem, 2.2vw, 2.25rem);
+  --text-xl: clamp(1.75rem, 2.8vw, 3rem);
+  --text-2xl: clamp(2rem, 3.5vw, 4rem);
+  --text-3xl: clamp(2.5rem, 4.5vw, 5rem);
+  --text-4xl: clamp(3rem, 6vw, 7rem);
+  --text-5xl: clamp(4rem, 8vw, 10rem);
+}
+
+/* ========================================================================
+   HEADER
+   ======================================================================== */
+
+html.classroom-mode .academy-header {
+  height: 100px;
+}
+
+html.classroom-mode .academy-header__logo {
+  width: 44px;
+  height: 44px;
+}
+
+html.classroom-mode .academy-header__brand-text {
+  font-size: var(--text-xl);
+}
+
+/* ========================================================================
+   NAVIGATION
+   ======================================================================== */
+
+html.classroom-mode .academy-nav-item__link,
+html.classroom-mode .academy-nav-item__trigger {
+  padding: 1.25rem 2rem;
+  font-size: var(--text-lg);
+}
+
+html.classroom-mode .academy-nav-dropdown__link {
+  font-size: var(--text-base);
+  padding: 1rem 1.5rem;
+}
+
+/* ========================================================================
+   HERO
+   ======================================================================== */
+
+html.classroom-mode .academy-hero {
+  min-height: 85vh;
+}
+
+/* Hero zoom animation must run in classroom mode too (design consistency).
+   The base classroom-mode.css sets animation-duration: 0.01ms !important
+   on all elements. We override with !important for specific animations. */
+html.classroom-mode .academy-hero__bg img,
+html.classroom-mode .academy-hero__bg video {
+  animation: heroZoom 20s ease-out forwards !important;
+}
+
+html.classroom-mode .academy-hero__content {
+  max-width: 100%;
+  padding: 0 4vw;
+}
+
+/* Scroll indicator stays visible in classroom mode */
+html.classroom-mode .academy-hero__scroll {
+  bottom: 2.5rem;
+}
+
+/* Scroll indicator animation must run in classroom mode */
+html.classroom-mode .academy-hero__scroll-line {
+  animation: scroll-pulse 2s ease-in-out infinite !important;
+}
+
+html.classroom-mode .academy-hero__title {
+  font-size: var(--text-5xl);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+html.classroom-mode .academy-hero__subtitle {
+  font-size: var(--text-xl);
+  max-width: 90%;
+}
+
+html.classroom-mode .academy-hero__cta .academy-btn {
+  padding: 1.25rem 2.5rem;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  min-height: 64px;
+  min-width: 180px;
+}
+
+/* ========================================================================
+   CONTAINER & SECTIONS
+   ======================================================================== */
+
+html.classroom-mode .academy-container {
+  max-width: 100%;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+html.classroom-mode .academy-section {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+html.classroom-mode .academy-section__title {
+  font-size: var(--text-4xl);
+}
+
+html.classroom-mode .academy-section__subtitle {
+  font-size: var(--text-xl);
+}
+
+/* ========================================================================
+   CARDS & CONTENT
+   ======================================================================== */
+
+html.classroom-mode .academy-card {
+  padding: 2rem;
+}
+
+html.classroom-mode .academy-card__visual {
+  height: 200px;
+}
+
+html.classroom-mode .academy-card__icon {
+  width: 100px;
+  height: 100px;
+}
+
+html.classroom-mode .academy-card__icon i {
+  font-size: 64px;
+}
+
+html.classroom-mode .academy-card__title {
+  font-size: var(--text-2xl);
+}
+
+html.classroom-mode .academy-card__description {
+  font-size: var(--text-lg);
+}
+
+html.classroom-mode .academy-card__feature {
+  font-size: var(--text-base);
+}
+
+html.classroom-mode .academy-mirror__title,
+html.classroom-mode .academy-sprint__title {
+  font-size: var(--text-2xl);
+}
+
+html.classroom-mode .academy-mirror__text,
+html.classroom-mode .academy-sprint__desc {
+  font-size: var(--text-lg);
+}
+
+html.classroom-mode .academy-certificate__title {
+  font-size: var(--text-xl);
+}
+
+html.classroom-mode .academy-certificate__text,
+html.classroom-mode .academy-certificate__benefit {
+  font-size: var(--text-lg);
+}
+
+/* ========================================================================
+   FOOTER
+   ======================================================================== */
+
+html.classroom-mode .academy-footer__col h4,
+html.classroom-mode .academy-footer__col a {
+  font-size: var(--text-base);
+}
+
+/* ========================================================================
+   BUTTONS
+   ======================================================================== */
+
+html.classroom-mode .academy-btn {
+  padding: 1.25rem 2.5rem;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  min-height: 64px;
+  min-width: 180px;
+}
+
+/* ========================================================================
+   FLOATING ACTION BUTTON (FAB)
+   ======================================================================== */
+
+html.classroom-mode .fab-container {
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  right: 2rem;
+  gap: 1.5rem;
+}
+
+html.classroom-mode .fab-btn {
+  width: 64px;
+  height: 64px;
+  font-size: 1.75rem;
+}
+
+/* Mobile FAB positioning in classroom mode */
+@media (max-width: 767px) {
+  html.classroom-mode .fab-container {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    right: 1.5rem;
+  }
+}

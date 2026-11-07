@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mission 7: Few-Shot Learning - Mit Beispielen zur perfekten KI-Antwort">
+  <title>Mission 7: Few-Shot Learning | KI Academy</title>
+  
+  <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+<link rel="shortcut icon" href="../assets/icons/favicon.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/mission.css">
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
+
+  <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index.html" class="header-logo">
+        <div class="header-logo-icon">🤖</div>
+        <span class="header-logo-text">KI <span>ACADEMY</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Start</a>
+        <a href="mission-07.html" class="nav-link active">Mission 7</a>
+        <a href="../index.html#missions" class="nav-link">Alle Missionen</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <span class="mission-indicator">Mission 7 / 8</span>
+      <a href="../../pages/spenden.html" class="header-link header-support" style="color: var(--accent-pink);"><span class="support-icon">❤️</span><span class="support-text"> Support</span></a>
+      <nav class="lang-switch" aria-label="Sprache wählen">
+        <a href="mission-07.html" class="lang-btn active">DE</a>
+        <a href="mission-07-en.html" class="lang-btn">EN</a>
+      </nav>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Mission Hero -->
+    <section class="mission-hero">
+      <div class="mission-badge">MISSION 07</div>
+      <h1 class="mission-title">Few-Shot Learning</h1>
+      <p class="mission-subtitle">
+        Zeig der KI, was du willst – mit Beispielen! Lerne, wie du durch Vorbilder 
+        die Qualität deiner Antworten explosionsartig steigerst.
+      </p>
+      
+    </section>
+
+    <!-- Learning Objectives -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">🎯</span>
+        Deine Lernziele
+      </h2>
+      
+      <div class="objectives-list">
+        <div class="objective-item" data-objective="1">
+          <span class="check-box"></span>
+          <span class="objective-text">Du verstehst, warum Beispiele mächtiger sind als Beschreibungen</span>
+        </div>
+        <div class="objective-item" data-objective="2">
+          <span class="check-box"></span>
+          <span class="objective-text">Du erstellst effektive Input-Output-Beispiele</span>
+        </div>
+        <div class="objective-item" data-objective="3">
+          <span class="check-box"></span>
+          <span class="objective-text">Du wendest Few-Shot Learning auf Text, Code und Daten an</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Power of Examples -->
+    <section class="mission-section">
+      <div class="story-card">
+        <div class="story-header">
+          <span class="story-icon">💡</span>
+          <h3>Die Macht der Beispiele</h3>
+        </div>
+        <div class="story-content">
+          <p>
+            Stell dir vor, du sollst jemandem beibringen, was ein <strong>Haiku</strong> ist:
+          </p>
+          <div class="comparison-mini">
+            <div class="mini-option bad">
+              <strong>Nur Beschreibung:</strong><br>
+              <em>"Ein Haiku ist ein japanisches Gedicht mit 3 Zeilen und bestimmten Silbenzahlen."</em>
+            </div>
+            <div class="mini-option good">
+              <strong>Mit Beispiel:</strong><br>
+              <em>"Ein Haiku hat 5-7-5 Silben:<br>
+              Der alte See<br>
+              Ein Frosch springt hinein – Platsch!<br>
+              Stille wieder."</em>
+            </div>
+          </div>
+          <p>
+            <strong>Welche Erklärung hilft mehr?</strong> Das Beispiel! Dasselbe gilt für KI.
+            Ein gutes Beispiel sagt mehr als tausend Worte.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Zero-Shot vs Few-Shot -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">⚡</span>
+        Zero-Shot vs. Few-Shot: Der Unterschied
+      </h2>
+      
+      <div class="comparison-table">
+        <div class="table-header">
+          <div class="table-cell">❌ Zero-Shot (Nur Anweisung)</div>
+          <div class="table-cell">✅ Few-Shot (Mit Beispielen)</div>
+        </div>
+        
+        <div class="table-row">
+          <div class="table-cell">
+            <strong>Aufgabe:</strong> Klassifiziere Produktbewertungen als positiv/negativ<br><br>
+            <strong>Prompt:</strong><br>
+            <code>"Klassifiziere diese Bewertungen als positiv oder negativ."</code><br><br>
+            <strong>Problem:</strong> Die KI versteht nicht genau, was du meinst. Nutzt sie Sterne? Den Ton? Keywords?
+          </div>
+          <div class="table-cell">
+            <strong>Aufgabe:</strong> Klassifiziere Produktbewertungen als positiv/negativ<br><br>
+            <strong>Prompt:</strong><br>
+            <code>Bewertung: "Lieferung war schnell, aber Qualität mäßig."<br>Sentiment: neutral<br><br>
+Bewertung: "Absolut fantastisch, würde wieder kaufen!"<br>Sentiment: positiv<br><br>
+Bewertung: "Total enttäuscht, Geld zurück!"<br>Sentiment: negativ<br><br>
+Bewertung: "[DEINE BEWERTUNG]"<br>Sentiment:</code><br><br>
+            <strong>Ergebnis:</strong> Die KI versteht das Muster und wendet es an!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Anatomy of Good Examples -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">🧬</span>
+        Die Anatomie guter Beispiele
+      </h2>
+      
+      <div class="anatomy-container">
+        <div class="anatomy-card">
+          <div class="anatomy-icon">1</div>
+          <h4>Klarer Input</h4>
+          <p>Was geht rein? Ein Satz? Ein Text? Daten?</p>
+          <div class="example-box-small">
+            <code>Input: "Das Produkt ist okay."</code>
+          </div>
+        </div>
+        
+        <div class="anatomy-card">
+          <div class="anatomy-icon">2</div>
+          <h4>Klarer Output</h4>
+          <p>Was soll rauskommen? Format, Stil, Länge?</p>
+          <div class="example-box-small">
+            <code>Output: {"sentiment": "neutral", "confidence": 0.7}</code>
+          </div>
+        </div>
+        
+        <div class="anatomy-card">
+          <div class="anatomy-icon">3</div>
+          <h4>Konsistenz</h4>
+          <p>Alle Beispiele im gleichen Format!</p>
+          <div class="example-box-small">
+            <span class="consistency-good">✓ GLEICHES FORMAT</span>
+          </div>
+        </div>
+        
+        <div class="anatomy-card">
+          <div class="anatomy-icon">4</div>
+          <h4>Varietät</h4>
+          <p>Zeige verschiedene Fälle (Edge Cases!)</p>
+          <div class="example-box-small">
+            <span class="variety-good"> positiv / negativ / neutral / Sarkasmus</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="format-rules">
+        <h4>📋 Die Goldene Regel:</h4>
+        <div class="rule-box">
+          <code>Input: [Dein Input hier]<br>Output: [Gewünschter Output hier]<br><br>
+Input: [Dein Input hier]<br>Output: [Gewünschter Output hier]<br><br>
+Input: [ECHTE AUFGABE]<br>Output:</code>
+        </div>
+        <p class="rule-note">Die KI wird das letzte Output automatisch vervollständigen!</p>
+      </div>
+    </section>
+
+    <!-- Interactive: Few-Shot Builder -->
+    <section class="mission-section interactive-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">🔨</span>
+        Der Few-Shot Builder
+      </h2>
+      
+      <div class="lab-container">
+        <p class="lab-intro">
+          Wähle eine Aufgabe und sieh, wie sich der Prompt mit Beispielen verbessert:
+        </p>
+        
+        <div class="fsl-lab">
+          <!-- Task Selection -->
+          <div class="task-selector">
+            <h4>Wähle eine Aufgabe:</h4>
+            <div class="task-buttons">
+              <button class="task-btn active" data-task="sentiment">
+                <span class="task-icon">😊</span>
+                <span class="task-name">Sentiment-Analyse</span>
+              </button>
+              <button class="task-btn" data-task="translate">
+                <span class="task-icon">🌍</span>
+                <span class="task-name">Übersetzung (Jugendsprache)</span>
+              </button>
+              <button class="task-btn" data-task="summarize">
+                <span class="task-icon">📝</span>
+                <span class="task-name">Zusammenfassung (Bullet Points)</span>
+              </button>
+              <button class="task-btn" data-task="code">
+                <span class="task-icon">💻</span>
+                <span class="task-name">Code-Kommentare</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Example Count -->
+          <div class="example-count-selector">
+            <h4>Anzahl der Beispiele:</h4>
+            <div class="count-buttons">
+              <button class="count-btn" data-count="0">0 (Zero-Shot)</button>
+              <button class="count-btn active" data-count="2">2 Beispiele</button>
+              <button class="count-btn" data-count="3">3 Beispiele</button>
+            </div>
+          </div>
+          
+          <!-- Generated Prompt -->
+          <div class="generated-prompt" id="generated-prompt">
+            <h4>Dein Few-Shot Prompt:</h4>
+            <div class="prompt-display-box">
+              <pre id="prompt-code"></pre>
+            </div>
+            <div class="prompt-preview">
+              <h5>So antwortet die KI:</h5>
+              <div class="preview-output" id="preview-output"></div>
+            </div>
+            <button class="btn btn-secondary" id="copy-fsl-prompt">📋 Prompt kopieren</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Few-Shot Patterns -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">📚</span>
+        Bewährte Few-Shot Muster
+      </h2>
+      
+      <div class="patterns-container">
+        <!-- Pattern 1 -->
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-icon">🎭</span>
+            <h4>Stil-Transfer</h4>
+          </div>
+          <div class="pattern-content">
+            <p>Lehre der KI einen bestimmten Schreibstil:</p>
+            <div class="pattern-example">
+              <div class="pattern-input">
+                <strong>Input:</strong> Willkommen in unserem Shop.
+              </div>
+              <div class="pattern-output">
+                <strong>Output:</strong> Hey du! 🎉 Willkommen im Club – schön, dass du hier bist!
+              </div>
+            </div>
+            <div class="pattern-tags">
+              <span class="tag">Marketing</span>
+              <span class="tag">Tone of Voice</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern 2 -->
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-icon">📊</span>
+            <h4>Struktur-Vorgabe</h4>
+          </div>
+          <div class="pattern-content">
+            <p>Definiere das gewünschte Ausgabeformat:</p>
+            <div class="pattern-example">
+              <div class="pattern-input">
+                <strong>Input:</strong> Ich habe am Montag einen Termin beim Arzt.
+              </div>
+              <div class="pattern-output">
+                <strong>Output:</strong> {"was": "Arzttermin", "wann": "Montag", "wo": "", "prio": "normal"}
+              </div>
+            </div>
+            <div class="pattern-tags">
+              <span class="tag">JSON</span>
+              <span class="tag">Data Extraction</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern 3 -->
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-icon">🔄</span>
+            <h4>Umformulierung</h4>
+          </div>
+          <div class="pattern-content">
+            <p>Zeige, wie Text transformiert werden soll:</p>
+            <div class="pattern-example">
+              <div class="pattern-input">
+                <strong>Input:</strong> Das Produkt ist nicht schlecht.
+              </div>
+              <div class="pattern-output">
+                <strong>Output:</strong> Das Produkt ist gut.
+              </div>
+            </div>
+            <div class="pattern-tags">
+              <span class="tag">Simplification</span>
+              <span class="tag">Clarity</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern 4 -->
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-icon">🧩</span>
+            <h4>Klassifizierung</h4>
+          </div>
+          <div class="pattern-content">
+            <p>Sortiere Inhalte in Kategorien:</p>
+            <div class="pattern-example">
+              <div class="pattern-input">
+                <strong>Input:</strong> Mein Computer startet nicht mehr.
+              </div>
+              <div class="pattern-output">
+                <strong>Output:</strong> Kategorie: Hardware → Sub: Boot-Probleme
+              </div>
+            </div>
+            <div class="pattern-tags">
+              <span class="tag">Support</span>
+              <span class="tag">Routing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quality Tips -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">✨</span>
+        Qualitäts-Tipps für Beispiele
+      </h2>
+      
+      <div class="quality-tips">
+        <div class="quality-card good">
+          <div class="quality-header">
+            <span class="quality-icon">✅</span>
+            <h4>Dos</h4>
+          </div>
+          <ul class="quality-list">
+            <li>Starte mit einfachen Beispielen, steigere dann</li>
+            <li>Zeige Edge Cases (Grenzfälle)</li>
+            <li>Halte Beispiele kurz und prägnant</li>
+            <li>Nutze 2-5 Beispiele (meist optimal)</li>
+            <li>Ende mit dem echten Input (ohne Output)</li>
+          </ul>
+        </div>
+        
+        <div class="quality-card bad">
+          <div class="quality-header">
+            <span class="quality-icon">❌</span>
+            <h4>Don'ts</h4>
+          </div>
+          <ul class="quality-list">
+            <li>Widersprüchliche Beispiele geben</li>
+            <li>Zu viele Beispiele (Context-Limit!)</li>
+            <li>Nur ähnliche Fälle zeigen</li>
+            <li>Zu komplexe Beispiele am Anfang</li>
+            <li>Format zwischen Beispielen ändern</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-World Use Cases -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">🚀</span>
+        Einsatzgebiete im echten Leben
+      </h2>
+      
+      <div class="usecases-container">
+        <div class="usecase-item">
+          <div class="usecase-icon">📧</div>
+          <div class="usecase-content">
+            <h4>E-Mail Kategorisierung</h4>
+            <p>Sortiere eingehende Mails automatisch in "Wichtig", "Werbung", "Support"...</p>
+            <code class="usecase-code">
+Input: "50% Rabatt auf alle Schuhe!"<br>
+Kategorie: Werbung<br><br>
+Input: "Projekt-Deadline morgen"<br>
+Kategorie: Wichtig
+            </code>
+          </div>
+        </div>
+        
+        <div class="usecase-item">
+          <div class="usecase-icon">💬</div>
+          <div class="usecase-content">
+            <h4>Chatbot Training</h4>
+            <p>Lehre deinen Bot, wie er auf verschiedene Anfragen reagieren soll:</p>
+            <code class="usecase-code">
+Kunde: "Wann kommt meine Lieferung?"<br>
+Antwort: "Lass mich nachschauen..."
+            </code>
+          </div>
+        </div>
+        
+        <div class="usecase-item">
+          <div class="usecase-icon">📱</div>
+          <div class="usecase-content">
+            <h4>Content Moderation</h4>
+            <p>Erkenne problematische Kommentare automatisch:</p>
+            <code class="usecase-code">
+Kommentar: "Du bist so dumm!"<br>
+Aktion: Warnung aussprechen<br><br>
+Kommentar: "Guter Punkt, aber..."<br>
+Aktion: OK
+            </code>
+          </div>
+        </div>
+        
+        <div class="usecase-item">
+          <div class="usecase-icon">📄</div>
+          <div class="usecase-content">
+            <h4>Daten-Extraktion</h4>
+            <p>Extrahiere strukturierte Daten aus unstrukturiertem Text:</p>
+            <code class="usecase-code">
+Text: "Max Mustermann, 25.03.1990"<br>
+JSON: {"name": "Max Mustermann", "geb": "25.03.1990"}
+            </code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pro Tips -->
+    <section class="mission-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">🔥</span>
+        Pro-Tipps für Few-Shot
+      </h2>
+      
+      <div class="pro-tips-container">
+        <div class="tip-card">
+          <div class="tip-number">1</div>
+          <h4>Chain-of-Thought + Few-Shot kombinieren</h4>
+          <p>Zeige in Beispielen nicht nur das Ergebnis, sondern auch den Denkweg:</p>
+          <code>"Input: 2+3×4<br>Denkprozess: Zuerst Multiplikation (3×4=12), dann Addition (2+12=14)<br>Output: 14"</code>
+        </div>
+        
+        <div class="tip-card">
+          <div class="tip-number">2</div>
+          <h4>Negative Beispiele nutzen</h4>
+          <p>Zeige auch, was NICHT gewünscht ist, um Missverständnisse zu vermeiden.</p>
+        </div>
+        
+        <div class="tip-card">
+          <div class="tip-number">3</div>
+          <h4>Beispiele aus der echten Welt</h4>
+          <p>Nutze tatsächliche Daten deines Projekts als Beispiele – dann passt der Output perfekt!</p>
+        </div>
+        
+        <div class="tip-card">
+          <div class="tip-number">4</div>
+          <h4>Dynamische Few-Shot Templates</h4>
+          <p>Erstelle wiederverwendbare Templates mit Platzhaltern für verschiedene Aufgaben.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section class="mission-section quiz-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">✅</span>
+        Schnell-Check
+      </h2>
+      
+      <div class="quiz-container">
+        <div class="quiz-item" data-question="1">
+          <p class="quiz-question">1. Was ist das Hauptprinzip von Few-Shot Learning?</p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><span class="option-text">Mehr Prompts senden</span>
+            </div>
+            <div class="quiz-option" data-correct="true"><span class="option-text">Beispiele zeigen statt zu beschreiben</span>
+            </div>
+            <div class="quiz-option" data-correct="false">
+              longer<span class="option-text">Längere Prompts schreiben</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quiz-item" data-question="2">
+          <p class="quiz-question">2. Wie viele Beispiele sind meist optimal?</p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><span class="option-text">10+ Beispiele</span>
+            </div>
+            <div class="quiz-option" data-correct="true">
+              two-five<span class="option-text">2-5 Beispiele</span>
+            </div>
+            <div class="quiz-option" data-correct="false"><span class="option-text">Nur 1 Beispiel</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quiz-item" data-question="3">
+          <p class="quiz-question">3. Was ist bei den Beispielen wichtig?</p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><span class="option-text">Sie müssen komplex sein</span>
+            </div>
+            <div class="quiz-option" data-correct="false">
+              similar<span class="option-text">Sie sollten alle ähnlich sein</span>
+            </div>
+            <div class="quiz-option" data-correct="true">
+              consistent<span class="option-text">Konsistentes Format</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+      </div>
+    </section>
+
+    <!-- Mission Progress Summary -->
+    <section class="mission-section progress-summary-section">
+      <h2 class="section-heading">
+        <span class="heading-icon">📊</span>
+        Dein Missions-Fortschritt
+      </h2>
+      
+      <div class="progress-summary-card">
+        <div class="progress-stats">
+          <div class="progress-stat">
+            <span class="stat-number" id="objectives-completed">0/3</span>
+            <span class="stat-label">Lernziele erreicht</span>
+          </div>
+          <div class="progress-stat">
+            <span class="stat-number" id="progress-percentage">0%</span>
+            <span class="stat-label">Gesamtfortschritt</span>
+          </div>
+        </div>
+        
+        <div class="progress-bar-large">
+          <div class="progress-fill-large" id="mission-progress-fill"></div>
+        </div>
+        
+        <div class="progress-message" id="progress-message">
+          <span class="message-icon">🎯</span>
+          <span class="message-text">Hake alle Lernziele ab, um die Mission abzuschließen!</span>
+        </div>
+      </div>
+      
+      <!-- Complete Mission Button - moved here -->
+      <div class="complete-actions" style="margin-top: 32px; text-align: center;">
+        <button class="btn btn-primary complete-mission-btn disabled" data-mission="7" disabled>
+          <span>✅</span>
+          <span>Mission abschließen</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Mission Complete -->
+    <section class="mission-complete" id="mission-complete">
+      <div class="complete-card">
+        <div class="complete-icon">🎓</div>
+        <h2>Mission 7 abgeschlossen!</h2>
+        <p>Du lehrst jetzt die KI durch Beispiele – wie ein Meister!</p>
+        
+        <div class="complete-rewards">
+          <div class="reward">
+            <span class="reward-icon">⭐</span>
+            <span>+100 XP</span>
+          </div>
+          <div class="reward">
+            <span class="reward-icon">🏆</span>
+            <span>Achievement: "Few-Shot Expert"</span>
+          </div>
+        </div>
+        
+        <div class="complete-actions">
+          <a href="mission-08.html" class="btn btn-secondary next-mission-btn">
+            <span>Nächste Mission</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mission Navigation -->
+  <nav class="mission-bottom-nav">
+    <a href="mission-06.html" class="nav-link">
+      <span>←</span> Mission 6
+    </a>
+
+  </nav>
+
+  <!-- FAB Buttons -->
+  <div class="fab-container">
+    <button class="fab" id="backToTop" data-tooltip="Nach oben">↑</button>
+    <button class="fab" id="classroomToggle" data-tooltip="Classroom Mode">📺</button>
+    <button class="fab" id="themeToggle" data-tooltip="Hell/Dunkel">☀️</button>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/mission.js"></script>
+  <script>
+    // Mission 7 specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Few-Shot Lab Data
+      const tasks = {
+        sentiment: {
+          name: 'Sentiment-Analyse',
+          zeroShot: 'Klassifiziere die Stimmung dieser Bewertung als positiv, negativ oder neutral:',
+          examples: [
+            { input: 'Das Produkt ist absolut fantastisch! Liebe es!', output: 'positiv' },
+            { input: 'Naja, es funktioniert, aber nichts Besonderes.', output: 'neutral' },
+            { input: 'Totaler Schrott, nie wieder!', output: 'negativ' }
+          ],
+          finalInput: 'Lieferung war schnell, Qualität okay für den Preis.',
+          previewOutput: 'neutral'
+        },
+        translate: {
+          name: 'Übersetzung (Jugendsprache)',
+          zeroShot: 'Übersetze ins Jugendsprach-Deutsch:',
+          examples: [
+            { input: 'Das ist sehr gut!', output: 'Das ist wild! 🔥' },
+            { input: 'Ich verstehe nicht.', output: 'Ich check gar nix, digga 😅' },
+            { input: 'Das macht keinen Sinn.', output: 'Das ist komplett lost, no cap 🚫' }
+          ],
+          finalInput: 'Ich freue mich sehr darauf.',
+          previewOutput: 'Ich bin so hyped, das wird krank! 💯'
+        },
+        summarize: {
+          name: 'Zusammenfassung',
+          zeroShot: 'Fasse den Text als Bullet Points zusammen:',
+          examples: [
+            { input: 'Die Sonne scheint und die Vögel singen. Es ist ein schöner Tag.', output: '• Gutes Wetter\n• Sonnig\n• Vögel singen' },
+            { input: 'Der Meeting war lang. Wir haben viele Entscheidungen getroffen.', output: '• Langes Meeting\n• Viele Entscheidungen getroffen' }
+          ],
+          finalInput: 'Das Produkt wurde aktualisiert. Neue Features sind dabei. Bugfixes auch.',
+          previewOutput: '• Produkt aktualisiert\n• Neue Features\n• Bugfixes'
+        },
+        code: {
+          name: 'Code-Kommentare',
+          zeroShot: 'Füge einem Code-Kommentar hinzu:',
+          examples: [
+            { input: 'function add(a, b) { return a + b; }', output: '// Addiert zwei Zahlen und gibt das Ergebnis zurück' },
+            { input: 'const users = [];', output: '// Leeres Array für Benutzerliste' }
+          ],
+          finalInput: 'if (user.isActive) { login(); }',
+          previewOutput: '// Prüft ob Benutzer aktiv ist und führt Login durch'
+        }
+      };
+
+      let currentTask = 'sentiment';
+      let exampleCount = 2;
+
+      const taskBtns = document.querySelectorAll('.task-btn');
+      const countBtns = document.querySelectorAll('.count-btn');
+      const promptCode = document.getElementById('prompt-code');
+      const previewOutput = document.getElementById('preview-output');
+      const copyBtn = document.getElementById('copy-fsl-prompt');
+
+      function generatePrompt() {
+        const task = tasks[currentTask];
+        let prompt = '';
+        
+        if (exampleCount === 0) {
+          prompt = `${task.zeroShot}\n\n"${task.finalInput}"`;
+        } else {
+          const examples = task.examples.slice(0, exampleCount);
+          examples.forEach((ex, i) => {
+            prompt += `Beispiel ${i + 1}:\nInput: "${ex.input}"\nOutput: "${ex.output}"\n\n`;
+          });
+          prompt += `Aufgabe:\nInput: "${task.finalInput}"\nOutput:`;
+        }
+        
+        promptCode.textContent = prompt;
+        previewOutput.innerHTML = `<code>"${task.previewOutput}"</code>`;
+      }
+
+      taskBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          taskBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentTask = this.dataset.task;
+          generatePrompt();
+        });
+      });
+
+      countBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          countBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          exampleCount = parseInt(this.dataset.count);
+          generatePrompt();
+        });
+      });
+
+      copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(promptCode.textContent);
+        this.textContent = '✅ Kopiert!';
+        setTimeout(() => this.textContent = '📋 Prompt kopieren', 2000);
+      });
+
+      // Initialize
+      generatePrompt();
+      
+// Quiz functionality
+      const quizItems = document.querySelectorAll('.quiz-item');
+      const quizFeedback = document.getElementById('quiz-feedback');
+      let correctAnswers = 0;
+
+      quizItems.forEach(item => {
+        const options = item.querySelectorAll('.quiz-option');
+        options.forEach(option => {
+          option.addEventListener('click', function() {
+            options.forEach(o => o.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            const selected = document.querySelectorAll('.quiz-option.selected');
+            if (selected.length === 3) {
+              correctAnswers = 0;
+              selected.forEach(sel => {
+                if (sel.dataset.correct === 'true') correctAnswers++;
+              });
+              
+              quizFeedback.innerHTML = `
+                <div class="feedback-content ${correctAnswers === 3 ? 'success' : 'partial'}">
+                  <span class="feedback-icon">${correctAnswers === 3 ? '🎉' : '👍'}</span>
+                  <p>${correctAnswers}/3 richtig! ${correctAnswers === 3 ? 'Perfekt!' : 'Fast geschafft!'}</p>
+                </div>
+              `;
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

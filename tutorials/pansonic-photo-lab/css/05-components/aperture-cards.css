@@ -1,0 +1,96 @@
+/* =========================================
+   COMPONENT: Aperture Ring Cards
+   For f-stop ranges — aperture blade aesthetic
+   Light progression from bright to dark
+   ========================================= */
+
+.photo-aperture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--photo-space-4);
+  margin-block: var(--photo-space-6);
+}
+
+.photo-aperture-card {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-6);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-aperture-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+}
+
+/* Aperture blade visual */
+.photo-aperture-card__blade {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto var(--photo-space-4);
+  position: relative;
+}
+
+.photo-aperture-card__blade svg {
+  width: 100%;
+  height: 100%;
+}
+
+.photo-aperture-card__fstop {
+  font-size: var(--photo-font-size-2xl);
+  font-weight: var(--photo-font-weight-black);
+  color: var(--aperture-color, var(--photo-accent));
+  line-height: 1;
+  margin-bottom: var(--photo-space-2);
+}
+
+.photo-aperture-card__label {
+  font-weight: var(--photo-font-weight-bold);
+  font-size: var(--photo-font-size-base);
+  color: var(--photo-text-primary);
+  margin-bottom: var(--photo-space-2);
+}
+
+.photo-aperture-card__desc {
+  font-size: var(--photo-font-size-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-body);
+}
+
+/* Light progression — brighter = more open */
+.photo-aperture-card--open    { --aperture-color: #e8a87c; }
+.photo-aperture-card--mid     { --aperture-color: var(--photo-accent); }
+.photo-aperture-card--closed  { --aperture-color: #7b8fa6; }
+.photo-aperture-card--diffraction { --aperture-color: #9b8aa5; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .photo-aperture-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--photo-space-3);
+  }
+  .photo-aperture-card {
+    padding: var(--photo-space-4);
+  }
+  .photo-aperture-card__blade {
+    width: 56px;
+    height: 56px;
+  }
+  .photo-aperture-card__fstop {
+    font-size: var(--photo-font-size-xl);
+  }
+  .photo-aperture-card__label {
+    font-size: var(--photo-font-size-sm);
+  }
+  .photo-aperture-card__desc {
+    font-size: var(--photo-font-size-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,133 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Toast Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-toast-container {
+    position: fixed;
+    top: var(--py-space-4);
+    right: var(--py-space-4);
+    z-index: var(--py-z-modal);
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-3);
+    pointer-events: none;
+    max-width: 24rem;
+    width: calc(100% - var(--py-space-8));
+  }
+
+  .py-quest-toast {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    padding: var(--py-space-4);
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-lg);
+    box-shadow: var(--py-shadow-lg);
+    pointer-events: auto;
+    animation: toastSlideIn 0.3s ease both;
+    position: relative;
+  }
+
+  .py-quest-toast.is-hiding {
+    animation: toastSlideOut 0.3s ease both;
+  }
+
+  .py-quest-toast--success {
+    border-left: 4px solid var(--py-success);
+  }
+
+  .py-quest-toast--error {
+    border-left: 4px solid var(--py-error);
+  }
+
+  .py-quest-toast--warning {
+    border-left: 4px solid var(--py-warning);
+  }
+
+  .py-quest-toast--info {
+    border-left: 4px solid var(--py-info);
+  }
+
+  .py-quest-toast__icon {
+    flex-shrink: 0;
+    font-size: var(--py-text-xl);
+  }
+
+  .py-quest-toast--success .py-quest-toast__icon { color: var(--py-success); }
+  .py-quest-toast--error .py-quest-toast__icon { color: var(--py-error); }
+  .py-quest-toast--warning .py-quest-toast__icon { color: var(--py-warning); }
+  .py-quest-toast--info .py-quest-toast__icon { color: var(--py-info); }
+
+  .py-quest-toast__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .py-quest-toast__title {
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-1);
+  }
+
+  .py-quest-toast__text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-normal);
+  }
+
+  .py-quest-toast__close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--py-radius-sm);
+    color: var(--py-text-muted);
+    font-size: var(--py-text-sm);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-toast__close:hover {
+    background: var(--py-bg-hover);
+    color: var(--py-text-primary);
+  }
+
+  @keyframes toastSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes toastSlideOut {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .py-quest-toast {
+      animation: none;
+    }
+    .py-quest-toast.is-hiding {
+      animation: none;
+      opacity: 0;
+    }
+  }
+}

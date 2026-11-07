@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Systematic prompting for Python, code review with AI, efficient debugging strategies.">
+  <meta name="theme-color" content="#306998">
+  <title>12 – AI Co-Coding | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/12-ki-cocoding.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/12-ki-cocoding-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index-en.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index-en.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index-en.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon-en.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt-en.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index-en.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="12-ki-cocoding.html" class="py-classic-lang__btn " data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="12-ki-cocoding-en.html" class="py-classic-lang__btn is-active" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index-en.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index-en.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k12-ki-cocoding.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index-en.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 12</span>
+      </nav>
+      <h1 class="py-classic-hero__title">AI Co-Coding</h1>
+      <p class="py-classic-hero__subtitle">Systematic prompting for Python, code review with AI, efficient debugging strategies.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 60 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Schwer</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">You write effective prompts for Python code with AI</li>
+        <li class="py-classic-learning-goals__item">You critically review AI-generated code and improve it</li>
+        <li class="py-classic-learning-goals__item">You use AI-assisted debugging for quick error fixing</li>
+        <li class="py-classic-learning-goals__item">You extend PyBuddy with an AI prompt generator</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-robot"></i></span>
+          Effective Prompting
+        </h2>
+        <p>Good prompts are like good assignments: <strong>specific, structured, and rich in context</strong>. Instead of "Write me a game" you say: "Create a number guessing game in Python with input(), random numbers, and a guess counter. Comment the code."</p><p>The best structure for prompts:</p><ol class="py-classic-steps"><li class="py-classic-steps__item"><p class="py-classic-steps__text"><strong>Context:</strong> Who are you, what can you do?</p></li><li class="py-classic-steps__item"><p class="py-classic-steps__text"><strong>Requirement:</strong> What exactly should be done?</p></li><li class="py-classic-steps__item"><p class="py-classic-steps__text"><strong>Format:</strong> How should the answer look?</p></li><li class="py-classic-steps__item"><p class="py-classic-steps__text"><strong>Constraints:</strong> What should be avoided?</p></li></ol>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Schlechter vs. guter Prompt (als String)
+schlecht = "Schreib mir ein Programm"
+
+gut = '''Ich bin 16 Jahre alt und lerne Python. 
+Erstelle ein Zahlenratespiel mit folgenden Anforderungen:
+- Nutze random.randint() für eine Zahl 1-100
+- Der Spieler gibt Tipps ein
+- Nach jedem Tipp kommt "zu hoch" oder "zu niedrig"
+- Zähle die Versuche
+- Gib am Ende die Anzahl der Versuche aus
+- Kommentiere den Code für Anfänger
+Format: Nur Python-Code, keine Erklärungen dazwischen.'''
+
+print("Länge schlecht:", len(schlecht))
+print("Länge gut:", len(gut))</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Länge schlecht: 23
+Länge gut: 342
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"I'm a beginner in Python. Explain the 5 most important rules for effective prompting when I use AI for code generation. Use concrete examples."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-magnifying-glass"></i></span>
+          Code Review with AI
+        </h2>
+        <p>AI is an excellent <strong>code reviewer</strong> — if you ask the right questions. Ask the AI to check your code for bugs, security vulnerabilities, and best practices.</p><p>Typical review questions:</p><ul><li>"Review this function for bugs and edge cases."</li><li>"Check for Python best practices (PEP 8)."</li><li>"Are there security issues?"</li><li>"How can I make the code more efficient?"</li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Beispiel-Code für ein KI-Review
+def berechne_rabatt(preis, prozent):
+    return preis - (preis * prozent / 100)
+
+# KI-Prompt:
+review_prompt = '''
+Reviewe die Funktion berechne_rabatt().
+- Prüfe auf Bugs (z.B. negative Preise, Prozent &gt; 100)
+- Schlage Input-Validierung vor
+- Formatiere nach PEP 8
+- Gib den verbesserten Code als Komplettlösung aus
+'''
+
+print(review_prompt)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            
+Reviewe die Funktion berechalt().
+- Prüfe auf Bugs (z.B. negative Preise, Prozent &gt; 100)
+...
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Review the following Python function and suggest improvements: def login(user, pw): if user == 'admin' and pw == '1234': return True. Check security and best practices."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-bug"></i></span>
+          AI-Assisted Debugging
+        </h2>
+        <p>When your code doesn't work, copy <strong>error message + code</strong> into the AI. The best question is specific: "I get [ERROR]. Here is my code. Explain to me why and how I fix it."</p><div class="py-classic-box py-classic-box--tip"><h3 class="py-classic-box__title"><i class="ph ph-lightbulb"></i> Pro Tip</h3><p class="py-classic-box__text">Always provide the <strong>complete</strong> error text and the <strong>relevant</strong> code snippet. Without context, the AI can only guess.</p></div>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Beispiel für KI-Debugging-Request
+fehler_code = '''
+noten = [2, 3, 1, 4]
+durchschnitt = sum(noten) / len(noten)
+print(f"Durchschnitt: {durchschnitt:.2f}")
+'''
+
+fehlermeldung = "TypeError: unsupported operand type(s) for /: 'int' and 'list'"
+
+debug_prompt = f'''
+Ich bekomme diesen Fehler:
+{fehlermeldung}
+
+Hier ist mein Code:
+{fehler_code}
+
+Erkläre mir:
+1. Warum tritt der Fehler auf?
+2. Wie behebe ich ihn?
+3. Zeige mir den korrigierten Code.
+'''
+
+print(debug_prompt)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            
+Ich bekomme diesen Fehler:
+TypeError: unsupported operand type(s) for /: 'int' and 'list'
+...
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"I get an IndexError in Python. Explain the 3 most common causes of IndexError and how I can systematically fix them."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-lightning"></i></span>
+          AI Refactoring in Practice
+        </h2>
+        <p>Refactoring means: improving code without changing its behavior. AI can help you transform unreadable code into clean, pythonic solutions.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Vorher: Unleserlicher Code
+def note_von_prozent(p):
+    if p &gt; 89:
+        return 1
+    if p &gt; 76:
+        return 2
+    if p &gt; 63:
+        return 3
+    if p &gt; 50:
+        return 4
+    return 5
+
+# Nach KI-Refactoring (besser):
+def note_von_prozent(p):
+    """Gibt die Schulnote (1-5) basierend auf Prozent zurück."""
+    if not (0 &lt;= p &lt;= 100):
+        raise ValueError("Prozent muss zwischen 0 und 100 liegen")
+    
+    grenzen = [(89, 1), (76, 2), (63, 3), (50, 4)]
+    for grenze, note in grenzen:
+        if p &gt;= grenze:
+            return note
+    return 5
+
+# Test
+for p in [95, 82, 70, 55, 40]:
+    print(f"{p}% = Note {note_von_prozent(p)}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            95% = Note 1
+82% = Note 2
+70% = Note 3
+55% = Note 4
+40% = Note 5
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>def note_von_prozent(p):
+    if p &gt;= 89: return 1
+    if p &gt;= 76: return 2
+    ...</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>function noteVonProzent(p) {
+    if (p &gt;= 89) return 1;
+    if (p &gt;= 76) return 2;
+    ...
+}</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> The original if-elif pattern is identical in Python and JavaScript. The AI improvement with the threshold list shows pythonic thinking — less repetition, more readability.</div>
+          </div>
+        </div>
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Refactor this function into pythonic code: def summe(liste): ergebnis = 0; for i in range(len(liste)): ergebnis = ergebnis + liste[i]; return ergebnis. Explain the improvements."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-rocket"></i></span>
+          PyBuddy Meets AI
+        </h2>
+        <p>PyBuddy gets a function that generates structured AI prompts. The user enters a topic, PyBuddy creates a perfect prompt for it.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+def ki_prompt(thema, zielgruppe="Anfänger", sprache="de"):
+    """Generiert einen strukturierten KI-Prompt."""
+    prompt = f"""
+Erkläre mir das Thema '{thema}' in Python.
+Zielgruppe: {zielgruppe} (15-19 Jahre)
+Sprache: {sprache}
+Format: Code-Beispiel + Erklärung
+Anforderungen:
+- Nutze ein praktisches Beispiel
+- Kommentiere den Code für Anfänger
+- Zeige typische Fehler und wie man sie vermeidet
+- Maximal 30 Zeilen Code
+"""
+    return prompt.strip()
+
+# Nutzung
+thema = input(" Welches Thema willst du lernen? ")
+prompt = ki_prompt(thema)
+print("\n Dein KI-Prompt:")
+print("=" * 40)
+print(prompt)
+print("=" * 40)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+             Welches Thema willst du lernen? Schleifen
+
+ Dein KI-Prompt:
+========================================
+Erkläre mir das Thema 'Schleifen' in Python.
+Zielgruppe: Anfänger (15-19 Jahre)
+...
+========================================
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Create a Python prompt generator for AI requests. The function should take topic, difficulty level, and desired format as parameters and return a structured prompt."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: AI Refactor Challenge</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Take your grade calculator function from Chapter 4. Write a prompt that asks the AI to improve it with input validation, docstring, and type hints.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-1-1">
+            <label for="task-12-1-1" class="py-classic-exercise__task-text">Create refactor_prompt.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-1-2">
+            <label for="task-12-1-2" class="py-classic-exercise__task-text">Write the old code as a string</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-1-3">
+            <label for="task-12-1-3" class="py-classic-exercise__task-text">Formulate the refactoring prompt</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-1-4">
+            <label for="task-12-1-4" class="py-classic-exercise__task-text">Print the prompt</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># Alter Code (aus Kapitel 4)
+def note(p):
+    if p &gt;= 89: return 1
+    elif p &gt;= 76: return 2
+    elif p &gt;= 63: return 3
+    elif p &gt;= 50: return 4
+    else: return 5
+
+# KI-Prompt:
+prompt = '''Refactore diese Funktion mit:
+1. Input-Validierung (0-100)
+2. Docstring
+3. Typ-Hinweise
+4. PEP 8 Konformität
+5. Test-Beispiele
+
+Code:
+def note(p):
+    if p &gt;= 89: return 1
+    ...'''
+
+print(prompt)</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-12-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-12-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Alter Code (aus Kapitel 4)
+def note(p):
+    if p &gt;= 89: return 1
+    elif p &gt;= 76: return 2
+    elif p &gt;= 63: return 3
+    elif p &gt;= 50: return 4
+    else: return 5
+
+# KI-Prompt:
+prompt = '''Refactore diese Funktion mit:
+1. Input-Validierung (0-100)
+2. Docstring
+3. Typ-Hinweise
+4. PEP 8 Konformität
+5. Test-Beispiele
+
+Code:
+def note(p):
+    if p &gt;= 89: return 1
+    ...'''
+
+print(prompt)</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Debugging Exercise</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Write intentionally buggy code (e.g. IndexError, TypeError). Then write an AI prompt that contains the error message and code and asks for an explanation.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-2-1">
+            <label for="task-12-2-1" class="py-classic-exercise__task-text">Create debug_prompt.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-2-2">
+            <label for="task-12-2-2" class="py-classic-exercise__task-text">Write buggy code</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-2-3">
+            <label for="task-12-2-3" class="py-classic-exercise__task-text">Add error message</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-2-4">
+            <label for="task-12-2-4" class="py-classic-exercise__task-text">Formulate debugging questions</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># Absichtlich fehlerhafter Code
+code = "\nspieler = ['Anna', 'Ben']\nprint(spieler[5])  # IndexError!\n"
+
+fehler = 'IndexError: list index out of range'
+
+prompt = f'''\nIch bekomme diesen Fehler: {fehler}\n\nMein Code:{code}\n\nErkläre mir:\n1. Warum passiert das?\n2. Wie finde ich die Zeile mit dem Fehler?\n3. Wie behebe ich ihn sicher?\n'''
+
+print(prompt)</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-12-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-12-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Absichtlich fehlerhafter Code
+code = "\nspieler = ['Anna', 'Ben']\nprint(spieler[5])  # IndexError!\n"
+
+fehler = 'IndexError: list index out of range'
+
+prompt = f'''\nIch bekomme diesen Fehler: {fehler}\n\nMein Code:{code}\n\nErkläre mir:\n1. Warum passiert das?\n2. Wie finde ich die Zeile mit dem Fehler?\n3. Wie behebe ich ihn sicher?\n'''
+
+print(prompt)</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy-Checkpoint: AI Integration</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy gets a function that asks the user for a topic and generates a structured prompt for AI tools.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-3-1">
+            <label for="task-12-3-1" class="py-classic-exercise__task-text">Open pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-3-2">
+            <label for="task-12-3-2" class="py-classic-exercise__task-text">Create ki_generator()</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-3-3">
+            <label for="task-12-3-3" class="py-classic-exercise__task-text">Ask for topic and level</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-12-3-4">
+            <label for="task-12-3-4" class="py-classic-exercise__task-text">Generate formatted prompt</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+def ki_generator():
+    print(" PyBuddy KI-Assistent")
+    thema = input("Thema: ")
+    level = input("Level (Anfänger/Fortgeschritten/Pro): ") or "Anfänger"
+    
+    prompt = f"""\nErkläre mir '{thema}' in Python.\nMein Level: {level}\nFormat: Kurzes Code-Beispiel + Erklärung\nAnforderungen:\n- Praxisnah und verständlich\n- Maximal 20 Zeilen Code\n- Tipps für häufige Fehler\n"""
+    
+    print("\n Kopiere diesen Prompt in deine KI:")
+    print("-" * 40)
+    print(prompt)
+    print("-" * 40)
+
+ki_generator()</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-12-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-12-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Solution</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+def ki_generator():
+    print(" PyBuddy KI-Assistent")
+    thema = input("Thema: ")
+    level = input("Level (Anfänger/Fortgeschritten/Pro): ") or "Anfänger"
+    
+    prompt = f"""\nErkläre mir '{thema}' in Python.\nMein Level: {level}\nFormat: Kurzes Code-Beispiel + Erklärung\nAnforderungen:\n- Praxisnah und verständlich\n- Maximal 20 Zeilen Code\n- Tipps für häufige Fehler\n"""
+    
+    print("\n Kopiere diesen Prompt in deine KI:")
+    print("-" * 40)
+    print(prompt)
+    print("-" * 40)
+
+ki_generator()</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Didactic Break</span>
+        <p class="py-classic-funfact__text">In <strong>Portal 2</strong> you program with visual blocks — the AI GLaDOS comments on your code. AI assistants have long been reality: GitHub Copilot, ChatGPT, Claude — they all help developers write better code faster. You are currently learning to use these tools professionally!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-robot"></i></span><span>Good Prompts = Context + Requirement + Format + Constraints</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-magnifying-glass"></i></span><span>AI as Code Reviewer: Check bugs, security, best practices</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-bug"></i></span><span>Debugging: Error message + Code → AI for quick help</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-lightning"></i></span><span>Refactoring with AI: Transform unreadable code into pythonic code</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-rocket"></i></span><span>PyBuddy now generates structured AI prompts</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="11-apis-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">APIs & Requests</span>
+    </a>
+    <a href="../abschlussprojekt-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Next</span> →</span>
+      <span class="py-classic-chapter-nav__title">Final Project</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Chapters</h4><nav><a href="../index-en.html#kapitel">All Chapters</a><a href="06-listen-en.html">06. Lists</a><a href="12-ki-cocoding-en.html">12. AI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Resources</h4><nav><a href="../lexikon-en.html">Glossary</a><a href="../abschlussprojekt-en.html">Final Project</a><a href="../../../../index-en.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Legal</h4><nav><a href="../../../../pages/impressum-en.html">Imprint</a><a href="../../../../pages/datenschutz-en.html">Privacy</a><a href="../../../../pages/disclaimer-en.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden-en.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Support</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

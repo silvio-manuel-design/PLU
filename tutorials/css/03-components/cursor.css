@@ -1,0 +1,58 @@
+/* ==========================================================================
+   CUSTOM CURSOR - Animated Dot & Outline
+   ========================================================================== */
+
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary);
+  transition: transform 0.1s ease;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--accent-primary);
+  opacity: 0.5;
+  transition: all 0.15s ease-out;
+}
+
+.cursor-outline.hover {
+  width: 60px;
+  height: 60px;
+  background: rgba(88, 166, 255, 0.15);
+  border-color: transparent;
+  opacity: 0.3;
+}
+
+/* Hide cursor on touch devices */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-outline {
+    display: none;
+  }
+}
+
+/* Light Mode */
+html.light-theme .cursor-dot {
+  background: #2563eb;
+}
+
+html.light-theme .cursor-outline {
+  border-color: #2563eb;
+}
+
+html.light-theme .cursor-outline.hover {
+  background: rgba(37, 99, 235, 0.15);
+}

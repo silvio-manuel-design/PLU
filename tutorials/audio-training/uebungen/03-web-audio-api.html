@@ -1,0 +1,518 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Übung: Web Audio API | Audio-Tutorial | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="../kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="../kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="../kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="../kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="../kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="../uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="../uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="../tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="../tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="../tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="../tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="../ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="../ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="../ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="../ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="../ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>✏️ Übung: Web Audio API</h1>
+      <p class="hero-subtitle">Praktische Anwendung der Web Audio API</p>
+    </section>
+
+    <section>
+      <h2>Lernziele</h2>
+      <p>
+        In dieser Übung wirst du:
+      </p>
+      <ul>
+        <li>Die Web Audio API in der Praxis anwenden</li>
+        <li>Audio-Graphen programmatisch erstellen</li>
+        <li>Verschiedene Audio-Node-Typen verwenden</li>
+        <li>Audio-Effekte implementieren</li>
+        <li>Interaktive Audio-Anwendungen entwickeln</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Voraussetzungen</h2>
+      <ul>
+        <li>Grundkenntnisse in JavaScript</li>
+        <li>Verständnis der Web Audio API Grundlagen</li>
+        <li>Web-Browser mit Web Audio API Unterstützung</li>
+        <li>Text-Editor</li>
+        <li>Beispiel-Audiodateien (optional)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Theoretische Grundlagen</h2>
+      
+      <h3>Web Audio API Konzepte</h3>
+      <p>
+        Die Web Audio API basiert auf folgenden zentralen Konzepten:
+      </p>
+      <ul>
+        <li><strong>AudioContext:</strong> Verwaltungsumgebung für Audio-Operationen</li>
+        <li><strong>AudioNodes:</strong> Bausteine für Audio-Verarbeitung (Quellen, Effekte, Ziele)</li>
+        <li><strong>AudioParams:</strong> Einstellbare Parameter (z.B. Frequenz, Gain)</li>
+        <li><strong>AudioGraph:</strong> Verbindungsstruktur zwischen den Nodes</li>
+      </ul>
+      
+      <h3>Typische Anwendungsbereiche</h3>
+      <ul>
+        <li>Web-basierte Musikinstrumente</li>
+        <li>Audio-Visualisierungen</li>
+        <li>Browser-basierte Audio-Editoren</li>
+        <li>Interaktive Spiele mit Audio</li>
+        <li>Audio-Streaming-Anwendungen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Aufgabenstellung</h2>
+      
+      <h3>Aufgabe 1: Einfacher Oszillator</h3>
+      <p>
+        Erstelle einen einfachen Oszillator, der einen Ton abspielt:
+      </p>
+      <ol>
+        <li>Erstelle einen AudioContext</li>
+        <li>Erstelle einen Oszillator-Node</li>
+        <li>Setze die Frequenz auf 440 Hz (A4)</li>
+        <li>Verbinde den Oszillator mit dem destination-Node</li>
+        <li>Starte den Oszillator</li>
+        <li>Stoppe den Oszillator nach 2 Sekunden</li>
+        <li>Erweitere das Beispiel um eine Frequenzänderung</li>
+      </ol>
+      
+      <h3>Aufgabe 2: Audio-Datei Wiedergabe</h3>
+      <p>
+        Lade und spiele eine Audiodatei ab:
+      </p>
+      <ol>
+        <li>Erstelle einen AudioContext</li>
+        <li>Lade eine Audiodatei (z.B. über fetch API)</li>
+        <li>Decodiere die Audiodatei zu einem AudioBuffer</li>
+        <li>Erstelle einen BufferSource-Node</li>
+        <li>Verbinde den BufferSource mit dem destination-Node</li>
+        <li>Starte die Wiedergabe</li>
+        <li>Implementiere Steuerelemente (Play, Pause, Stop)</li>
+      </ol>
+      
+      <h3>Aufgabe 3: Effekt-Hinzufügung</h3>
+      <p>
+        Füge einen Effekt zur Audio-Wiedergabe hinzu:
+      </p>
+      <ol>
+        <li>Erstelle einen Gain-Node für Lautstärkekontrolle</li>
+        <li>Erstelle einen Filter-Node (z.B. Tiefpassfilter)</li>
+        <li>Erstelle einen Delay-Node</li>
+        <li>Verbinde die Nodes in der richtigen Reihenfolge</li>
+        <li>Implementiere Steuerelemente für die Effekt-Parameter</li>
+        <li>Teste verschiedene Effekt-Kombinationen</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Praktische Anwendung</h2>
+      
+      <h3>1. Erstellung eines einfachen Synthesizers</h3>
+      <p>
+        Implementiere einen einfachen Web-Synthesizer:
+      </p>
+      <pre><code class="js-code">// HTML
+&lt;div id="synth"&gt;
+  &lt;label&gt;Frequenz: &lt;input type="range" id="freqControl" min="50" max="1000" value="440"&gt;&lt;/label&gt;
+  &lt;label&gt;Lautstärke: &lt;input type="range" id="volControl" min="0" max="1" step="0.01" value="0.5"&gt;&lt;/label&gt;
+  &lt;button id="playBtn"&gt;Play&lt;/button&gt;
+  &lt;button id="stopBtn"&gt;Stop&lt;/button&gt;
+&lt;/div&gt;
+
+// JavaScript
+class SimpleSynth {
+  constructor() {
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    this.oscillator = null;
+    this.gainNode = null;
+    
+    this.setupControls();
+  }
+  
+  setupControls() {
+    const freqControl = document.getElementById('freqControl');
+    const volControl = document.getElementById('volControl');
+    const playBtn = document.getElementById('playBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    
+    freqControl.addEventListener('input', (e) => {
+      if (this.oscillator) {
+        this.oscillator.frequency.value = parseFloat(e.target.value);
+      }
+    });
+    
+    volControl.addEventListener('input', (e) => {
+      if (this.gainNode) {
+        this.gainNode.gain.value = parseFloat(e.target.value);
+      }
+    });
+    
+    playBtn.addEventListener('click', () => this.play());
+    stopBtn.addEventListener('click', () => this.stop());
+  }
+  
+  play() {
+    if (this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+    
+    if (this.oscillator) {
+      this.oscillator.stop();
+    }
+    
+    this.oscillator = this.audioCtx.createOscillator();
+    this.gainNode = this.audioCtx.createGain();
+    
+    const freqControl = document.getElementById('freqControl');
+    const volControl = document.getElementById('volControl');
+    
+    this.oscillator.type = 'sine';
+    this.oscillator.frequency.value = parseFloat(freqControl.value);
+    this.gainNode.gain.value = parseFloat(volControl.value);
+    
+    this.oscillator.connect(this.gainNode);
+    this.gainNode.connect(this.audioCtx.destination);
+    
+    this.oscillator.start();
+  }
+  
+  stop() {
+    if (this.oscillator) {
+      this.oscillator.stop();
+      this.oscillator = null;
+    }
+  }
+}
+
+// Initialisierung
+document.addEventListener('DOMContentLoaded', () => {
+  new SimpleSynth();
+});</code></pre>
+      
+      <h3>2. Audio-Visualisierung</h3>
+      <p>
+        Erstelle eine einfache Frequenz-Visualisierung:
+      </p>
+      <pre><code class="js-code">// Erweitere die SimpleSynth Klasse
+initVisualizer() {
+  this.analyser = this.audioCtx.createAnalyser();
+  this.analyser.fftSize = 2048;
+  
+  // Verbinde nach dem Gain-Node
+  this.gainNode.connect(this.analyser);
+  this.analyser.connect(this.audioCtx.destination);
+  
+  // Canvas für Visualisierung
+  this.canvas = document.createElement('canvas');
+  this.canvas.width = 600;
+  this.canvas.height = 200;
+  document.body.appendChild(this.canvas);
+  this.canvasCtx = this.canvas.getContext('2d');
+  
+  this.drawVisualizer();
+}
+
+drawVisualizer() {
+  if (!this.analyser) return;
+  
+  const bufferLength = this.analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  
+  const draw = () => {
+    requestAnimationFrame(draw);
+    
+    this.analyser.getByteTimeDomainData(dataArray);
+    
+    this.canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+    this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    this.canvasCtx.lineWidth = 2;
+    this.canvasCtx.strokeStyle = '#00bcd4';
+    this.canvasCtx.beginPath();
+    
+    const sliceWidth = this.canvas.width * 1.0 / bufferLength;
+    let x = 0;
+    
+    for (let i = 0; i < bufferLength; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = v * this.canvas.height / 2;
+      
+      if (i === 0) {
+        this.canvasCtx.moveTo(x, y);
+      } else {
+        this.canvasCtx.lineTo(x, y);
+      }
+      
+      x += sliceWidth;
+    }
+    
+    this.canvasCtx.lineTo(this.canvas.width, this.canvas.height / 2);
+    this.canvasCtx.stroke();
+  };
+  
+  draw();
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Erweiterte Techniken</h2>
+      
+      <h3>1. Effekt-Rack</h3>
+      <p>
+        Erstelle eine modulare Effekt-Verarbeitung:
+      </p>
+      <pre><code class="js-code">class EffectChain {
+  constructor(audioCtx) {
+    this.audioCtx = audioCtx;
+    this.nodes = [];
+    this.input = null;
+    this.output = null;
+  }
+  
+  addEffect(effectType, params) {
+    let effectNode;
+    
+    switch(effectType) {
+      case 'filter':
+        effectNode = this.audioCtx.createBiquadFilter();
+        effectNode.type = params.type || 'lowpass';
+        effectNode.frequency.value = params.frequency || 1000;
+        break;
+        
+      case 'delay':
+        effectNode = this.audioCtx.createDelay(params.maxDelay || 1.0);
+        effectNode.delayTime.value = params.delayTime || 0.5;
+        break;
+        
+      case 'gain':
+        effectNode = this.audioCtx.createGain();
+        effectNode.gain.value = params.gain || 1.0;
+        break;
+        
+      default:
+        throw new Error('Unbekannter Effekt-Typ');
+    }
+    
+    this.nodes.push(effectNode);
+    return effectNode;
+  }
+  
+  connect(input, output) {
+    let currentNode = input;
+    
+    for (const node of this.nodes) {
+      currentNode.connect(node);
+      currentNode = node;
+    }
+    
+    currentNode.connect(output);
+  }
+}</code></pre>
+      
+      <h3>2. Sample-Genauigkeit</h3>
+      <p>
+        Nutze die sample-genauen Funktionen der Web Audio API:
+      </p>
+      <pre><code class="js-code">// Starte Audio zu einem exakten Zeitpunkt
+const startTime = audioCtx.currentTime + 0.1; // Starte in 100ms
+oscillator.start(startTime);
+
+// Stoppe zu einem exakten Zeitpunkt
+const stopTime = startTime + 2.0; // Stoppe nach 2 Sekunden
+oscillator.stop(stopTime);
+
+// Automatisiere Parameter zu exakten Zeitpunkten
+gainNode.gain.setValueAtTime(0.5, startTime);
+gainNode.gain.linearRampToValueAtTime(1.0, startTime + 0.5);
+gainNode.gain.exponentialRampToValueAtTime(0.1, startTime + 2.0);</code></pre>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      
+      <h3>Performance</h3>
+      <ul>
+        <li>Vermeide das Erstellen neuer Nodes in Animationsschleifen</li>
+        <li>Wiederverwendung von Nodes wenn möglich</li>
+        <li>Effiziente Verarbeitung in ScriptProcessorNodes vermeiden</li>
+        <li>Nutze AudioWorklets für komplexe Verarbeitung (wenn verfügbar)</li>
+      </ul>
+      
+      <h3>Browser-Kompatibilität</h3>
+      <pre><code class="js-code">// Sichere Initialisierung des AudioContext
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
+
+// Resumiere Context falls nötig
+if (audioCtx.state === 'suspended') {
+  await audioCtx.resume();
+}</code></pre>
+      
+      <h3>Sicherheit</h3>
+      <ul>
+        <li>AudioContext erst nach Benutzerinteraktion starten</li>
+        <li>HTTPS für Audio-Streaming verwenden</li>
+        <li>Keine sensiblen Daten über Audio-Streams übertragen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Problembehandlung</h2>
+      
+      <h3>Häufige Probleme</h3>
+      <ul>
+        <li><strong>Kein Ton:</strong> Prüfe, ob AudioContext nach Benutzerinteraktion gestartet wurde</li>
+        <li><strong>Verzögerungen:</strong> Prüfe die Latenz-Einstellungen und Buffer-Größen</li>
+        <li><strong>Clipping:</strong> Stelle sicher, dass die Gesamtlautstärke unter 1.0 liegt</li>
+        <li><strong>Memory Leaks:</strong> Trenne alle Verbindungen und stoppe Nodes vor dem Entfernen</li>
+      </ul>
+      
+      <h3>Debugging</h3>
+      <pre><code class="js-code">// Debugging-Hilfe
+console.log('AudioContext State:', audioCtx.state);
+console.log('Sample Rate:', audioCtx.sampleRate);
+
+// Node-Status überprüfen
+if (oscillator) {
+  console.log('Oscillator State:', oscillator.playbackState);
+}
+
+// Verbindungen visualisieren
+function logConnections(node, prefix = '') {
+  console.log(`${prefix}${node.constructor.name}`);
+  // Beachte: Es gibt keine direkte Methode, um Verbindungen zu überprüfen
+  // Du musst deine eigene Verwaltung implementieren
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Auswertung und Dokumentation</h2>
+      
+      <h3>Zu dokumentierende Ergebnisse</h3>
+      <ul>
+        <li>Welche Audio-Elemente wurden erfolgreich implementiert?</li>
+        <li>Welche Herausforderungen traten bei der Implementierung auf?</li>
+        <li>Wie unterscheidet sich die Web Audio API von anderen Audio-APIs?</li>
+        <li>Welche Performance-Aspekte wurden beobachtet?</li>
+        <li>Wie könnte die Implementierung verbessert werden?</li>
+      </ul>
+      
+      <h3>Reflexion</h3>
+      <p>
+        Beantworte folgende Fragen in deiner Dokumentation:
+      </p>
+      <ol>
+        <li>Wie intuitiv war die Web Audio API für dich?</li>
+        <li>Welche Konzepte waren besonders schwierig zu verstehen?</li>
+        <li>Wie unterscheidet sich die Web Audio API von Desktop-Audio-Software?</li>
+        <li>Welche Anwendungsmöglichkeiten siehst du für deine Projekte?</li>
+        <li>Wie könntest du die Web Audio API in zukünftigen Web-Anwendungen einsetzen?</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Vertiefung</h2>
+      
+      <h3>Erweiterungsaufgaben</h3>
+      <ul>
+        <li>Erstelle einen vollständigen Web-Synthesizer mit mehreren Oszillatoren</li>
+        <li>Implementiere einen Drum-Machine mit Sample-Playback</li>
+        <li>Erstelle eine Audio-Visualisierung mit WebGL</li>
+        <li>Entwickle eine Web-Audio-Sequencer-Anwendung</li>
+        <li>Erstelle eine Spracherkennung mit Web Speech API und Web Audio API</li>
+      </ul>
+    </section>
+
+
+    <section class="kapitel-navigation">
+      <p>Du hast die Web Audio API erfolgreich in der Praxis angewandt!</p>
+      <a href="../index.html" class="nav-button">→ Zurück zum Hauptmenü</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

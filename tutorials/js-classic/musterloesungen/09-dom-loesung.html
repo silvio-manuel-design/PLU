@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Musterlösung – Kapitel 9 | JS-Tutorial</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="warnung" style="background:#ffebee; border-left:4px solid #e53935; margin-bottom:24px;">
+    <strong>🔒 Nur für Lehrkraft / Nachbesprechung!</strong><br>
+    Dieser Link ist nicht öffentlich verlinkt.
+  </div>
+
+  <main class="main-content">
+    <section>
+      <h1>🌐 Musterlösung – Kapitel 9: DOM-Manipulation</h1>
+
+      <h2>Aufgabe 1: <code>innerHTML</code> vs. <code>textContent</code></h2>
+      <h3>Unterschied:</h3>
+      <ul>
+        <li><code>innerHTML</code>: Interpretiert den String als <strong>HTML</strong> – führt Skripte aus!</li>
+        <li><code>textContent</code>: Behandelt den String als <strong>reinen Text</strong> – HTML wird nicht interpretiert.</li>
+      </ul>
+
+      <h3>Bei bösartiger Eingabe:</h3>
+      <ul>
+        <li><code>innerHTML</code>: Führt den <code>&lt;script&gt;</code>-Tag aus → <strong>XSS-Angriff!</strong></li>
+        <li><code>textContent</code>: Zeigt den Code als Text an → <strong>sicher</strong>.</li>
+      </ul>
+
+      <h3>Wann ist <code>innerHTML</code> sinnvoll?</h3>
+      <p>✅ Wenn du **vertrauenswürdigen HTML-Code** einfügst – z. B. aus deinem eigenen Template:<br>
+      <code>element.innerHTML = "&lt;p&gt;Willkommen, " + name + "!&lt;/p&gt;";</code></p>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle eine Funktion zeigeBenutzer(eingabe), die den Text sicher anzeigt.
+Verwende textContent für Benutzereingaben.
+Verwende innerHTML nur, wenn der Inhalt aus vertrauenswürdigem Code stammt.</code></pre>
+
+      <h2>Aufgabe 2: Dynamische Liste</h2>
+      <h3>Lösung:</h3>
+      <pre><code>function zeigeListe(elemente) {
+  const ul = document.getElementById("liste");
+  if (!ul) {
+    console.error("Element mit ID 'liste' nicht gefunden!");
+    return;
+  }
+  // Alten Inhalt leeren
+  ul.innerHTML = "";
+
+  // Liste im Speicher bauen
+  const fragment = document.createDocumentFragment();
+  for (const item of elemente) {
+    const li = document.createElement("li");
+    li.textContent = item;
+    fragment.appendChild(li);
+  }
+  ul.appendChild(fragment);
+}</code></pre>
+
+      <h3>Warum im Speicher bauen?</h3>
+      <p>✅ Jeder Zugriff auf den DOM ist **langsam**.<br>
+      Wenn du 100 <code>li</code> nacheinander einfügst, wird die Seite 100× neu gerendert.<br>
+      Mit <code>DocumentFragment</code> wird nur **einmal** gerendert → <strong>besser für Performance</strong>.</p>
+
+      <h3>Fehlerbehandlung:</h3>
+      <p>✅ Prüfe mit <code>if (!ul)</code>, ob das Element existiert – sonst gibt es einen Fehler.</p>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle eine Funktion zeigeListe(elemente), die eine ul-Liste mit li-Elementen füllt.
+Verwende createElement und textContent.
+Baue die Liste im Speicher (mit DocumentFragment) und füge sie dann einmalig ein.
+Füge eine Fehlerprüfung ein, falls das Ziel-Element nicht existiert.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

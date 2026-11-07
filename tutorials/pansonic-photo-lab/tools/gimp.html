@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIMP | Pansonic Photo Lab</title>
+  <meta name="description" content="GIMP — Open Source Bildbearbeitung. Die kostenlose Alternative zu Photoshop mit Ebenen, Masken, Plugins und Scripting.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+  <link rel="stylesheet" href="/tutorials/pansonic-photo-lab/css/photo-lab.css">
+  <link rel="icon" type="image/svg+xml" href="/tutorials/pansonic-photo-lab/assets/icons/favicon.svg">
+</head>
+<body data-tool="gimp">
+<!-- No-JS Banner -->
+<noscript>
+  <div class="photo-noscript-banner" role="alert">
+    <i class="ph ph-warning" aria-hidden="true"></i>
+    <span>Einige interaktive Funktionen (Checklisten, Quiz, Fortschritt) erfordern JavaScript. Der gesamte Lerninhalt ist vollständig ohne JavaScript nutzbar.</span>
+  </div>
+</noscript>
+
+<a href="#main-content" class="u-skip-link">Zum Hauptinhalt springen</a>
+
+<div class="photo-scroll-progress">
+  <div class="photo-scroll-progress__bar" id="scrollProgressBar"></div>
+</div>
+
+<header class="photo-header" id="header" role="banner">
+  <div class="photo-header__container">
+    <div class="photo-header__left">
+      <a href="/tutorials/pansonic-photo-lab/" class="photo-header__logo" aria-label="Pansonic Photo Lab Startseite">
+        <div class="photo-header__logo-icon" aria-hidden="true"><i class="ph ph-camera"></i></div>
+        <span class="photo-header__logo-text">PAN<span>SONIC</span></span>
+      </a>
+      <nav class="photo-header__nav" aria-label="Hauptnavigation">
+        <a href="/tutorials/pansonic-photo-lab/" class="photo-header__nav-link">Start</a>
+        <div class="photo-header__dropdown">
+          <a href="#" class="photo-header__nav-link">Module</a>
+          <div class="photo-header__dropdown-menu photo-header__dropdown-menu--mega">
+            <div class="photo-header__dropdown-section">
+              <span class="photo-header__dropdown-section-title">Grundlagen</span>
+              <a href="../module/00-willkommen.html" class="photo-header__dropdown-item">
+                <i class="ph ph-hand-waving photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 00 — Willkommen</span>
+                  <span class="photo-header__dropdown-desc">Einstieg & Überblick</span>
+                </span>
+              </a>
+              <a href="../module/01-kamera-basics.html" class="photo-header__dropdown-item">
+                <i class="ph ph-camera photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 01 — Equipment</span>
+                  <span class="photo-header__dropdown-desc">Sensor, Objektive, Verschluss</span>
+                </span>
+              </a>
+              <a href="../module/02-belichtung.html" class="photo-header__dropdown-item">
+                <i class="ph ph-sun photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 02 — Belichtung</span>
+                  <span class="photo-header__dropdown-desc">Das Belichtungsdreieck</span>
+                </span>
+              </a>
+              <a href="../module/03-blende-iso.html" class="photo-header__dropdown-item">
+                <i class="ph ph-aperture photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 03 — Blende & ISO</span>
+                  <span class="photo-header__dropdown-desc">Tiefenschärfe & Lichtempfindlichkeit</span>
+                </span>
+              </a>
+              <a href="../module/04-komposition.html" class="photo-header__dropdown-item">
+                <i class="ph ph-frame-corners photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 04 — Komposition</span>
+                  <span class="photo-header__dropdown-desc">Drittel-Regel & Führungslinien</span>
+                </span>
+              </a>
+              <a href="../module/05-licht.html" class="photo-header__dropdown-item">
+                <i class="ph ph-lightbulb photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 05 — Licht</span>
+                  <span class="photo-header__dropdown-desc">Natürliches & künstliches Licht</span>
+                </span>
+              </a>
+            </div>
+            <div class="photo-header__dropdown-section">
+              <span class="photo-header__dropdown-section-title">Spezialthemen</span>
+              <a href="../module/06-farbe.html" class="photo-header__dropdown-item">
+                <i class="ph ph-palette photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 06 — Farbe</span>
+                  <span class="photo-header__dropdown-desc">Farbtheorie & Weissabgleich</span>
+                </span>
+              </a>
+              <a href="../module/07-portrait.html" class="photo-header__dropdown-item">
+                <i class="ph ph-user photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 07 — Portrait</span>
+                  <span class="photo-header__dropdown-desc">Menschen fotografieren</span>
+                </span>
+              </a>
+              <a href="../module/08-landschaft.html" class="photo-header__dropdown-item">
+                <i class="ph ph-mountains photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 08 — Landschaft</span>
+                  <span class="photo-header__dropdown-desc">Natur & Architektur</span>
+                </span>
+              </a>
+              <a href="../module/09-makro.html" class="photo-header__dropdown-item">
+                <i class="ph ph-bug photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 09 — Makro</span>
+                  <span class="photo-header__dropdown-desc">Die kleine Welt entdecken</span>
+                </span>
+              </a>
+              <a href="../module/10-bearbeitung.html" class="photo-header__dropdown-item">
+                <i class="ph ph-paint-brush photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 10 — Bearbeitung</span>
+                  <span class="photo-header__dropdown-desc">RAW-Workflow & Editing</span>
+                </span>
+              </a>
+              <a href="../module/11-capstone.html" class="photo-header__dropdown-item">
+                <i class="ph ph-trophy photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Modul 11 — Capstone</span>
+                  <span class="photo-header__dropdown-desc">Dein Abschlussprojekt</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="photo-header__dropdown">
+          <a href="#" class="photo-header__nav-link is-active">Tools</a>
+          <div class="photo-header__dropdown-menu photo-header__dropdown-menu--mega photo-header__dropdown-menu--single">
+          <div class="photo-header__dropdown-section">
+            <span class="photo-header__dropdown-section-title">Werkzeuge</span>
+            <a href="../pages/glossar.html" class="photo-header__dropdown-item">
+              <i class="ph ph-book photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">Glossar</span>
+                <span class="photo-header__dropdown-desc">Foto-Fachbegriffe A--Z</span>
+              </span>
+            </a>
+            <a href="./darktable.html" class="photo-header__dropdown-item">
+              <i class="ph ph-desktop photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">darktable</span>
+                <span class="photo-header__dropdown-desc">Open Source RAW Editor</span>
+              </span>
+            </a>
+            <a href="./lightroom-mobile.html" class="photo-header__dropdown-item">
+              <i class="ph ph-device-mobile-camera photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">Lightroom Mobile</span>
+                <span class="photo-header__dropdown-desc">Mobile RAW-Bearbeitung</span>
+              </span>
+            </a>
+            <a href="./snapseed.html" class="photo-header__dropdown-item">
+              <i class="ph ph-sliders photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">Snapseed</span>
+                <span class="photo-header__dropdown-desc">Mobile Editing von Google</span>
+              </span>
+            </a>
+            <a href="./gimp.html" class="photo-header__dropdown-item">
+              <i class="ph ph-paint-brush photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">GIMP</span>
+                <span class="photo-header__dropdown-desc">Open Source Bildbearbeitung</span>
+              </span>
+            </a>
+            <a href="./rawtherapee.html" class="photo-header__dropdown-item">
+              <i class="ph ph-image photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">RawTherapee</span>
+                <span class="photo-header__dropdown-desc">RAW-Entwicklung Freeware</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <a href="../pages/galerie.html" class="photo-header__nav-link">Galerie</a>
+        <a href="../pages/veroeffentlichen.html" class="photo-header__nav-link">Teilen</a>
+      </nav>
+    </div>
+    <div class="photo-header__right">
+      <button class="photo-header__btn photo-header__btn--theme" id="theme-toggle" aria-label="Farbschema wechseln" title="Theme (T)"><i class="ph ph-moon"></i></button>
+      <button class="photo-header__btn photo-header__btn--top" id="back-to-top" aria-label="Nach oben" title="Nach oben"><i class="ph ph-arrow-up"></i></button>
+      <nav class="photo-lang-switch" aria-label="Sprache wählen">
+        <a href="./gimp.html" class="photo-lang-btn is-active" aria-current="page">DE</a>
+        <a href="./gimp-en.html" class="photo-lang-btn">EN</a>
+      </nav>
+      <a href="../pages/galerie.html" target="_blank" class="photo-header__btn photo-header__btn--viewer" aria-label="Bildbetrachter" title="Viewer">
+        <i class="ph ph-images"></i><span class="photo-header__viewer-label">Viewer</span>
+      </a>
+      <button class="photo-header__toggle" id="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="photo-mobile-nav__backdrop" aria-hidden="true"></div>
+<nav class="photo-mobile-nav" id="mobile-nav" aria-hidden="true" aria-label="Mobile Navigation">
+  <button class="photo-mobile-nav__close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+  <div class="photo-mobile-nav__items">
+    <a href="../../" class="photo-mobile-nav__link">Start</a>
+    <div class="photo-mobile-nav__group">
+      <button class="photo-mobile-nav__heading" aria-expanded="false" aria-controls="mobile-modules">Module <i class="ph ph-caret-down"></i></button>
+      <div class="photo-mobile-nav__sub" id="mobile-modules" hidden>
+        <a href="../module/00-willkommen.html" class="photo-mobile-nav__sublink">Modul 00 — Willkommen</a>
+        <a href="../module/01-kamera-basics.html" class="photo-mobile-nav__sublink">Modul 01 — Equipment</a>
+        <a href="../module/02-belichtung.html" class="photo-mobile-nav__sublink">Modul 02 — Belichtung</a>
+        <a href="../module/03-blende-iso.html" class="photo-mobile-nav__sublink">Modul 03 — Blende & ISO</a>
+        <a href="../module/04-komposition.html" class="photo-mobile-nav__sublink">Modul 04 — Komposition</a>
+        <a href="../module/05-licht.html" class="photo-mobile-nav__sublink">Modul 05 — Licht</a>
+        <a href="../module/06-farbe.html" class="photo-mobile-nav__sublink">Modul 06 — Farbe</a>
+        <a href="../module/07-portrait.html" class="photo-mobile-nav__sublink">Modul 07 — Portrait</a>
+        <a href="../module/08-landschaft.html" class="photo-mobile-nav__sublink">Modul 08 — Landschaft</a>
+        <a href="../module/09-makro.html" class="photo-mobile-nav__sublink">Modul 09 — Makro</a>
+        <a href="../module/10-bearbeitung.html" class="photo-mobile-nav__sublink">Modul 10 — Bearbeitung</a>
+        <a href="../module/11-capstone.html" class="photo-mobile-nav__sublink">Modul 11 — Capstone</a>
+      </div>
+    </div>
+    <div class="photo-mobile-nav__group">
+      <button class="photo-mobile-nav__heading" aria-expanded="false" aria-controls="mobile-tools">Tools <i class="ph ph-caret-down"></i></button>
+      <div class="photo-mobile-nav__sub" id="mobile-tools" hidden>
+        <a href="../pages/glossar.html" class="photo-mobile-nav__sublink">Glossar</a>
+        <a href="./darktable.html" class="photo-mobile-nav__sublink">darktable</a>
+        <a href="./lightroom-mobile.html" class="photo-mobile-nav__sublink">Lightroom Mobile</a>
+        <a href="./snapseed.html" class="photo-mobile-nav__sublink">Snapseed</a>
+        <a href="./gimp.html" class="photo-mobile-nav__sublink">GIMP</a>
+        <a href="./rawtherapee.html" class="photo-mobile-nav__sublink">RawTherapee</a>
+      </div>
+    </div>
+    <a href="../pages/galerie.html" class="photo-mobile-nav__link">Galerie</a>
+    <a href="../pages/veroeffentlichen.html" class="photo-mobile-nav__link">Teilen</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- Chapter Hero -->
+  <header class="photo-chapter-hero">
+    <div class="photo-chapter-hero__inner">
+      <div class="photo-chapter-hero__breadcrumb">
+        <a href="/tutorials/pansonic-photo-lab/">Photo Lab</a> <i class="ph ph-caret-right" aria-hidden="true"></i> <a href="/tutorials/pansonic-photo-lab/pages/glossar.html">Tools</a> <i class="ph ph-caret-right" aria-hidden="true"></i> <span>GIMP</span>
+      </div>
+      <span class="photo-chapter-hero__badge"><i class="ph ph-desktop" aria-hidden="true"></i> Desktop Software</span>
+      <h1 class="photo-chapter-hero__title">GIMP</h1>
+      <p class="photo-chapter-hero__lead">GNU Image Manipulation Program — die leistungsstarke Open-Source-Alternative zu Adobe Photoshop. Mit Ebenen, Masken, Plugins und Scripting für pixelgenaue Bildbearbeitung, Retusche und kreative Compositing-Arbeiten.</p>
+    </div>
+  </header>
+
+  <section class="o-section">
+    <div class="o-container">
+
+      <!-- Overview -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-info" aria-hidden="true"></i> Was ist GIMP?</h2>
+        <p>GIMP steht für GNU Image Manipulation Program und ist seit über 25 Jahren die führende Open-Source-Software für pixelbasierte Bildbearbeitung. Ursprünglich 1996 als Studienprojekt gestartet, hat sich GIMP zu einem vollwertigen Werkzeug entwickelt, das in vielen Bereichen mit kommerziellen Alternativen wie Adobe Photoshop konkurrieren kann. Die Software ist unter der GPL-Lizenz verfügbar, was bedeutet, dass sie vollständig kostenlos ist und der Quellcode frei zugänglich bleibt.</p>
+        <p>Im Gegensatz zu RAW-Entwicklern wie darktable oder RawTherapee arbeitet GIMP auf Pixelebene. Das macht es ideal für Aufgaben, die über die reine Entwicklung hinausgehen: Retusche von Hautunreinheiten, Compositing mehrerer Bilder, komplexe Auswahlen, Text- und Grafikelemente, sowie kreative Manipulationen jeder Art. Wer seine Fotos nicht nur entwickeln, sondern auch gezielt bearbeiten möchte, braucht ein Pixel-Editor wie GIMP.</p>
+        <p>Die Stärken von GIMP liegen in seinem modularen Aufbau, der umfangreichen Plugin-Unterstützung und der flexiblen Scripting-Schnittstelle. Mit Python, Scheme und anderen Sprachen lassen sich wiederkehrende Aufgaben automatisieren und eigene Werkzeuge entwickeln. Die aktive Community stellt tausende kostenlose Plugins bereit, die GIMP um Funktionen wie HDR-Erzeugung, Panorama-Stitching, RAW-Import und Spezialeffekte erweitern.</p>
+        <p>GIMP unterstützt alle gängigen Bildformate von JPEG und PNG über TIFF und GIF bis hin zu professionellen Formaten wie PSD und RAW über Plugins. Die Oberfläche ist anpassbar und erlaubt es dir, Werkzeugfenster, Dialoge und Paletten nach deinen Vorlieben anzuordnen. Ob als Einzelfenster- oder Multi-Fenster-Modus — GIMP passt sich deinem Arbeitsstil an.</p>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-lightbulb" aria-hidden="true"></i> Philosophie</h3>
+          <p class="photo-card__text">GIMP folgt der Unix-Philosophie: Mache eine Sache, aber mache sie richtig. Das Programm ist als flexible Werkzeugkiste konzipiert, die sich an nahezu jeden Workflow anpassen lässt. Durch die nicht-destruktive Arbeit mit Ebenen und Masken bleiben deine Originaldateien stets erhalten. Jeder Bearbeitungsschritt ist rückgängig zu machen, und mit Ebenenmasken arbeitest du selektiv und präzise — ohne den Originalzustand zu zerstören.</p>
+        </div>
+      </div>
+
+      <!-- Key Features -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-star" aria-hidden="true"></i> Highlights & Funktionen</h2>
+        <p>GIMP bietet eine beeindruckende Sammlung an Funktionen, die sowohl Einsteiger als auch fortgeschrittene Nutzer begeistern werden. Hier sind die wichtigsten Features im Überblick:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-stack" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Ebenen & Masken</h3>
+            <p class="photo-feature-card__desc">Arbeite mit unbegrenzten Ebenen, Gruppen und Ebenenmasken für nicht-destruktive Bearbeitung. Jede Ebene kann individuell mit Mischmodi, Deckkraft und Effekten versehen werden. Ebenenmasken erlauben präzise, verlaufsbasierte oder pinselgesteuerte Ausblendungen.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-puzzle-piece" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Umfangreiche Plugin-Unterstützung</h3>
+            <p class="photo-feature-card__desc">Erweitere GIMP mit tausenden Plugins aus der Community. Von RAW-Import über HDR-Erzeugung bis zu Spezialeffekten — die Plugin-API eröffnet nahezu unbegrenzte Möglichkeiten für deinen Workflow.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-code" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Scripting (Python / Scheme)</h3>
+            <p class="photo-feature-card__desc">Automatisiere wiederkehrende Aufgaben mit Python-Fu oder Script-Fu. Erstelle eigene Filter, Batch-Verarbeitungen und Workflows, die auf deine spezifischen Bedürfnisse zugeschnitten sind.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">RAW-Import</h3>
+            <p class="photo-feature-card__desc">Öffne RAW-Dateien direkt in GIMP über Plugins wie darktable-cli oder RawTherapee-CLI. So behältst du maximale Bildqualität bei und kannst trotzdem alle Pixel-Werkzeuge von GIMP nutzen.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-selection" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Fortgeschrittene Auswahlwerkzeuge</h3>
+            <p class="photo-feature-card__desc">Nutze intelligente Scheren, Zauberstab, Farbauswahl, Pfadauswahl und den leistungsstarken Vordergrund-Auswahl-Algorithmus. Speichere und lade Auswahlen als Kanäle für spätere Bearbeitung.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-band-aid" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Clone & Heal</h3>
+            <p class="photo-feature-card__desc">Entferne störende Elemente, Hautunreinheiten oder Staubflecken mit dem Klonen-Stempel und dem Heilungs-Werkzeug. Beide Werkzeuge arbeiten mit anpassbaren Pinselspitzen und Quellenpunkten für natürliche Ergebnisse.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-paint-brush" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Zeichen- & Malwerkzeuge</h3>
+            <p class="photo-feature-card__desc">Verwende druckempfindliche Pinsel, Muster, Farbverläufe und Texturen. Ideal für digitale Malerei, Photo-Painting und kreative Überarbeitungen deiner Fotos.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-text-t" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Text & Vektor-Ebenen</h3>
+            <p class="photo-feature-card__desc">Füge professionelle Textelemente hinzu mit voller Kontrolle über Schriftart, Größe, Farbe und Effekte. Pfade und Vektor-Werkzeuge ermöglichen skalierbare Formen und präzise Kurven.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interface -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-layout" aria-hidden="true"></i> Oberfläche und Arbeitsbereiche</h2>
+        <p>Die GIMP-Oberfläche ist auf maximale Effizienz und Benutzerfreundlichkeit ausgelegt. Hier sind die zentralen Arbeitsbereiche, die du kennen solltest:</p>
+        <div class="o-grid o-grid--2 u-mt-8">
+          <div class="photo-card" data-reveal data-reveal-delay="1">
+            <div class="photo-card__icon"><i class="ph ph-toolbox" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Werkzeugkasten</h3>
+            <p class="photo-card__text">Die zentrale Werkzeugleiste enthält alle wichtigen Werkzeuge für Auswahl, Malen, Retusche, Transformation und Text. Jedes Werkzeug bietet kontextsensitive Optionen, die sich dynamisch anpassen. Du kannst die Toolbox als eigenes Fenster oder angedockt nutzen.</p>
+          </div>
+          <div class="photo-card" data-reveal data-reveal-delay="2">
+            <div class="photo-card__icon"><i class="ph ph-stack" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Ebenen-Dialog</h3>
+            <p class="photo-card__text">Verwalte alle Ebenen deines Bildes hierarchisch. Erstelle Ebenengruppen, passe Deckkraft und Mischmodi an, und nutze Ebenenmasken für nicht-destruktive Bearbeitung. Der Ebenen-Dialog ist das Herzstück jedes komplexen GIMP-Projekts.</p>
+          </div>
+          <div class="photo-card" data-reveal data-reveal-delay="1">
+            <div class="photo-card__icon"><i class="ph ph-palette" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Kanäle & Pfade</h3>
+            <p class="photo-card__text">Arbeite mit Farb-Kanälen (Rot, Grün, Blau, Alpha) für präzise Farbkorrekturen. Speichere komplexe Auswahlen als Kanäle und nutze den Pfad-Dialog für vektorbasierte Formen und Text auf Pfaden.</p>
+          </div>
+          <div class="photo-card" data-reveal data-reveal-delay="2">
+            <div class="photo-card__icon"><i class="ph ph-sliders-horizontal" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Filter & Effekte</h3>
+            <p class="photo-card__text">Wende hunderte integrierte Filter an — von Schärfung und Weichzeichnung bis zu Verzerrungen, Lichteffekten und kreativen Stilisierungen. Alle Filter sind über das Filter-Menü erreichbar und können als Plugin erweitert werden.</p>
+          </div>
+          <div class="photo-card" data-reveal data-reveal-delay="1">
+            <div class="photo-card__icon"><i class="ph ph-monitor" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Anpassbare Arbeitsbereiche</h3>
+            <p class="photo-card__text">Speichere deine bevorzugte Fensteranordnung als Arbeitsbereich und wechsle mit einem Klick zwischen verschiedenen Layouts — etwa Retusche, Malen, oder Compositing. GIMP passt sich deinem Workflow an, nicht umgekehrt.</p>
+          </div>
+          <div class="photo-card" data-reveal data-reveal-delay="2">
+            <div class="photo-card__icon"><i class="ph ph-device-tablet-camera" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Tablet & Druck</h3>
+            <p class="photo-card__text">Nutzung von Grafiktabletts mit voller Druckempfindlichkeit für natürliches Zeichnen und Malen. GIMP unterstützt moderne Tablett-APIs und bietet feingranulare Kontrolle über Pinseldynamik basierend auf Druck und Neigung.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Where used -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-books" aria-hidden="true"></i> In diesen Modulen verwendest du GIMP</h2>
+        <p>GIMP ist ein zentrales Werkzeug im Pansonic Photo Lab. Du wirst es in mehreren Modulen einsetzen, um deine fotografischen Fähigkeiten weiterzuentwickeln und professionelle Ergebnisse zu erzielen:</p>
+        <div class="o-grid o-grid--3 u-mt-8">
+          <a href="../module/10-bearbeitung.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="1">
+            <div class="photo-card__icon"><i class="ph ph-sliders" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Modul 10 — Bearbeitung & Retusche</h3>
+            <p class="photo-card__text">Der Kern der pixelbasierten Nachbearbeitung: Hautretusche mit Frequenztrennung, Entfernung von störenden Elementen, Objektaustausch und fortgeschrittene Compositing-Techniken. Hier lernst du GIMP als professionelles Retusche-Werkzeug kennen.</p>
+            <span class="photo-card__cta">Zum Modul <i class="ph ph-arrow-right"></i></span>
+          </a>
+          <a href="../module/06-farbe.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="2">
+            <div class="photo-card__icon"><i class="ph ph-palette" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Modul 06 — Color Grading</h3>
+            <p class="photo-card__text">Farbtheorie in der Praxis: Nutze GIMP für selektive Farbkorrekturen, Look-Erstellung mit Ebenen und Mischmodi, sowie kreative Farbmanipulationen. Entwickle deinen eigenen, wiedererkennbaren Stil mit Kurven, Farbbalance und Gradient Maps.</p>
+            <span class="photo-card__cta">Zum Modul <i class="ph ph-arrow-right"></i></span>
+          </a>
+          <a href="../module/11-capstone.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="3">
+            <div class="photo-card__icon"><i class="ph ph-trophy" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Modul 11 — Capstone</h3>
+            <p class="photo-card__text">Dein Abschlussprojekt: Verwende GIMP für die finale Nachbearbeitung deiner besten Aufnahmen. Vom RAW-Import bis zum fertigen Bild — hier kombinierst du alle Techniken, die du im Photo Lab gelernt hast.</p>
+            <span class="photo-card__cta">Zum Modul <i class="ph ph-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Workflow -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-steps" aria-hidden="true"></i> Der GIMP-Workflow Schritt für Schritt</h2>
+        <p>Ein strukturierter Workflow hilft dir, systematisch vorzugehen und das Beste aus deinen Fotos herauszuholen. Folge diesen Schritten für professionelle Ergebnisse:</p>
+        <div class="o-stack u-mt-8">
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="1">
+            <div class="photo-card__num">01</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Import & Vorbereitung</h3>
+              <p class="photo-card__text">Öffne dein Bild in GIMP — entweder direkt als JPEG/PNG oder als RAW über ein Import-Plugin. Erstelle sofort eine Kopie der Hintergrundebene, um nicht-destruktiv arbeiten zu können. Prüfe die Bildgrösse, Auflösung und den Farbmodus (RGB ist Standard für Fotos). Organisiere deine Arbeitsumgebung mit den benötigten Werkzeugfenstern.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="2">
+            <div class="photo-card__num">02</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Ebenenstruktur aufbauen</h3>
+              <p class="photo-card__text">Organisiere dein Projekt mit einer klaren Ebenenhierarchie. Erstelle separate Ebenen für Korrekturen, Retusche, Effekte und Text. Nutze Ebenengruppen, um verwandte Elemente zusammenzufassen. Eine gute Struktur erleichtert spätere Änderungen enorm und gibt dir den vollen Überblick über dein Projekt.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="3">
+            <div class="photo-card__num">03</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Auswahl & Maskierung</h3>
+              <p class="photo-card__text">Erstelle präzise Auswahlen für die Bereiche, die du bearbeiten möchtest. Nutze den Zauberstab für einfarbige Bereiche, die intelligente Schere für komplexe Konturen, und Pfade für präzise Kanten. Speichere wichtige Auswahlen als Kanäle für spätere Verwendung und Masken für nicht-destruktive Bearbeitung.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="1">
+            <div class="photo-card__num">04</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Retusche & Korrektur</h3>
+              <p class="photo-card__text">Arbeite mit dem Klonen-Stempel und dem Heilungs-Werkzeug, um Hautunreinheiten, Staubflecken oder störende Objekte zu entfernen. Nutze Ebenenmasken, um Korrekturen selektiv anzuwenden. Die Frequenztrennung ist ein fortgeschrittener Trick für professionelle Hautretusche ohne Weichzeichnung.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="2">
+            <div class="photo-card__num">05</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Farbe & Look</h3>
+              <p class="photo-card__text">Wende Farbkorrekturen mit Kurven, Farbbalance und Hue-Saturation an. Nutze Gradient Maps und Mischmodi für kreative Looks. Arbeite mit Ebenenmasken, um Farbeffekte nur auf bestimmte Bereiche anzuwenden — etwa einen warmen Ton für den Vordergrund und einen kühlen für den Himmel.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="3">
+            <div class="photo-card__num">06</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Export & Veröffentlichung</h3>
+              <p class="photo-card__text">Exportiere dein fertiges Bild in das gewünschte Zielformat. GIMP unterstützt JPEG, PNG, TIFF, WebP, PDF und viele weitere Formate. Achte auf die richtige Farbprofil-Einbettung und wähle die Auflösung entsprechend des Verwendungszwecks — Web, Druck oder Archiv. Erstelle verschiedene Export-Voreinstellungen für wiederkehrende Aufgaben.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro Tips -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-lightbulb" aria-hidden="true"></i> Pro-Tipps für GIMP</h2>
+        <div class="photo-mode-grid--2col"><div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Nicht-destruktiv mit Ebenen arbeiten</h3>
+            <p class="photo-mode-card__desc">Arbeite immer auf neuen Ebenen statt direkt auf dem Hintergrund. So kannst du jederzeit zu einem früheren Zustand zurückkehren. Nutze Ebenenmasken statt den Radiergummi — Masken lassen sich später anpassen und sind viel flexibler. Gruppiere Ebenen nach Aufgabenbereichen, um den Überblick zu behalten. Ein professioneller Trick: Erstelle eine Korrekturen-Gruppe mit Ebenen für Helligkeit, Kontrast, Farbe und Schärfe. Jede Korrektur liegt auf einer eigenen Ebene mit Maske — so hast du maximale Kontrolle und kannst den Gesamteffekt über die Gruppendeckkraft steuern.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Ebenenmasken für selektive Bearbeitung</h3>
+            <p class="photo-mode-card__desc">Ebenenmasken sind das stärkste Werkzeug in GIMP. Anstatt Bereiche direkt zu löschen oder zu übermalen, verwendest du eine Maske, um Teile einer Ebene unsichtbar zu machen. Mit weichen Pinseln und Verläufen erzeugst du sanfte Übergänge, die natürlich aussehen. Für präzise Masken nutze die schnelle Maske (Umschalt+Q) oder erstelle eine Maske aus einer Auswahl. Du kannst Masken auch invertieren, mit Filtern bearbeiten und als Kanäle speichern. Das Aufmalen von Masken mit einem Grafiktablet ist besonders effizient und ergonomisch.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Tastenkürzel meistern</h3>
+            <p class="photo-mode-card__desc">Lerne die wichtigsten Tastenkürzel, um deinen Workflow erheblich zu beschleunigen: Strg+Z zum Rückgängig machen, Strg+Umschalt+Z zum Wiederherstellen, X zum Austauschen von Vorder- und Hintergrundfarbe. Tab schaltet die Sichtbarkeit aller Werkzeugfenster um. Für Auswahlen: Strg+A wählt alles, Strg+Umschalt+A hebt die Auswahl auf, Strg+I invertiert die Auswahl. Mit Leertaste verschiebst du die Ansicht, mit +/- zoomst du rein und raus. Eigene Tastenkürzel kannst du in den Einstellungen definieren.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Export als WebP für das Web</h3>
+            <p class="photo-mode-card__desc">Für Web-Verwendung bietet das WebP-Format beste Kompression bei hoher Qualität. GIMP unterstützt WebP-Export mit einstellbarer Qualität und verlustfreier Option. Vergleiche die Dateigrösse mit JPEG — bei gleicher Qualität ist WebP oft 25-35% kleiner, was die Ladezeiten deiner Website deutlich verbessert. Für Druck verwende stets TIFF oder PNG mit eingebettetem Farbprofil. Für Archivierung eignet sich XCF (GIMP's eigenes Format), da es alle Ebenen, Masken und Einstellungen erhält. So kannst du Monate später an einem Projekt weiterarbeiten, als wäre es gestern gewesen.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Plugins und Scripting nutzen</h3>
+            <p class="photo-mode-card__desc">Die Plugin-Community ist einer der grössten Vorteile von GIMP. Installiere Plugins für RAW-Import, HDR-Erzeugung, Panorama-Stitching und Spezialeffekte. Mit Python-Fu kannst du wiederkehrende Aufgaben automatisieren — etwa die Batch-Verarbeitung ganzer Bildordner. Ein einfaches Python-Skript kann dir Stunden manueller Arbeit ersparen, wenn du regelmäßig dieselben Korrekturen auf viele Bilder anwenden musst. Die GIMP-Registry und GitHub sind die besten Quellen für qualitativ hochwertige Plugins.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Frequenztrennung für Hautretusche</h3>
+            <p class="photo-mode-card__desc">Die Frequenztrennung ist ein professioneller Retusche-Trick, der in GIMP mit Ebenen und dem Gaussischen Weichzeichner umgesetzt wird. Du teilst das Bild in eine Tiefe- und eine Detail-Ebene auf. Auf der Tiefenebene gleichst du Hauttöne aus, auf der Detailebene behältst du Poren und Textur bei. Diese Technik erlaubt es dir, Hautunreinheiten zu entfernen und den Teint zu verbessern, ohne die natürliche Hautstruktur zu zerstören. Das Ergebnis wirkt deutlich natürlicher als einfaches Weichzeichnen und ist der Standard in der professionellen Portrait-Retusche.</p>
+          </div>
+        </div>
+</div>
+      </div>
+
+      <!-- Comparison -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-scales" aria-hidden="true"></i> GIMP im Vergleich</h2>
+        <p>Wie schneidet GIMP im direkten Vergleich mit anderen Tools ab? Diese Übersicht hilft dir bei der Auswahl des richtigen Werkzeugs für deinen Workflow:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-paint-brush" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">GIMP</h3>
+            <p class="photo-feature-card__desc">Kostenlose Open-Source-Lösung für pixelbasierte Bildbearbeitung. Verfügbar für Windows, macOS und Linux. Fortgeschrittene Ebenen &amp; Masken, Python/Scheme-Scripting, großes Plugin-Ökosystem.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-crown" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Adobe Photoshop</h3>
+            <p class="photo-feature-card__desc">Der professionelle Industriestandard. Abonnement-basiert, verfügbar für Windows und macOS. Umfassendste Feature-Palette, integrierter Camera Raw, riesige kommerzielle Plugin-Welt, native CMYK-Unterstützung.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-aperture" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">darktable</h3>
+            <p class="photo-feature-card__desc">Kostenlose Open-Source-Lösung für RAW-Entwicklung. Verfügbar für Windows, macOS und Linux. Spezialisiert auf RAW-Workflow, nicht-destruktive Bearbeitung, Lua-Scripting, professionelles Farbmanagement.</p>
+          </div>
+        </div>
+        <p class="u-mt-8">GIMP ist die ideale Wahl, wenn du pixelbasierte Bearbeitung benötigst und dabei kein Geld ausgeben möchtest. Für reine RAW-Entwicklung ist darktable besser geeignet, während Photoshop das umfassendste kommerzielle Paket bleibt. Viele Fotografen nutzen eine Kombination: darktable für RAW-Entwicklung, GIMP für finale Retusche und Compositing. So entsteht ein vollständig kostenloser, professioneller Workflow, der in Qualität und Flexibilität mit teuren Alternativen mithalten kann.</p>
+      </div>
+
+      <!-- Download -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-download-simple" aria-hidden="true"></i> Download & Installation</h2>
+        <p>GIMP ist für die sofortige Nutzung verfügbar. Lade die neueste Version direkt von der offiziellen Quelle herunter:</p>
+        <div class="u-mt-8">
+          <a href="https://www.gimp.org/" class="photo-btn photo-btn--primary" target="_blank" rel="noopener">
+            <i class="ph ph-globe" aria-hidden="true"></i> Offizielle Website besuchen
+          </a>
+          <a href="https://www.gimp.org/downloads/" class="photo-btn photo-btn--secondary u-mt-4" target="_blank" rel="noopener">
+            <i class="ph ph-book-open" aria-hidden="true"></i> Installationsanleitung lesen
+          </a>
+        </div>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-monitor" aria-hidden="true"></i> Systemanforderungen</h3>
+          <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-desktop" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Windows:</h3>
+            <p class="photo-feature-card__desc">Windows 10 oder neuer, 64-bit Architektur empfohlen</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-laptop" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">macOS:</h3>
+            <p class="photo-feature-card__desc">macOS 10.12 (Sierra) oder neuer, Intel und Apple Silicon werden unterstützt</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-terminal" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Linux:</h3>
+            <p class="photo-feature-card__desc">Die meisten Distributionen über Flatpak, Snap oder den Paketmanager</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-cpu" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Hardware:</h3>
+            <p class="photo-feature-card__desc">4 GB RAM empfohlen, 8 GB für große Bilder, OpenCL-fähige GPU für Beschleunigung</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-hard-drives" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Speicher:</h3>
+            <p class="photo-feature-card__desc">Mindestens 200 MB für die Installation, SSD empfohlen für schnelles Laden</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-pen-nib" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Tablet:</h3>
+            <p class="photo-feature-card__desc">Grafiktablett mit Druckempfindlichkeit wird empfohlen für Retusche und Malerei</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Related Tools -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-wrench" aria-hidden="true"></i> Verwandte Tools im Photo Lab</h2>
+        <p>Erweitere deinen Workflow mit diesen komplementären Tools aus dem Photo Lab. Jedes Tool hat seine Stärken und ergänzt GIMP ideal:</p>
+        <div class="o-grid o-grid--3 u-mt-8">
+          <a href="./darktable.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="1">
+            <div class="photo-card__icon"><i class="ph ph-aperture" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">darktable</h3>
+            <p class="photo-card__text">Professioneller RAW-Workflow und nicht-destruktive Bildentwicklung. Nutze darktable für die RAW-Entwicklung und GIMP für die finale pixelbasierte Bearbeitung — ein klassischer, kostenloser Workflow.</p>
+            <span class="photo-card__cta">Zum Tool <i class="ph ph-arrow-right"></i></span>
+          </a>
+          <a href="./rawtherapee.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="2">
+            <div class="photo-card__icon"><i class="ph ph-sliders" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">RawTherapee</h3>
+            <p class="photo-card__text">Alternative Open-Source RAW-Entwicklung mit Fokus auf maximale Bildqualität und fortschrittlichen Algorithmen für Rauschunterdrückung und Detailwiedergabe.</p>
+            <span class="photo-card__cta">Zum Tool <i class="ph ph-arrow-right"></i></span>
+          </a>
+          <a href="./snapseed.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="3">
+            <div class="photo-card__icon"><i class="ph ph-device-mobile" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Snapseed</h3>
+            <p class="photo-card__text">Kostenlose Mobile-App von Google für schnelle Edits unterwegs — ideal, wenn du keine Desktop-Software zur Hand hast oder unterwegs schnell einen Look anpassen möchtest.</p>
+            <span class="photo-card__cta">Zum Tool <i class="ph ph-arrow-right"></i></span>
+          </a>
+          <a href="./lightroom-mobile.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="1">
+            <div class="photo-card__icon"><i class="ph ph-sun-dim" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Lightroom Mobile</h3>
+            <p class="photo-card__text">Adobes mobile RAW-Bearbeitung mit Cloud-Sync und KI-gestützten Masken — für unterwegs und nahtlose Desktop-Integration mit dem Adobe-Ökosystem.</p>
+            <span class="photo-card__cta">Zum Tool <i class="ph ph-arrow-right"></i></span>
+          </a>
+          <a href="../pages/glossar.html" class="photo-card photo-card--link" data-reveal data-reveal-delay="2">
+            <div class="photo-card__icon"><i class="ph ph-book-bookmark" aria-hidden="true"></i></div>
+            <h3 class="photo-card__title">Foto-Glossar</h3>
+            <p class="photo-card__text">Alle wichtigen Fachbegriffe der Fotografie von A bis Z — dein kompaktes Nachschlagewerk für jeden Workflow und jede Aufnahmesituation im Photo Lab.</p>
+            <span class="photo-card__cta">Zum Glossar <i class="ph ph-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Extra section: Community -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-users" aria-hidden="true"></i> Community & Ressourcen</h2>
+        <p>Die GIMP-Community ist eine der aktivsten Open-Source-Gemeinschaften weltweit. Egal ob du Anfänger oder Profi bist — es gibt zahlreiche Ressourcen, die dir helfen, GIMP zu meistern:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-book-open" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Offizielle Dokumentation:</h3>
+            <p class="photo-feature-card__desc">Die GIMP-Dokumentation deckt alle Werkzeuge, Filter und Funktionen ab und wird regelmäßig aktualisiert.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-users" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">GIMP-Forum:</h3>
+            <p class="photo-feature-card__desc">Das offizielle Forum ist der beste Ort für Fragen, Tipps und den Austausch mit anderen Nutzern.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-youtube-logo" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Tutorials:</h3>
+            <p class="photo-feature-card__desc">Auf YouTube findest du tausende GIMP-Tutorials für alle Schwierigkeitsstufen — von Einsteigern bis zu Profis.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-puzzle-piece" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Plugin-Registry:</h3>
+            <p class="photo-feature-card__desc">Die Registry listet alle verfügbaren Plugins mit Beschreibungen und Bewertungen.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-github-logo" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Quellcode:</h3>
+            <p class="photo-feature-card__desc">Der vollständige Quellcode ist auf GitLab verfügbar. Fortgeschrittene Nutzer können eigene Builds erstellen.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- History & Background -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i> Geschichte & Hintergrund</h2>
+        <p>Die Geschichte von GIMP begann 1995 an der University of California, Berkeley. Die Studenten Spencer Kimball und Peter Mattis entwickelten das Programm ursprünglich als semesterübergreifendes Projekt. Sie wollten ein leistungsfähiges Bildbearbeitungsprogramm für Unix-Systeme schaffen, das den damals verfügbaren kommerziellen Alternativen ebenbürtig war.</p>
+        <p>Bereits 1996 wurde GIMP unter der GNU General Public License veröffentlicht. Diese Entscheidung erwies sich als wegweisend: Innerhalb kurzer Zeit entwickelte sich eine aktive Community von Entwicklern und Nutzern, die das Programm kontinuierlich verbesserte. Die modulare Architektur und die Plugin-API ermöglichten es Dritten, GIMP um zusätzliche Funktionen zu erweitern.</p>
+        <p>Im Jahr 1997 wurde das GTK+ Toolkit (GIMP Toolkit) als separates Projekt ausgegliedert. GTK+ wurde zu einem der wichtigsten GUI-Toolkits für Linux und bildet bis heute die Grundlage für die GIMP-Oberfläche. Diese Trennung zeigt den weitreichenden Einfluss, den GIMP auf die Open-Source-Welt hatte.</p>
+        <p>Die Version 2.0 erschien 2004 und brachte eine komplett überarbeitete Oberfläche sowie zahlreiche neue Werkzeuge. Mit Version 2.10 (2018) wurde der GEGL-Bildverarbeitungs-Engine (Generic Graphics Library) standardmäßig aktiviert, was den Weg für moderne, nicht-destruktive Bearbeitungstechniken ebnete. Die aktuelle Entwicklung konzentriert sich auf Version 3.0, die eine Portierung auf GTK3 und zahlreiche Performance-Verbesserungen bringen wird.</p>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-trophy" aria-hidden="true"></i> Meilensteine</h3>
+          <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-calendar" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">1995:</h3>
+            <p class="photo-feature-card__desc">Erste Entwicklung an der UC Berkeley</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-calendar" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">1996:</h3>
+            <p class="photo-feature-card__desc">Erste öffentliche Veröffentlichung unter GPL</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-calendar" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">1997:</h3>
+            <p class="photo-feature-card__desc">Ausgliederung von GTK+ als eigenes Projekt</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-calendar" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">2004:</h3>
+            <p class="photo-feature-card__desc">Veröffentlichung von GIMP 2.0</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-calendar" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">2018:</h3>
+            <p class="photo-feature-card__desc">GIMP 2.10 mit GEGL-Engine</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-calendar" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Heute:</h3>
+            <p class="photo-feature-card__desc">Aktive Entwicklung mit regelmäßigen Updates</p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Best Practices -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-check-circle" aria-hidden="true"></i> Best Practices</h2>
+        <p>Um das Beste aus GIMP herauszuholen, solltest du einige bewährte Methoden befolgen. Diese Praktiken helfen dir, effizienter zu arbeiten, bessere Ergebnisse zu erzielen und typische Fehler zu vermeiden:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-floppy-disk" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Regelmässig speichern:</h3>
+            <p class="photo-feature-card__desc">GIMP bietet eine Auto-Backup-Funktion, aber regelmäßiges manuelles Speichern in das XCF-Format schützt vor Datenverlust. Nutze Versionsnummern in Dateinamen, um verschiedene Stadien deines Projekts nachvollziehen zu können.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-stack" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Konsistente Ebenennamen:</h3>
+            <p class="photo-feature-card__desc">Benenne deine Ebenen aussagekräftig — etwa "Hautretusche", "Farbanpassung" oder "Schärfung". Das erleichtert die Navigation in komplexen Projekten enorm und hilft dir, den Überblick zu behalten.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-palette" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Farbprofile verwenden:</h3>
+            <p class="photo-feature-card__desc">Arbeite immer mit eingebetteten Farbprofilen (sRGB für Web, Adobe RGB für Druck). Überprüfe das Farbmanagement in den Einstellungen, um Farbverschiebungen zwischen verschiedenen Geräten zu vermeiden.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-crop" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Nicht-destruktiv zuschneiden:</h3>
+            <p class="photo-feature-card__desc">Nutze die Funktion "Alles sichtbar machen" statt direkt zuzuschneiden. So behältst du Flexibilität, falls du später doch mehr Bildfläche benötigst. Ebenenmasken sind hier dem direkten Löschen vorzuziehen.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-device-tablet-camera" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Tablet-Konfiguration optimieren:</h3>
+            <p class="photo-feature-card__desc">Passe die Druckempfindlichkeit und die Pinseldynamik an deinen Arbeitsstil an. Teste verschiedene Einstellungen, um die optimale Balance zwischen Kontrolle und Natürlichkeit zu finden.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-export" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Export-Voreinstellungen erstellen:</h3>
+            <p class="photo-feature-card__desc">Speichere häufig verwendete Export-Einstellungen als Voreinstellungen. Das spart Zeit und stellt sicher, dass deine Bilder immer mit den gleichen Parametern exportiert werden — besonders wichtig für konsistente Web-Ausgaben.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Advanced Techniken -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-gear" aria-hidden="true"></i> Erweiterte Techniken</h2>
+        <p>Sobald du die Grundlagen von GIMP beherrschst, öffnen sich zahlreiche fortgeschrittene Techniken, die deine Bildbearbeitung auf das nächste Level heben:</p>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-intersect" aria-hidden="true"></i> Luminanz-Masken</h3>
+          <p class="photo-card__text">Erstelle Masken basierend auf der Helligkeit deines Bildes. Luminanz-Masken erlauben präzise Auswahlen von Lichtern, Mitteltönen und Schatten — ideal für kontrastreiche Landschaftsfotos. In GIMP erstellst du diese über Kanäle und Berechnungen.</p>
+        </div>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-selection" aria-hidden="true"></i> Focus Stacking</h3>
+          <p class="photo-card__text">Kombiniere mehrere Bilder mit unterschiedlichen Fokusebenen zu einem einzigen, durchgehend scharfen Bild. Diese Technik ist besonders in der Makro- und Landschaftsfotografie unverzichtbar und lässt sich in GIMP mit speziellen Plugins umsetzen.</p>
+        </div>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-paint-brush" aria-hidden="true"></i> Digitale Malerei</h3>
+          <p class="photo-card__text">Nutze GIMP als vollwertiges Malprogramm mit druckempfindlichen Pinseln, Texturen und Mischmodi. Viele digitale Künstler nutzen GIMP für Concept Art, Illustrationen und Photo-Bashing — die Grenzen zwischen Fotografie und Malerei verschwimmen.</p>
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-wrench" aria-hidden="true"></i> Fehlerbehebung</h2>
+        <p>Hier sind die häufigsten Probleme, die GIMP-Nutzer begegnen, und ihre Lösungen:</p>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-warning" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">GIMP ist langsam bei großen Bildern</h3>
+            <p class="photo-mode-card__desc">Prüfe die Einstellungen unter Bearbeiten &gt; Einstellungen &gt; Systemressourcen. Erhöhe den Cache-Speicher und die Anzahl der Undo-Schritte entsprechend deinem verfügbaren RAM. Auf Systemen mit wenig Arbeitsspeicher solltest du die Anzahl der Ebenen reduzieren oder das Bild in kleinere Teile aufteilen.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-warning" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Farbverschiebungen beim Export</h3>
+            <p class="photo-mode-card__desc">Dies tritt meist auf, wenn das Farbprofil nicht korrekt eingebettet wird. Gehe zu Bild &gt; Modus und stelle sicher, dass du im RGB-Modus arbeitest. Beim Export aktiviere die Option "Farbprofil speichern". Für Web-Exporte verwende stets sRGB.</p>
+          </div>
+        </div>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-warning" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">Plugins werden nicht geladen</h3>
+            <p class="photo-mode-card__desc">Prüfe, ob die Plugin-Dateien im richtigen Verzeichnis liegen (unter Bearbeiten &gt; Einstellungen &gt; Ordner &gt; Plugins findest du den Pfad). Starte GIMP nach der Installation neuer Plugins neu. Achte darauf, dass die Plugins für deine GIMP-Version kompiliert wurden.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keyboard Shortcuts Reference -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-keyboard" aria-hidden="true"></i> Tastenkürzel-Referenz</h2>
+        <p>Diese Tabelle zeigt die wichtigsten Tastenkürzel, die deinen Workflow in GIMP erheblich beschleunigen. Lerne sie nach und nach, um immer effizienter zu werden:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-arrow-up" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Öffnen <span class="u-text-muted">— Strg + O</span></h3>
+            <p class="photo-feature-card__desc">Bilddatei öffnen</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-floppy-disk" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Speichern <span class="u-text-muted">— Strg + S</span></h3>
+            <p class="photo-feature-card__desc">Aktuelles Bild speichern</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-export" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Exportieren <span class="u-text-muted">— Strg + Umschalt + E</span></h3>
+            <p class="photo-feature-card__desc">Bild als JPEG/PNG exportieren</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-arrow-u-up-left" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Rückgängig <span class="u-text-muted">— Strg + Z</span></h3>
+            <p class="photo-feature-card__desc">Letzte Aktion rückgängig machen</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-arrow-u-up-right" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Wiederherstellen <span class="u-text-muted">— Strg + Umschalt + Z</span></h3>
+            <p class="photo-feature-card__desc">Zuletzt Rückgängig-Wiederholen</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-selection-all" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Alles auswählen <span class="u-text-muted">— Strg + A</span></h3>
+            <p class="photo-feature-card__desc">Gesamtes Bild auswählen</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-selection-slash" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Auswahl aufheben <span class="u-text-muted">— Strg + Umschalt + A</span></h3>
+            <p class="photo-feature-card__desc">Aktuelle Auswahl aufheben</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-selection-inverse" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Auswahl invertieren <span class="u-text-muted">— Strg + I</span></h3>
+            <p class="photo-feature-card__desc">Auswahl umkehren</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-swatches" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Farben tauschen <span class="u-text-muted">— X</span></h3>
+            <p class="photo-feature-card__desc">Vorder- und Hintergrundfarbe tauschen</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-gradient" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Verlauf <span class="u-text-muted">— G</span></h3>
+            <p class="photo-feature-card__desc">Verlaufswerkzeug aktivieren</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-text-t" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Text <span class="u-text-muted">— T</span></h3>
+            <p class="photo-feature-card__desc">Textwerkzeug aktivieren</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-magnifying-glass-plus" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Zoom <span class="u-text-muted">— Z</span></h3>
+            <p class="photo-feature-card__desc">Zoom-Werkzeug aktivieren</p>
+          </div>
+        </div>
+        <p class="u-mt-8">Alle Tastenkürzel können unter Bearbeiten &gt; Tastaturkürzel individuell angepasst werden. Erstelle eigene Kürzel für häufig verwendete Aktionen, um deinen persönlichen Workflow noch weiter zu optimieren.</p>
+      </div>
+
+      <!-- File Formats -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-files" aria-hidden="true"></i> Unterstützte Dateiformate</h2>
+        <p>GIMP unterstützt eine beeindruckende Vielzahl an Dateiformaten — von einfachen Webformaten bis zu professionellen Druck- und Archivformaten. Hier ist ein Überblick über die wichtigsten Formate und ihre Verwendungszwecke:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">XCF</h3>
+            <p class="photo-feature-card__desc">Das native GIMP-Format. Speichert alle Ebenen, Masken, Pfade und Einstellungen. Ideal für die Zwischenspeicherung und Archivierung laufender Projekte.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">JPEG</h3>
+            <p class="photo-feature-card__desc">Das Standardformat für Fotos im Web. Verlustbehaftete Kompression mit einstellbarer Qualität. Nicht für mehrfache Bearbeitung geeignet.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">PNG</h3>
+            <p class="photo-feature-card__desc">Verlustfreies Format mit Transparenz-Unterstützung. Ideal für Grafiken, Screenshots und Bilder mit scharfen Kanten im Web.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">TIFF</h3>
+            <p class="photo-feature-card__desc">Professionelles Format für den Druck. Unterstützt Ebenen, Transparenz und verschiedene Farbtiefen. Ideal für den Austausch mit Druckereien.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">WebP</h3>
+            <p class="photo-feature-card__desc">Modernes Google-Format mit überlegener Kompression. Unterstützt sowohl verlustbehaftete als auch verlustfreie Kompression sowie Transparenz.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--emerald">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">PSD</h3>
+            <p class="photo-feature-card__desc">Adobe Photoshop-Dateien können geöffnet und exportiert werden. Ebenen und Textebenen bleiben weitgehend erhalten.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">RAW (via Plugin)</h3>
+            <p class="photo-feature-card__desc">Dank Plugins wie darktable-cli können die meisten Kamera-RAW-Formate direkt importiert werden.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">PDF</h3>
+            <p class="photo-feature-card__desc">GIMP kann Bilder als PDF exportieren und PDF-Dateien öffnen. Nützlich für die Erstellung von Präsentationen und Dokumentationen.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Management -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-palette" aria-hidden="true"></i> Farbmanagement</h2>
+        <p>Korrektes Farbmanagement ist entscheidend für professionelle Ergebnisse. GIMP bietet umfangreiche Optionen für die Verwaltung von Farbräumen und Profilen:</p>
+        <p>Arbeite im RGB-Modus für die meisten Fotoprojekte. Für den Druck kannst du über Plugins in den CMYK-Farbraum konvertieren. Verwende stets kalibrierte Monitore und lade ICC-Profile für deinen Drucker, um Farbverschiebungen zu minimieren.</p>
+        <p>Das Soft-Proofing-Feature ermöglicht es dir, das Druckergebnis am Monitor zu simulieren. So erkennst du Farbverschiebungen frühzeitig und kannst gezielt korrigieren, bevor du das Bild zum Drucker schickst.</p>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-lightbulb" aria-hidden="true"></i> Tipp</h3>
+          <p class="photo-card__text">Für Web-Projekte verwende stets das sRGB-Farbprofil. Es ist der Standard für Browser und Displays und gewährleistet die konsistenteste Darstellung über verschiedene Geräte hinweg.</p>
+        </div>
+      </div>
+
+      <!-- Performance Optimization -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-lightning" aria-hidden="true"></i> Performance-Optimierung</h2>
+        <p>GIMP kann bei großen Bildern und komplexen Projekten ressourcenintensiv werden. Mit diesen Optimierungen sorgst du für einen flüssigen Workflow:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-cpu" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">OpenCL aktivieren:</h3>
+            <p class="photo-feature-card__desc">Wenn deine Grafikkarte OpenCL unterstützt, aktiviere diese Option in den Einstellungen. Viele Filter und Operationen werden dann deutlich schneller.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-hard-drives" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Swap auf SSD:</h3>
+            <p class="photo-feature-card__desc">Lege den GIMP-Cache und die Swap-Dateien auf einer schnellen SSD ab. Das beschleunigt den Zugriff auf Zwischenspeicher enorm.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-image" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Tile-Cache anpassen:</h3>
+            <p class="photo-feature-card__desc">Erhöhe den Tile-Cache in den Einstellungen entsprechend deinem verfügbaren RAM. Ein zu kleiner Cache führt zu häufigen Festplattenzugriffen.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-layers" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Ebenen reduzieren:</h3>
+            <p class="photo-feature-card__desc">Für sehr große Bilder solltest du regelmäßig Ebenen zusammenführen, die nicht mehr separat benötigt werden. Jede Ebene erhöht den Speicherbedarf.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-arrows-clockwise" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Regelmässig speichern:</h3>
+            <p class="photo-feature-card__desc">Speichere in XCF und nutze die Auto-Backup-Funktion. So verlierst du bei einem Absturz möglichst wenig Arbeit.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Backup & Recovery -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-shield-check" aria-hidden="true"></i> Backup & Wiederherstellung</h2>
+        <p>Deine Bilder und Projekte sind wertvoll. Ein durchdachtes Backup-Konzept schützt dich vor Datenverlust:</p>
+        <p>Speichere deine XCF-Projekte regelmäßig auf einer externen Festplatte oder in der Cloud. GIMP erstellt automatisch Backup-Dateien mit der Endung .xcf~, die du im Notfall wiederherstellen kannst. Für besonders wichtige Projekte empfehlen sich Versionskontrollsysteme wie Git.</p>
+        <p>Exportiere wichtige Meilensteine deines Projekts als separate XCF-Dateien mit Datumsangabe im Dateinamen. So kannst du jederzeit zu einem früheren Stand zurückkehren, falls eine Bearbeitung nicht wie gewünscht verläuft.</p>
+        <div class="photo-mode-card photo-mode-card--portrait">
+        <div class="photo-mode-card__dial"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+        <div class="photo-mode-card__content">
+            <h3 class="photo-mode-card__title">3-2-1 Backup-Regel</h3>
+            <p class="photo-mode-card__desc">Befolge die 3-2-1 Regel: Halte 3 Kopien deiner Daten auf 2 verschiedenen Medien, davon 1 Kopie an einem anderen Ort. So bist du selbst bei Hardware-Ausfall oder Diebstahl auf der sicheren Seite.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Integration with Other Tools -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-plugs-connected" aria-hidden="true"></i> Integration mit anderen Tools</h2>
+        <p>GIMP lässt sich nahtlos in professionelle Workflows einbinden. Die offene Architektur ermöglicht den Datenaustausch mit zahlreichen anderen Programmen:</p>
+        <div class="photo-feature-grid u-mt-8">
+          <div class="photo-feature-card photo-feature-card--indigo">
+            <div class="photo-feature-card__icon"><i class="ph ph-aperture" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">darktable / RawTherapee:</h3>
+            <p class="photo-feature-card__desc">Entwickle deine RAW-Dateien in einem dedizierten RAW-Konverter und öffne das Ergebnis in GIMP für die finale Pixel-Bearbeitung.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--coral">
+            <div class="photo-feature-card__icon"><i class="ph ph-film-strip" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Blender:</h3>
+            <p class="photo-feature-card__desc">Nutze GIMP für Texturen und Matte-Painting, die du anschliessend in Blender für 3D-Projekte verwendest.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--teal">
+            <div class="photo-feature-card__icon"><i class="ph ph-pen-nib" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Inkscape:</h3>
+            <p class="photo-feature-card__desc">Kombiniere GIMP für Raster-Grafiken mit Inkscape für Vektor-Illustrationen. Beide Programme teilen sich das GTK-Toolkit und harmonieren perfekt.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--amber">
+            <div class="photo-feature-card__icon"><i class="ph ph-scissors" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">Scribus:</h3>
+            <p class="photo-feature-card__desc">Bereite Bilder in GIMP vor und platziere sie in Scribus für professionelle Desktop-Publishing-Projekte.</p>
+          </div>
+          <div class="photo-feature-card photo-feature-card--rose">
+            <div class="photo-feature-card__icon"><i class="ph ph-export" aria-hidden="true"></i></div>
+            <h3 class="photo-feature-card__title">ImageMagick:</h3>
+            <p class="photo-feature-card__desc">Nutze ImageMagick-Skripte für die Batch-Verarbeitung und wechsle zu GIMP für manuelle Feinabstimmungen.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Professional Workflows -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-briefcase" aria-hidden="true"></i> Professionelle Workflows</h2>
+        <p>Professionelle Fotografen und Designer nutzen GIMP in vielfältigen Workflows. Hier sind einige bewährte Ansätze für verschiedene Anwendungsbereiche:</p>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-camera" aria-hidden="true"></i> Portrait-Workflow</h3>
+          <p class="photo-card__text">Importiere das RAW-Bild, entwickle es in darktable, und öffne das Ergebnis in GIMP. Nutze Frequenztrennung für die Hautretusche, passe Augen und Lippen mit selektiver Schärfung an, und erstelle eine Vignette für den dramatischen Effekt. Exportiere für Web und Druck in separaten Durchläufen.</p>
+        </div>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-mountains" aria-hidden="true"></i> Landschafts-Workflow</h3>
+          <p class="photo-card__text">Erstelle Belichtungsreihen in der Kamera, entwickle die RAW-Dateien, und nutze GIMP für das Blending mehrerer Belichtungen. Passe den Himmel separat an, verstärke die Schärfe im Vordergrund, und nutze Luminanz-Masken für präzise Tonwertkorrekturen.</p>
+        </div>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-paint-brush" aria-hidden="true"></i> Compositing-Workflow</h3>
+          <p class="photo-card__text">Kombiniere Elemente aus verschiedenen Bildern zu einer neuen Komposition. Nutze präzise Auswahlen und Ebenenmasken, um Objekte nahtlos einzufügen. Passe Lichtrichtung, Farbe und Perspektive an, damit alle Elemente zusammenpassen.</p>
+        </div>
+        <div class="photo-card u-mt-8">
+          <h3 class="photo-card__title"><i class="ph ph-device-mobile" aria-hidden="true"></i> Web-Design-Workflow</h3>
+          <p class="photo-card__text">Erstelle Web-Grafiken, Icons und UI-Elemente mit präzisen Ausmassen. Nutze Guides und Raster für exakte Positionierung. Exportiere in WebP für moderne Browser und erstelle Fallbacks in PNG für ältere Systeme.</p>
+        </div>
+      </div>
+
+      <!-- Learning Path -->
+      <div class="photo-content-section" data-reveal>
+        <h2><i class="ph ph-stairs" aria-hidden="true"></i> Lernpfad</h2>
+        <p>Wenn du GIMP neu erlernst, empfehlen wir dir diesen strukturierten Lernpfad. Jeder Schritt baut auf dem vorherigen auf und führt dich systematisch zum professionellen Umgang mit dem Programm:</p>
+        <p>Geduld und regelmäßige Übung sind der Schlüssel zum Erfolg. Nutze die Übungsprojekte im Photo Lab, um das Gelernte sofort anzuwenden und zu festigen. Experimentiere ohne Angst vor Fehlern — das ist der beste Weg, um GIMP wirklich zu verstehen.</p>
+        <p>Die Community ist immer hilfsbereit, wenn du Fragen hast. Zögere nicht, im Forum nachzufragen oder Tutorials anzusehen.</p>
+        <div class="o-stack u-mt-8">
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="1">
+            <div class="photo-card__num">01</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Grundlagen</h3>
+              <p class="photo-card__text">Lerne die Oberfläche kennen: Toolbox, Ebenen, Kanäle und grundlegende Werkzeuge. Übe mit einfachen Aufgaben wie Zuschneiden, Helligkeit anpassen und Exportieren.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="2">
+            <div class="photo-card__num">02</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Ebenen & Masken</h3>
+              <p class="photo-card__text">Beherrsche die nicht-destruktive Bearbeitung mit Ebenen und Masken. Experimentiere mit Mischmodi und lerne, komplexe Auswahlen zu erstellen und zu speichern.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="3">
+            <div class="photo-card__num">03</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Retusche & Farbkorrektur</h3>
+              <p class="photo-card__text">Arbeite mit dem Klonen-Stempel, Heilungs-Werkzeug und Frequenztrennung. Lerne Kurven, Farbbalance und selektive Farbkorrekturen für professionelle Ergebnisse.</p>
+            </div>
+          </div>
+          <div class="photo-card photo-card--horizontal" data-reveal data-reveal-delay="1">
+            <div class="photo-card__num">04</div>
+            <div class="photo-card__content">
+              <h3 class="photo-card__title">Fortgeschrittene Techniken</h3>
+              <p class="photo-card__text">Erkunde Luminanz-Masken, Compositing, Scripting und Plugin-Entwicklung. Arbeite an eigenen Projekten und entwickle deinen persönlichen Stil.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="photo-footer--premium" role="contentinfo">
+  <div class="o-container">
+    <div class="photo-footer__main">
+      <div class="photo-footer__brand-wrap">
+        <div class="photo-footer__logo">
+          <img src="/tutorials/pansonic-photo-lab/assets/icons/favicon.svg" alt="" width="48" height="48" loading="lazy">
+          <div class="photo-footer__logo-text">
+            <span class="photo-footer__logo-title">PANTAM</span>
+            <span class="photo-footer__logo-subtitle">LEARNING UNIVERSE</span>
+          </div>
+        </div>
+        <p class="photo-footer__tagline">Mit KI denken. Menschlich handeln.</p>
+      </div>
+      <div class="photo-footer__links-grid">
+        <div class="photo-footer__col">
+                    <h4>Photo Lab</h4>
+          <nav>
+            <a href="/tutorials/pansonic-photo-lab/">Startseite</a>
+            <a href="/tutorials/pansonic-photo-lab/pages/galerie.html">Galerie</a>
+            <a href="/tutorials/pansonic-photo-lab/pages/glossar.html">Glossar</a>
+            <a href="/tutorials/pansonic-photo-lab/pages/veroeffentlichen.html">Teilen</a>
+            <a href="/tutorials/pansonic-photo-lab/index-en.html">English Version</a>
+          </nav>
+        </div>
+        <div class="photo-footer__col">
+          <h4>PLU Ökosystem</h4>
+          <nav>
+            <a href="/tutorials/">PLU Hub</a>
+            <a href="/tutorials/pages/vision.html">KI Vision</a>
+            <a href="/tutorials/pages/ki-charter.html">KI Charter</a>
+            <a href="/tutorials/pages/lexikon.html">KI-Lexikon</a>
+          </nav>
+        </div>
+        <div class="photo-footer__col">
+          <h4>Weitere Academies</h4>
+          <nav>
+            <a href="/tutorials/pansonic-video-lab/"><i class="ph ph-film-strip" aria-hidden="true"></i> Video Lab</a>
+            <a href="/tutorials/pansonic-audio-lab/"><i class="ph ph-speaker-high" aria-hidden="true"></i> Audio Lab</a>
+            <a href="/tutorials/ki-academy-premium/"><i class="ph ph-brain" aria-hidden="true"></i> KI Premium</a>
+            <a href="/tutorials/grafik-modern/"><i class="ph ph-paint-brush" aria-hidden="true"></i> Grafik & Design</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="photo-footer__bottom">
+      <div class="photo-footer__legal">
+        <a href="/tutorials/pages/impressum.html">Impressum</a>
+        <span class="photo-footer__dot">•</span>
+        <a href="/tutorials/pages/datenschutz.html">Datenschutz</a>
+        <span class="photo-footer__dot">•</span>
+        <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+        <span class="photo-footer__dot">•</span>
+        <span>Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
+        <span class="photo-footer__dot">•</span>
+        <span>Code: <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a></span>
+      </div>
+      <div class="photo-footer__meta">
+        <span>&#169; Pantam, Art & Culture — Austria</span>
+        <a href="/tutorials/pages/spenden.html" class="photo-footer__support-link"><i class="ph ph-heart" aria-hidden="true"></i> Unterstützen</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/tutorials/pansonic-photo-lab/js/entry-global.js"></script>
+
+<button class="photo-back-to-top" id="back-to-top-fab" aria-label="Nach oben"><i class="ph ph-arrow-up"></i></button>
+
+</body>
+</html>

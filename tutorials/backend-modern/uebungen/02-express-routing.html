@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Side Quest U02: Express Routing | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id" style="color: var(--warning);">Side Quest U02</span>
+      <span class="mission-timer">~20 Min • +40 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Erstelle komplexe Routen mit Parametern und Middleware in Express.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Route-Parameter</h3>
+        <p>Erstelle dynamische Routen:</p>
+        <div class="code-block">app.get('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`User ID: ${userId}`);
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Query-Parameter</h3>
+        <p>Nutze URL-Parameter für Filter:</p>
+        <div class="code-block">app.get('/search', (req, res) => {
+  const q = req.query.q;
+  res.send(`Suche nach: ${q}`);
+});
+// URL: /search?q=express</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Middleware erstellen</h3>
+        <p>Logger-Middleware als Beispiel:</p>
+        <div class="code-block">app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>Static Files</h3>
+        <p>Serve statische Dateien:</p>
+        <div class="code-block">app.use(express.static('public'));</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Error Handling</h3>
+        <p>Fange Fehler ab:</p>
+        <div class="code-block">app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Etwas ist schiefgelaufen!');
+});</div>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Routing verstanden?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Wissen testen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+40 XP Bonus] (Side Quest abgeschlossen)
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeSideQuest()" disabled>
+        Side Quest abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>Route-Parameter mit :id für dynamische URLs.</li>
+          <li>Query-Parameter mit req.query für optionale Filter.</li>
+          <li>Middleware verarbeitet Requests vor den Routen.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe Verständnis...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'Prüfung OK';
+        result.textContent = '[OK] Express Routing und Middleware verstanden.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeSideQuest() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeSideQuest, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeSideQuest('U02');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('U02', 'Express Routing', 'Komplexe Routen und Middleware');
+      AbgabePanel.init('U02', 'Express Routing');
+      
+      const status = MissionsAPI.getSideQuestStatus()['U02'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+40 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

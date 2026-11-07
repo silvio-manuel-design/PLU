@@ -1,0 +1,596 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Capstone Exclusive Components (M11)
+   Journey Grid + Completion Card + Challenge Progress
+   Premium upgrade: psychology-driven visual reinforcement
+   ============================================================ */
+
+@layer components {
+
+  /* ============================================================
+     JOURNEY GRID — 12-Module Overview with path & animations
+     ============================================================ */
+
+  .photo-journey-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--photo-space-3);
+    margin-block: var(--photo-space-8);
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .photo-journey-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-journey-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .photo-journey-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-2);
+    padding: var(--photo-space-4) var(--photo-space-2);
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+  }
+
+  .photo-journey-item.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .photo-journey-item__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--photo-radius-md);
+    font-size: 1.35rem;
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    color: var(--photo-text-tertiary);
+    transition: all 0.35s ease;
+    position: relative;
+  }
+
+  .photo-journey-item__name {
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-tertiary);
+    line-height: 1.2;
+    transition: color 0.3s ease;
+  }
+
+  /* Checkmark overlay for completed */
+  .photo-journey-item__check {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: var(--photo-accent-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* ── Completed state ─────────────────────────────────────── */
+  .photo-journey-item.is-completed {
+    border-color: rgba(20, 184, 166, 0.35);
+    background: linear-gradient(145deg, var(--photo-bg-elevated), rgba(20, 184, 166, 0.06));
+  }
+
+  .photo-journey-item.is-completed .photo-journey-item__icon {
+    background: rgba(20, 184, 166, 0.12);
+    border-color: rgba(20, 184, 166, 0.35);
+    color: var(--photo-accent-secondary);
+  }
+
+  .photo-journey-item.is-completed .photo-journey-item__name {
+    color: var(--photo-text-secondary);
+  }
+
+  .photo-journey-item.is-completed .photo-journey-item__check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ── Current (M11) state — THE FINALE ───────────────────── */
+  .photo-journey-item.is-current {
+    border-color: var(--photo-accent);
+    background: linear-gradient(145deg, var(--photo-bg-elevated), rgba(245, 158, 11, 0.12));
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.12), inset 0 1px 0 rgba(255,255,255,0.03);
+    transform: scale(1.05);
+    z-index: 2;
+  }
+
+  .photo-journey-item.is-current .photo-journey-item__icon {
+    background: var(--photo-accent-dim);
+    border-color: var(--photo-accent-glow);
+    color: var(--photo-accent);
+    animation: photo-journey-pulse 2.5s ease-in-out infinite;
+  }
+
+  .photo-journey-item.is-current .photo-journey-item__name {
+    color: var(--photo-accent);
+    font-weight: var(--photo-font-weight-bold);
+  }
+
+  @keyframes photo-journey-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.25); }
+    50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  }
+
+  /* ── Staggered reveal delays ────────────────────────────── */
+  .photo-journey-item:nth-child(1).is-revealed { transition-delay: 0.05s; }
+  .photo-journey-item:nth-child(2).is-revealed { transition-delay: 0.10s; }
+  .photo-journey-item:nth-child(3).is-revealed { transition-delay: 0.15s; }
+  .photo-journey-item:nth-child(4).is-revealed { transition-delay: 0.20s; }
+  .photo-journey-item:nth-child(5).is-revealed { transition-delay: 0.25s; }
+  .photo-journey-item:nth-child(6).is-revealed { transition-delay: 0.30s; }
+  .photo-journey-item:nth-child(7).is-revealed { transition-delay: 0.35s; }
+  .photo-journey-item:nth-child(8).is-revealed { transition-delay: 0.40s; }
+  .photo-journey-item:nth-child(9).is-revealed { transition-delay: 0.45s; }
+  .photo-journey-item:nth-child(10).is-revealed { transition-delay: 0.50s; }
+  .photo-journey-item:nth-child(11).is-revealed { transition-delay: 0.55s; }
+  .photo-journey-item:nth-child(12).is-revealed { transition-delay: 0.70s; }
+
+  /* ── Connecting path line (desktop only) ────────────────── */
+  @media (min-width: 769px) {
+    .photo-journey-grid::before {
+      content: '';
+      position: absolute;
+      top: 34px;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: linear-gradient(90deg,
+        var(--photo-accent-secondary) 0%,
+        var(--photo-accent-secondary) 90%,
+        var(--photo-accent) 100%
+      );
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+    }
+  }
+
+
+  /* ============================================================
+     CHALLENGE PROGRESS TRACKER — 5 Phase Dots
+     ============================================================ */
+
+  .photo-challenge-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--photo-space-2);
+    margin-bottom: var(--photo-space-8);
+    padding: var(--photo-space-5) var(--photo-space-6);
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-xl);
+  }
+
+  .photo-challenge-progress__phase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-2);
+    flex: 1;
+    position: relative;
+  }
+
+  .photo-challenge-progress__phase:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    right: -50%;
+    width: 100%;
+    height: 2px;
+    background: var(--photo-border-subtle);
+    z-index: 0;
+  }
+
+  .photo-challenge-progress__dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-bold);
+    background: var(--photo-bg-surface);
+    border: 2px solid var(--photo-border-default);
+    color: var(--photo-text-tertiary);
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+
+  .photo-challenge-progress__dot:hover {
+    transform: scale(1.15);
+    border-color: var(--photo-accent);
+    color: var(--photo-accent);
+  }
+
+  .photo-challenge-progress__dot.is-active {
+    background: var(--photo-accent);
+    border-color: var(--photo-accent);
+    color: #1a1a1a;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+
+  .photo-challenge-progress__dot.is-done {
+    background: var(--photo-accent-success);
+    border-color: var(--photo-accent-success);
+    color: #fff;
+  }
+
+  .photo-challenge-progress__dot.is-done i {
+    font-size: 1rem;
+  }
+
+  .photo-challenge-progress__label {
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-tertiary);
+    text-align: center;
+    line-height: 1.2;
+    max-width: 80px;
+  }
+
+  .photo-challenge-progress__phase:has(.is-active) .photo-challenge-progress__label {
+    color: var(--photo-accent);
+  }
+
+  .photo-challenge-progress__phase:has(.is-done) .photo-challenge-progress__label {
+    color: var(--photo-accent-success);
+  }
+
+  /* Mobile: hide labels, keep dots */
+  @media (max-width: 640px) {
+    .photo-challenge-progress {
+      padding: var(--photo-space-4);
+    }
+    .photo-challenge-progress__label {
+      display: none;
+    }
+    .photo-challenge-progress__dot {
+      width: 32px;
+      height: 32px;
+      font-size: var(--photo-text-xs);
+    }
+  }
+
+
+  /* ============================================================
+     COMPLETION CARD — Certificate-style finale
+     ============================================================ */
+
+  .photo-completion-card {
+    text-align: center;
+    padding: var(--photo-space-12) var(--photo-space-10);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.12), transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(245, 158, 11, 0.06), transparent 50%),
+      linear-gradient(180deg, #1a1410 0%, var(--photo-bg-elevated) 40%, var(--photo-bg-elevated) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.25);
+    border-radius: var(--photo-radius-xl);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ornamental corner accents */
+  .photo-completion-card::before,
+  .photo-completion-card::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(245, 158, 11, 0.2);
+    pointer-events: none;
+  }
+
+  .photo-completion-card::before {
+    top: 16px;
+    left: 16px;
+    border-right: none;
+    border-bottom: none;
+    border-radius: var(--photo-radius-md) 0 0 0;
+  }
+
+  .photo-completion-card::after {
+    bottom: 16px;
+    right: 16px;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 var(--photo-radius-md) 0;
+  }
+
+  /* Inner glow */
+  .photo-completion-card__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.08), transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: photo-completion-breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes photo-completion-breathe {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+  }
+
+  /* Seal badge */
+  .photo-completion-card__badge {
+    width: 100px;
+    height: 100px;
+    margin-inline: auto;
+    margin-bottom: var(--photo-space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--photo-accent-gold);
+    background: linear-gradient(145deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    border: 3px solid rgba(245, 158, 11, 0.3);
+    border-radius: var(--photo-radius-full);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+    animation: photo-seal-float 3s ease-in-out infinite;
+  }
+
+  @keyframes photo-seal-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Seal ring */
+  .photo-completion-card__badge::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    border: 1px dashed rgba(245, 158, 11, 0.25);
+    animation: photo-seal-spin 20s linear infinite;
+  }
+
+  @keyframes photo-seal-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .photo-completion-card__title {
+    font-size: var(--photo-text-3xl);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-accent-gold);
+    margin-bottom: var(--photo-space-4);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 20px rgba(245, 158, 11, 0.15);
+  }
+
+  .photo-completion-card__subtitle {
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--photo-accent);
+    margin-bottom: var(--photo-space-6);
+    position: relative;
+    z-index: 1;
+  }
+
+  .photo-completion-card__text {
+    font-size: var(--photo-text-base);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: var(--photo-space-4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .photo-completion-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--photo-space-4);
+    justify-content: center;
+    margin-top: var(--photo-space-10);
+    position: relative;
+    z-index: 1;
+  }
+
+  .photo-completion-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--photo-space-3);
+    padding: var(--photo-space-4) var(--photo-space-7);
+    background: linear-gradient(135deg, var(--photo-accent), #d97706);
+    color: #1a1a1a;
+    border-radius: var(--photo-radius-full);
+    font-weight: var(--photo-font-weight-bold);
+    font-size: var(--photo-text-sm);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+  }
+
+  .photo-completion-card__btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(245, 158, 11, 0.4);
+    filter: brightness(1.1);
+  }
+
+  .photo-completion-card__btn--secondary {
+    background: transparent;
+    color: var(--photo-accent);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    box-shadow: none;
+    font-weight: var(--photo-font-weight-semibold);
+  }
+
+  .photo-completion-card__btn--secondary:hover {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: var(--photo-accent);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.1);
+  }
+
+  /* ── Setup Card Color Variants (5 Pillars) ──────────────── */
+  .photo-setup-card--teal .photo-setup-card__icon {
+    color: var(--photo-accent-secondary);
+    background: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.25);
+  }
+
+  .photo-setup-card--violet .photo-setup-card__icon {
+    color: var(--photo-accent-violet);
+    background: rgba(167, 139, 250, 0.1);
+    border-color: rgba(167, 139, 250, 0.25);
+  }
+
+  .photo-setup-card--coral .photo-setup-card__icon {
+    color: var(--photo-accent-coral);
+    background: rgba(251, 113, 133, 0.1);
+    border-color: rgba(251, 113, 133, 0.25);
+  }
+
+  .photo-setup-card--gold .photo-setup-card__icon {
+    color: var(--photo-accent-gold);
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.25);
+  }
+
+  .photo-setup-card--green .photo-setup-card__icon {
+    color: var(--photo-accent-success);
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.25);
+  }
+
+  /* ── Track Feedback Panel (Mission Briefing) ───────────── */
+  .photo-track-feedback {
+    display: none;
+    margin-top: var(--photo-space-6);
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-track-feedback.is-visible {
+    display: block;
+    animation: photo-track-feedback-in 0.4s ease;
+  }
+
+  @keyframes photo-track-feedback-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .photo-track-feedback::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--photo-accent), var(--photo-accent-gold));
+  }
+
+  .photo-track-feedback__title {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-3);
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-track-feedback__title i {
+    color: var(--photo-accent);
+    font-size: 1.35rem;
+  }
+
+  .photo-track-feedback__desc {
+    font-size: var(--photo-text-base);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+  }
+
+  .photo-track-feedback__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--photo-space-3);
+  }
+
+  .photo-track-feedback__body p {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+    margin: 0;
+  }
+
+  .photo-track-feedback__body p strong {
+    color: var(--photo-text-primary);
+    font-weight: var(--photo-font-weight-semibold);
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .photo-completion-card {
+      padding: var(--photo-space-10) var(--photo-space-5);
+    }
+
+    .photo-completion-card__badge {
+      width: 76px;
+      height: 76px;
+      font-size: 2.25rem;
+    }
+
+    .photo-completion-card__title {
+      font-size: var(--photo-text-2xl);
+    }
+
+    .photo-completion-card__actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .photo-completion-card__btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

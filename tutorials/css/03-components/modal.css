@@ -1,0 +1,351 @@
+/* ==========================================================================
+   MODAL COMPONENT
+   Accessible modal dialogs
+   ========================================================================== */
+
+/* ========================================================================
+   MODAL OVERLAY
+   ======================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================================================
+   MODAL CONTAINER
+   ======================================================================== */
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+  transform: scale(1) translateY(0);
+}
+
+/* ========================================================================
+   MODAL CLOSE BUTTON
+   ======================================================================== */
+
+.modal-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  
+  cursor: pointer;
+  transition: var(--transition-colors);
+  z-index: 1;
+}
+
+@media (hover: hover) {
+  .modal-close:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+}
+
+.modal-close .ph {
+  font-size: 1.25rem;
+}
+
+/* ========================================================================
+   MODAL HEADER
+   ======================================================================== */
+
+.modal-header {
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  text-align: center;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+@media (min-width: 768px) {
+  .modal-header {
+    padding: var(--space-8) var(--space-8) var(--space-6);
+  }
+}
+
+.modal-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+}
+
+.modal-icon .ph {
+  font-size: 2rem;
+  color: var(--accent-primary);
+}
+
+.modal-header h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .modal-header h3 {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* ========================================================================
+   MODAL BODY
+   ======================================================================== */
+
+.modal-body {
+  padding: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .modal-body {
+    padding: var(--space-8);
+  }
+}
+
+.modal-body p {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.modal-body h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+/* Premium List Styling */
+.modal-body ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.modal-body li {
+  position: relative;
+  padding: var(--space-4) var(--space-4) var(--space-4) calc(var(--space-4) + 40px);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08) 0%, 
+    rgba(139, 92, 246, 0.04) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.15);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  transition: all 0.3s ease;
+}
+
+.modal-body li::before {
+  content: '✓';
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-violet));
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.4);
+}
+
+.modal-body li:hover {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.12) 0%, 
+    rgba(139, 92, 246, 0.08) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.25);
+  transform: translateX(4px);
+}
+
+/* ========================================================================
+   REDUCED MOTION
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay,
+  .modal {
+    transition: none;
+  }
+  
+  .modal {
+    transform: none;
+  }
+}
+
+
+/* ========================================================================
+   PREMIUM MODAL STYLING - Dark & Light Mode
+   ======================================================================== */
+
+/* Premium Modal Overlay */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+/* Premium Modal Container */
+.modal {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(88, 166, 255, 0.1);
+}
+
+/* Premium Modal Close Button */
+.modal-close {
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.modal-close:hover {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-violet));
+  color: white;
+  box-shadow: 
+    0 6px 20px rgba(88, 166, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Premium Modal Icon */
+.modal-icon {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(139, 92, 246, 0.1)
+  );
+  box-shadow: 
+    0 8px 32px rgba(88, 166, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+}
+
+/* Premium List Items */
+.modal-body li::before {
+  box-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+/* ========================================================================
+   LIGHT MODE PREMIUM STYLING
+   ======================================================================== */
+
+/* Light Mode: Premium Glass Modal */
+html.light-theme .modal-overlay {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+}
+
+html.light-theme .modal {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  box-shadow: 
+    0 25px 50px -12px rgba(88, 166, 255, 0.25),
+    0 0 0 1px rgba(88, 166, 255, 0.1);
+}
+
+/* Light Mode: Premium Close Button */
+html.light-theme .modal-close {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9), 
+    rgba(224, 242, 254, 0.8)
+  );
+  border-color: rgba(88, 166, 255, 0.25);
+  color: var(--accent-primary);
+  box-shadow: 
+    0 4px 12px rgba(88, 166, 255, 0.2);
+}
+
+html.light-theme .modal-close:hover {
+  background: linear-gradient(135deg, #58a6ff, #8b5cf6);
+  color: white;
+  box-shadow: 
+    0 6px 20px rgba(88, 166, 255, 0.4);
+}
+
+/* Light Mode: Premium Icon */
+html.light-theme .modal-icon {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.25);
+  box-shadow: 
+    0 8px 32px rgba(88, 166, 255, 0.15);
+}
+
+/* Light Mode: Premium List Items */
+html.light-theme .modal-body li {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(224, 242, 254, 0.5) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(88, 166, 255, 0.1);
+}
+
+html.light-theme .modal-body li:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(224, 242, 254, 0.7) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.35);
+  box-shadow: 0 4px 16px rgba(88, 166, 255, 0.15);
+}
+
+html.light-theme .modal-body li::before {
+  background: linear-gradient(135deg, #58a6ff, #8b5cf6);
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.4);
+}

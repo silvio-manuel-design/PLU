@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Module 5: Chain of Thought - Structuring Complex Problems. Learn how to solve difficult tasks step by step.">
+  <meta name="keywords" content="Chain of Thought, AI Problem Solving, Step by Step, Complex Tasks, Prompt Engineering">
+  
+  <meta property="og:title" content="Module 5: Chain of Thought | AI Academy Senior">
+  <meta property="og:description" content="Structuring Complex Problems - Step by Step to Success">
+  <meta property="og:image" content="../../../assets/images/sprints/m05_hero.jpg">
+  <meta property="og:type" content="website">
+  
+  <title>Module 5: Chain of Thought | AI Academy Senior</title>
+<meta name="theme-color" content="#5B5F97">
+  <link rel="icon" type="image/svg+xml" href="../../../assets/images/icons/favicon-ki.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../../../css/main.css?v=56">
+  <link rel="stylesheet" href="../../../css/layout.css?v=58">
+  <link rel="stylesheet" href="../../../css/components.css?v=56">
+  <link rel="stylesheet" href="../../../css/premium-startpage.css?v=15">
+  <link rel="stylesheet" href="../../../css/responsive.css?v=58">
+  <link rel="stylesheet" href="../../module-styles-m05.css?v=35">
+  <!-- Fallback: If JavaScript doesn't load, content remains visible -->
+
+</head>
+
+<body class="module-page">
+  <!-- Progress Indicator -->
+  <div class="module-progress">
+    <div class="module-progress-bar" id="progress-bar"></div>
+  </div>
+  
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Navigation -->
+  <nav class="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../../../index-en.html" class="nav-logo" aria-label="AI Academy Homepage">
+        <img src="../../../assets/images/icons/logo-ki-academy.svg" alt="" class="logo-icon" width="40" height="40" onerror="this.style.display='none'">
+        <span class="logo-text">AI Academy</span>
+      </a>
+
+      <div class="nav-controls nav-controls-desktop">
+        <div class="language-switcher" role="group" aria-label="Language selection">
+          <a href="../../de/05-chain-of-thought/module-05.html" class="lang-btn" data-lang="de" aria-label="Deutsch">DE</a>
+          <span class="lang-divider">|</span>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Dark Mode">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          </svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="classroom-toggle" aria-label="Toggle classroom mode" title="Classroom Mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="module-dropdown nav-module-dropdown nav-module-dropdown-desktop">
+        <button class="module-dropdown-toggle" aria-expanded="false" aria-controls="module-menu" aria-label="Select module">
+          <span class="current-module-label">Module 05</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <nav class="module-dropdown-menu" id="module-menu" aria-label="Module navigation">
+          <a href="../../../index-en.html" class="module-dropdown-item module-dropdown-home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="module-dropdown-name">Home</span>
+          </a>
+          <div class="module-dropdown-divider"></div>
+          <div class="module-dropdown-section">Sprint 1: Understand</div>
+          <a href="../00-welcome/module-00-en.html" class="module-dropdown-item"><span class="module-dropdown-num">0</span><span class="module-dropdown-name">Welcome</span></a>
+          <a href="../01-basics/module-01-en.html" class="module-dropdown-item"><span class="module-dropdown-num">1</span><span class="module-dropdown-name">Basics</span></a>
+          <a href="../02-everyday/module-02-en.html" class="module-dropdown-item"><span class="module-dropdown-num">2</span><span class="module-dropdown-name">Everyday</span></a>
+          <div class="module-dropdown-section">Sprint 2: Apply</div>
+          <a href="../03-dialog-basics/module-03-en.html" class="module-dropdown-item"><span class="module-dropdown-num">3</span><span class="module-dropdown-name">Dialog Basics</span></a>
+          <a href="../04-system-prompts/module-04-en.html" class="module-dropdown-item"><span class="module-dropdown-num">4</span><span class="module-dropdown-name">System Prompts <small style="opacity:0.6;font-weight:400">(AI instructions)</small></span></a>
+          <a href="module-05-en.html" class="module-dropdown-item active" aria-current="page"><span class="module-dropdown-num">5</span><span class="module-dropdown-name">Chain of Thought <small style="opacity:0.6;font-weight:400">(Step-by-step thinking)</small></span></a>
+          <div class="module-dropdown-section">Sprint 3: Master</div>
+          <a href="../06-creativity/module-06-en.html" class="module-dropdown-item"><span class="module-dropdown-num">6</span><span class="module-dropdown-name">Creativity</span></a>
+          <a href="../07-critical-thinking/module-07-en.html" class="module-dropdown-item"><span class="module-dropdown-num">7</span><span class="module-dropdown-name">Critical Thinking</span></a>
+          <a href="../08-glossary/module-08-en.html" class="module-dropdown-item"><span class="module-dropdown-num">8</span><span class="module-dropdown-name">Glossary</span></a>
+          <div class="module-dropdown-divider"></div>
+          <a href="../09-completion/module-09-en.html" class="module-dropdown-item module-dropdown-highlight"><span class="module-dropdown-num">✓</span><span class="module-dropdown-name">Certificate</span></a>
+        </nav>
+      </div>
+
+      <div class="nav-controls nav-controls-mobile">
+        <div class="language-switcher" role="group" aria-label="Language selection">
+          <a href="../../de/05-chain-of-thought/module-05.html" class="lang-btn" data-lang="de" aria-label="Deutsch">DE</a>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Dark Mode">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="back-to-top-nav" aria-label="Scroll to top" title="To top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation"><span class="hamburger"></span></button>
+
+      <ul id="nav-menu" class="nav-menu" role="menubar">
+        <li role="none"><a href="../../../index-en.html" class="nav-link" role="menuitem">Home</a></li>
+        <li role="none" class="nav-menu-section">Sprint 1: Understand</li>
+        <li role="none"><a href="../00-welcome/module-00-en.html" class="nav-link" role="menuitem">0 Welcome</a></li>
+        <li role="none"><a href="../01-basics/module-01-en.html" class="nav-link" role="menuitem">1 Basics</a></li>
+        <li role="none"><a href="../02-everyday/module-02-en.html" class="nav-link" role="menuitem">2 Everyday</a></li>
+        <li role="none" class="nav-menu-section">Sprint 2: Apply</li>
+        <li role="none"><a href="../03-dialog-basics/module-03-en.html" class="nav-link" role="menuitem">3 Dialog Basics</a></li>
+        <li role="none"><a href="../04-system-prompts/module-04-en.html" class="nav-link" role="menuitem">4 System Prompts</a></li>
+        <li role="none"><a href="module-05-en.html" class="nav-link active" role="menuitem" aria-current="page">5 Chain of Thought</a></li>
+        <li role="none" class="nav-menu-section">Sprint 3: Master</li>
+        <li role="none"><a href="../06-creativity/module-06-en.html" class="nav-link" role="menuitem">6 Creativity</a></li>
+        <li role="none"><a href="../07-critical-thinking/module-07-en.html" class="nav-link" role="menuitem">7 Critical Thinking</a></li>
+        <li role="none"><a href="../08-glossary/module-08-en.html" class="nav-link" role="menuitem">8 Glossary</a></li>
+        <li role="none" class="nav-menu-section">Completion</li>
+        <li role="none"><a href="../09-completion/module-09-en.html" class="nav-link" role="menuitem">Certificate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- HERO SECTION -->
+  <section class="m05-hero" id="hero" role="banner">
+    <div class="m05-hero-bg">
+      <picture>
+        <source srcset="../../../assets/images/sprints/m05_hero.webp" type="image/webp">
+        <img src="../../../assets/images/sprints/m05_hero.jpg" alt="Chain of Thought Visualization" id="hero-bg-img" loading="eager">
+      </picture>
+    </div>
+    <div class="m05-hero-overlay"></div>
+    
+    <div class="m05-hero-content">
+      <div class="m05-hero-badge">
+        <i class="ph ph-steps"></i>
+        <span>Module 05 · Sprint 2 · 12 Minutes</span>
+      </div>
+      
+      <h1 class="m05-hero-title">
+        Structuring Complex<br><em>Problems</em>
+      </h1>
+      
+      <p class="m05-hero-subtitle">
+        Learn Chain of Thought - the method to solve difficult tasks step by step.
+      </p>
+      
+      <a href="#intro" class="m05-hero-cta">
+        <span>Start now</span>
+        <i class="ph ph-arrow-down"></i>
+      </a>
+
+      <div class="hero-content-outline">
+        <div class="outline-label">
+          <i class="ph ph-list-dashes"></i>
+          In this module
+        </div>
+        <div class="outline-steps">
+          <span class="outline-step"><i class="ph ph-footprints"></i> The 5 Steps</span>
+          <span class="outline-step"><i class="ph ph-sliders"></i> CoT Visualizer</span>
+          <span class="outline-step"><i class="ph ph-lightbulb"></i> Practice Examples</span>
+          <span class="outline-step"><i class="ph ph-check-square"></i> Knowledge Check</span>
+          <span class="outline-step"><i class="ph ph-arrow-right"></i> On to Module 06</span>
+        </div>
+        <p class="outline-time"><i class="ph ph-clock"></i> About 12 min read</p>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <!-- SECTION 1: INTRO -->
+    <section class="section-intro" id="intro">
+      <div class="intro-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-lightbulb"></i>
+            What is Chain of Thought?
+          </span>
+          <h2 class="section-title-premium">Think like a Detective</h2>
+          <p class="section-subtitle-premium">
+            Like Sherlock Holmes - Step by Step to the Result
+          </p>
+        </div>
+        
+        <div class="analogy-card">
+          <div class="analogy-visual">
+            <div class="analogy-icon">
+              <i class="ph ph-magnifying-glass"></i>
+            </div>
+          </div>
+          <div class="analogy-content">
+            <h3>The Detective Method</h3>
+            <p>
+              Imagine Sherlock Holmes. He doesn't solve cases through a sudden flash of insight,
+              but through systematic, step-by-step thinking. He gathers clues, connects them logically,
+              and arrives at the solution. That's exactly how Chain of Thought works.
+            </p>
+            <div class="analogy-example">
+              <strong>A CoT Prompt in Action:</strong>
+              <p>"Solve this math problem step by step. Explain each intermediate step and show how you arrive at the result."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE 5 STEPS -->
+    <section class="section-bausteine detektiv-section" id="schritte">
+      <div class="bausteine-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-footprints"></i>
+            The 5 Steps
+          </span>
+          <h2 class="section-title-premium">The CoT Process at a Glance</h2>
+          <p class="section-subtitle-premium">Each step builds on the previous one. Click the cards for details.</p>
+        </div>
+        
+        <div class="detektiv-progress">
+          <div class="detektiv-progress-bar"></div>
+          <span class="detektiv-progress-text">0 of 5 steps discovered</span>
+        </div>
+        
+        <div class="bausteine-grid">
+          <!-- Step 1 -->
+          <div class="baustein-card" data-schritt="verstehen" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">1</div>
+            <div class="baustein-icon"><i class="ph ph-question"></i></div>
+            <h4>Understand the Problem</h4>
+            <p>What exactly needs to be solved?</p>
+            <div class="baustein-example">
+              "I want to find out whether buying a new car is worth it, given my budget and my driving needs..."
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Before you ask AI, ask yourself: What do I really want to know? The clearer your question, the more precise the answer. A retiree who wants "better photos" gets something different than one who wants to know about "focus at dusk."</p>
+            </div>
+          </div>
+          
+          <!-- Step 2 -->
+          <div class="baustein-card" data-schritt="sammeln" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">2</div>
+            <div class="baustein-icon"><i class="ph ph-magnifying-glass-plus"></i></div>
+            <h4>Gather Information</h4>
+            <p>What data and facts do we need?</p>
+            <div class="baustein-example">
+              "Consider purchase price, insurance, fuel costs, maintenance, and resale value..."
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>AI can only work with what you give it. Imagine asking a friend for advice – you'd say: "My budget is €2,000, I don't like heights, and we're traveling in September." That's exactly how AI works.</p>
+            </div>
+          </div>
+          
+          <!-- Step 3 -->
+          <div class="baustein-card" data-schritt="zwischen" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">3</div>
+            <div class="baustein-icon"><i class="ph ph-steps"></i></div>
+            <h4>Intermediate Results</h4>
+            <p>What does each individual calculation yield?</p>
+            <div class="baustein-example">
+              "First calculate the monthly costs, then the annual total costs, compare with my budget..."
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>Complex problems are like a puzzle. AI lays one piece after another. If you understand the intermediate step, you also understand the result. And if something seems odd, you can ask exactly there.</p>
+            </div>
+          </div>
+          
+          <!-- Step 4 -->
+          <div class="baustein-card" data-schritt="verknuepfen" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">4</div>
+            <div class="baustein-icon"><i class="ph ph-arrows-left-right"></i></div>
+            <h4>Connect</h4>
+            <p>How do the results relate to each other?</p>
+            <div class="baustein-example">
+              "Compare the total costs over 5 years with my current car and alternative means of transport..."
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>This is the magical moment! AI connects the individual puzzle pieces into a picture. As a senior, you have the advantage of life experience – you immediately recognize whether the overall picture fits or if a piece is missing.</p>
+            </div>
+          </div>
+          
+          <!-- Step 5 -->
+          <div class="baustein-card" data-schritt="fazit" onclick="toggleDetektiv(this)">
+            <div class="baustein-number">5</div>
+            <div class="baustein-icon"><i class="ph ph-check-circle"></i></div>
+            <h4>Draw Conclusion</h4>
+            <p>What is the final recommendation?</p>
+            <div class="baustein-example">
+              "Summarize the key points and give a clear recommendation with reasoning..."
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>The conclusion is your decision aid, not your command! AI suggests, you decide. If the conclusion doesn't suit you, say: "I don't like that. What if we..." and start a new train of thought.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="detektiv-reveal">
+          <div class="detektiv-reveal-icon"><i class="ph ph-trophy"></i></div>
+          <h3>Wonderful! All steps discovered!</h3>
+          <p>You've learned all 5 building blocks of the Chain of Thought process. You're ready for complex problems!</p>
+          <div class="detektiv-counter"><i class="ph ph-check-circle"></i> <span>0 of 5 discovered</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE 1 -->
+    <section class="parallax-quote-section" id="parallax-quote-1">
+      <div class="parallax-bg parallax-bg-m05-1" role="img" aria-label="Thought structure"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content">
+        <i class="ph ph-quotes"></i>
+        <blockquote>
+          "Those who tackle the problem <em>step by step</em>,
+          find the solution - no matter how complex it seems."
+        </blockquote>
+        <a href="#quiz" class="parallax-cta-btn">To Knowledge Check <i class="ph ph-arrow-down"></i></a>
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERACTIVE COT VISUALIZER -->
+    <section class="section-builder" id="visualizer">
+      <div class="builder-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-wrench"></i>
+            Interactive
+          </span>
+          <h2 class="section-title-premium">See CoT in Action</h2>
+          <p class="section-subtitle-premium">Compare a simple prompt with a Chain of Thought prompt</p>
+        </div>
+        
+        <div class="visualizer-toggle">
+          <button class="viz-btn active" data-mode="simple">
+            <i class="ph ph-text-t"></i>
+            Simple Prompt
+          </button>
+          <button class="viz-btn" data-mode="cot">
+            <i class="ph ph-brain"></i>
+            Chain of Thought
+          </button>
+        </div>
+        
+        <div class="visualizer-workspace">
+          <div class="viz-prompt-input">
+            <h4><i class="ph ph-terminal"></i> Your Prompt:</h4>
+            <div class="viz-prompt-text" id="viz-prompt-text">
+              My doctor prescribed an antibiotic: 1 capsule 3 times daily for 8 days. The pack has 20 capsules. Do I need a second pack?
+            </div>
+          </div>
+          
+          <div class="viz-comparison">
+            <div class="viz-side viz-simple" id="viz-simple">
+              <div class="viz-badge simple">
+                <i class="ph ph-x-circle"></i> Without CoT
+              </div>
+              <div class="viz-response">
+                <p><strong>Answer:</strong> No, 20 capsules are enough.</p>
+                <div class="viz-problems">
+                  <span class="problem-tag"><i class="ph ph-x-circle"></i> Wrong!</span>
+                  <span class="problem-tag"><i class="ph ph-calculator"></i> No calculation</span>
+                  <span class="problem-tag"><i class="ph ph-warning"></i> 20 feels like enough</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="viz-side viz-cot" id="viz-cot" style="display: none;">
+              <div class="viz-badge cot">
+                <i class="ph ph-check-circle"></i> With CoT
+              </div>
+              <div class="viz-response">
+                <div class="cot-step">
+                  <span class="step-num">1</span>
+                  <p><strong>Given:</strong> 3 capsules/day, 8 days duration, pack = 20 capsules</p>
+                </div>
+                <div class="cot-step">
+                  <span class="step-num">2</span>
+                  <p><strong>Calculation:</strong> 3 × 8 = <strong>24 capsules needed</strong></p>
+                </div>
+                <div class="cot-step">
+                  <span class="step-num">3</span>
+                  <p><strong>Comparison:</strong> 24 needed > 20 available → <strong>Pack is not enough!</strong></p>
+                </div>
+                <div class="cot-step highlight">
+                  <span class="step-num">✓</span>
+                  <p><strong>Conclusion:</strong> Yes, a second pack is needed. Without calculation, 20 seems sufficient.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PRACTICE EXAMPLES -->
+    <section class="section-examples detektiv-section" id="beispiele">
+      <div class="examples-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-lightbulb"></i>
+            Practice Examples
+          </span>
+          <h2 class="section-title-premium">CoT in Practice</h2>
+          <p class="section-subtitle-premium">Three detailed examples for complex problems</p>
+        </div>
+        
+        <div class="detektiv-progress">
+          <div class="detektiv-progress-bar"></div>
+          <span class="detektiv-progress-text">0 of 3 examples discovered</span>
+        </div>
+        
+        <div class="examples-grid">
+          <!-- Example 1: Math -->
+          <div class="example-card" onclick="toggleDetektiv(this)">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-calculator"></i>
+              </div>
+              <h4>Solving a Math Problem</h4>
+            </div>
+            
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>A retiree with €50,000 in savings wants to know how much he can withdraw monthly. Instead of just naming the formula, AI shows every intermediate step: interest rate, annuity formula, substitution, result. This way you can TRACE whether it's correct.</p>
+            </div>
+            
+            <div class="cot-example-flow">
+              <div class="flow-problem">
+                <span class="flow-label"><i class="ph ph-question"></i> Problem</span>
+                <p>A retiree has €50,000 in savings. He wants to know how much he can withdraw monthly at 3% interest over 10 years.</p>
+              </div>
+              
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="step-badge">Step 1</span>
+                  <p>Identify the variables: Capital = €50,000, Interest = 3%, Time period = 10 years</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 2</span>
+                  <p>Calculate the interest factor: 1 + (3/100) = 1.03 per year</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 3</span>
+                  <p>Apply the annuity formula: R = K × (q-1) / (1-q^-n)</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 4</span>
+                  <p>Calculate: R = 50,000 × 0.03 / (1-1.03^-10) ≈ €5,860 per year</p>
+                </div>
+              </div>
+              
+              <div class="flow-solution">
+                <span class="flow-label solution"><i class="ph ph-check-circle"></i> Solution</span>
+                <p><strong>Result:</strong> The retiree can withdraw approximately <strong>€488 per month</strong> without depleting the capital.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Example 2: Travel -->
+          <div class="example-card" onclick="toggleDetektiv(this)">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-airplane-tilt"></i>
+              </div>
+              <h4>Planning a Trip on a Budget</h4>
+            </div>
+            
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>A couple (70+) plans an Italy vacation with a €3,000 budget. AI doesn't just compare prices, but considers ALL factors: comfort, accessibility, stress, food. The result: Lake Maggiore by night train – romantic AND relaxed.</p>
+            </div>
+            
+            <div class="cot-example-flow">
+              <div class="flow-problem">
+                <span class="flow-label"><i class="ph ph-question"></i> Problem</span>
+                <p>A couple (70+) wants to take a 2-week vacation in Italy with a €3,000 budget. Which region? Flight or train?</p>
+              </div>
+              
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="step-badge">Step 1</span>
+                  <p>Analyze preferences: Relaxed, easily accessible, low stress, great food</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 2</span>
+                  <p>Compare transport: Train (relaxed, central) vs. Flight (faster, more transfers)</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 3</span>
+                  <p>Cost breakdown: Accommodation ~€1,400, Food ~€700, Transport ~€600, Activities ~€300</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 4</span>
+                  <p>Region check: Tuscany (good by car), Lakes (good by train), Sicily (far away)</p>
+                </div>
+              </div>
+              
+              <div class="flow-solution">
+                <span class="flow-label solution"><i class="ph ph-check-circle"></i> Solution</span>
+                <p><strong>Recommendation:</strong> <strong>Lake Maggiore</strong> by night train. Romantic, relaxed arrival, budget fits.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Example 3: Business -->
+          <div class="example-card" onclick="toggleDetektiv(this)">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-briefcase"></i>
+              </div>
+              <h4>Making a Business Decision</h4>
+            </div>
+            
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Aha!</span>
+              <p>A craftsman (62) wonders: Online shop or second store? AI analyzes not just costs, but also quality of life: Online = flexible, but tech learning curve. Store = personal, but must be present. The result: Online shop with local delivery area – the best of both worlds.</p>
+            </div>
+            
+            <div class="cot-example-flow">
+              <div class="flow-problem">
+                <span class="flow-label"><i class="ph ph-question"></i> Problem</span>
+                <p>Should I expand my small crafts business online or open an additional shop?</p>
+              </div>
+              
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="step-badge">Step 1</span>
+                  <p>Define goal: More revenue with minimal risk, suitable for age (62)</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 2</span>
+                  <p>Online analysis: Advantages (flexible, low fixed costs), Disadvantages (tech learning curve, competition)</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 3</span>
+                  <p>Shop analysis: Advantages (personal, proven), Disadvantages (high rent, must be present)</p>
+                </div>
+                <div class="flow-step">
+                  <span class="step-badge">Step 4</span>
+                  <p>Risk assessment: Online = scalable, Shop = higher capital risk</p>
+                </div>
+              </div>
+              
+              <div class="flow-solution">
+                <span class="flow-label solution"><i class="ph ph-check-circle"></i> Solution</span>
+                <p><strong>Recommendation:</strong> Start with an <strong>online shop</strong> with a local delivery area - low risk, personal connection remains.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="detektiv-reveal">
+          <div class="detektiv-reveal-icon"><i class="ph ph-trophy"></i></div>
+          <h3>Fantastic! All examples explored!</h3>
+          <p>You've seen how Chain of Thought works in practice – from math to business decisions.</p>
+          <div class="detektiv-counter"><i class="ph ph-check-circle"></i> <span>0 of 3 discovered</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE 2 -->
+    <section class="parallax-quote-section" id="parallax-quote-2">
+      <div class="parallax-bg parallax-bg-m05-2" role="img" aria-label="Patience and structure"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content">
+        <i class="ph ph-quotes"></i>
+        <blockquote>
+          "<em>Patience</em> and <em>structure</em> are the keys
+          to every complex challenge."
+        </blockquote>
+        <a href="#quiz" class="parallax-cta-btn">To Knowledge Check <i class="ph ph-arrow-down"></i></a>
+      </div>
+    </section>
+
+    <!-- SECTION 5: QUIZ -->
+    <section class="section-quiz" id="quiz">
+      <div class="quiz-progress-wrapper">
+        <div class="quiz-progress-header">
+          <span class="quiz-progress-label">Your Progress</span>
+          <span class="quiz-progress-count" id="quiz-progress-count">Question 1 of 3</span>
+        </div>
+        <div class="quiz-progress-bar-track">
+          <div class="quiz-progress-bar-fill" id="quiz-progress-bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <div class="section-header">
+          <span class="section-tag-premium">
+            <i class="ph ph-check-circle"></i>
+            Test Your Knowledge
+          </span>
+          <h2 class="section-title-premium">How well do you know Chain of Thought?</h2>
+          <p class="section-subtitle-premium">Three questions that strengthen your understanding. No pressure, just progress!</p>
+        </div>
+        
+        <div class="quiz-question-card" id="quiz-q1" data-question="1">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">1</span>
+              <h4 class="quiz-card-title">What is the main advantage of Chain of Thought?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 1, event)">The AI shows its thinking step by step</button>
+              <button class="quiz-option" data-correct="false" onclick="QuizModule.checkAnswer(this, 1, event)">The answer becomes shorter</button>
+              <button class="quiz-option" data-correct="false" onclick="QuizModule.checkAnswer(this, 1, event)">It only works for math problems</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 1, event)">
+                💬 I see it differently...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-1"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card" id="quiz-q2" data-question="2">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">2</span>
+              <h4 class="quiz-card-title">When should you use CoT?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" onclick="QuizModule.checkAnswer(this, 2, event)">Only for simple yes/no questions</button>
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 2, event)">For complex problems that require multiple steps</button>
+              <button class="quiz-option" data-correct="false" onclick="QuizModule.checkAnswer(this, 2, event)">Only when the AI gave a wrong answer</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 2, event)">
+                💬 I see it differently...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-2"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card" id="quiz-q3" data-question="3">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">3</span>
+              <h4 class="quiz-card-title">Which prompt activates Chain of Thought best?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" onclick="QuizModule.checkAnswer(this, 3, event)">"Solution please"</button>
+              <button class="quiz-option" data-correct="false" onclick="QuizModule.checkAnswer(this, 3, event)">"Think about it briefly"</button>
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 3, event)">"Solve step by step and explain each intermediate step"</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 3, event)">
+                💬 I see it differently...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-3"></div>
+          </div>
+        </div>
+        <div id="quiz-result" class="quiz-result-box">
+          <div class="quiz-result-icon">
+            <i class="ph ph-trophy"></i>
+          </div>
+          <h3 class="quiz-result-title">Well done!</h3>
+          <p class="quiz-result-text">You have completed the knowledge check. Every question is a chance to learn.</p>
+          <div class="quiz-result-score">0 of 3 correct</div>
+          <div class="quiz-result-badges">
+            <span class="quiz-badge success">
+              <i class="ph ph-check"></i>CoT ✓
+            </span>
+            <span class="quiz-badge next">
+              <i class="ph ph-arrow-right"></i>Onward →
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: ROADMAP -->
+    <section class="section-roadmap">
+      <div class="container-premium">
+        <div class="section-roadmap-header">
+          <span class="section-roadmap-tag">
+            <i class="ph ph-compass"></i>
+            Sprint 2 of 3
+          </span>
+          <h2 class="section-roadmap-title">Your Progress</h2>
+          <p class="section-roadmap-subtitle">Sprint 2: 3 Modules · Dialog & Prompting · Step by Step</p>
+        </div>
+        
+        <div class="roadmap-grid">
+          <div class="roadmap-card completed">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-check"></i>Completed
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-puzzle-piece"></i>
+            </div>
+            <h4 class="roadmap-card-title">Dialog Basics</h4>
+            <p class="roadmap-card-desc">Module 03 · The 5 Building Blocks</p>
+          </div>
+          
+          <div class="roadmap-card completed">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-check"></i>Completed
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-user-gear"></i>
+            </div>
+            <h4 class="roadmap-card-title">System Prompts</h4>
+            <p class="roadmap-card-desc">Module 04 · Roles & Context</p>
+          </div>
+          
+          <div class="roadmap-card current">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-brain"></i>Current
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-steps"></i>
+            </div>
+            <h4 class="roadmap-card-title">Chain of Thought</h4>
+            <p class="roadmap-card-desc">Module 05 · Structured Thinking</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section-light section-final-cta">
+      <div class="container-premium">
+        <div class="final-cta-container">
+          <div class="final-cta-icon">
+            <i class="ph ph-check-circle"></i>
+          </div>
+          <h2 class="final-cta-title">Sprint 2 completed!</h2>
+          <p class="final-cta-text">
+            You now master Dialog Basics, System Prompts, and Chain of Thought.
+            You are ready for Sprint 3: Master!
+          </p>
+          <a href="../06-creativity/module-06-en.html" class="btn-final-cta">
+            <span>To Module 06: Creativity</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+          <div class="final-cta-links">
+            <a href="../../../index-en.html">
+              <i class="ph ph-house"></i> Back to Homepage
+            </a>
+            <span class="final-cta-divider">|</span>
+            <a href="../04-system-prompts/module-04-en.html">
+              <i class="ph ph-arrow-left"></i> Previous Module
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav-senior" aria-label="Module Navigation">
+    <div class="bottom-nav-inner">
+      <a href="../../../index-en.html" class="bottom-nav-btn home" title="Back to homepage">
+        <i class="ph ph-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="../04-system-prompts/module-04-en.html" class="bottom-nav-btn nav-prev">
+        <i class="ph ph-caret-left"></i>
+        <span>Back</span>
+      </a>
+      <div class="bottom-nav-progress">
+        <span class="bottom-nav-progress-label">Sprint 2 · Module 05</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 100%"></div>
+        </div>
+      </div>
+      <a href="../06-creativity/module-06-en.html" class="bottom-nav-btn nav-next">
+        <i class="ph ph-caret-right"></i>
+        <span>Next</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- FOOTER -->
+  <footer class="main-footer footer-premium">
+    <div class="container-premium">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="../../../assets/images/icons/logo-ki-academy.svg" alt="" width="36" height="36">
+          <span>AI Academy</span>
+        </div>
+        <p class="footer-license">A project of <a href="https://pantam.at" target="_blank">Pantam Learning Universe</a></p>
+        <nav class="footer-nav">
+          <a href="../../../index-en.html">Home</a>
+          <a href="../../../index-en.html#sprints">Learning Path</a>
+          <a href="https://pantam.at/tutorials/pages/spenden.html" target="_blank">Support</a>
+          <a href="../../../pages/privacy-en.html">Privacy</a>
+        </nav>
+        <p class="footer-copyright">© Pantam, Art & Culture – Austria</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="../../../js/theme.js"></script>
+  <script src="../../../js/back-to-top.js"></script>
+  <script src="../../../js/navigation.js"></script>
+  <script src="../../../js/premium-parallax.js"></script>
+  <script src="../../../js/module-05.js?v=5"></script>
+  
+  <!-- Quiz Module - Inline Upgrade -->
+  <script>
+    window.initQuiz = function() {
+      // Overridden inline - new quiz pattern handles interactions
+    };
+    
+    window.QuizModule = {
+      correctAnswers: 0,
+      totalQuestions: 3,
+      answeredQuestions: new Set(),
+      firstAttemptCorrect: new Set(),
+
+      updateProgress() {
+        const countEl = document.getElementById('quiz-progress-count');
+        const barEl = document.getElementById('quiz-progress-bar-fill');
+        const answered = this.answeredQuestions.size;
+        const percent = Math.min(100, (answered / this.totalQuestions) * 100);
+        if (countEl) {
+          const initial = countEl.dataset.initial || countEl.textContent;
+          if (!countEl.dataset.initial) countEl.dataset.initial = initial;
+          countEl.textContent = initial.replace(/^\d+/, Math.max(1, answered));
+        }
+        if (barEl) barEl.style.width = `${percent}%`;
+      },
+
+      checkAnswer(button, questionNum, event) {
+        if (event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+        
+        const card = button.closest('.quiz-question-card') || button.closest('.quiz-card');
+        const allButtons = card.querySelectorAll('.quiz-option');
+        const feedback = document.getElementById(`feedback-${questionNum}`);
+        const isCorrect = button.getAttribute('data-correct') === 'true';
+        const isOwn = button.getAttribute('data-own') === 'true';
+        
+        allButtons.forEach(btn => btn.classList.remove('selected', 'wrong', 'correct', 'correct-hint'));
+        if (feedback) feedback.className = 'quiz-feedback';
+        const oldNext = card.querySelector('.quiz-next-btn');
+        if (oldNext) oldNext.remove();
+        
+        const isFirstAttempt = !this.answeredQuestions.has(questionNum);
+        
+        if (isOwn) {
+          button.classList.add('selected');
+          if (feedback) {
+            feedback.classList.add('show', 'info');
+            feedback.innerHTML = '<strong>💬 Your opinion matters!</strong><br>There are often multiple valid perspectives. That is a strength of human thinking.';
+          }
+          if (isFirstAttempt) {
+            this.answeredQuestions.add(questionNum);
+            this.updateProgress();
+          }
+        } else if (isCorrect) {
+          button.classList.add('selected', 'correct');
+          if (feedback) {
+            feedback.classList.add('show', 'correct');
+            feedback.innerHTML = this.getCorrectMessage(questionNum);
+          }
+          if (!this.answeredQuestions.has(questionNum)) {
+            this.answeredQuestions.add(questionNum);
+            this.updateProgress();
+          }
+          if (!this.firstAttemptCorrect.has(questionNum)) {
+            this.correctAnswers++;
+            this.firstAttemptCorrect.add(questionNum);
+          }
+        } else {
+          button.classList.add('selected', 'wrong');
+          if (feedback) {
+            feedback.classList.add('show', 'wrong');
+            feedback.innerHTML = this.getWrongMessage(questionNum);
+          }
+          allButtons.forEach(btn => {
+            if (btn.getAttribute('data-correct') === 'true') btn.classList.add('correct-hint');
+          });
+          if (!this.answeredQuestions.has(questionNum)) {
+            this.answeredQuestions.add(questionNum);
+            this.updateProgress();
+          }
+        }
+        
+        this.addNextButton(card, questionNum);
+        this.checkAllAnswered();
+      },
+      
+      addNextButton(card, currentQuestionNum) {
+        if (card.querySelector('.quiz-next-btn')) return;
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'quiz-next-btn';
+        nextBtn.innerHTML = 'Next Question <i class="ph ph-arrow-down"></i>';
+        nextBtn.onclick = () => {
+          const nextQ = document.getElementById(`quiz-q${currentQuestionNum + 1}`);
+          if (nextQ) {
+            nextQ.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            const result = document.getElementById('quiz-result');
+            if (result) result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        };
+        const feedback = card.querySelector('.quiz-feedback');
+        if (feedback && feedback.parentNode) {
+          feedback.parentNode.insertBefore(nextBtn, feedback.nextSibling);
+        } else {
+          card.appendChild(nextBtn);
+        }
+      },
+      
+      checkAllAnswered() {
+        if (this.answeredQuestions.size >= this.totalQuestions) {
+          this.showResult();
+        }
+      },
+      
+      showResult() {
+        const result = document.getElementById('quiz-result');
+        if (!result) return;
+        result.classList.add('show');
+        
+        const scoreEl = result.querySelector('.quiz-result-score');
+        if (scoreEl) {
+          scoreEl.textContent = `${this.correctAnswers} of ${this.totalQuestions} correct`;
+        }
+        
+        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      },
+      
+      getCorrectMessage(q) {
+        const messages = {
+          1: '<strong>✓ Correct!</strong> Chain of Thought forces the AI to make its thinking transparent, which leads to better results.',
+          2: '<strong>✓ Exactly!</strong> CoT is especially valuable for complex, multi-step problems like planning, calculations, or decisions.',
+          3: '<strong>✓ Correct!</strong> Explicit prompts like "step by step" or "explain your thinking" activate the best CoT behavior.'
+        };
+        return messages[q] || '<strong>✓ Correct!</strong> Very well done.';
+      },
+      
+      getWrongMessage(q) {
+        const messages = {
+          1: '<strong>Not quite.</strong> CoT often makes answers longer (because they are more detailed) and works for many problem types, not just math.',
+          2: '<strong>For simple questions, CoT is unnecessary.</strong> It is useful preventively for complex tasks, not only after errors.',
+          3: '<strong>Too vague phrasing often leads to superficial answers.</strong> Be explicit when asking for intermediate steps.'
+        };
+        return messages[q] || '<strong>Not quite.</strong> The marked answer is correct.';
+      }
+    };
+  </script>
+</body>
+</html>

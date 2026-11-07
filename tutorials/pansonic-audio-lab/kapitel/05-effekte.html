@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul 05: Effekte & Mixing | Pansonic Lab</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    .chapter-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 100px 24px 40px;
+    }
+    
+    .chapter-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .chapter-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-breadcrumb a {
+      color: var(--accent-coral);
+      text-decoration: none;
+    }
+    
+    .chapter-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .chapter-nummer {
+      display: inline-block;
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .chapter-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    
+    .content-section {
+      margin-bottom: 64px;
+    }
+    
+    .content-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .content-section h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--accent-coral);
+      border-radius: 2px;
+    }
+    
+    .content-section h3 {
+      font-size: 1.2rem;
+      margin: 32px 0 16px;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .content-section ul, .content-section ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    
+    .content-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-teal);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .tip-box strong {
+      color: var(--accent-teal);
+    }
+    
+    .warning-box {
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 4px solid #f59e0b;
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .practice-box {
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+      border: 1px solid var(--accent-coral);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    
+    .practice-box h3 {
+      color: var(--accent-coral);
+      margin-top: 0;
+    }
+    
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-subtle);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-active);
+    }
+    
+    .nav-btn-primary {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    .nav-btn-primary:hover {
+      background: var(--accent-coral-light);
+    }
+    
+    .chapter-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+      z-index: 1001;
+    }
+    
+    .chapter-progress-bar {
+      height: 100%;
+      background: var(--accent-coral);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+    
+    .chapter-audio-widget {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 380px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 1024px) {
+      .chapter-audio-widget {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        width: auto;
+      }
+    }
+    
+    .chapter-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .chapter-widget-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .chapter-widget-toggle {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+    
+    .chapter-widget-content {
+      padding: 16px;
+    }
+    
+    .chapter-widget.collapsed .chapter-widget-content {
+      display: none;
+    }
+    
+    .chapter-widget-upload {
+      border: 2px dashed var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .chapter-widget-upload:hover {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+    
+    .chapter-widget-upload-text {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .chapter-widget-track-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .chapter-track-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .chapter-track-time {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-progress-container {
+      height: 4px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-progress-fill {
+      height: 100%;
+      background: var(--accent-coral);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+    
+    .chapter-widget-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .chapter-widget-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-tertiary);
+      border: none;
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .chapter-widget-btn:hover {
+      background: var(--border-active);
+    }
+    
+    .chapter-widget-btn.play {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-coral);
+    }
+    
+    .chapter-volume-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .chapter-volume-slider {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    
+    .chapter-volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .chapter-volume-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+    
+    /* Effect Chain Visualization */
+    .effect-chain {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    
+    .chain-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .chain-item {
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-align: center;
+      min-width: 90px;
+    }
+    
+    .chain-item.active {
+      border-color: var(--accent-teal);
+      background: rgba(0, 212, 170, 0.1);
+    }
+    
+    .chain-item h4 {
+      margin: 0 0 4px 0;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+    
+    .chain-item p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    .chain-arrow {
+      font-size: 1.5rem;
+      color: var(--accent-coral);
+    }
+    
+    /* EQ Visualization */
+    .eq-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    
+    .eq-canvas {
+      width: 100%;
+      height: 200px;
+      background: #0d1117;
+      border-radius: 8px;
+      display: block;
+    }
+    
+    .eq-bands {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .eq-band {
+      text-align: center;
+      padding: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+    }
+    
+    .eq-band-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    
+    .eq-band-freq {
+      font-weight: 700;
+      color: var(--accent-teal);
+      font-size: 0.9rem;
+    }
+    
+    /* Workflow Steps */
+    .workflow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .workflow-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    
+    .step-nummer {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-coral);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    
+    .step-content h4 {
+      margin: 0 0 8px 0;
+      color: var(--text-primary);
+    }
+    
+    .step-content p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    /* Plugin Cards */
+    .plugin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    
+    .plugin-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px;
+      border-left: 3px solid var(--accent-teal);
+    }
+    
+    .plugin-card h4 {
+      margin: 0 0 8px 0;
+      color: var(--accent-teal);
+      font-size: 0.95rem;
+    }
+    
+    .plugin-card p {
+      margin: 0;
+      font-size: 0.85rem;
+    }
+    
+    @media (max-width: 768px) {
+      .chain-container {
+        flex-direction: column;
+      }
+      
+      .chain-arrow {
+        transform: rotate(90deg);
+      }
+      
+      .eq-bands {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .eq-zones {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .eq-zones .zone {
+        width: 100%;
+        min-width: auto;
+      }
+      
+      /* Audio Widget Mobile Fix */
+      .audio-widget {
+        left: 16px !important;
+        right: 16px !important;
+        bottom: 16px !important;
+        width: auto !important;
+        max-width: calc(100% - 32px);
+      }
+      
+      /* EQ Canvas Mobile Fix */
+      #interactiveEQ {
+        min-width: 280px !important;
+        height: 200px !important;
+      }
+      
+      /* Chapter Title Mobile */
+      .chapter-title {
+        font-size: 1.8rem;
+      }
+      
+      .chapter-lead {
+        font-size: 1rem;
+      }
+      
+      .content-section h2 {
+        font-size: 1.3rem;
+      }
+    }
+    
+    /* Mobile hamburger menu visibility */
+    @media (max-width: 1024px) {
+      .mobile-toggle {
+        display: flex !important;
+      }
+    }
+    
+    /* EQ Pro Visualizer */
+    .eq-pro {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      margin: 32px 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .eq-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .eq-icon {
+      font-size: 2.5rem;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent-coral-dim), var(--accent-teal-dim));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .eq-title h3 {
+      margin: 0 0 4px 0;
+      font-size: 1.3rem;
+    }
+
+    .eq-title span {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .eq-display {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .eq-graph-container {
+      margin-bottom: 20px;
+    }
+
+    .eq-graph {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+    }
+
+    .eq-bands {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .eq-band {
+      background: var(--bg-card);
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .eq-band.highlight {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+
+    .band-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .band-freq {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 4px 0;
+    }
+
+    .band-gain {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .band-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .eq-zones {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .zone {
+      background: var(--bg-tertiary);
+      padding: 16px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .zone.low { border-left: 4px solid #8b5cf6; }
+    .zone.mid { border-left: 4px solid #00d4aa; }
+    .zone.high { border-left: 4px solid #f59e0b; }
+
+    .zone-name {
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .zone-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .eq-tip {
+      background: linear-gradient(135deg, var(--accent-teal-dim), transparent);
+      border-left: 4px solid var(--accent-teal);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Tools</a>
+          <div class="dropdown-menu">
+            <a href="../tools/audacity.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+              <span class="dropdown-item-desc">Open Source Fundament</span>
+            </a>
+            <a href="../tools/suno.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+              <span class="dropdown-item-desc">KI-Musik Generierung</span>
+            </a>
+            <a href="../tools/elevenlabs.html" class="dropdown-item">
+              <span class="dropdown-item-name">Stimmen-KI</span>
+              <span class="dropdown-item-desc">Voice Cloning</span>
+            </a>
+            <a href="../tools/daw.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+              <span class="dropdown-item-desc">Prof Software</span>
+            </a>
+          </div>
+        </div>
+        <a href="../bibliothek.html" class="nav-link">Audio Bibliothek</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch">
+        <a href="05-effekte.html" class="lang-btn active">DE</a>
+        <a href="05-effects-en.html" class="lang-btn">EN</a>
+      </nav>
+      <a href="../../pages/spenden.html" class="btn-support">Support</a>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="../player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Hell/Dunkel" aria-label="Theme wechseln">🌓</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <button class="fab-btn" id="langToggle" data-tooltip="English" aria-label="Zu English wechseln">EN</button>
+    <button class="fab-btn" id="backToTop" data-tooltip="Nach oben">↑</button>
+  </div>
+
+  <!-- Audio Widget (Tabs: Generator + Player) - Default collapsed -->
+<div class="audio-widget collapsed" id="audioWidget">
+  <div class="audio-widget-header">
+    <span class="audio-widget-title">🎵 Audio Lab</span>
+    <button class="audio-widget-toggle" id="audioWidgetToggle">+</button>
+  </div>
+  <div class="audio-widget-content">
+    <div class="audio-tabs">
+      <button class="audio-tab active" data-tab="generator">Generator</button>
+      <button class="audio-tab" data-tab="player">Player</button>
+    </div>
+    <div class="audio-tab-content active" id="generatorTab">
+      <div class="freq-display">
+        <div class="freq-value" id="freqValue">440 Hz</div>
+        <div class="freq-label">Sine Wave</div>
+      </div>
+      <input type="range" class="freq-slider" id="freqSlider" min="20" max="2000" value="440">
+      <div class="gen-controls">
+        <button class="gen-btn active" data-wave="sine">SINE</button>
+        <button class="gen-btn" data-wave="square">SQUARE</button>
+        <button class="gen-btn" data-wave="sawtooth">SAW</button>
+      </div>
+      <button class="play-btn" id="playBtn">Play Tone</button>
+    </div>
+    <div class="audio-tab-content" id="playerTab">
+      <div class="player-upload" id="playerUpload">
+        <div class="player-upload-text">Audio-Datei laden</div>
+        <div class="player-upload-hint">MP3, WAV, OGG</div>
+      </div>
+      <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+      <div class="player-track-info" id="playerTrackInfo" style="display: none;">
+        <div class="track-name" id="trackName">Keine Datei</div>
+        <div class="track-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+      </div>
+      <div class="progress-container" id="progressContainer" style="display: none;">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="player-controls" id="playerControls" style="display: none;">
+        <button class="player-btn" id="prevBtn">⏮</button>
+        <button class="player-btn" id="playPauseBtn">▶</button>
+        <button class="player-btn" id="nextBtn">⏭</button>
+      </div>
+    </div>
+  </div>
+</div><!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header-inner">
+      <nav class="chapter-breadcrumb">
+        <a href="../index.html">Pansonic Lab</a>
+        <span>/</span>
+        <span>Modul 05</span>
+      </nav>
+      <span class="chapter-number">Modul 05</span>
+      <h1 class="chapter-title">Effekte & Mixing</h1>
+      <p class="chapter-lead">Vom Rohmaterial zum fertigen Track. Lerne die wichtigsten Effekte kennen und wie du sie in der richtigen Reihenfolge anwendest.</p>
+    </div>
+  </header>
+
+  <!-- Chapter Content -->
+  <main class="chapter-content">
+    
+    <section class="content-section">
+      <h2>Die Effekt-Kette</h2>
+      <p>In der Audio-Produktion werden Effekte in einer bestimmten <strong>Reihenfolge</strong> angewendet – die Effekt-Kette. Die Reihenfolge macht einen enormen Unterschied im Klang.</p>
+      
+      <div class="effect-chain">
+        <h3 style="margin-top: 0; text-align: center;">Die ideale Vocal-Kette</h3>
+        <div class="chain-container">
+          <div class="chain-item active">
+            <h4>1. EQ</h4>
+            <p>Grundton formen</p>
+          </div>
+          <span class="chain-arrow">→</span>
+          <div class="chain-item active">
+            <h4>2. Kompressor</h4>
+            <p>Dynamik kontrollieren</p>
+          </div>
+          <span class="chain-arrow">→</span>
+          <div class="chain-item active">
+            <h4>3. EQ (fein)</h4>
+            <p>Probleme korrigieren</p>
+          </div>
+          <span class="chain-arrow">→</span>
+          <div class="chain-item">
+            <h4>4. De-Esser</h4>
+            <p>Zischlaute reduzieren</p>
+          </div>
+          <span class="chain-arrow">→</span>
+          <div class="chain-item">
+            <h4>5. Reverb</h4>
+            <p>Raum geben</p>
+          </div>
+          <span class="chain-arrow">→</span>
+          <div class="chain-item">
+            <h4>6. Limiter</h4>
+            <p>Lautstärke maximieren</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tip-box">
+        <strong>Goldene Regel:</strong> EQ vor dem Kompressor für den Grundton, EQ nach dem Kompressor für Feinjustierungen. Der Kompressor verstärkt Frequenzen – wenn du vorher nicht korrigierst, verstärkt er auch die Probleme.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Equalizer (EQ)</h2>
+      <p>Der <strong>Equalizer</strong> ist das wichtigste Werkzeug im Mixing. Er erlaubt dir, bestimmte Frequenzen anzuheben oder abzusenken.</p>
+      
+      <!-- Equalizer Pro Visualizer -->
+      <div class="eq-pro">
+        <div class="eq-header">
+          <div class="eq-icon">🎛️</div>
+          <div class="eq-title">
+            <h3>Equalizer (EQ)</h3>
+            <span>Frequenz-Spektrum steuern wie ein Profi</span>
+          </div>
+        </div>
+        
+        <div class="eq-display">
+          <div class="eq-graph-container" style="background: var(--bg-tertiary); border-radius: 8px; padding: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <!-- Interaktiver Canvas EQ -->
+            <canvas id="interactiveEQ" width="500" height="250" style="width: 100%; min-width: 320px; height: auto; max-width: 100%; background: linear-gradient(135deg, #1a1a20 0%, #252530 100%); border-radius: 8px; cursor: crosshair; display: block; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);"></canvas>
+            <div class="eq-hint" style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;">
+              🖱️ Ziehe die Punkte, um Frequenzen anzupassen | 🎵 Starte den Generator im Audio Lab, um den EQ zu hören!
+            </div>
+          </div>
+          
+          <!-- Band controls -->
+          <div class="eq-bands">
+            <div class="eq-band">
+              <div class="band-label">Low</div>
+              <div class="band-freq">100Hz</div>
+              <div class="band-gain" style="color: var(--accent-teal);">+3dB</div>
+              <div class="band-desc">Bass-Wärme</div>
+            </div>
+            <div class="eq-band highlight">
+              <div class="band-label">Mid</div>
+              <div class="band-freq">1kHz</div>
+              <div class="band-gain" style="color: var(--accent-coral);">+9dB</div>
+              <div class="band-desc">Stimme/Präsenz</div>
+            </div>
+            <div class="eq-band">
+              <div class="band-label">High</div>
+              <div class="band-freq">8kHz</div>
+              <div class="band-gain" style="color: var(--accent-teal);">+5dB</div>
+              <div class="band-desc">Brillanz/Air</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="eq-zones">
+          <div class="zone low">
+            <span class="zone-name">🔊 LOW (20-250Hz)</span>
+            <span class="zone-desc">Bass, Sub, Wärme</span>
+          </div>
+          <div class="zone mid">
+            <span class="zone-name">🎵 MID (250Hz-4kHz)</span>
+            <span class="zone-desc">Klangkörper, Stimme</span>
+          </div>
+          <div class="zone high">
+            <span class="zone-name">✨ HIGH (4kHz-20kHz)</span>
+            <span class="zone-desc">Höhen, Details, Air</span>
+          </div>
+        </div>
+        
+        <div class="eq-tip">
+          <strong>🎯 EQ-Regel:</strong> Cut rather than boost! Reduziere statt zu erhöhen – das verhindert Verzerrungen und erhält Headroom.
+        </div>
+      </div>
+      
+      <h3>EQ für Vocals: Die wichtigsten Frequenzen</h3>
+      <ul>
+        <li><strong>100 Hz:</strong> Absenken für weniger Brummen und mehr Klarheit</li>
+        <li><strong>200-400 Hz:</strong> Kann dumpf klingen – vorsichtig absenken bei Mud</li>
+        <li><strong>1-3 kHz:</strong> Präsenz und Verständlichkeit – anheben für mehr Durchsetzung</li>
+        <li><strong>3-6 kHz:</strong> S-Laute und Zischlaute – absenken, wenn zu scharf</li>
+        <li><strong>10-15 kHz:</strong> "Air" – sanft anheben für mehr Helligkeit und Raum</li>
+      </ul>
+      
+      <div class="tip-box">
+        <strong>Weniger ist mehr:</strong> EQ sollte korrigieren, nicht neu erfinden. Extreme Einstellungen klingen unnatürlich. Wenn du mehr als 6 dB anheben/absenken musst, überprüfe die Aufnahme.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Kompression meistern</h2>
+      <p>Der <strong>Kompressor</strong> ist das Geheimnis professioneller Lautstärke. Er macht laute Parts leiser und hebt leise Parts an.</p>
+      
+      <h3>Die Parameter im Detail</h3>
+      <div class="plugin-grid">
+        <div class="plugin-card">
+          <h4>Threshold (Schwelle)</h4>
+          <p>Ab welchem Lautstärkepegel der Kompressor greift. -18 dB ist ein guter Startwert für Vocals.</p>
+        </div>
+        <div class="plugin-card">
+          <h4>Ratio (Verhältnis)</h4>
+          <p>Wie stark komprimiert wird. 3:1 für sanfte Vocals, 6:1 für stärkere Kontrolle.</p>
+        </div>
+        <div class="plugin-card">
+          <h4>Attack (Ansprechzeit)</h4>
+          <p>Wie schnell der Kompressor reagiert. 5-10ms für Transparenz, 20-30ms für Punch.</p>
+        </div>
+        <div class="plugin-card">
+          <h4>Release (Ausklingzeit)</h4>
+          <p>Wie schnell der Kompressor loslässt. 50-100ms für Vocals, automatisch für natürlichen Sound.</p>
+        </div>
+        <div class="plugin-card">
+          <h4>Make-up Gain</h4>
+          <p>Kompensation der Lautstärke nach der Kompression. Verluste wieder auffüllen.</p>
+        </div>
+        <div class="plugin-card">
+          <h4>Gain Reduction</h4>
+          <p>Wie viel der Kompressor aktuell reduziert. Sollte 3-6 dB bei Spitzen anzeigen.</p>
+        </div>
+      </div>
+      
+      <h3>Kompression in der Praxis</h3>
+      <ol>
+        <li><strong>Threshold setzen:</strong> So dass der Kompressor bei lauten Stellen greift</li>
+        <li><strong>Ratio wählen:</strong> Starte mit 3:1 für natürlichen Sound</li>
+        <li><strong>Attack einstellen:</strong> Schnell für Kontrolle, langsamer für Dynamik</li>
+        <li><strong>Release justieren:</strong> Automatisch oder 100ms für natürliches Ausklingen</li>
+        <li><strong>Make-up Gain:</strong> Anpassen bis der Pegel wieder stimmt</li>
+        <li><strong>A/B-Vergleich:</strong> Bypass drücken und vergleichen – komprimiert sollte "besser" klingen, nicht nur lauter</li>
+      </ol>
+    </section>
+
+    <section class="content-section">
+      <h2>Der professionelle Workflow</h2>
+      <p>Vom Rohmaterial zum fertigen Track – Schritt für Schritt:</p>
+      
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <span class="step-number">1</span>
+          <div class="step-content">
+            <h4>Editing</h4>
+            <p>Atemgeräusche reduzieren, Pausen kürzen, falsch gesungene Stellen korrigieren oder neu aufnehmen. Ein sauberes Edit ist die Basis.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">2</span>
+          <div class="step-content">
+            <h4>Gain Staging</h4>
+            <p>Alle Spuren auf konsistente Lautstärke bringen (-12 dB bis -6 dB Peak). Keine Übersteuerung, genug Headroom für das Mastering.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">3</span>
+          <div class="step-content">
+            <h4>EQ</h4>
+            <p>Frequenz-Konflikte lösen. Jedem Instrument seinen Platz im Frequenz-Spektrum geben. Bass unten, Vocals in der Mitte, Höhen oben.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">4</span>
+          <div class="step-content">
+            <h4>Kompression</h4>
+            <p>Dynamik kontrollieren. Vocals gleichmäßig machen, Bass festigen, Drums punchy gestalten. Nicht alles komprimieren!</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">5</span>
+          <div class="step-content">
+            <h4>Panning & Balance</h4>
+            <p>Instrumente im Stereobild platzieren. Bass und Kick zentriert, Gitarren seitlich, Background-Vocals breit.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">6</span>
+          <div class="step-content">
+            <h4>Reverb & Delay</h4>
+            <p>Tiefe und Raum schaffen. Send-Effekte nutzen (nicht auf der Spur selbst). Vocals in denselben Raum setzen.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">7</span>
+          <div class="step-content">
+            <h4>Automation</h4>
+            <p>Lautstärke-Verläufe programmieren. Chorus lauter, Verse leiser, Filter-Sweeps. Die Geschichte erzählen.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <span class="step-number">8</span>
+          <div class="step-content">
+            <h4>Mastering</h4>
+            <p>Finaler Limiter für Lautstärke, EQ für Feinabstimmung, Multiband-Kompression für Glue. Nicht zu laut machen!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Praxisübung: Dein erster Mix</h2>
+      <div class="practice-box">
+        <h3>Multi-Track Mixing Project</h3>
+        <ol>
+          <li><strong>Material beschaffen:</strong> Lade ein kostenloses Multi-Track-Projekt herunter (z.B. von Cambridge MT) oder nutze Loop-Pakete</li>
+          <li><strong>Import:</strong> Alle Spuren in Audacity importieren – Kick, Snare, Bass, Gitarren, Vocals</li>
+          <li><strong>Balance:</strong> Ohne Effekte! Nur mit den Volume-Fadern eine grundlegende Balance finden</li>
+          <li><strong>Panning:</strong> Gitarren nach links/rechts (70%), Bass und Kick zentriert, Background-Vocals breit</li>
+          <li><strong>EQ:</strong> Jede Spur einzeln bearbeiten. Bass unter 100 Hz boosten, Vocals zwischen 2-5 kHz anheben</li>
+          <li><strong>Kompression:</strong> Bass und Vocals komprimieren (3:1 Ratio, -18 dB Threshold)</li>
+          <li><strong>Reverb:</strong> Send-Effekt auf Vocals (ca. 15-20% Wet) für Raum</li>
+          <li><strong>Export:</strong> Als Stereo-Track exportieren und mit dem Original vergleichen</li>
+        </ol>
+      </div>
+      
+      <div class="tip-box">
+        <strong>Referenz-Tracks nutzen:</strong> Importiere einen professionellen Song in der selben Stilrichtung als Referenz. Vergleiche Lautstärkeverhältnisse. Vergleiche Lautstärkeverhältnisse und Klangbild – nicht kopieren, lernen!
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Zusammenfassung</h2>
+      <ul>
+        <li><strong>Effekt-Kette:</strong> Reihenfolge ist entscheidend – EQ → Kompressor → Fein-EQ → Reverb → Limiter</li>
+        <li><strong>EQ:</strong> Probleme absenken statt alles anzuheben. Weniger ist mehr.</li>
+        <li><strong>Kompression:</strong> Threshold, Ratio, Attack, Release verstehen und gezielt einsetzen</li>
+        <li><strong>Workflow:</strong> Edit → Gain → EQ → Kompression → Panning → Reverb → Automation → Mastering</li>
+        <li><strong>Referenz:</strong> Profi-Tracks als Vergleich nutzen, um das eigene Gehör zu schulen</li>
+      </ul>
+      
+      <p>Mixing ist ein Handwerk, das man nur durch Üben lernt. Jeder Mix macht dich besser. Bleib dran, experimentiere, und vergleiche dich mit Profis – nicht, um perfekt zu sein, sondern um besser zu werden.</p>
+    </section>
+
+  </main>
+
+  <!-- Navigation Footer -->
+  <nav class="nav-footer">
+    <a href="04-audacity.html" class="nav-btn">
+      Zurück
+    </a>
+    <a href="../index.html#module" class="nav-btn">
+      Modulübersicht
+    </a>
+    <a href="06-voice.html" class="nav-btn nav-btn-primary">
+      Weiter <span></span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="../index.html">Start</a>
+      <a href="../../pages/spenden.html">Support</a>
+      <a href="../../pages/impressum.html">Impressum</a>
+    </nav>
+    <p class="footer-copy"> PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+    <script>
+    // ==========================================
+    // GLOBAL AUDIO CONTEXT (shared by Generator, Player, and EQ)
+    // ==========================================
+    let sharedAudioContext = null;
+    let eqFilters = [];
+    let eqInitialized = false;
+    let playerAudioSource = null;
+    
+    function getAudioContext() {
+      if (!sharedAudioContext) {
+        sharedAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return sharedAudioContext;
+    }
+    
+    // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${isGerman ? '../index.html' : '../index-en.html'}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${isGerman ? '../tools/audacity.html' : '../tools/audacity-en.html'}">Audacity</a>
+              <a href="${isGerman ? '../tools/suno.html' : '../tools/suno-en.html'}">Suno AI</a>
+              <a href="${isGerman ? '../tools/elevenlabs.html' : '../tools/elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${isGerman ? '../tools/daw.html' : '../tools/daw-en.html'}">DAW Guide</a>
+              <a href="${isGerman ? '../bibliothek.html' : '../library.html'}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (Dark/Light)
+    // ==========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check saved preference
+    const savedTheme = localStorage.getItem('sonicLabTheme');
+    
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+    
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    } else {
+      // Default to dark
+      html.setAttribute('data-theme', 'dark');
+      updateThemeIcon('dark');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sonicLabTheme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    // ==========================================
+    // CLASSROOM MODE
+    // ==========================================
+    const classroomToggle = document.getElementById('classroomToggle');
+    
+    const savedClassroom = localStorage.getItem('sonicLabClassroom');
+    if (savedClassroom === 'true') {
+      html.setAttribute('data-classroom', 'true');
+      classroomToggle.classList.add('active');
+    }
+    
+    classroomToggle.addEventListener('click', function() {
+      const isClassroom = html.getAttribute('data-classroom') === 'true';
+      
+      if (isClassroom) {
+        html.removeAttribute('data-classroom');
+        localStorage.setItem('sonicLabClassroom', 'false');
+        classroomToggle.classList.remove('active');
+      } else {
+        html.setAttribute('data-classroom', 'true');
+        localStorage.setItem('sonicLabClassroom', 'true');
+        classroomToggle.classList.add('active');
+      }
+    });
+
+    // ==========================================
+    // BACK TO TOP
+    // ==========================================
+    const backToTop = document.getElementById('backToTop');
+    
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+    
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==========================================
+    // EQ CANVAS
+    // ==========================================
+    // PROGRESS BAR
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // ==========================================
+    // LANGUAGE TOGGLE
+    // ==========================================
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        window.location.href = '05-effects-en.html';
+      });
+    }
+
+        // ==========================================
+    // AUDIO WIDGET - TABS (GENERATOR + PLAYER)
+    // ==========================================
+    const audioWidget = document.getElementById('audioWidget');
+    const audioWidgetToggle = document.getElementById('audioWidgetToggle');
+    
+    // Initialize widget state
+    if (audioWidget && !audioWidget.classList.contains('collapsed')) {
+      audioWidget.classList.add('expanded');
+    }
+    
+    // Tabs
+    const audioTabs = document.querySelectorAll('.audio-tab');
+    const tabContents = document.querySelectorAll('.audio-tab-content');
+    
+    audioTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetTab = this.dataset.tab;
+        
+        audioTabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById(targetTab + 'Tab').classList.add('active');
+      });
+    });
+    
+    // --- GENERATOR TAB ---
+    const freqSlider = document.getElementById('freqSlider');
+    const freqValue = document.getElementById('freqValue');
+    const playBtn = document.getElementById('playBtn');
+    const waveButtons = document.querySelectorAll('.gen-btn[data-wave]');
+    
+    let oscillator = null;
+    let gainNode = null;
+    let isPlaying = false;
+    let currentWaveform = 'sine';
+    let currentFrequency = 440;
+    
+    function playTone() {
+      const ctx = getAudioContext();
+      
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+      }
+      
+      oscillator = ctx.createOscillator();
+      oscillator.type = currentWaveform;
+      oscillator.frequency.value = currentFrequency;
+      
+      // Wenn EQ-Filter verfügbar und initialisiert, verbinde damit
+      if (eqInitialized && eqFilters.length > 0) {
+        oscillator.connect(eqFilters[0]);
+      } else {
+        // Standard: direkt zum Output
+        gainNode = ctx.createGain();
+        gainNode.gain.value = 0.1;
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+      }
+      
+      oscillator.start();
+      isPlaying = true;
+      playBtn.textContent = '⏸ Pause Tone';
+      playBtn.classList.add('playing');
+    }
+    
+    function stopTone() {
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+        oscillator = null;
+      }
+      isPlaying = false;
+      playBtn.textContent = '▶ Play Tone';
+      playBtn.classList.remove('playing');
+    }
+    
+    playBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        stopTone();
+      } else {
+        playTone();
+      }
+    });
+    
+    freqSlider.addEventListener('input', function() {
+      currentFrequency = parseInt(this.value);
+      freqValue.textContent = currentFrequency + ' Hz';
+      
+      if (oscillator) {
+        oscillator.frequency.value = currentFrequency;
+      }
+    });
+    
+    waveButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        waveButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentWaveform = this.dataset.wave;
+        
+        if (isPlaying && oscillator) {
+          oscillator.type = currentWaveform;
+        }
+      });
+    });
+    
+    // --- PLAYER TAB ---
+    const playerUpload = document.getElementById('playerUpload');
+    const audioFileInput = document.getElementById('audioFileInput');
+    const playerTrackInfo = document.getElementById('playerTrackInfo');
+    const trackName = document.getElementById('trackName');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const playerControls = document.getElementById('playerControls');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    
+    let playerAudio = null;
+    let isPlayerPlaying = false;
+    let playerAnimationId = null;
+    
+    // File Upload
+    playerUpload.addEventListener('click', () => audioFileInput.click());
+    
+    audioFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadAudioFile(file);
+      }
+    });
+    
+    // Drag & Drop
+    playerUpload.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = 'var(--accent-teal)';
+    });
+    
+    playerUpload.addEventListener('dragleave', () => {
+      playerUpload.style.borderColor = '';
+    });
+    
+    playerUpload.addEventListener('drop', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = '';
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('audio/')) {
+        loadAudioFile(file);
+      }
+    });
+    
+    function loadAudioFile(file) {
+      if (playerAudio) {
+        playerAudio.pause();
+        playerAudio = null;
+        playerAudioSource = null;
+      }
+      
+      const url = URL.createObjectURL(file);
+      const ctx = getAudioContext();
+      
+      // Create audio element and media element source
+      playerAudio = new Audio(url);
+      playerAudio.volume = 0.8;
+      
+      try {
+        playerAudioSource = ctx.createMediaElementSource(playerAudio);
+        
+        // Connect to EQ if available, otherwise directly to destination
+        if (eqInitialized && eqFilters.length > 0) {
+          playerAudioSource.connect(eqFilters[0]);
+        } else {
+          playerAudioSource.connect(ctx.destination);
+        }
+      } catch (e) {
+        console.error('Error creating MediaElementSource:', e);
+        // Fallback: just use the audio element without Web Audio API processing
+      }
+      
+      trackName.textContent = file.name;
+      
+      playerAudio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(playerAudio.duration);
+        currentTimeEl.textContent = '0:00';
+        
+        playerUpload.style.display = 'none';
+        playerTrackInfo.style.display = 'block';
+        progressContainer.style.display = 'block';
+        playerControls.style.display = 'flex';
+      });
+      
+      playerAudio.addEventListener('ended', () => {
+        isPlayerPlaying = false;
+        playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+      });
+    }
+    
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function updateProgress() {
+      if (playerAudio && isPlayerPlaying) {
+        const progress = (playerAudio.currentTime / playerAudio.duration) * 100;
+        progressFill.style.width = progress + '%';
+        currentTimeEl.textContent = formatTime(playerAudio.currentTime);
+        playerAnimationId = requestAnimationFrame(updateProgress);
+      }
+    }
+    
+    playPauseBtn.addEventListener('click', function() {
+      if (!playerAudio) return;
+      
+      if (isPlayerPlaying) {
+        playerAudio.pause();
+        isPlayerPlaying = false;
+        this.textContent = isPlayerPlaying ? '⏸' : '▶';
+        cancelAnimationFrame(playerAnimationId);
+      } else {
+        playerAudio.play();
+        isPlayerPlaying = true;
+        this.textContent = isPlayerPlaying ? '⏸' : '▶';
+        updateProgress();
+      }
+    });
+    
+    progressContainer.addEventListener('click', function(e) {
+      if (!playerAudio) return;
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percentage = clickX / rect.width;
+      playerAudio.currentTime = percentage * playerAudio.duration;
+    });
+    
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = 0;
+      }
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = Math.min(playerAudio.currentTime + 10, playerAudio.duration);
+      }
+    });
+    
+    // Widget minimize
+    audioWidgetToggle.addEventListener('click', function() {
+      audioWidget.classList.toggle('collapsed');
+      audioWidget.classList.toggle('expanded');
+      this.textContent = audioWidget.classList.contains('collapsed') ? '+' : '-';
+    });
+    
+    // Stop audio when leaving page
+    window.addEventListener('beforeunload', () => {
+      stopTone();
+      if (playerAudio) playerAudio.pause();
+    });
+    
+    
+    // ==========================================
+    // INTERACTIVE EQ WITH AUDIO
+    // ==========================================
+    (function(){
+      const canvas = document.getElementById('interactiveEQ');
+      if (!canvas) { console.error('EQ Canvas not found'); return; }
+      
+      canvas.width = 500; canvas.height = 250;
+      const ctx = canvas.getContext('2d');
+      const cy = 125;
+      
+      const bands = [
+        {x: 100, f: '100', g: 0, c: '#00d4aa'},
+        {x: 200, f: '500', g: 0, c: '#00d4aa'},
+        {x: 300, f: '2k', g: 0, c: '#00d4aa'},
+        {x: 400, f: '8k', g: 0, c: '#00d4aa'}
+      ];
+      
+      let drag = null;
+      
+      function init() {
+        if (eqInitialized) return;
+        const audioCtx = getAudioContext();
+        
+        // Create EQ filters
+        eqFilters = bands.map((b,i) => {
+          const f = audioCtx.createBiquadFilter();
+          f.type = ['lowshelf','peaking','peaking','highshelf'][i];
+          f.frequency.value = [100,500,2000,8000][i];
+          f.gain.value = 0;
+          if (f.type==='peaking') f.Q.value = 1.5;
+          return f;
+        });
+        
+        // Connect filters in chain
+        for (let i=0;i<3;i++) eqFilters[i].connect(eqFilters[i+1]);
+        
+        // Connect last filter to destination via gain node
+        const g = audioCtx.createGain(); 
+        g.gain.value = 0.15;
+        eqFilters[3].connect(g); 
+        g.connect(audioCtx.destination);
+        
+        eqInitialized = true;
+      }
+      
+      function draw() {
+        ctx.fillStyle = '#1a1a20'; ctx.fillRect(0,0,500,250);
+        ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+        for (let x=50; x<500; x+=50) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,250); ctx.stroke(); }
+        for (let y=25; y<250; y+=25) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(500,y); ctx.stroke(); }
+        
+        ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.font = '9px sans-serif';
+        ctx.fillText('+12dB',5,15); ctx.fillText('0dB',5,cy+3); ctx.fillText('-12dB',5,245);
+        ['50Hz','200Hz','1kHz','5kHz','16kHz'].forEach((f,i) => ctx.fillText(f,[50,150,250,350,450][i]-10,240));
+        
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.beginPath(); ctx.moveTo(50,cy); ctx.lineTo(450,cy); ctx.stroke();
+        
+        const pts = [];
+        for (let x=50; x<=450; x+=5) {
+          let y = cy;
+          bands.forEach(b => { const d=(x-b.x)/50; y -= b.g*Math.exp(-d*d)*8; });
+          pts.push({x,y});
+        }
+        
+        ctx.strokeStyle = '#ff5a5a'; ctx.lineWidth = 3; ctx.beginPath();
+        pts.forEach((p,i) => i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+        ctx.stroke();
+        
+        bands.forEach((b,i) => {
+          const y = cy - b.g*8;
+          ctx.fillStyle = drag===i?'#fff':b.c;
+          ctx.beginPath(); ctx.arc(b.x,y,8,0,Math.PI*2); ctx.fill();
+          ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+          ctx.fillStyle = '#fff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText(b.f+'Hz',b.x,y-12); ctx.fillStyle = b.g>=0?'#00d4aa':'#ff5a5a';
+          ctx.fillText((b.g>=0?'+':'')+b.g+'dB',b.x,y+22);
+        });
+      }
+      
+      function getBand(x,y) { for(let i=0;i<bands.length;i++){const by=cy-bands[i].g*8;if((x-bands[i].x)**2+(y-by)**2<100)return i;}return null;}
+      
+      canvas.addEventListener('mousedown',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*(500/r.width),y=(e.clientY-r.top)*(250/r.height);drag=getBand(x,y);if(!eqInitialized)init();});
+      window.addEventListener('mousemove',e=>{if(drag===null)return;const r=canvas.getBoundingClientRect(),y=(e.clientY-r.top)*(250/r.height);bands[drag].g=Math.max(-12,Math.min(12,Math.round((cy-y)/8)));if(eqFilters[drag])eqFilters[drag].gain.value=bands[drag].g;draw();});
+      window.addEventListener('mouseup',()=>drag=null);
+      
+      canvas.addEventListener('touchstart',e=>{const r=canvas.getBoundingClientRect(),t=e.touches[0],x=(t.clientX-r.left)*(500/r.width),y=(t.clientY-r.top)*(250/r.height);drag=getBand(x,y);if(!eqInitialized)init();});
+      window.addEventListener('touchmove',e=>{if(drag===null)return;e.preventDefault();const r=canvas.getBoundingClientRect(),t=e.touches[0],y=(t.clientY-r.top)*(250/r.height);bands[drag].g=Math.max(-12,Math.min(12,Math.round((cy-y)/8)));if(eqFilters[drag])eqFilters[drag].gain.value=bands[drag].g;draw();},{passive:false});
+      window.addEventListener('touchend',()=>drag=null);
+      
+      draw(); console.log('EQ ready');
+    })();
+
+  </script>
+</body>
+</html>

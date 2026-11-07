@@ -1,0 +1,43 @@
+# PLU 404 Error Handling & Cache Control
+# Diese Datei muss im ROOT-Verzeichnis des Webservers liegen
+
+# Set error documents
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 500 /404.html
+
+# Disable directory browsing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Cache-Control for HTML files (prevent aggressive caching of error pages)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  
+  # Force revalidation for CSS/JS as well during development
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  
+  # Cache images aggressively (1 year) — they are immutable content
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|avif)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header unset Pragma
+    Header unset Expires
+  </FilesMatch>
+  
+  # Cache fonts (1 year)
+  <FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Alternative: If your site is in a subdirectory (e.g., /tutorials/)
+# Uncomment and modify the line below:
+# ErrorDocument 404 /tutorials/404.html

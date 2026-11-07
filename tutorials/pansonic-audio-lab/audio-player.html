@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pansonic Audio Player</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/style-v3.css">
+  <style>
+    :root {
+      --bg-primary: #0a0c0f;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --bg-card: #1c2128;
+      --border-subtle: #30363d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent-coral: #ff5a5a;
+      --accent-coral-dim: rgba(255, 90, 90, 0.15);
+      --accent-teal: #00d4aa;
+      --accent-teal-dim: rgba(0, 212, 170, 0.15);
+      --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'SF Mono', Monaco, monospace;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header */
+    .header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    
+    .header-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-coral);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .header-logo-icon svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+    
+    .header-logo-text {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .header-logo-text span {
+      color: var(--accent-coral);
+    }
+    
+    .header-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    
+    .close-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.3rem;
+      transition: all 0.2s;
+    }
+    
+    .close-btn:hover {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+    
+    .player-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+    }
+    
+    .player-header {
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+      padding: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .player-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .player-title-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent-coral), #e04a4a);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .player-title h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    
+    .player-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-left: 56px;
+    }
+    
+    .player-body {
+      padding: 24px;
+    }
+    
+    /* Upload Area */
+    .upload-area {
+      border: 2px dashed var(--border-subtle);
+      border-radius: 12px;
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 20px;
+    }
+    
+    .upload-area:hover {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+    
+    .upload-area.dragover {
+      border-color: var(--accent-teal);
+      background: var(--accent-teal-dim);
+    }
+    
+    .upload-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    
+    .upload-text {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .upload-hint {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Track Info */
+    .track-info {
+      display: none;
+      margin-bottom: 20px;
+    }
+    
+    .track-info.active {
+      display: block;
+    }
+    
+    .track-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .track-time {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+    
+    /* Progress */
+    .progress-container {
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      margin: 16px 0;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-coral), var(--accent-teal));
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+    
+    /* Controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .control-btn {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+    
+    .control-btn:hover {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    .control-btn.play {
+      width: 64px;
+      height: 64px;
+      font-size: 1.5rem;
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    .control-btn.play:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Volume */
+    .volume-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .volume-icon {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+    
+    .volume-slider {
+      flex: 1;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      outline: none;
+    }
+    
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--accent-coral);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .volume-value {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      min-width: 36px;
+      text-align: right;
+    }
+    
+    /* Footer Notice */
+    .footer-notice {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    .footer-notice::before {
+      content: '💡';
+    }
+    
+    /* Responsive */
+    @media (max-width: 520px) {
+      .header { padding: 0 16px; }
+      .main-content { padding: 20px 16px; }
+      .player-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" target="_blank" class="header-logo">
+      <div class="header-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="header-logo-text">PAN<span>SONIC</span></div>
+        <div class="header-subtitle">Audio Player</div>
+      </div>
+    </a>
+    <button class="close-btn" onclick="window.close()" title="Schließen">×</button>
+  </header>
+  
+  <main class="main-content">
+    <div class="player-card">
+      <div class="player-header">
+        <div class="player-title">
+          <div class="player-title-icon">🎵</div>
+          <h1>Audio Player</h1>
+        </div>
+        <div class="player-subtitle">MP3, WAV oder M4A abspielen</div>
+      </div>
+      
+      <div class="player-body">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">📁</div>
+          <div class="upload-text">Audio-Datei hierher ziehen</div>
+          <div class="upload-hint">Oder klicken zum Auswählen</div>
+        </div>
+        <input type="file" id="fileInput" accept="audio/*" style="display: none;">
+        
+        <div class="track-info" id="trackInfo">
+          <div class="track-name" id="trackName">-</div>
+          <div class="track-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+          
+          <div class="progress-container" id="progressContainer">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          
+          <div class="controls">
+            <button class="control-btn" id="prevBtn" title="-10s">⏮</button>
+            <button class="control-btn play" id="playBtn" title="Play/Pause">▶</button>
+            <button class="control-btn" id="nextBtn" title="+10s">⏭</button>
+          </div>
+          
+          <div class="volume-container">
+            <span class="volume-icon">🔊</span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
+            <span class="volume-value" id="volumeValue">80%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer-notice">
+    Dieses Fenster bleibt beim Modul-Wechsel geöffnet
+  </div>
+
+  <script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const trackInfo = document.getElementById('trackInfo');
+    const trackName = document.getElementById('trackName');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const playBtn = document.getElementById('playBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeValue = document.getElementById('volumeValue');
+
+    let audio = null;
+    let isPlaying = false;
+
+    // Upload
+    uploadArea.addEventListener('click', () => fileInput.click());
+    
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('audio/')) {
+        loadAudio(file);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) loadAudio(file);
+    });
+
+    function loadAudio(file) {
+      const url = URL.createObjectURL(file);
+      if (audio) audio.pause();
+      
+      audio = new Audio(url);
+      audio.volume = 0.8;
+      trackName.textContent = file.name;
+      
+      uploadArea.style.display = 'none';
+      trackInfo.classList.add('active');
+      
+      audio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(audio.duration);
+      });
+      
+      audio.addEventListener('timeupdate', updateProgress);
+      audio.addEventListener('ended', () => {
+        isPlaying = false;
+        playBtn.textContent = '▶';
+      });
+      
+      audio.play();
+      isPlaying = true;
+      playBtn.textContent = '⏸';
+    }
+
+    function updateProgress() {
+      if (!audio) return;
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = progress + '%';
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (!audio) return;
+      if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = '▶';
+      } else {
+        audio.play();
+        playBtn.textContent = '⏸';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+      if (!audio) return;
+      const rect = progressContainer.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = percent * audio.duration;
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+      const value = e.target.value;
+      volumeValue.textContent = value + '%';
+      if (audio) audio.volume = value / 100;
+    });
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Skip buttons
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (audio) audio.currentTime = Math.max(0, audio.currentTime - 10);
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (audio) audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+    });
+  </script>
+</body>
+</html>

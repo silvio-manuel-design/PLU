@@ -1,0 +1,258 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Dual Partner Cards (Premium)
+   ========================================================================== */
+
+@layer components {
+  /* ---- Grid ---- */
+  .py-quest-partner-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--py-space-6);
+    margin-top: var(--py-space-8);
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-partner-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--py-space-8);
+    }
+  }
+
+  /* ---- Card ---- */
+  .py-quest-partner-card {
+    position: relative;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--py-radius-2xl);
+    padding: var(--py-space-8);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html[data-theme="light"] .py-quest-partner-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Top accent line */
+  .py-quest-partner-card__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: var(--py-radius-2xl) var(--py-radius-2xl) 0 0;
+  }
+
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__accent {
+    background: linear-gradient(90deg, #306998, #4A90C6);
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__accent {
+    background: linear-gradient(90deg, #04AA6D, #2ECC71);
+  }
+
+  /* Hover effects */
+  .py-quest-partner-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .py-quest-partner-card[data-partner="classic"]:hover {
+    border-color: rgba(48, 105, 152, 0.4);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(48, 105, 152, 0.15);
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"]:hover {
+    border-color: rgba(4, 170, 109, 0.4);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(4, 170, 109, 0.15);
+  }
+
+  html[data-theme="light"] .py-quest-partner-card[data-partner="classic"]:hover {
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 30px rgba(48, 105, 152, 0.12);
+  }
+
+  html[data-theme="light"] .py-quest-partner-card[data-partner="w3schools"]:hover {
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 30px rgba(4, 170, 109, 0.12);
+  }
+
+  /* ---- Header ---- */
+  .py-quest-partner-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+  }
+
+  /* Icon */
+  .py-quest-partner-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--py-radius-lg);
+    font-size: 1.25rem;
+    color: var(--py-white);
+  }
+
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__icon {
+    background: linear-gradient(135deg, #306998, #4A90C6);
+    box-shadow: 0 4px 12px rgba(48, 105, 152, 0.35);
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__icon {
+    background: linear-gradient(135deg, #04AA6D, #2ECC71);
+    box-shadow: 0 4px 12px rgba(4, 170, 109, 0.35);
+  }
+
+  /* Label pill */
+  .py-quest-partner-card__label {
+    display: inline-block;
+    padding: var(--py-space-1) var(--py-space-3);
+    border-radius: 100px;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__label {
+    background: rgba(48, 105, 152, 0.15);
+    color: #4A90C6;
+    border: 1px solid rgba(48, 105, 152, 0.25);
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__label {
+    background: rgba(4, 170, 109, 0.15);
+    color: #2ECC71;
+    border: 1px solid rgba(4, 170, 109, 0.25);
+  }
+
+  html[data-theme="light"] .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__label {
+    background: rgba(48, 105, 152, 0.1);
+    color: #306998;
+  }
+
+  html[data-theme="light"] .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__label {
+    background: rgba(4, 170, 109, 0.1);
+    color: #04AA6D;
+  }
+
+  /* ---- Text ---- */
+  .py-quest-partner-card__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-xl);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-partner-card__text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-5);
+  }
+
+  /* ---- Links ---- */
+  .py-quest-partner-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--py-space-2);
+    margin-bottom: var(--py-space-6);
+  }
+
+  .py-quest-partner-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-2) var(--py-space-3);
+    border-radius: var(--py-radius-md);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-medium);
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  /* Classic links — blue theme */
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__link {
+    background: rgba(48, 105, 152, 0.08);
+    border: 1px solid rgba(48, 105, 152, 0.2);
+    color: #6BADE0;
+  }
+
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__link:hover {
+    background: #306998;
+    border-color: #306998;
+    color: var(--py-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(48, 105, 152, 0.3);
+  }
+
+  /* W3Schools links — green theme */
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__link {
+    background: rgba(4, 170, 109, 0.08);
+    border: 1px solid rgba(4, 170, 109, 0.2);
+    color: #3DDB96;
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__link:hover {
+    background: #04AA6D;
+    border-color: #04AA6D;
+    color: var(--py-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(4, 170, 109, 0.3);
+  }
+
+  /* Light mode link colors */
+  html[data-theme="light"] .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__link {
+    color: #306998;
+  }
+
+  html[data-theme="light"] .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__link {
+    color: #04AA6D;
+  }
+
+  /* ---- CTA Button ---- */
+  .py-quest-partner-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-3) var(--py-space-5);
+    border-radius: 100px;
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__cta {
+    background: linear-gradient(135deg, #306998, #4A90C6);
+    box-shadow: 0 4px 16px rgba(48, 105, 152, 0.35);
+  }
+
+  .py-quest-partner-card[data-partner="classic"] .py-quest-partner-card__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(48, 105, 152, 0.45);
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__cta {
+    background: linear-gradient(135deg, #04AA6D, #2ECC71);
+    box-shadow: 0 4px 16px rgba(4, 170, 109, 0.35);
+  }
+
+  .py-quest-partner-card[data-partner="w3schools"] .py-quest-partner-card__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(4, 170, 109, 0.45);
+  }
+}

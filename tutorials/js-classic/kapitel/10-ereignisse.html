@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>10 – Ereignisse & Timing | JavaScript-Tutorial</title>
+  <!-- Favicon – nur .ico wie gewünscht -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+      <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="06-arrays.html">06. Arrays</a></li>
+        <li><a href="07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="08-objekte.html">08. Objekte</a></li>
+        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>10 – Ereignisse & Timing 🕓</h1>
+      <p class="hero-subtitle">Wie deine Webseite auf Benutzer reagiert und zeitgesteuert arbeitet</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was sind Ereignisse & Timing?</h2>
+      <p>
+        <strong>Ereignisse (Events)</strong> sind Aktionen wie Klicks oder Tastendruck –  
+        darauf reagiert deine Webseite <strong>dynamisch</strong>.  
+        <strong>Timing-Funktionen</strong> führen Code <strong>zeitgesteuert</strong> aus –  
+        z. B. eine Meldung nach 3 Sekunden automatisch ausblenden.
+      </p>
+    </section>
+
+    <section>
+      <h2>📊 2. Übersicht: Ereignisse & Timing</h2>
+      
+      <h3>Häufige Ereignisse</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ereignis</th>
+            <th>Beschreibung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>click</code></td>
+            <td>Mausklick</td>
+            <td>Button-Bestätigung</td>
+          </tr>
+          <tr>
+            <td><code>input</code></td>
+            <td>Änderung in Eingabefeld</td>
+            <td>Live-Suche</td>
+          </tr>
+          <tr>
+            <td><code>submit</code></td>
+            <td>Formular absenden</td>
+            <td>Kontaktformular</td>
+          </tr>
+          <tr>
+            <td><code>keydown</code></td>
+            <td>Taste gedrückt</td>
+            <td>Spiele</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Timing-Funktionen</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Funktion</th>
+            <th>Zweck</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>setTimeout</code></td>
+            <td>Einmalige Verzögerung</td>
+            <td>Meldung nach 3s ausblenden</td>
+          </tr>
+          <tr>
+            <td><code>setInterval</code></td>
+            <td>Wiederholte Ausführung</td>
+            <td>Digitale Uhr</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🎯 3. Einleitung & W3Schools</h2>
+      <p>
+        Ereignisse und Timing machen Webseiten <strong>interaktiv und lebendig</strong>.  
+        Ohne sie wäre JavaScript passiv – nur für Berechnungen im Hintergrund.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/js/js_events.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Events</a><br>
+
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 4. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, warum <code>addEventListener</code> besser ist als <code>onclick</code> – 
+        und wie man mit <code>setInterval</code> eine Uhr baut, die man auch wieder stoppen kann.
+      </p>
+    </section>
+
+    <!-- 5. Event-Listener -->
+    <section>
+      <h2>🖱️ 5. Event-Listener – die moderne Methode</h2>
+      <p>
+        Mit <code>addEventListener</code> kannst du <strong>mehrere Funktionen</strong> auf dasselbe Ereignis legen – 
+        ohne vorherige zu überschreiben.
+      </p>
+      <button id="btn-demo-listener">Klick mich mehrfach!</button>
+      <div id="ausgabe-listener" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">// Modern: addEventListener
+document.getElementById("btn-demo-listener").addEventListener("click", function() {
+  const zaehler = parseInt(this.getAttribute("data-anzahl") || "0") + 1;
+  this.setAttribute("data-anzahl", zaehler);
+  document.getElementById("ausgabe-listener").textContent = 
+    "Button wurde " + zaehler + "× geklickt.";
+});
+
+// ❌ Vermeiden: onclick als Eigenschaft
+// button.onclick = ... → überschreibt vorherige Funktionen!
+</code></pre>
+    </section>
+
+    <!-- 6. Event-Objekt -->
+    <section>
+      <h2>🔑 6. Das Event-Objekt – Details zur Aktion</h2>
+      <p>
+        Jede Event-Funktion erhält automatisch ein <code>event</code>-Objekt mit Informationen – 
+        z. B. welche Taste gedrückt wurde oder welches Element geklickt wurde.
+      </p>
+      <input type="text" id="input-demo" placeholder="Tippe etwas und drücke Enter">
+      <div id="ausgabe-event" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">document.getElementById("input-demo").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    document.getElementById("ausgabe-event").innerHTML = 
+      "Du hast &lt;strong&gt;Enter&lt;/strong&gt; gedrückt! Eingabe: „" + 
+      event.target.value + "“";
+    event.target.value = ""; // Feld leeren
+  }
+});</code></pre>
+    </section>
+
+    <!-- 7. Event-Delegation -->
+    <section>
+      <h2>🔄 7. Event-Delegation – für dynamische Inhalte</h2>
+      <p>
+        Bei Inhalten, die <strong>zur Laufzeit hinzugefügt</strong> werden (z. B. per DOM),  
+        hängst du den Listener an ein <strong>übergeordnetes Element</strong> und prüfst das Ziel.
+      </p>
+      <button id="btn-hinzufuegen">Neuen Button hinzufügen</button>
+      <div id="container-buttons"></div>
+      <div id="ausgabe-delegation" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">// Event-Delegation
+document.getElementById("container-buttons").addEventListener("click", function(event) {
+  if (event.target.tagName === "BUTTON") {
+    document.getElementById("ausgabe-delegation").textContent = 
+      "Geklickt: " + event.target.textContent;
+  }
+});
+
+// Button hinzufügen
+document.getElementById("btn-hinzufuegen").addEventListener("click", function() {
+  const btn = document.createElement("button");
+  btn.textContent = "Dynamisch " + (document.querySelectorAll("#container-buttons button").length + 1);
+  document.getElementById("container-buttons").appendChild(btn);
+});</code></pre>
+    </section>
+
+    <!-- 8. Timing -->
+    <section class="warnung">
+      <h2>⏱️ 8. Zeitgesteuerte Aktionen</h2>
+      <p>
+        ⚠️ <strong>Wichtig:</strong> Speichere die Timer-ID von <code>setInterval</code>!  
+        Mit <code>clearInterval</code> kannst du die Wiederholung stoppen – sonst läuft sie ewig.
+      </p>
+      <button onclick="demoTimeout()">Temporäre Meldung (3s)</button>
+      <div id="meldung-timing" class="ausgabe-bereich"></div>
+      <br>
+      <button onclick="startUhr()">Starte Uhr</button>
+      <button onclick="stopUhr()">Stoppe Uhr</button>
+      <div id="uhr-timing" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoTimeout() {
+  const meldung = document.getElementById("meldung-timing");
+  meldung.textContent = "✅ Erfolgreich gespeichert!";
+  meldung.style.backgroundColor = "#d4edda";
+  
+  setTimeout(() => {
+    meldung.textContent = "";
+    meldung.style.backgroundColor = "";
+  }, 3000);
+}
+
+let uhrIntervall = null;
+
+function startUhr() {
+  if (uhrIntervall) return;
+  uhrIntervall = setInterval(() => {
+    document.getElementById("uhr-timing").textContent = 
+      new Date().toLocaleTimeString();
+  }, 1000);
+}
+
+function stopUhr() {
+  if (uhrIntervall) {
+    clearInterval(uhrIntervall);
+    uhrIntervall = null;
+  }
+}</code></pre>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Herzlichen Glückwunsch! Du hast das JavaScript-Tutorial abgeschlossen.</p>
+      <a href="../index.html" class="nav-button">→ Zurück zur Startseite</a>
+    </section>
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/10-ereignisse.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

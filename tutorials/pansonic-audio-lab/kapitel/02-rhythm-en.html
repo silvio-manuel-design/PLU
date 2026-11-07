@@ -1,0 +1,1512 @@
+?<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 02: Rhythm Fundamentals | Pansonic Lab</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    .chapter-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 100px 24px 40px;
+    }
+    
+    .chapter-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .chapter-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-breadcrumb a {
+      color: var(--accent-coral);
+      text-decoration: none;
+    }
+    
+    .chapter-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .chapter-number {
+      display: inline-block;
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .chapter-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    
+    .content-section {
+      margin-bottom: 64px;
+    }
+    
+    .content-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .content-section h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--accent-coral);
+      border-radius: 2px;
+    }
+    
+    .content-section h3 {
+      font-size: 1.2rem;
+      margin: 32px 0 16px;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .content-section ul, .content-section ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    
+    .content-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-teal);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .tip-box strong {
+      color: var(--accent-teal);
+    }
+    
+    .practice-box {
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+      border: 1px solid var(--accent-coral);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    
+    .practice-box h3 {
+      color: var(--accent-coral);
+      margin-top: 0;
+    }
+    
+    .tempo-display {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    
+    .bpm-number {
+      font-family: var(--font-mono);
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--accent-coral);
+      line-height: 1;
+    }
+    
+    .bpm-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+    
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-subtle);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-active);
+    }
+    
+    .nav-btn-primary {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    .nav-btn-primary:hover {
+      background: var(--accent-coral-light);
+    }
+    
+    .chapter-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+      z-index: 1001;
+    }
+    
+    .chapter-progress-bar {
+      height: 100%;
+      background: var(--accent-coral);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+    
+    .chapter-audio-widget {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 380px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 1024px) {
+      .chapter-audio-widget {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        width: auto;
+      }
+    }
+    
+    .chapter-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .chapter-widget-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .chapter-widget-toggle {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+    
+    .chapter-widget-content {
+      padding: 16px;
+    }
+    
+    .chapter-widget.collapsed .chapter-widget-content {
+      display: none;
+    }
+    
+    .chapter-widget-upload {
+      border: 2px dashed var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .chapter-widget-upload:hover {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+    
+    .chapter-widget-upload-text {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .chapter-widget-track-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .chapter-track-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .chapter-track-time {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-progress-container {
+      height: 4px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-progress-fill {
+      height: 100%;
+      background: var(--accent-coral);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+    
+    .chapter-widget-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .chapter-widget-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-tertiary);
+      border: none;
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .chapter-widget-btn:hover {
+      background: var(--border-active);
+    }
+    
+    .chapter-widget-btn.play {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-coral);
+    }
+    
+    .chapter-volume-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .chapter-volume-slider {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    
+    .chapter-volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .chapter-volume-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+    
+    /* Interactive Rhythm Trainer Styles */
+    .rhythm-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    
+    .rhythm-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    
+    .rhythm-btn {
+      padding: 10px 20px;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .rhythm-btn:hover {
+      border-color: var(--accent-teal);
+    }
+    
+    .rhythm-btn.active {
+      background: var(--accent-teal);
+      border-color: var(--accent-teal);
+      color: white;
+    }
+    
+    .rhythm-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .rhythm-circle {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+    
+    .rhythm-circle svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    
+    .rhythm-beat {
+      fill: var(--bg-tertiary);
+      stroke: var(--border-subtle);
+      stroke-width: 2;
+      transition: all 0.1s ease;
+    }
+    
+    .rhythm-beat.active {
+      fill: var(--accent-coral);
+      stroke: var(--accent-coral);
+      filter: drop-shadow(0 0 10px var(--accent-coral));
+    }
+    
+    .rhythm-beat.accent {
+      fill: var(--accent-teal);
+      stroke: var(--accent-teal);
+    }
+    
+    .rhythm-center {
+      fill: var(--bg-card);
+    }
+    
+    .rhythm-info {
+      text-align: center;
+    }
+    
+    .rhythm-bpm {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-coral);
+    }
+    
+    .bpm-slider {
+      width: 200px;
+      margin-top: 12px;
+    }
+    
+    .rhythm-play-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent-coral);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .rhythm-play-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 90, 90, 0.4);
+    }
+    
+    .sound-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index-en.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index-en.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Tools</a>
+          <div class="dropdown-menu">
+            <a href="../tools/audacity-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+              <span class="dropdown-item-desc">Open Source Foundation</span>
+            </a>
+            <a href="../tools/suno-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+              <span class="dropdown-item-desc">AI Music Generation</span>
+            </a>
+            <a href="../tools/elevenlabs-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Voice AI</span>
+              <span class="dropdown-item-desc">Voice Cloning</span>
+            </a>
+            <a href="../tools/daw-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+              <span class="dropdown-item-desc">Pro Software</span>
+            </a>
+          </div>
+        </div>
+        <a href="../library.html" class="nav-link">Audio Library</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch">
+        <a href="02-rhythmus.html" class="lang-btn">DE</a>
+        <a href="02-rhythm-en.html" class="lang-btn active">EN</a>
+      </nav>
+      <a href="../../pages/spenden-en.html" class="btn-support">Support</a>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="../player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Dark/Light" aria-label="Toggle theme">🌓</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <button class="fab-btn" id="langToggle" data-tooltip="Deutsch" aria-label="Switch to German">DE</button>
+    <button class="fab-btn" id="backToTop" data-tooltip="Back to top">?</button>
+  </div>
+
+  <!-- Audio Widget (Tabs: Generator + Player) - Default collapsed -->
+<div class="audio-widget collapsed" id="audioWidget">
+  <div class="audio-widget-header">
+    <span class="audio-widget-title">🎵 Audio Lab</span>
+    <button class="audio-widget-toggle" id="audioWidgetToggle">+</button>
+  </div>
+  <div class="audio-widget-content">
+    <div class="audio-tabs">
+      <button class="audio-tab active" data-tab="generator">Generator</button>
+      <button class="audio-tab" data-tab="player">Player</button>
+    </div>
+    <div class="audio-tab-content active" id="generatorTab">
+      <div class="freq-display">
+        <div class="freq-value" id="freqValue">440 Hz</div>
+        <div class="freq-label">Sine Wave</div>
+      </div>
+      <input type="range" class="freq-slider" id="freqSlider" min="20" max="2000" value="440">
+      <div class="gen-controls">
+        <button class="gen-btn active" data-wave="sine">SINE</button>
+        <button class="gen-btn" data-wave="square">SQUARE</button>
+        <button class="gen-btn" data-wave="sawtooth">SAW</button>
+      </div>
+      <button class="play-btn" id="playBtn">? Play Tone</button>
+    </div>
+    <div class="audio-tab-content" id="playerTab">
+      <div class="player-upload" id="playerUpload">
+        <div class="player-upload-text">Load Audio File</div>
+        <div class="player-upload-hint">MP3, WAV, OGG</div>
+      </div>
+      <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+      <div class="player-track-info" id="playerTrackInfo" style="display: none;">
+        <div class="track-name" id="trackName">No file</div>
+        <div class="track-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+      </div>
+      <div class="progress-container" id="progressContainer" style="display: none;">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="player-controls" id="playerControls" style="display: none;">
+        <button class="player-btn" id="prevBtn">?</button>
+        <button class="player-btn" id="playPauseBtn">?</button>
+        <button class="player-btn" id="nextBtn">?</button>
+      </div>
+    </div>
+  </div>
+</div><!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header-inner">
+      <nav class="chapter-breadcrumb">
+        <a href="../index-en.html">Pansonic Lab</a>
+        <span>/</span>
+        <span>Module 02</span>
+      </nav>
+      <span class="chapter-number">Module 02</span>
+      <h1 class="chapter-title">Rhythm Fundamentals</h1>
+      <p class="chapter-lead">The pulse of music. How tempo, meter and groove work together, and why rhythm is the heart of every production.</p>
+    </div>
+  </header>
+
+  <!-- Chapter Content -->
+  <main class="chapter-content">
+    
+    <section class="content-section">
+      <h2>What is Rhythm?</h2>
+      <p><strong>Rhythm</strong> is the temporal organization of sounds and silences in music. It's what makes us nod, dance, or clap along. Without rhythm, music would be just a sequence of random tones.</p>
+      
+      <p>Every music has an underlying pulse � a regular beat that structures time. This pulse can be fast or slow, strong or subtle, but it's always there.</p>
+      
+      <div class="tip-box">
+        <strong>Groove vs. Rhythm:</strong> Rhythm is the mathematical structure (bars, note values). Groove is the <em>feeling</em> that emerges when rhythm comes alive  the micro-variations that human players unconsciously introduce.
+      </div>
+    </section>
+
+    <!-- Interactive Rhythm Trainer -->
+    <div class="rhythm-section">
+      <h3 style="text-align: center; margin-bottom: 16px;">Interactive Rhythm Trainer</h3>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 24px;">
+        Select a time signature and feel the rhythm
+      </p>
+      
+      <div class="rhythm-controls">
+        <button class="rhythm-btn active" data-beats="4" data-accent="1">4/4 Time</button>
+        <button class="rhythm-btn" data-beats="3" data-accent="1">3/4 Waltz</button>
+        <button class="rhythm-btn" data-beats="6" data-accent="1,4">6/8 Shuffle</button>
+        <button class="rhythm-btn" data-beats="2" data-accent="1">2/4 March</button>
+      </div>
+      
+      <div class="rhythm-display">
+        <div class="rhythm-circle" id="rhythmCircle">
+          <!-- SVG generated by JavaScript -->
+        </div>
+        
+        <div class="rhythm-info">
+          <div class="rhythm-bpm"><span id="bpmDisplay">100</span> BPM</div>
+          <input type="range" class="freq-slider bpm-slider" id="bpmSlider" min="60" max="180" value="100">
+          
+          <div style="margin-top: 16px;">
+            <button class="rhythm-play-btn" id="rhythmPlayBtn">?</button>
+          </div>
+          
+          <label class="sound-toggle">
+            <input type="checkbox" id="soundToggle" checked>
+            <span>Sound enabled 🔊</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <h2>Tempo and BPM</h2>
+      <p><strong>Tempo</strong> determines how fast the music is. It's measured in <strong>BPM</strong> (Beats Per Minute)  how many beats are played in one minute.</p>
+      
+      <div class="tempo-display">
+        <div class="bpm-number">120</div>
+        <div class="bpm-label">BPM = 2 beats per second</div>
+      </div>
+      
+      <h3>Typical Tempo Ranges</h3>
+      <ul>
+        <li><strong>60-80 BPM:</strong> Ballads, slow Hip-Hop, Ambient</li>
+        <li><strong>90-110 BPM:</strong> Pop, Reggae, Trip-Hop</li>
+        <li><strong>120-130 BPM:</strong> House, EDM, Disco (standard dance tempo)</li>
+        <li><strong>140-150 BPM:</strong> Dubstep, Trap, Drum & Bass</li>
+        <li><strong>160-180 BPM:</strong> Jungle, Hardcore, DnB</li>
+      </ul>
+      
+      <div class="tip-box">
+        <strong>Pro Tip:</strong> In Suno AI, you can specify tempo directly in the prompt: "120 BPM, 4/4 time signature"
+      </div>
+      
+      <!-- Professional Beat Visualizer -->
+      <div class="rhythm-visualizer-container" style="margin-top: 32px; background: var(--bg-tertiary); border-radius: 16px; padding: 24px; border: 1px solid var(--border-subtle);">
+        <h3 style="margin: 0 0 16px 0; font-size: 1rem; color: var(--text-primary);">🥁 4/4 Time Visualization</h3>
+        <canvas id="rhythmCanvas" style="width: 100%; height: 160px; border-radius: 12px; background: var(--bg-primary);"></canvas>
+        <div class="rhythm-labels" style="display: flex; justify-content: space-around; margin-top: 12px; font-size: 0.8rem; color: var(--text-muted);">
+          <span>Downbeat (1)</span>
+          <span>Backbeat (2)</span>
+          <span>Weak (3)</span>
+          <span>Backbeat (4)</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Meter and Note Values</h2>
+      <p><strong>Meter</strong> groups beats into regular units. The most common form is <strong>4/4 time</strong> (also called "Common Time"):</p>
+      
+      <ul>
+        <li><strong>4/4:</strong> 4 quarter notes per bar (standard for Pop, Rock, EDM)</li>
+        <li><strong>3/4:</strong> 3 quarter notes per bar (Waltz)</li>
+        <li><strong>6/8:</strong> 6 eighth notes per bar (Ballads, Blues)</li>
+      </ul>
+      
+      <p>The first beat in the bar (the "One") is the strongest accent and gives the music its orientation.</p>
+      
+      <h3>The Most Important Note Values</h3>
+      <ul>
+        <li><strong>Whole note</strong>  4 beats</li>
+        <li><strong>Half note</strong>  2 beats</li>
+        <li><strong>Quarter note</strong>  1 beat</li>
+        <li><strong>Eighth note</strong>  1/2 beat</li>
+        <li><strong>Sixteenth note</strong>  1/4 beat</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2>Groove and Timing</h2>
+      <p>Perfect mathematical precision sounds mechanical. <strong>Groove</strong> emerges through subtle deviations from the grid:</p>
+      
+      <ul>
+        <li><strong>Shuffle/Swing:</strong> Odd notes are lengthened, even notes shortened</li>
+        <li><strong>Humanize:</strong> Slight timing shifts for natural sound</li>
+        <li><strong>Lay back:</strong> Playing slightly behind the beat (relaxed)</li>
+        <li><strong>On top:</strong> Right on the beat (driving)</li>
+      </ul>
+      
+      <p>Electronic music often uses <strong>quantization</strong> (automatic grid correction), but too much quantization kills the groove.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Practice Exercise</h2>
+      <div class="practice-box">
+        <h3>Your Rhythm Training</h3>
+        <ol>
+          <li><strong>Feel the meter:</strong> Clap in 4/4 time  loud on beat 1, quiet on beats 2-3-4.</li>
+          <li><strong>Recognize tempo:</strong> Listen to 3 songs from different genres. Estimate the BPM, then check with an app.</li>
+          <li><strong>Feel the backbeat:</strong> The snare drum typically falls on beats 2 and 4 (the "backbeat"). Nod your head to these beats while listening.</li>
+          <li><strong>Suno Prompt:</strong> Create a song with "90 BPM, shuffle groove, 4/4".</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Rhythm</strong> is the temporal structure of music</li>
+        <li><strong>BPM</strong> measures tempo (beats per minute)</li>
+        <li><strong>4/4 time</strong> is the standard (4 quarter notes per bar)</li>
+        <li><strong>Groove</strong> emerges through human micro-variations</li>
+        <li><strong>Backbeat</strong> on 2 and 4 drives the music forward</li>
+      </ul>
+      
+      <p>Rhythm is the foundation. Everything else  melody, harmony, sound design  builds upon it.</p>
+    </section>
+
+  </main>
+
+  <!-- Navigation Footer -->
+  <nav class="nav-footer">
+    <a href="01-sound-en.html" class="nav-btn">Back</a>
+    <a href="../index-en.html#module" class="nav-btn">Module Overview</a>
+    <a href="03-recording-en.html" class="nav-btn nav-btn-primary">Next</a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="../index-en.html">Start</a>
+      <a href="../../pages/spenden-en.html">Support</a>
+      <a href="../../pages/impressum-en.html">Legal Notice</a>
+    </nav>
+    <p class="footer-copy"> PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+    <script>
+    // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${isGerman ? '../index.html' : '../index-en.html'}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${isGerman ? '../tools/audacity.html' : '../tools/audacity-en.html'}">Audacity</a>
+              <a href="${isGerman ? '../tools/suno.html' : '../tools/suno-en.html'}">Suno AI</a>
+              <a href="${isGerman ? '../tools/elevenlabs.html' : '../tools/elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${isGerman ? '../tools/daw.html' : '../tools/daw-en.html'}">DAW Guide</a>
+              <a href="${isGerman ? '../bibliothek.html' : '../library.html'}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (Dark/Light)
+    // ==========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check saved preference
+    const savedTheme = localStorage.getItem('sonicLabTheme');
+    
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+    
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    } else {
+      // Default to dark
+      html.setAttribute('data-theme', 'dark');
+      updateThemeIcon('dark');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sonicLabTheme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    // ==========================================
+    // CLASSROOM MODE
+    // ==========================================
+    const classroomToggle = document.getElementById('classroomToggle');
+    
+    const savedClassroom = localStorage.getItem('sonicLabClassroom');
+    if (savedClassroom === 'true') {
+      html.setAttribute('data-classroom', 'true');
+      classroomToggle.classList.add('active');
+    }
+    
+    classroomToggle.addEventListener('click', function() {
+      const isClassroom = html.getAttribute('data-classroom') === 'true';
+      
+      if (isClassroom) {
+        html.removeAttribute('data-classroom');
+        localStorage.setItem('sonicLabClassroom', 'false');
+        classroomToggle.classList.remove('active');
+      } else {
+        html.setAttribute('data-classroom', 'true');
+        localStorage.setItem('sonicLabClassroom', 'true');
+        classroomToggle.classList.add('active');
+      }
+    });
+
+    // ==========================================
+    // BACK TO TOP
+    // ==========================================
+    const backToTop = document.getElementById('backToTop');
+    
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+    
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==========================================
+    // PROGRESS BAR
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // ==========================================
+    // LANGUAGE TOGGLE
+    // ==========================================
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        window.location.href = '02-rhythmus.html';
+      });
+    }
+
+        // ==========================================
+    // AUDIO WIDGET - TABS (GENERATOR + PLAYER)
+    // ==========================================
+    const audioWidget = document.getElementById('audioWidget');
+    const audioWidgetToggle = document.getElementById('audioWidgetToggle');
+    
+    // Initialize widget state
+    if (audioWidget && !audioWidget.classList.contains('collapsed')) {
+      audioWidget.classList.add('expanded');
+    }
+    
+    // Tabs
+    const audioTabs = document.querySelectorAll('.audio-tab');
+    const tabContents = document.querySelectorAll('.audio-tab-content');
+    
+    audioTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetTab = this.dataset.tab;
+        
+        audioTabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById(targetTab + 'Tab').classList.add('active');
+      });
+    });
+    
+    // --- GENERATOR TAB ---
+    const freqSlider = document.getElementById('freqSlider');
+    const freqValue = document.getElementById('freqValue');
+    const playBtn = document.getElementById('playBtn');
+    const waveButtons = document.querySelectorAll('.gen-btn[data-wave]');
+    
+    let audioContext = null;
+    let oscillator = null;
+    let gainNode = null;
+    let isPlaying = false;
+    let currentWaveform = 'sine';
+    let currentFrequency = 440;
+    
+    // Audio Context for Generator
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+    
+    function playTone() {
+      initAudio();
+      
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+      }
+      
+      oscillator = audioContext.createOscillator();
+      gainNode = audioContext.createGain();
+      
+      oscillator.type = currentWaveform;
+      oscillator.frequency.value = currentFrequency;
+      
+      gainNode.gain.value = 0.1;
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.start();
+      isPlaying = true;
+      playBtn.textContent = '? Pause Tone';
+      playBtn.classList.add('playing');
+    }
+    
+    function stopTone() {
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+        oscillator = null;
+      }
+      isPlaying = false;
+      playBtn.textContent = '? Play Tone';
+      playBtn.classList.remove('playing');
+    }
+    
+    playBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        stopTone();
+      } else {
+        playTone();
+      }
+    });
+    
+    freqSlider.addEventListener('input', function() {
+      currentFrequency = parseInt(this.value);
+      freqValue.textContent = currentFrequency + ' Hz';
+      
+      if (oscillator) {
+        oscillator.frequency.value = currentFrequency;
+      }
+    });
+    
+    waveButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        waveButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentWaveform = this.dataset.wave;
+        
+        if (isPlaying && oscillator) {
+          oscillator.type = currentWaveform;
+        }
+      });
+    });
+    
+    // --- PLAYER TAB ---
+    const playerUpload = document.getElementById('playerUpload');
+    const audioFileInput = document.getElementById('audioFileInput');
+    const playerTrackInfo = document.getElementById('playerTrackInfo');
+    const trackName = document.getElementById('trackName');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const playerControls = document.getElementById('playerControls');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    
+    let playerAudio = null;
+    let isPlayerPlaying = false;
+    let playerAnimationId = null;
+    
+    // File Upload
+    playerUpload.addEventListener('click', () => audioFileInput.click());
+    
+    audioFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadAudioFile(file);
+      }
+    });
+    
+    // Drag & Drop
+    playerUpload.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = 'var(--accent-teal)';
+    });
+    
+    playerUpload.addEventListener('dragleave', () => {
+      playerUpload.style.borderColor = '';
+    });
+    
+    playerUpload.addEventListener('drop', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = '';
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('audio/')) {
+        loadAudioFile(file);
+      }
+    });
+    
+    function loadAudioFile(file) {
+      if (playerAudio) {
+        playerAudio.pause();
+        playerAudio = null;
+      }
+      
+      const url = URL.createObjectURL(file);
+      playerAudio = new Audio(url);
+      playerAudio.volume = 0.8;
+      
+      trackName.textContent = file.name;
+      
+      playerAudio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(playerAudio.duration);
+        currentTimeEl.textContent = '0:00';
+        
+        playerUpload.style.display = 'none';
+        playerTrackInfo.style.display = 'block';
+        progressContainer.style.display = 'block';
+        playerControls.style.display = 'flex';
+      });
+      
+      playerAudio.addEventListener('ended', () => {
+        isPlayerPlaying = false;
+        playPauseBtn.textContent = isPlayerPlaying ? '?' : '?';
+      });
+    }
+    
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function updateProgress() {
+      if (playerAudio && isPlayerPlaying) {
+        const progress = (playerAudio.currentTime / playerAudio.duration) * 100;
+        progressFill.style.width = progress + '%';
+        currentTimeEl.textContent = formatTime(playerAudio.currentTime);
+        playerAnimationId = requestAnimationFrame(updateProgress);
+      }
+    }
+    
+    playPauseBtn.addEventListener('click', function() {
+      if (!playerAudio) return;
+      
+      if (isPlayerPlaying) {
+        playerAudio.pause();
+        isPlayerPlaying = false;
+        this.textContent = isPlayerPlaying ? '?' : '?';
+        cancelAnimationFrame(playerAnimationId);
+      } else {
+        playerAudio.play();
+        isPlayerPlaying = true;
+        this.textContent = isPlayerPlaying ? '?' : '?';
+        updateProgress();
+      }
+    });
+    
+    progressContainer.addEventListener('click', function(e) {
+      if (!playerAudio) return;
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percentage = clickX / rect.width;
+      playerAudio.currentTime = percentage * playerAudio.duration;
+    });
+    
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = 0;
+      }
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = Math.min(playerAudio.currentTime + 10, playerAudio.duration);
+      }
+    });
+    
+    // Widget minimize
+    audioWidgetToggle.addEventListener('click', function() {
+      audioWidget.classList.toggle('collapsed');
+      audioWidget.classList.toggle('expanded');
+      this.textContent = audioWidget.classList.contains('collapsed') ? '+' : '-';
+    });
+    
+    // Stop audio when leaving page
+    window.addEventListener('beforeunload', () => {
+      stopTone();
+      if (playerAudio) playerAudio.pause();
+    });
+    
+    // ==========================================
+    // PROFESSIONAL RHYTHM VISUALIZER CANVAS
+    // ==========================================
+    const rhythmCanvas = document.getElementById('rhythmCanvas');
+    if (rhythmCanvas) {
+      const rctx = rhythmCanvas.getContext('2d');
+      let beat = 0;
+      let lastBeatTime = 0;
+      const bpm = 120;
+      const beatInterval = 60000 / bpm;
+      
+      function setupRhythmCanvas() {
+        const rect = rhythmCanvas.parentElement.getBoundingClientRect();
+        rhythmCanvas.width = rect.width - 48;
+        rhythmCanvas.height = 160;
+      }
+      setupRhythmCanvas();
+      window.addEventListener('resize', setupRhythmCanvas);
+      
+      function drawRhythm() {
+        const w = rhythmCanvas.width;
+        const h = rhythmCanvas.height;
+        const cy = h / 2;
+        
+        // Background
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary') || '#1a1a1a';
+        rctx.fillStyle = bgColor;
+        rctx.fillRect(0, 0, w, h);
+        
+        // Draw connection line
+        const beatWidth = w / 4;
+        rctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border-subtle') || '#333';
+        rctx.lineWidth = 3;
+        rctx.beginPath();
+        rctx.moveTo(beatWidth / 2, cy);
+        rctx.lineTo(w - beatWidth / 2, cy);
+        rctx.stroke();
+        
+        // Update beat timing
+        const now = Date.now();
+        if (now - lastBeatTime > beatInterval) {
+          beat = (beat + 1) % 4;
+          lastBeatTime = now;
+        }
+        
+        const progress = Math.min((now - lastBeatTime) / beatInterval, 1);
+        
+        // Draw 4 beat markers
+        for (let i = 0; i < 4; i++) {
+          const x = i * beatWidth + beatWidth / 2;
+          const isCurrent = i === beat;
+          const isAccent = i === 0 || i === 2; // 1 and 3 are stronger
+          
+          // Calculate pulse effect for current beat
+          let radius = isAccent ? 28 : 22;
+          if (isCurrent) {
+            radius += Math.sin(progress * Math.PI) * 12;
+          }
+          
+          // Gradient for beat circle
+          const gradient = rctx.createRadialGradient(x, cy, 0, x, cy, radius);
+          if (isCurrent) {
+            gradient.addColorStop(0, '#ff5a5a');
+            gradient.addColorStop(0.7, '#ff5a5a');
+            gradient.addColorStop(1, 'rgba(255, 90, 90, 0.3)');
+          } else {
+            gradient.addColorStop(0, getComputedStyle(document.documentElement).getPropertyValue('--bg-card') || '#2a2a2a');
+            gradient.addColorStop(1, getComputedStyle(document.documentElement).getPropertyValue('--border-subtle') || '#444');
+          }
+          
+          // Glow effect for current beat
+          if (isCurrent) {
+            rctx.shadowColor = '#ff5a5a';
+            rctx.shadowBlur = 20;
+          } else {
+            rctx.shadowBlur = 0;
+          }
+          
+          // Draw beat circle
+          rctx.fillStyle = gradient;
+          rctx.beginPath();
+          rctx.arc(x, cy, radius, 0, Math.PI * 2);
+          rctx.fill();
+          rctx.shadowBlur = 0;
+          
+          // Beat number
+          rctx.fillStyle = isCurrent ? '#fff' : getComputedStyle(document.documentElement).getPropertyValue('--text-muted') || '#666';
+          rctx.font = 'bold ' + (isCurrent ? 24 : 18) + 'px Inter, system-ui, sans-serif';
+          rctx.textAlign = 'center';
+          rctx.textBaseline = 'middle';
+          rctx.fillText(i + 1, x, cy);
+          
+          // Beat strength indicator
+          if (isAccent) {
+            rctx.fillStyle = isCurrent ? '#ff5a5a' : getComputedStyle(document.documentElement).getPropertyValue('--text-secondary') || '#888';
+            rctx.font = '10px Inter, system-ui, sans-serif';
+            rctx.fillText('?', x, cy + radius + 15);
+          }
+        }
+        
+        // Title
+        rctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-primary') || '#e0e0e0';
+        rctx.font = 'bold 12px Inter, system-ui, sans-serif';
+        rctx.textAlign = 'left';
+        rctx.fillText('120 BPM | 4/4 Time', 15, 22);
+        
+        requestAnimationFrame(drawRhythm);
+      }
+      
+      drawRhythm();
+    }
+
+    // ==========================================
+    // INTERACTIVE RHYTHM TRAINER
+    // ==========================================
+    (function() {
+      const rhythmCircle = document.getElementById('rhythmCircle');
+      const rhythmBtns = document.querySelectorAll('.rhythm-btn');
+      const bpmSlider = document.getElementById('bpmSlider');
+      const bpmDisplay = document.getElementById('bpmDisplay');
+      const rhythmPlayBtn = document.getElementById('rhythmPlayBtn');
+      const soundToggle = document.getElementById('soundToggle');
+      
+      if (!rhythmCircle) return;
+      
+      let currentBeats = 4;
+      let currentAccent = [1];
+      let bpm = 100;
+      let isPlaying = false;
+      let currentBeat = 0;
+      let nextNoteTime = 0;
+      let timerID = null;
+      let audioCtx = null;
+      
+      // Create SVG circles for beats
+      function createBeatCircles(beats) {
+        rhythmCircle.innerHTML = '';
+        const radius = 80;
+        const centerX = 100;
+        const centerY = 100;
+        
+        for (let i = 0; i < beats; i++) {
+          const angle = (i / beats) * Math.PI * 2 - Math.PI / 2;
+          const x = centerX + Math.cos(angle) * radius;
+          const y = centerY + Math.sin(angle) * radius;
+          
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', x);
+          circle.setAttribute('cy', y);
+          circle.setAttribute('r', i === 0 ? 20 : 15);
+          circle.setAttribute('class', 'rhythm-beat' + (i === 0 ? ' accent' : ''));
+          circle.setAttribute('data-beat', i + 1);
+          rhythmCircle.appendChild(circle);
+        }
+        
+        // Center circle
+        const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        center.setAttribute('cx', centerX);
+        center.setAttribute('cy', centerY);
+        center.setAttribute('r', 30);
+        center.setAttribute('class', 'rhythm-center');
+        rhythmCircle.appendChild(center);
+      }
+      
+      // Initialize audio context
+      function initAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+      
+      // Play click sound
+      function playClick(isAccent) {
+        if (!soundToggle.checked || !audioCtx) return;
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.frequency.value = isAccent ? 1000 : 600;
+        gain.gain.value = isAccent ? 0.3 : 0.2;
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.05);
+      }
+      
+      // Scheduler
+      function nextNote() {
+        const secondsPerBeat = 60.0 / bpm;
+        nextNoteTime += secondsPerBeat;
+        currentBeat = (currentBeat + 1) % currentBeats;
+      }
+      
+      function scheduleNote(beatNumber, time) {
+        const isAccentBeat = currentAccent.includes(beatnumber + 1);
+        
+        setTimeout(() => {
+          const beats = document.querySelectorAll('.rhythm-beat');
+          beats.forEach((b, i) => {
+            b.classList.remove('active');
+            if (i === beatNumber) {
+              b.classList.add('active');
+            }
+          });
+          playClick(isAccentBeat);
+        }, (time - audioCtx.currentTime) * 1000);
+      }
+      
+      function scheduler() {
+        while (nextNoteTime < audioCtx.currentTime + 0.1) {
+          scheduleNote(currentBeat, nextNoteTime);
+          nextNote();
+        }
+        timerID = setTimeout(scheduler, 25);
+      }
+      
+      function start() {
+        if (isPlaying) return;
+        initAudio();
+        isPlaying = true;
+        currentBeat = 0;
+        nextNoteTime = audioCtx.currentTime;
+        scheduler();
+        rhythmPlayBtn.textContent = '?';
+      }
+      
+      function stop() {
+        isPlaying = false;
+        clearTimeout(timerID);
+        rhythmPlayBtn.textContent = '?';
+        document.querySelectorAll('.rhythm-beat').forEach(b => b.classList.remove('active'));
+      }
+      
+      // Event listeners
+      rhythmBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          rhythmBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentBeats = parseInt(btn.dataset.beats);
+          currentAccent = btn.dataset.accent.split(',').map(Number);
+          createBeatCircles(currentBeats);
+          if (isPlaying) {
+            stop();
+            start();
+          }
+        });
+      });
+      
+      bpmSlider.addEventListener('input', () => {
+        bpm = parseInt(bpmSlider.value);
+        bpmDisplay.textContent = bpm;
+      });
+      
+      rhythmPlayBtn.addEventListener('click', () => {
+        if (isPlaying) stop();
+        else start();
+      });
+      
+      // Initialize
+      createBeatCircles(4);
+      
+      // Sound toggle text update
+      soundToggle.addEventListener('change', function() {
+        this.nextElementSibling.textContent = this.checked ? 'Sound enabled 🔊' : 'Sound muted 🔇';
+      });
+    })();
+
+  </script>
+</body>
+</html>
+
+

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Die Standardbibliothek nutzen, eigene Module bauen und erste Schritte in Objektorientierung.">
+  <meta name="theme-color" content="#306998">
+  <title>09 – Module & OOP | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/09-module.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/09-module-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="09-module.html" class="py-classic-lang__btn is-active" data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="09-module-en.html" class="py-classic-lang__btn " data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k09-module.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 09</span>
+      </nav>
+      <h1 class="py-classic-hero__title">Module & OOP</h1>
+      <p class="py-classic-hero__subtitle">Die Standardbibliothek nutzen, eigene Module bauen und erste Schritte in Objektorientierung.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 60 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Schwer</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">Du importierst Module aus der Python-Standardbibliothek</li>
+        <li class="py-classic-learning-goals__item">Du erstellst eigene Module und verstehst __name__ == '__main__'</li>
+        <li class="py-classic-learning-goals__item">Du definierst Klassen mit Attributen und Methoden</li>
+        <li class="py-classic-learning-goals__item">Du baust PyBuddy als Klasse mit Vererbung</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-package"></i></span>
+          Module importieren
+        </h2>
+        <p>Python hat eine riesige <strong>Standardbibliothek</strong> — fertige Werkzeuge für Mathe, Zufallszahlen, Datum, JSON und mehr. Du musst das Rad nicht neu erfinden!</p><ul><li><code>import math</code> — Mathematische Funktionen</li><li><code>import random</code> — Zufallszahlen</li><li><code>import datetime</code> — Datum und Uhrzeit</li><li><code>from math import sqrt</code> — Nur eine Funktion importieren</li><li><code>import random as rnd</code> — Alias vergeben</li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import random
+import math
+from datetime import datetime
+
+# Zufallszahl
+wurf = random.randint(1, 6)
+print(f"Würfel: {wurf}")
+
+# Wurzel
+print(math.sqrt(16))  # 4.0
+
+# Aktuelles Datum
+jetzt = datetime.now()
+print(jetzt.strftime("%d.%m.%Y %H:%M"))
+
+# Alias
+import random as rnd
+print(rnd.choice(["Kopf", "Zahl"]))</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Würfel: 4
+4.0
+30.05.2026 14:30
+Kopf
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>import random
+import math
+from datetime import datetime</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>// JavaScript (Node.js):
+const random = require('crypto');
+const math = Math;
+const now = new Date();</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>import modul</code> lädt Module. JavaScript (Node.js): <code>require()</code> oder ES6 <code>import</code>. Python's Standardbibliothek ist besonders umfangreich.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-wrench"></i></span>
+          Eigene Module erstellen
+        </h2>
+        <p>Jede <code>.py</code>-Datei ist ein Modul! Du kannst Funktionen in eine Datei schreiben und sie in anderen Dateien importieren. Der Code unter <code>if __name__ == '__main__':</code> läuft nur, wenn die Datei direkt ausgeführt wird — nicht beim Import.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Datei: hilfen.py
+def durchschnitt(zahlen):
+    """Berechnet den Durchschnitt einer Zahlenliste."""
+    return sum(zahlen) / len(zahlen)
+
+def max_wert(a, b):
+    return a if a &gt; b else b
+
+if __name__ == "__main__":
+    # Test-Code, der nur beim direkten Ausführen läuft
+    print(durchschnitt([1, 2, 3, 4, 5]))
+
+# Datei: main.py
+import hilfen
+
+noten = [2, 3, 1, 4, 2]
+print(f"Durchschnitt: {hilfen.durchschnitt(noten):.2f}")
+print(f"Größer: {hilfen.max_wert(10, 25)}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Durchschnitt: 2.40
+Größer: 25
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Ich habe eine Python-Datei mit Hilfsfunktionen. Erkläre mir __name__ == '__main__' anhand eines konkreten Beispiels, wann es nützlich ist."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-buildings"></i></span>
+          Klassen und Objekte
+        </h2>
+        <p>Mit <strong>Klassen</strong> erstellst du eigene Datentypen. Eine Klasse ist wie ein Bauplan für Objekte. <code>__init__</code> ist der Konstruktor — er wird beim Erstellen aufgerufen. <code>self</code> referenziert das aktuelle Objekt.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>class Spieler:
+    """Repräsentiert einen Spieler."""
+    
+    def __init__(self, name, level=1):
+        self.name = name
+        self.level = level
+        self.xp = 0
+    
+    def level_up(self):
+        self.level += 1
+        self.xp = 0
+        return f" {self.name} ist jetzt Level {self.level}!"
+    
+    def __str__(self):
+        return f"{self.name} (Level {self.level}, {self.xp} XP)"
+
+# Objekt erstellen
+p1 = Spieler("PyKnight", 3)
+print(p1)
+print(p1.level_up())
+print(p1)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            PyKnight (Level 3, 0 XP)
+ PyKnight ist jetzt Level 4!
+PyKnight (Level 4, 0 XP)
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>class Spieler:
+    def __init__(self, name):
+        self.name = name</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>class Spieler {
+    constructor(name) {
+        this.name = name;
+    }
+}</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>__init__(self, ...)</code> ist der Konstruktor. JavaScript: <code>constructor(...)</code>. <code>self</code> in Python ist <code>this</code> in JS.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-arrows-clockwise"></i></span>
+          Vererbung
+        </h2>
+        <p>Mit <strong>Vererbung</strong> erstellst du spezialisierte Klassen, die Eigenschaften und Methoden einer Eltern-Klasse übernehmen. Das spart Code und macht ihn übersichtlicher.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Eltern-Klasse
+class Charakter:
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+    
+    def ist_am_leben(self):
+        return self.hp &gt; 0
+
+# Kind-Klasse
+class Magier(Charakter):
+    def __init__(self, name, hp, mana):
+        super().__init__(name, hp)
+        self.mana = mana
+    
+    def zaubern(self, ziel):
+        if self.mana &gt;= 10:
+            self.mana -= 10
+            return f" {self.name} zaubert auf {ziel}!"
+        return " Nicht genug Mana!"
+
+m = Magier("Gandalf", 100, 50)
+print(m.ist_am_leben())  # True (von Charakter geerbt)
+print(m.zaubern("Drache"))
+print(f"Mana: {m.mana}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            True
+ Gandalf zaubert auf Drache!
+Mana: 40
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>class Magier(Charakter):
+    def __init__(self, name, hp, mana):
+        super().__init__(name, hp)
+        self.mana = mana</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>class Magier extends Charakter {
+    constructor(name, hp, mana) {
+        super(name, hp);
+        this.mana = mana;
+    }
+}</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>class Kind(Eltern)</code> und <code>super().__init__()</code>. JavaScript: <code>class Kind extends Eltern</code> und <code>super()</code>. Fast identisch!</div>
+          </div>
+        </div>
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Erstelle ein Python-Klassen-Beispiel mit Vererbung für ein RPG: Eine Basisklasse Charakter und zwei Unterklassen Krieger und Magier mit unterschiedlichen Fähigkeiten."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-sparkle"></i></span>
+          Magic Methods
+        </h2>
+        <p><strong>Magic Methods</strong> (oder Dunder-Methods) beginnen und enden mit zwei Unterstrichen. Sie ermöglichen es, Operatoren und eingebaute Funktionen für deine Klassen anzupassen.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>class Inventar:
+    def __init__(self):
+        self.items = []
+    
+    def add(self, item):
+        self.items.append(item)
+    
+    def __len__(self):
+        return len(self.items)
+    
+    def __contains__(self, item):
+        return item in self.items
+    
+    def __str__(self):
+        return f"Inventar({len(self.items)} Items): {', '.join(self.items)}"
+
+inv = Inventar()
+inv.add("Schwert")
+inv.add("Schild")
+
+print(len(inv))           # 2
+print("Schwert" in inv)  # True
+print(inv)                # Inventar(2 Items): Schwert, Schild</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            2
+True
+Inventar(2 Items): Schwert, Schild
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Erkläre mir die 5 wichtigsten Magic Methods in Python (__init__, __str__, __len__, __eq__, __getitem__) mit praktischen Beispielen."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Eigenes Hilfsmodul</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Erstelle <code>hilfen.py</code> mit 3 Funktionen (z.B. flaeche_rechteck, umfang_kreis, durchschnitt). Importiere sie in <code>main.py</code> und teste sie.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-1-1">
+            <label for="task-09-1-1" class="py-classic-exercise__task-text">Erstelle hilfen.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-1-2">
+            <label for="task-09-1-2" class="py-classic-exercise__task-text">Schreibe 3 Hilfsfunktionen</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-1-3">
+            <label for="task-09-1-3" class="py-classic-exercise__task-text">Erstelle main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-1-4">
+            <label for="task-09-1-4" class="py-classic-exercise__task-text">Importiere und teste die Funktionen</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># hilfen.py
+import math
+
+def flaeche(a, b):
+    return a * b
+
+def umfang(r):
+    return 2 * math.pi * r
+
+def durchschnitt(l):
+    return sum(l) / len(l)
+
+# main.py
+import hilfen
+print(hilfen.flaeche(5, 3))
+print(hilfen.durchschnitt([1, 2, 3, 4, 5]))</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-09-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-09-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># hilfen.py
+import math
+
+def flaeche(a, b):
+    return a * b
+
+def umfang(r):
+    return 2 * math.pi * r
+
+def durchschnitt(l):
+    return sum(l) / len(l)
+
+# main.py
+import hilfen
+print(hilfen.flaeche(5, 3))
+print(hilfen.durchschnitt([1, 2, 3, 4, 5]))</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: RPG-Charakter-System</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Erstelle eine Klasse <code>Charakter</code> mit Name, HP und Level. Erstelle eine Unterklasse <code>Heiler</code> mit einer <code>heilen()</code>-Methode, die HP wiederherstellt.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-2-1">
+            <label for="task-09-2-1" class="py-classic-exercise__task-text">Erstelle rpg.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-2-2">
+            <label for="task-09-2-2" class="py-classic-exercise__task-text">Erstelle Klasse Charakter</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-2-3">
+            <label for="task-09-2-3" class="py-classic-exercise__task-text">Erstelle Unterklasse Heiler</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-2-4">
+            <label for="task-09-2-4" class="py-classic-exercise__task-text">Implementiere heilen() mit Mana-Kosten</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>class Charakter:
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+        self.max_hp = hp
+
+class Heiler(Charakter):
+    def __init__(self, name, hp, mana):
+        super().__init__(name, hp)
+        self.mana = mana
+    
+    def heilen(self, ziel):
+        if self.mana &gt;= 20:
+            self.mana -= 20
+            ziel.hp = min(ziel.hp + 30, ziel.max_hp)
+            return f" {ziel.name} geheilt!"
+        return " Kein Mana!"
+
+p = Charakter("Krieger", 100)
+h = Heiler("Heiler", 80, 50)
+p.hp -= 40
+print(h.heilen(p))
+print(f"HP: {p.hp}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-09-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-09-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>class Charakter:
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+        self.max_hp = hp
+
+class Heiler(Charakter):
+    def __init__(self, name, hp, mana):
+        super().__init__(name, hp)
+        self.mana = mana
+    
+    def heilen(self, ziel):
+        if self.mana &gt;= 20:
+            self.mana -= 20
+            ziel.hp = min(ziel.hp + 30, ziel.max_hp)
+            return f" {ziel.name} geheilt!"
+        return " Kein Mana!"
+
+p = Charakter("Krieger", 100)
+h = Heiler("Heiler", 80, 50)
+p.hp -= 40
+print(h.heilen(p))
+print(f"HP: {p.hp}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy-Checkpoint: PyBuddy-Klasse</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy wird zur Klasse! Er soll einen Namen haben, den Nutzer begrüßen können und einen Befehl verarbeiten. Nutze __init__ und Methoden.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-3-1">
+            <label for="task-09-3-1" class="py-classic-exercise__task-text">Öffne pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-3-2">
+            <label for="task-09-3-2" class="py-classic-exercise__task-text">Erstelle Klasse PyBuddy</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-3-3">
+            <label for="task-09-3-3" class="py-classic-exercise__task-text">Implementiere __init__, begruesse(), status()</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-09-3-4">
+            <label for="task-09-3-4" class="py-classic-exercise__task-text">Teste die Methoden</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+class PyBuddy:
+    def __init__(self, name):
+        self.name = name
+        self.version = "1.0"
+    
+    def begruesse(self, nutzer):
+        return f" Hallo {nutzer}! Ich bin {self.name} v{self.version}."
+    
+    def status(self):
+        return f" {self.name} läuft einwandfrei."
+
+bot = PyBuddy("PyBuddy")
+print(bot.begruesse("Max"))
+print(bot.status())</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-09-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-09-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+class PyBuddy:
+    def __init__(self, name):
+        self.name = name
+        self.version = "1.0"
+    
+    def begruesse(self, nutzer):
+        return f" Hallo {nutzer}! Ich bin {self.name} v{self.version}."
+    
+    def status(self):
+        return f" {self.name} läuft einwandfrei."
+
+bot = PyBuddy("PyBuddy")
+print(bot.begruesse("Max"))
+print(bot.status())</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Didaktische Pause</span>
+        <p class="py-classic-funfact__text">In <strong>League of Legends</strong> hat jeder Champion eine Basisklasse mit HP, Mana und Position. Jeder spezielle Champion (Kind-Klasse) erbt diese Eigenschaften und fügt eigene Fähigkeiten hinzu — genau wie die Vererbung, die du gerade gelernt hast!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-package"></i></span><span>import math, random, datetime — Standardbibliothek nutzen</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-wrench"></i></span><span>Jede .py-Datei ist ein Modul mit __name__ == '__main__'</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-buildings"></i></span><span> class Name: → Klasse mit __init__ und Methoden</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-arrows-clockwise"></i></span><span>Vererbung: class Kind(Eltern) mit super()</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-sparkle"></i></span><span>Magic Methods machen Klassen pythonic</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="08-funktionen.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">08 – Funktionen</span>
+    </a>
+    <a href="10-fileio.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">10 – File I/O & JSON</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Kapitel</h4><nav><a href="../index.html#kapitel">Alle Kapitel</a><a href="06-listen.html">06. Listen</a><a href="12-ki-cocoding.html">12. KI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Ressourcen</h4><nav><a href="../lexikon.html">Lexikon</a><a href="../abschlussprojekt.html">Abschlussprojekt</a><a href="../../../../index.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Rechtliches</h4><nav><a href="../../../../pages/impressum.html">Impressum</a><a href="../../../../pages/datenschutz.html">Datenschutz</a><a href="../../../../pages/disclaimer.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

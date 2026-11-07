@@ -1,0 +1,625 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — Advanced Glossary (Accordion + Detail)
+   Inspired by KI Academy Premium — adapted for Video Lab tokens
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Featured Terms Section
+   ---------------------------------------------------------- */
+.video-featured-terms {
+  margin-top: var(--video-space-16);
+  margin-bottom: var(--video-space-16);
+}
+
+.video-featured-terms__header {
+  text-align: center;
+  margin-bottom: var(--video-space-10);
+}
+
+.video-featured-terms__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--video-space-2);
+  font-size: var(--video-text-xs);
+  font-weight: var(--video-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--video-letter-spacing-wide);
+  color: var(--video-accent-coral);
+  margin-bottom: var(--video-space-3);
+}
+
+.video-featured-terms__title {
+  font-size: var(--video-text-3xl);
+  font-weight: var(--video-font-weight-bold);
+  margin-bottom: var(--video-space-3);
+}
+
+.video-featured-terms__subtitle {
+  font-size: var(--video-text-base);
+  color: var(--video-text-secondary);
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+/* ----------------------------------------------------------
+   Term Card (Accordion)
+   ---------------------------------------------------------- */
+.video-term-card {
+  background: var(--video-bg-card);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-lg);
+  margin-bottom: var(--video-space-3);
+  overflow: hidden;
+  transition: border-color var(--video-transition-base) var(--video-ease-out);
+}
+
+.video-term-card:hover {
+  border-color: var(--video-border-active);
+}
+
+.video-term-card.is-hidden,
+.video-term-card.hidden {
+  display: none;
+}
+
+.video-glossary-section.is-hidden {
+  display: none;
+}
+
+.video-term-card.is-expanded {
+  border-color: var(--video-accent-coral);
+  box-shadow: var(--video-shadow-md);
+}
+
+/* Featured variant */
+.video-term-card--featured {
+  border-left: 3px solid var(--video-accent-coral);
+}
+
+.video-term-card--featured:hover {
+  border-left-color: var(--video-accent-coral);
+}
+
+/* ----------------------------------------------------------
+   Term Header (Accordion Trigger)
+   ---------------------------------------------------------- */
+.video-term-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--video-space-4);
+  padding: var(--video-space-5);
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--video-transition-fast);
+}
+
+.video-term-header:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.video-term-header:focus-visible {
+  outline: 2px solid var(--video-accent-coral);
+  outline-offset: -2px;
+}
+
+.video-term-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--video-space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.video-term-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--video-radius-md);
+  background: linear-gradient(135deg, var(--video-accent-coral-dim), var(--video-accent-violet-dim));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--video-accent-coral);
+  flex-shrink: 0;
+}
+
+.video-term-icon--tech {
+  background: linear-gradient(135deg, rgba(255, 90, 90, 0.15), rgba(255, 90, 90, 0.05));
+  color: var(--video-accent-coral);
+}
+
+.video-term-icon--creative {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(45, 212, 191, 0.05));
+  color: var(--video-accent-teal);
+}
+
+.video-term-icon--post {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(124, 58, 237, 0.05));
+  color: var(--video-accent-violet);
+}
+
+.video-term-title-wrap {
+  min-width: 0;
+}
+
+.video-term-title-wrap h3 {
+  font-size: var(--video-text-lg);
+  font-weight: var(--video-font-weight-bold);
+  margin-bottom: var(--video-space-1);
+  line-height: 1.3;
+}
+
+.video-term-subtitle {
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  display: block;
+  line-height: 1.4;
+}
+
+.video-term-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--video-text-muted);
+  flex-shrink: 0;
+  transition: all var(--video-transition-base) var(--video-ease-out);
+}
+
+.video-term-card.is-expanded .video-term-toggle {
+  transform: rotate(180deg);
+  background: var(--video-accent-coral);
+  color: #fff;
+}
+
+/* ----------------------------------------------------------
+   Term Content (Accordion Panel)
+   ---------------------------------------------------------- */
+.video-term-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.4s ease;
+}
+
+.video-term-card.is-expanded .video-term-content {
+  max-height: 1200px;
+  padding: 0 var(--video-space-5) var(--video-space-5);
+}
+
+.video-term-definition {
+  font-size: var(--video-text-base);
+  color: var(--video-text-primary);
+  margin-bottom: var(--video-space-5);
+  padding: var(--video-space-4);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--video-radius-md);
+  border-left: 3px solid var(--video-accent-coral);
+  line-height: var(--video-line-height-normal);
+}
+
+/* ----------------------------------------------------------
+   Term Blocks (Detail Sections)
+   ---------------------------------------------------------- */
+.video-term-blocks {
+  display: grid;
+  gap: var(--video-space-3);
+  margin-bottom: var(--video-space-5);
+}
+
+.video-term-block {
+  padding: var(--video-space-4);
+  border-radius: var(--video-radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.video-term-block--explanation { border-left-color: var(--video-accent-teal); }
+.video-term-block--analogy     { border-left-color: var(--video-accent-coral); }
+.video-term-block--why         { border-left-color: #4ade80; }
+.video-term-block--example     { border-left-color: var(--video-accent-violet); }
+.video-term-block--module      { border-left-color: var(--video-accent-amber); }
+
+.video-term-block h4 {
+  font-size: var(--video-text-xs);
+  font-weight: var(--video-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--video-space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--video-space-2);
+}
+
+.video-term-block--explanation h4 { color: var(--video-accent-teal); }
+.video-term-block--analogy h4     { color: var(--video-accent-coral); }
+.video-term-block--why h4         { color: #4ade80; }
+.video-term-block--example h4     { color: var(--video-accent-violet); }
+.video-term-block--module h4      { color: var(--video-accent-amber); }
+
+.video-term-block p {
+  margin: 0;
+  color: var(--video-text-secondary);
+  line-height: var(--video-line-height-normal);
+  font-size: var(--video-text-sm);
+}
+
+/* ----------------------------------------------------------
+   Module Link
+   ---------------------------------------------------------- */
+.video-term-module-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--video-space-2);
+  padding: var(--video-space-3) var(--video-space-4);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-md);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  color: var(--video-accent-coral);
+  text-decoration: none;
+  transition: all var(--video-transition-fast);
+}
+
+.video-term-module-link:hover {
+  background: rgba(255, 90, 90, 0.08);
+  border-color: var(--video-accent-coral);
+  transform: translateX(4px);
+}
+
+.video-term-module-link i {
+  font-size: 18px;
+}
+
+/* ----------------------------------------------------------
+   Glossary Section (A-Z)
+   ---------------------------------------------------------- */
+.video-glossary-section {
+  margin-bottom: var(--video-space-10);
+}
+
+.video-glossary-section__letter {
+  font-family: var(--video-font-mono);
+  font-size: var(--video-text-4xl);
+  font-weight: var(--video-font-weight-bold);
+  color: var(--video-accent-coral);
+  opacity: 0.3;
+  margin-bottom: var(--video-space-4);
+  line-height: 1;
+}
+
+/* ----------------------------------------------------------
+   Glossary Nav (Alphabet)
+   ---------------------------------------------------------- */
+.video-glossary-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--video-space-2);
+  justify-content: center;
+  margin-bottom: var(--video-space-10);
+  padding: var(--video-space-4);
+  background: var(--video-bg-card);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-lg);
+}
+
+.video-glossary-nav__letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--video-radius-sm);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  color: var(--video-text-muted);
+  text-decoration: none;
+  transition: all var(--video-transition-fast);
+}
+
+.video-glossary-nav__letter:hover {
+  background: rgba(255, 90, 90, 0.1);
+  color: var(--video-accent-coral);
+}
+
+.video-glossary-nav__letter.is-active {
+  background: var(--video-accent-coral);
+  color: #fff;
+}
+
+.video-glossary-nav__letter.is-empty {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   Search Enhancements
+   ---------------------------------------------------------- */
+.video-glossary-search {
+  max-width: 640px;
+  margin: 0 auto var(--video-space-10);
+  position: relative;
+}
+
+.video-glossary-search__helper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--video-space-2);
+  text-align: center;
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  margin-bottom: var(--video-space-3);
+}
+
+.video-glossary-search__field {
+  position: relative;
+}
+
+.video-glossary-search__input {
+  width: 100%;
+  padding: var(--video-space-4) var(--video-space-5) var(--video-space-4) 48px;
+  background: var(--video-bg-card);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-xl);
+  color: var(--video-text-primary);
+  font-size: var(--video-text-base);
+  font-family: inherit;
+  transition: all var(--video-transition-fast);
+}
+
+.video-glossary-search__input:focus {
+  outline: none;
+  border-color: var(--video-accent-coral);
+  box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.15);
+}
+
+.video-glossary-search__input::placeholder {
+  color: var(--video-text-muted);
+}
+
+.video-glossary-search__icon {
+  position: absolute;
+  left: var(--video-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--video-text-muted);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.video-glossary-search__clear {
+  position: absolute;
+  right: var(--video-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--video-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  padding: var(--video-space-1);
+}
+
+.video-glossary-search__clear.is-visible {
+  display: block;
+}
+
+.video-glossary-search__meta {
+  text-align: center;
+  font-size: var(--video-text-sm);
+  color: var(--video-text-muted);
+  margin-top: var(--video-space-3);
+  min-height: 1.5em;
+}
+
+/* ----------------------------------------------------------
+   Legacy Glossary Card (backward compatibility)
+   ---------------------------------------------------------- */
+.video-glossary-card {
+  background: var(--video-bg-card);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-lg);
+  padding: var(--video-space-5);
+  transition: all var(--video-transition-base) var(--video-ease-out);
+}
+
+.video-glossary-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--video-border-active);
+  box-shadow: var(--video-shadow-md);
+}
+
+.video-glossary-card__term {
+  font-size: var(--video-text-lg);
+  font-weight: var(--video-font-weight-bold);
+  margin-bottom: var(--video-space-2);
+}
+
+.video-glossary-card__category {
+  display: inline-block;
+  font-size: var(--video-text-xs);
+  font-weight: var(--video-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--video-letter-spacing-wide);
+  padding: 2px 10px;
+  border-radius: var(--video-radius-full);
+  margin-bottom: var(--video-space-3);
+}
+
+.video-glossary-card__category--tech {
+  background: rgba(255, 90, 90, 0.12);
+  color: var(--video-accent-coral);
+}
+
+.video-glossary-card__category--creative {
+  background: rgba(45, 212, 191, 0.12);
+  color: var(--video-accent-teal);
+}
+
+.video-glossary-card__category--post {
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--video-accent-violet);
+}
+
+.video-glossary-card__def {
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  line-height: var(--video-line-height-normal);
+}
+
+/* ----------------------------------------------------------
+   Grid Layouts
+   ---------------------------------------------------------- */
+.video-glossary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--video-space-4);
+}
+
+.video-glossary-grid--single {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 768px) {
+  .video-term-title-group {
+    gap: var(--video-space-3);
+  }
+
+  .video-term-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .video-term-title-wrap h3 {
+    font-size: var(--video-text-base);
+  }
+
+  .video-term-subtitle {
+    font-size: var(--video-text-xs);
+  }
+
+  .video-glossary-nav__letter {
+    width: 44px;
+    height: 44px;
+    font-size: var(--video-text-xs);
+  }
+}
+
+/* ----------------------------------------------------------
+   Light Theme Overrides
+   ---------------------------------------------------------- */
+[data-theme="light"] .video-term-card {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .video-term-card:hover {
+  border-color: rgba(255, 90, 90, 0.3);
+}
+
+[data-theme="light"] .video-term-header:hover {
+  background: rgba(255, 90, 90, 0.03);
+}
+
+[data-theme="light"] .video-term-definition {
+  background: linear-gradient(135deg, rgba(255, 90, 90, 0.06), rgba(255, 90, 90, 0.02));
+  border-left-color: var(--video-accent-coral);
+  color: #1a1a2e;
+}
+
+[data-theme="light"] .video-term-block {
+  background: #f8f8fa;
+  border-left-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .video-term-block--explanation { border-left-color: #0d9488; }
+[data-theme="light"] .video-term-block--analogy     { border-left-color: #dc2626; }
+[data-theme="light"] .video-term-block--why         { border-left-color: #16a34a; }
+[data-theme="light"] .video-term-block--example     { border-left-color: #7c3aed; }
+[data-theme="light"] .video-term-block--module      { border-left-color: #d97706; }
+
+[data-theme="light"] .video-term-block h4 {
+  color: #5a5a6a;
+}
+
+[data-theme="light"] .video-term-block p {
+  color: #4a4a5a;
+}
+
+[data-theme="light"] .video-term-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  color: #7a7a8a;
+}
+
+[data-theme="light"] .video-term-card.is-expanded .video-term-toggle {
+  background: var(--video-accent-coral);
+  color: #fff;
+}
+
+[data-theme="light"] .video-glossary-nav {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .video-glossary-search__input {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .video-glossary-card {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .video-term-module-link {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Loading state for dynamic glossary */
+.video-glossary-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 64px 24px;
+  color: var(--video-text-secondary);
+  font-size: 1rem;
+}
+
+.video-glossary-loading .ph-spinner {
+  font-size: 1.25rem;
+  color: var(--video-accent-coral);
+}
+
+.video-glossary-error {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--video-accent-coral);
+  font-size: 1rem;
+}
+
+/* No-JS fallback */
+@media (scripting: none) {
+  .video-term-content {
+    max-height: none;
+    padding: 0 var(--video-space-5) var(--video-space-5);
+  }
+  .video-term-toggle {
+    display: none;
+  }
+}

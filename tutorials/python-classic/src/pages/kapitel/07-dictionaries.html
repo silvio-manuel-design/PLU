@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Schlüssel-Wert-Paare und einzigartige Sammlungen — die Datenstrukturen für echte Projekte.">
+  <meta name="theme-color" content="#306998">
+  <title>07 – Dictionaries & Sets | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/07-dictionaries.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/07-dictionaries-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="07-dictionaries.html" class="py-classic-lang__btn is-active" data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="07-dictionaries-en.html" class="py-classic-lang__btn " data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k07-dictionaries.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 07</span>
+      </nav>
+      <h1 class="py-classic-hero__title">Dictionaries & Sets</h1>
+      <p class="py-classic-hero__subtitle">Schlüssel-Wert-Paare und einzigartige Sammlungen — die Datenstrukturen für echte Projekte.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 50 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Mittel</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">Du erstellst Dictionaries und greifst sicher auf Werte zu</li>
+        <li class="py-classic-learning-goals__item">Du nutzt get(), keys(), values() und items() professionell</li>
+        <li class="py-classic-learning-goals__item">Du verwendest Sets für einzigartige Werte und Mengenoperationen</li>
+        <li class="py-classic-learning-goals__item">Du baust PyBuddy's Nutzerprofil als Dictionary</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-book"></i></span>
+          Dictionaries Grundlagen
+        </h2>
+        <p>Ein <strong>Dictionary</strong> ist wie ein Telefonbuch oder ein Inventar in einem Spiel: Jeder Wert hat einen eindeutigen Namen (Schlüssel). Statt über Zahlen-Indizes greifst du über Namen zu.</p><ul><li>Erstellen: <code>spieler = {"name": "Max", "level": 5}</code></li><li>Zugriff: <code>spieler["name"]</code></li><li>Sicherer Zugriff: <code>spieler.get("name")</code></li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Dictionary erstellen
+spieler = {
+    "name": "DragonSlayer99",
+    "level": 12,
+    "klasse": "Magier",
+    "hp": 100
+}
+
+print(spieler["name"])       # DragonSlayer99
+print(spieler.get("level"))  # 12
+
+# Wert ändern
+spieler["level"] = 13
+spieler["xp"] = 450  # Neuer Schlüssel!
+
+# Löschen
+del spieler["klasse"]
+print(spieler)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            DragonSlayer99
+12
+{'name': 'DragonSlayer99', 'level': 13, 'hp': 100, 'xp': 450}
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>spieler = {"name": "Max", "level": 5}
+print(spieler["name"])
+print(spieler.get("level"))</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>let spieler = { name: "Max", level: 5 };
+console.log(spieler.name);
+console.log(spieler.level);</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python-Dicts sind wie JavaScript-Objekte. Der Zugriff in Python ist <code>spieler["name"]</code> oder <code>.get()</code>, in JS <code>spieler.name</code> oder <code>["name"]</code>.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-folders"></i></span>
+          Methoden und Nested Dicts
+        </h2>
+        <p>Dictionaries haben mächtige Methoden: <code>keys()</code>, <code>values()</code>, <code>items()</code>. Und du kannst Dictionaries ineinander verschachteln — perfekt für komplexe Datenstrukturen wie Spieler-Profile.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Dictionary-Methoden
+nutzer = {"name": "Anna", "alter": 17, "ort": "Wien"}
+
+print(list(nutzer.keys()))    # ['name', 'alter', 'ort']
+print(list(nutzer.values()))  # ['Anna', 17, 'Wien']
+
+# items() liefert Schlüssel-Wert-Paare
+for key, value in nutzer.items():
+    print(f"{key}: {value}")
+
+# Verschachtelte Dicts
+profil = {
+    "user": {"name": "Max", "id": 42},
+    "stats": {"level": 5, "xp": 1200},
+    "badges": ["Newbie", "Coder"]
+}
+print(profil["stats"]["level"])  # 5</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            ['name', 'alter', 'ort']
+['Anna', 17, 'Wien']
+name: Anna
+alter: 17
+ort: Wien
+5
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Erstelle ein verschachteltes Dictionary für ein RPG-Charakter-Profil mit Name, Level, Ausrüstung und Fähigkeiten. Zeige mir den Python-Code."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-diamond"></i></span>
+          Sets für einzigartige Werte
+        </h2>
+        <p>Ein <strong>Set</strong> ist wie eine Liste, aber jeder Wert kommt nur einmal vor — Duplikate werden automatisch entfernt. Sets sind perfekt für eindeutige Sammlungen und Mengenoperationen.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Sets erstellen
+besucht = {"Paris", "Tokio", "New York", "Paris"}
+print(besucht)  # {'Tokio', 'New York', 'Paris'} — keine Duplikate!
+
+# Mengenoperationen
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+print(a | b)  # Vereinigung: {1, 2, 3, 4, 5, 6}
+print(a &amp; b)  # Schnittmenge: {3, 4}
+print(a - b)  # Differenz: {1, 2}
+
+# Prüfung
+print(3 in a)  # True
+print(7 in a)  # False</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            {'Tokio', 'New York', 'Paris'}
+{1, 2, 3, 4, 5, 6}
+{3, 4}
+{1, 2}
+True
+False
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>a = {1, 2, 3}
+b = {3, 4, 5}
+print(a | b)
+print(3 in a)</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>let a = new Set([1, 2, 3]);
+let b = new Set([3, 4, 5]);
+let vereinigung = new Set([...a, ...b]);
+console.log(vereinigung);
+console.log(a.has(3));</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python hat <code>|</code> und <code>&</code> direkt als Operatoren für Sets. JavaScript nutzt <code>Set</code>-Objekte und den Spread-Operator <code>...</code>.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-lightning"></i></span>
+          Dict Comprehensions
+        </h2>
+        <p>Wie bei Listen gibt es auch für Dictionaries <strong>Comprehensions</strong>. Du erstellst ein Dictionary in einer Zeile — elegant und pythonic.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Dict Comprehension
+namen = ["Anna", "Ben", "Clara"]
+laengen = {name: len(name) for name in namen}
+print(laengen)  # {'Anna': 4, 'Ben': 3, 'Clara': 5}
+
+# Mit Bedingung
+zahlen = [1, 2, 3, 4, 5, 6]
+quadrate = {z: z**2 for z in zahlen if z % 2 == 0}
+print(quadrate)  # {2: 4, 4: 16, 6: 36}
+
+# Aus zwei Listen
+keys = ["a", "b", "c"]
+values = [1, 2, 3]
+paar = {k: v for k, v in zip(keys, values)}
+print(paar)  # {'a': 1, 'b': 2, 'c': 3}</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            {'Anna': 4, 'Ben': 3, 'Clara': 5}
+{2: 4, 4: 16, 6: 36}
+{'a': 1, 'b': 2, 'c': 3}
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Zeige mir 3 praktische Dict Comprehension Beispiele für Python: ein Wörterbuch mit Wortlängen, ein Zahlen-Quadrate-Dict, und ein Filter-Dict."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-game-controller"></i></span>
+          Dictionaries in Aktion: Spieler-Profil
+        </h2>
+        <p>Stell dir ein vollständiges Spieler-Profil vor: Name, Level, XP, Badges und Ausrüstung — alles in einem verschachtelten Dictionary. Das ist die Datenstruktur, die echte Spiele intern nutzen.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Spieler-Profil
+spieler = {
+    "name": "PyKnight",
+    "level": 7,
+    "xp": 3400,
+    "badges": ["First Blood", "Level 5"],
+    "ausruestung": {
+        "waffe": "Stahlschwert",
+        "ruestung": "Lederpanzer",
+        "gold": 150
+    }
+}
+
+# XP hinzufügen
+gewonnen = 500
+spieler["xp"] += gewonnen
+
+# Level-Up prüfen
+if spieler["xp"] &gt;= 4000:
+    spieler["level"] += 1
+    spieler["badges"].append(f"Level {spieler['level']}")
+    print(f" Level-Up! Du bist jetzt Level {spieler['level']}!")
+
+# Profil anzeigen
+print(f"\n  {spieler['name']} — Level {spieler['level']}")
+print(f" XP: {spieler['xp']}")
+print(f"  Rüstung: {spieler['ausruestung']['ruestung']}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+             Level-Up! Du bist jetzt Level 8!
+
+  PyKnight — Level 8
+ XP: 3900
+  Rüstung: Lederpanzer
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Kontaktbuch</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Erstelle ein Dictionary mit 3 Kontakten (Name → Telefonnummer). Nutze <code>input()</code> für eine Suche und gib die Nummer aus oder 'Nicht gefunden'.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-1-1">
+            <label for="task-07-1-1" class="py-classic-exercise__task-text">Erstelle kontakte.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-1-2">
+            <label for="task-07-1-2" class="py-classic-exercise__task-text">Erstelle Dictionary mit 3 Kontakten</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-1-3">
+            <label for="task-07-1-3" class="py-classic-exercise__task-text">Frage mit input() nach Namen</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-1-4">
+            <label for="task-07-1-4" class="py-classic-exercise__task-text">Nutze get() mit Default-Wert</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>kontakte = {"Anna": "0664/123", "Ben": "0664/456", "Clara": "0664/789"}
+name = input("Suche: ")
+print(kontakte.get(name, " Nicht gefunden"))</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-07-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-07-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>kontakte = {"Anna": "0664/123", "Ben": "0664/456", "Clara": "0664/789"}
+name = input("Suche: ")
+print(kontakte.get(name, " Nicht gefunden"))</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Wort-Häufigkeit</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Der Nutzer gibt einen Satz ein. Zähle, wie oft jedes Wort vorkommt. Nutze ein Dictionary mit Wörtern als Schlüssel und Häufigkeiten als Werte.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-2-1">
+            <label for="task-07-2-1" class="py-classic-exercise__task-text">Erstelle woerter.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-2-2">
+            <label for="task-07-2-2" class="py-classic-exercise__task-text">Lies Satz ein und teile in Wörter</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-2-3">
+            <label for="task-07-2-3" class="py-classic-exercise__task-text">Zähle Häufigkeit in Dict</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-2-4">
+            <label for="task-07-2-4" class="py-classic-exercise__task-text">Gib Ergebnis aus</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>satz = input("Satz: ").lower()
+woerter = satz.split()
+
+haeufigkeit = {}
+for wort in woerter:
+    haeufigkeit[wort] = haeufigkeit.get(wort, 0) + 1
+
+for wort, anzahl in haeufigkeit.items():
+    print(f"{wort}: {anzahl}x")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-07-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-07-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>satz = input("Satz: ").lower()
+woerter = satz.split()
+
+haeufigkeit = {}
+for wort in woerter:
+    haeufigkeit[wort] = haeufigkeit.get(wort, 0) + 1
+
+for wort, anzahl in haeufigkeit.items():
+    print(f"{wort}: {anzahl}x")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy-Checkpoint: Nutzerprofil</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy speichert Name, Level, XP und Badges in einem Dictionary. Zeige das Profil formatiert an und erlaube das Hinzufügen von XP.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-3-1">
+            <label for="task-07-3-1" class="py-classic-exercise__task-text">Öffne pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-3-2">
+            <label for="task-07-3-2" class="py-classic-exercise__task-text">Erstelle Dictionary profil</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-3-3">
+            <label for="task-07-3-3" class="py-classic-exercise__task-text">Zeige Profil-Daten formatiert an</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-07-3-4">
+            <label for="task-07-3-4" class="py-classic-exercise__task-text">Erlaube XP-Update mit input()</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+profil = {
+    "name": "Max",
+    "level": 1,
+    "xp": 0,
+    "badges": ["PyBuddy Nutzer"]
+}
+
+print(f" Profil von {profil['name']}")
+print(f" Level {profil['level']} | {profil['xp']} XP")
+print(f"🎖️  Badges: {', '.join(profil['badges'])}")
+
+# XP hinzufügen
+bonus = int(input("Bonus-XP: "))
+profil["xp"] += bonus
+print(f"Neuer XP-Stand: {profil['xp']}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-07-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-07-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+profil = {
+    "name": "Max",
+    "level": 1,
+    "xp": 0,
+    "badges": ["PyBuddy Nutzer"]
+}
+
+print(f" Profil von {profil['name']}")
+print(f" Level {profil['level']} | {profil['xp']} XP")
+print(f"🎖️  Badges: {', '.join(profil['badges'])}")
+
+# XP hinzufügen
+bonus = int(input("Bonus-XP: "))
+profil["xp"] += bonus
+print(f"Neuer XP-Stand: {profil['xp']}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Didaktische Pause</span>
+        <p class="py-classic-funfact__text">In <strong>Pokémon</strong> wird jedes Monster als Dictionary gespeichert: Name, Typ, KP, Angriff, Verteidigung, Attacken-Liste. Wenn du ein Pokémon fängst, fügt das Spiel einfach ein neues Dict zu deiner Liste hinzu. Du baust gerade die Grundlagen für deine eigene Monster-Sammlung!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-book"></i></span><span>Dictionary = {'key': 'value'} — wie ein Telefonbuch</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-magnifying-glass"></i></span><span>get(), keys(), values(), items() für Zugriff</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-diamond"></i></span><span>Sets = {1, 2, 3} — nur einzigartige Werte</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-lightning"></i></span><span>Dict Comprehensions für elegante Erstellung</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-folders"></i></span><span> Verschachtelte Dicts für komplexe Daten</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="06-listen.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">06 – Listen</span>
+    </a>
+    <a href="08-funktionen.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">08 – Funktionen</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Kapitel</h4><nav><a href="../index.html#kapitel">Alle Kapitel</a><a href="06-listen.html">06. Listen</a><a href="12-ki-cocoding.html">12. KI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Ressourcen</h4><nav><a href="../lexikon.html">Lexikon</a><a href="../abschlussprojekt.html">Abschlussprojekt</a><a href="../../../../index.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Rechtliches</h4><nav><a href="../../../../pages/impressum.html">Impressum</a><a href="../../../../pages/datenschutz.html">Datenschutz</a><a href="../../../../pages/disclaimer.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

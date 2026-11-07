@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 10: Editing | Pansonic Photo Lab</title>
+  <meta name="description" content="RAW workflow and image editing: exposure, color, sharpness and export with darktable, Lightroom, Snapseed and GIMP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+  <link rel="stylesheet" href="/tutorials/pansonic-photo-lab/css/photo-lab.css">
+  <link rel="icon" type="image/svg+xml" href="/tutorials/pansonic-photo-lab/assets/icons/favicon.svg">
+</head>
+<body data-module="m10">
+<!-- No-JS Banner -->
+<noscript>
+  <div class="photo-noscript-banner" role="alert">
+    <i class="ph ph-warning" aria-hidden="true"></i>
+    <span>Some interactive features (checklists, quiz, progress) require JavaScript. All learning content is fully accessible without JavaScript.</span>
+  </div>
+</noscript>
+
+<!-- No-JS Navigation -->
+<nav class="photo-noscript-nav" aria-label="Navigation">
+  <a href="09-makro-en.html" class="photo-noscript-nav__link">&larr; Previous Module</a>
+  <a href="../index-en.html" class="photo-noscript-nav__link photo-noscript-nav__link--center">Overview</a>
+  <a href="11-capstone-en.html" class="photo-noscript-nav__link">Next Module &rarr;</a>
+</nav>
+<!-- Skip Link -->
+<a href="#main-content" class="u-skip-link">Skip to main content</a>
+
+<!-- Chapter Progress -->
+<div class="photo-chapter-progress">
+  <div class="photo-chapter-progress__bar" id="progressBar"></div>
+</div>
+
+<!-- Header -->
+<header class="photo-header" id="header" role="banner">
+  <div class="photo-header__container">
+    <div class="photo-header__left">
+      <a href="/tutorials/pansonic-photo-lab/index-en.html" class="photo-header__logo" aria-label="Pansonic Photo Lab Homepage">
+        <div class="photo-header__logo-icon" aria-hidden="true"><i class="ph ph-camera"></i></div>
+        <span class="photo-header__logo-text">PAN<span>SONIC</span></span>
+      </a>
+      <nav class="photo-header__nav" aria-label="Main navigation">
+        <a href="/tutorials/pansonic-photo-lab/index-en.html" class="photo-header__nav-link">Start</a>
+        <div class="photo-header__dropdown">
+          <a href="#" class="photo-header__nav-link is-active">Modules</a>
+          <div class="photo-header__dropdown-menu photo-header__dropdown-menu--mega">
+            <div class="photo-header__dropdown-section">
+              <span class="photo-header__dropdown-section-title">Fundamentals</span>
+              <a href="00-willkommen-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-hand-waving photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 00 &mdash; Welcome</span>
+                  <span class="photo-header__dropdown-desc">Introduction &amp; Overview</span>
+                </span>
+              </a>
+              <a href="01-kamera-basics-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-camera photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 01 &mdash; Equipment</span>
+                  <span class="photo-header__dropdown-desc">Sensor, Lenses, Shutter</span>
+                </span>
+              </a>
+              <a href="02-belichtung-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-sun photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 02 &mdash; Exposure</span>
+                  <span class="photo-header__dropdown-desc">The Exposure Triangle</span>
+                </span>
+              </a>
+              <a href="03-blende-iso-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-aperture photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 03 &mdash; Aperture &amp; ISO</span>
+                  <span class="photo-header__dropdown-desc">Depth of Field &amp; Sensitivity</span>
+                </span>
+              </a>
+              <a href="04-komposition-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-frame-corners photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 04 &mdash; Composition</span>
+                  <span class="photo-header__dropdown-desc">Rule of Thirds &amp; Leading Lines</span>
+                </span>
+              </a>
+              <a href="05-licht-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-lightbulb photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 05 &mdash; Light</span>
+                  <span class="photo-header__dropdown-desc">Natural &amp; Artificial Light</span>
+                </span>
+              </a>
+            </div>
+            <div class="photo-header__dropdown-section">
+              <span class="photo-header__dropdown-section-title">Special Topics</span>
+              <a href="06-farbe-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-palette photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 06 &mdash; Color</span>
+                  <span class="photo-header__dropdown-desc">Color Theory &amp; White Balance</span>
+                </span>
+              </a>
+              <a href="07-portrait-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-user photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 07 &mdash; Portrait</span>
+                  <span class="photo-header__dropdown-desc">Photographing People</span>
+                </span>
+              </a>
+              <a href="08-landschaft-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-mountains photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 08 &mdash; Landscape &amp; Architecture</span>
+                  <span class="photo-header__dropdown-desc">Nature, City &amp; Buildings</span>
+                </span>
+              </a>
+              <a href="09-makro-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-bug photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 09 &mdash; Macro</span>
+                  <span class="photo-header__dropdown-desc">Discovering the Small World</span>
+                </span>
+              </a>
+              <a href="10-bearbeitung-en.html" class="photo-header__dropdown-item is-active">
+                <i class="ph ph-paint-brush photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 10 &mdash; Editing</span>
+                  <span class="photo-header__dropdown-desc">RAW Workflow &amp; Editing</span>
+                </span>
+              </a>
+              <a href="11-capstone-en.html" class="photo-header__dropdown-item">
+                <i class="ph ph-trophy photo-header__dropdown-icon" aria-hidden="true"></i>
+                <span>
+                  <span class="photo-header__dropdown-name">Module 11 &mdash; Capstone</span>
+                  <span class="photo-header__dropdown-desc">Your Final Project</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="photo-header__dropdown">
+          <a href="#" class="photo-header__nav-link">Tools</a>
+          <div class="photo-header__dropdown-menu photo-header__dropdown-menu--mega photo-header__dropdown-menu--single">
+          <div class="photo-header__dropdown-section">
+            <span class="photo-header__dropdown-section-title">Werkzeuge</span>
+            <a href="../pages/glossar-en.html" class="photo-header__dropdown-item">
+              <i class="ph ph-book photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">Glossary</span>
+                <span class="photo-header__dropdown-desc">Photo Terms A&ndash;Z</span>
+              </span>
+            </a>
+            <a href="../tools/darktable-en.html" class="photo-header__dropdown-item">
+              <i class="ph ph-desktop photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">darktable</span>
+                <span class="photo-header__dropdown-desc">Open Source RAW Editor</span>
+              </span>
+            </a>
+            <a href="../tools/lightroom-mobile-en.html" class="photo-header__dropdown-item">
+              <i class="ph ph-device-mobile-camera photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">Lightroom Mobile</span>
+                <span class="photo-header__dropdown-desc">Mobile RAW Editing</span>
+              </span>
+            </a>
+            <a href="../tools/snapseed-en.html" class="photo-header__dropdown-item">
+              <i class="ph ph-sliders photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">Snapseed</span>
+                <span class="photo-header__dropdown-desc">Mobile Editing by Google</span>
+              </span>
+            </a>
+            <a href="../tools/gimp-en.html" class="photo-header__dropdown-item">
+              <i class="ph ph-paint-brush photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">GIMP</span>
+                <span class="photo-header__dropdown-desc">Open Source Image Editor</span>
+              </span>
+            </a>
+            <a href="../tools/rawtherapee-en.html" class="photo-header__dropdown-item">
+              <i class="ph ph-image photo-header__dropdown-icon" aria-hidden="true"></i>
+              <span>
+                <span class="photo-header__dropdown-name">RawTherapee</span>
+                <span class="photo-header__dropdown-desc">RAW Development Freeware</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <a href="../pages/gallery.html" class="photo-header__nav-link">Gallery</a>
+        <a href="../pages/publish.html" class="photo-header__nav-link">Share</a>
+      </nav>
+    </div>
+    <div class="photo-header__right">
+      <button class="photo-header__btn photo-header__btn--theme" id="theme-toggle" aria-label="Toggle color scheme" title="Theme (T)">
+        <i class="ph ph-moon"></i>
+      </button>
+      <button class="photo-header__btn photo-header__btn--top" id="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="ph ph-arrow-up"></i>
+      </button>
+      <nav class="photo-lang-switch" aria-label="Select language">
+        <a href="10-bearbeitung.html" class="photo-lang-btn">DE</a>
+        <a href="10-bearbeitung-en.html" class="photo-lang-btn is-active" aria-current="page">EN</a>
+      </nav>
+      <a href="../pages/gallery.html" target="_blank" class="photo-header__btn photo-header__btn--viewer" aria-label="Image Viewer" title="Viewer">
+        <i class="ph ph-images"></i><span class="photo-header__viewer-label">Viewer</span>
+      </a>
+      <button class="photo-header__toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Backdrop -->
+<div class="photo-mobile-nav__backdrop" aria-hidden="true"></div>
+
+<nav class="photo-mobile-nav" id="mobile-nav" aria-hidden="true" aria-label="Mobile Navigation">
+  <button class="photo-mobile-nav__close" aria-label="Close menu"><i class="ph ph-x"></i></button>
+  <div class="photo-mobile-nav__items">
+    <a href="/tutorials/pansonic-photo-lab/index-en.html" class="photo-mobile-nav__link">Start</a>
+    <div class="photo-mobile-nav__group">
+      <button class="photo-mobile-nav__heading" aria-expanded="false" aria-controls="mobile-modules">
+        Modules <i class="ph ph-caret-down"></i>
+      </button>
+      <div class="photo-mobile-nav__sub" id="mobile-modules" hidden>
+        <a href="00-willkommen-en.html" class="photo-mobile-nav__sublink">Module 00 &mdash; Welcome</a>
+        <a href="01-kamera-basics-en.html" class="photo-mobile-nav__sublink">Module 01 &mdash; Equipment</a>
+        <a href="02-belichtung-en.html" class="photo-mobile-nav__sublink">Module 02 &mdash; Exposure</a>
+        <a href="03-blende-iso-en.html" class="photo-mobile-nav__sublink">Module 03 &mdash; Aperture &amp; ISO</a>
+        <a href="04-komposition-en.html" class="photo-mobile-nav__sublink">Module 04 &mdash; Composition</a>
+        <a href="05-licht-en.html" class="photo-mobile-nav__sublink">Module 05 &mdash; Light</a>
+        <a href="06-farbe-en.html" class="photo-mobile-nav__sublink">Module 06 &mdash; Color</a>
+        <a href="07-portrait-en.html" class="photo-mobile-nav__sublink">Module 07 &mdash; Portrait</a>
+        <a href="08-landschaft-en.html" class="photo-mobile-nav__sublink">Module 08 &mdash; Landscape &amp; Architecture</a>
+        <a href="09-makro-en.html" class="photo-mobile-nav__sublink">Module 09 &mdash; Macro</a>
+        <a href="10-bearbeitung-en.html" class="photo-mobile-nav__sublink is-active">Module 10 &mdash; Editing</a>
+        <a href="11-capstone-en.html" class="photo-mobile-nav__sublink">Module 11 &mdash; Capstone</a>
+      </div>
+    </div>
+    <div class="photo-mobile-nav__group">
+      <button class="photo-mobile-nav__heading" aria-expanded="false" aria-controls="mobile-tools">
+        Tools <i class="ph ph-caret-down"></i>
+      </button>
+      <div class="photo-mobile-nav__sub" id="mobile-tools" hidden>
+        <a href="../pages/glossar-en.html" class="photo-mobile-nav__sublink">Glossary</a>
+        <a href="../tools/darktable-en.html" class="photo-mobile-nav__sublink">darktable</a>
+        <a href="../tools/lightroom-mobile-en.html" class="photo-mobile-nav__sublink">Lightroom Mobile</a>
+        <a href="../tools/snapseed-en.html" class="photo-mobile-nav__sublink">Snapseed</a>
+        <a href="../tools/gimp-en.html" class="photo-mobile-nav__sublink">GIMP</a>
+        <a href="../tools/rawtherapee-en.html" class="photo-mobile-nav__sublink">RawTherapee</a>
+      </div>
+    </div>
+    <a href="../pages/gallery.html" class="photo-mobile-nav__link">Gallery</a>
+    <a href="../pages/publish.html" class="photo-mobile-nav__link">Share</a>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main id="main-content">
+
+<!-- Hero -->
+<section class="photo-chapter-hero">
+  <div class="photo-chapter-hero__inner">
+    <div class="photo-chapter-hero__breadcrumb">
+      <a href="/tutorials/pansonic-photo-lab/index-en.html">Photo Lab</a> <i class="ph ph-caret-right" aria-hidden="true"></i> <span>Module 10</span>
+    </div>
+    <span class="photo-chapter-hero__badge">Module 10</span>
+    <h1 class="photo-chapter-hero__title">Editing</h1>
+    <p class="photo-chapter-hero__lead">The photo is just the beginning. With the right workflow, you transform good shots into great images &mdash; no magic, just control.</p>
+  </div>
+</section>
+
+<section class="photo-chapter-content">
+  <div class="o-container">
+
+    <!-- Section 1: Filter Playground -->
+    <div class="photo-content-section" data-reveal>
+      <h2>Play with Brightness, Contrast &amp; Color</h2>
+      <p>Editing isn't magic &mdash; it's targeted adjustments. Drag the sliders and see live how the image changes.</p>
+
+      <div class="photo-filter-playground" data-filter-playground>
+        <div class="photo-filter-playground__stage">
+          <div class="photo-filter-playground__preview">
+            <span class="photo-filter-playground__preview-label">Edited</span>
+            <svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-label="Landscape for editing">
+              <rect width="600" height="340" fill="#1a0a2e"/>
+              <rect width="600" height="200" fill="url(#skygrad)"/>
+              <defs>
+                <linearGradient id="skygrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ff6b6b"/>
+                  <stop offset="30%" stop-color="#feca57"/>
+                  <stop offset="60%" stop-color="#ff9ff3"/>
+                  <stop offset="100%" stop-color="#54a0ff"/>
+                </linearGradient>
+                <linearGradient id="mtn1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2d3436"/>
+                  <stop offset="100%" stop-color="#636e72"/>
+                </linearGradient>
+                <linearGradient id="mtn2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1e272e"/>
+                  <stop offset="100%" stop-color="#485460"/>
+                </linearGradient>
+                <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#54a0ff"/>
+                  <stop offset="100%" stop-color="#1a0a2e"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 180 L80 100 L160 160 L250 90 L340 150 L420 80 L500 140 L600 110 L600 340 L0 340 Z" fill="url(#mtn1)" opacity="0.7"/>
+              <path d="M0 220 L100 150 L200 200 L320 130 L440 190 L600 140 L600 340 L0 340 Z" fill="url(#mtn2)" opacity="0.85"/>
+              <rect x="0" y="240" width="600" height="100" fill="url(#lake)" opacity="0.6"/>
+              <path d="M20 260 L35 200 L50 260 M70 270 L90 180 L110 270 M500 265 L520 190 L540 265 M550 270 L570 200 L590 270" stroke="#0d1117" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <circle cx="450" cy="80" r="35" fill="#feca57" opacity="0.9"/>
+              <circle cx="450" cy="80" r="50" fill="#feca57" opacity="0.3"/>
+              <ellipse cx="150" cy="70" rx="50" ry="15" fill="#ffffff" opacity="0.3"/>
+              <ellipse cx="200" cy="85" rx="40" ry="12" fill="#ffffff" opacity="0.2"/>
+              <ellipse cx="350" cy="60" rx="60" ry="18" fill="#ffffff" opacity="0.25"/>
+            </svg>
+          </div>
+
+          <div class="photo-filter-playground__panel">
+            <div class="photo-filter-playground__panel-title">Controls</div>
+
+            <div class="photo-filter-playground__control">
+              <div class="photo-filter-playground__control-header">
+                <span class="photo-filter-playground__control-label"><i class="ph ph-sun" aria-hidden="true"></i> Brightness</span>
+                <span class="photo-filter-playground__control-value" data-filter-value="brightness">100%</span>
+              </div>
+              <input type="range" class="photo-filter-playground__slider" data-filter="brightness" min="50" max="150" value="100">
+            </div>
+
+            <div class="photo-filter-playground__control">
+              <div class="photo-filter-playground__control-header">
+                <span class="photo-filter-playground__control-label"><i class="ph ph-circles-four" aria-hidden="true"></i> Contrast</span>
+                <span class="photo-filter-playground__control-value" data-filter-value="contrast">100%</span>
+              </div>
+              <input type="range" class="photo-filter-playground__slider" data-filter="contrast" min="50" max="150" value="100">
+            </div>
+
+            <div class="photo-filter-playground__control">
+              <div class="photo-filter-playground__control-header">
+                <span class="photo-filter-playground__control-label"><i class="ph ph-palette" aria-hidden="true"></i> Saturation</span>
+                <span class="photo-filter-playground__control-value" data-filter-value="saturate">100%</span>
+              </div>
+              <input type="range" class="photo-filter-playground__slider" data-filter="saturate" min="0" max="200" value="100">
+            </div>
+
+            <div class="photo-filter-playground__control">
+              <div class="photo-filter-playground__control-header">
+                <span class="photo-filter-playground__control-label"><i class="ph ph-drop" aria-hidden="true"></i> Blur</span>
+                <span class="photo-filter-playground__control-value" data-filter-value="blur">0px</span>
+              </div>
+              <input type="range" class="photo-filter-playground__slider" data-filter="blur" min="0" max="5" value="0" step="0.5">
+            </div>
+
+            <div class="photo-filter-playground__actions">
+              <button class="photo-filter-playground__btn" data-filter-compare type="button">
+                <i class="ph ph-columns" aria-hidden="true"></i>
+                <span>Before</span>
+              </button>
+              <button class="photo-filter-playground__btn" data-filter-reset type="button">
+                <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
+                <span>Reset</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-filter-playground__info">
+          <i class="ph ph-lightbulb" aria-hidden="true"></i>
+          <span><strong>Tip:</strong> Always start with exposure and contrast before touching colors. Blur simulates softness &mdash; in real editing you would use sharpening masks instead for selective sharpening.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: RAW Workflow -->
+    <div class="photo-content-section" data-reveal>
+      <h2>The RAW Workflow in 4 Steps</h2>
+      <p>From memory card to finished image &mdash; every pro follows this process. Click the steps to see details.</p>
+
+      <div class="photo-viewfinder">
+        <div class="photo-viewfinder__corners-bottom" aria-hidden="true"></div>
+        <div class="photo-viewfinder__crosshair" aria-hidden="true"></div>
+        <div class="photo-viewfinder__track" role="tablist" aria-label="Workflow steps">
+          <button class="photo-viewfinder__step is-active" role="tab" aria-selected="true" aria-controls="wf-import-en" id="tab-wf-import-en" data-wf-step="import">
+            <div class="photo-viewfinder__ring"><i class="ph ph-download-simple" aria-hidden="true"></i></div>
+            <span class="photo-viewfinder__label">Import</span>
+            <span class="photo-viewfinder__sublabel">Rate &amp; Tag</span>
+          </button>
+          <button class="photo-viewfinder__step" role="tab" aria-selected="false" aria-controls="wf-exposure-en" id="tab-wf-exposure-en" data-wf-step="exposure">
+            <div class="photo-viewfinder__ring"><i class="ph ph-sliders-horizontal" aria-hidden="true"></i></div>
+            <span class="photo-viewfinder__label">Exposure</span>
+            <span class="photo-viewfinder__sublabel">Correct &amp; Contrast</span>
+          </button>
+          <button class="photo-viewfinder__step" role="tab" aria-selected="false" aria-controls="wf-color-en" id="tab-wf-color-en" data-wf-step="color">
+            <div class="photo-viewfinder__ring"><i class="ph ph-palette" aria-hidden="true"></i></div>
+            <span class="photo-viewfinder__label">Color</span>
+            <span class="photo-viewfinder__sublabel">White Balance &amp; Sharp</span>
+          </button>
+          <button class="photo-viewfinder__step" role="tab" aria-selected="false" aria-controls="wf-export-en" id="tab-wf-export-en" data-wf-step="export">
+            <div class="photo-viewfinder__ring"><i class="ph ph-export" aria-hidden="true"></i></div>
+            <span class="photo-viewfinder__label">Export</span>
+            <span class="photo-viewfinder__sublabel">Format &amp; Size</span>
+          </button>
+        </div>
+        <p class="photo-viewfinder-hint"><i class="ph ph-hand-pointing" aria-hidden="true"></i> Click a step for details</p>
+      </div>
+
+      <div class="photo-scenario-panel is-active" id="wf-import-en" role="tabpanel" aria-labelledby="tab-wf-import-en">
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-download-simple"></i></div>
+            <div class="photo-setup-card__title">Step 1: Import &amp; Selection</div>
+          </div>
+          <ul class="photo-checklist-static">
+            <li><strong>Copy RAW files</strong> to your hard drive &mdash; never edit directly from the card</li>
+            <li><strong>Rate with stars:</strong> Mark the best images (e.g. 1&ndash;5 stars) to stay focused</li>
+            <li><strong>Tags &amp; collections:</strong> Organize by subject, date, or project</li>
+            <li><strong>Never delete files</strong> from the filesystem &mdash; only hide in the catalog</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="photo-scenario-panel" id="wf-exposure-en" role="tabpanel" aria-labelledby="tab-wf-exposure-en" hidden>
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-sliders-horizontal"></i></div>
+            <div class="photo-setup-card__title">Step 2: Exposure &amp; Contrast</div>
+          </div>
+          <ul class="photo-checklist-static">
+            <li><strong>Exposure:</strong> Correction in stops (+/- 1&ndash;2 EV is usually no problem in RAW)</li>
+            <li><strong>Highlights:</strong> Pull back overexposed areas (Highlights slider)</li>
+            <li><strong>Shadows:</strong> Lift shadows to rescue detail &mdash; but not too much (noise!)</li>
+            <li><strong>Contrast &amp; curves:</strong> S-curve for punch, reversed S-curve for soft look</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="photo-scenario-panel" id="wf-color-en" role="tabpanel" aria-labelledby="tab-wf-color-en" hidden>
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-palette"></i></div>
+            <div class="photo-setup-card__title">Step 3: Color &amp; Sharpness</div>
+          </div>
+          <ul class="photo-checklist-static">
+            <li><strong>White balance:</strong> Choose the right Kelvin value or use the eyedropper white balance</li>
+            <li><strong>Saturation &amp; vibrance:</strong> Vibrance protects skin tones, saturation affects all colors equally</li>
+            <li><strong>HSL:</strong> Selective color correction &mdash; only intensify the orange of the sun</li>
+            <li><strong>Sharpness:</strong> Apply edge masking to spare skies and skin</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="photo-scenario-panel" id="wf-export-en" role="tabpanel" aria-labelledby="tab-wf-export-en" hidden>
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-export"></i></div>
+            <div class="photo-setup-card__title">Step 4: Export &amp; Share</div>
+          </div>
+          <ul class="photo-checklist-static">
+            <li><strong>JPEG for web:</strong> sRGB color space, 80&ndash;90% quality, long edge 2048 px</li>
+            <li><strong>JPEG for print:</strong> Adobe RGB or sRGB, 100% quality, at least 300 DPI</li>
+            <li><strong>TIFF/PNG:</strong> Only for further editing or print shop</li>
+            <li><strong>Keep RAW:</strong> Never delete the original RAW file &mdash; it's your negative</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Tool-Kit (App-Tiles) -->
+    <div class="photo-content-section" data-reveal>
+      <h2>Your Tool Kit</h2>
+      <p>Each tool has its strengths. Choose based on platform, budget, and requirements. Click a tool for details.</p>
+
+      <div class="photo-app-grid">
+        <a href="../tools/darktable-en.html" class="photo-app-tile photo-app-tile--darktable">
+          <span class="photo-app-tile__badge">Desktop</span>
+          <div class="photo-app-tile__icon-wrap"><i class="ph ph-desktop" aria-hidden="true"></i></div>
+          <div class="photo-app-tile__name">darktable</div>
+          <div class="photo-app-tile__desc">Open source RAW developer for Windows, macOS and Linux. Professional workflow without subscription.</div>
+          <div class="photo-app-tile__footer">Learn more <i class="ph ph-arrow-right" aria-hidden="true"></i></div>
+        </a>
+        <a href="../tools/lightroom-mobile-en.html" class="photo-app-tile photo-app-tile--lightroom">
+          <span class="photo-app-tile__badge">Mobile</span>
+          <div class="photo-app-tile__icon-wrap"><i class="ph ph-device-mobile-camera" aria-hidden="true"></i></div>
+          <div class="photo-app-tile__name">Lightroom Mobile</div>
+          <div class="photo-app-tile__desc">Adobe RAW editing on your smartphone. Cloud sync, AI masks, premium presets.</div>
+          <div class="photo-app-tile__footer">Learn more <i class="ph ph-arrow-right" aria-hidden="true"></i></div>
+        </a>
+        <a href="../tools/snapseed-en.html" class="photo-app-tile photo-app-tile--snapseed">
+          <span class="photo-app-tile__badge">Free</span>
+          <div class="photo-app-tile__icon-wrap"><i class="ph ph-magic-wand" aria-hidden="true"></i></div>
+          <div class="photo-app-tile__name">Snapseed</div>
+          <div class="photo-app-tile__desc">Google's free image editor. Selective adjustments, healing tool, perspective correction.</div>
+          <div class="photo-app-tile__footer">Learn more <i class="ph ph-arrow-right" aria-hidden="true"></i></div>
+        </a>
+        <a href="../tools/gimp-en.html" class="photo-app-tile photo-app-tile--gimp">
+          <span class="photo-app-tile__badge">Desktop</span>
+          <div class="photo-app-tile__icon-wrap"><i class="ph ph-paint-brush" aria-hidden="true"></i></div>
+          <div class="photo-app-tile__name">GIMP</div>
+          <div class="photo-app-tile__desc">Open source pixel editor. Layers, masks, plugins &mdash; the free Photoshop alternative.</div>
+          <div class="photo-app-tile__footer">Learn more <i class="ph ph-arrow-right" aria-hidden="true"></i></div>
+        </a>
+        <a href="../tools/rawtherapee-en.html" class="photo-app-tile photo-app-tile--rawtherapee">
+          <span class="photo-app-tile__badge">Desktop</span>
+          <div class="photo-app-tile__icon-wrap"><i class="ph ph-sliders" aria-hidden="true"></i></div>
+          <div class="photo-app-tile__name">RawTherapee</div>
+          <div class="photo-app-tile__desc">Specialized RAW converter. Detail wavelets, noise reduction, advanced algorithms.</div>
+          <div class="photo-app-tile__footer">Learn more <i class="ph ph-arrow-right" aria-hidden="true"></i></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Section 4: Editing Basics -->
+    <div class="photo-content-section" data-reveal>
+      <h2>The 4 Pillars of Editing</h2>
+      <p>No matter which tool you use &mdash; these four principles apply everywhere. Master them, and you master every editor.</p>
+
+      <div class="photo-setup-grid photo-setup-grid--2col">
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-sun"></i></div>
+            <div class="photo-setup-card__title">Correct Exposure</div>
+          </div>
+          <p class="photo-setup-card__text">RAW files contain more information than you see. Under- and overexposed areas can often be rescued. Work in this order: Exposure &rarr; Contrast &rarr; Highlights &rarr; Shadows.</p>
+        </div>
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-palette"></i></div>
+            <div class="photo-setup-card__title">Control Color</div>
+          </div>
+          <p class="photo-setup-card__text">White balance is the most important color control. A wrong Kelvin value makes warm sunsets cold. Use HSL for selective corrections &mdash; e.g. only darken the green of trees.</p>
+        </div>
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-crop"></i></div>
+            <div class="photo-setup-card__title">Crop &amp; Straighten</div>
+          </div>
+          <p class="photo-setup-card__text">A good crop can rescue a mediocre image. Remove distracting edge elements, place the subject on rule-of-thirds points, and keep horizons straight. Crop before sharpening.</p>
+        </div>
+        <div class="photo-setup-card">
+          <div class="photo-setup-card__header">
+            <div class="photo-setup-card__icon"><i class="ph ph-scan"></i></div>
+            <div class="photo-setup-card__title">Selective Adjustments</div>
+          </div>
+          <p class="photo-setup-card__text">Not every image needs global changes. Masks, gradient filters, and brushes allow targeted edits: darken only the sky, brighten only the face, sharpen only the eyes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Smartphone Editing -->
+    <div class="photo-content-section" data-reveal>
+      <h2><i class="ph ph-device-mobile-camera" aria-hidden="true" style="color: var(--photo-accent-violet);"></i> Editing on Smartphone</h2>
+      <p>You don't need to sit at a computer for great results. Modern apps bring desktop power to your pocket.</p>
+
+      <div class="photo-mode-grid photo-mode-grid--2col">
+        <div class="photo-mode-card">
+          <div class="photo-mode-card__icon"><i class="ph ph-file-image" aria-hidden="true"></i></div>
+          <h3 class="photo-mode-card__title">RAW Instead of JPEG</h3>
+          <p class="photo-mode-card__desc">Shoot in RAW mode (DNG) if your smartphone supports it. Lightroom Mobile and Snapseed edit RAW files with full dynamic range &mdash; that makes the difference.</p>
+        </div>
+        <div class="photo-mode-card">
+          <div class="photo-mode-card__icon"><i class="ph ph-presets" aria-hidden="true"></i></div>
+          <h3 class="photo-mode-card__title">Presets as Starting Point</h3>
+          <p class="photo-mode-card__desc">Presets (Looks, Filters) are not cheating &mdash; they are a starting point. Choose a look close to your image, then adjust the sliders individually.</p>
+        </div>
+        <div class="photo-mode-card">
+          <div class="photo-mode-card__icon"><i class="ph ph-hand-pointing" aria-hidden="true"></i></div>
+          <h3 class="photo-mode-card__title">Selective Adjustments</h3>
+          <p class="photo-mode-card__desc">Snapseed and Lightroom Mobile allow point adjustments. Tap an area and adjust brightness, contrast, or saturation only there &mdash; without affecting the rest.</p>
+        </div>
+        <div class="photo-mode-card">
+          <div class="photo-mode-card__icon"><i class="ph ph-arrows-out" aria-hidden="true"></i></div>
+          <h3 class="photo-mode-card__title">Cloud Sync Workflow</h3>
+          <p class="photo-mode-card__desc">With Lightroom Mobile, edit on the go and find your edits later on desktop. The workflow is seamless &mdash; ideal for on-the-road and at home.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Tip-Box -->
+    <div class="photo-tip-box" data-reveal>
+      <div class="photo-tip-box__icon"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+      <div class="photo-tip-box__content">
+        <h4>The 80/20 Rule of Editing</h4>
+        <p>80% of the result comes from 20% of the sliders. Focus on: Exposure, Contrast, White Balance, and Cropping. Everything else is fine-tuning. A well-captured image needs barely any editing.</p>
+        <p><strong>Smartphone tip:</strong> Use the "Auto" feature as a starting point, but always check white balance and exposure manually. AI often gets it wrong.</p>
+      </div>
+    </div>
+
+    <!-- Section 7: Practice Exercises -->
+    <div class="photo-content-section" data-reveal>
+      <h2>Practice: Editing Training</h2>
+      <p>Three exercises that sharpen your workflow:</p>
+
+      <div class="photo-practice-box photo-practice-box--coral">
+        <h3><i class="ph ph-sliders-horizontal" aria-hidden="true"></i> Exercise 1: The Same Look</h3>
+        <p>Edit 5 images (different subjects) with the same style:</p>
+        <ol class="photo-step-list">
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">1</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Create a preset</div>
+              <div class="photo-step-list__desc">Edit the first image until satisfied. Save the settings as a preset/Look.</div>
+            </div>
+          </li>
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">2</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Apply to 4 more images</div>
+              <div class="photo-step-list__desc">Import 4 more images and apply the same preset.</div>
+            </div>
+          </li>
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">3</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Adjust individually</div>
+              <div class="photo-step-list__desc">Each image needs fine-tuning. Exposure and white balance will differ for every image.</div>
+            </div>
+          </li>
+        </ol>
+        <p style="margin-top: var(--photo-space-3); color: var(--photo-text-secondary);">Learn how differently the same preset affects various subjects.</p>
+      </div>
+
+      <div class="photo-practice-box photo-practice-box--teal">
+        <h3><i class="ph ph-magic-wand" aria-hidden="true"></i> Exercise 2: Rescue Mission</h3>
+        <p>Choose a technically bad image (underexposed, wrong color, blurry):</p>
+        <ol class="photo-step-list">
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">1</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Rescue exposure</div>
+              <div class="photo-step-list__desc">Lift shadows and pull back highlights. Where are the limits of the RAW file?</div>
+            </div>
+          </li>
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">2</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Correct white balance</div>
+              <div class="photo-step-list__desc">Use the eyedropper white balance on a neutral area. Compare with manual Kelvin.</div>
+            </div>
+          </li>
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">3</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Best possible result</div>
+              <div class="photo-step-list__desc">Edit the image as well as possible. When does it become too much? When does it look over-edited?</div>
+            </div>
+          </li>
+        </ol>
+        <p style="margin-top: var(--photo-space-3); color: var(--photo-text-secondary);">This exercise shows you the limits of post-processing &mdash; and why good captures matter.</p>
+      </div>
+
+      <div class="photo-practice-box photo-practice-box--violet">
+        <h3><i class="ph ph-device-mobile-camera" aria-hidden="true"></i> Exercise 3: Mobile Editing Challenge</h3>
+        <p>Edit an image completely on your smartphone:</p>
+        <ol class="photo-step-list">
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">1</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Shoot RAW</div>
+              <div class="photo-step-list__desc">Use Pro mode or RAW mode on your smartphone. Photograph a subject with high contrast.</div>
+            </div>
+          </li>
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">2</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Edit in Lightroom Mobile</div>
+              <div class="photo-step-list__desc">Exposure, contrast, color, sharpness, cropping &mdash; everything on the phone.</div>
+            </div>
+          </li>
+          <li class="photo-step-list__item">
+            <span class="photo-step-list__dot">3</span>
+            <div class="photo-step-list__content">
+              <div class="photo-step-list__title">Compare in Snapseed</div>
+              <div class="photo-step-list__desc">Export the image and open it in Snapseed. Which app feels better? Where are the strengths?</div>
+            </div>
+          </li>
+        </ol>
+        <p style="margin-top: var(--photo-space-3); color: var(--photo-text-secondary);">Compare the result with a desktop edit of the same image.</p>
+      </div>
+    </div>
+
+    <!-- Section 8: Quiz -->
+    <div class="photo-content-section" data-reveal>
+      <h2>Quiz: Editing</h2>
+
+      <div class="photo-quiz" data-correct="1">
+        <h3 class="photo-quiz__question">Why should you always shoot in RAW format if you plan to edit?</h3>
+        <div class="photo-quiz__options">
+          <div class="photo-quiz__option">Because RAW files are smaller than JPEG</div>
+          <div class="photo-quiz__option">Because RAW contains more image information and dynamic range</div>
+          <div class="photo-quiz__option">Because RAW can be viewed directly in the browser</div>
+        </div>
+        <div class="photo-quiz__feedback"></div>
+      </div>
+
+      <div class="photo-quiz" data-correct="0">
+        <h3 class="photo-quiz__question">What is the first step in the RAW workflow?</h3>
+        <div class="photo-quiz__options">
+          <div class="photo-quiz__option">Import and select the best images</div>
+          <div class="photo-quiz__option">Start color correction immediately</div>
+          <div class="photo-quiz__option">Export the image as JPEG</div>
+        </div>
+        <div class="photo-quiz__feedback"></div>
+      </div>
+
+      <div class="photo-quiz" data-correct="2">
+        <h3 class="photo-quiz__question">What is the difference between saturation and vibrance?</h3>
+        <div class="photo-quiz__options">
+          <div class="photo-quiz__option">There is no difference</div>
+          <div class="photo-quiz__option">Vibrance makes everything more colorful</div>
+          <div class="photo-quiz__option">Vibrance protects skin tones, saturation affects all colors equally</div>
+        </div>
+        <div class="photo-quiz__feedback"></div>
+      </div>
+
+      <div class="photo-quiz" data-correct="1">
+        <h3 class="photo-quiz__question">Which tool is best for free desktop RAW editing?</h3>
+        <div class="photo-quiz__options">
+          <div class="photo-quiz__option">Lightroom Mobile</div>
+          <div class="photo-quiz__option">darktable</div>
+          <div class="photo-quiz__option">Snapseed</div>
+        </div>
+        <div class="photo-quiz__feedback"></div>
+      </div>
+
+      <div class="photo-quiz" data-correct="0">
+        <h3 class="photo-quiz__question">Which format is best for web export?</h3>
+        <div class="photo-quiz__options">
+          <div class="photo-quiz__option">JPEG with sRGB color space</div>
+          <div class="photo-quiz__option">TIFF without compression</div>
+          <div class="photo-quiz__option">RAW file directly</div>
+        </div>
+        <div class="photo-quiz__feedback"></div>
+      </div>
+    </div>
+
+    <!-- Section 9: Reflection -->
+    <div class="photo-content-section" data-reveal>
+      <div id="moduleReflection"></div>
+    </div>
+    <noscript>
+      <div class="photo-reflection__fallback" role="note">
+        <p>The interactive learning reflection requires JavaScript. All learning content is fully accessible without reflection.</p>
+      </div>
+    </noscript>
+
+    <!-- Module Checklist -->
+    <section class="photo-checklist--gamified" data-reveal data-module="m10">
+      <div class="photo-checklist__header">
+        <div class="photo-checklist__title-group">
+          <h2 class="photo-checklist__title">Your Learning Progress</h2>
+          <p class="photo-checklist__subtitle">Check off the points you have understood.</p>
+          <span class="photo-checklist__completed-badge"><i class="ph ph-check-circle" aria-hidden="true"></i> Module completed</span>
+        </div>
+        <div class="photo-checklist__ring">
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+            <circle class="photo-checklist__ring-track" cx="40" cy="40" r="36" />
+            <circle class="photo-checklist__ring-fill" cx="40" cy="40" r="36" />
+          </svg>
+          <span class="photo-checklist__ring-text">0%</span>
+        </div>
+      </div>
+      <div class="photo-checklist__list">
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I understand the difference between RAW and JPEG</span>
+        </div>
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I know the 4-step RAW workflow</span>
+        </div>
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I can adjust exposure, contrast, and color deliberately</span>
+        </div>
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I know at least 2 suitable tools for my platform</span>
+        </div>
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I understand the difference between saturation and vibrance</span>
+        </div>
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I know which export format is suitable for web and print</span>
+        </div>
+        <div class="photo-checklist__item" tabindex="0" role="checkbox" aria-checked="false">
+          <div class="photo-checklist__checkbox">
+            <svg class="photo-checklist__checkmark" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M2 7l4 4 6-6" />
+            </svg>
+          </div>
+          <span class="photo-checklist__label">I have completed the exercises from this module</span>
+        </div>
+      </div>
+      <div class="photo-checklist__footer">
+        <button class="photo-checklist__btn" disabled><i class="ph ph-camera" aria-hidden="true"></i><span>Start shooting</span></button>
+      </div>
+    </section>
+
+    <!-- Section: What's Next? -->
+    <section class="photo-content-section" data-reveal>
+      <h2>What's Next?</h2>
+      <p>You now master the complete workflow &mdash; from capture to finished image. Now it's time for your masterpiece.</p>
+      <div class="photo-next-module">
+        <a href="11-capstone-en.html" class="photo-next-module__link">
+          <span class="photo-next-module__num">11</span>
+          <div class="photo-next-module__content">
+            <span class="photo-next-module__title">Capstone</span>
+            <span class="photo-next-module__desc">Your Final Project</span>
+          </div>
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</section>
+</main>
+
+<!-- Module Navigation Footer -->
+<nav class="photo-module-nav-footer" aria-label="Module navigation">
+  <div class="photo-module-nav-footer__inner">
+    <a href="09-makro-en.html" class="photo-nav-btn photo-nav-btn--prev">
+      <i class="ph ph-arrow-left"></i>
+      <span>Macro</span>
+    </a>
+    <div class="photo-nav-progress-indicator">
+      <div class="photo-nav-progress-bar">
+        <div class="photo-nav-progress-fill" data-base="10"></div>
+      </div>
+      <span class="photo-nav-progress-text"><strong>Module 10</strong> &mdash; Editing</span>
+    </div>
+    <a href="11-capstone-en.html" class="photo-nav-btn photo-nav-btn--next">
+      <span>Capstone</span>
+      <i class="ph ph-arrow-right"></i>
+    </a>
+  </div>
+</nav>
+
+<!-- Footer -->
+<footer class="photo-footer--premium" role="contentinfo">
+  <div class="o-container">
+    <div class="photo-footer__main">
+      <div class="photo-footer__brand-wrap">
+        <div class="photo-footer__logo">
+          <img src="/tutorials/pansonic-photo-lab/assets/icons/favicon.svg" alt="" width="48" height="48" loading="lazy">
+          <div class="photo-footer__logo-text">
+            <span class="photo-footer__logo-title">PANTAM</span>
+            <span class="photo-footer__logo-subtitle">LEARNING UNIVERSE</span>
+          </div>
+        </div>
+        <p class="photo-footer__tagline">Think with AI. Act human.</p>
+      </div>
+      <div class="photo-footer__links-grid">
+        <div class="photo-footer__col">
+          <h4>Photo Lab</h4>
+          <nav>
+            <a href="/tutorials/pansonic-photo-lab/index-en.html">Homepage</a>
+            <a href="/tutorials/pansonic-photo-lab/pages/gallery.html">Gallery</a>
+            <a href="/tutorials/pansonic-photo-lab/pages/glossar-en.html">Glossary</a>
+            <a href="/tutorials/pansonic-photo-lab/">German Version</a>
+          </nav>
+        </div>
+        <div class="photo-footer__col">
+          <h4>PLU Ecosystem</h4>
+          <nav>
+            <a href="/tutorials/">PLU Hub</a>
+            <a href="/tutorials/pages/vision.html">AI Vision</a>
+            <a href="/tutorials/pages/ki-charter.html">AI Charter</a>
+            <a href="/tutorials/pages/lexikon.html">AI Lexicon</a>
+          </nav>
+        </div>
+        <div class="photo-footer__col">
+          <h4>More Academies</h4>
+          <nav>
+            <a href="/tutorials/pansonic-video-lab/"><i class="ph ph-film-strip" aria-hidden="true"></i> Video Lab</a>
+            <a href="/tutorials/pansonic-audio-lab/"><i class="ph ph-speaker-high" aria-hidden="true"></i> Audio Lab</a>
+            <a href="/tutorials/ki-academy-premium/"><i class="ph ph-brain" aria-hidden="true"></i> AI Premium</a>
+            <a href="/tutorials/grafik-modern/"><i class="ph ph-paint-brush" aria-hidden="true"></i> Graphics &amp; Design</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="photo-footer__bottom">
+      <div class="photo-footer__legal">
+        <a href="/tutorials/pages/impressum.html">Imprint</a>
+        <span class="photo-footer__dot">&bull;</span>
+        <a href="/tutorials/pages/datenschutz.html">Privacy</a>
+        <span class="photo-footer__dot">&bull;</span>
+        <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+        <span class="photo-footer__dot">&bull;</span>
+        <span>Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+        <span class="photo-footer__dot">&bull;</span>
+        <span>Code: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></span>
+      </div>
+      <div class="photo-footer__meta">
+        <span>&copy; Pantam, Art &amp; Culture &ndash; Austria</span>
+        <a href="/tutorials/pages/spenden.html" class="photo-footer__support-link"><i class="ph ph-heart" aria-hidden="true"></i> Support</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Action Buttons -->
+<div class="photo-fab-container" role="group" aria-label="Quick actions">
+  <button class="photo-back-to-top photo-fab" id="back-to-top-fab" aria-label="Back to top" title="Back to top">
+    <i class="ph ph-arrow-up"></i>
+  </button>
+</div>
+
+<!-- Mobile Bottom Bar -->
+<div id="mobileBottomBar" class="photo-bottom-bar"></div>
+
+<!-- JS Entry Point -->
+<script type="module" src="/tutorials/pansonic-photo-lab/js/entry-chapter.js"></script>
+
+</body>
+</html>

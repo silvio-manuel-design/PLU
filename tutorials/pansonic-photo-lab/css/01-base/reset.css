@@ -1,0 +1,110 @@
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+
+@layer generic {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--photo-font-family);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--photo-bg-base);
+    color: var(--photo-text-primary);
+    min-height: 100vh;
+  }
+
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* No-JS Navigation — visible when JS is disabled */
+  .photo-noscript-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--photo-space-4);
+    padding: var(--photo-space-4) var(--photo-space-6);
+    background: var(--photo-bg-surface);
+    border-bottom: 1px solid var(--photo-border-subtle);
+  }
+
+  .photo-noscript-nav__link {
+    padding: var(--photo-space-2) var(--photo-space-4);
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-md);
+    color: var(--photo-text-primary);
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-medium);
+    text-decoration: none;
+    transition: all var(--photo-transition-fast);
+    white-space: nowrap;
+  }
+
+  .photo-noscript-nav__link:hover {
+    background: var(--photo-accent-dim);
+    border-color: var(--photo-accent);
+  }
+
+  .photo-noscript-nav__link.is-disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .photo-noscript-nav__link--center {
+    background: transparent;
+    border-color: transparent;
+    color: var(--photo-text-secondary);
+  }
+
+  .photo-noscript-nav__link--center:hover {
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-default);
+    color: var(--photo-text-primary);
+  }
+
+  /* Hide noscript nav when JS is available */
+  @media (scripting: enabled) {
+    .photo-noscript-nav {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mehrere Werte speichern, durchlaufen und manipulieren — Python's flexibelste Datenstruktur.">
+  <meta name="theme-color" content="#306998">
+  <title>06 – Listen | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/06-listen.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/06-listen-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="06-listen.html" class="py-classic-lang__btn is-active" data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="06-listen-en.html" class="py-classic-lang__btn " data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k06-listen.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 06</span>
+      </nav>
+      <h1 class="py-classic-hero__title">Listen</h1>
+      <p class="py-classic-hero__subtitle">Mehrere Werte speichern, durchlaufen und manipulieren — Python's flexibelste Datenstruktur.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 50 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Mittel</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">Du erstellst Listen, greifst auf Elemente zu und veränderst sie</li>
+        <li class="py-classic-learning-goals__item">Du nutzt Slicing und eingebaute Methoden wie append(), remove(), sort()</li>
+        <li class="py-classic-learning-goals__item">Du filterst und transformierst Daten mit List Comprehensions</li>
+        <li class="py-classic-learning-goals__item">Du baust PyBuddy's To-Do-Liste</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-list"></i></span>
+          Listen-Grundlagen
+        </h2>
+        <p>Listen speichern mehrere Werte in einer einzigen Variable. Sie sind wie ein <strong>Rucksack</strong>, in dem du alles Mögliche verstauen kannst — und der Inhalt ist jederzeit veränderbar.</p><ul><li>Erstellen: <code>aufgaben = ["Python", "CSS", "HTML"]</code></li><li>Zugriff: <code>aufgaben[0]</code> gibt das erste Element</li><li>Negative Indizes: <code>aufgaben[-1]</code> gibt das letzte Element</li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Listen erstellen und indizieren
+spiele = ["Minecraft", "Zelda", "Tetris", "Mario"]
+
+print(spiele[0])       # Minecraft
+print(spiele[-1])      # Mario (letztes)
+print(spiele[1:3])     # ['Zelda', 'Tetris']
+
+# Elemente ändern
+spiele[1] = "Zelda: TOTK"
+print(spiele)
+
+# Länge prüfen
+print(f"Du hast {len(spiele)} Spiele.")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Minecraft
+Mario
+['Zelda', 'Tetris']
+['Minecraft', 'Zelda: TOTK', 'Tetris', 'Mario']
+Du hast 4 Spiele.
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>spiele = ["Minecraft", "Zelda"]
+print(spiele[0])
+print(len(spiele))</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>let spiele = ["Minecraft", "Zelda"];
+console.log(spiele[0]);
+console.log(spiele.length);</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Listen in Python sind wie Arrays in JavaScript. Der Zugriff mit <code>[0]</code> ist identisch. Nur <code>len()</code> in Python vs <code>.length</code> in JS unterscheidet sich.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-scissors"></i></span>
+          Slicing &amp; Methoden
+        </h2>
+        <p>Mit <strong>Slicing</strong> schneidest du Teile aus einer Liste heraus: <code>liste[start:stop:step]</code>. Die Methoden <code>append()</code>, <code>insert()</code>, <code>remove()</code> und <code>pop()</code> verändern die Liste direkt.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Slicing
+zahlen = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(zahlen[2:6])     # [2, 3, 4, 5]
+print(zahlen[:4])      # [0, 1, 2, 3]
+print(zahlen[::-1])    # [9, 8, 7, ..., 0] (umgedreht!)
+
+# Methoden
+aufgaben = ["Python lernen"]
+aufgaben.append("Übung machen")
+aufgaben.insert(0, "Setup checken")
+print(aufgaben)
+
+aufgaben.remove("Setup checken")
+letztes = aufgaben.pop()
+print(f"Erledigt: {letztes}")
+print(aufgaben)</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            [2, 3, 4, 5]
+[0, 1, 2, 3]
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+['Setup checken', 'Python lernen', 'Übung machen']
+Erledigt: Übung machen
+['Python lernen']
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>aufgaben.append("Neu")
+aufgaben.remove("Alt")
+letztes = aufgaben.pop()</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>aufgaben.push("Neu");
+aufgaben.splice(aufgaben.indexOf("Alt"), 1);
+letztes = aufgaben.pop();</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>append()</code> und <code>pop()</code> sind identisch. Aber <code>remove()</code> in Python vs <code>splice(indexOf())</code> in JS ist viel einfacher!</div>
+          </div>
+        </div>
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Zeige mir die 10 wichtigsten Listen-Methoden in Python mit kurzen Code-Beispielen. Vergleiche sie mit JavaScript-Array-Methoden."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-lightning"></i></span>
+          List Comprehensions mit Bedingungen
+        </h2>
+        <p>List Comprehensions werden mit Bedingungen noch mächtiger. Du kannst filtern, transformieren und in einer Zeile ausdrücken, was sonst 5 Zeilen braucht.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Comprehensions mit Bedingungen
+zahlen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Nur gerade Zahlen
+gerade = [z for z in zahlen if z % 2 == 0]
+print(gerade)  # [2, 4, 6, 8, 10]
+
+# Quadrate nur von ungeraden Zahlen
+ungerade_quadrate = [z**2 for z in zahlen if z % 2 == 1]
+print(ungerade_quadrate)  # [1, 9, 25, 49, 81]
+
+# Strings filtern
+woerter = ["Apfel", "Banane", "Kirsche", "Dattel"]
+k_woerter = [w for w in woerter if w.startswith("K")]
+print(k_woerter)  # ['Kirsche']</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            [2, 4, 6, 8, 10]
+[1, 9, 25, 49, 81]
+['Kirsche']
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-chart-bar"></i></span>
+          Sortieren und Durchlaufen
+        </h2>
+        <p><code>sort()</code> sortiert die Liste direkt (in-place), während <code>sorted()</code> eine neue sortierte Liste zurückgibt. Mit <code>reverse=True</code> drehst du die Reihenfolge um.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Sortieren
+noten = [3, 1, 4, 2, 5, 2]
+noten.sort()
+print(noten)  # [1, 2, 2, 3, 4, 5]
+
+# Absteigend
+punkte = [450, 890, 120, 670]
+punkte.sort(reverse=True)
+print(punkte)  # [890, 670, 450, 120]
+
+# sorted() gibt neue Liste zurück
+namen = ["Charlie", "Alice", "Bob"]
+print(sorted(namen))  # ['Alice', 'Bob', 'Charlie']
+print(namen)          # Original bleibt!
+
+# Mit enumerate durchlaufen
+for platz, name in enumerate(namen, start=1):
+    print(f"{platz}. {name}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            [1, 2, 2, 3, 4, 5]
+[890, 670, 450, 120]
+['Alice', 'Bob', 'Charlie']
+['Charlie', 'Alice', 'Bob']
+1. Charlie
+2. Alice
+3. Bob
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>noten.sort()
+punkte.sort(reverse=True)
+for i, name in enumerate(namen):</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>noten.sort();
+punkte.sort((a, b) =&gt; b - a);
+for (let i = 0; i &lt; namen.length; i++) { let name = namen[i]; }</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>sort(reverse=True)</code> ist einfach. JavaScript: <code>sort()</code> sortiert Strings alphabetisch, für Zahlen brauchst du eine Compare-Funktion <code>(a,b) => b-a</code>.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-game-controller"></i></span>
+          Listen in Aktion: Inventar-System
+        </h2>
+        <p>Stell dir ein RPG-Inventar vor. Der Spieler kann Items hinzufügen, entfernen und sein bestes Item anzeigen. Listen sind dafür perfekt geeignet.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># RPG-Inventar
+inventar = ["Holzschwert", "Heiltrank", "5 Gold"]
+
+# Item hinzufügen
+neues_item = input("Gefundenes Item: ")
+inventar.append(neues_item)
+
+# Inventar anzeigen
+print("\n🎒 Dein Inventar:")
+for i, item in enumerate(inventar, 1):
+    print(f"  {i}. {item}")
+
+# Letztes Item entfernen (benutzen)
+if inventar:
+    benutzt = inventar.pop()
+    print(f"\n  Du hast {benutzt} benutzt.")
+    print(f" Verbleibend: {len(inventar)} Items")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Gefundenes Item: Eisenrüstung
+
+🎒 Dein Inventar:
+  1. Holzschwert
+  2. Heiltrank
+  3. 5 Gold
+  4. Eisenrüstung
+
+  Du hast Eisenrüstung benutzt.
+ Verbleibend: 3 Items
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Noten-Durchschnitt</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Speichere 5 Noten in einer Liste und berechne den Durchschnitt. Nutze <code>sum()</code> und <code>len()</code>.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-1-1">
+            <label for="task-06-1-1" class="py-classic-exercise__task-text">Erstelle noten.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-1-2">
+            <label for="task-06-1-2" class="py-classic-exercise__task-text">Erstelle leere Liste noten</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-1-3">
+            <label for="task-06-1-3" class="py-classic-exercise__task-text">Lies 5 Noten ein und füge sie hinzu</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-1-4">
+            <label for="task-06-1-4" class="py-classic-exercise__task-text">Berechne Durchschnitt mit sum()/len()</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>noten = []
+for i in range(5):
+    n = int(input(f"Note {i+1}: "))
+    noten.append(n)
+
+durchschnitt = sum(noten) / len(noten)
+print(f"Durchschnitt: {durchschnitt:.2f}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-06-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-06-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>noten = []
+for i in range(5):
+    n = int(input(f"Note {i+1}: "))
+    noten.append(n)
+
+durchschnitt = sum(noten) / len(noten)
+print(f"Durchschnitt: {durchschnitt:.2f}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Einkaufsliste mit Sortierung</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Erstelle eine Einkaufsliste. Der Nutzer kann Artikel hinzufügen, bis er 'fertig' eingibt. Danach wird die Liste alphabetisch sortiert ausgegeben.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-2-1">
+            <label for="task-06-2-1" class="py-classic-exercise__task-text">Erstelle einkauf.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-2-2">
+            <label for="task-06-2-2" class="py-classic-exercise__task-text">Nutze while für Eingabe</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-2-3">
+            <label for="task-06-2-3" class="py-classic-exercise__task-text">Füge Artikel mit append() hinzu</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-2-4">
+            <label for="task-06-2-4" class="py-classic-exercise__task-text">Sortiere mit sort() und gib aus</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>einkauf = []
+while True:
+    artikel = input("Artikel (fertig zum Beenden): ")
+    if artikel.lower() == "fertig":
+        break
+    einkauf.append(artikel)
+
+einkauf.sort()
+print("\n🛒 Einkaufsliste:")
+for i, artikel in enumerate(einkauf, 1):
+    print(f"  {i}. {artikel}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-06-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-06-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>einkauf = []
+while True:
+    artikel = input("Artikel (fertig zum Beenden): ")
+    if artikel.lower() == "fertig":
+        break
+    einkauf.append(artikel)
+
+einkauf.sort()
+print("\n🛒 Einkaufsliste:")
+for i, artikel in enumerate(einkauf, 1):
+    print(f"  {i}. {artikel}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy-Checkpoint: To-Do-Liste</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy speichert Aufgaben in einer Liste und zeigt sie formatiert an. Der Nutzer kann Aufgaben hinzufügen und anzeigen.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-3-1">
+            <label for="task-06-3-1" class="py-classic-exercise__task-text">Öffne pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-3-2">
+            <label for="task-06-3-2" class="py-classic-exercise__task-text">Erstelle Liste aufgaben</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-3-3">
+            <label for="task-06-3-3" class="py-classic-exercise__task-text">Nutze while für Menü</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-06-3-4">
+            <label for="task-06-3-4" class="py-classic-exercise__task-text">Implementiere add und show</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+aufgaben = ["Python lernen", "Projekt bauen"]
+
+print(" PyBuddy To-Do")
+while True:
+    cmd = input("\n[add, show, exit] ").lower()
+    if cmd == "exit":
+        break
+    elif cmd == "add":
+        task = input("Neue Aufgabe: ")
+        aufgaben.append(task)
+        print(" Hinzugefügt!")
+    elif cmd == "show":
+        for i, task in enumerate(aufgaben, 1):
+            print(f"  {i}. {task}")
+    else:
+        print("❓ Unbekannter Befehl")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-06-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-06-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+aufgaben = ["Python lernen", "Projekt bauen"]
+
+print(" PyBuddy To-Do")
+while True:
+    cmd = input("\n[add, show, exit] ").lower()
+    if cmd == "exit":
+        break
+    elif cmd == "add":
+        task = input("Neue Aufgabe: ")
+        aufgaben.append(task)
+        print(" Hinzugefügt!")
+    elif cmd == "show":
+        for i, task in enumerate(aufgaben, 1):
+            print(f"  {i}. {task}")
+    else:
+        print("❓ Unbekannter Befehl")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Didaktische Pause</span>
+        <p class="py-classic-funfact__text">In <strong>Minecraft</strong> ist das Inventar nichts anderes als eine riesige Liste mit 36 Slots. Jedes Item ist ein Listeneintrag mit Eigenschaften (Name, Haltbarkeit, Verzauberungen). Wenn du ein Item aufhebst, ruft das Spiel intern <code>inventar.append(item)</code> auf!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-list"></i></span><span>Listen = [1, 2, 3] — flexibel und veränderbar</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-scissors"></i></span><span> Slicing: liste[0:3], liste[::-1]</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-lightning"></i></span><span>Comprehensions: [x*2 for x in liste if x &gt; 0]</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-chart-bar"></i></span><span>sort() sortiert inplace, sorted() gibt neue Liste zurück</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-pencil-simple"></i></span><span>append(), remove(), pop() für Manipulation</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="05-schleifen.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">05 – Schleifen</span>
+    </a>
+    <a href="07-dictionaries.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">07 – Dictionaries & Sets</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Kapitel</h4><nav><a href="../index.html#kapitel">Alle Kapitel</a><a href="06-listen.html">06. Listen</a><a href="12-ki-cocoding.html">12. KI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Ressourcen</h4><nav><a href="../lexikon.html">Lexikon</a><a href="../abschlussprojekt.html">Abschlussprojekt</a><a href="../../../../index.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Rechtliches</h4><nav><a href="../../../../pages/impressum.html">Impressum</a><a href="../../../../pages/datenschutz.html">Datenschutz</a><a href="../../../../pages/disclaimer.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

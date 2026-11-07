@@ -1,0 +1,123 @@
+/* =========================================
+   COMPONENT: Step List — Vertical timeline
+   ========================================= */
+
+.photo-step-list {
+  --step-line-color: var(--photo-border-subtle);
+  --step-dot-size: 2.5rem;
+  --step-line-width: 2px;
+
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.photo-step-list__item {
+  display: flex;
+  gap: var(--photo-space-6);
+  padding: 0 0 var(--photo-space-8);
+  position: relative;
+}
+
+.photo-step-list__item:last-child {
+  padding-bottom: 0;
+}
+
+/* Timeline line */
+.photo-step-list__item::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--step-dot-size) / 2);
+  top: var(--step-dot-size);
+  width: var(--step-line-width);
+  height: calc(100% - var(--step-dot-size) / 2);
+  background: var(--step-line-color);
+}
+
+.photo-step-list__item:last-child::before {
+  display: none;
+}
+
+/* Numbered dot */
+.photo-step-list__dot {
+  flex-shrink: 0;
+  width: var(--step-dot-size);
+  height: var(--step-dot-size);
+  border-radius: 50%;
+  background: var(--module-accent, var(--photo-accent));
+  color: #1a1a1a;
+  font-weight: var(--photo-font-weight-bold);
+  font-size: var(--photo-font-size-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 4px var(--photo-surface-1);
+}
+
+/* Ensure dots stay visible on colored backgrounds (practice boxes) */
+.photo-practice-box .photo-step-list__dot {
+  box-shadow: 0 0 0 4px var(--photo-surface-1), 0 0 0 5px rgba(0,0,0,0.15);
+}
+
+/* Content */
+.photo-step-list__content {
+  flex: 1;
+  min-width: 0;
+  padding-top: calc((var(--step-dot-size) - var(--photo-line-height-body) * var(--photo-font-size-base)) / 2);
+}
+
+.photo-step-list__title {
+  font-weight: var(--photo-font-weight-bold);
+  color: var(--photo-text-primary);
+  margin-bottom: var(--photo-space-1);
+  font-size: var(--photo-font-size-base);
+  overflow-wrap: break-word;
+}
+
+.photo-step-list__desc {
+  color: var(--photo-text-secondary);
+  font-size: var(--photo-font-size-sm);
+  line-height: var(--photo-line-height-body);
+  overflow-wrap: break-word;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .photo-step-list__dot {
+  box-shadow: 0 0 0 4px var(--photo-surface-1);
+}
+
+[data-theme="dark"] .photo-step-list__item::before {
+  background: var(--photo-border-default);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .photo-step-list {
+    --step-dot-size: 1.75rem;
+  }
+  .photo-step-list__item {
+    gap: var(--photo-space-3);
+    padding-bottom: var(--photo-space-5);
+  }
+  .photo-step-list__content {
+    padding-top: 0.125rem;
+  }
+  .photo-step-list__title {
+    font-size: var(--photo-font-size-sm);
+    line-height: 1.4;
+  }
+  .photo-step-list__desc {
+    font-size: var(--photo-font-size-xs);
+    line-height: 1.5;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .photo-step-list__dot {
+    transition: none;
+  }
+}

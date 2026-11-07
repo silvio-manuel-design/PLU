@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05 – Box-Modell | HTML & CSS Tutorial</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .box-demo-container {
+      margin: 24px 0;
+      padding: 20px;
+      background: #fdf7f0;
+      border-radius: 12px;
+      border: 1px solid #eaeff5;
+      text-align: center;
+    }
+
+    .box-visual {
+      width: 200px;
+      height: 120px;
+      background-color: #e8f4fc;
+      border: 5px solid #9b59b6;
+      padding: 20px;
+      margin: 30px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      font-weight: bold;
+      color: #2c3e50;
+      transition: all 0.2s ease;
+    }
+
+    .slider-group {
+      margin: 12px 0;
+      width: 80%;
+    }
+
+    .slider-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .slider-value {
+      font-family: monospace;
+      background: #3498db;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    /* Dark Mode für Demo */
+    html.dark-mode .box-demo-container {
+      background: #252525 !important;
+    }
+    html.dark-mode .slider-group label {
+      color: #f0f0f0 !important;
+    }
+    html.dark-mode .slider-value {
+      background: #444 !important;
+      color: #4dc9ff !important;
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../assets/logo.svg" alt="HTML/CSS Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link">🏠</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 Module ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+                <li><a href="../kapitel/01-html-elements.html">01. HTML-Elemente</a></li>
+                <li><a href="../kapitel/02-page-structure.html">02. Seitenstruktur</a></li>
+                <li><a href="../kapitel/03-css-basics.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../kapitel/04-colors-and-inheritance.html">04. Farben & Vererbung</a></li>
+                <li><a href="../kapitel/05-box-model.html">05. Box-Modell</a></li>
+                <li><a href="../kapitel/06-folder-structure.html">06. Ordner & Pfade</a></li>
+                <li><a href="../kapitel/07-links.html">07. Links & Navigation</a></li>
+                <li><a href="../kapitel/08-media.html">08. Medien</a></li>
+                <li><a href="../kapitel/09-lists-selectors.html">09. Listen & Selektoren</a></li>
+                <li><a href="../kapitel/10-block-inline.html">10. Block vs. Inline</a></li>
+                <li><a href="../kapitel/11-layout-responsive.html">11. Layout & Responsive</a></li>
+                <li><a href="../kapitel/12-tables-forms.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">✏️ Übungen ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+                <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+                <li><a href="../uebungen/01-html-elements-aufgaben.html">01. HTML-Elemente</a></li>
+                <li><a href="../uebungen/02-page-structure-aufgaben.html">02. Seitenstruktur</a></li>
+                <li><a href="../uebungen/03-css-basics-aufgaben.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../uebungen/04-colors-and-inheritance-aufgaben.html">04. Farben & Vererbung</a></li>
+                <li><a href="../uebungen/05-box-model-aufgaben.html">05. Box-Modell</a></li>
+                <li><a href="../uebungen/06-folder-structure-aufgaben.html">06. Ordner & Pfade</a></li>
+                <li><a href="../uebungen/07-links-aufgaben.html">07. Links & Navigation</a></li>
+                <li><a href="../uebungen/08-media-aufgaben.html">08. Medien</a></li>
+                <li><a href="../uebungen/09-lists-selectors-aufgaben.html">09. Listen & Selektoren</a></li>
+                <li><a href="../uebungen/10-block-inline-aufgaben.html">10. Block vs. Inline</a></li>
+                <li><a href="../uebungen/11-layout-responsive-aufgaben.html">11. Layout & Responsive</a></li>
+                <li><a href="../uebungen/12-tables-forms-aufgaben.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li><a href="../tools/ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+            <li><a href="../tools/vscode.html" class="nav-link">💻 VS Code</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../abschluss/aufgabenstellung.html">📄 Statische Website</a></li>
+              </ul>
+            </li>
+            <li><a href="../resources/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <h1>05 – Box-Modell 📦</h1>
+      <p class="hero-subtitle">Jedes Element ist eine Box – versteh, wie sie aufgebaut ist</p>
+    </section>
+
+    <!-- 1. Was ist das Box-Modell? -->
+    <section>
+      <h2>📦 1. Was ist das Box-Modell?</h2>
+      <p>
+        In CSS wird <strong>jedes HTML-Element</strong> als rechteckige „Box“ behandelt.
+        Diese Box besteht aus <strong>vier übereinanderliegenden Schichten</strong>:
+      </p>
+      <ol>
+        <li><strong>Content</strong> – der eigentliche Inhalt (Text, Bild, etc.)</li>
+        <li><strong>Padding</strong> – Abstand <em>zwischen Inhalt und Rahmen</em> (innen)</li>
+        <li><strong>Border</strong> – der sichtbare Rahmen um das Element</li>
+        <li><strong>Margin</strong> – Abstand <em>zur nächsten Box</em> (außen)</li>
+      </ol>
+      <div class="regel">
+        💡 <strong>Gesamtbreite einer Box (Standard):</strong><br>
+        <code>width + padding-links + padding-rechts + border-links + border-rechts + margin-links + margin-rechts</code>
+      </div>
+      <p>
+        Ohne Kontrolle führt das schnell zu unerwarteten Layout-Verschiebungen – besonders bei responsivem Design.
+      </p>
+    </section>
+
+    <!-- 🔗 W3Schools – Box Model -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – Box Model</h2>
+      <p>
+        W3Schools erklärt das Box-Modell mit interaktiven Beispielen und visueller Darstellung.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_boxmodel.asp" target="_blank">W3Schools: CSS Box Model</a>
+      </p>
+    </section>
+
+    <!-- 2. Interaktive Box -->
+    <section>
+      <h2>🖱️ 2. Interaktive Box – spiele damit!</h2>
+      <p>
+        Verändere die Werte für <code>padding</code>, <code>border</code> und <code>margin</code> – und beobachte, wie sich die Box verhält.
+      </p>
+
+      <div class="box-demo-container">
+        <div class="box-visual" id="interactive-box">Inhalt</div>
+
+        <div class="slider-group">
+          <label>Padding: <span id="padding-value" class="slider-value">20px</span></label>
+          <input type="range" id="padding-slider" min="0" max="50" value="20">
+        </div>
+
+        <div class="slider-group">
+          <label>Border: <span id="border-value" class="slider-value">5px</span></label>
+          <input type="range" id="border-slider" min="0" max="20" value="5">
+        </div>
+
+        <div class="slider-group">
+          <label>Margin: <span id="margin-value" class="slider-value">30px</span></label>
+          <input type="range" id="margin-slider" min="0" max="60" value="30">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. box-sizing: border-box -->
+    <section>
+      <h2>🔧 3. Das Geheimnis professioneller Layouts: <code>box-sizing: border-box</code></h2>
+      <p>
+        Standardmäßig gilt: Wenn du <code>width: 200px</code> setzt, bezieht sich das <em>nur auf den Content</em>.  
+        Sobald du Padding oder Border hinzufügst, wird die Box <strong>breiter als 200px</strong> – oft unerwünscht!
+      </p>
+      <p>
+        Die Lösung: Das <code>box-sizing</code>-Property.
+      </p>
+      <div class="regel">
+        💡 <strong>Professioneller Standard:</strong>
+        <pre><code>* {
+  box-sizing: border-box;
+}</code></pre>
+        → Jetzt bezieht sich <code>width</code> auf die <strong>gesamte Box</strong> (inkl. Padding und Border).  
+        → Layouts werden vorhersehbar, stabil und leichter zu erstellen.
+      </div>
+      <div class="warnung">
+        ⚠️ <strong>Ohne <code>box-sizing: border-box</code></strong> ist responsives Design extrem fehleranfällig!
+      </div>
+      <p>
+        Dieses Snippet gehört in <em>jede</em> CSS-Datei – direkt am Anfang.
+      </p>
+    </section>
+
+    <!-- 4. KI als Lernpartner -->
+    <section>
+      <h2>🧠 4. KI als Lernpartner – guter Prompt</h2>
+      <p>
+        ❌ Schlecht: „Schreib mir CSS für eine Box.“  
+        ✅ Gut: „Erkläre mir das CSS-Box-Modell Schritt für Schritt – und zeig, wie <code>box-sizing: border-box</code> verhindert, dass Elemente unbeabsichtigt über den Container hinauswachsen.“
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt verstehst du, wie jede Box im Web aufgebaut ist – und wie du sie kontrollierst!</p>
+      <a href="./06-folder-structure.html" class="nav-button">→ Zu Modul 06: Ordner & Pfade</a>
+    </section>
+
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>HTML & CSS Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const box = document.getElementById('interactive-box');
+      const paddingSlider = document.getElementById('padding-slider');
+      const borderSlider = document.getElementById('border-slider');
+      const marginSlider = document.getElementById('margin-slider');
+      const paddingValue = document.getElementById('padding-value');
+      const borderValue = document.getElementById('border-value');
+      const marginValue = document.getElementById('margin-value');
+
+      // 100% sichere Stilsetzung
+      const setStyle = (prop, value) => {
+        box.style.setProperty(prop, value, 'important');
+      };
+
+      // Initiale Stile
+      setStyle('border', '5px solid #9b59b6');
+      setStyle('margin', '30px');
+      setStyle('width', '200px');
+      setStyle('height', '120px');
+      setStyle('display', 'flex');
+      setStyle('alignItems', 'center');
+      setStyle('justifyContent', 'center');
+      setStyle('fontWeight', 'bold');
+      setStyle('color', '#2c3e50');
+      setStyle('backgroundColor', '#e8f4fc');
+      setStyle('transition', 'all 0.2s ease');
+
+      function updateBox() {
+        const p = paddingSlider.value;
+        const b = borderSlider.value;
+        const m = marginSlider.value;
+
+        setStyle('padding', p + 'px');
+        setStyle('border', b + 'px solid #9b59b6');
+        setStyle('margin', m + 'px');
+
+        paddingValue.textContent = p + 'px';
+        borderValue.textContent = b + 'px';
+        marginValue.textContent = m + 'px';
+
+        const isDark = document.documentElement.classList.contains('dark-mode');
+        const textColor = isDark ? '#f0f0f0' : '#2c3e50';
+        const bgColor = isDark ? '#2a2a2a' : '#e8f4fc';
+
+        box.style.setProperty('color', textColor, 'important');
+        box.style.setProperty('backgroundColor', bgColor, 'important');
+      }
+
+      updateBox();
+      paddingSlider?.addEventListener('input', updateBox);
+      borderSlider?.addEventListener('input', updateBox);
+      marginSlider?.addEventListener('input', updateBox);
+
+      // Back-to-Top
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 600) button.classList.add('show');
+          else button.classList.remove('show');
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

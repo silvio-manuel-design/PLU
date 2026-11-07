@@ -1,0 +1,391 @@
+/* ==========================================================================
+   PYDESIGN QUEST — World Card Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-worlds-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--py-space-6);
+  }
+
+  .py-quest-world-card:nth-child(-n+3) {
+    grid-column: span 2;
+  }
+
+  .py-quest-world-card:nth-child(n+4) {
+    grid-column: span 3;
+  }
+
+  @media (max-width: 1023px) {
+    .py-quest-worlds-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .py-quest-world-card:nth-child(-n+3),
+    .py-quest-world-card:nth-child(n+4) {
+      grid-column: span 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .py-quest-worlds-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .py-quest-world-card {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%),
+      #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--py-radius-xl);
+    overflow: hidden;
+    transition: all var(--py-transition-base);
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Top accent line for unlocked worlds */
+  .py-quest-world-card:not(.is-locked)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--world-color, var(--py-primary));
+    opacity: 0.8;
+    z-index: 2;
+    transition: opacity var(--py-transition-base);
+  }
+
+  .py-quest-world-card:hover:not(.is-locked)::before {
+    opacity: 1;
+  }
+
+  .py-quest-world-card:hover:not(.is-locked) {
+    transform: translateY(-8px);
+    box-shadow:
+      0 24px 48px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 30px color-mix(in srgb, var(--world-color, var(--py-primary)) 20%, transparent);
+    border-color: color-mix(in srgb, var(--world-color, var(--py-primary)) 50%, rgba(255,255,255,0.15));
+  }
+
+  .py-quest-world-card.is-locked {
+    opacity: 0.7;
+    cursor: not-allowed;
+    filter: grayscale(0.6) brightness(0.8);
+  }
+
+  .py-quest-world-card.is-locked:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .py-quest-world-card.is-locked .py-quest-world-card__image {
+    filter: blur(2px);
+  }
+
+  .py-quest-world-card.is-locked .py-quest-world-card__lock {
+    background: rgba(11, 17, 32, 0.6);
+    backdrop-filter: blur(6px);
+  }
+
+  .py-quest-world-card.is-locked .py-quest-world-card__lock i {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: var(--py-space-3);
+    animation: lockPulse 3s ease-in-out infinite;
+  }
+
+  .py-quest-world-card.is-locked .py-quest-world-card__lock span {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @keyframes lockPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  /* Image */
+  .py-quest-world-card__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .py-quest-world-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--py-transition-slow);
+  }
+
+  .py-quest-world-card:hover:not(.is-locked) .py-quest-world-card__image img {
+    transform: scale(1.06);
+  }
+
+  .py-quest-world-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+  }
+
+  /* Completed worlds — brighter image, lighter overlay */
+  .py-quest-world-card.is-completed .py-quest-world-card__overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 70%);
+  }
+
+  .py-quest-world-card.is-completed .py-quest-world-card__image img {
+    filter: brightness(1.1) saturate(1.1);
+  }
+
+  .py-quest-world-card__lock {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .py-quest-world-card__lock i {
+    font-size: 2.5rem;
+    color: var(--py-text-muted);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-world-card__lock span {
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-muted);
+  }
+
+  .py-quest-world-card__number {
+    position: absolute;
+    top: var(--py-space-3);
+    left: var(--py-space-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-md);
+    color: var(--py-white);
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .py-quest-world-card__status {
+    position: absolute;
+    top: var(--py-space-3);
+    right: var(--py-space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    border-radius: 100px;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    text-transform: uppercase;
+  }
+
+  .py-quest-world-card__status--completed {
+    background: var(--py-success-bg);
+    color: var(--py-success);
+  }
+
+  .py-quest-world-card__status--active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--py-white);
+    backdrop-filter: blur(10px);
+  }
+
+  .py-quest-world-card__status--locked {
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--py-text-muted);
+  }
+
+  /* Content */
+  .py-quest-world-card__content {
+    padding: var(--py-space-5);
+  }
+
+  .py-quest-world-card__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-1);
+  }
+
+  .py-quest-world-card__subtitle {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    margin-bottom: var(--py-space-3);
+  }
+
+  .py-quest-world-card__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--py-space-2);
+    margin-bottom: var(--py-space-3);
+  }
+
+  .py-quest-world-card__skill {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--py-space-1) var(--py-space-2);
+    background: rgba(48, 105, 152, 0.1);
+    border: 1px solid rgba(48, 105, 152, 0.2);
+    border-radius: var(--py-radius-sm);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-primary);
+    line-height: 1;
+  }
+
+  .py-quest-world-card.is-locked .py-quest-world-card__skill {
+    opacity: 0.5;
+    filter: grayscale(0.5);
+  }
+
+  .py-quest-world-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--py-space-3);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+
+  /* Progress Bar */
+  .py-quest-world-card__progress {
+    margin-top: var(--py-space-3);
+  }
+
+  .py-quest-world-card__progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-full);
+    overflow: hidden;
+  }
+
+  .py-quest-world-card__progress-fill {
+    height: 100%;
+    border-radius: var(--py-radius-full);
+    transition: width var(--py-transition-slow);
+    min-width: 0;
+    width: var(--progress-width, 0%);
+    background: var(--progress-color, var(--py-primary));
+  }
+
+  .py-quest-world-card__progress-text {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--py-space-1);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+
+  /* Quest Timeline */
+  .py-quest-world-card__timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--py-space-2);
+    margin-top: var(--py-space-3);
+    position: relative;
+  }
+
+  .py-quest-world-card__timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 40px);
+    right: calc(50% - 40px);
+    height: 2px;
+    background: var(--py-bg-hover);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .py-quest-world-card__timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--py-bg-hover);
+    background: var(--py-bg-card);
+    position: relative;
+    z-index: 1;
+    transition: all var(--py-transition-base);
+  }
+
+  .py-quest-world-card__timeline-dot--completed {
+    background: var(--timeline-color, var(--py-primary));
+    border-color: var(--timeline-color, var(--py-primary));
+    box-shadow: 0 0 8px var(--timeline-color, var(--py-primary));
+  }
+
+  .py-quest-world-card__timeline-dot--active {
+    background: var(--py-bg-card);
+    border-color: var(--timeline-color, var(--py-primary));
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 0 12px var(--timeline-color, var(--py-primary));
+    animation: timelinePulse 2s ease-in-out infinite;
+  }
+
+  .py-quest-world-card__timeline-dot--locked {
+    background: var(--py-bg-hover);
+    border-color: var(--py-border-color);
+    opacity: 0.5;
+  }
+
+  @keyframes timelinePulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 0 12px var(--timeline-color, var(--py-primary)); }
+    50% { box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.05), 0 0 20px var(--timeline-color, var(--py-primary)); }
+  }
+
+  /* Completion Seal */
+  .py-quest-world-card__seal {
+    position: absolute;
+    bottom: var(--py-space-3);
+    right: var(--py-space-3);
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, var(--py-accent) 0%, var(--py-accent-dark) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--py-white);
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(255, 212, 59, 0.4);
+    animation: sealPop 0.5s ease both;
+  }
+
+  @keyframes sealPop {
+    0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+    70% { transform: scale(1.1) rotate(10deg); }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .py-quest-world-card__seal {
+      animation: none;
+    }
+  }
+}

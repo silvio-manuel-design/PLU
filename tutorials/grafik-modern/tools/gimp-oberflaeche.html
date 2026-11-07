@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <script>
+    if (!localStorage.getItem('darkMode')) {
+      localStorage.setItem('darkMode', 'true');
+    }
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GIMP – Oberfläche & Werkzeuge | Grafik Quest</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/cyberpunk-theme.css">
+  <link rel="stylesheet" href="../css/light-theme.css">
+  <link rel="stylesheet" href="../css/gamification.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html" class="brand">
+          <img src="../assets/logo.svg" alt="PLU" width="40" height="40">
+          <span class="brand__name">
+            Grafik <span class="brand__name--quest">Quest</span>
+          </span>
+        </a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten">🌓</button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../index.html" class="nav-link">🏠 HQ</a></li>
+<li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 LEVELS ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen</a></li>
+                <li><a href="../kapitel/01-pixel-vs-vektor.html">01. Pixel vs. Vektor</a></li>
+                <li><a href="../kapitel/02-gimp-grundlagen.html">02. GIMP Basics</a></li>
+                <li><a href="../kapitel/03-inkscape-grundlagen.html">03. Inkscape Basics</a></li>
+                <li><a href="../kapitel/04-dateiformate-web.html">04. Formate & Web</a></li>
+                <li><a href="../kapitel/05-projekt-logo.html">05. Boss: Logo</a></li>
+                <li><a href="../kapitel/06-animierte-grafiken.html">06. Animationen</a></li>
+              </ul>
+            </li>
+            <li><a href="../dashboard.html" class="nav-link">🎮 DASHBOARD</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️ INTEL</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- ANIMIERTER HERO-BEREICH -->
+    <section class="hero-section">
+      <h1>🖼️ GIMP – Canvas & Werkzeuge</h1>
+      <p class="hero-subtitle">Deine digitale Werkstatt für Pixelgrafiken</p>
+    </section>
+
+    <section>
+      <h2>🖥️ 1. Die drei Hauptfenster</h2>
+      <p>
+        Beim Start zeigt GIMP standardmäßig drei Fenster:
+      </p>
+      <figure class="illustration-center">
+        <img src="../assets/images/gimp-oberflaeche-placeholder.png" alt="GIMP-Oberfläche mit Hauptfenster, Werkzeugkasten und Ebenen-Dock" class="screenshot">
+        <figcaption class="screenshot-caption">
+          (1) Hauptfenster – dein Arbeitsbereich<br>
+          (2) Werkzeugkasten – alle Werkzeuge auf einen Blick<br>
+          (3) Ebenen-, Kanäle-, Pfade-Dock – zentral für fortgeschrittene Bearbeitung
+        </figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>🛠️ 2. Werkzeuggruppen im Überblick</h2>
+      <p>
+        Der Werkzeugkasten ist in logische Gruppen unterteilt. Hier die wichtigsten:
+      </p>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Gruppe</th>
+              <th>Werkzeuge</th>
+              <th>Verwendung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Auswahl</strong></td>
+              <td>Rechteck-, Ellipsen-, Lasso-Werkzeug</td>
+              <td>Bereiche markieren (z. B. zum Freistellen)</td>
+            </tr>
+            <tr>
+              <td><strong>Malen</strong></td>
+              <td>Pinsel, Stift, Radierer, Farbeimer</td>
+              <td>Zeichnen, Retusche, Füllen</td>
+            </tr>
+            <tr>
+              <td><strong>Transformieren</strong></td>
+              <td>Verschieben, Drehen, Skalieren, Perspektive</td>
+              <td>Objekte verändern</td>
+            </tr>
+            <tr>
+              <td><strong>Farben</strong></td>
+              <td>Farbpipette, Verlauf</td>
+              <td>Farben aufnehmen oder sanft übergehen lassen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>📦 3. Die Docks: Ebenen, Kanäle & Pfade</h2>
+      <p>
+        Rechts vom Hauptfenster findest du die <strong>Docks</strong> – schaltbare Panels mit wichtigen Funktionen:
+      </p>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Dock</th>
+              <th>Icon</th>
+              <th>Funktion</th>
+              <th>Tastenkürzel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ebenen</strong></td>
+              <td>📜</td>
+              <td>Layer verwalten, Sichtbarkeit, Reihenfolge ändern</td>
+              <td><kbd>Strg+L</kbd></td>
+            </tr>
+            <tr>
+              <td><strong>Kanäle</strong></td>
+              <td>🎨</td>
+              <td>RGB-Kanäle einzeln bearbeiten</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><strong>Pfade</strong></td>
+              <td>✏️</td>
+              <td>Vektorpfade erstellen & bearbeiten</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><strong>Werkzeugoptionen</strong></td>
+              <td>⚙️</td>
+              <td>Einstellungen für das aktive Werkzeug</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><strong>Farben</strong></td>
+              <td>🌈</td>
+              <td>Farbkorrektur: Helligkeit, Kontrast, Sättigung</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="regel">
+        <strong>💡 Tipp:</strong> Du kannst Docks verschieben, indem du den Reiter mit gedrückter Maus an eine neue Position ziehst. So passt du GIMP an deinen Workflow an!
+      </div>
+    </section>
+
+    <section>
+      <h2>🎨 4. Werkzeug-Optionen verstehen</h2>
+      <p>
+        Jedes Werkzeug hat unten im Werkzeugkasten oder im Dock "Werkzeugoptionen" spezifische Einstellungen:
+      </p>
+      <div class="card" style="margin-top: 16px;">
+        <h4 style="color: var(--neon-cyan);">Beispiel: Pinsel-Werkzeug</h4>
+        <ul style="color: var(--text-secondary);">
+          <li><strong>Größe:</strong> Durchmesser des Pinsels (1-5000 Pixel)</li>
+          <li><strong>Härte:</strong> Harte (scharfe) vs. weiche (verschwommene) Kanten</li>
+          <li><strong>Deckkraft:</strong> Wie stark die Farbe aufgetragen wird (0-100%)</li>
+          <li><strong>Dynamik:</strong> Druckempfindlichkeit (für Grafiktabletts)</li>
+        </ul>
+      </div>
+      <p style="margin-top: 16px;">
+        📝 <strong>Merke:</strong> Die gleichen Werkzeuge können mit unterschiedlichen Optionen völlig unterschiedliche Ergebnisse erzielen!
+      </p>
+    </section>
+
+    <section>
+      <h2>⌨️ 5. Die wichtigsten Tastenkürzel</h2>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tastenkürzel</th>
+              <th>Funktion</th>
+              <th>Wann nützlich?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><kbd>Strg+O</kbd></td>
+              <td>Bild öffnen</td>
+              <td>Schneller Start</td>
+            </tr>
+            <tr>
+              <td><kbd>Strg+S</kbd></td>
+              <td>Speichern (XCF)</td>
+              <td>Regelmäßig zwischenspeichern!</td>
+            </tr>
+            <tr>
+              <td><kbd>Strg+Z</kbd></td>
+              <td>Rückgängig</td>
+              <td>Fehler korrigieren</td>
+            </tr>
+            <tr>
+              <td><kbd>Strg+Shift+Z</kbd></td>
+              <td>Wiederherstellen</td>
+              <td>Zu viel zurück?</td>
+            </tr>
+            <tr>
+              <td><kbd>Strg+C / Strg+V</kbd></td>
+              <td>Kopieren / Einfügen</td>
+              <td>Objekte duplizieren</td>
+            </tr>
+            <tr>
+              <td><kbd>Strg+Shift+E</kbd></td>
+              <td>Exportieren</td>
+              <td>Schnell als PNG/JPG speichern</td>
+            </tr>
+            <tr>
+              <td><kbd>R</kbd></td>
+              <td>Rechteck-Auswahl</td>
+              <td>Schneller Wechsel</td>
+            </tr>
+            <tr>
+              <td><kbd>B</kbd></td>
+              <td>Pinsel</td>
+              <td>Zum Malen</td>
+            </tr>
+            <tr>
+              <td><kbd>E</kbd></td>
+              <td>Radierer</td>
+              <td>Korrekturen</td>
+            </tr>
+            <tr>
+              <td><kbd>Shift+Q</kbd></td>
+              <td>Schnellmaske</td>
+              <td>Präzise Auswahlen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warnung">
+        ⚠️ <strong>Wichtig:</strong> Tastenkürzel funktionieren nur, wenn das GIMP-Fenster aktiv ist (nicht im Browser o.ä.).
+      </div>
+    </section>
+
+    <section>
+      <h2>✂️ 6. Objekte freistellen – Schritt für Schritt</h2>
+      <p>
+        So stellst du ein Motiv frei (z. B. eine Person vom Hintergrund):
+      </p>
+      <ol>
+        <li>Öffne das Bild in GIMP</li>
+        <li>Wähle das <strong>Lasso-Werkzeug</strong> (oder <strong>Intelligentes Scheren-Werkzeug</strong>)</li>
+        <li>Umrahme das Motiv möglichst genau</li>
+        <li>Drücke <code>Strg+C</code> (kopieren), dann <code>Strg+V</code> (einfügen)</li>
+        <li>Im Ebenen-Dock erscheint eine neue „schwebende Auswahl“ → klicke auf <strong>„In Ebene umwandeln“</strong></li>
+        <li>Der Hintergrund ist nun transparent (graues Schachbrettmuster)</li>
+      </ol>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Ohne Umwandlung in eine Ebene geht der Ausschnitt beim Speichern verloren!
+      </div>
+    </section>
+
+    <section>
+      <h2>🎨 7. Farben verwenden</h2>
+      <p>
+        GIMP arbeitet mit zwei Farben gleichzeitig:
+      </p>
+      <ul>
+        <li><strong>Vordergrundfarbe</strong>: Für Pinsel, Text, Formen</li>
+        <li><strong>Hintergrundfarbe</strong>: Für Radierer, Verläufe</li>
+      </ul>
+      <p>
+        Klicke auf die Farbfelder im Werkzeugkasten, um neue Farben auszuwählen.<br>
+        Mit der <strong>Farbpipette</strong> kannst du Farben direkt aus dem Bild übernehmen.
+      </p>
+    </section>
+
+    <section>
+      <h2>↔️ 8. Skalieren & Transformieren</h2>
+      <p>
+        Um ein Bild oder eine Auswahl zu vergrößern/verkleinern:
+      </p>
+      <ol>
+        <li>Wähle das Objekt (oder die ganze Ebene)</li>
+        <li>Klicke auf das <strong>Skalieren-Werkzeug</strong></li>
+        <li>Ziehe an den Anfasspunkten oder gib exakte Werte ein</li>
+        <li>Klicke auf <strong>Skalieren</strong></li>
+      </ol>
+      <p>
+        🔁 Tipp: Halte <code>Umschalt</code> gedrückt, um das Seitenverhältnis zu erhalten.
+      </p>
+    </section>
+
+    <section>
+      <h2>🌀 9. Filter anwenden</h2>
+      <p>
+        Filter verändern das Aussehen deines Bildes (Weichzeichnung, Schärfe, Kunststile).
+      </p>
+      <p>
+        So geht’s:
+      </p>
+      <ol>
+        <li>Wähle die gewünschte Ebene</li>
+        <li>Gehe zu <strong>Filter → [Kategorie] → [Effekt]</strong></li>
+        <li>Stelle die Parameter ein und klicke auf <strong>OK</strong></li>
+      </ol>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Filter wirken nur auf die aktive Ebene – nicht auf das gesamte Bild!<br>
+        Das macht sie perfekt für experimentelles Arbeiten.
+      </div>
+    </section>
+
+    <section>
+      <h2>➡️ 7. Vorbereitung auf Ebenen</h2>
+      <p>
+        Alles, was du hier gelernt hast – Freistellen, Farben, Transformation – 
+        wird in der nächsten Lektion mit <strong>Ebenen</strong> kombiniert.
+      </p>
+      <p>
+        Denn: Erst mit Ebenen kannst du mehrere Objekte unabhängig voneinander bearbeiten.
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Du kennst jetzt die Werkstatt – bald wirst du Meisterwerke schaffen!</p>
+      <a href="../kapitel/02-gimp-grundlagen.html" class="nav-button" style="background: var(--neon-cyan); color: var(--bg-void);">→ Zurück zu Level 02: GIMP Basics</a>
+      <div style="margin-top: 16px;">
+        <a href="gimp-ebenen.html" class="nav-button btn-secondary" style="font-size: 0.9rem;">Optional: Ebenen & Transparenz →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+<script src="../js/gamification.js"></script>
+  <script src="../js/classroom-mode.js"></script>
+<script src="../js/reflection-form.js"></script>
+<script src="../js/quest-log.js"></script>
+</body>
+</html>

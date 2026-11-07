@@ -1,0 +1,109 @@
+/* ============================================================
+   COLOR TEMPERATURE CARDS — Weißabgleich / Kelvin-Skala
+   ============================================================ */
+
+.photo-temp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--photo-space-3);
+  margin: var(--photo-space-6) 0;
+}
+
+.photo-temp-card {
+  position: relative;
+  padding: var(--photo-space-4);
+  border-radius: var(--photo-radius-lg);
+  border: 1px solid var(--photo-border-subtle);
+  background: var(--photo-bg-surface);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.photo-temp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Color temperature bar at top */
+.photo-temp-card__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: var(--photo-radius-lg) var(--photo-radius-lg) 0 0;
+}
+
+.photo-temp-card--candle .photo-temp-card__bar { background: #FF6B35; }
+.photo-temp-card--tungsten .photo-temp-card__bar { background: #FFA500; }
+.photo-temp-card--fluorescent .photo-temp-card__bar { background: #E8F5E9; }
+.photo-temp-card--daylight .photo-temp-card__bar { background: #FFF8E1; }
+.photo-temp-card--cloudy .photo-temp-card__bar { background: #E3F2FD; }
+.photo-temp-card--shade .photo-temp-card__bar { background: #BBDEFB; }
+
+/* Kelvin value */
+.photo-temp-card__kelvin {
+  font-size: var(--photo-text-2xl);
+  font-weight: var(--photo-font-weight-bold);
+  color: var(--photo-text-primary);
+  margin-bottom: var(--photo-space-1);
+}
+
+.photo-temp-card__unit {
+  font-size: var(--photo-text-sm);
+  color: var(--photo-text-tertiary);
+  font-weight: var(--photo-font-weight-normal);
+}
+
+/* Label */
+.photo-temp-card__label {
+  font-size: var(--photo-text-base);
+  font-weight: var(--photo-font-weight-semibold);
+  color: var(--photo-text-primary);
+  margin-bottom: var(--photo-space-1);
+}
+
+/* Description */
+.photo-temp-card__desc {
+  font-size: var(--photo-text-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-relaxed);
+}
+
+/* Icon */
+.photo-temp-card__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--photo-radius-full);
+  margin-bottom: var(--photo-space-3);
+  font-size: 20px;
+}
+
+.photo-temp-card--candle .photo-temp-card__icon { background: rgba(255, 107, 53, 0.15); color: #FF6B35; }
+.photo-temp-card--tungsten .photo-temp-card__icon { background: rgba(255, 165, 0, 0.15); color: #FFA500; }
+.photo-temp-card--fluorescent .photo-temp-card__icon { background: rgba(200, 230, 201, 0.15); color: #A5D6A7; }
+.photo-temp-card--daylight .photo-temp-card__icon { background: rgba(255, 248, 225, 0.15); color: #FFE082; }
+.photo-temp-card--cloudy .photo-temp-card__icon { background: rgba(187, 222, 251, 0.15); color: #90CAF9; }
+.photo-temp-card--shade .photo-temp-card__icon { background: rgba(187, 222, 251, 0.2); color: #64B5F6; }
+
+/* Smartphone preset tag */
+.photo-temp-card__preset {
+  display: inline-flex;
+  margin-top: var(--photo-space-3);
+  padding: var(--photo-space-1) var(--photo-space-2);
+  background: var(--photo-accent-violet-dim);
+  color: var(--photo-accent-violet);
+  border-radius: var(--photo-radius-sm);
+  font-size: var(--photo-text-xs);
+  font-weight: var(--photo-font-weight-medium);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .photo-temp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

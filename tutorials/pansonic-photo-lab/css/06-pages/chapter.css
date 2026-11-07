@@ -1,0 +1,1264 @@
+/* ============================================================
+   Chapter / Module Page
+   ============================================================ */
+
+@layer pages {
+  /* Body padding for fixed bottom nav */
+  body {
+    padding-bottom: 80px;
+    overflow-x: hidden;
+  }
+
+  .photo-chapter-hero {
+    background: var(--photo-bg-secondary);
+    border-bottom: 1px solid var(--photo-border-subtle);
+  }
+
+  .photo-chapter-hero__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 24px 48px;
+  }
+
+  .photo-chapter-hero__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-tertiary);
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-chapter-hero__breadcrumb a {
+    color: var(--photo-accent);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .photo-chapter-hero__breadcrumb a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  .photo-chapter-hero__badge {
+    display: inline-block;
+    padding: var(--photo-space-1) var(--photo-space-3);
+    background: var(--photo-accent-dim);
+    border: 1px solid var(--photo-accent-glow);
+    border-radius: var(--photo-radius-sm);
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-chapter-hero__title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-4);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+
+  .photo-chapter-hero__lead {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: var(--photo-text-secondary);
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  .photo-chapter-content {
+    padding-block: var(--photo-space-12);
+  }
+
+  .photo-content-section {
+    margin-bottom: var(--photo-space-20);
+  }
+
+  .photo-content-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-content-section h3 {
+    font-size: var(--photo-text-xl);
+    margin-top: var(--photo-space-10);
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-primary);
+    margin-top: var(--photo-space-8);
+    margin-bottom: var(--photo-space-3);
+  }
+
+  .photo-content-section p {
+    margin-bottom: var(--photo-space-5);
+    line-height: 1.75;
+  }
+
+  .photo-content-section ul,
+  .photo-content-section ol {
+    margin-bottom: var(--photo-space-4);
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .photo-content-section ul li {
+    position: relative;
+    padding-left: var(--photo-space-6);
+    margin-bottom: var(--photo-space-3);
+    color: var(--photo-text-secondary);
+    line-height: 1.65;
+  }
+
+  .photo-content-section ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--module-accent, var(--photo-accent));
+    box-shadow: 0 0 8px color-mix(in srgb, var(--module-accent, var(--photo-accent)) 50%, transparent);
+  }
+
+  /* Mobile: list items as compact cards */
+  @media (max-width: 640px) {
+    .photo-content-section ul li {
+      background: var(--photo-bg-elevated);
+      border: 1px solid var(--photo-border-subtle);
+      border-radius: var(--photo-radius-md);
+      padding: var(--photo-space-3) var(--photo-space-4) var(--photo-space-3) var(--photo-space-6);
+      margin-bottom: var(--photo-space-2);
+      font-size: var(--photo-text-sm);
+      line-height: 1.5;
+    }
+
+    .photo-content-section ul li::before {
+      top: 0.85em;
+      left: 14px;
+    }
+  }
+
+  .photo-content-section ol:not(.photo-step-list) {
+    counter-reset: photo-list;
+  }
+
+  .photo-content-section ol:not(.photo-step-list) li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: var(--photo-space-3);
+    color: var(--photo-text-secondary);
+    line-height: 1.65;
+    counter-increment: photo-list;
+  }
+
+  .photo-content-section ol:not(.photo-step-list) li::before {
+    content: counter(photo-list);
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--photo-radius-sm);
+    background: var(--module-accent, var(--photo-accent));
+    color: var(--photo-bg-base);
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-bold);
+    line-height: 1;
+  }
+
+  .photo-tip-box {
+    display: flex;
+    gap: var(--photo-space-4);
+    padding: var(--photo-space-6);
+    background: var(--photo-accent-dim);
+    border: 1px solid var(--photo-accent-glow);
+    border-radius: var(--photo-radius-lg);
+    margin-block: var(--photo-space-6);
+  }
+
+  .photo-tip-box__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--photo-accent);
+    color: var(--photo-text-inverse);
+    border-radius: var(--photo-radius-md);
+    font-size: var(--photo-text-xl);
+  }
+
+  .photo-tip-box__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .photo-tip-box__content h4 {
+    font-size: var(--photo-text-md);
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-1);
+    overflow-wrap: break-word;
+  }
+
+  .photo-tip-box__content p {
+    font-size: var(--photo-text-md);
+    color: var(--photo-text-secondary);
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+
+  .photo-chapter-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--photo-space-8);
+    border-top: 1px solid var(--photo-border-subtle);
+    margin-top: var(--photo-space-12);
+  }
+
+  .photo-chapter-nav__link {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    transition: color var(--photo-transition-fast);
+  }
+
+  .photo-chapter-nav__link:hover {
+    color: var(--photo-accent);
+  }
+
+  .photo-chapter-nav__link--next {
+    margin-left: auto;
+  }
+
+  /* ── Tool Grid ───────────────────────────────────────────── */
+  .photo-tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--photo-space-4);
+    margin: var(--photo-space-6) 0;
+  }
+
+  .photo-tool-grid--cards {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--photo-space-5);
+  }
+
+  .photo-tool-grid--setup {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .photo-tool-grid-hint {
+    text-align: center;
+    color: var(--photo-text-tertiary);
+    font-size: var(--photo-text-sm);
+    margin-top: var(--photo-space-2);
+  }
+
+  @media (max-width: 640px) {
+    .photo-tool-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .photo-tool-grid--cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Tool Card ───────────────────────────────────────────── */
+  .photo-tool-card {
+    background: var(--photo-bg-card);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--photo-space-3);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .photo-tool-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: var(--photo-border-default);
+  }
+
+  .photo-tool-card__badge {
+    position: absolute;
+    top: var(--photo-space-3);
+    right: var(--photo-space-3);
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: var(--photo-radius-full);
+    background: var(--module-accent, var(--photo-accent));
+    color: #1a1a1a;
+  }
+
+  .photo-tool-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--photo-radius-md);
+    background: var(--photo-surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--module-accent, var(--photo-accent));
+  }
+
+  .photo-tool-card__title,
+  .photo-tool-card__name {
+    font-weight: var(--photo-font-weight-bold);
+    font-size: var(--photo-text-base);
+    color: var(--photo-text-primary);
+    margin: 0;
+  }
+
+  .photo-tool-card__desc {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-body);
+    margin: 0;
+  }
+
+  .photo-tool-card__footer {
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-tertiary);
+    margin-top: auto;
+    padding-top: var(--photo-space-2);
+  }
+
+  /* Compact variant for setup checklists */
+  .photo-tool-card--compact {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--photo-space-4);
+    padding: var(--photo-space-5);
+  }
+
+  .photo-tool-card--compact .photo-tool-card__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .photo-tool-card--compact .photo-tool-card__name {
+    font-size: var(--photo-text-sm);
+  }
+
+  .photo-tool-card--compact .photo-tool-card__desc {
+    font-size: var(--photo-text-xs);
+  }
+
+  [data-theme="light"] .photo-tool-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  /* ── Static Checklist ────────────────────────────────────── */
+  .photo-checklist-static {
+    list-style: none;
+    padding: 0;
+  }
+
+  .photo-checklist-static li {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 12px;
+    color: var(--photo-text-secondary);
+  }
+
+  .photo-checklist-static li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--photo-accent-secondary);
+    font-weight: 700;
+  }
+
+  /* ── Protip Box ──────────────────────────────────────────── */
+  .photo-protip-box {
+    background: rgba(255, 215, 0, 0.08);
+    border-left: 4px solid #FFD700;
+    padding: 20px 24px;
+    border-radius: 0 var(--photo-radius-lg) var(--photo-radius-lg) 0;
+    margin: var(--photo-space-6) 0;
+  }
+
+  .photo-protip-box strong {
+    color: #FFD700;
+  }
+
+  .photo-protip-box strong i {
+    color: #FFD700;
+    font-size: 1.1em;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* ── Setup Diagram ───────────────────────────────────────── */
+  .photo-setup {
+    background: var(--photo-bg-elevated);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-8);
+    text-align: center;
+    margin: var(--photo-space-6) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .photo-setup > svg,
+  .photo-setup svg:first-of-type {
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+  }
+    border: 1px solid var(--photo-border-subtle);
+  }
+
+  .photo-setup__diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-4);
+  }
+
+  .photo-setup__subject {
+    width: 60px;
+    height: 60px;
+    background: var(--photo-accent-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--photo-accent);
+  }
+
+  .photo-setup__arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--photo-text-tertiary);
+    font-size: 0.85rem;
+    gap: 4px;
+  }
+
+  .photo-setup__camera {
+    width: 80px;
+    height: 80px;
+    background: var(--photo-bg-surface);
+    border: 3px solid var(--photo-accent-secondary);
+    border-radius: var(--photo-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--photo-accent-secondary);
+  }
+
+  /* ── Responsive Table ────────────────────────────────────── */
+  .photo-table-wrap,
+  .photo-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: var(--photo-space-4) 0;
+  }
+
+  .photo-table-wrap table,
+  .photo-table-wrapper table {
+    width: 100%;
+    min-width: 320px;
+    table-layout: fixed;
+  }
+
+  /* ── Scenario Tabs ───────────────────────────────────────── */
+  .photo-scenario-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--photo-space-2);
+    margin: var(--photo-space-6) 0;
+    background: var(--photo-bg-elevated);
+    padding: 6px;
+    border-radius: 9999px;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .photo-scenario-tab {
+    padding: 10px 24px;
+    border-radius: 9999px;
+    border: 1px solid var(--photo-border-subtle);
+    background: var(--photo-bg-elevated);
+    color: var(--photo-text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .photo-scenario-tab:hover {
+    color: var(--photo-text-primary);
+    border-color: var(--photo-border-default);
+    background: var(--photo-bg-surface);
+  }
+
+  .photo-scenario-tab.is-active {
+    background: var(--photo-accent);
+    color: #1a1a1a;
+    box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
+  }
+
+  @media (max-width: 640px) {
+    .photo-scenario-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+      width: 100%;
+      padding: 4px;
+      border-radius: var(--photo-radius-lg);
+    }
+
+    .photo-scenario-tab {
+      padding: 8px 4px;
+      font-size: 0.8rem;
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .photo-scenario-tab i {
+      font-size: 0.85rem;
+    }
+  }
+
+  .photo-scenario-panel {
+    display: none;
+    animation: panelFadeIn 0.4s ease;
+  }
+
+  .photo-scenario-panel.is-active {
+    display: block;
+  }
+
+  @keyframes panelFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Setup Card ──────────────────────────────────────────── */
+  .photo-setup-card {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-5) 0;
+  }
+
+  .photo-setup-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-3);
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-setup-card__icon {
+    width: 44px;
+    height: 44px;
+    background: var(--photo-accent-dim);
+    border-radius: var(--photo-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--photo-accent);
+    flex-shrink: 0;
+  }
+
+  .photo-setup-card__title {
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+  }
+
+  .photo-setup-card__subtitle {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-tertiary);
+  }
+
+  .photo-setup-card__text {
+    color: var(--photo-text-secondary);
+    margin-bottom: var(--photo-space-4);
+    line-height: var(--photo-line-height-normal);
+  }
+
+  .photo-setup-card__heading {
+    font-size: var(--photo-text-md);
+    font-weight: var(--photo-font-weight-semibold);
+    margin-bottom: var(--photo-space-3);
+    color: var(--photo-text-primary);
+  }
+
+  /* ── Interactive Checklist (Scenario) ────────────────────── */
+  .photo-interactive-checklist {
+    list-style: none;
+    padding: 0;
+    margin: var(--photo-space-5) 0;
+  }
+
+  .photo-interactive-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-3);
+    padding: 14px 16px;
+    margin-bottom: var(--photo-space-2);
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .photo-interactive-checklist li:hover {
+    border-color: var(--photo-border-default);
+  }
+
+  .photo-interactive-checklist li.is-checked {
+    background: rgba(42, 157, 143, 0.08);
+    border-color: var(--photo-accent-secondary);
+  }
+
+  .photo-interactive-checklist li.is-checked .photo-check-circle {
+    background: var(--photo-accent-secondary);
+    border-color: var(--photo-accent-secondary);
+  }
+
+  .photo-interactive-checklist li.is-checked .photo-check-circle::after {
+    content: '✓';
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .photo-check-circle {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--photo-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-top: 2px;
+  }
+
+  .photo-interactive-checklist__text {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-primary);
+    line-height: var(--photo-line-height-normal);
+  }
+
+  .photo-interactive-checklist li.is-checked .photo-interactive-checklist__text {
+    color: var(--photo-text-secondary);
+    text-decoration: line-through;
+    text-decoration-color: var(--photo-border-subtle);
+    text-decoration-thickness: 1px;
+  }
+
+  /* ── Scenario Progress Ring ──────────────────────────────── */
+  .photo-scenario-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-4);
+    padding: var(--photo-space-5) var(--photo-space-6);
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    margin: var(--photo-space-6) 0;
+  }
+
+  .photo-scenario-progress__svg {
+    width: 60px;
+    height: 60px;
+    transform: rotate(-90deg);
+    flex-shrink: 0;
+  }
+
+  .photo-scenario-progress__circle {
+    fill: none;
+    stroke: var(--photo-border-default);
+    stroke-width: 4;
+  }
+
+  .photo-scenario-progress__circle--fill {
+    fill: none;
+    stroke: var(--photo-accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+
+  .photo-scenario-progress__text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--photo-accent);
+  }
+
+  .photo-scenario-progress__label {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-tertiary);
+  }
+
+  .photo-scenario-progress.is-hidden {
+    display: none;
+  }
+
+  /* ── Practice Box ────────────────────────────────────────── */
+  .photo-practice-box {
+    background: linear-gradient(135deg, var(--photo-accent-dim), transparent);
+    border: 1px solid var(--photo-accent);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-8) 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .photo-practice-box h3 {
+    color: var(--photo-text-primary);
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+    font-weight: var(--photo-font-weight-bold);
+    font-size: var(--photo-text-lg);
+    overflow-wrap: break-word;
+    flex-wrap: wrap;
+  }
+
+  .photo-practice-box--teal {
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), transparent);
+    border-color: var(--photo-accent-secondary);
+  }
+
+  .photo-practice-box--teal h3 {
+    color: var(--photo-accent-secondary);
+  }
+
+  /* ── Track Selector ──────────────────────────────────────── */
+  .photo-track-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--photo-space-4);
+    margin: var(--photo-space-6) 0;
+  }
+
+  .photo-track-card {
+    background: var(--photo-bg-elevated);
+    border: 2px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-7) var(--photo-space-6);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .photo-track-card:hover {
+    border-color: var(--photo-accent);
+    transform: translateY(-4px);
+    box-shadow: var(--photo-shadow-md);
+  }
+
+  .photo-track-card.is-selected {
+    border-color: var(--photo-accent);
+    background: var(--photo-accent-dim);
+  }
+
+  .photo-track-card__icon {
+    width: 56px;
+    height: 56px;
+    background: var(--photo-accent-dim);
+    border-radius: var(--photo-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto var(--photo-space-4);
+    color: var(--photo-accent);
+  }
+
+  .photo-track-card.is-selected .photo-track-card__icon {
+    background: var(--photo-accent);
+    color: var(--photo-text-inverse);
+  }
+
+  .photo-track-card__title {
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    margin-bottom: var(--photo-space-2);
+    color: var(--photo-text-primary);
+  }
+
+  .photo-track-card__desc {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-tertiary);
+    line-height: var(--photo-line-height-normal);
+  }
+
+  .photo-track-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: var(--photo-accent);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--photo-text-inverse);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .photo-track-card.is-selected .photo-track-card__badge {
+    display: flex;
+  }
+
+  @media (max-width: 640px) {
+    .photo-track-selector {
+      grid-template-columns: 1fr;
+    }
+    .photo-setup__subject {
+      width: 40px;
+      height: 40px;
+      font-size: 1.1rem;
+    }
+    .photo-setup__camera {
+      width: 52px;
+      height: 52px;
+      font-size: 1.4rem;
+    }
+    .photo-setup__arrow {
+      font-size: 0.75rem;
+      gap: 2px;
+    }
+    .photo-setup {
+      padding: var(--photo-space-5);
+    }
+    .photo-tip-box__icon {
+      width: 32px;
+      height: 32px;
+      font-size: var(--photo-text-lg);
+    }
+    .photo-tip-box {
+      padding: var(--photo-space-4);
+      gap: var(--photo-space-3);
+    }
+    .photo-tool-card__icon {
+      width: 36px;
+      height: 36px;
+      font-size: 1.25rem;
+    }
+    .photo-setup-card__icon {
+      width: 36px;
+      height: 36px;
+      font-size: 1.2rem;
+    }
+  }
+
+  .photo-track-feedback {
+    display: none;
+  }
+
+  .photo-track-feedback.is-visible {
+    display: block;
+  }
+
+  /* ── Next Module ─────────────────────────────────────────── */
+  .photo-next-module {
+    margin: var(--photo-space-8) 0;
+  }
+
+  .photo-next-module__link {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-5);
+    padding: var(--photo-space-6) var(--photo-space-8);
+    background: var(--photo-bg-elevated);
+    border: 2px solid var(--photo-accent);
+    border-radius: var(--photo-radius-lg);
+    color: var(--photo-text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);
+  }
+
+  .photo-next-module__link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(245, 158, 11, 0.2);
+    background: var(--photo-accent-dim);
+  }
+
+  .photo-next-module__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--photo-radius-md);
+    background: var(--photo-accent);
+    color: #1a1a1a;
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    flex-shrink: 0;
+  }
+
+  .photo-next-module__content {
+    flex: 1;
+  }
+
+  .photo-next-module__title {
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    margin-bottom: var(--photo-space-1);
+  }
+
+  .photo-next-module__desc {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+  }
+
+  .photo-next-module__link .ph-arrow-right {
+    font-size: 1.5rem;
+    color: var(--photo-accent);
+    transition: transform 0.3s ease;
+  }
+
+  .photo-next-module__link:hover .ph-arrow-right {
+    transform: translateX(4px);
+  }
+
+  /* Mobile Next Module */
+  @media (max-width: 640px) {
+    .photo-next-module__link {
+      padding: var(--photo-space-4) var(--photo-space-5);
+      gap: var(--photo-space-4);
+    }
+    .photo-next-module__num {
+      width: 40px;
+      height: 40px;
+      font-size: var(--photo-text-base);
+      border-radius: var(--photo-radius-sm);
+    }
+    .photo-next-module__title {
+      font-size: var(--photo-text-base);
+      margin-bottom: 2px;
+    }
+    .photo-next-module__desc {
+      font-size: var(--photo-text-xs);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+    }
+    .photo-next-module__link .ph-arrow-right {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* ── Light Mode Section Cards ────────────────────────────── */
+  [data-theme="light"] .photo-content-section {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-8);
+    margin-bottom: var(--photo-space-8);
+    box-shadow: var(--photo-shadow-sm);
+  }
+
+  [data-theme="light"] .photo-content-section h2 {
+    margin-top: 0;
+  }
+
+  [data-theme="light"] .photo-content-section h3:first-of-type {
+    margin-top: 0;
+  }
+
+  [data-theme="light"] .photo-tip-box {
+    background: var(--photo-bg-surface);
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="light"] .photo-tool-card {
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-default);
+    box-shadow: var(--photo-shadow-sm);
+  }
+
+  [data-theme="light"] .photo-tool-card:hover {
+    box-shadow: var(--photo-shadow-md);
+  }
+
+  [data-theme="light"] .photo-track-card {
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-default);
+  }
+
+  /* ── Rating Stars (replaces emoji ⭐) ─────────────────────── */
+  .photo-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* ── Tip Box Color Variants (extends base photo-tip-box) ─── */
+  .photo-tip-box--violet {
+    background: var(--photo-accent-violet-dim);
+    border-color: var(--photo-accent-violet);
+  }
+  .photo-tip-box--violet .photo-tip-box__icon {
+    background: var(--photo-accent-violet);
+  }
+
+  .photo-tip-box--teal {
+    background: var(--photo-accent-secondary-dim);
+    border-color: var(--photo-accent-secondary);
+  }
+  .photo-tip-box--teal .photo-tip-box__icon {
+    background: var(--photo-accent-secondary);
+  }
+
+  .photo-tip-box--coral {
+    background: var(--photo-accent-coral-dim);
+    border-color: var(--photo-accent-coral);
+  }
+  .photo-tip-box--coral .photo-tip-box__icon {
+    background: var(--photo-accent-coral);
+  }
+
+  .photo-tip-box--danger {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+  .photo-tip-box--danger .photo-tip-box__icon {
+    background: var(--photo-accent-error);
+  }
+
+  /* ── Section Visual Variations ───────────────────────────── */
+  /* Alternating section backgrounds for visual rhythm */
+  .photo-content-section:nth-child(odd) {
+    position: relative;
+  }
+  .photo-content-section:nth-child(odd)::before {
+    content: '';
+    position: absolute;
+    inset: -24px -24px -24px -24px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.02) 0%, transparent 50%);
+    border-radius: var(--photo-radius-xl);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Left accent border on h3s within sections */
+  .photo-content-section h3 {
+    position: relative;
+    padding-left: var(--photo-space-4);
+  }
+  .photo-content-section h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35em;
+    bottom: 0.35em;
+    width: 3px;
+    background: var(--photo-accent);
+    border-radius: var(--photo-radius-full);
+    opacity: 0.6;
+  }
+
+  /* ── Glow effects on interactive elements ────────────────── */
+  .photo-scenario-tab.is-active {
+    box-shadow: 0 0 20px var(--photo-accent-glow);
+  }
+
+  .photo-sim-camera__preset.is-active {
+    box-shadow: 0 0 16px var(--photo-accent-glow);
+  }
+
+  /* ── Track-visible content blocks ──────────────────────── */
+  [data-track-visible] {
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-6) 0;
+    border-radius: var(--photo-radius-lg);
+    border: 1px solid var(--photo-border-subtle);
+    background: var(--photo-bg-secondary);
+  }
+
+  [data-track-visible="smartphone"] {
+    border-color: rgba(245, 158, 11, 0.15);
+    background: rgba(245, 158, 11, 0.02);
+  }
+
+  [data-track-visible="camera"] {
+    border-color: rgba(20, 184, 166, 0.15);
+    background: rgba(20, 184, 166, 0.02);
+  }
+
+  [data-track-visible="both"] {
+    border-color: var(--photo-border-default);
+    background: var(--photo-bg-elevated);
+  }
+
+  [data-track-visible] h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Remove left accent stripe on h3 inside track boxes — the colored border already provides visual grouping */
+  [data-track-visible] h3 {
+    padding-left: 0;
+  }
+  [data-track-visible] h3::before {
+    display: none;
+  }
+
+  /* ── Setup Checklist Compact Cards ─────────────────────── */
+  .photo-tool-card--compact .photo-tool-card__name {
+    font-size: var(--photo-text-base);
+  }
+
+  .photo-tool-card--compact .photo-tool-card__desc {
+    font-size: var(--photo-text-sm);
+  }
+
+  @media (max-width: 768px) {
+    .photo-tool-grid--setup {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-tool-grid--setup {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Dark Mode Card Contrast Fixes ─────────────────────── */
+  [data-theme="dark"] .photo-tool-card,
+  [data-theme="dark"] .photo-setup-card,
+  [data-theme="dark"] .photo-track-card {
+    border-color: var(--photo-border-default);
+    background: var(--photo-bg-elevated);
+  }
+
+  [data-theme="dark"] .photo-tool-card:hover {
+    border-color: var(--photo-border-default);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  [data-theme="dark"] .photo-track-card:hover {
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-practice-box {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), transparent);
+  }
+
+  [data-theme="dark"] .photo-practice-box--teal {
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), transparent);
+  }
+
+  [data-theme="dark"] .photo-setup {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-setup__subject,
+  [data-theme="dark"] .photo-setup__camera {
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-scenario-tabs {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-scenario-tab {
+    color: var(--photo-text-secondary);
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-subtle);
+  }
+
+  [data-theme="dark"] .photo-scenario-tab:hover {
+    background: var(--photo-bg-surface);
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-tip-box {
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-next-modules li::before {
+    background: var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-content-section ul li::before {
+    box-shadow: 0 0 6px color-mix(in srgb, var(--module-accent, var(--photo-accent)) 60%, transparent);
+  }
+
+  [data-theme="dark"] .photo-interactive-checklist li {
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="dark"] .photo-check-circle {
+    border-color: var(--photo-border-default);
+  }
+
+  /* ── Responsive Hero ─────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .photo-chapter-hero__inner {
+      padding: 108px 16px 32px;
+    }
+
+    [data-theme="light"] .photo-content-section {
+      padding: var(--photo-space-6);
+    }
+
+    .photo-content-section:nth-child(odd)::before {
+      inset: -12px -12px -12px -12px;
+    }
+  }

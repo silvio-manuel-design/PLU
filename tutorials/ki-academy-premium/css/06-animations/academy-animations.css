@@ -1,0 +1,96 @@
+/* ============================================
+   KI ACADEMY PREMIUM - ANIMATIONS
+   ITCSS Layer: 06-animations
+   ============================================ */
+
+/* ------------------------------------------
+   Scroll Reveal Base
+   ------------------------------------------ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  will-change: opacity, transform;
+}
+
+[data-reveal="up"] {
+  transform: translateY(24px);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-24px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(24px);
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.96);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Stagger delays */
+[data-reveal-delay="1"] { transition-delay: 0.1s; }
+[data-reveal-delay="2"] { transition-delay: 0.2s; }
+[data-reveal-delay="3"] { transition-delay: 0.3s; }
+[data-reveal-delay="4"] { transition-delay: 0.4s; }
+[data-reveal-delay="5"] { transition-delay: 0.5s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ------------------------------------------
+   Hero Parallax
+   ------------------------------------------ */
+.academy-hero__bg {
+  will-change: transform;
+}
+
+/* ------------------------------------------
+   Floating Elements
+   ------------------------------------------ */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ------------------------------------------
+   Pulse Glow
+   ------------------------------------------ */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(244, 162, 97, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(244, 162, 97, 0.4); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ------------------------------------------
+   Typewriter Cursor
+   ------------------------------------------ */
+/* ------------------------------------------
+   Spin
+   ------------------------------------------ */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

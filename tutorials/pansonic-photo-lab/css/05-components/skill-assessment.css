@@ -1,0 +1,294 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Skill Self-Assessment (M11 Capstone)
+   Interactive star-rating with skill bars, color coding & score
+   ============================================================ */
+
+@layer components {
+  .photo-skill-assessment {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-8);
+    margin-block: var(--photo-space-8);
+  }
+
+  .photo-skill-assessment__header {
+    text-align: center;
+    margin-bottom: var(--photo-space-8);
+  }
+
+  .photo-skill-assessment__title {
+    font-size: var(--photo-text-xl);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-2);
+  }
+
+  .photo-skill-assessment__subtitle {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+  }
+
+  /* ── Skill Row with color coding ────────────────────────── */
+  .photo-skill-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--photo-space-4);
+    padding: var(--photo-space-5) 0;
+    border-bottom: 1px solid var(--photo-border-subtle);
+  }
+
+  .photo-skill-row:last-child {
+    border-bottom: none;
+  }
+
+  .photo-skill-row__info {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-4);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .photo-skill-row__icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--photo-radius-md);
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    color: var(--photo-accent);
+    font-size: 1.35rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .photo-skill-row__name {
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-primary);
+    font-size: var(--photo-text-base);
+  }
+
+  .photo-skill-row__hint {
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-tertiary);
+    margin-top: 2px;
+  }
+
+  /* Color-coded category accents */
+  .photo-skill-row--technique .photo-skill-row__icon {
+    color: var(--photo-accent-secondary);
+    background: rgba(20, 184, 166, 0.08);
+    border-color: rgba(20, 184, 166, 0.2);
+  }
+
+  .photo-skill-row--composition .photo-skill-row__icon {
+    color: var(--photo-accent-violet);
+    background: rgba(167, 139, 250, 0.08);
+    border-color: rgba(167, 139, 250, 0.2);
+  }
+
+  .photo-skill-row--light .photo-skill-row__icon {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.2);
+  }
+
+  .photo-skill-row--creativity .photo-skill-row__icon {
+    color: var(--photo-accent-coral);
+    background: rgba(251, 113, 133, 0.08);
+    border-color: rgba(251, 113, 133, 0.2);
+  }
+
+  .photo-skill-row--editing .photo-skill-row__icon {
+    color: var(--photo-accent);
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+
+  /* ── Star Rating ────────────────────────────────────────── */
+  .photo-star-rating {
+    display: flex;
+    gap: var(--photo-space-1);
+    flex-shrink: 0;
+  }
+
+  .photo-star-rating__btn {
+    background: none;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    color: var(--photo-border-default);
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .photo-star-rating__btn:hover {
+    transform: scale(1.25);
+  }
+
+  .photo-star-rating__btn.is-filled {
+    color: #f59e0b;
+  }
+
+  .photo-star-rating__btn:focus-visible {
+    outline: 2px solid var(--photo-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Category-colored stars when filled */
+  .photo-skill-row--technique .photo-star-rating__btn.is-filled { color: var(--photo-accent-secondary); }
+  .photo-skill-row--composition .photo-star-rating__btn.is-filled { color: var(--photo-accent-violet); }
+  .photo-skill-row--light .photo-star-rating__btn.is-filled { color: #fbbf24; }
+  .photo-skill-row--creativity .photo-star-rating__btn.is-filled { color: var(--photo-accent-coral); }
+  .photo-skill-row--editing .photo-star-rating__btn.is-filled { color: var(--photo-accent); }
+
+  /* ── Skill Bar (visual anchor) ──────────────────────────── */
+  .photo-skill-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--photo-bg-surface);
+    border-radius: var(--photo-radius-full);
+    margin-top: var(--photo-space-2);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-skill-bar__fill {
+    height: 100%;
+    border-radius: var(--photo-radius-full);
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .photo-skill-row--technique .photo-skill-bar__fill { background: linear-gradient(90deg, var(--photo-accent-secondary), #2dd4bf); }
+  .photo-skill-row--composition .photo-skill-bar__fill { background: linear-gradient(90deg, var(--photo-accent-violet), #c4b5fd); }
+  .photo-skill-row--light .photo-skill-bar__fill { background: linear-gradient(90deg, #f59e0b, #fde047); }
+  .photo-skill-row--creativity .photo-skill-bar__fill { background: linear-gradient(90deg, var(--photo-accent-coral), #fda4af); }
+  .photo-skill-row--editing .photo-skill-bar__fill { background: linear-gradient(90deg, var(--photo-accent), #fcd34d); }
+
+  /* ── Score Panel ────────────────────────────────────────── */
+  .photo-assessment-score {
+    margin-top: var(--photo-space-8);
+    padding: var(--photo-space-6);
+    background:
+      linear-gradient(135deg, var(--photo-bg-surface), rgba(245, 158, 11, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: var(--photo-radius-lg);
+    text-align: center;
+    display: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-assessment-score.is-visible {
+    display: block;
+    animation: photo-score-reveal 0.5s ease;
+  }
+
+  @keyframes photo-score-reveal {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .photo-assessment-score__value {
+    font-size: 3rem;
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-accent-gold);
+    line-height: 1;
+    text-shadow: 0 2px 16px rgba(245, 158, 11, 0.2);
+  }
+
+  .photo-assessment-score__label {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    margin-top: var(--photo-space-2);
+  }
+
+  .photo-assessment-score__meter {
+    width: 100%;
+    max-width: 280px;
+    height: 8px;
+    background: var(--photo-bg-surface);
+    border-radius: var(--photo-radius-full);
+    margin: var(--photo-space-4) auto 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-assessment-score__meter-fill {
+    height: 100%;
+    border-radius: var(--photo-radius-full);
+    background: linear-gradient(90deg, var(--photo-accent-secondary), var(--photo-accent), var(--photo-accent-gold));
+    width: 0%;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .photo-assessment-score__recommendation {
+    margin-top: var(--photo-space-5);
+    padding: var(--photo-space-4) var(--photo-space-5);
+    background: var(--photo-bg-card);
+    border-radius: var(--photo-radius-md);
+    border-left: 3px solid var(--photo-accent);
+    text-align: left;
+  }
+
+  .photo-assessment-score__recommendation-title {
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-1);
+    font-size: var(--photo-text-sm);
+  }
+
+  .photo-assessment-score__recommendation-text {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+  }
+
+  /* ── Dark mode enhancements ─────────────────────────────── */
+  [data-theme="dark"] .photo-star-rating__btn.is-filled {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  [data-theme="dark"] .photo-assessment-score__value {
+    text-shadow: 0 0 24px rgba(245, 158, 11, 0.3);
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .photo-skill-assessment {
+      padding: var(--photo-space-5);
+    }
+
+    .photo-skill-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--photo-space-3);
+    }
+
+    .photo-skill-row__icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+
+    .photo-star-rating__btn {
+      font-size: 1.35rem;
+    }
+
+    .photo-assessment-score__value {
+      font-size: 2.25rem;
+    }
+
+    .photo-skill-bar {
+      max-width: 100%;
+    }
+  }
+}

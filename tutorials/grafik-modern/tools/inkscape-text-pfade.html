@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <script>
+    if (!localStorage.getItem('darkMode')) {
+      localStorage.setItem('darkMode', 'true');
+    }
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inkscape – Text als Pfad & Formen | Grafik Quest</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/cyberpunk-theme.css">
+  <link rel="stylesheet" href="../css/light-theme.css">
+  <link rel="stylesheet" href="../css/gamification.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html" class="brand">
+          <img src="../assets/logo.svg" alt="PLU" width="40" height="40">
+          <span class="brand__name">
+            Grafik <span class="brand__name--quest">Quest</span>
+          </span>
+        </a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten">🌓</button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../index.html" class="nav-link">🏠 HQ</a></li>
+<li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 LEVELS ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen</a></li>
+                <li><a href="../kapitel/01-pixel-vs-vektor.html">01. Pixel vs. Vektor</a></li>
+                <li><a href="../kapitel/02-gimp-grundlagen.html">02. GIMP Basics</a></li>
+                <li><a href="../kapitel/03-inkscape-grundlagen.html">03. Inkscape Basics</a></li>
+                <li><a href="../kapitel/04-dateiformate-web.html">04. Formate & Web</a></li>
+                <li><a href="../kapitel/05-projekt-logo.html">05. Boss: Logo</a></li>
+                <li><a href="../kapitel/06-animierte-grafiken.html">06. Animationen</a></li>
+              </ul>
+            </li>
+            <li><a href="../dashboard.html" class="nav-link">🎮 DASHBOARD</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️ INTEL</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- ANIMIERTER HERO-BEREICH -->
+    <section class="hero-section">
+      <h1>✏️ Inkscape – Text als Pfad & Formen</h1>
+      <p class="hero-subtitle">Wie aus Schrift ein bearbeitbares Vektorobjekt wird</p>
+    </section>
+
+    <section>
+      <h2>❓ 1. Warum Text in Pfade umwandeln?</h2>
+      <p>
+        Solange Text ein „Textobjekt“ ist, benötigt der Betrachter dieselbe Schriftart.
+        Wird sie nicht gefunden, sieht das Logo plötzlich ganz anders aus!
+      </p>
+      <div class="regel">
+        💡 <strong>Lösung:</strong> Wandele Text in einen <strong>Pfad</strong> um.<br>
+        Dann ist er nur noch eine <em>Form</em> – unabhängig von Schriftarten.
+      </div>
+      <p>
+        ⚠️ <strong>Achtung:</strong> Danach kann der Text <em>nicht mehr</em> als Text bearbeitet werden!
+      </p>
+    </section>
+
+    <section>
+      <h2>🛠️ 2. Schritt-für-Schritt-Anleitung</h2>
+      <ol>
+        <li>Erstelle ein Textobjekt mit dem <strong>Text-Werkzeug</strong></li>
+        <li>Wähle den Text mit dem <strong>Auswahl-Werkzeug</strong> an</li>
+        <li>Gehe zu <strong>Pfad → Objekt in Pfad umwandeln</strong><br>
+          (Tastenkombination: <code>Umschalt+Strg+C</code>)</li>
+        <li>Der Text ist nun ein Pfad – erkennbar an den blauen Knotenpunkten</li>
+      </ol>
+      <figure class="illustration-center">
+        <svg width="100%" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="text-to-path-title text-to-path-desc">
+          <title id="text-to-path-title">Text vor und nach der Pfadumwandlung</title>
+          <desc id="text-to-path-desc">Links normaler Text, rechts derselbe Text als Pfad mit sichtbaren Knotenpunkten.</desc>
+          
+          <!-- Vorher -->
+          <text x="80" y="70" font-family="Arial" font-size="24" fill="#333">LOGO</text>
+          <text x="80" y="100" font-size="12" fill="#795548">Textobjekt</text>
+          
+          <!-- Pfeil -->
+          <path d="M180,60 L220,60" stroke="#d4a017" stroke-width="2" marker-end="url(#arrow)"/>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#d4a017" />
+            </marker>
+          </defs>
+          
+          <!-- Nachher -->
+          <path d="M240,50 Q250,30 260,50 T280,50" fill="none" stroke="#333" stroke-width="2"/>
+          <circle cx="240" cy="50" r="3" fill="#d4a017"/>
+          <circle cx="250" cy="30" r="2" fill="#d4a017" opacity="0.6"/>
+          <text x="260" y="100" font-size="12" fill="#795548">Pfad</text>
+        </svg>
+        <figcaption class="screenshot-caption">
+          Links: Textobjekt (bearbeitbar als Text)<br>
+          Rechts: Pfad (bearbeitbar als Form)
+        </figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>✅ 3. Was kannst du danach tun?</h2>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Nach Umwandlung</th>
+              <th>Möglich?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Buchstaben einzeln verschieben</td>
+              <td>✅ Ja (mit Pfad-Werkzeug)</td>
+            </tr>
+            <tr>
+              <td>Form der Buchstaben verändern</td>
+              <td>✅ Ja (Knoten ziehen)</td>
+            </tr>
+            <tr>
+              <td>Textinhalt ändern (z. B. „LOGO“ → „BRAND“)</td>
+              <td>❌ Nein</td>
+            </tr>
+            <tr>
+              <td>Schriftart wechseln</td>
+              <td>❌ Nein</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>⚠️ 4. Wichtige Hinweise</h2>
+      <ul>
+        <li><strong>Immer zuerst den finalen Text schreiben!</strong> Danach umwandeln.</li>
+        <li>Speichere eine Kopie mit Textobjekt (als <code>.svg</code>), falls du später Änderungen brauchst.</li>
+        <li>Für Logos ist die Umwandlung <strong>unbedingt notwendig</strong> – sonst funktioniert es beim Empfänger nicht!</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>➡️ 5. Vorbereitung auf das Logo-Projekt</h2>
+      <p>
+        Im Abschlussprojekt wirst du:
+      </p>
+      <ul>
+        <li>Einen Firmennamen als Text eingeben</li>
+        <li>Ihn in einen Pfad umwandeln</li>
+        <li>Die Buchstaben individuell gestalten (z. B. Farbe, Form)</li>
+        <li>Das Logo als <code>.svg</code> exportieren – perfekt fürs Web!</li>
+      </ul>
+      <p>
+        🔗 <a href="inkscape-abschluss.html">→ Vorschau: Abschlussprojekt – Logo-Design</a>
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du Text dauerhaft in Grafiken verwandeln!</p>
+      <a href="inkscape-export.html" class="nav-button">→ Zu Inkscape – Export nach SVG & PNG</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+<script src="../js/gamification.js"></script>
+  <script src="../js/classroom-mode.js"></script>
+<script src="../js/reflection-form.js"></script>
+<script src="../js/quest-log.js"></script>
+</body>
+</html>

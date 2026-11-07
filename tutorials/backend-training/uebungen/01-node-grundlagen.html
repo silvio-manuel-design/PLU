@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01. Node.js | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>01. Node.js 🟢</h1>
+      <p class="hero-subtitle">Deine ersten Schritte mit JavaScript auf dem Server</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Ziel dieser Übung</h2>
+      <p>
+        Du lernst:
+      </p>
+      <ul>
+        <li>Wie man ein Node.js-Skript ausführt</li>
+        <li>Wie man mit dem <code>fs</code>-Modul Dateien erstellt</li>
+        <li>Warum der Code im Terminal erscheint – nicht im Browser</li>
+        <li>Wie man Fehler liest und behebt</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📁 2. Vorbereitung</h2>
+      <p>
+        Stelle sicher, dass:
+      </p>
+      <ul>
+        <li>Node.js installiert ist (<code>node -v</code> im Terminal)</li>
+        <li>Dein Projektordner existiert: <code>C:\NodeJS\schueler-max\</code></li>
+        <li>Du das Terminal in diesem Ordner öffnen kannst</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🖨️ 3. Aufgabe 1: Hallo vom Server</h2>
+      <p>
+        Erstelle eine Datei <code>hallo.js</code> mit folgendem Inhalt:
+      </p>
+      <pre><code class="js-code">// hallo.js
+console.log("Hallo vom Node.js-Server!");
+console.log("Heute ist " + new Date().toLocaleDateString());</code></pre>
+      <p>
+        Führe das Skript im Terminal aus:
+      </p>
+      <pre><code>node hallo.js</code></pre>
+      <p>
+        <strong>Erwartete Ausgabe:</strong><br>
+        <code>Hallo vom Node.js-Server!</code><br>
+        <code>Heute ist ...</code>
+      </p>
+    </section>
+
+    <section>
+      <h2>💾 4. Aufgabe 2: Datei erstellen mit fs</h2>
+      <p>
+        Erstelle eine Datei <code>speichern.js</code>:
+      </p>
+      <pre><code class;js-code">// speichern.js
+const fs = require('fs');
+
+const nachricht = "Dies ist eine Testnachricht von " + process.env.USERNAME || "Schüler";
+
+fs.writeFile('test.txt', nachricht, (err) => {
+  if (err) {
+    console.error("❌ Fehler beim Speichern:", err.message);
+    return;
+  }
+  console.log("✅ Datei 'test.txt' wurde gespeichert!");
+});</code></pre>
+      <p>
+        Führe aus: <code>node speichern.js</code><br>
+        Prüfe: Liegt <code>test.txt</code> im selben Ordner?
+      </p>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Diese Datei wird <em>nicht</em> im Browser angezeigt – sie liegt auf deinem PC!
+      </div>
+    </section>
+
+    <section>
+      <h2>🧠 5. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Beantworte auf Papier:
+      </p>
+      <ol>
+        <li>Warum erscheint die Ausgabe von <code>console.log()</code> im Terminal und nicht im Browser?</li>
+        <li>Was passiert, wenn du <code>require('fs')</code> vergisst?</li>
+        <li>Warum ist es unsicher, Benutzerdaten direkt in eine Datei zu schreiben?</li>
+      </ol>
+      <p>
+        Danach formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, warum man bei Dateioperationen immer Fehler abfangen sollte.
+      </p>
+    </section>
+
+    <section>
+      <h2>✅ 6. Abgabe</h2>
+      <p>
+        Lade folgende Dateien in deinen OneDrive-Ordner hoch:
+      </p>
+      <ul>
+        <li><code>hallo.js</code></li>
+        <li><code>speichern.js</code></li>
+        <li><code>test.txt</code> (die erzeugte Datei)</li>
+        <li>Einen Screenshot des Terminals mit der Ausgabe beider Skripte</li>
+      </ul>
+      <p>
+        Gib einen <strong>Freigabelink auf den gesamten Ordner</strong> in Moodle ab.
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Du hast deine ersten Node.js-Skripte erfolgreich ausgeführt!</p>
+      <a href="../musterloesungen/01-node-grundlagen-loesung.html" class="nav-button">🔍 Musterlösung ansehen (Lehrkräfte)</a>
+      <a href="02-express-routing.html" class="nav-button">→ 02. Express-Routing</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

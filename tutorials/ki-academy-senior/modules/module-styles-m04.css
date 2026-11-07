@@ -1,0 +1,589 @@
+/* ============================================
+   M04 SYSTEM-PROMPTS — GOLD STANDARD UPGRADE
+   Detektiv Pattern + Hero Outline + Parallax CTA + Final Checklist
+   ============================================ */
+
+/* --------------------------------------------
+   HERO CONTENT OUTLINE
+   -------------------------------------------- */
+.hero-content-outline {
+  margin-top: 40px;
+  padding: 24px 28px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  max-width: 640px;
+}
+
+.outline-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.outline-label i {
+  color: #F4A261;
+  font-size: 1.1rem;
+}
+
+.outline-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.outline-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.outline-step:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.outline-step i {
+  color: #F4A261;
+  font-size: 1rem;
+}
+
+.outline-time {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.outline-time i {
+  color: #90A955;
+}
+
+@media (max-width: 768px) {
+  .hero-content-outline {
+    margin-top: 28px;
+    padding: 18px 20px;
+  }
+  .outline-steps {
+    gap: 8px;
+  }
+  .outline-step {
+    font-size: 0.82rem;
+    padding: 6px 12px;
+  }
+}
+
+/* --------------------------------------------
+   DETEKTIV SECTION (Click-to-Reveal Pattern)
+   -------------------------------------------- */
+.detektiv-section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.detektiv-progress {
+  max-width: 600px;
+  margin: 0 auto 32px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 100px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.detektiv-progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #F4A261 0%, #90A955 100%);
+  border-radius: 100px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.detektiv-progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2A363B;
+  z-index: 1;
+}
+
+.detektiv-progress-text.all-found {
+  color: white;
+}
+
+/* Rollen cards with click-to-reveal */
+.rollen-grid.detektiv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.rollen-card.detektiv-card {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.rollen-card.detektiv-card:hover:not(.active) {
+  transform: translateY(-6px);
+  border-color: #F4A261;
+  box-shadow: 0 12px 40px rgba(244, 162, 97, 0.15);
+}
+
+.rollen-card.detektiv-card.active {
+  border-color: #90A955;
+  background: linear-gradient(135deg, rgba(144, 169, 85, 0.12) 0%, rgba(255,255,255,1) 50%, rgba(144, 169, 85, 0.08) 100%);
+  box-shadow: 0 8px 30px rgba(144, 169, 85, 0.2);
+  transform: scale(1.02);
+}
+
+.rollen-card.detektiv-card.active::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: #90A955 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") center no-repeat;
+  background-size: 18px;
+  border-radius: 50%;
+  animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rollen-card.detektiv-card .rollen-icon {
+  transition: all 0.35s ease;
+}
+
+.rollen-card.detektiv-card.active .rollen-icon {
+  color: #90A955;
+  transform: scale(0.9);
+}
+
+/* Keep original rollen card top border color */
+.rollen-card.detektiv-card[data-rolle="lehrer"] { border-top: 4px solid #4CAF50; }
+.rollen-card.detektiv-card[data-rolle="kreativ"] { border-top: 4px solid #FF9800; }
+.rollen-card.detektiv-card[data-rolle="analytiker"] { border-top: 4px solid #2196F3; }
+.rollen-card.detektiv-card[data-rolle="experte"] { border-top: 4px solid #9C27B0; }
+.rollen-card.detektiv-card[data-rolle="coach"] { border-top: 4px solid #E91E63; }
+.rollen-card.detektiv-card[data-rolle="berater"] { border-top: 4px solid #607D8B; }
+
+.rollen-card.detektiv-card.active[data-rolle] {
+  border-top-color: #90A955;
+}
+
+.detektiv-explanation {
+  display: none;
+  padding: 0 24px 24px;
+  text-align: left;
+}
+
+.rollen-card.detektiv-card.active .detektiv-explanation {
+  display: block;
+  animation: slideUpReveal 0.4s ease 0.1s both;
+}
+
+.explanation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(244, 162, 97, 0.15);
+  color: #D4853A;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.explanation-badge i {
+  font-size: 0.85rem;
+  color: #D4853A;
+  margin: 0;
+  display: inline;
+}
+
+.explanation-badge.protip {
+  background: rgba(144, 169, 85, 0.15);
+  color: #6B8E3B;
+}
+
+.explanation-badge.protip i {
+  color: #6B8E3B;
+}
+
+.detektiv-reveal {
+  max-width: 800px;
+  margin: 48px auto 0;
+  padding: 40px 32px;
+  background: linear-gradient(135deg, rgba(244, 162, 97, 0.08) 0%, white 50%, rgba(144, 169, 85, 0.05) 100%);
+  border: 2px solid rgba(244, 162, 97, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(244, 162, 97, 0.15);
+  text-align: center;
+  display: none;
+}
+
+.detektiv-reveal.show {
+  display: block;
+  animation: fadeInUp 0.6s ease;
+}
+
+.detektiv-reveal-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #F4A261, #E76F51);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.detektiv-reveal-icon i {
+  font-size: 2.2rem;
+  color: white;
+  margin: 0;
+}
+
+.detektiv-reveal h3 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  color: #2A363B;
+  margin-bottom: 12px;
+}
+
+.detektiv-reveal p {
+  color: #5D4037;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detektiv-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(144, 169, 85, 0.15);
+  border-radius: 100px;
+  color: #6B8E3B;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.detektiv-counter i {
+  font-size: 1.3rem;
+  color: #90A955;
+}
+
+/* Example cards click-to-reveal */
+.examples-grid.detektiv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.example-card.detektiv-card {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.example-card.detektiv-card:hover:not(.active) {
+  transform: translateY(-6px);
+  border-color: #F4A261;
+  box-shadow: 0 12px 40px rgba(244, 162, 97, 0.15);
+}
+
+.example-card.detektiv-card.active {
+  border-color: #90A955;
+  background: linear-gradient(135deg, rgba(144, 169, 85, 0.08) 0%, white 50%, rgba(144, 169, 85, 0.05) 100%);
+  box-shadow: 0 8px 30px rgba(144, 169, 85, 0.2);
+  transform: scale(1.01);
+}
+
+.example-card.detektiv-card.active::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: #90A955 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") center no-repeat;
+  background-size: 18px;
+  border-radius: 50%;
+  animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.example-card.detektiv-card .detektiv-explanation {
+  padding: 0 20px 20px;
+}
+
+/* Pulse feedback on re-click */
+@keyframes detektivPulse {
+  0%, 100% { transform: scale(1.02); }
+  50% { transform: scale(1.06); }
+}
+
+.rollen-card.detektiv-card.pulse-feedback,
+.example-card.detektiv-card.pulse-feedback {
+  animation: detektivPulse 0.5s ease;
+}
+
+/* --------------------------------------------
+   PARALLAX CTA BUTTON
+   -------------------------------------------- */
+.parallax-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.parallax-cta-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------
+   FINAL CHECKLIST
+   -------------------------------------------- */
+.final-cta-checklist {
+  max-width: 420px;
+  margin: 0 auto 28px;
+  text-align: left;
+  background: rgba(144, 169, 85, 0.06);
+  border: 1px solid rgba(144, 169, 85, 0.15);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.final-cta-checklist p {
+  margin: 0 0 10px 0;
+  color: #4B5563;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.final-cta-checklist p:last-child {
+  margin-bottom: 0;
+}
+
+.final-cta-checklist p i {
+  color: #90A955;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.final-cta-checklist-pending {
+  color: #6B7280 !important;
+  font-style: italic;
+}
+
+.final-cta-checklist-pending i {
+  color: #9CA3AF !important;
+}
+
+/* --------------------------------------------
+   KEYFRAME ANIMATIONS
+   -------------------------------------------- */
+@keyframes slideUpReveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --------------------------------------------
+   DARK MODE VARIANTS
+   -------------------------------------------- */
+[data-theme="dark"] .hero-content-outline {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .outline-label {
+  color: rgba(248, 245, 240, 0.8);
+}
+
+[data-theme="dark"] .outline-step {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(248, 245, 240, 0.9);
+}
+
+[data-theme="dark"] .outline-step:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .outline-time {
+  color: rgba(248, 245, 240, 0.5);
+}
+
+[data-theme="dark"] .detektiv-section {
+  background: linear-gradient(180deg, #12151c 0%, #1a1d24 100%);
+}
+
+[data-theme="dark"] .detektiv-section .section-subtitle-premium {
+  color: rgba(248, 245, 240, 0.7);
+}
+
+[data-theme="dark"] .detektiv-progress {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .detektiv-progress-text {
+  color: #F8F5F0;
+}
+
+[data-theme="dark"] .rollen-card.detektiv-card,
+[data-theme="dark"] .example-card.detektiv-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .rollen-card.detektiv-card:hover:not(.active),
+[data-theme="dark"] .example-card.detektiv-card:hover:not(.active) {
+  border-color: rgba(244, 162, 97, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .rollen-card.detektiv-card.active,
+[data-theme="dark"] .example-card.detektiv-card.active {
+  background: linear-gradient(135deg, rgba(144, 169, 85, 0.15) 0%, rgba(255,255,255,0.02) 50%, rgba(144, 169, 85, 0.1) 100%);
+  border-color: rgba(144, 169, 85, 0.5);
+}
+
+[data-theme="dark"] .rollen-card.detektiv-card.active::after,
+[data-theme="dark"] .example-card.detektiv-card.active::after {
+  box-shadow: 0 2px 12px rgba(144, 169, 85, 0.4);
+}
+
+[data-theme="dark"] .rollen-card.detektiv-card h4,
+[data-theme="dark"] .example-card.detektiv-card h4 {
+  color: #F8F5F0;
+}
+
+[data-theme="dark"] .rollen-card.detektiv-card p,
+[data-theme="dark"] .example-card.detektiv-card p {
+  color: rgba(248, 245, 240, 0.6);
+}
+
+[data-theme="dark"] .detektiv-explanation p {
+  color: rgba(248, 245, 240, 0.75);
+}
+
+[data-theme="dark"] .explanation-badge {
+  background: rgba(244, 162, 97, 0.2);
+  color: #F4A261;
+}
+
+[data-theme="dark"] .explanation-badge.protip {
+  background: rgba(144, 169, 85, 0.2);
+  color: #A8C76A;
+}
+
+[data-theme="dark"] .detektiv-reveal {
+  background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, rgba(255,255,255,0.02) 50%, rgba(144, 169, 85, 0.08) 100%);
+  border-color: rgba(244, 162, 97, 0.3);
+}
+
+[data-theme="dark"] .detektiv-reveal h3 {
+  color: #F8F5F0;
+}
+
+[data-theme="dark"] .detektiv-reveal p {
+  color: rgba(248, 245, 240, 0.8);
+}
+
+[data-theme="dark"] .final-cta-checklist {
+  background: rgba(144, 169, 85, 0.08);
+  border-color: rgba(144, 169, 85, 0.2);
+}
+
+[data-theme="dark"] .final-cta-checklist p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .final-cta-checklist-pending {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+@media (max-width: 768px) {
+  .detektiv-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+  .detektiv-progress {
+    margin-bottom: 24px;
+    height: 36px;
+  }
+  .detektiv-reveal {
+    padding: 28px 20px;
+    margin-top: 32px;
+  }
+}

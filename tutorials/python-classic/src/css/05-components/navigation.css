@@ -1,0 +1,171 @@
+/* ==========================================================================
+   PYTHON CLASSIC — Navigation Component
+   Chapter Next/Prev + Table of Contents
+   ========================================================================== */
+
+@layer components {
+  /* Chapter Bottom Navigation */
+  .py-classic-chapter-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--py-space-4);
+    max-width: var(--py-content-width);
+    margin: var(--py-space-16) auto var(--py-space-12);
+    padding-top: var(--py-space-8);
+    border-top: 1px solid var(--py-border-color);
+  }
+
+  @media (max-width: 767px) {
+    .py-classic-chapter-nav {
+      gap: var(--py-space-3);
+      margin: var(--py-space-10) auto var(--py-space-8);
+      padding-top: var(--py-space-6);
+    }
+
+    .py-classic-chapter-nav__link {
+      padding: var(--py-space-3) var(--py-space-4);
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    .py-classic-chapter-nav__title {
+      display: none;
+    }
+
+    .py-classic-chapter-nav__label {
+      font-size: var(--py-text-sm);
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--py-text-primary);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .py-classic-chapter-nav {
+      gap: var(--py-space-6);
+    }
+  }
+
+  .py-classic-chapter-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-1);
+    padding: var(--py-space-5);
+    background-color: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    transition: transform var(--py-transition-base),
+                box-shadow var(--py-transition-base),
+                border-color var(--py-transition-base);
+  }
+
+  .py-classic-chapter-nav__link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--py-shadow-md);
+    border-color: var(--py-primary-light);
+  }
+
+  .py-classic-chapter-nav__link--prev {
+    text-align: left;
+  }
+
+  .py-classic-chapter-nav__link--next {
+    text-align: right;
+    grid-column: 2;
+  }
+
+  .py-classic-chapter-nav__label {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--py-text-muted);
+  }
+
+  .py-classic-chapter-nav__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-base);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-primary);
+  }
+
+  .py-classic-chapter-nav__arrow {
+    font-size: var(--py-text-xl);
+    color: var(--py-primary);
+    line-height: 1;
+  }
+
+  /* Table of Contents (Sidebar / Floating) */
+  .py-classic-toc {
+    position: sticky;
+    top: 6rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    padding: var(--py-space-4);
+    background-color: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+  }
+
+  .py-classic-toc__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--py-text-muted);
+    margin-bottom: var(--py-space-4);
+    padding-bottom: var(--py-space-3);
+    border-bottom: 1px solid var(--py-border-color);
+  }
+
+  .py-classic-toc__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-1);
+  }
+
+  .py-classic-toc__item {
+    display: block;
+  }
+
+  .py-classic-toc__link {
+    display: block;
+    padding: var(--py-space-2) var(--py-space-3);
+    border-radius: var(--py-radius-md);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    transition: color var(--py-transition-fast),
+                background-color var(--py-transition-fast);
+  }
+
+  .py-classic-toc__link:hover {
+    color: var(--py-text-primary);
+    background-color: var(--py-bg-hover);
+  }
+
+  .py-classic-toc__link.is-active {
+    color: var(--py-primary);
+    background-color: var(--py-bg-hover);
+    font-weight: var(--py-weight-semibold);
+  }
+
+  /* Scroll Progress Bar */
+  .py-classic-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: transparent;
+    z-index: calc(var(--py-z-header) + 1);
+  }
+
+  .py-classic-scroll-progress__bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--py-primary) 0%, var(--py-accent) 100%);
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+}

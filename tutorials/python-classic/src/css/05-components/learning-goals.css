@@ -1,0 +1,119 @@
+/* ==========================================================================
+   PYTHON CLASSIC — Learning Goals Component (Premium Upgrade)
+   Lernziele am Kapitelanfang — glassmorphism, gold accents, Phosphor icons
+   ========================================================================== */
+
+@layer components {
+  .py-classic-learning-goals {
+    position: relative;
+    background:
+      linear-gradient(135deg, rgb(48 105 152 / 0.85) 0%, rgb(30 63 90 / 0.9) 100%);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-8) var(--py-space-6);
+    margin-bottom: var(--py-space-12);
+    color: var(--py-white);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 4px 24px rgb(48 105 152 / 0.2),
+      inset 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+
+  /* Decorative gold glow in top-right */
+  .py-classic-learning-goals::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, var(--py-accent) 0%, transparent 65%);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  /* Subtle grid pattern overlay */
+  .py-classic-learning-goals::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .py-classic-learning-goals__title {
+    position: relative;
+    z-index: 1;
+    font-family: var(--py-font-display);
+    font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+    font-weight: var(--py-weight-bold);
+    margin-bottom: var(--py-space-5);
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    color: var(--py-white);
+    text-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+  }
+
+  .py-classic-learning-goals__title i {
+    color: var(--py-accent);
+    font-size: var(--py-text-2xl);
+  }
+
+  .py-classic-learning-goals__list {
+    position: relative;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-3);
+  }
+
+  .py-classic-learning-goals__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    font-size: var(--py-text-base);
+    line-height: var(--py-leading-normal);
+    color: rgb(255 255 255 / 0.92);
+  }
+
+  /* Phosphor checkmark icon instead of unicode character */
+  .py-classic-learning-goals__item::before {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: linear-gradient(135deg, var(--py-accent) 0%, var(--py-accent-dark) 100%);
+    color: var(--py-primary-dark);
+    border-radius: var(--py-radius-full);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    flex-shrink: 0;
+    margin-top: 1px;
+    /* Use a check SVG as background, or rely on the user adding an <i> element in HTML */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231e3f5a' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 2px 8px rgb(255 212 59 / 0.25);
+  }
+
+  /* Light mode adjustments */
+  html[data-theme="light"] .py-classic-learning-goals {
+    background:
+      linear-gradient(135deg, rgb(48 105 152 / 0.92) 0%, rgb(30 63 90 / 0.95) 100%);
+    border-color: rgb(48 105 152 / 0.2);
+    box-shadow:
+      0 4px 24px rgb(48 105 152 / 0.15),
+      inset 0 1px 0 rgb(255 255 255 / 0.15);
+  }
+}

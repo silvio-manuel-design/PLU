@@ -1,0 +1,281 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Header Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--py-z-header);
+    background: rgba(11, 17, 32, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transition: background var(--py-transition-base), border-color var(--py-transition-base), box-shadow var(--py-transition-base), transform 0.3s ease;
+  }
+
+  /* Mobile: Header auto-hide beim Scrollen nach unten */
+  @media (max-width: 767px) {
+    .py-quest-header.is-hidden {
+      transform: translateY(-100%);
+    }
+  }
+
+  .py-quest-header.is-scrolled {
+    background: rgba(11, 17, 32, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--py-shadow-md);
+  }
+
+  html[data-theme="light"] .py-quest-header {
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom-color: var(--py-border-color);
+  }
+
+  html[data-theme="light"] .py-quest-header.is-scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom-color: var(--py-border-strong);
+    box-shadow: var(--py-shadow-md);
+  }
+
+  .py-quest-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--py-max-width);
+    margin: 0 auto;
+    padding: var(--py-space-2) var(--py-space-3);
+    gap: var(--py-space-2);
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-header__container {
+      padding: var(--py-space-4) var(--py-space-6);
+      gap: var(--py-space-4);
+    }
+  }
+
+  .py-quest-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    font-family: var(--py-font-display);
+    font-size: 1.35rem;
+    font-weight: var(--py-weight-extrabold);
+    color: var(--py-text-primary);
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .py-quest-logo__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: var(--py-text-base);
+  }
+
+  .py-quest-logo__accent {
+    color: var(--py-accent);
+  }
+
+  /* Mobile: nur Logo-Icon, Text ausblenden */
+  @media (max-width: 639px) {
+    .py-quest-logo {
+      font-size: 0;
+      gap: 0;
+    }
+
+    .py-quest-logo__icon {
+      font-size: var(--py-text-base);
+    }
+  }
+
+  .py-quest-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+  }
+
+  .py-quest-nav__link {
+    display: none;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-2) var(--py-space-4);
+    font-size: 0.9rem;
+    font-weight: var(--py-weight-medium);
+    color: var(--py-text-secondary);
+    border-radius: var(--py-radius-md);
+    transition: color var(--py-transition-fast),
+                background-color var(--py-transition-fast);
+    text-decoration: none;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-nav__link {
+      display: inline-flex;
+    }
+  }
+
+  .py-quest-nav__link:hover {
+    background: var(--py-bg-hover);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-nav__link.is-active {
+    color: var(--py-text-primary);
+    background-color: var(--py-bg-hover);
+  }
+
+  .py-quest-nav__link.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--py-primary), var(--py-accent));
+    border-radius: var(--py-radius-full);
+  }
+
+  .py-quest-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+  }
+
+  /* Control Buttons — 44×44 wie Classic */
+  .py-quest-header__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--py-radius-md);
+    color: var(--py-text-secondary);
+    font-size: var(--py-text-base);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+    flex-shrink: 0;
+  }
+
+  .py-quest-header__btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-header__btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Mobile: Classroom-Button ausblenden (ist als FAB verfügbar) */
+  @media (max-width: 639px) {
+    .py-quest-header__btn[data-classroom-toggle] {
+      display: none;
+    }
+  }
+
+  .py-quest-header__btn svg,
+  .py-quest-header__btn i {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 1.25rem;
+  }
+
+  html[data-theme="light"] .py-quest-header__btn {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--py-text-secondary);
+  }
+
+  html[data-theme="light"] .py-quest-header__btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: var(--py-text-primary);
+  }
+
+  /* Language Switcher */
+  .py-quest-lang {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .py-quest-lang {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .py-quest-lang__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 0.7rem;
+    font-weight: var(--py-weight-bold);
+    letter-spacing: 0.04em;
+    color: var(--py-text-muted);
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all var(--py-transition-fast);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .py-quest-lang__btn:hover {
+    color: var(--py-text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  html[data-theme="light"] .py-quest-lang__btn:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .py-quest-lang__btn.is-active {
+    background: linear-gradient(135deg, var(--py-primary), var(--py-accent));
+    color: var(--py-white);
+    box-shadow: 0 2px 8px var(--py-shadow-glow);
+  }
+
+  .py-quest-xp-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    background: linear-gradient(135deg, rgba(255, 212, 59, 0.1) 0%, rgba(48, 105, 152, 0.1) 100%);
+    border: 1px solid rgba(255, 212, 59, 0.2);
+    border-radius: 100px;
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-accent-dark);
+    flex-shrink: 0;
+  }
+
+  html[data-theme="dark"] .py-quest-xp-badge {
+    color: var(--py-accent);
+  }
+
+  .py-quest-xp-badge i {
+    font-size: var(--py-text-sm);
+    color: var(--py-accent);
+  }
+}

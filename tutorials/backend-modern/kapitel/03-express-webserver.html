@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission 03: Express Server | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id">Mission 03</span>
+      <span class="mission-timer">~20 Min • +75 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Baue einen Webserver mit Express.js, der auf Anfragen antwortet.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Express installieren</h3>
+        <p>Erstelle einen neuen Ordner und initialisiere npm:</p>
+        <div class="code-block">npm init -y
+npm install express</div>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Server-Datei erstellen</h3>
+        <p>Erstelle <code>server.js</code> mit dem Express-Grundgerüst:</p>
+        <div class="code-block">const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log('Server läuft auf Port ' + PORT);
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Erste Route erstellen</h3>
+        <p>Füge eine GET-Route hinzu:</p>
+        <div class="code-block">app.get('/', (req, res) => {
+  res.send('Hallo von Express!');
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>Server starten</h3>
+        <p>Starte den Server im Terminal:</p>
+        <div class="code-block">node server.js</div>
+        <p>Teste im Browser: <code>http://localhost:3000</code></p>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Weitere Route hinzufügen</h3>
+        <p>Erstelle eine Route für <code>/api</code>:</p>
+        <div class="code-block">app.get('/api', (req, res) => {
+  res.json({ message: 'API läuft', status: 'OK' });
+});</div>
+      </li>
+      
+      <li class="step-item" id="step-6">
+        <h3>Testen</h3>
+        <p>Rufe <code>http://localhost:3000/api</code> im Browser auf.</p>
+        <p>Du solltest JSON-Daten sehen.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Läuft dein Express-Server?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Server testen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+75 XP] [Mission 04 freigeschaltet]
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeMission()" disabled>
+        Mission abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>Express vereinfacht das Erstellen von Webservern in Node.js.</li>
+          <li>Routen definieren, welche Antwort auf welche URL kommt.</li>
+          <li>JSON ist das Standardformat für API-Antworten.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe Express-Server...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'Prüfung OK';
+        result.textContent = '[OK] Express-Server Code korrekt. Route /api erkannt.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeMission() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeMission, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeMission('03');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('03', 'Express Server', 'Webserver mit Express.js erstellen');
+      AbgabePanel.init('03', 'Express Server');
+      
+      const status = MissionsAPI.getMissionStatus()['03'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+75 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

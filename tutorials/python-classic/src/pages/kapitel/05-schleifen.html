@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="for und while — Wiederholungen meistern mit List Comprehensions und Python-Idiomen.">
+  <meta name="theme-color" content="#306998">
+  <title>05 – Schleifen | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/05-schleifen.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/05-schleifen-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="05-schleifen.html" class="py-classic-lang__btn is-active" data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="05-schleifen-en.html" class="py-classic-lang__btn " data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k05-schleifen.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 05</span>
+      </nav>
+      <h1 class="py-classic-hero__title">Schleifen</h1>
+      <p class="py-classic-hero__subtitle">for und while — Wiederholungen meistern mit List Comprehensions und Python-Idiomen.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 60 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Mittel</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">Du nutzt for-Schleifen mit range() für gezielte Wiederholungen</li>
+        <li class="py-classic-learning-goals__item">Du steuerst while-Schleifen mit Abbruchbedingungen und vermeidest Endlosschleifen</li>
+        <li class="py-classic-learning-goals__item">Du nutzt break, continue und enumerate() für elegante Iteration</li>
+        <li class="py-classic-learning-goals__item">Du baust PyBuddy's interaktives Menü</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-repeat"></i></span>
+          Die for-Schleife
+        </h2>
+        <p>Die <code>for</code>-Schleife ist die häufigste Wiederholung in Python. Sie durchläuft jedes Element einer Sequenz — sei es eine Liste, ein String oder ein <code>range()</code>-Objekt.</p><p><code>range(start, stop, step)</code> erzeugt Zahlenfolgen. Wichtig: Der <code>stop</code>-Wert ist exklusiv!</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># for-Schleife mit range()
+for i in range(1, 6):
+    print(f"Runde {i}")
+
+# Mit Schrittweite
+for i in range(0, 11, 2):
+    print(f"Gerade Zahl: {i}")
+
+# Strings durchlaufen
+for buchstabe in "Python":
+    print(buchstabe.upper())</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Runde 1
+Runde 2
+Runde 3
+Runde 4
+Runde 5
+Gerade Zahl: 0
+Gerade Zahl: 2
+...
+P
+Y
+T
+H
+O
+N
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>for i in range(1, 6):
+    print(i)</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>for (let i = 1; i &lt; 6; i++) {
+    console.log(i);
+}</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>range(1, 6)</code> gibt 1-5. JavaScript: <code>i &lt; 6</code> gibt auch 1-5. Python's for ist intuitiver, JS braucht die klassische C-Syntax.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-arrows-clockwise"></i></span>
+          Die while-Schleife
+        </h2>
+        <p><code>while</code> wiederholt Code, solange eine Bedingung <code>True</code> ist. Sie ist perfekt, wenn du nicht weißt, wie oft etwas wiederholt werden muss — z.B. bis der Nutzer 'exit' eingibt.</p><div class="py-classic-box py-classic-box--warning"><h3 class="py-classic-box__title"><i class="ph ph-warning"></i> Achtung</h3><p class="py-classic-box__text">Vergiss nie die Abbruchbedingung, sonst läuft die Schleife ewig — das nennt man <strong>Endlosschleife</strong>!</p></div>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># while-Schleife: Countdown
+countdown = 3
+while countdown &gt; 0:
+    print(f"Start in {countdown}...")
+    countdown -= 1
+print(" Los!")
+
+# Nutzer-Eingabe bis 'exit'
+befehl = ""
+while befehl != "exit":
+    befehl = input("Befehl (exit zum Beenden): ").lower()
+    if befehl != "exit":
+        print(f"Ausführung: {befehl}")
+print(" Programm beendet.")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Start in 3...
+Start in 2...
+Start in 1...
+ Los!
+Befehl (exit zum Beenden): hallo
+Ausführung: hallo
+Befehl (exit zum Beenden): exit
+ Programm beendet.
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>while befehl != "exit":
+    befehl = input("&gt; ")</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>while (befehl !== "exit") {
+    befehl = prompt("&gt; ");
+}</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Die Logik ist identisch! Python nutzt <code>input()</code> im Terminal, JavaScript <code>prompt()</code> als Popup.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-octagon"></i></span>
+          break &amp; continue
+        </h2>
+        <p>Manchmal willst du eine Schleife vorzeitig abbrechen oder einen Durchlauf überspringen. Dafür gibt es <code>break</code> und <code>continue</code>:</p><ul><li><code>break</code> — beendet die Schleife sofort</li><li><code>continue</code> — überspringt den Rest des aktuellen Durchlaufs</li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># break: Schleife vorzeitig beenden
+for i in range(1, 11):
+    if i == 5:
+        print(" Abbruch bei 5!")
+        break
+    print(i)
+
+# continue: Überspringen
+for i in range(1, 6):
+    if i == 3:
+        print("⏭️  Überspringe 3")
+        continue
+    print(f"Verarbeite {i}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            1
+2
+3
+4
+ Abbruch bei 5!
+1
+2
+⏭️  Überspringe 3
+4
+5
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>if i == 5:
+    break
+if i == 3:
+    continue</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>if (i === 5) { break; }
+if (i === 3) { continue; }</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> <code>break</code> und <code>continue</code> funktionieren in Python und JavaScript exakt gleich!</div>
+          </div>
+        </div>
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Zeige mir ein Python-Beispiel mit break und continue in einem Spiel-Szenario: Ein Spieler sucht nach einem Item in einer Liste und bricht ab, wenn er es findet."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-list"></i></span>
+          enumerate() &amp; zip()
+        </h2>
+        <p><code>enumerate()</code> liefert bei einer Iteration gleichzeitig den Index und den Wert — super praktisch! <code>zip()</code> kombiniert zwei Listen Element für Element.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># enumerate: Index + Wert
+aufgaben = ["Python lernen", "Übung machen", "Projekt bauen"]
+for index, aufgabe in enumerate(aufgaben, start=1):
+    print(f"{index}. {aufgabe}")
+
+# zip: Listen kombinieren
+namen = ["Anna", "Ben", "Clara"]
+punkte = [95, 87, 92]
+for name, punkt in zip(namen, punkte):
+    print(f"{name}: {punkt} Punkte")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            1. Python lernen
+2. Übung machen
+3. Projekt bauen
+Anna: 95 Punkte
+Ben: 87 Punkte
+Clara: 92 Punkte
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Erkläre mir enumerate() und zip() in Python mit einem praktischen Beispiel aus dem Schulalltag: Notenlisten oder Anwesenheitslisten."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-lightning"></i></span>
+          List Comprehensions
+        </h2>
+        <p><strong>List Comprehensions</strong> sind Pythons Superpower: Du erstellst eine neue Liste in einer einzigen Zeile. Sie ist schneller und lesbarer als eine klassische for-Schleife.</p><div class="py-classic-box py-classic-box--tip"><h3 class="py-classic-box__title"><i class="ph ph-lightbulb"></i> Pro Tipp</h3><p class="py-classic-box__text">List Comprehensions können auch Bedingungen enthalten: <code>[x for x in liste if x > 0]</code> filtert automatisch.</p></div>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Klassisch vs. Comprehension
+zahlen = [1, 2, 3, 4, 5]
+
+# Klassisch
+quadrate_alt = []
+for z in zahlen:
+    quadrate_alt.append(z ** 2)
+
+# Comprehension (eine Zeile!)
+quadrate_neu = [z ** 2 for z in zahlen]
+print(quadrate_neu)  # [1, 4, 9, 16, 25]
+
+# Mit Bedingung: nur gerade Zahlen
+gerade = [z for z in zahlen if z % 2 == 0]
+print(gerade)  # [2, 4]
+
+# Strings transformieren
+woerter = ["python", "ist", "cool"]
+gross = [w.upper() for w in woerter]
+print(gross)  # ['PYTHON', 'IST', 'COOL']</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            [1, 4, 9, 16, 25]
+[2, 4]
+['PYTHON', 'IST', 'COOL']
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Multiplikationstabelle</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Schreibe ein Programm, das eine Zahl einliest und die Multiplikationstabelle von 1-10 ausgibt.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-1-1">
+            <label for="task-05-1-1" class="py-classic-exercise__task-text">Erstelle tabelle.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-1-2">
+            <label for="task-05-1-2" class="py-classic-exercise__task-text">Lies Zahl mit int(input()) ein</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-1-3">
+            <label for="task-05-1-3" class="py-classic-exercise__task-text">Nutze for i in range(1, 11)</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-1-4">
+            <label for="task-05-1-4" class="py-classic-exercise__task-text">Gib Tabelle mit f-Strings aus</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>z = int(input("Zahl: "))
+for i in range(1, 11):
+    print(f"{i} x {z} = {i * z}")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-05-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-05-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>z = int(input("Zahl: "))
+for i in range(1, 11):
+    print(f"{i} x {z} = {i * z}")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Zahlenraten</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Programmiere ein Zahlenraten-Spiel! Der Computer wählt eine Zahl 1-100. Der Spieler tippt, bis er die Zahl errät. Nach jedem Tipp kommt 'zu hoch' oder 'zu niedrig'.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-2-1">
+            <label for="task-05-2-1" class="py-classic-exercise__task-text">Erstelle raten.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-2-2">
+            <label for="task-05-2-2" class="py-classic-exercise__task-text">Wähle Zufallszahl mit random.randint(1, 100)</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-2-3">
+            <label for="task-05-2-3" class="py-classic-exercise__task-text">Nutze while True für die Hauptschleife</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-2-4">
+            <label for="task-05-2-4" class="py-classic-exercise__task-text">Breche mit break ab bei richtigem Tipp</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>import random
+ziel = random.randint(1, 100)
+versuche = 0
+
+while True:
+    tipp = int(input("Dein Tipp: "))
+    versuche += 1
+    if tipp &lt; ziel:
+        print("Zu niedrig!")
+    elif tipp &gt; ziel:
+        print("Zu hoch!")
+    else:
+        print(f" Richtig! {versuche} Versuche.")
+        break</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-05-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-05-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import random
+ziel = random.randint(1, 100)
+versuche = 0
+
+while True:
+    tipp = int(input("Dein Tipp: "))
+    versuche += 1
+    if tipp &lt; ziel:
+        print("Zu niedrig!")
+    elif tipp &gt; ziel:
+        print("Zu hoch!")
+    else:
+        print(f" Richtig! {versuche} Versuche.")
+        break</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy-Checkpoint: Menü-Loop</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy zeigt ein interaktives Menü und wiederholt, bis der Nutzer 'exit' eingibt. Nutze while und if-elif.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-3-1">
+            <label for="task-05-3-1" class="py-classic-exercise__task-text">Öffne pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-3-2">
+            <label for="task-05-3-2" class="py-classic-exercise__task-text">Nutze while True für das Menü</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-3-3">
+            <label for="task-05-3-3" class="py-classic-exercise__task-text">Prüfe Befehle mit if-elif-else</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-05-3-4">
+            <label for="task-05-3-4" class="py-classic-exercise__task-text">Breche mit break bei exit ab</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+print(" PyBuddy ist bereit!")
+
+while True:
+    cmd = input("\n[Befehl: hallo, zeit, exit] ").lower()
+    if cmd == "exit":
+        print(" Bis bald!")
+        break
+    elif cmd == "hallo":
+        print(" Hallo! Wie geht es dir?")
+    elif cmd == "zeit":
+        import datetime
+        print(f"🕒 {datetime.datetime.now().strftime('%H:%M')}")
+    else:
+        print("❓ Unbekannter Befehl.")</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-05-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-05-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+print(" PyBuddy ist bereit!")
+
+while True:
+    cmd = input("\n[Befehl: hallo, zeit, exit] ").lower()
+    if cmd == "exit":
+        print(" Bis bald!")
+        break
+    elif cmd == "hallo":
+        print(" Hallo! Wie geht es dir?")
+    elif cmd == "zeit":
+        import datetime
+        print(f"🕒 {datetime.datetime.now().strftime('%H:%M')}")
+    else:
+        print("❓ Unbekannter Befehl.")</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Didaktische Pause</span>
+        <p class="py-classic-funfact__text">In <strong>Tetris</strong> läuft eine Endlosschleife, die ständig prüft: Gibt es eine vollständige Reihe? Wenn ja → lösche sie, aktualisiere Punkte, beschleunige das Spiel. Genau das machst du mit while und if — nur mit mehr Grafik!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-repeat"></i></span><span>for → Element für Element durchlaufen</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-arrows-clockwise"></i></span><span>while → solange Bedingung True</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-octagon"></i></span><span>break / continue für Flusssteuerung</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-list"></i></span><span>enumerate() und zip() für elegante Iteration</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-lightning"></i></span><span>List Comprehensions: [x*2 for x in liste]</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="04-bedingungen.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">04 – Bedingungen</span>
+    </a>
+    <a href="06-listen.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">06 – Listen</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Kapitel</h4><nav><a href="../index.html#kapitel">Alle Kapitel</a><a href="06-listen.html">06. Listen</a><a href="12-ki-cocoding.html">12. KI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Ressourcen</h4><nav><a href="../lexikon.html">Lexikon</a><a href="../abschlussprojekt.html">Abschlussprojekt</a><a href="../../../../index.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Rechtliches</h4><nav><a href="../../../../pages/impressum.html">Impressum</a><a href="../../../../pages/datenschutz.html">Datenschutz</a><a href="../../../../pages/disclaimer.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

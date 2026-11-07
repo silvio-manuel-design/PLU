@@ -1,0 +1,214 @@
+/* ==========================================================================
+   PYDESIGN QUEST — KI Copilot Avatar Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-copilot {
+    position: fixed;
+    bottom: calc(var(--py-space-6) + 80px);
+    left: var(--py-space-6);
+    z-index: var(--py-z-dropdown);
+    cursor: grab;
+    display: flex;
+    align-items: flex-end;
+    gap: var(--py-space-3);
+    flex-direction: row-reverse;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .py-quest-copilot.is-dragging {
+    cursor: grabbing;
+  }
+
+  .py-quest-copilot.is-dragging .py-quest-copilot__avatar {
+    animation: none;
+    transform: scale(1.15);
+    box-shadow: var(--py-shadow-glow);
+    border-color: var(--py-primary);
+  }
+
+  /* Mobile Copilot */
+  @media (max-width: 1023px) {
+    .py-quest-copilot {
+      bottom: calc(64px + var(--py-space-4));
+      left: auto;
+      right: var(--py-space-4);
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .py-quest-copilot__avatar {
+      width: 48px;
+      height: 48px;
+    }
+
+    .py-quest-copilot__avatar svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .py-quest-copilot__bubble {
+      max-width: 180px;
+      margin-bottom: var(--py-space-2);
+      margin-right: 0;
+      transform: translateY(10px);
+    }
+
+    .py-quest-copilot__bubble.is-visible {
+      transform: translateY(0);
+    }
+
+    .py-quest-copilot__bubble::after {
+      bottom: -6px;
+      left: auto;
+      right: 20px;
+      border-bottom: none;
+      border-left: none;
+      border-top: 1px solid var(--py-border-color);
+      border-right: 1px solid var(--py-border-color);
+    }
+  }
+
+  .py-quest-copilot__avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--py-bg-card);
+    border: 2px solid var(--py-border-color);
+    box-shadow: var(--py-shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    animation: copilotFloat 3s ease-in-out infinite;
+    cursor: grab;
+  }
+
+  .py-quest-copilot:hover .py-quest-copilot__avatar {
+    transform: scale(1.1);
+    box-shadow: var(--py-shadow-glow);
+    border-color: var(--py-primary);
+  }
+
+  .py-quest-copilot.is-bouncing .py-quest-copilot__avatar {
+    animation: copilotBounce 0.6s ease;
+  }
+
+  .py-quest-copilot__avatar svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Stage Glows */
+  .py-quest-copilot--stage-2 .py-quest-copilot__avatar {
+    border-color: rgba(230, 126, 34, 0.5);
+    box-shadow: 0 4px 20px rgba(230, 126, 34, 0.2);
+  }
+
+  .py-quest-copilot--stage-3 .py-quest-copilot__avatar {
+    border-color: rgba(39, 174, 96, 0.5);
+    box-shadow: 0 4px 20px rgba(39, 174, 96, 0.2);
+  }
+
+  .py-quest-copilot--stage-4 .py-quest-copilot__avatar {
+    border-color: rgba(155, 89, 182, 0.5);
+    box-shadow: 0 4px 25px rgba(155, 89, 182, 0.25);
+  }
+
+  .py-quest-copilot--stage-5 .py-quest-copilot__avatar {
+    border-color: rgba(231, 76, 60, 0.5);
+    box-shadow: 0 4px 30px rgba(231, 76, 60, 0.3);
+    animation: copilotFloat 3s ease-in-out infinite, copilotLegendGlow 2s ease-in-out infinite alternate;
+  }
+
+  /* Bubble */
+  .py-quest-copilot__bubble {
+    position: relative;
+    max-width: 220px;
+    padding: var(--py-space-3) var(--py-space-4);
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-lg);
+    box-shadow: var(--py-shadow-lg);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-normal);
+    opacity: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+    transition: all var(--py-transition-base);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-copilot__bubble.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .py-quest-copilot__bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: -6px;
+    width: 12px;
+    height: 12px;
+    background: var(--py-bg-card);
+    border-bottom: 1px solid var(--py-border-color);
+    border-left: 1px solid var(--py-border-color);
+    transform: rotate(45deg);
+  }
+
+  .py-quest-copilot__bubble-text {
+    display: block;
+    padding-right: var(--py-space-6);
+  }
+
+  .py-quest-copilot__bubble-close {
+    position: absolute;
+    top: var(--py-space-2);
+    right: var(--py-space-2);
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--py-text-muted);
+    font-size: var(--py-text-xs);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--py-transition-fast);
+  }
+
+  .py-quest-copilot__bubble:hover .py-quest-copilot__bubble-close,
+  .py-quest-copilot__bubble.is-visible .py-quest-copilot__bubble-close {
+    opacity: 1;
+  }
+
+  /* Animations */
+  @keyframes copilotFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes copilotBounce {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    50% { transform: scale(0.95); }
+    75% { transform: scale(1.05); }
+  }
+
+  @keyframes copilotLegendGlow {
+    0% { box-shadow: 0 4px 30px rgba(231, 76, 60, 0.3); }
+    100% { box-shadow: 0 4px 40px rgba(231, 76, 60, 0.5); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .py-quest-copilot__avatar {
+      animation: none;
+    }
+  }
+}

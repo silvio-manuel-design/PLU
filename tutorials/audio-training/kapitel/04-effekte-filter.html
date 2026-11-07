@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Effekte & Filter | Audio-Tutorial | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="../kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="../kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="../kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="../kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="../kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="../uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="../uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="../tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="../tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="../tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="../tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="../ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="../ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="../ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="../ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="../ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>🌀 Effekte & Filter</h1>
+      <p class="hero-subtitle">Audio-Verarbeitung und Signalmanipulation</p>
+    </section>
+
+    <section>
+      <h2>Was sind Audio-Effekte und Filter?</h2>
+      <p>
+        Audio-Effekte und Filter sind Werkzeuge zur Manipulation von Audiosignalen.
+        Sie verändern die Klangcharakteristik durch mathematische Operationen
+        auf dem Audiostream.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Merke:</strong> Effekte verändern den Klang, Filter beeinflussen
+        bestimmte Frequenzbereiche.
+      </div>
+
+
+      <figure class="illustration-center">
+        <svg width="100%" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="effekte-title effekte-desc">
+          <title id="effekte-title">Audio-Effekte und Filter - Funktionsweise</title>
+          <desc id="effekte-desc">Darstellung verschiedener Audio-Effekte und Filter: Tiefpass, Hochpass, Verzerrung, Verzögerung</desc>
+
+          <!-- Hintergrund -->
+          <rect x="0" y="0" width="800" height="300" fill="#e0f7fa" />
+
+          <!-- Ursprüngliches Signal -->
+          <path d="M 50 150
+                   C 100 100, 150 200, 200 150
+                   S 300 200, 350 150"
+                stroke="#004d40" stroke-width="2" fill="none" />
+          <text x="200" y="90" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Originalsignal</text>
+
+          <!-- Tiefpassfilter -->
+          <path d="M 50 250
+                   C 100 240, 150 260, 200 250
+                   S 300 260, 350 250"
+                stroke="#00bcd4" stroke-width="2" fill="none" />
+          <text x="200" y="280" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Tiefpassfilter</text>
+          <text x="200" y="295" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">lässt tiefe Frequenzen durch</text>
+
+          <!-- Hochpassfilter -->
+          <path d="M 450 150
+                   C 500 120, 550 180, 600 150
+                   S 700 180, 750 150"
+                stroke="#00838f" stroke-width="2" fill="none" />
+          <text x="600" y="90" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Hochpassfilter</text>
+          <text x="600" y="105" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">lässt hohe Frequenzen durch</text>
+
+          <!-- Verzerrung -->
+          <path d="M 450 250
+                   C 500 220, 550 280, 600 250
+                   S 700 280, 750 250"
+                stroke="#006064" stroke-width="2" fill="none" stroke-dasharray="4,4" />
+          <text x="600" y="280" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Verzerrung</text>
+          <text x="600" y="295" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">verändert Wellenform</text>
+
+          <!-- Frequenzbereiche -->
+          <text x="100" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40">Niedrige Frequenzen</text>
+          <text x="300" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40">Mittlere Frequenzen</text>
+          <text x="500" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40">Mittlere Frequenzen</text>
+          <text x="700" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40">Hohe Frequenzen</text>
+
+          <!-- Frequenzachse -->
+          <line x1="50" y1="30" x2="350" y2="30" stroke="#004d40" stroke-width="1" />
+          <line x1="450" y1="30" x2="750" y2="30" stroke="#004d40" stroke-width="1" />
+
+          <!-- Überschrift -->
+          <text x="400" y="20" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Audio-Effekte und Filter</text>
+        </svg>
+        <figcaption class="illustration-caption">
+          Unterschiedliche Audio-Effekte und Filter: Tiefpassfilter (lässt tiefe Frequenzen durch), Hochpassfilter (lässt hohe Frequenzen durch), Verzerrung (verändert Wellenform)
+        </figcaption>
+      </figure>
+
+      <div class="regel">
+        💡 <strong>W3Schools Ressource:</strong> Für Informationen über Audio-Filter und deren Anwendung siehe
+        <a href="https://www.w3schools.com/graphics/webaudio_filters.asp" target="_blank" rel="noopener noreferrer">Web Audio Filter auf W3Schools</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Grundlegende Filtertypen</h2>
+      
+      <h3>Tiefpassfilter (Low-pass Filter)</h3>
+      <p>
+        Lässt tiefe Frequenzen passieren und dämpft hohe Frequenzen.
+      </p>
+      <ul>
+        <li><strong>Anwendung:</strong> Entfernen von Rauschen, weicher machen von Klang</li>
+        <li><strong>Grenzfrequenz:</strong> Bestimmt, ab welcher Frequenz gedämpft wird</li>
+        <li><strong>Steilheit:</strong> Bestimmt, wie abrupt der Übergang ist</li>
+      </ul>
+      
+      <h3>Hochpassfilter (High-pass Filter)</h3>
+      <p>
+        Lässt hohe Frequenzen passieren und dämpft tiefe Frequenzen.
+      </p>
+      <ul>
+        <li><strong>Anwendung:</strong> Entfernen von Brummen, Windgeräuschen</li>
+        <li><strong>Grenzfrequenz:</strong> Bestimmt, unterhalb welcher Frequenz gedämpft wird</li>
+      </ul>
+      
+      <h3>Bandpassfilter (Band-pass Filter)</h3>
+      <p>
+        Lässt nur einen bestimmten Frequenzbereich passieren.
+      </p>
+      <ul>
+        <li><strong>Anwendung:</strong> Isolieren bestimmter Frequenzbereiche</li>
+        <li><strong>Mittenfrequenz:</strong> Zentrale Frequenz des Durchlassbereichs</li>
+        <li><strong>Bandbreite:</strong> Bestimmt die Breite des Durchlassbereichs</li>
+      </ul>
+      
+      <h3>Notch-Filter (Band-stop Filter)</h3>
+      <p>
+        Dämpft einen bestimmten Frequenzbereich und lässt alle anderen durch.
+      </p>
+      <ul>
+        <li><strong>Anwendung:</strong> Entfernen spezifischer Störungen (z.B. 50Hz Brummen)</li>
+        <li><strong>Zentrale Frequenz:</strong> Frequenz, die gedämpft werden soll</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Gängige Audio-Effekte</h2>
+      
+      <h3>Verzerrer (Distortion)</h3>
+      <p>
+        Fügt harmonische Obertöne hinzu und verleiht dem Klang eine raue Qualität.
+      </p>
+      <ul>
+        <li><strong>Anwendung:</strong> Gitarrenverzerrung, kreative Effekte</li>
+        <li><strong>Drive:</strong> Bestimmt den Grad der Verzerrung</li>
+        <li><strong>Art:</strong> Weiche oder harte Clipping-Charakteristik</li>
+      </ul>
+      
+      <h3>Verzögerung (Delay)</h3>
+      <p>
+        Spielt das Signal nach einer bestimmten Zeit erneut ab.
+      </p>
+      <ul>
+        <li><strong>Zeit:</strong> Bestimmt die Verzögerung</li>
+        <li><strong>Rückkopplung:</strong> Bestimmt, wie viele Wiederholungen</li>
+        <li><strong>Mischung:</strong> Verhältnis von Original zu verzögertem Signal</li>
+      </ul>
+      
+      <h3>Hall (Reverb)</h3>
+      <p>
+        Simuliert die akustischen Eigenschaften eines Raumes.
+      </p>
+      <ul>
+        <li><strong>Raumgröße:</strong> Beeinflusst die Dauer des Halls</li>
+        <li><strong>Dämpfung:</strong> Bestimmt, wie schnell hohe Frequenzen abklingen</li>
+        <li><strong>Early Reflections:</strong> Erste Reflektionen nach dem Direktschall</li>
+      </ul>
+      
+      <h3>Modulationseffekte</h3>
+      <ul>
+        <li><strong>Chorus:</strong> Erzeugt einen "vollen" Klang durch leicht verzögerte Kopien</li>
+        <li><strong>Flanger:</strong> Erzeugt einen "jet"-ähnlichen Effekt</li>
+        <li><strong>Phaser:</strong> Erzeugt einen "sweeping" Filtereffekt</li>
+        <li><strong>Tremolo:</strong> Periodische Lautstärkeänderung</li>
+        <li><strong>Vibrato:</strong> Periodische Frequenzänderung</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Implementierung in der Web Audio API</h2>
+      
+      <h3>Filter implementieren</h3>
+      <pre><code class="js-code">const filter = audioCtx.createBiquadFilter();
+filter.type = 'lowpass';  // oder 'highpass', 'bandpass', etc.
+filter.frequency.value = 1000;  // 1kHz Grenzfrequenz
+filter.Q.value = 1.0;  // Resonanz</code></pre>
+      
+      <h3>Effekte implementieren</h3>
+      <pre><code class="js-code">// Verzögerung
+const delay = audioCtx.createDelay(1.0);  // Maximal 1 Sekunde Verzögerung
+delay.delayTime.value = 0.5;  // 500ms Verzögerung
+
+// Feedback für Echo-Effekt
+const feedback = audioCtx.createGain();
+feedback.gain.value = 0.3;
+
+// Verbindungen
+source.connect(delay);
+delay.connect(feedback);
+feedback.connect(delay);  // Feedback-Schleife
+delay.connect(audioCtx.destination);</code></pre>
+      
+      <h3>Dynamic Compressor</h3>
+      <p>
+        Ein Kompressor reguliert den Dynamikumfang eines Signals.
+      </p>
+      <pre><code class="js-code">const compressor = audioCtx.createDynamicsCompressor();
+compressor.threshold.value = -50;  // Schwellwert in dB
+compressor.knee.value = 40;        // Weichheit des Übergangs
+compressor.ratio.value = 12;       // Kompressionsverhältnis
+compressor.attack.value = 0.003;   // Angriffszeit in Sekunden
+compressor.release.value = 0.250;  // Haltezeit in Sekunden</code></pre>
+    </section>
+
+    <section>
+      <h2>Equalizer</h2>
+      <p>
+        Ein Equalizer ist eine Sammlung von Filtern, die verschiedene 
+        Frequenzbereiche anheben oder absenken.
+      </p>
+      
+      <h3>Parametric Equalizer</h3>
+      <p>
+        Besteht aus mehreren Bands, die jeweils Frequenz, Gain und Q-Faktor haben.
+      </p>
+      <pre><code class="js-code">const eq = {
+  low: audioCtx.createBiquadFilter(),
+  mid: audioCtx.createBiquadFilter(),
+  high: audioCtx.createBiquadFilter()
+};
+
+eq.low.type = 'lowshelf';    // Tiefe Frequenzen
+eq.mid.type = 'peaking';     // Mittlere Frequenzen
+eq.high.type = 'highshelf';  // Hohe Frequenzen
+
+eq.low.frequency.value = 200;
+eq.mid.frequency.value = 1000;
+eq.high.frequency.value = 5000;
+
+// Verbindungskette
+source.connect(eq.low);
+eq.low.connect(eq.mid);
+eq.mid.connect(eq.high);
+eq.high.connect(audioCtx.destination);</code></pre>
+    </section>
+
+    <section>
+      <h2>Effekte in der Praxis</h2>
+      
+      <h3>Podcast-Produktion</h3>
+      <ul>
+        <li><strong>Hochpassfilter:</strong> Entfernt tieffrequentes Brummen</li>
+        <li><strong>Equalizer:</strong> Betont Sprachfrequenzen</li>
+        <li><strong>Compressor:</strong> Glättet Lautstärkeunterschiede</li>
+        <li><strong>Limitor:</strong> Verhindert Übersteuerung</li>
+      </ul>
+      
+      <h3>Musikproduktion</h3>
+      <ul>
+        <li><strong>Reverb:</strong> Fügt Raumklang hinzu</li>
+        <li><strong>Delay:</strong> Erzeugt räumliche Effekte</li>
+        <li><strong>Chorus/Flanger:</strong> Verleiht Instrumenten Fülle</li>
+        <li><strong>Distortion:</strong> Für Gitarreneffekte</li>
+      </ul>
+      
+      <h3>Game-Audio</h3>
+      <ul>
+        <li><strong>3D-Audio:</strong> Positionsabhängige Effekte</li>
+        <li><strong>Dynamic Range Compression:</strong> Für Lautstärkeanpassung</li>
+        <li><strong>Filter:</strong> Umgebungsabhängige Klangveränderung</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Qualitätsaspekte</h2>
+      
+      <h3>Effekte maßvoll einsetzen</h3>
+      <ul>
+        <li>Vermeide Überverarbeitung</li>
+        <li>Behalte den Originalcharakter des Materials</li>
+        <li>Teste auf verschiedenen Wiedergabesystemen</li>
+        <li>Achte auf kumulative Effekte</li>
+      </ul>
+      
+      <h3>Computational Cost</h3>
+      <p>
+        Komplexe Effekte benötigen mehr Rechenleistung:
+      </p>
+      <ul>
+        <li>Convolution Reverb: Sehr rechenintensiv</li>
+        <li>Simple Filter: Wenig Rechenleistung</li>
+        <li>Modulationseffekte: Mittlere Rechenleistung</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Praktische Übung</h2>
+      <p>
+        Erstelle eine Web-Audio-Anwendung mit folgenden Effekten:
+      </p>
+      <ol>
+        <li>Erstelle einen AudioContext</li>
+        <li>Füge einen Oszillator als Quelle hinzu</li>
+        <li>Füge einen Tiefpassfilter hinzu</li>
+        <li>Füge eine Verzögerung mit Feedback hinzu</li>
+        <li>Füge einen Kompressor hinzu</li>
+        <li>Stelle Parameter interaktiv ein</li>
+        <li>Beobachte die Auswirkungen der verschiedenen Effekte</li>
+      </ol>
+      
+      <h3>Erweiterungsideen</h3>
+      <ul>
+        <li>Füge einen Equalizer hinzu</li>
+        <li>Implementiere einen Hall-Effekt</li>
+        <li>Erstelle eine Effekt-Rack-Struktur</li>
+        <li>Füge Steuerungselemente für die Parameter hinzu</li>
+      </ul>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>Du hast die wichtigsten Audio-Effekte und Filter kennengelernt!</p>
+      <a href="05-projekt-audio-player.html" class="nav-button">→ Weiter zum Projekt: Audio-Player</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

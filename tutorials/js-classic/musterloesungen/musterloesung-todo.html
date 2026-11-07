@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📝 Musterlösung: Todo-Liste | JS-Tutorial</title>
+  <style>
+    /* === GLOBALE RESETS UND TYPOGRAPHIE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #2c3e50;
+      background-color: #f9fbfd;
+      padding: 20px;
+    }
+
+    /* === HEADER === */
+    .header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 0.8rem 0;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .main-content > section {
+      background: white;
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #eaeff5;
+    }
+
+    .main-content h1 {
+      font-size: 2.2rem;
+      margin-bottom: 24px;
+      color: #2c3e50;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .main-content h2 {
+      font-size: 1.6rem;
+      margin: 24px 0 18px 0;
+      color: #2980b9;
+    }
+
+    .regel {
+      background-color: #e8f4fc;
+      border-left: 4px solid #3498db;
+      padding: 16px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .warnung {
+      background-color: #fff8e1;
+      color: #5d4037;
+      padding: 16px;
+      border-left: 4px solid #ffc107;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* === TODO-SPEZIFISCHES DESIGN === */
+    .todo-container {
+      display: flex;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .todo-input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 8px 8px 16px 0;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      background: white;
+    }
+
+    .todo-item.erledigt {
+      background: #f8f9fa;
+      color: #6c757d;
+      text-decoration: line-through;
+    }
+
+    .todo-text {
+      flex: 1;
+      margin: 0 12px;
+    }
+
+    .todo-actions button {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+
+    .hinweis {
+      color: #6c757d;
+      font-style: italic;
+      text-align: center;
+      padding: 24px;
+    }
+
+    /* === FOOTER === */
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #7f8c8d;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../kapitel/02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../kapitel/03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="../kapitel/04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="../kapitel/05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="../kapitel/06-arrays.html">06. Arrays</a></li>
+        <li><a href="../kapitel/07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="../kapitel/08-objekte.html">08. Objekte</a></li>
+        <li><a href="../kapitel/09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="../kapitel/10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section>
+      <h1>📝 Musterlösung: Interaktive Todo-Liste</h1>
+
+      <p class="regel">
+        💡 Diese Seite ist eine <strong>vollständig lauffähige Musterlösung</strong> – 
+        alle Funktionen sind aktiv und nutzen die optimale Implementierung.
+      </p>
+
+      <!-- Todo-App -->
+      <div class="todo-container">
+        <input type="text" id="todo-input" class="todo-input" placeholder="Neue Aufgabe eingeben...">
+        <button id="add-todo">Hinzufügen</button>
+      </div>
+
+      <div id="todo-list">
+        <!-- Todos werden hier dynamisch eingefügt -->
+      </div>
+
+      <p class="warnung">
+        ⚠️ Diese Musterlösung speichert Daten im Browser (Local Storage).<br>
+        Sie ist für Vorführungen gedacht – Schüler\*innen haben keinen Zugriff darauf.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <!-- Eingebettetes JavaScript – optimale Musterlösung -->
+  <script>
+    /**
+     * ABSCHLUSSPROJEKT 1: TODO-LISTE
+     * Vollständige, optimale Referenzimplementierung
+     */
+    let todos = [];
+    const STORAGE_KEY = 'musterloesung_meineTodos';
+
+    const todoInput = document.getElementById('todo-input');
+    const addBtn = document.getElementById('add-todo');
+    const todoList = document.getElementById('todo-list');
+
+    function speichereTodos() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+    }
+
+    function ladeTodos() {
+      const gespeichert = localStorage.getItem(STORAGE_KEY);
+      if (gespeichert) {
+        try {
+          todos = JSON.parse(gespeichert);
+          todos = todos.map(todo => ({
+            text: String(todo.text || ''),
+            erledigt: Boolean(todo.erledigt)
+          }));
+        } catch (e) {
+          todos = [];
+        }
+      }
+      zeigeTodos();
+    }
+
+    function zeigeTodos() {
+      todoList.innerHTML = '';
+      if (todos.length === 0) {
+        todoList.innerHTML = '<p class="hinweis">Keine Todos vorhanden. Füge eine neue Aufgabe hinzu!</p>';
+        return;
+      }
+
+      todos.forEach((todo, index) => {
+        const todoItem = document.createElement('div');
+        todoItem.className = `todo-item ${todo.erledigt ? 'erledigt' : ''}`;
+        todoItem.innerHTML = `
+          <input type="checkbox" ${todo.erledigt ? 'checked' : ''} data-index="${index}">
+          <span class="todo-text">${todo.text}</span>
+          <div class="todo-actions">
+            <button data-index="${index}">Löschen</button>
+          </div>
+        `;
+        todoList.appendChild(todoItem);
+      });
+    }
+
+    function fuegeTodoHinzu() {
+      const text = todoInput.value.trim();
+      if (text === '') return;
+      
+      todos.push({ text, erledigt: false });
+      speichereTodos();
+      zeigeTodos();
+      
+      todoInput.value = '';
+      todoInput.focus();
+    }
+
+    todoList.addEventListener('click', function(e) {
+      const indexStr = e.target.dataset.index;
+      if (indexStr === undefined) return;
+      
+      const index = parseInt(indexStr, 10);
+      if (isNaN(index) || index < 0 || index >= todos.length) return;
+
+      if (e.target.type === 'checkbox') {
+        todos[index].erledigt = e.target.checked;
+        speichereTodos();
+        zeigeTodos();
+      } else if (e.target.tagName === 'BUTTON') {
+        todos.splice(index, 1);
+        speichereTodos();
+        zeigeTodos();
+      }
+    });
+
+    addBtn.addEventListener('click', fuegeTodoHinzu);
+    todoInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        fuegeTodoHinzu();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', ladeTodos);
+  </script>
+</body>
+</html>

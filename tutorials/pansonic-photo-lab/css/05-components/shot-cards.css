@@ -1,0 +1,358 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Shot Cards
+   Location checklist as interactive shot cards (film set style)
+   Replaces boring bullet lists with visual card grids
+   ============================================================ */
+
+@layer components {
+  /* Location Card Container */
+  .photo-location-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--photo-radius-xl);
+    overflow: hidden;
+    margin: var(--photo-space-4) 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .photo-location-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-4);
+    padding: var(--photo-space-5) var(--photo-space-5) var(--photo-space-4);
+    background: linear-gradient(135deg, var(--location-accent-dim, rgba(0,0,0,0.02)) 0%, #ffffff 100%);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-location-card__header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--location-accent, var(--photo-accent));
+    opacity: 0.8;
+  }
+
+  .photo-location-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--photo-radius-lg);
+    background: color-mix(in srgb, var(--location-accent, var(--photo-accent)) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--location-accent, var(--photo-accent)) 20%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .photo-location-card__icon i {
+    font-size: 1.5rem;
+    color: var(--location-accent, var(--photo-accent));
+  }
+
+  .photo-location-card__title {
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .photo-location-card__subtitle {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+  }
+
+  .photo-location-card__text {
+    padding: var(--photo-space-4) var(--photo-space-5);
+    color: #444444;
+    line-height: 1.7;
+    font-size: var(--photo-text-base);
+  }
+
+  .photo-location-card__text + .photo-location-card__text {
+    padding-top: 0;
+  }
+
+  /* Shot Grid */
+  .photo-shot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 var(--photo-space-5) var(--photo-space-4);
+  }
+
+  /* Individual Shot Card */
+  .photo-shot-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-3);
+    padding: var(--photo-space-3) var(--photo-space-3);
+    background: #f8f9fa;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: var(--photo-radius-lg);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-shot-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--location-accent, var(--photo-accent));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .photo-shot-card__check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--photo-border-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+
+  .photo-shot-card__check i {
+    font-size: 12px;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .photo-shot-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .photo-shot-card__title {
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+
+  .photo-shot-card__desc {
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-tertiary);
+    line-height: 1.4;
+  }
+
+  /* Hover state */
+  .photo-shot-card:hover,
+  .photo-shot-card:focus-visible {
+    border-color: var(--location-accent, rgba(0,0,0,0.12));
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .photo-shot-card:hover::before,
+  .photo-shot-card:focus-visible::before {
+    opacity: 0.6;
+  }
+
+  .photo-shot-card:focus-visible {
+    outline: 2px solid var(--location-accent, var(--photo-accent));
+    outline-offset: 2px;
+  }
+
+  .photo-shot-card:hover .photo-shot-card__check {
+    border-color: var(--location-accent, var(--photo-border-default));
+  }
+
+  /* Checked state */
+  .photo-shot-card.is-checked {
+    background: color-mix(in srgb, var(--location-accent, var(--photo-accent)) 8%, #ffffff);
+    border-color: color-mix(in srgb, var(--location-accent, var(--photo-accent)) 40%, rgba(0,0,0,0.1));
+  }
+
+  .photo-shot-card.is-checked::before {
+    opacity: 1;
+  }
+
+  .photo-shot-card.is-checked .photo-shot-card__check {
+    background: var(--location-accent, var(--photo-accent));
+    border-color: var(--location-accent, var(--photo-accent));
+    transform: scale(1.05);
+  }
+
+  .photo-shot-card.is-checked .photo-shot-card__check i {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .photo-shot-card.is-checked .photo-shot-card__title {
+    color: var(--photo-text-primary);
+  }
+
+  /* Location accent colors */
+  .photo-location-card--indoor  { --location-accent: #D4A853; --location-accent-dim: rgba(212,168,83,0.08); }
+  .photo-location-card--outdoor { --location-accent: #4CAF7A; --location-accent-dim: rgba(76,175,122,0.08); }
+  .photo-location-card--both    { --location-accent: #E8913A; --location-accent-dim: rgba(232,145,58,0.08); }
+
+  /* Progress Bar (replaces circle) */
+  .photo-shot-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-3);
+    padding: var(--photo-space-3) var(--photo-space-5) var(--photo-space-4);
+    margin-top: var(--photo-space-2);
+  }
+
+  .photo-shot-progress__track {
+    flex: 1;
+    height: 6px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .photo-shot-progress__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--location-accent, var(--photo-accent)), color-mix(in srgb, var(--location-accent, var(--photo-accent)) 70%, #fff));
+    border-radius: 3px;
+    transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 0%;
+  }
+
+  .photo-shot-progress__text {
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--location-accent, var(--photo-accent));
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .photo-shot-progress__label {
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-tertiary);
+    margin-left: var(--photo-space-2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .photo-shot-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 0 var(--photo-space-3) var(--photo-space-3);
+    }
+
+    .photo-shot-card {
+      padding: var(--photo-space-2) var(--photo-space-3);
+      gap: var(--photo-space-2);
+    }
+
+    .photo-shot-card__check {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+    }
+
+    .photo-shot-card__title {
+      font-size: var(--photo-text-xs);
+    }
+
+    .photo-shot-card__desc {
+      font-size: 10px;
+    }
+
+    .photo-location-card__header {
+      padding: var(--photo-space-3) var(--photo-space-3) var(--photo-space-2);
+      gap: var(--photo-space-3);
+    }
+
+    .photo-location-card__text {
+      padding: var(--photo-space-2) var(--photo-space-3);
+      font-size: var(--photo-text-sm);
+    }
+
+    .photo-location-card__icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .photo-location-card__icon i {
+      font-size: 1.1rem;
+    }
+
+    .photo-location-card__title {
+      font-size: var(--photo-text-sm);
+    }
+
+    .photo-location-card__subtitle {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-shot-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .photo-shot-card {
+      padding: var(--photo-space-2) var(--photo-space-3);
+    }
+
+    .photo-shot-progress {
+      padding: var(--photo-space-2) var(--photo-space-4) var(--photo-space-3);
+    }
+  }
+
+  /* Dark Mode */
+  [data-theme="dark"] .photo-location-card {
+    background: #252530;
+    border-color: rgba(255,255,255,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="dark"] .photo-location-card__header {
+    background: linear-gradient(135deg, var(--location-accent-dim, rgba(255,255,255,0.02)) 0%, #252530 100%);
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+
+  [data-theme="dark"] .photo-location-card__text {
+    color: var(--photo-text-secondary);
+  }
+
+  [data-theme="dark"] .photo-shot-card {
+    background: #2a2a3a;
+    border-color: rgba(255,255,255,0.06);
+  }
+
+  [data-theme="dark"] .photo-shot-card:hover,
+  [data-theme="dark"] .photo-shot-card:focus-visible {
+    background: #252530;
+    border-color: var(--location-accent, rgba(255,255,255,0.12));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="dark"] .photo-shot-card.is-checked {
+    background: color-mix(in srgb, var(--location-accent, var(--photo-accent)) 12%, #252530);
+    border-color: color-mix(in srgb, var(--location-accent, var(--photo-accent)) 50%, rgba(255,255,255,0.1));
+  }
+
+  [data-theme="dark"] .photo-shot-card.is-checked .photo-shot-card__title {
+    color: var(--photo-text-primary);
+  }
+
+  [data-theme="dark"] .photo-shot-progress__track {
+    background: rgba(255,255,255,0.08);
+  }
+}

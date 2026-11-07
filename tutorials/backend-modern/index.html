@@ -1,0 +1,388 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Backend Quest | Das digitale Abenteuer</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/techops.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+  <!-- A) MISSION HEADER -->
+  <header class="mission-header">
+    <div class="header-bar">
+      <a href="index.html" class="logo" aria-label="Zur Startseite">
+        <img src="assets/logo.svg" width="32" height="32" alt="PLU">
+        <span class="logo-text">Backend <span class="logo-text--quest">Quest</span></span>
+      </a>
+      <div class="header-actions" style="display: flex; align-items: center; gap: 16px;">
+        <a href="/tutorials/" class="btn-secondary" style="font-size: 0.85rem; padding: 6px 12px; background: rgba(39, 174, 96, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); text-decoration: none; border-radius: 4px; transition: all 0.2s;">
+          ← ZUM PLU HUB
+        </a>
+        <div class="profile-badge" aria-label="Profil">
+          <span class="level">Lvl 1</span>
+          <span class="xp">0 XP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="active-mission">
+      <h1>Backend Quest</h1>
+      <div class="mission-status">
+        <span class="status-label">Aktive Mission</span>
+        <h2>01 – Server erkennen</h2>
+        <p class="mission-meta">~10 Min • Schritt 1 von 8</p>
+        
+        <div class="progress-container" aria-label="Fortschritt">
+          <div class="progress-bar" style="width: 0%"></div>
+        </div>
+        
+        <div class="mission-reward">
+          <span class="reward-xp">+50 XP</span>
+          <span class="reward-badge">Badge: Script Kiddie</span>
+        </div>
+      </div>
+      
+      <a href="kapitel/01-was-ist-backend.html" class="btn-primary">
+        Mission starten
+      </a>
+      
+      <p class="why-matters">
+        Ohne Backend keine Login-Daten, keine Speicherstände, keine Highscores.
+      </p>
+    </div>
+  </header>
+
+  <main class="mission-hub">
+    <!-- B) SKILL STATUS -->
+    <section class="skill-status" aria-labelledby="skill-heading">
+      <h2 id="skill-heading" class="sr-only">Skill Status</h2>
+      
+      <div class="status-indicators">
+        <div class="status-item" id="server-status-item" aria-label="Server Status" title="Prüft XAMPP/Apache auf localhost">
+          <span class="status-dot pending" id="server-dot"></span>
+          <span class="status-label">Server</span>
+          <span class="status-value" id="server-value">Prüfe...</span>
+        </div>
+        
+        <div class="status-item" id="setup-status-item" aria-label="Setup Status" title="Node.js + XAMPP Setup Status">
+          <span class="status-dot pending" id="setup-dot"></span>
+          <span class="status-label">Node.js</span>
+          <span class="status-value" id="setup-value">Prüfe...</span>
+          <button id="setup-confirm-btn" class="tool-btn" style="margin-left: 8px; padding: 2px 8px; font-size: 0.7rem; display: none;" title="Node.js ist installiert">✓</button>
+        </div>
+        
+        <div class="status-item" aria-label="Gesamtfortschritt">
+          <span class="status-dot check" id="overall-dot"></span>
+          <span class="status-label">Overall</span>
+          <span class="status-value" id="overall-progress">0%</span>
+        </div>
+      </div>
+      
+      <p id="status-hint" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; text-align: center; font-style: italic;">
+        Starte XAMPP (Apache) – die Anzeige aktualisiert sich automatisch
+      </p>
+      
+      <!-- XAMPP Hinweis für Schule -->
+      <div id="xampp-school-hint" style="margin-top: 16px; padding: 12px 16px; background-color: var(--bg-elevated); border-left: 3px solid var(--warning); border-radius: 0 var(--radius) var(--radius) 0; display: none;">
+        <strong style="color: var(--warning); font-size: 0.875rem;">💡 Hinweis für die Schule:</strong>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin: 8px 0 0 0; line-height: 1.6;">
+          Bei gemeinsamer PC-Nutzung: Lege im Ordner <code style="background: var(--bg-dark); padding: 2px 6px; border-radius: 4px;">C:\xampp\htdocs</code> einen Ordner mit deinem Namen an.<br>
+          Deine PHP-Dateien speicherst du in <code style="background: var(--bg-dark); padding: 2px 6px; border-radius: 4px;">htdocs\DEIN_NAME\</code><br>
+          Aufruf dann über: <code style="background: var(--bg-dark); padding: 2px 6px; border-radius: 4px;">localhost/DEIN_NAME/datei.php</code>
+        </p>
+        <button id="xampp-hint-close" style="margin-top: 8px; font-size: 0.75rem; padding: 4px 12px; background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: var(--radius); cursor: pointer;">Verstanden</button>
+      </div>
+    </section>
+
+    <!-- C) MISSION DECK (Main Missions 01-08) -->
+    <section class="mission-deck" aria-labelledby="deck-heading">
+      <h2 id="deck-heading">Mission Deck</h2>
+      
+      <div class="mission-grid" id="main-missions">
+        <!-- Filled by JavaScript -->
+      </div>
+    </section>
+
+    <!-- C2) SIDE QUESTS (Bonus) -->
+    <section class="side-quests" aria-labelledby="sq-heading">
+      <h2 id="sq-heading">Side Quests (Bonus XP)</h2>
+      <p class="side-quests-subtitle">Optional, aber empfohlen für extra XP. Blockieren den Hauptpfad nicht.</p>
+      
+      <div class="sidequest-list" id="side-quests">
+        <!-- Filled by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Debug Controls (only visible with ?debug=1) -->
+    <div class="debug-only debug-controls">
+      <button onclick="MissionsAPI.resetAll(); location.reload();" class="btn-check">
+        [DEBUG: Alles zurücksetzen]
+      </button>
+      <button onclick="MissionsAPI.debug();" class="btn-check">
+        [DEBUG: Konsole anzeigen]
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="hub-nav" aria-label="Hauptnavigation">
+      <h2 class="sr-only">Navigation</h2>
+      <a href="bibliothek/bibliothek.html" class="nav-link">Bibliothek</a>
+      <a href="info.html" class="nav-link">Info</a>
+    </nav>
+  </main>
+
+  <!-- D) TOOLS & QUICK ACTIONS -->
+  <aside class="tool-bar" aria-label="Werkzeuge">
+    <div class="tool-item" aria-label="Server Status">
+      <span class="tool-icon" aria-hidden="true">[●]</span>
+      <span class="tool-label">Server</span>
+      <span class="tool-value">--</span>
+    </div>
+    
+    <a href="uebungen/00-server-einrichten.html" class="tool-item tool-link" aria-label="Setup">
+      <span class="tool-icon" aria-hidden="true">[⌘]</span>
+      <span class="tool-label">Setup</span>
+    </a>
+    
+    <button id="dark-mode-toggle" class="tool-item tool-btn" aria-label="Dark Mode">
+      <span class="tool-icon" aria-hidden="true">[◐]</span>
+      <span class="tool-label">Theme</span>
+    </button>
+  </aside>
+
+  <script src="js/main.js"></script>
+  <script src="js/classroom.js"></script>
+  <script>
+    // Render missions dynamically
+    function renderMissions() {
+      const mainContainer = document.getElementById('main-missions');
+      const sideContainer = document.getElementById('side-quests');
+      
+      if (!mainContainer || typeof MissionsAPI === 'undefined') return;
+      
+      const mStatus = MissionsAPI.getMissionStatus();
+      const sqStatus = MissionsAPI.getSideQuestStatus();
+      
+      // Main Missions 01-08
+      const missions = [
+        { id: '01', title: 'Server erkennen', time: '~10 Min', xp: 50 },
+        { id: '02', title: 'Ersten Code schreiben', time: '~15 Min', xp: 50 },
+        { id: '03', title: 'Express Server', time: '~20 Min', xp: 75 },
+        { id: '04', title: 'PHP Basics', time: '~15 Min', xp: 50 },
+        { id: '05', title: 'Datenbank verbinden', time: '~20 Min', xp: 75 },
+        { id: '06', title: 'Node vs PHP', time: '~10 Min', xp: 50 },
+        { id: '07', title: 'Sicherheit', time: '~15 Min', xp: 50 },
+        { id: '08', title: 'Mini API bauen', time: '~25 Min', xp: 100 }
+      ];
+      
+      const paths = {
+        '01': 'kapitel/01-was-ist-backend.html',
+        '02': 'kapitel/02-nodejs-grundlagen.html',
+        '03': 'kapitel/03-express-webserver.html',
+        '04': 'kapitel/04-php-xampp.html',
+        '05': 'kapitel/05-formulare-datenbank.html',
+        '06': 'kapitel/06-vergleich-node-php.html',
+        '07': 'kapitel/07-sicherheit.html',
+        '08': 'kapitel/08-projekt-mini-api.html'
+      };
+      
+      mainContainer.innerHTML = missions.map(m => {
+        const status = mStatus[m.id] || 'locked';
+        const stateText = status === 'completed' ? 'Done' : status;
+        return `
+          <a href="${paths[m.id]}" class="mission-card ${status}" data-mission="${m.id}" aria-label="Mission ${m.id}: ${m.title}, ${stateText}">
+            <span class="mission-number">${m.id}</span>
+            <h3>${m.title}</h3>
+            <p class="mission-time">${m.time}</p>
+            <span class="mission-xp">+${m.xp} XP</span>
+            <span class="mission-state">${stateText}</span>
+          </a>
+        `;
+      }).join('');
+      
+      // Side Quests U00-U05
+      if (sideContainer) {
+        const sideQuests = [
+          { id: 'U00', title: 'Server einrichten', time: '~20 Min', xp: 25 },
+          { id: 'U01', title: 'Node.js Basics', time: '~15 Min', xp: 35 },
+          { id: 'U02', title: 'Express Routing', time: '~20 Min', xp: 40 },
+          { id: 'U03', title: 'PHP Formular', time: '~15 Min', xp: 35 },
+          { id: 'U04', title: 'DB Abfrage', time: '~20 Min', xp: 40 },
+          { id: 'U05', title: 'DB Verwaltung', time: '~25 Min', xp: 50 }
+        ];
+        
+        const sqPaths = {
+          'U00': 'uebungen/00-server-einrichten.html',
+          'U01': 'uebungen/01-node-grundlagen.html',
+          'U02': 'uebungen/02-express-routing.html',
+          'U03': 'uebungen/03-php-formular.html',
+          'U04': 'uebungen/04-datenbank-abfrage.html',
+          'U05': 'uebungen/05-datenbank-verwaltung.html'
+        };
+        
+        sideContainer.innerHTML = sideQuests.map(sq => {
+          const status = sqStatus[sq.id] || 'available';
+          const done = status === 'completed';
+          return `
+            <a href="${sqPaths[sq.id]}" class="sidequest-card ${done ? 'completed' : ''}" data-sidequest="${sq.id}">
+              <div class="sidequest-header">
+                <span class="sidequest-id">${sq.id}</span>
+                <span class="sidequest-xp">+${sq.xp} XP</span>
+              </div>
+              <div class="sidequest-title">${sq.title}</div>
+              <div class="sidequest-meta">${sq.time}</div>
+              <span class="sidequest-status">${done ? '[DONE]' : ''}</span>
+            </a>
+          `;
+        }).join('');
+      }
+      
+      // Update profile badge
+      const level = MissionsAPI.getLevel();
+      const xp = MissionsAPI.getXP();
+      document.querySelector('.profile-badge .level').textContent = `Lvl ${level}`;
+      document.querySelector('.profile-badge .xp').textContent = `${xp} XP`;
+      
+      // Update active mission display
+      const active = MissionsAPI.getActiveMission();
+      if (active) {
+        document.querySelector('.mission-status h2').textContent = `${active.id} – ${active.title}`;
+        document.querySelector('.mission-meta').textContent = `${active.duration} • Schritt ${active.id} von 8`;
+        document.querySelector('.reward-xp').textContent = `+${active.xp} XP`;
+        document.querySelector('.btn-primary').href = paths[active.id];
+      }
+    }
+    
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(renderMissions, 100);
+      checkServerStatus();
+      // Alle 10 Sekunden neu prüfen
+      setInterval(checkServerStatus, 10000);
+    });
+    
+    /**
+     * SERVER STATUS CHECK
+     * Prüft ob XAMPP/Apache läuft und aktualisiert die Kontrollleuchten
+     */
+    async function checkServerStatus() {
+      const serverDot = document.getElementById('server-dot');
+      const serverValue = document.getElementById('server-value');
+      const setupDot = document.getElementById('setup-dot');
+      const setupValue = document.getElementById('setup-value');
+      
+      if (!serverDot || !serverValue) return;
+      
+      // === SERVER PRÜFEN (XAMPP/Apache) ===
+      try {
+        // Versuche localhost:80 zu erreichen (XAMPP Standard)
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        
+        const response = await fetch('http://localhost/', {
+          method: 'HEAD',
+          mode: 'no-cors', // CORS ignorieren für localhost
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        // Wenn wir hier sind, läuft ein Server
+        serverDot.className = 'status-dot check';
+        serverValue.textContent = 'Online';
+        serverValue.style.color = 'var(--success)';
+        
+      } catch (err) {
+        // Kein Server erreichbar - prüfe ob es ein "Expected Error" ist
+        // Bei no-cors bekommen wir oft trotzdem einen Fehler obwohl der Server läuft
+        // Daher zusätzliche Heuristik: prüfe ob localhost überhaupt erreichbar
+        
+        try {
+          const img = new Image();
+          img.src = 'http://localhost/favicon.ico?' + Date.now();
+          
+          await Promise.race([
+            new Promise((resolve) => { img.onload = resolve; }),
+            new Promise((_, reject) => { img.onerror = () => reject(new Error('Failed')); }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 1500))
+          ]);
+          
+          // Bild geladen = Server läuft
+          serverDot.className = 'status-dot check';
+          serverValue.textContent = 'Online';
+          serverValue.style.color = 'var(--success)';
+          
+        } catch {
+          // Wirklich kein Server
+          serverDot.className = 'status-dot pending';
+          serverValue.textContent = 'Offline';
+          serverValue.style.color = 'var(--text-muted)';
+        }
+      }
+      
+      // Status-Hinweis aktualisieren
+      const hint = document.getElementById('status-hint');
+      const xamppHint = document.getElementById('xampp-school-hint');
+      
+      if (hint) {
+        if (serverValue.textContent === 'Online') {
+          hint.textContent = '✓ XAMPP/Apache erkannt – Server läuft!';
+          hint.style.color = 'var(--success)';
+          // Zeige Schule-Hinweis beim ersten Mal
+          if (xamppHint && !localStorage.getItem('bt.xamppHintClosed')) {
+            xamppHint.style.display = 'block';
+          }
+        } else {
+          hint.textContent = 'Starte XAMPP (Apache) – die Anzeige aktualisiert sich automatisch';
+          hint.style.color = 'var(--text-muted)';
+        }
+      }
+      
+      // XAMPP Hinweis schließen
+      const xamppCloseBtn = document.getElementById('xampp-hint-close');
+      if (xamppCloseBtn) {
+        xamppCloseBtn.addEventListener('click', () => {
+          if (xamppHint) xamppHint.style.display = 'none';
+          localStorage.setItem('bt.xamppHintClosed', 'true');
+        });
+      }
+      
+      // === SETUP PRÜFEN (Node.js basierend auf Mission 01) ===
+      if (setupDot && setupValue) {
+        // Prüfe ob Mission 01 abgeschlossen (Node.js Grundlagen gelernt)
+        const missionStatus = MissionsAPI.getMissionStatus();
+        const mission01Done = missionStatus['01'] === 'completed';
+        
+        // Oder: Prüfe ob Node.js installiert (via user agent hint)
+        const nodeMentioned = localStorage.getItem('bt.nodeInstalled') === 'true';
+        
+        const setupBtn = document.getElementById('setup-confirm-btn');
+        
+        if (mission01Done || nodeMentioned) {
+          setupDot.className = 'status-dot check';
+          setupValue.textContent = 'Bereit';
+          setupValue.style.color = 'var(--success)';
+          if (setupBtn) setupBtn.style.display = 'none';
+        } else {
+          setupDot.className = 'status-dot pending';
+          setupValue.textContent = 'Pending';
+          setupValue.style.color = 'var(--text-muted)';
+          // Zeige Button zum Bestätigen
+          if (setupBtn) {
+            setupBtn.style.display = 'inline-block';
+            setupBtn.onclick = () => {
+              localStorage.setItem('bt.nodeInstalled', 'true');
+              checkServerStatus(); // Neu prüfen
+            };
+          }
+        }
+      }
+    }
+    
+    // HINWEIS: Fortschritt zurücksetzen ist jetzt auf der Info-Seite
+    // Unter: Info → "Fortschritt zurücksetzen" Section
+  </script>
+</body>
+</html>

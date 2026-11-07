@@ -1,0 +1,1351 @@
+/* ==========================================================================
+   PREMIUM NAVIGATION V3
+   Hochwertiges Design für Top-Level Navigation
+   
+   Design Principles:
+   - Generous whitespace (Premium = Luft)
+   - Sophisticated color palette (nicht nur grau/weiß)
+   - Smooth, luxurious animations
+   - Clear visual hierarchy
+   - Glassmorphism mit Tiefe
+   ========================================================================== */
+
+/* ========================================================================
+   SITE HEADER - PREMIUM BASE
+   ======================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: var(--z-fixed);
+  
+  /* Darker gradient, doesn't go fully transparent */
+  background: linear-gradient(180deg, 
+    rgba(10, 12, 16, 0.98) 0%, 
+    rgba(10, 12, 16, 0.9) 50%,
+    rgba(10, 12, 16, 0.7) 100%
+  );
+  
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode: Premium Glass Header */
+html.light-theme .site-header {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.site-header--scrolled {
+  height: 70px;
+  background: rgba(17, 19, 26, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+
+/* Light Mode: Gescrollter Header Premium Glass */
+html.light-theme .site-header--scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 4px 20px rgba(88, 166, 255, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+/* Light Mode: Logo Text Gradient */
+html.light-theme .brand__name {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 50%, #4a90e2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Light Mode: Navigation Text Colors */
+html.light-theme .nav-item__trigger {
+  color: var(--text-primary);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme .nav-item__trigger:hover,
+html.light-theme .nav-item__trigger.active {
+  color: var(--accent-primary);
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+/* Light Mode: Language Switch */
+html.light-theme .lang-switch {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+html.light-theme .lang-btn {
+  color: var(--text-secondary);
+}
+
+html.light-theme .lang-btn.active {
+  color: #ffffff;
+}
+
+html.light-theme .lang-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Light Mode: Mobile Menu Toggle (gleiche Styles wie Header Buttons) */
+html.light-theme .mobile-menu-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+html.light-theme .mobile-menu-toggle span {
+  background: linear-gradient(90deg, var(--text-primary), rgba(0, 0, 0, 0.7));
+}
+
+@media (hover: hover) {
+  html.light-theme .mobile-menu-toggle:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1440px;
+  padding: 0 1rem; /* Mobile: kompakter */
+}
+
+@media (min-width: 768px) {
+  .site-header .container {
+    padding: 0 3rem; /* Desktop: mehr Luft */
+  }
+}
+
+/* Brand: Mobile optimiert */
+.brand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand img {
+  width: 44px;
+  height: 44px;
+}
+
+@media (min-width: 768px) {
+  .brand img {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .brand img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .brand img {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+.lang-switch {
+  width: 100px; /* Fixe Breite für Balance */
+  justify-content: center;
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .lang-switch {
+    width: 76px;
+  }
+}
+
+/* ========================================================================
+   BRAND - PREMIUM STYLING
+   ======================================================================== */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.brand::after {
+  content: '';
+  position: absolute;
+  inset: -8px -12px;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+@media (hover: hover) {
+  .brand:hover::after {
+    opacity: 1;
+  }
+}
+
+.brand img {
+  width: 44px;
+  height: 44px;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 20px rgba(88, 166, 255, 0.4));
+}
+
+@media (hover: hover) {
+  .brand:hover img {
+    transform: rotate(12deg) scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+  }
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem; /* GRÖSSER für "PLU" */
+  font-weight: 800; /* EXTRABOLD */
+  letter-spacing: 0.05em; /* BREITER */
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, #58a6ff 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .brand__name {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .brand__name {
+    font-size: 1.75rem; /* NOCH GRÖSSER auf Desktop */
+  }
+}
+
+/* ========================================================================
+   DESKTOP NAVIGATION - PREMIUM
+   ======================================================================== */
+
+.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 auto; /* ZENTRIERT */
+  }
+}
+
+/* ========================================================================
+   NAV ITEM - PREMIUM PILL BUTTONS
+   ======================================================================== */
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700; /* BOLDER */
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  text-transform: uppercase; /* GROSSBUCHSTABEN wie Logo */
+  letter-spacing: 0.08em; /* BREITERER ABSTAND */
+  
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background: transparent;
+  
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient background on normal state */
+.nav-item__trigger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.03), 
+    rgba(255, 255, 255, 0.01)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+@media (hover: hover) {
+  .nav-item__trigger:hover {
+    color: rgba(255, 255,  255, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  .nav-item__trigger:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ACTIVE / CURRENT STATE - Premium Highlight */
+.nav-item__trigger.active,
+.nav-item:hover .nav-item__trigger,
+.nav-item:focus-within .nav-item__trigger {
+  color: #fff;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border-color: rgba(88, 166, 255, 0.4);
+  box-shadow: 
+    0 0 20px rgba(88, 166, 255, 0.2),
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Glow effect */
+.nav-item__trigger::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.4), 
+    rgba(139, 92, 246, 0.2)
+  );
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(8px);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.nav-item:hover .nav-item__trigger::after,
+.nav-item__trigger.active::after {
+  opacity: 1;
+}
+
+/* Caret Icon */
+.nav-item__trigger .ph-caret-down {
+  font-size: 0.75rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0.6;
+}
+
+.nav-item:hover .nav-item__trigger .ph-caret-down,
+.nav-item:focus-within .nav-item__trigger .ph-caret-down {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* ========================================================================
+   COMPACT DESKTOP NAVIGATION (1024px - 1199px)
+   Reduzierte Größen für Tablets wie iPad Pro Hochformat
+   ======================================================================== */
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .nav-item__trigger {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.75rem;
+    gap: 0.375rem;
+  }
+
+  .nav-item__link {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.75rem;
+    gap: 0.375rem;
+  }
+
+  .nav-item__trigger .ph-caret-down {
+    font-size: 0.6875rem;
+  }
+
+  .nav-item__link .ph {
+    font-size: 0.875rem;
+  }
+
+  .site-header .container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* ========================================================================
+   DROPDOWN MEGA MENU - PREMIUM
+   ======================================================================== */
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px) scale(0.96);
+  
+  min-width: 520px;
+  max-width: 90vw;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  
+  padding: 2rem;
+  
+  background: rgba(17, 19, 26, 0.95);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  z-index: var(--z-dropdown);
+}
+
+/* Scrollable dropdown variant */
+.nav-dropdown--scrollable {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-top: 2.75rem;
+}
+.nav-dropdown--scrollable::before {
+  top: 6px;
+}
+
+/* Arrow pointer */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: rgba(17, 19, 26, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.nav-item:hover .nav-dropdown,
+.nav-item:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* Dropdown Sections */
+.nav-dropdown__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-dropdown__title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(148, 163, 184, 0.8);
+  padding: 0 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.nav-dropdown__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Pansonic Labs section sits in the left column under Classic */
+.nav-dropdown__section--fullwidth {
+  grid-column: 1;
+}
+
+.nav-dropdown__section--fullwidth .nav-dropdown__links {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.25rem 1.5rem;
+}
+
+/* Premium Dropdown Links */
+.nav-dropdown__link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 0.875rem 0.75rem;
+  min-height: 72px;
+  
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-dropdown__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.1), 
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+}
+
+@media (hover: hover) {
+  .nav-dropdown__link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateX(4px);
+  }
+  
+  .nav-dropdown__link:hover::before {
+    opacity: 1;
+  }
+}
+
+.nav-dropdown__link .ph {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  transition: transform 0.25s ease;
+  /* Color is defined by utility classes below */
+}
+
+@media (hover: hover) {
+  .nav-dropdown__link:hover .ph {
+    transform: scale(1.1);
+  }
+}
+
+.nav-dropdown__link span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-dropdown__link strong {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.nav-dropdown__link small {
+  font-size: 0.8125rem;
+  color: rgba(148, 163, 184, 0.8);
+  line-height: 1.4;
+}
+
+/* Special: Section Anchors */
+.nav-dropdown__link--anchor .ph {
+  color: var(--accent-cyan);
+}
+
+/* ========================================================================
+   LANGUAGE SWITCH - PREMIUM
+   ======================================================================== */
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  padding: 0 0.5rem;
+  
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  
+  border-radius: 100px;
+  transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+  .lang-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.lang-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.9), 
+    rgba(139, 92, 246, 0.8)
+  );
+  box-shadow: 
+    0 4px 12px rgba(88, 166, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================================================
+   HEADER CONTROLS - Mobile Optimized
+   ======================================================================== */
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Header Buttons (Mobile: Theme, Back to Top) - Premium Unified 36px */
+.header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  
+  color: var(--text-primary);
+  font-size: 1rem;
+  
+  transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+  .header-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.header-btn:active {
+  transform: scale(0.95);
+}
+
+/* Desktop: Hide mobile-only header buttons */
+@media (min-width: 1024px) {
+  .header-btn--theme,
+  .header-btn--top {
+    display: none;
+  }
+}
+
+/* Light Mode Header Buttons */
+html.light-theme .header-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+html.light-theme .header-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* ========================================================================
+   MOBILE MENU TOGGLE - PREMIUM (Symmetrie mit Logo 36px)
+   ======================================================================== */
+
+.mobile-menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.8));
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+}
+
+@media (hover: hover) {
+  .mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.mobile-menu-toggle.active {
+  background: rgba(88, 166, 255, 0.15);
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========================================================================
+   MOBILE NAVIGATION - PREMIUM
+   ======================================================================== */
+
+.mobile-nav {
+  position: fixed;
+  inset: var(--header-height) 0 0 0;
+  z-index: var(--z-modal);
+  
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 0.5rem;
+  
+  background: rgba(10, 12, 16, 0.98);
+  backdrop-filter: blur(40px);
+  
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.mobile-nav.active {
+  transform: translateX(0);
+}
+
+.mobile-nav__section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-nav__title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(148, 163, 184, 0.6);
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  border-radius: 16px;
+  transition: all 0.25s ease;
+}
+
+@media (hover: hover) {
+  .mobile-nav a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    transform: translateX(8px);
+  }
+}
+
+.mobile-nav a .ph {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .mobile-nav a:hover .ph {
+    transform: scale(1.1);
+  }
+}
+
+.mobile-nav__support {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.mobile-nav__support a {
+  color: var(--accent-pink);
+  font-weight: 600;
+}
+
+.mobile-nav__support a .ph {
+  color: var(--accent-red);
+}
+
+/* Light Mode: Mobile Navigation */
+html.light-theme .mobile-nav {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+html.light-theme .mobile-nav__section {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme .mobile-nav__title {
+  color: rgba(100, 116, 139, 0.8);
+}
+
+html.light-theme .mobile-nav a {
+  color: rgba(15, 23, 42, 0.9);
+}
+
+@media (hover: hover) {
+  html.light-theme .mobile-nav a:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #0f172a;
+  }
+}
+
+html.light-theme .mobile-nav__support a {
+  color: var(--accent-red);
+}
+
+/* ========================================================================
+   BOTTOM NAVIGATION - PREMIUM (Mobile)
+   ======================================================================== */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  
+  background: rgba(17, 19, 26, 0.95);
+  backdrop-filter: blur(30px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Bottom Navigation completely hidden (user preference) */
+.bottom-nav {
+  display: none;
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  
+  border-radius: 16px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.bottom-nav__item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.bottom-nav__item.active,
+.bottom-nav__item[aria-current="page"] {
+  color: var(--accent-primary);
+}
+
+.bottom-nav__item.active::before,
+.bottom-nav__item[aria-current="page"]::before {
+  opacity: 1;
+}
+
+.bottom-nav__item .ph {
+  font-size: 1.5rem;
+  transition: transform 0.25s ease;
+}
+
+.bottom-nav__item.active .ph {
+  transform: translateY(-2px);
+}
+
+.bottom-nav__item--support {
+  color: var(--accent-pink);
+}
+
+.bottom-nav__item--support .ph {
+  color: var(--accent-red);
+}
+
+/* ========================================================================
+   SKIP LINK - PREMIUM
+   ======================================================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: calc(var(--z-toast) + 1);
+  
+  padding: 1rem 2rem;
+  
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-violet));
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+  
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 10px 40px rgba(88, 166, 255, 0.4);
+  
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+
+
+/* ========================================================================
+   NAV ITEM LINK - Direct Link Variant (no dropdown)
+   For explicit Home link and other direct navigation items
+   ======================================================================== */
+
+.nav-item__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background: transparent;
+  
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.03), 
+    rgba(255, 255, 255, 0.01)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+@media (hover: hover) {
+  .nav-item__link:hover {
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  .nav-item__link:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Active / Current State - Same as nav-item__trigger */
+.nav-item__link[aria-current="page"],
+.nav-item__link.active {
+  color: #fff;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border-color: rgba(88, 166, 255, 0.4);
+  box-shadow: 
+    0 0 20px rgba(88, 166, 255, 0.2),
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.nav-item__link .ph {
+  font-size: 1rem;
+  color: var(--accent-primary);
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .nav-item__link:hover .ph {
+    transform: scale(1.1);
+  }
+}
+
+/* Light Mode */
+html.light-theme .nav-item__link {
+  color: var(--text-secondary);
+}
+
+@media (hover: hover) {
+  html.light-theme .nav-item__link:hover {
+    color: var(--text-primary);
+    border-color: rgba(88, 166, 255, 0.3);
+  }
+}
+
+html.light-theme .nav-item__link[aria-current="page"],
+html.light-theme .nav-item__link.active {
+  color: var(--accent-primary);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(139, 92, 246, 0.08)
+  );
+  border-color: rgba(88, 166, 255, 0.5);
+  box-shadow: 
+    0 0 20px rgba(88, 166, 255, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================================================
+   MOBILE NAV - HOME SECTION
+   Highlighted section for explicit Home navigation
+   ======================================================================== */
+
+.mobile-nav__section--home {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08) 0%, 
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  border-left: 3px solid var(--accent-primary);
+}
+
+.mobile-nav__section--home .mobile-nav__title {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.mobile-nav__section--home a {
+  font-weight: 500;
+}
+
+.mobile-nav__section--home a .ph {
+  color: var(--accent-primary);
+}
+
+/* Light Mode Mobile Home Section */
+html.light-theme .mobile-nav__section--home {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.06) 0%, 
+    rgba(139, 92, 246, 0.04) 100%
+  );
+  border-left-color: var(--accent-primary);
+}
+
+html.light-theme .mobile-nav__section--home .mobile-nav__title {
+  color: var(--accent-primary);
+}
+/* ========================================================================
+   NAV ICON COLORS - Utility Classes for Dropdown Icons
+   Replaces inline styles with semantic CSS classes
+   ======================================================================== */
+
+/* Target Groups Icons */
+.nav-icon--primary { color: var(--accent-primary); }
+.nav-icon--cyan { color: var(--accent-cyan); }
+.nav-icon--orange { color: var(--accent-orange); }
+.nav-icon--pink { color: var(--accent-pink); }
+.nav-icon--red { color: var(--accent-red); }
+.nav-icon--green { color: var(--accent-green); }
+.nav-icon--yellow { color: var(--accent-yellow); }
+.nav-icon--violet { color: var(--accent-violet); }
+
+/* Light Mode Support */
+html.light-theme .nav-icon--primary { color: var(--accent-primary); }
+html.light-theme .nav-icon--cyan { color: var(--accent-cyan); }
+html.light-theme .nav-icon--orange { color: var(--accent-orange); }
+html.light-theme .nav-icon--pink { color: var(--accent-pink); }
+html.light-theme .nav-icon--red { color: var(--accent-red); }
+html.light-theme .nav-icon--green { color: var(--accent-green); }
+html.light-theme .nav-icon--yellow { color: var(--accent-yellow); }
+html.light-theme .nav-icon--violet { color: var(--accent-violet); }
+/* ========================================================================
+   NAV DROPDOWN MODIFIERS - Structural Variants
+   Replaces inline width/grid styles with semantic CSS classes
+   ======================================================================== */
+
+/* Single Column Dropdown Variants */
+.nav-dropdown--single {
+  min-width: 320px;
+  grid-template-columns: 1fr;
+}
+
+.nav-dropdown--narrow {
+  min-width: 280px;
+  grid-template-columns: 1fr;
+}
+
+/* Wide Dropdown (Skills) */
+.nav-dropdown--wide {
+  min-width: 380px;
+  grid-template-columns: 1fr;
+}
+
+/* Mega Dropdown (default 2-column) */
+.nav-dropdown--mega {
+  min-width: 520px;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Dropdown Sections with spacing */
+.nav-dropdown__section + .nav-dropdown__section--bordered {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Light Mode Dropdown Borders */
+html.light-theme .nav-dropdown__section + .nav-dropdown__section--bordered {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode: Dropdown Links */
+html.light-theme .nav-dropdown__link {
+  color: var(--text-secondary);
+}
+
+html.light-theme .nav-dropdown__link strong {
+  color: var(--text-primary);
+}
+
+html.light-theme .nav-dropdown__link small {
+  color: var(--text-muted);
+}
+
+@media (hover: hover) {
+  html.light-theme .nav-dropdown__link:hover {
+    color: var(--text-primary);
+    background: rgba(88, 166, 255, 0.05);
+  }
+}
+
+html.light-theme .nav-dropdown__link .ph {
+  color: var(--accent-primary);
+}
+
+html.light-theme .nav-dropdown__link--anchor .ph {
+  color: var(--accent-cyan);
+}
+
+/* Light Mode: Dropdown Title */
+html.light-theme .nav-dropdown__title {
+  color: var(--text-muted);
+}
+
+/* ========================================================================
+   LIGHT MODE DROPDOWN STYLES
+   Ensures colored icons remain visible in light mode
+   ======================================================================== */
+
+/* Light Mode Dropdown Background - Lighter for better contrast */
+html.light-theme .nav-dropdown {
+  background: rgba(248, 250, 252, 0.98);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+}
+
+html.light-theme .nav-dropdown::before {
+  background: rgba(248, 250, 252, 0.98);
+  border-left-color: rgba(0, 0, 0, 0.08);
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Light Mode Dropdown Links - Ensure colored icons pop */
+html.light-theme .nav-dropdown__link {
+  color: var(--text-secondary);
+}
+
+html.light-theme .nav-dropdown__link strong {
+  color: var(--text-primary);
+}
+
+html.light-theme .nav-dropdown__link small {
+  color: var(--text-muted);
+}
+
+@media (hover: hover) {
+  html.light-theme .nav-dropdown__link:hover {
+    color: var(--text-primary);
+    background: rgba(88, 166, 255, 0.08);
+  }
+}
+
+/* Light Mode Dropdown Title */
+html.light-theme .nav-dropdown__title {
+  color: var(--text-muted);
+}
+
+/* Light Mode: Colored Icons remain visible */
+html.light-theme .nav-dropdown__link .ph {
+  /* Icons keep their utility class colors - no override */
+  opacity: 1;
+}
+
+/* Light Mode Section Borders */
+html.light-theme .nav-dropdown__section + .nav-dropdown__section--bordered {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================================================
+   NAV DROPDOWN ICONS - Color Override
+   Utility classes must override default icon color
+   ======================================================================== */
+
+/* Default dropdown icon styling */
+.nav-dropdown__link .ph {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  transition: transform 0.25s ease;
+}
+
+/* Default icon color - only when no utility class is present */
+.nav-dropdown__link .ph:not([class*="nav-icon--"]) {
+  color: var(--accent-primary);
+}
+
+/* Utility classes with higher specificity for dropdowns */
+.nav-dropdown__link .nav-icon--primary { color: var(--accent-primary); }
+.nav-dropdown__link .nav-icon--cyan { color: var(--accent-cyan); }
+.nav-dropdown__link .nav-icon--orange { color: var(--accent-orange); }
+.nav-dropdown__link .nav-icon--pink { color: var(--accent-pink); }
+.nav-dropdown__link .nav-icon--red { color: var(--accent-red); }
+.nav-dropdown__link .nav-icon--green { color: var(--accent-green); }
+.nav-dropdown__link .nav-icon--yellow { color: var(--accent-yellow); }
+.nav-dropdown__link .nav-icon--violet { color: var(--accent-violet); }
+
+/* Light Mode Dropdown Icon Colors */
+html.light-theme .nav-dropdown__link .nav-icon--primary { color: var(--accent-primary); }
+html.light-theme .nav-dropdown__link .nav-icon--cyan { color: var(--accent-cyan); }
+html.light-theme .nav-dropdown__link .nav-icon--orange { color: var(--accent-orange); }
+html.light-theme .nav-dropdown__link .nav-icon--pink { color: var(--accent-pink); }
+html.light-theme .nav-dropdown__link .nav-icon--red { color: var(--accent-red); }
+html.light-theme .nav-dropdown__link .nav-icon--green { color: var(--accent-green); }
+html.light-theme .nav-dropdown__link .nav-icon--yellow { color: var(--accent-yellow); }
+html.light-theme .nav-dropdown__link .nav-icon--violet { color: var(--accent-violet); }
+
+/* Light Mode Dropdown Background */
+html.light-theme .nav-dropdown {
+  background: rgba(248, 250, 252, 0.98);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme .nav-dropdown::before {
+  background: rgba(248, 250, 252, 0.98);
+  border-left-color: rgba(0, 0, 0, 0.08);
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+

@@ -1,0 +1,374 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Viewfinder Workflow
+   Camera viewfinder-inspired step tracker for process/checklist sections
+   ============================================================ */
+
+@layer components {
+  .photo-viewfinder {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6) var(--photo-space-5);
+    margin: var(--photo-space-6) 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  /* Viewfinder corner marks */
+  .photo-viewfinder::before,
+  .photo-viewfinder::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: rgba(0,0,0,0.12);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .photo-viewfinder::before {
+    top: 16px;
+    left: 16px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+
+  .photo-viewfinder::after {
+    top: 16px;
+    right: 16px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+  }
+
+  .photo-viewfinder__corners-bottom::before,
+  .photo-viewfinder__corners-bottom::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: rgba(0,0,0,0.12);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .photo-viewfinder__corners-bottom::before {
+    bottom: 16px;
+    left: 16px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+  }
+
+  .photo-viewfinder__corners-bottom::after {
+    bottom: 16px;
+    right: 16px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  /* Crosshair overlay */
+  .photo-viewfinder__crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    pointer-events: none;
+    opacity: 0.06;
+    z-index: 1;
+  }
+
+  .photo-viewfinder__crosshair::before,
+  .photo-viewfinder__crosshair::after {
+    content: '';
+    position: absolute;
+    background: #000;
+  }
+
+  .photo-viewfinder__crosshair::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  .photo-viewfinder__crosshair::after {
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+
+  /* Step track */
+  .photo-viewfinder__track {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: var(--photo-space-2);
+    position: relative;
+    z-index: 3;
+  }
+
+  .photo-viewfinder__track::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    z-index: 0;
+  }
+
+  /* Individual step */
+  .photo-viewfinder__step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--photo-space-2);
+    padding: var(--photo-space-3) var(--photo-space-2);
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  /* Focus ring */
+  .photo-viewfinder__ring {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .photo-viewfinder__ring .ph {
+    font-size: 22px;
+    color: var(--module-accent);
+  }
+
+  /* Ring accent bracket */
+  .photo-viewfinder__ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    border-top-color: var(--module-accent);
+    border-right-color: var(--module-accent);
+    transform: rotate(-45deg);
+    opacity: 0.4;
+  }
+
+  /* Step label */
+  .photo-viewfinder__label {
+    font-size: var(--photo-text-sm);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+    line-height: 1.3;
+  }
+
+  .photo-viewfinder__sublabel {
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-secondary);
+    line-height: 1.4;
+  }
+
+  /* Active step */
+  .photo-viewfinder__step.is-active .photo-viewfinder__ring {
+    border-color: var(--module-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--module-accent) 15%, transparent);
+  }
+
+  .photo-viewfinder__step.is-active .photo-viewfinder__ring::before {
+    opacity: 1;
+    animation: photo-viewfinder-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes photo-viewfinder-pulse {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.08); }
+  }
+
+  .photo-viewfinder__step.is-active .photo-viewfinder__label {
+    color: var(--module-accent);
+  }
+
+  /* Completed step */
+  .photo-viewfinder__step.is-completed .photo-viewfinder__ring {
+    background: var(--module-accent);
+    border-color: var(--module-accent);
+  }
+
+  .photo-viewfinder__step.is-completed .photo-viewfinder__ring .ph {
+    color: #fff;
+  }
+
+  .photo-viewfinder__step.is-completed .photo-viewfinder__ring::before {
+    display: none;
+  }
+
+  /* Responsive: stack vertically on mobile */
+  @media (max-width: 767px) {
+    .photo-viewfinder {
+      padding: var(--photo-space-8) var(--photo-space-4);
+    }
+
+    .photo-viewfinder__track {
+      flex-direction: column;
+      gap: var(--photo-space-3);
+    }
+
+    .photo-viewfinder__track::before {
+      display: none;
+    }
+
+    .photo-viewfinder__step {
+      flex-direction: row;
+      text-align: left;
+      gap: var(--photo-space-3);
+      padding: var(--photo-space-3);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .photo-viewfinder__step:last-child {
+      border-bottom: none;
+    }
+
+    .photo-viewfinder__ring {
+      width: 44px;
+      height: 44px;
+    }
+
+    .photo-viewfinder__ring .ph {
+      font-size: 18px;
+    }
+
+    .photo-viewfinder__label {
+      font-size: var(--photo-text-sm);
+    }
+
+    .photo-viewfinder__sublabel {
+      font-size: 12px;
+    }
+
+    .photo-viewfinder__crosshair {
+      display: none;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .photo-viewfinder {
+      padding: var(--photo-space-6) var(--photo-space-3);
+      border-radius: var(--photo-radius-lg);
+    }
+
+    .photo-viewfinder::before,
+    .photo-viewfinder::after,
+    .photo-viewfinder__corners-bottom::before,
+    .photo-viewfinder__corners-bottom::after {
+      width: 18px;
+      height: 18px;
+    }
+
+    .photo-viewfinder::before,
+    .photo-viewfinder::after {
+      top: 12px;
+    }
+
+    .photo-viewfinder__corners-bottom::before,
+    .photo-viewfinder__corners-bottom::after {
+      bottom: 12px;
+    }
+
+    .photo-viewfinder__step {
+      padding: var(--photo-space-2) var(--photo-space-1);
+    }
+
+    .photo-viewfinder__ring {
+      width: 40px;
+      height: 40px;
+    }
+
+    .photo-viewfinder__label {
+      font-size: var(--photo-text-xs);
+    }
+
+    .photo-viewfinder__sublabel {
+      font-size: 11px;
+    }
+  }
+
+  /* Dark Mode */
+  [data-theme="dark"] .photo-viewfinder {
+    background: #252530;
+    border-color: rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="dark"] .photo-viewfinder::before,
+  [data-theme="dark"] .photo-viewfinder::after,
+  [data-theme="dark"] .photo-viewfinder__corners-bottom::before,
+  [data-theme="dark"] .photo-viewfinder__corners-bottom::after {
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  [data-theme="dark"] .photo-viewfinder__crosshair {
+    opacity: 0.04;
+  }
+
+  [data-theme="dark"] .photo-viewfinder__crosshair::before,
+  [data-theme="dark"] .photo-viewfinder__crosshair::after {
+    background: #fff;
+  }
+
+  [data-theme="dark"] .photo-viewfinder__track::before {
+    background: rgba(255,255,255,0.08);
+  }
+
+  [data-theme="dark"] .photo-viewfinder__ring {
+    background: #252530;
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  [data-theme="dark"] .photo-viewfinder__label {
+    color: var(--photo-text-primary);
+  }
+
+  [data-theme="dark"] .photo-viewfinder__sublabel {
+    color: var(--photo-text-secondary);
+  }
+
+  [data-theme="dark"] .photo-viewfinder__step {
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+
+  /* Hint */
+  .photo-viewfinder-hint {
+    text-align: center;
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-tertiary);
+    margin-top: var(--photo-space-4);
+  }
+
+  .photo-viewfinder-hint i {
+    color: var(--photo-accent);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+}

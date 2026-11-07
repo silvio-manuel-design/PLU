@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quest | JS Quest</title>
+  <meta name="description" content="Gamified JavaScript Quest mit Sandbox und XP-Belohnung.">
+  <meta name="theme-color" content="#F1C40F">
+
+  <!-- PLU Favicon (Quest Orange) -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-quest">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="header">
+    <div class="site-header__container">
+      <a href="index.html" class="brand">
+        <img src="../assets/logo.svg" alt="PLU" width="40" height="40">
+        <span class="brand__name">JavaScript <span class="brand__name--quest">Quest</span></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html" class="nav-link"><i class="ph ph-arrow-left"></i> <span data-i18n="nav.backToHub">Zurück zum Hub</span></a>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="lang-switcher__btn" aria-label="Sprache wählen" aria-expanded="false">
+            <span class="lang-switcher__code" id="lang-current">DE</span>
+            <i class="ph ph-caret-down"></i>
+          </button>
+          <div class="lang-switcher__dropdown">
+            <button data-lang="de" class="lang-switcher__option is-active">Deutsch</button>
+            <button data-lang="en" class="lang-switcher__option">English</button>
+          </div>
+        </div>
+
+        <button class="header-btn header-btn--top" id="header-top" aria-label="Nach oben scrollen" title="Nach oben scrollen">
+          <i class="ph ph-arrow-up"></i>
+        </button>
+
+        <button class="theme-toggle" id="theme-toggle" aria-label="Dark Mode umschalten">
+          <i class="ph ph-moon"></i>
+        </button>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menü" aria-expanded="false">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html"><i class="ph ph-house"></i> <span data-i18n="nav.hub">Hub</span></a>
+      <a href="index.html#welten"><i class="ph ph-globe-hemisphere-west"></i> <span data-i18n="nav.worlds">Welten</span></a>
+      <a href="index.html#badges"><i class="ph ph-trophy"></i> <span data-i18n="nav.badges">Badges</span></a>
+      <a href="tools.html"><i class="ph ph-wrench"></i> <span data-i18n="nav.toolsSetup">Tools & Setup</span></a>
+      <a href="#" class="mobile-nav__scroll-top" data-scroll-top><i class="ph ph-arrow-up"></i> <span data-i18n="nav.scrollUp">Nach oben</span></a>
+      <hr class="mobile-nav__divider">
+      <a href="/tutorials/"><i class="ph ph-arrow-left"></i> <span data-i18n="nav.pluHub">PLU Hub</span></a>
+      <a href="/tutorials/html-css-classic/"><i class="ph ph-book-open"></i> <span data-i18n="nav.classicTutorial">Classic Tutorial</span></a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <div class="quest-hero quest-hero--detail" id="quest-hero">
+    <div class="quest-hero__bg">
+      <picture>
+        <source srcset="../assets/images/quests/quest-bg.webp" type="image/webp">
+        <img src="../assets/images/quests/quest-bg.jpg" alt="" loading="eager">
+      </picture>
+    </div>
+    <div class="quest-hero__content">
+      <div class="quest-hero__world-badge" id="quest-hero-world">
+        <i class="ph ph-globe-hemisphere-west"></i>
+        <span data-i18n="loading.world">Welt wird geladen...</span>
+      </div>
+      <h1 class="quest-hero__title-detail" id="quest-hero-title" data-i18n="loading.quest">Quest wird geladen...</h1>
+      <div class="quest-hero__meta-row" id="quest-hero-meta"></div>
+    </div>
+  </div>
+  <div class="quest-hero__accent-bar" id="quest-hero-accent"></div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main id="quest-main">
+    <div class="quest-layout">
+
+      <!-- Sidebar -->
+      <aside class="quest-sidebar" id="quest-sidebar">
+        <div class="quest-sidebar__world" id="sidebar-world">
+          <div class="quest-sidebar__world-icon" id="sidebar-world-icon">
+            <i class="ph ph-globe-hemisphere-west"></i>
+          </div>
+          <div class="quest-sidebar__world-info">
+            <h4 data-i18n="loading.world">Welt wird geladen...</h4>
+            <p><span id="sidebar-quest-count">0/0</span> <span data-i18n="quest.quests">Quests</span></p>
+          </div>
+        </div>
+        <div class="quest-sidebar__progress">
+          <div class="quest-sidebar__progress-label">
+            <span data-i18n="quest.progress">Fortschritt</span>
+            <span id="sidebar-progress-text">0%</span>
+          </div>
+          <div class="quest-sidebar__progress-bar">
+            <div class="quest-sidebar__progress-fill" id="sidebar-progress-fill"></div>
+          </div>
+        </div>
+        <nav>
+          <ul class="quest-sidebar__list" id="sidebar-list"></ul>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <div class="quest-main-content" id="quest-detail">
+        <div class="quest-loading">
+          <p class="quest-loading__text" data-i18n="loading.quest">Quest wird geladen...</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <a href="/tutorials/" class="site-footer__logo">
+            <img src="../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="site-footer__logo-text">
+              <span class="site-footer__logo-title">PANTAM</span>
+              <span class="site-footer__logo-subtitle">LEARNING UNIVERSE</span>
+            </div>
+          </a>
+          <p class="site-footer__tagline" data-i18n="footer.slogan">Mit KI denken. Menschlich handeln.</p>
+        </div>
+        <div class="site-footer__links">
+          <div class="site-footer__col">
+            <h4 data-i18n="footer.platform">Plattform</h4>
+            <nav>
+              <a href="/tutorials/">PLU Hub</a>
+              <a href="/tutorials/pages/lexikon.html">KI-Lexikon</a>
+              <a href="/tutorials/pages/vision.html">Vision</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4 data-i18n="footer.learn">Lernen</h4>
+            <nav>
+              <a href="/tutorials/html-css-classic/">HTML/CSS Classic</a>
+              <a href="/tutorials/backend-modern/">Backend Quest</a>
+              <a href="/tutorials/js-classic/">JavaScript</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4 data-i18n="footer.legal">Rechtliches</h4>
+            <nav>
+              <a href="/tutorials/pages/impressum.html">Impressum</a>
+              <a href="/tutorials/pages/datenschutz.html">Datenschutz</a>
+              <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div class="site-footer__legal">
+          <span data-i18n-html="footer.content">Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
+          <span>•</span>
+          <span data-i18n-html="footer.code">Code: <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a></span>
+        </div>
+        <div class="site-footer__meta">
+          <span data-i18n="footer.copyright">© Pantam, Art & Culture – Austria</span>
+          <a href="/tutorials/pages/spenden.html" class="site-footer__support">
+            <i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FAB ==================== -->
+  <div class="fab-container" aria-label="Werkzeuge">
+    <button class="fab-btn fab-btn--classroom" id="classroom-toggle" data-i18n="fab.classroom" data-tooltip="Classroom Mode (Shift+C)" aria-label="Classroom Mode umschalten" aria-pressed="false">
+      <i class="ph ph-presentation"></i>
+      <span class="fab-btn__label" data-i18n="fab.classroom">Classroom</span>
+    </button>
+    <div class="fab-quest-progress u-hidden" id="fab-progress">
+      <span class="fab-quest-label" data-i18n="fab.quests">Quests</span>
+      <div id="fab-dots"></div>
+    </div>
+    <a href="index.html" class="fab-btn" data-i18n="fab.hub" data-tooltip="Zum Hub" aria-label="Zurück zum Hub">
+      <i class="ph ph-house"></i>
+      <span class="fab-btn__label" data-i18n="fab.hub">Hub</span>
+    </a>
+    <button class="fab-btn fab-btn--backtop" id="back-to-top" data-i18n="fab.top" data-tooltip="Nach oben" aria-label="Nach oben scrollen">
+      <i class="ph ph-arrow-up"></i>
+      <span class="fab-btn__label" data-i18n="fab.top">Top</span>
+    </button>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="quest-toast" id="quest-toast" role="status" aria-live="polite">
+    <i class="ph ph-check-circle"></i>
+    <span id="quest-toast-text"></span>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas class="confetti-canvas" id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script type="module" src="../js/quest-page.js"></script>
+</body>
+</html>

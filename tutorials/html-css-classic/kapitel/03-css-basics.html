@@ -1,0 +1,516 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>03 – CSS-Grundlagen | HTML & CSS Tutorial</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#F39C12">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../assets/logo.svg" alt="HTML/CSS Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link">🏠</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 Module ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+                <li><a href="../kapitel/01-html-elements.html">01. HTML-Elemente</a></li>
+                <li><a href="../kapitel/02-page-structure.html">02. Seitenstruktur</a></li>
+                <li><a href="../kapitel/03-css-basics.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../kapitel/04-colors-and-inheritance.html">04. Farben & Vererbung</a></li>
+                <li><a href="../kapitel/05-box-model.html">05. Box-Modell</a></li>
+                <li><a href="../kapitel/06-folder-structure.html">06. Ordner & Pfade</a></li>
+                <li><a href="../kapitel/07-links.html">07. Links & Navigation</a></li>
+                <li><a href="../kapitel/08-media.html">08. Medien</a></li>
+                <li><a href="../kapitel/09-lists-selectors.html">09. Listen & Selektoren</a></li>
+                <li><a href="../kapitel/10-block-inline.html">10. Block vs. Inline</a></li>
+                <li><a href="../kapitel/11-layout-responsive.html">11. Layout & Responsive</a></li>
+                <li><a href="../kapitel/12-tables-forms.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">✏️ Übungen ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+                <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+                <li><a href="../uebungen/01-html-elements-aufgaben.html">01. HTML-Elemente</a></li>
+                <li><a href="../uebungen/02-page-structure-aufgaben.html">02. Seitenstruktur</a></li>
+                <li><a href="../uebungen/03-css-basics-aufgaben.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../uebungen/04-colors-and-inheritance-aufgaben.html">04. Farben & Vererbung</a></li>
+                <li><a href="../uebungen/05-box-model-aufgaben.html">05. Box-Modell</a></li>
+                <li><a href="../uebungen/06-folder-structure-aufgaben.html">06. Ordner & Pfade</a></li>
+                <li><a href="../uebungen/07-links-aufgaben.html">07. Links & Navigation</a></li>
+                <li><a href="../uebungen/08-media-aufgaben.html">08. Medien</a></li>
+                <li><a href="../uebungen/09-lists-selectors-aufgaben.html">09. Listen & Selektoren</a></li>
+                <li><a href="../uebungen/10-block-inline-aufgaben.html">10. Block vs. Inline</a></li>
+                <li><a href="../uebungen/11-layout-responsive-aufgaben.html">11. Layout & Responsive</a></li>
+                <li><a href="../uebungen/12-tables-forms-aufgaben.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li><a href="../tools/ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+            <li><a href="../tools/vscode.html" class="nav-link">💻 VS Code</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../abschluss/aufgabenstellung.html">📄 Statische Website</a></li>
+              </ul>
+            </li>
+            <li><a href="../resources/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <h1>03 – CSS-Grundlagen 🎨</h1>
+      <p class="hero-subtitle">Gestalte das Aussehen deiner Webseite – sauber und strukturiert</p>
+    </section>
+
+    <!-- 1. Was ist CSS? -->
+    <section>
+      <h2>🎨 1. Was ist CSS?</h2>
+      <p>
+        <strong>CSS (Cascading Style Sheets)</strong> definiert das <em>Aussehen</em> einer HTML-Seite:
+        Farben, Schriften, Abstände, Layouts.
+      </p>
+      <p>
+        Ohne CSS wäre das Web grau, linksbündig und ohne Struktur – wie ein reiner Text.
+      </p>
+      <div class="regel">
+        💡 <strong>Prinzip:</strong> HTML = Inhalt | CSS = Design | JavaScript = Verhalten
+      </div>
+      <p>
+        Bis jetzt hast du gelernt, wie man <strong>Inhalte strukturiert</strong> (mit HTML).
+        Jetzt lernst du, wie man diese Inhalte <strong>gestaltet</strong> – mit <strong>CSS</strong>.
+      </p>
+      <div class="warnung">
+        ⚠️ <strong>Wichtig:</strong> Halte <em>Inhalt</em> (HTML) und <em>Design</em> (CSS) strikt getrennt!  
+        Das macht deine Website übersichtlicher, wartbarer und professioneller.
+      </div>
+    </section>
+
+    <!-- 2. CSS-Syntax – ausführlich erklärt -->
+    <section>
+      <h2>📝 2. CSS-Syntax: Selektor, Eigenschaft, Wert</h2>
+      <p>
+        Jede CSS-Regel besteht aus drei klar definierten Teilen:
+      </p>
+      <ol>
+        <li><strong>Selektor</strong> – wählt ein oder mehrere HTML-Elemente aus (z. B. <code>h1</code>, <code>.highlight</code>, <code>#header</code>)</li>
+        <li><strong>Eigenschaft</strong> – legt fest, <em>was</em> verändert wird (z. B. <code>color</code>, <code>font-size</code>)</li>
+        <li><strong>Wert</strong> – definiert <em>wie</em> es verändert wird (z. B. <code>#e67e22</code>, <code>24px</code>)</li>
+      </ol>
+      <p>
+        Diese drei Teile bilden eine <strong>Regel</strong>, die immer in geschweifte Klammern geschrieben wird.
+      </p>
+
+      <div class="code-example">
+        <div class="code-block">
+          <pre><code>h1 {
+  color: #2ecc71;
+  font-size: 2rem;
+}</code></pre>
+        </div>
+        <div class="result">
+          <h1 style="color: #2ecc71; font-size: 2rem;">Das ist eine grüne Überschrift</h1>
+        </div>
+      </div>
+
+      <p>
+        Der allgemeine Aufbau einer CSS-Regel:
+      </p>
+      <pre><code>/* Kommentar (wird vom Browser ignoriert) */
+selektor {
+  eigenschaft: wert;
+  eigenschaft: wert;
+}</code></pre>
+
+      <div class="warnung">
+        ⚠️ <strong>Achte auf die Syntax:</strong>
+        <ul>
+          <li>Geschweifte Klammern <code>{ }</code> umschließen den Regelblock</li>
+          <li>Nach jeder Eigenschaft folgt ein <strong>Doppelpunkt</strong></li>
+          <li>Fast jeder Wert endet mit einem <strong>Semikolon</strong> (;)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Syntax -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – CSS Syntax</h2>
+      <p>
+        W3Schools erklärt die CSS-Syntax Schritt für Schritt mit interaktiven Beispielen.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_syntax.asp" target="_blank">W3Schools: CSS Syntax</a>
+      </p>
+    </section>
+
+    <!-- 3. Drei Arten, CSS einzubinden -->
+    <section>
+      <h2>📂 3. Drei Arten, CSS einzubinden</h2>
+      <p>
+        Es gibt drei Möglichkeiten – aber nur eine ist für echte Projekte geeignet:
+      </p>
+      <ul>
+        <li><strong>Inline-CSS</strong>: direkt im HTML-Tag (z. B. <code>&lt;p style="color:red"&gt;</code>) → ❌ schlecht – nur für Ausnahmen</li>
+        <li><strong>Interne CSS</strong>: im <code>&lt;head&gt;</code> mit <code>&lt;style&gt;</code> → ❌ okay für Tests, aber nicht für echte Projekte</li>
+        <li><strong>Externe CSS</strong>: in einer separaten <code>.css</code>-Datei → ✅ <strong>das Ziel!</strong></li>
+      </ul>
+      <p>
+        Warum extern?  
+        → Du kannst das Design auf <em>allen Seiten</em> gleichzeitig ändern.  
+        → Dein HTML bleibt sauber und lesbar.  
+        → Profis machen es so – und du lernst es gleich richtig.
+      </p>
+
+      <h3>1. Inline-CSS (vermeiden!)</h3>
+      <pre><code>&lt;h1 style="color: red;"&gt;Titel&lt;/h1&gt;</code></pre>
+      <div class="warnung">
+        ❌ <strong>Nachteil:</strong> Mischung von Inhalt und Design – schwer zu warten!
+      </div>
+
+      <h3>2. Interne CSS (im &lt;head&gt;)</h3>
+      <pre><code>&lt;head&gt;
+  &lt;style&gt;
+    h1 { color: red; }
+  &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+      <div class="warnung">
+        ❌ <strong>Nachteil:</strong> Funktioniert nur für diese eine Seite – keine Wiederverwendung!
+      </div>
+
+      <h3>3. Externe CSS (✅ empfohlen!)</h3>
+      <pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;</code></pre>
+      <div class="regel">
+        💡 <strong>Vorteil:</strong> Einmal schreiben – auf allen Seiten nutzen! Sauber, wartbar, professionell.
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Selektoren -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – CSS Selektoren</h2>
+      <p>
+        Erfahre, wie du gezielt Elemente auswählst – von einfachen Tags bis zu komplexen Kombinationen.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_selectors.asp" target="_blank">W3Schools: CSS Selectors</a>
+      </p>
+    </section>
+
+    <!-- 4. Farben in CSS -->
+    <section>
+      <h2>🌈 4. Farben in CSS – Drei Schreibweisen</h2>
+      <p>
+        Farben kannst du auf drei Arten definieren:
+      </p>
+      <ul>
+        <li><strong>Farbnamen</strong>: <code>tomato</code>, <code>blue</code> (eingeschränkt, ca. 140 Namen)</li>
+        <li><strong>HEX</strong>: <code>#e67e22</code> (6-stellig, basierend auf RGB)</li>
+        <li><strong>RGB</strong>: <code>rgb(230, 126, 34)</code> (0–255 pro Kanal)</li>
+      </ul>
+      <div class="regel">
+        💡 <strong>Empfehlung:</strong> Nutze <code>HEX</code> – es ist präzise, kurz und überall unterstützt.
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Farben -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – CSS Farben</h2>
+      <p>
+        Alle Farbformate im Überblick – mit Farbwähler und Beispielen.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_colors.asp" target="_blank">W3Schools: CSS Colors</a>
+      </p>
+    </section>
+
+    <!-- 5. Interaktives Farbmisch-Tool -->
+    <section>
+      <h2>🎨 5. Farben interaktiv – RGB & HEX verstehen</h2>
+      <p>
+        Farben im Web basieren auf dem <strong>RGB-System</strong> (Rot, Grün, Blau).
+        Jeder Kanal hat einen Wert von <code>0</code> bis <code>255</code>.
+        HEX ist nur eine Abkürzung davon!
+      </p>
+
+      <div class="css-demo color-sliders">
+        <div id="color-preview"></div>
+
+        <div class="color-sliders">
+          <label for="r-slider">Rot: <span id="r-value">128</span></label><br>
+          <input type="range" id="r-slider" min="0" max="255" value="128">
+        </div>
+
+        <div class="color-sliders">
+          <label for="g-slider">Grün: <span id="g-value">128</span></label><br>
+          <input type="range" id="g-slider" min="0" max="255" value="128">
+        </div>
+
+        <div class="color-sliders">
+          <label for="b-slider">Blau: <span id="b-value">128</span></label><br>
+          <input type="range" id="b-slider" min="0" max="255" value="128">
+        </div>
+
+        <div class="color-output">
+          RGB: <span id="rgb-output">rgb(128, 128, 128)</span><br>
+          HEX: <span id="hex-output">#808080</span>
+        </div>
+
+        <div class="regel tip-margin">
+          💡 <strong>Tipp:</strong> Gleiche Werte = Graustufe! Höhere Werte = heller.
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Schriften & Textgestaltung -->
+    <section>
+      <h2>🔤 6. Schriften & Textgestaltung</h2>
+      <pre><code>p {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 18px;
+  color: #2c3e50;
+  line-height: 1.6;
+}</code></pre>
+      <div id="schrift-demo" class="demo-box" style="font-family: 'Segoe UI', Arial, sans-serif !important; font-size: 18px !important; color: #2c3e50 !important; line-height: 1.6 !important; background: none !important; text-align: left !important;">
+        Dieser Text zeigt die Wirkung von Schrift, Größe, Farbe und Zeilenabstand.
+      </div>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Immer mindestens <strong>eine Ersatzschrift</strong> (z. B. <code>sans-serif</code>) angeben!
+      </div>
+    </section>
+
+    <!-- 7. Bildformate – Kurzübersicht -->
+    <section>
+      <h2>🖼️ 7. Bildformate – Kurzübersicht</h2>
+      <p>
+        Wenn du Bilder in Webseiten einbindest, wähle das richtige Format:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Eigenschaften</th>
+            <th>Verwendung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.jpg</code></td>
+            <td>Verlustbehaftet, kleine Datei</td>
+            <td>Fotos, komplexe Bilder</td>
+          </tr>
+          <tr>
+            <td><code>.png</code></td>
+            <td>Verlustfrei, Transparenz</td>
+            <td>Logos, Grafiken mit Transparenz</td>
+          </tr>
+          <tr>
+            <td><code>.gif</code></td>
+            <td>Animation, nur 256 Farben</td>
+            <td>Einfache Animationen (z. B. aus GIMP)</td>
+          </tr>
+          <tr>
+            <td><code>.svg</code></td>
+            <td>Vektor, beliebig skalierbar</td>
+            <td>Icons, Logos, Illustrationen (perfekt für dein Tutorial-Logo!)</td>
+          </tr>
+          <tr>
+            <td><code>.webp</code></td>
+            <td>Modern, klein, guter Support</td>
+            <td>Wenn du moderne Browser voraussetzen kannst</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="regel">
+        💡 <strong>Empfehlung für Anfänger:</strong> Nutze <code>.jpg</code> für Fotos, <code>.png</code> für Grafiken, <code>.svg</code> für Logos.
+      </div>
+    </section>
+
+    <section>
+      <h2>🖼️ 7.1 Bilder richtig einbinden – lokal, nicht extern</h2>
+      <p>
+        Bilder werden in HTML mit dem <code>&lt;img&gt;</code>-Element eingebunden:
+      </p>
+      <pre><code>&lt;img src="bilder/logo.png" alt="Logo der Schule"&gt;</code></pre>
+      <p>
+        Der <code>src</code>-Wert ist ein <strong>relativer Pfad</strong> zur Bilddatei – nicht ein Link zu einer fremden Website!
+      </p>
+
+      <div class="warnung">
+        ⚠️ <strong>Niemals externe Bild-URLs verwenden!</strong><br>
+        Beispiel für falsch:<br>
+        <code>&lt;img src="https://irgendwo-extern.de/bild.jpg"&gt;</code><br><br>
+        Das nennt man „Hotlinking“ – es verbraucht die Bandbreite anderer Seiten,<br>
+        verstößt oft gegen Urheberrecht und führt zu toten Bildern, sobald die Quelle gelöscht wird.
+      </div>
+
+      <h3>Wo speicherst du Bilder in deinem Projekt?</h3>
+      <p>
+        Erstelle einen Ordner <code>assets/</code> (oder <code>bilder/</code>) im Hauptverzeichnis deines Projekts:
+      </p>
+      <pre><code>mein-projekt/
+    ├── index.html
+    ├── css/
+    │   └── style.css
+    └── assets/
+        └── bilder/
+            ├── profil.jpg
+            └── banner.png</code></pre>
+      <p>
+        Dann verlinkst du so:
+      </p>
+      <pre><code>&lt;img src="assets/bilder/profil.jpg" alt="Mein Profilbild"&gt;</code></pre>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Alle Inhalte deiner Website – HTML, CSS, Bilder, PDFs –<br>
+        gehören in <em>einen gemeinsamen Projektordner</em>.<br>
+        So funktioniert deine Website überall – auf dem Schulserver, zu Hause und später im Portfolio.
+      </div>
+    </section>
+
+    <!-- 8. Bildgrößenoptimierung -->
+    <section>
+      <h2>⚖️ 8. Warum Bildgrößen optimieren?</h2>
+      <p>
+        Ein ungefiltertes Handybild kann **5 MB** groß sein – eine Webseite sollte insgesamt **unter 1 MB** laden.
+        Große Bilder führen zu:
+      </p>
+      <ul>
+        <li>Langen Ladezeiten</li>
+        <li>Höherem Datenverbrauch (besonders mobil)</li>
+        <li>Schlechterem Ranking in Suchmaschinen</li>
+      </ul>
+      <div class="warnung">
+        ⚠️ <strong>Regel:</strong> Skaliere Bilder <em>vor dem Upload</em> auf die maximale Anzeigegröße!
+      </div>
+
+      <h3>So optimierst du Bilder einfach:</h3>
+      <ol>
+        <li><strong>Größe anpassen:</strong> Nutze z. B. <strong>GIMP</strong> (kostenlos!) → „Bild → Bildgröße“</li>
+        <li><strong>Qualität reduzieren:</strong> Bei JPG: Qualität auf 70–80 % → oft kaum sichtbarer Unterschied, aber 70 % kleinere Datei</li>
+        <li><strong>Online-Tools:</strong> <a href="https://squoosh.app" target="_blank">Squoosh.app</a> (Google) – einfach, webbasiert, keine Installation</li>
+      </ol>
+      <div class="regel">
+        💡 <strong>Praxis-Tipp:</strong> Für eine Website-Breite von 900px brauchst du Bilder <em>max. 1000px breit</em> – nicht 4000px!
+      </div>
+    </section>
+
+    <!-- 9. KI als Lernpartner -->
+    <section>
+      <h2>🧠 9. KI als Lernpartner – guter Prompt</h2>
+      <p>
+        ❌ Schlecht: „Mach mir CSS.“  
+        ✅ Gut: „Kannst du mir eine externe CSS-Regel zeigen, die alle Überschriften in unserem Orange (#e67e22) darstellt, mit zentrierter Schrift und Schatten?“
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du das Aussehen deiner Seite gestalten – sauber, schnell und barrierearm!</p>
+      <a href="./04-colors-and-inheritance.html" class="nav-button">→ Zu Modul 04: Farben und Vererbung</a>
+    </section>
+
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>HTML & CSS Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Farbmischer-Elemente
+  const rSlider = document.getElementById('r-slider');
+  const gSlider = document.getElementById('g-slider');
+  const bSlider = document.getElementById('b-slider');
+  const rValue = document.getElementById('r-value');
+  const gValue = document.getElementById('g-value');
+  const bValue = document.getElementById('b-value');
+  const rgbOutput = document.getElementById('rgb-output');
+  const hexOutput = document.getElementById('hex-output');
+  const colorPreview = document.getElementById('color-preview');
+
+  // Farbkonvertierung
+  function toHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }
+
+  // Aktualisiere Farbe
+  function updateColor() {
+    const r = rSlider.value;
+    const g = gSlider.value;
+    const b = bSlider.value;
+
+    rValue.textContent = r;
+    gValue.textContent = g;
+    bValue.textContent = b;
+
+    const rgb = `rgb(${r}, ${g}, ${b})`;
+    const hex = `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+
+    rgbOutput.textContent = rgb;
+    hexOutput.textContent = hex;
+    colorPreview.style.backgroundColor = rgb;
+
+    // Border color based on theme
+    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    const borderColor = isDarkMode ? '#444' : '#eaeff5';
+    colorPreview.style.border = `1px solid ${borderColor}`;
+  }
+
+  // Event-Listener
+  if (rSlider) rSlider.addEventListener('input', updateColor);
+  if (gSlider) gSlider.addEventListener('input', updateColor);
+  if (bSlider) bSlider.addEventListener('input', updateColor);
+
+  // Initiale Aktualisierung
+  if (rSlider) updateColor();
+
+  // Back-to-Top
+  const button = document.getElementById('back-to-top');
+  if (button) {
+    const toggleButton = () => {
+      button.classList.toggle('show', window.scrollY > 600);
+    };
+    window.addEventListener('scroll', toggleButton);
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+</script>
+</body>
+</html>

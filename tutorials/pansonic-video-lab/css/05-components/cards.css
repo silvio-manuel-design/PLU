@@ -1,0 +1,436 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — Cards
+   1:1 mit Audio Lab Hover-Animation
+   ============================================================ */
+
+/* Feature Cards */
+.video-card {
+  background: var(--video-bg-card);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-lg);
+  padding: var(--video-space-8);
+  transition: all var(--video-transition-base) var(--video-ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--video-accent-violet), transparent);
+  opacity: 1;
+  transition: all var(--video-transition-base) var(--video-ease-out);
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--video-border-active);
+  box-shadow: var(--video-shadow-lg);
+}
+
+.video-card:hover::before {
+  background: linear-gradient(90deg, var(--video-accent-coral), transparent);
+}
+
+.video-card__icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--video-accent-coral-dim), var(--video-accent-violet-dim));
+  border-radius: var(--video-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: var(--video-space-5);
+  border: 1px solid var(--video-border-subtle);
+}
+
+.video-card__title {
+  font-size: var(--video-text-lg);
+  font-weight: var(--video-font-weight-bold);
+  margin-bottom: var(--video-space-2);
+}
+
+.video-card__text {
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  line-height: var(--video-line-height-normal);
+}
+
+/* Module Card (Kapitel-Übersicht) */
+.video-module-card {
+  background: var(--video-bg-secondary);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-lg);
+  padding: var(--video-space-6);
+  transition: all var(--video-transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--video-space-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.video-module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--video-accent-violet), transparent);
+  opacity: 1;
+  transition: all var(--video-transition-base);
+}
+
+.video-module-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--video-border-active);
+  box-shadow: var(--video-shadow-lg);
+}
+
+.video-module-card:hover::before {
+  background: linear-gradient(90deg, var(--video-accent-coral), transparent);
+}
+
+.video-module-card__number {
+  font-family: var(--video-font-mono);
+  font-size: var(--video-text-xs);
+  color: var(--video-accent-coral);
+  letter-spacing: var(--video-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.video-module-card__title {
+  font-size: var(--video-text-xl);
+  font-weight: var(--video-font-weight-bold);
+}
+
+.video-module-card__desc {
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  flex: 1;
+}
+
+.video-module-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--video-space-3);
+  font-size: var(--video-text-xs);
+  color: var(--video-text-muted);
+}
+
+.video-module-card__link {
+  cursor: pointer;
+}
+
+.video-module-card__action {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--video-space-3);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  color: var(--video-accent-coral);
+  transition: all var(--video-transition-fast);
+}
+
+.video-module-card:hover .video-module-card__action {
+  transform: translateX(4px);
+}
+
+/* Module card as direct link + preview button */
+.video-module-card__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--video-space-4);
+  color: inherit;
+  text-decoration: none;
+  flex: 1;
+}
+
+.video-module-card__preview {
+  position: absolute;
+  top: var(--video-space-4);
+  right: var(--video-space-4);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--video-bg-elevated);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-md);
+  color: var(--video-text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all var(--video-transition-fast);
+  z-index: 2;
+}
+
+.video-module-card__preview:hover {
+  background: var(--video-bg-card);
+  border-color: var(--video-border-active);
+  color: var(--video-text-primary);
+}
+
+.video-module-card__preview:focus-visible {
+  outline: 2px solid var(--video-accent-coral);
+  outline-offset: 2px;
+}
+
+/* Clickable tool cards */
+.video-card[data-modal-target] {
+  cursor: pointer;
+}
+
+.video-card[data-modal-target]:focus-visible {
+  outline: 2px solid var(--video-accent-coral);
+  outline-offset: 2px;
+}
+
+.video-card__action {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--video-space-4);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  color: var(--video-accent-coral);
+  transition: all var(--video-transition-fast);
+}
+
+.video-card:hover .video-card__action {
+  transform: translateX(4px);
+}
+
+/* Library card visual placeholder */
+.video-card__visual {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  border-radius: var(--video-radius-lg) var(--video-radius-lg) 0 0;
+}
+
+/* Category gradient modifiers */
+.video-card__visual--coral {
+  background: linear-gradient(135deg, rgba(255, 90, 90, 0.1), rgba(124, 58, 237, 0.1));
+}
+
+.video-card__visual--teal {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(124, 58, 237, 0.1));
+}
+
+.video-card__visual--amber {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 90, 90, 0.1));
+}
+
+.video-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--video-radius-lg) var(--video-radius-lg) 0 0;
+}
+
+.video-card__visual--pending {
+  background: var(--video-bg-tertiary);
+  position: relative;
+}
+
+.video-card__badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--video-bg-primary);
+  border: 1px solid var(--video-border-subtle);
+  color: var(--video-text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   MODULE CARD — Color Accent Modifiers
+   ============================================================ */
+
+.video-module-card--coral::before {
+  background: linear-gradient(90deg, var(--video-accent-coral), transparent);
+}
+.video-module-card--coral .video-module-card__number {
+  color: var(--video-accent-coral);
+}
+.video-module-card--coral .video-module-card__action {
+  color: var(--video-accent-coral);
+}
+.video-module-card--coral:hover {
+  border-color: var(--video-border-coral);
+  box-shadow: 0 8px 32px rgba(255, 90, 90, 0.12);
+}
+
+.video-module-card--violet::before {
+  background: linear-gradient(90deg, var(--video-accent-violet), transparent);
+}
+.video-module-card--violet .video-module-card__number {
+  color: var(--video-accent-violet);
+}
+.video-module-card--violet .video-module-card__action {
+  color: var(--video-accent-violet);
+}
+.video-module-card--violet:hover {
+  border-color: rgba(162, 155, 254, 0.3);
+  box-shadow: 0 8px 32px rgba(162, 155, 254, 0.12);
+}
+
+.video-module-card--teal::before {
+  background: linear-gradient(90deg, var(--video-accent-teal), transparent);
+}
+.video-module-card--teal .video-module-card__number {
+  color: var(--video-accent-teal);
+}
+.video-module-card--teal .video-module-card__action {
+  color: var(--video-accent-teal);
+}
+.video-module-card--teal:hover {
+  border-color: var(--video-border-teal);
+  box-shadow: 0 8px 32px rgba(45, 212, 191, 0.12);
+}
+
+.video-module-card--gold::before {
+  background: linear-gradient(90deg, var(--video-accent-gold), transparent);
+}
+.video-module-card--gold .video-module-card__number {
+  color: var(--video-accent-gold);
+}
+.video-module-card--gold .video-module-card__action {
+  color: var(--video-accent-gold);
+}
+.video-module-card--gold:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.12);
+}
+
+/* ============================================================
+   TOOL CARDS (Homepage Tool Section)
+   ============================================================ */
+
+.video-tool-card {
+  background: var(--video-bg-secondary);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-lg);
+  padding: var(--video-space-6);
+  transition: all var(--video-transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--video-space-4);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.video-tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--video-accent-coral), var(--video-accent-violet));
+  opacity: 1;
+  transition: all var(--video-transition-base);
+}
+
+.video-tool-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--video-border-active);
+  box-shadow: var(--video-shadow-lg);
+}
+
+.video-tool-card:hover::before {
+  height: 4px;
+}
+
+.video-tool-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--video-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border: 1px solid var(--video-border-subtle);
+  flex-shrink: 0;
+}
+
+.video-tool-card__icon--coral {
+  background: linear-gradient(135deg, var(--video-accent-coral-dim), rgba(255, 90, 90, 0.05));
+  color: var(--video-accent-coral);
+}
+
+.video-tool-card__icon--teal {
+  background: linear-gradient(135deg, var(--video-accent-teal-dim), rgba(45, 212, 191, 0.05));
+  color: var(--video-accent-teal);
+}
+
+.video-tool-card__icon--violet {
+  background: linear-gradient(135deg, var(--video-accent-violet-dim), rgba(162, 155, 254, 0.05));
+  color: var(--video-accent-violet);
+}
+
+.video-tool-card__icon--gold {
+  background: linear-gradient(135deg, var(--video-accent-gold-dim), rgba(255, 215, 0, 0.05));
+  color: var(--video-accent-gold);
+}
+
+.video-tool-card__title {
+  font-size: var(--video-text-xl);
+  font-weight: var(--video-font-weight-bold);
+}
+
+.video-tool-card__desc {
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  flex: 1;
+}
+
+.video-tool-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--video-space-2);
+  margin-top: var(--video-space-3);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  color: var(--video-text-secondary);
+  transition: all var(--video-transition-fast);
+}
+
+.video-tool-card:hover .video-tool-card__cta {
+  transform: translateX(4px);
+}
+
+/* Tool card accent colors — explicit classes for cross-browser support */
+.video-tool-card--coral .video-tool-card__cta {
+  color: var(--video-accent-coral);
+}
+
+.video-tool-card--teal .video-tool-card__cta {
+  color: var(--video-accent-teal);
+}
+
+.video-tool-card--violet .video-tool-card__cta {
+  color: var(--video-accent-violet);
+}
+
+.video-tool-card--gold .video-tool-card__cta {
+  color: var(--video-accent-gold);
+}
+
+/* Card content spacing */
+.video-card__content {
+  padding: var(--video-space-5);
+}

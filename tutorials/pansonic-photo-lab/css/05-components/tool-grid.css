@@ -1,0 +1,121 @@
+/* =========================================
+   COMPONENT: Tool Grid — Visual card grid
+   for software lists, setup lists, etc.
+   ========================================= */
+
+.photo-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--photo-space-5);
+  margin-block: var(--photo-space-6);
+}
+
+/* Individual tool card */
+.photo-tool-card {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--photo-space-3);
+}
+
+.photo-tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-color: var(--photo-border-default);
+}
+
+.photo-tool-card__badge {
+  position: absolute;
+  top: var(--photo-space-3);
+  right: var(--photo-space-3);
+  font-size: var(--photo-font-size-xs);
+  font-weight: var(--photo-font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--photo-radius-full);
+  background: var(--module-accent, var(--photo-accent));
+  color: #fff;
+}
+
+.photo-tool-card__badge--secondary {
+  background: var(--photo-surface-3);
+  color: var(--photo-text-secondary);
+}
+
+.photo-tool-card__badge--premium {
+  background: var(--module-accent, var(--photo-accent));
+}
+
+.photo-tool-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--photo-radius-md);
+  background: var(--photo-surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--module-accent, var(--photo-accent));
+}
+
+.photo-tool-card__name {
+  font-weight: var(--photo-font-weight-bold);
+  font-size: var(--photo-font-size-base);
+  color: var(--photo-text-primary);
+  margin: 0;
+}
+
+.photo-tool-card__desc {
+  font-size: var(--photo-font-size-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-body);
+  margin: 0;
+}
+
+.photo-tool-card__footer {
+  font-size: var(--photo-font-size-xs);
+  color: var(--photo-text-muted);
+  margin-top: auto;
+  padding-top: var(--photo-space-2);
+}
+
+/* Compact variant for setup checklists */
+.photo-tool-card--compact {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--photo-space-4);
+  padding: var(--photo-space-5);
+}
+
+.photo-tool-card--compact .photo-tool-card__icon {
+  width: 36px;
+  height: 36px;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.photo-tool-card--compact .photo-tool-card__name {
+  font-size: var(--photo-font-size-sm);
+}
+
+.photo-tool-card--compact .photo-tool-card__desc {
+  font-size: var(--photo-font-size-xs);
+}
+
+/* Dark mode */
+[data-theme="dark"] .photo-tool-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* Responsive */
+@media (max-width: 639px) {
+  .photo-tool-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 – Block vs. Inline | HTML & CSS Tutorial</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../assets/logo.svg" alt="HTML/CSS Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link">🏠</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 Module ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+                <li><a href="../kapitel/01-html-elements.html">01. HTML-Elemente</a></li>
+                <li><a href="../kapitel/02-page-structure.html">02. Seitenstruktur</a></li>
+                <li><a href="../kapitel/03-css-basics.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../kapitel/04-colors-and-inheritance.html">04. Farben & Vererbung</a></li>
+                <li><a href="../kapitel/05-box-model.html">05. Box-Modell</a></li>
+                <li><a href="../kapitel/06-folder-structure.html">06. Ordner & Pfade</a></li>
+                <li><a href="../kapitel/07-links.html">07. Links & Navigation</a></li>
+                <li><a href="../kapitel/08-media.html">08. Medien</a></li>
+                <li><a href="../kapitel/09-lists-selectors.html">09. Listen & Selektoren</a></li>
+                <li><a href="../kapitel/10-block-inline.html">10. Block vs. Inline</a></li>
+                <li><a href="../kapitel/11-layout-responsive.html">11. Layout & Responsive</a></li>
+                <li><a href="../kapitel/12-tables-forms.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">✏️ Übungen ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+                <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+                <li><a href="../uebungen/01-html-elements-aufgaben.html">01. HTML-Elemente</a></li>
+                <li><a href="../uebungen/02-page-structure-aufgaben.html">02. Seitenstruktur</a></li>
+                <li><a href="../uebungen/03-css-basics-aufgaben.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../uebungen/04-colors-and-inheritance-aufgaben.html">04. Farben & Vererbung</a></li>
+                <li><a href="../uebungen/05-box-model-aufgaben.html">05. Box-Modell</a></li>
+                <li><a href="../uebungen/06-folder-structure-aufgaben.html">06. Ordner & Pfade</a></li>
+                <li><a href="../uebungen/07-links-aufgaben.html">07. Links & Navigation</a></li>
+                <li><a href="../uebungen/08-media-aufgaben.html">08. Medien</a></li>
+                <li><a href="../uebungen/09-lists-selectors-aufgaben.html">09. Listen & Selektoren</a></li>
+                <li><a href="../uebungen/10-block-inline-aufgaben.html">10. Block vs. Inline</a></li>
+                <li><a href="../uebungen/11-layout-responsive-aufgaben.html">11. Layout & Responsive</a></li>
+                <li><a href="../uebungen/12-tables-forms-aufgaben.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li><a href="../tools/ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+            <li><a href="../tools/vscode.html" class="nav-link">💻 VS Code</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../abschluss/aufgabenstellung.html">📄 Statische Website</a></li>
+              </ul>
+            </li>
+            <li><a href="../resources/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <h1>10 – Block vs. Inline 🧱↔️🔤</h1>
+      <p class="hero-subtitle">Verstehe, wie HTML-Elemente sich im Layout verhalten</p>
+    </section>
+
+    <!-- 1. Was bedeutet „Block“ und „Inline“? -->
+    <section>
+      <h2>🧱↔️ 1. Was bedeutet „Block“ und „Inline“?</h2>
+      <p>
+        Stell dir vor, du baust mit Legosteinen und schreibst gleichzeitig einen Brief:
+      </p>
+      <ul>
+        <li><strong>Block-Elemente</strong> sind wie <strong>Legosteine</strong>:<br>
+            Sie stapeln sich untereinander, nehmen die ganze Breite ein und bilden das Gerüst.</li>
+        <li><strong>Inline-Elemente</strong> sind wie <strong>Wörter im Brief</strong>:<br>
+            Sie fließen nebeneinander im Text, ohne Zeilenumbruch.</li>
+      </ul>
+      <p>
+        Diese Unterscheidung ist die <strong>Grundlage aller Layouts</strong> im Web. 
+        Wenn du sie verstehst, kannst du vorhersagen, wie Elemente auf der Seite angeordnet werden.
+      </p>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Display -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – Display Property</h2>
+      <p>
+        W3Schools erklärt alle Werte von <code>display</code> – von <code>block</code> bis <code>flex</code>.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_display_visibility.asp" target="_blank">W3Schools: CSS Display</a>
+      </p>
+    </section>
+
+    <!-- 2. Block-Elemente -->
+    <section>
+      <h2>🧱 2. Block-Elemente – die „Stapelbausteine“</h2>
+      <p>
+        Block-Elemente:
+      </p>
+      <ul>
+        <li>Beginnen <strong>immer in einer neuen Zeile</strong></li>
+        <li>Nehmen <strong>standardmäßig 100 % der Breite</strong> des Elternelements ein</li>
+        <li>Respektieren <code>width</code>, <code>height</code>, <code>padding</code>, <code>margin</code></li>
+      </ul>
+      <p><strong>Häufige Block-Elemente:</strong></p>
+      <ul>
+        <li><code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code></li>
+        <li><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code></li>
+        <li><code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code></li>
+        <li><code>&lt;form&gt;</code>, <code>&lt;table&gt;</code></li>
+      </ul>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Block-Elemente sind wie <em>Bausteine</em> – 
+        sie bauen das Gerüst deiner Seite.
+      </div>
+    </section>
+
+    <!-- 2b. Semantische Block-Elemente -->
+    <section>
+      <h2>🧱+🧠 2b. Semantische Block-Elemente – Struktur mit Bedeutung</h2>
+      <p>
+        Während <code>&lt;div&gt;</code> ein <em>generischer</em> Container ist, 
+        bieten <strong>semantische Elemente</strong> <em>inhaltliche Bedeutung</em> – 
+        sowohl für Menschen als auch für Maschinen.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Bedeutung</th>
+            <th>Wann verwenden?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&lt;header&gt;</code></td>
+            <td>Einführender Bereich (Seite oder Abschnitt)</td>
+            <td>Logo, Navigation, Titel</td>
+          </tr>
+          <tr>
+            <td><code>&lt;nav&gt;</code></td>
+            <td>Hauptnavigation</td>
+            <td>Liste von Links zur Seitennavigation</td>
+          </tr>
+          <tr>
+            <td><code>&lt;main&gt;</code></td>
+            <td>Hauptinhalt der Seite</td>
+            <td>Einmal pro Seite – der zentrale Inhalt</td>
+          </tr>
+          <tr>
+            <td><code>&lt;section&gt;</code></td>
+            <td>Thematischer Abschnitt</td>
+            <td>Mit eigener Überschrift (z. B. Kapitel)</td>
+          </tr>
+          <tr>
+            <td><code>&lt;article&gt;</code></td>
+            <td>Selbstständiger Inhalt</td>
+            <td>Blog-Post, Nachricht, Kommentar</td>
+          </tr>
+          <tr>
+            <td><code>&lt;aside&gt;</code></td>
+            <td>Nebeninhalt</td>
+            <td>Werbung, Zitate, zusätzliche Infos</td>
+          </tr>
+          <tr>
+            <td><code>&lt;footer&gt;</code></td>
+            <td>Abschließender Bereich</td>
+            <td>Copyright, Kontakt, Meta-Links</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="regel">
+        💡 <strong>Merke:</strong><br>
+        - Verwende <strong>semantische Elemente zuerst</strong> – <code>&lt;div&gt;</code> nur als letzte Wahl.<br>
+        - Screenreader und Suchmaschinen <em>verstehen</em> die Struktur – das macht deine Seite barrierefrei und SEO-freundlich.
+      </div>
+    </section>
+
+    <!-- 3. Inline-Elemente -->
+    <section>
+      <h2>🔤 3. Inline-Elemente – die „Textbegleiter“</h2>
+      <p>
+        Inline-Elemente:
+      </p>
+      <ul>
+        <li>Fließen <strong>im laufenden Text</strong></li>
+        <li>Nehmen <strong>nur so viel Platz</strong>, wie ihr Inhalt benötigt</li>
+        <li>Ignorieren <code>width</code> und <code>height</code></li>
+        <li>Respektieren nur <strong>horizontales</strong> <code>padding</code> und <code>margin</code></li>
+      </ul>
+      <p><strong>Häufige Inline-Elemente:</strong></p>
+      <ul>
+        <li><code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code></li>
+        <li><code>&lt;img&gt;</code> (leer, aber inline!)</li>
+        <li><code>&lt;input&gt;</code>, <code>&lt;label&gt;</code> (Formular-Elemente)</li>
+      </ul>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Du kannst <strong>kein Block-Element</strong> (z. B. <code>&lt;div&gt;</code>) 
+        <strong>in ein Inline-Element</strong> (z. B. <code>&lt;span&gt;</code>) einbetten – 
+        das ist <em>ungültiges HTML</em>!
+      </div>
+    </section>
+
+    <!-- 4. display: inline-block -->
+    <section>
+      <h2>🧱+🔤 4. <code>display: inline-block</code> – das Beste aus beiden Welten</h2>
+      <p>
+        Manchmal brauchst du ein Element, das:
+      </p>
+      <ul>
+        <li><strong>im Text fließt</strong> (wie inline),</li>
+        <li>aber <strong>Breite, Höhe, Padding und Margin</strong> akzeptiert (wie block).</li>
+      </ul>
+      <p>
+        Dafür gibt es <code>display: inline-block</code>:
+      </p>
+      <pre><code>.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url(icon.svg);
+  vertical-align: middle;
+}</code></pre>
+      <p>
+        Typische Anwendung: Icons neben Text, kleine Karten in einer Zeile, Navigationselemente.
+      </p>
+    </section>
+
+    <!-- 5. Ausblenden: display vs. visibility -->
+    <section>
+      <h2>👁️ 5. Ausblenden: <code>display: none</code> vs. <code>visibility: hidden</code></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Eigenschaft</th>
+            <th><code>display: none</code></th>
+            <th><code>visibility: hidden</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sichtbar?</strong></td>
+            <td>Nein</td>
+            <td>Nein</td>
+          </tr>
+          <tr>
+            <td><strong>Platz im Layout?</strong></td>
+            <td>Nein – Element verschwindet komplett</td>
+            <td>Ja – Platz bleibt reserviert</td>
+          </tr>
+          <tr>
+            <td><strong>Barrierefreiheit</strong></td>
+            <td>Screenreader ignorieren es</td>
+            <td>Screenreader lesen es trotzdem</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="regel">
+        💡 <strong>Merke:</strong><br>
+        - Für Layout-Umschaltungen (z. B. Mobile ↔ Desktop): <code>display: none</code><br>
+        - Für temporäres Ausblenden (z. B. Loading-Text): <code>visibility: hidden</code>
+      </div>
+    </section>
+
+    <!-- 6. Verbindung zu Flexbox -->
+    <section>
+      <h2>🔗 6. Verbindung zu Flexbox & modernem Layout</h2>
+      <p>
+        Sobald du ein Element mit <code>display: flex</code> versiehst, 
+        ändern sich die Regeln:
+      </p>
+      <ul>
+        <li>Das Element selbst wird zum <strong>Flex-Container</strong> (blockartig)</li>
+        <li>Alle direkten Kinder werden zu <strong>Flex-Items</strong> – 
+            unabhängig davon, ob sie vorher block oder inline waren!</li>
+      </ul>
+      <p>
+        Das ist der Grund, warum Flexbox so mächtig ist: 
+        Es <strong>hebt die alten Block/Inline-Regeln auf</strong> 
+        und gibt dir volle Kontrolle über Ausrichtung und Abstände.
+      </p>
+      <div class="regel">
+        💡 <strong>Vorbereitung auf Kapitel 11:</strong><br>
+        In der nächsten Lektion wirst du lernen, 
+        wie du mit Flexbox Layouts baust, 
+        die auf allen Geräten perfekt aussehen.
+      </div>
+    </section>
+
+    <!-- 7. KI als Lernpartner -->
+    <section>
+      <h2>🧠 7. KI als Lernpartner – guter Prompt</h2>
+      <p>
+        ❌ Schlecht: „Erkläre Block und Inline.“  
+        ✅ Gut: „Erkläre mir den Unterschied zwischen Block- und Inline-Elementen – 
+        und zeig mir, wie ich mit <code>display: inline-block</code> kleine Karten nebeneinander anordne. 
+        Außerdem: Warum kann ich kein <code>&lt;div&gt;</code> in einen <code>&lt;span&gt;</code> einbetten?“
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt verstehst du, wie Elemente im Layout interagieren!</p>
+      <a href="./11-layout-responsive.html" class="nav-button">→ Zu Modul 11: Layout & Responsive</a>
+    </section>
+
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>HTML & CSS Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

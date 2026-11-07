@@ -1,0 +1,247 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Feature Card Component (Premium)
+   ========================================================================== */
+
+@layer components {
+  .py-quest-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--py-space-6);
+    margin-top: var(--py-space-8);
+  }
+
+  .py-quest-feature-card {
+    padding: var(--py-space-8) var(--py-space-6);
+    background:
+      linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%),
+      var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle colored glow behind card on hover */
+  .py-quest-feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Card content above pseudo-elements */
+  .py-quest-feature-card > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ---- Individual card colors ---- */
+
+  /* Card 1 — Blue (Welten) */
+  .py-quest-feature-card:nth-child(1) {
+    --card-accent: #306998;
+    --card-accent-glow: rgba(48, 105, 152, 0.35);
+    --card-accent-soft: rgba(48, 105, 152, 0.08);
+  }
+
+  /* Card 2 — Orange (Sandbox) */
+  .py-quest-feature-card:nth-child(2) {
+    --card-accent: #E67E22;
+    --card-accent-glow: rgba(230, 126, 34, 0.35);
+    --card-accent-soft: rgba(230, 126, 34, 0.08);
+  }
+
+  /* Card 3 — Green (Badges) */
+  .py-quest-feature-card:nth-child(3) {
+    --card-accent: #27AE60;
+    --card-accent-glow: rgba(39, 174, 96, 0.35);
+    --card-accent-soft: rgba(39, 174, 96, 0.08);
+  }
+
+  /* Card 4 — Purple (Copilot) */
+  .py-quest-feature-card:nth-child(4) {
+    --card-accent: #9C59B6;
+    --card-accent-glow: rgba(156, 89, 182, 0.35);
+    --card-accent-soft: rgba(156, 89, 182, 0.08);
+  }
+
+  /* ---- Hover Effects ---- */
+
+  .py-quest-feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--card-accent);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px var(--card-accent-soft),
+      0 0 30px var(--card-accent-glow);
+  }
+
+  .py-quest-feature-card:hover::before {
+    opacity: 1;
+    background: radial-gradient(ellipse at center top, var(--card-accent-soft) 0%, transparent 70%);
+  }
+
+  .py-quest-feature-card:hover::after {
+    opacity: 0.1;
+    color: var(--card-accent);
+  }
+
+  /* ---- Icon ---- */
+
+  .py-quest-feature-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: var(--py-radius-xl);
+    color: var(--py-white);
+    font-size: 1.75rem;
+    margin-bottom: var(--py-space-5);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .py-quest-feature-card:hover .py-quest-feature-card__icon {
+    transform: scale(1.1) translateY(-4px);
+  }
+
+  /* Icon glow */
+  .py-quest-feature-card__icon::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+
+  .py-quest-feature-card:hover .py-quest-feature-card__icon::after {
+    opacity: 0.4;
+  }
+
+  /* Card-specific icon colors */
+  .py-quest-feature-card:nth-child(1) .py-quest-feature-card__icon {
+    background: linear-gradient(135deg, #306998 0%, #4A90C6 100%);
+    box-shadow: 0 8px 24px rgba(48, 105, 152, 0.35);
+  }
+  .py-quest-feature-card:nth-child(1) .py-quest-feature-card__icon::after {
+    background: #306998;
+  }
+  .py-quest-feature-card:nth-child(1):hover .py-quest-feature-card__icon {
+    box-shadow: 0 12px 32px rgba(48, 105, 152, 0.5);
+  }
+
+  .py-quest-feature-card:nth-child(2) .py-quest-feature-card__icon {
+    background: linear-gradient(135deg, #E67E22 0%, #F39C12 100%);
+    box-shadow: 0 8px 24px rgba(230, 126, 34, 0.35);
+  }
+  .py-quest-feature-card:nth-child(2) .py-quest-feature-card__icon::after {
+    background: #E67E22;
+  }
+  .py-quest-feature-card:nth-child(2):hover .py-quest-feature-card__icon {
+    box-shadow: 0 12px 32px rgba(230, 126, 34, 0.5);
+  }
+
+  .py-quest-feature-card:nth-child(3) .py-quest-feature-card__icon {
+    background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
+    box-shadow: 0 8px 24px rgba(39, 174, 96, 0.35);
+  }
+  .py-quest-feature-card:nth-child(3) .py-quest-feature-card__icon::after {
+    background: #27AE60;
+  }
+  .py-quest-feature-card:nth-child(3):hover .py-quest-feature-card__icon {
+    box-shadow: 0 12px 32px rgba(39, 174, 96, 0.5);
+  }
+
+  .py-quest-feature-card:nth-child(4) .py-quest-feature-card__icon {
+    background: linear-gradient(135deg, #9C59B6 0%, #BB6FCE 100%);
+    box-shadow: 0 8px 24px rgba(156, 89, 182, 0.35);
+  }
+  .py-quest-feature-card:nth-child(4) .py-quest-feature-card__icon::after {
+    background: #9C59B6;
+  }
+  .py-quest-feature-card:nth-child(4):hover .py-quest-feature-card__icon {
+    box-shadow: 0 12px 32px rgba(156, 89, 182, 0.5);
+  }
+
+  /* ---- Step Badge (small colored circle over icon) ---- */
+  .py-quest-feature-card__step {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--card-accent);
+    color: var(--py-white);
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 4px 12px var(--card-accent-glow),
+      0 0 0 2px rgba(255, 255, 255, 0.9);
+    z-index: 3;
+  }
+
+  html[data-theme="light"] .py-quest-feature-card__step {
+    box-shadow:
+      0 4px 12px var(--card-accent-glow),
+      0 0 0 2px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ---- Text ---- */
+
+  .py-quest-feature-card__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-xl);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-feature-card__text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  /* ---- Tool Link ---- */
+  .py-quest-tool-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    margin-top: var(--py-space-4);
+    padding: var(--py-space-2) var(--py-space-4);
+    border-radius: var(--py-radius-full);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+    color: var(--card-accent);
+    background: var(--card-accent-soft);
+    border: 1px solid var(--card-accent-soft);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .py-quest-tool-link:hover {
+    background: var(--card-accent);
+    color: var(--py-white);
+    box-shadow: 0 4px 16px var(--card-accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .py-quest-tool-link i {
+    font-size: var(--py-text-xs);
+  }
+}

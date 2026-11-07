@@ -1,0 +1,132 @@
+/* =========================================
+   COMPONENT: ISO Meter Cards
+   For ISO sensitivity display — VU-meter aesthetic
+   Color gradient: green → yellow → red (quality → noise)
+   ========================================= */
+
+.photo-iso-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--photo-space-3);
+  margin-block: var(--photo-space-6);
+}
+
+.photo-iso-card {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-left: 4px solid var(--iso-color, #4a9b7f);
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-5) var(--photo-space-6);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  gap: var(--photo-space-2) var(--photo-space-5);
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-iso-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-color: var(--iso-color, #4a9b7f);
+}
+
+/* ISO value — large number */
+.photo-iso-card__value {
+  font-size: var(--photo-font-size-2xl);
+  font-weight: var(--photo-font-weight-black);
+  color: var(--iso-color, #4a9b7f);
+  line-height: 1;
+  grid-row: 1 / 3;
+  min-width: 80px;
+}
+
+/* Meter track */
+.photo-iso-card__meter {
+  height: 8px;
+  background: var(--photo-surface-2);
+  border-radius: var(--photo-radius-full);
+  overflow: hidden;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.photo-iso-card__meter-fill {
+  height: 100%;
+  border-radius: var(--photo-radius-full);
+  background: var(--iso-color, #4a9b7f);
+  transition: width 0.3s ease;
+}
+
+/* Description */
+.photo-iso-card__desc {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: var(--photo-font-size-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-body);
+}
+
+/* Noise indicator */
+.photo-iso-card__noise {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--photo-space-1);
+  min-width: 60px;
+}
+
+.photo-iso-card__noise-label {
+  font-size: var(--photo-font-size-xs);
+  color: var(--photo-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.photo-iso-card__noise-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.photo-iso-card__noise-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--photo-surface-3);
+}
+
+.photo-iso-card__noise-dot.is-active {
+  background: var(--iso-color, #4a9b7f);
+}
+
+/* Color variants — green → yellow → red */
+.photo-iso-card--low    { --iso-color: #4a9b7f; }
+.photo-iso-card--mid    { --iso-color: #c99b4a; }
+.photo-iso-card--high   { --iso-color: #d4845a; }
+.photo-iso-card--extreme{ --iso-color: #c95d78; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .photo-iso-card {
+    padding: var(--photo-space-4);
+    gap: var(--photo-space-2) var(--photo-space-3);
+  }
+  .photo-iso-card__value {
+    font-size: var(--photo-font-size-xl);
+    min-width: 60px;
+  }
+  .photo-iso-card__meter {
+    height: 6px;
+  }
+  .photo-iso-card__noise {
+    min-width: 48px;
+  }
+  .photo-iso-card__noise-dot {
+    width: 6px;
+    height: 6px;
+  }
+}

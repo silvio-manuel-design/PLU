@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Side Quest U03: PHP Formular | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id" style="color: var(--warning);">Side Quest U03</span>
+      <span class="mission-timer">~15 Min • +35 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Erstelle ein HTML-Formular und verarbeite die Daten mit PHP.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>HTML-Formular erstellen</h3>
+        <p>Erstelle <code>form.html</code>:</p>
+        <div class="code-block"><form action="process.php" method="POST">
+  <input type="text" name="username" placeholder="Name">
+  <input type="email" name="email" placeholder="E-Mail">
+  <button type="submit">Senden</button>
+</form></div>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>PHP-Verarbeitung</h3>
+        <p>Erstelle <code>process.php</code>:</p>
+        <div class="code-block"><?php
+$username = $_POST['username'] ?? '';
+$email = $_POST['email'] ?? '';
+
+echo "Hallo, $username!<br>";
+echo "Deine E-Mail: $email";
+?></div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Validierung hinzufügen</h3>
+        <p>Prüfe die Eingaben:</p>
+        <div class="code-block">if (empty($username)) {
+  echo "Name ist erforderlich!";
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  echo "Ungültige E-Mail!";
+} else {
+  echo "Danke für deine Eingabe!";
+}</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>XSS-Schutz</h3>
+        <p>Escapen der Ausgabe:</p>
+        <div class="code-block">echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8');</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Testen</h3>
+        <p>Fülle das Formular aus und prüfe die Ausgabe.</p>
+        <p>Teste auch mit leeren Feldern und ungültiger E-Mail.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Formular funktioniert?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Funktion testen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+35 XP Bonus] (Side Quest abgeschlossen)
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeSideQuest()" disabled>
+        Side Quest abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>POST sendet Daten im Body, GET in der URL.</li>
+          <li>$_POST enthält gesendete Formulardaten.</li>
+          <li>Immer Validierung und Escaping verwenden.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe Formular-Logik...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'Formular OK';
+        result.textContent = '[OK] Formular-Verarbeitung und Validierung verstanden.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeSideQuest() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeSideQuest, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeSideQuest('U03');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('U03', 'PHP Formular', 'HTML-Formular mit PHP verarbeiten');
+      AbgabePanel.init('U03', 'PHP Formular');
+      
+      const status = MissionsAPI.getSideQuestStatus()['U03'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+35 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Audio API | Audio-Tutorial | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="../kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="../kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="../kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="../kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="../kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="../uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="../uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="../tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="../tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="../tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="../tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="../ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="../ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="../ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="../ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="../ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>🌐 Web Audio API</h1>
+      <p class="hero-subtitle">Audio-Verarbeitung direkt im Browser</p>
+    </section>
+
+    <section>
+      <h2>Was ist die Web Audio API?</h2>
+      <p>
+        Die Web Audio API ist eine Schnittstelle (API), die es Web-Browsern ermöglicht,
+        Audio direkt im Browser zu verarbeiten und zu erzeugen – Sie ermöglicht es Entwicklern, 
+        komplexe Audio-Anwendungen zu erstellen, ohne Plugins oder externe Programme zu benötigen.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Was ist eine API?</strong> API steht für Application Programming Interface.
+        Es ist eine Sammlung von Regeln und Funktionen, die es Programmen ermöglicht,
+        miteinander zu kommunizieren. Die Web Audio API sagt dem Browser:
+        "So kannst du Audio verarbeiten".
+      </div>
+
+      <p>
+        Mit der Web Audio API kannst du:
+      </p>
+      <ul>
+        <li>Audio-Dateien abspielen und steuern</li>
+        <li>Neue Töne erzeugen (z.B. Sinustöne)</li>
+        <li>Audio-Effekte anwenden (z.B. Verzerrung, Verzögerung)</li>
+        <li>Audio in Echtzeit analysieren</li>
+        <li>Interaktive Audio-Anwendungen erstellen</li>
+      </ul>
+
+      <figure class="illustration-center">
+        <svg width="100%" height="350" viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="api-title api-desc">
+          <title id="api-title">Web Audio API - Audio-Graph Struktur</title>
+          <desc id="api-desc">Darstellung des Audio-Graphen mit verschiedenen Nodes: AudioContext, Quellen, Effekte, Ausgabe</desc>
+
+          <!-- Hintergrund -->
+          <rect x="0" y="0" width="800" height="350" fill="#e0f7fa" />
+
+          <!-- AudioContext -->
+          <rect x="25" y="100" width="150" height="60" rx="10" fill="#00bcd4" stroke="#00838f" stroke-width="2" />
+          <text x="100" y="130" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">AudioContext</text>
+          <text x="100" y="150" font-family="monospace" font-size="12" text-anchor="middle" fill="white">audioCtx</text>
+
+          <!-- Quellen -->
+          <rect x="225" y="60" width="150" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="300" y="90" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Audio-Quelle</text>
+          <text x="300" y="110" font-family="monospace" font-size="12" text-anchor="middle" fill="white">BufferSource</text>
+
+          <rect x="225" y="150" width="150" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="300" y="180" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Oszillator</text>
+          <text x="300" y="200" font-family="monospace" font-size="12" text-anchor="middle" fill="white">OscillatorNode</text>
+
+          <!-- Effekte -->
+          <rect x="425" y="80" width="150" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="500" y="110" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Effekt</text>
+          <text x="500" y="130" font-family="monospace" font-size="12" text-anchor="middle" fill="white">GainNode</text>
+
+          <rect x="425" y="170" width="150" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="500" y="200" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Filter</text>
+          <text x="500" y="220" font-family="monospace" font-size="12" text-anchor="middle" fill="white">BiquadFilter</text>
+
+          <!-- Ausgabe -->
+          <rect x="625" y="130" width="150" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="700" y="160" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Ausgabe</text>
+          <text x="700" y="180" font-family="monospace" font-size="12" text-anchor="middle" fill="white">Destination</text>
+
+          <!-- Verbindungspfeile -->
+          <line x1="175" y1="130" x2="250" y2="90" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="175" y1="130" x2="250" y2="180" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+
+          <line x1="375" y1="90" x2="450" y2="110" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="375" y1="180" x2="450" y2="200" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+
+          <line x1="575" y1="110" x2="650" y2="160" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="575" y1="200" x2="650" y2="160" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+
+          <!-- Pfeildefinition -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#004d40" />
+            </marker>
+          </defs>
+
+          <!-- Beschriftungen -->
+          <text x="400" y="30" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Web Audio API - Audio-Graph</text>
+          <text x="400" y="340" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">Audio-Nodes werden verbunden, um Audio-Graphen zu erstellen</text>
+        </svg>
+        <figcaption class="illustration-caption">
+          Struktur des Web Audio API Graphen mit verschiedenen Audio-Nodes: Quellen, Effekte und Ausgabe
+        </figcaption>
+      </figure>
+
+      <div class="regel">
+        💡 <strong>W3Schools Ressource:</strong> Für Informationen über die Web Audio API und deren Anwendung siehe
+        <a href="https://www.w3schools.com/graphics/webaudio_intro.asp" target="_blank" rel="noopener noreferrer">Web Audio API auf W3Schools</a>
+      </div>
+    </section>
+      
+      <h3>AudioContext</h3>
+      <p>
+        Der AudioContext ist das "Herzstück" der Web Audio API. Er ist wie eine
+        "Audiowerkstatt", in der alle Audio-Operationen stattfinden.
+        Du musst immer zuerst einen AudioContext erstellen, bevor du mit Audio arbeiten kannst.
+      </p>
+      <pre><code class="js-code">const audioCtx = new (window.AudioContext || window.webkitAudioContext)();</code></pre>
+
+      <div class="regel">
+        💡 <strong>Merke:</strong> Der AudioContext ist wie eine virtuelle Audiowerkstatt –
+        alles Audio wird darin bearbeitet.
+      </div>
+
+      <h3>AudioNodes</h3>
+      <p>
+        AudioNodes sind wie "Bausteine" für Audio. Jeder Baustein hat eine spezielle Funktion:
+      </p>
+      <ul>
+        <li><strong>Quellen:</strong> Erzeugen von Audio (z.B. Töne abspielen, Mikrofon aufnehmen)</li>
+        <li><strong>Effekte:</strong> Verändern von Audio (z.B. Lautstärke, Filter, Verzögerung)</li>
+        <li><strong>Ausgänge:</strong> Senden Audio zu den Lautsprechern</li>
+      </ul>
+
+      <h3>AudioGraph</h3>
+      <p>
+        Der AudioGraph beschreibt, wie die AudioNodes miteinander verbunden sind –
+        wie ein Fließband in einer Fabrik. Audio fließt von Quellen über Effekte zu den Ausgängen.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Vergleich:</strong> Stell dir den AudioGraph wie ein Fließband vor –
+        Audio geht durch verschiedene Stationen (Effekte), bevor es am Ende ausgegeben wird.
+      </div>
+    </section>
+
+    <section>
+      <h2>Einfaches Beispiel</h2>
+      <p>
+        Hier ist ein einfaches Beispiel, das einen Ton erzeugt und abspielt:
+      </p>
+      <pre><code class="js-code">// Schritt 1: Erstelle eine Audio-Werkstatt (AudioContext)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+// Schritt 2: Erstelle einen Ton-Generator (Oszillator)
+const oscillator = audioCtx.createOscillator();
+oscillator.type = 'sine';  // Erzeugt eine Sinuswelle (reiner Ton)
+oscillator.frequency.value = 440; // Setzt die Frequenz auf 440 Hz (A4-Note)
+
+// Schritt 3: Verbinde den Ton-Generator mit den Lautsprechern
+oscillator.connect(audioCtx.destination);
+
+// Schritt 4: Starte den Ton
+oscillator.start();
+
+// Schritt 5: Stoppe den Ton nach 2 Sekunden
+setTimeout(() => {
+  oscillator.stop();
+}, 2000); // 2000 Millisekunden = 2 Sekunden</code></pre>
+
+      <div class="regel">
+        💡 <strong>Erklärung:</strong> Dieses Beispiel erstellt einen reinen Ton (440 Hz = A4-Note)
+        und spielt ihn für 2 Sekunden ab. Der Ton ist eine Sinuswelle – die einfachste Form eines Tones.
+      </div>
+    </section>
+
+    <section>
+      <h2>Audio-Quellen</h2>
+
+      <h3>OscillatorNode (Ton-Generator)</h3>
+      <p>
+        Der OscillatorNode ist wie ein "elektronischer Synthesizer" – er erzeugt kontinuierliche Töne:
+      </p>
+      <ul>
+        <li><strong>sine:</strong> Reiner Ton (wie eine Stimmgabel)</li>
+        <li><strong>square:</strong> Klarer, kantiger Klang (wie bei alten Computerspielen)</li>
+        <li><strong>sawtooth:</strong> Sägezahnform – reichhaltiger Klang</li>
+        <li><strong>triangle:</strong> Dreieckform – ähnlich Sinus, aber mit mehr Obertönen</li>
+      </ul>
+
+      <div class="regel">
+        💡 <strong>Vergleich:</strong> Ein Oszillator ist wie ein elektronisches Instrument,
+        das verschiedene Klangformen erzeugen kann.
+      </div>
+
+      <h3>AudioBufferSourceNode (Audio-Datei-Player)</h3>
+      <p>
+        Der AudioBufferSourceNode ist wie ein "Audio-Datei-Player" – er spielt vorab geladene Audiodateien ab.
+        Perfekt für kurze Sounds oder Samples.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Merke:</strong> Dieser Node ist ideal für kurze Audiodateien (z.B. Soundeffekte),
+        aber nicht für lange Musikstücke wegen des Ladens in den Speicher.
+      </div>
+
+      <h3>MediaElementAudioSourceNode (HTML-Audio-Quelle)</h3>
+      <p>
+        Dieser Node ermöglicht die Verarbeitung von Audio aus &lt;audio&gt; oder &lt;video&gt; HTML-Elementen.
+        So kannst du Effekte auf bereits auf der Webseite eingebettete Audiodateien anwenden.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Vergleich:</strong> Dieser Node verbindet herkömmliche HTML-Audio-Elemente
+        mit der Web Audio API für Bearbeitung.
+      </div>
+    </section>
+
+    <section>
+      <h2>Audio-Effekte</h2>
+
+      <h3>GainNode (Lautstärke-Regler)</h3>
+      <p>
+        Die GainNode ist wie ein "Lautstärkeregler" – sie steuert die Lautstärke eines Audiosignals.
+      </p>
+      <pre><code class="js-code">const gainNode = audioCtx.createGain();
+gainNode.gain.value = 0.5; // 50% Lautstärke</code></pre>
+
+      <div class="regel">
+        💡 <strong>Vergleich:</strong> Die GainNode ist wie der Lautstärkeregler an deinem Radio oder Computer.
+      </div>
+
+      <h3>BiquadFilterNode (Frequenz-Filter)</h3>
+      <p>
+        Der BiquadFilterNode ist wie ein "Frequenzfilter" – er lässt bestimmte Frequenzen durch oder blockiert sie:
+      </p>
+      <ul>
+        <li><strong>Lowpass:</strong> Lässt tiefe Frequenzen durch, filtert hohe Frequenzen</li>
+        <li><strong>Highpass:</strong> Lässt hohe Frequenzen durch, filtert tiefe Frequenzen</li>
+        <li><strong>Bandpass:</strong> Lässt nur einen bestimmten Frequenzbereich durch</li>
+      </ul>
+      <pre><code class="js-code">const filter = audioCtx.createBiquadFilter();
+filter.type = 'lowpass';
+filter.frequency.value = 1000; // 1kHz Grenzfrequenz</code></pre>
+
+      <div class="regel">
+        💡 <strong>Beispiel:</strong> Ein Lowpass-Filter ist wie eine Tonregelung,
+        die nur die Bässe durchlässt und die Höhen herausfiltert.
+      </div>
+
+      <h3>DelayNode (Verzögerung)</h3>
+      <p>
+        Die DelayNode fügt eine zeitliche Verzögerung hinzu – ideal für Echo-Effekte.
+        Du kannst bestimmen, wie lange die Verzögerung ist und wie laut der "Echo" sein soll.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Vergleich:</strong> Ein Delay ist wie ein Echo in den Bergen –
+        der Ton kommt nach einer Verzögerung noch einmal zurück.
+      </div>
+
+      <h3>ConvolverNode (Hall-Effekt)</h3>
+      <p>
+        Die ConvolverNode erzeugt Hall- oder Raumeffekte.
+        Sie simuliert, wie ein Ton in einem bestimmten Raum (z.B. Kirche, Keller, Saal) klingt.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Beispiel:</strong> Mit diesem Effekt kannst du simulieren,
+        dass ein Ton in einer großen Kirche aufgenommen wurde statt in einem kleinen Zimmer.
+      </div>
+    </section>
+
+    <section>
+      <h2>Praktische Anwendung</h2>
+      
+      <h3>Erstellen eines einfachen Synthesizers</h3>
+      <ol>
+        <li>Erstelle einen AudioContext</li>
+        <li>Erstelle einen Oszillator für die Grundfrequenz</li>
+        <li>Füge einen GainNode für Lautstärkekontrolle hinzu</li>
+        <li>Verbinde alles mit dem destination</li>
+        <li>Starte den Oszillator</li>
+      </ol>
+      
+      <h3>Audio-Visualisierung</h3>
+      <p>
+        Mit der AnalyserNode können Frequenz- und Zeitdaten extrahiert werden, 
+        um Audio zu visualisieren.
+      </p>
+      <pre><code class="js-code">const analyser = audioCtx.createAnalyser();
+analyser.fftSize = 2048;
+source.connect(analyser);
+analyser.connect(destination);
+
+// Abfrage der Frequenzdaten
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+analyser.getByteFrequencyData(dataArray);</code></pre>
+    </section>
+
+    <section>
+      <h2>Browser-Unterstützung</h2>
+      <p>
+        Die Web Audio API wird von allen modernen Browsern unterstützt:
+      </p>
+      <ul>
+        <li>Chrome/Chromium: Vollständige Unterstützung</li>
+        <li>Firefox: Vollständige Unterstützung</li>
+        <li>Safari: Gute Unterstützung (einige Einschränkungen)</li>
+        <li>Edge: Vollständige Unterstützung</li>
+      </ul>
+      
+      <div class="warnung">
+        ⚠️ <strong>Hinweis:</strong> Einige ältere Browser benötigen Vendor-Prefixe 
+        (webkitAudioContext). Der Code-Beispiel oben berücksichtigt dies.
+      </div>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Erstelle den AudioContext erst nach Benutzerinteraktion</li>
+        <li>Verwende resume() falls der Context suspended ist</li>
+        <li>Vermeide Memory Leaks durch korrektes Disconnecten von Nodes</li>
+        <li>Teste auf verschiedenen Geräten wegen unterschiedlicher Latenz</li>
+        <li>Implementiere Fallbacks für ältere Browser</li>
+      </ul>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>Du hast die Grundlagen der Web Audio API kennengelernt!</p>
+      <a href="04-effekte-filter.html" class="nav-button">→ Weiter zu Effekte & Filter</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────
+     Pose Guide Cards — M07
+     Visual pose tips as cards with icons
+     ────────────────────────────────────────────── */
+
+  .photo-pose-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--photo-space-4);
+    margin: var(--photo-space-6) 0;
+  }
+
+  .photo-pose-card {
+    position: relative;
+    background: var(--photo-bg-card);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+  }
+
+  .photo-pose-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .photo-pose-card__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: var(--photo-radius-lg) 0 0 var(--photo-radius-lg);
+  }
+
+  .photo-pose-card--angle .photo-pose-card__accent { background: linear-gradient(180deg, #F59E0B, #F97316); }
+  .photo-pose-card--chin .photo-pose-card__accent { background: linear-gradient(180deg, #EC4899, #F43F5E); }
+  .photo-pose-card--shoulders .photo-pose-card__accent { background: linear-gradient(180deg, #8B5CF6, #A855F7); }
+  .photo-pose-card--expression .photo-pose-card__accent { background: linear-gradient(180deg, #10B981, #34D399); }
+
+  .photo-pose-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--photo-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: var(--photo-space-3);
+  }
+
+  .photo-pose-card--angle .photo-pose-card__icon {
+    background: color-mix(in srgb, #F59E0B 12%, transparent);
+    color: #F59E0B;
+  }
+  .photo-pose-card--chin .photo-pose-card__icon {
+    background: color-mix(in srgb, #EC4899 12%, transparent);
+    color: #EC4899;
+  }
+  .photo-pose-card--shoulders .photo-pose-card__icon {
+    background: color-mix(in srgb, #8B5CF6 12%, transparent);
+    color: #8B5CF6;
+  }
+  .photo-pose-card--expression .photo-pose-card__icon {
+    background: color-mix(in srgb, #10B981 12%, transparent);
+    color: #10B981;
+  }
+
+  .photo-pose-card__title {
+    font-family: var(--photo-font-display);
+    font-size: var(--photo-font-size-lg);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-2);
+  }
+
+  .photo-pose-card__text {
+    font-size: var(--photo-font-size-sm);
+    color: var(--photo-text-secondary);
+    line-height: 1.6;
+  }
+
+  .photo-pose-card__smartphone {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-2);
+    margin-top: var(--photo-space-3);
+    padding: var(--photo-space-2) var(--photo-space-3);
+    background: var(--photo-bg-elevated);
+    border-radius: var(--photo-radius-md);
+    font-size: var(--photo-font-size-xs);
+    color: var(--photo-text-tertiary);
+  }
+
+  .photo-pose-card__smartphone i {
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .photo-pose-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .photo-pose-card {
+      padding: var(--photo-space-4);
+    }
+  }
+}

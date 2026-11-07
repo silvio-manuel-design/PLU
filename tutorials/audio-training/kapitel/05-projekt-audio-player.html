@@ -1,0 +1,667 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projekt: Audio-Player | Audio-Tutorial | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="../kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="../kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="../kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="../kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="../kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="../uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="../uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="../tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="../tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="../tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="../tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="../ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="../ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="../ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="../ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="../ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>🎵 Projekt: Audio-Player</h1>
+      <p class="hero-subtitle">Erstelle deinen eigenen Web-Audio-Player mit Effekten</p>
+    </section>
+
+    <section>
+      <h2>Projektübersicht</h2>
+      <p>
+        In diesem Projekt wirst du einen vollständigen Audio-Player
+        mit Hilfe der Web Audio API erstellen. Der Player soll grundlegende
+        Funktionen bieten sowie verschiedene Audio-Effekte implementieren.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Ziel:</strong> Ein funktionsfähiger Audio-Player mit Wiedergabesteuerung
+        und Effektparametern, der im Browser läuft.
+      </div>
+
+      <figure class="illustration-center">
+        <svg width="100%" height="350" viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="player-title player-desc">
+          <title id="player-title">Audio-Player Projekt - Architektur</title>
+          <desc id="player-desc">Darstellung der Architektur eines Web-Audio-Players mit verschiedenen Komponenten: Audio-Quelle, Effekte, Steuerung</desc>
+
+          <!-- Hintergrund -->
+          <rect x="0" y="0" width="800" height="350" fill="#e0f7fa" />
+
+          <!-- Audio-Player Rahmen -->
+          <rect x="50" y="50" width="700" height="250" rx="15" fill="white" stroke="#004d40" stroke-width="2" />
+          <text x="400" y="75" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Audio-Player</text>
+
+          <!-- Audio-Quelle -->
+          <rect x="80" y="100" width="150" height="60" rx="10" fill="#00bcd4" stroke="#00838f" stroke-width="2" />
+          <text x="155" y="130" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Audio-Quelle</text>
+          <text x="155" y="150" font-family="monospace" font-size="12" text-anchor="middle" fill="white">Datei / Stream</text>
+
+          <!-- Effekt-Chain -->
+          <rect x="320" y="100" width="160" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="400" y="130" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Effekt-Chain</text>
+          <text x="400" y="150" font-family="monospace" font-size="12" text-anchor="middle" fill="white">Filter, Verzerrung, Hall</text>
+
+          <!-- Ausgabe -->
+          <rect x="570" y="100" width="150" height="60" rx="10" fill="#00838f" stroke="#006064" stroke-width="2" />
+          <text x="645" y="130" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Ausgabe</text>
+          <text x="645" y="150" font-family="monospace" font-size="12" text-anchor="middle" fill="white">Lautsprecher</text>
+
+          <!-- Steuerung -->
+          <rect x="200" y="200" width="400" height="80" rx="10" fill="#006064" stroke="#004d40" stroke-width="2" />
+          <text x="400" y="230" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Steuerung</text>
+          <text x="400" y="250" font-family="monospace" font-size="12" text-anchor="middle" fill="white">Play, Pause, Lautstärke, Effekte</text>
+
+          <!-- Verbindungspfeile -->
+          <line x1="230" y1="130" x2="320" y2="130" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="480" y1="130" x2="570" y2="130" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="400" y1="160" x2="400" y2="200" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+
+          <!-- Pfeildefinition -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#004d40" />
+            </marker>
+          </defs>
+
+ 
+        </svg>
+        <figcaption class="illustration-caption">
+          Architektur des Audio-Players: Audio-Quelle → Effekt-Chain → Ausgabe, mit separater Steuerungskomponente
+        </figcaption>
+      </figure>
+
+      <div class="regel">
+        💡 <strong>W3Schools Ressource:</strong> Für Informationen über Audio-Player-Implementierung mit HTML5 siehe
+        <a href="https://www.w3schools.com/html/html5_audio.asp" target="_blank" rel="noopener noreferrer">HTML5 Audio Player auf W3Schools</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Lernziele</h2>
+      <ul>
+        <li>Implementierung eines Audio-Players mit Web Audio API</li>
+        <li>Integration von Wiedergabesteuerungen</li>
+        <li>Implementierung von Audio-Effekten</li>
+        <li>Erstellung einer benutzerfreundlichen Oberfläche</li>
+        <li>Verständnis für Audio-Graphen und deren Verwaltung</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Voraussetzungen</h2>
+      <ul>
+        <li>Grundkenntnisse in HTML, CSS und JavaScript</li>
+        <li>Verständnis der Web Audio API Grundlagen</li>
+        <li>Texteditor und moderner Web-Browser</li>
+        <li>Beispiel-Audiodatei zum Testen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Projektstruktur</h2>
+      <pre><code class="js-code">audio-player/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── player.js
+└── audio/
+    └── beispiel.mp3</code></pre>
+    </section>
+
+    <section>
+      <h2>HTML-Grundgerüst</h2>
+      <p>
+        Erstelle die grundlegende HTML-Struktur für den Audio-Player:
+      </p>
+      <pre><code class="js-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Audio-Player&lt;/title&gt;
+  &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="player-container"&gt;
+    &lt;h1&gt;Mein Audio-Player&lt;/h1&gt;
+    
+    &lt;!-- Audio-Datei-Auswahl --&gt;
+    &lt;input type="file" id="audioFile" accept="audio/*"&gt;
+    
+    &lt;!-- Wiedergabesteuerung --&gt;
+    &lt;div class="controls"&gt;
+      &lt;button id="playBtn"&gt;▶&lt;/button&gt;
+      &lt;button id="pauseBtn"&gt;⏸&lt;/button&gt;
+      &lt;button id="stopBtn"&gt;⏹&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Fortschrittsanzeige --&gt;
+    &lt;div class="progress-container"&gt;
+      &lt;input type="range" id="progressBar" min="0" max="100" value="0"&gt;
+      &lt;span id="timeDisplay"&gt;0:00 / 0:00&lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Lautstärke --&gt;
+    &lt;div class="volume-control"&gt;
+      &lt;label for="volumeSlider"&gt;Lautstärke:&lt;/label&gt;
+      &lt;input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8"&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Effekt-Steuerung --&gt;
+    &lt;div class="effects-controls"&gt;
+      &lt;label for="reverbSlider"&gt;Hall:&lt;/label&gt;
+      &lt;input type="range" id="reverbSlider" min="0" max="1" step="0.01" value="0"&gt;
+      
+      &lt;label for="delaySlider"&gt;Verzögerung:&lt;/label&gt;
+      &lt;input type="range" id="delaySlider" min="0" max="1" step="0.01" value="0"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;script src="js/player.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>JavaScript-Implementierung</h2>
+      <p>
+        Implementiere die Hauptfunktionalitäten des Audio-Players:
+      </p>
+      <pre><code class="js-code">// player.js
+class AudioPlayer {
+  constructor() {
+    this.audioContext = null;
+    this.audioSource = null;
+    this.audioBuffer = null;
+    this.isPlaying = false;
+    this.startTime = 0;
+    this.pauseTime = 0;
+    
+    // Effekt-Knoten
+    this.gainNode = null;
+    this.reverbNode = null;
+    this.delayNode = null;
+    
+    this.initializeElements();
+    this.setupEventListeners();
+    this.initAudioContext();
+  }
+  
+  initializeElements() {
+    this.playBtn = document.getElementById('playBtn');
+    this.pauseBtn = document.getElementById('pauseBtn');
+    this.stopBtn = document.getElementById('stopBtn');
+    this.progressBar = document.getElementById('progressBar');
+    this.timeDisplay = document.getElementById('timeDisplay');
+    this.volumeSlider = document.getElementById('volumeSlider');
+    this.reverbSlider = document.getElementById('reverbSlider');
+    this.delaySlider = document.getElementById('delaySlider');
+    this.audioFileInput = document.getElementById('audioFile');
+  }
+  
+  setupEventListeners() {
+    this.playBtn.addEventListener('click', () => this.play());
+    this.pauseBtn.addEventListener('click', () => this.pause());
+    this.stopBtn.addEventListener('click', () => this.stop());
+    this.volumeSlider.addEventListener('input', () => this.updateVolume());
+    this.reverbSlider.addEventListener('input', () => this.updateReverb());
+    this.delaySlider.addEventListener('input', () => this.updateDelay());
+    this.audioFileInput.addEventListener('change', (e) => this.loadAudioFile(e));
+  }
+  
+  initAudioContext() {
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Initialisiere Effekt-Knoten
+    this.gainNode = this.audioContext.createGain();
+    this.gainNode.gain.value = this.volumeSlider.value;
+    
+    // Reverb (vereinfacht mit Convolver)
+    this.reverbNode = this.audioContext.createConvolver();
+    
+    // Delay
+    this.delayNode = this.audioContext.createDelay(1.0);
+    const feedback = this.audioContext.createGain();
+    feedback.gain.value = 0.3;
+    
+    // Verbindungen: Quelle -> Effekte -> Ausgabe
+    this.gainNode.connect(this.delayNode);
+    this.delayNode.connect(feedback);
+    feedback.connect(this.delayNode);
+    this.delayNode.connect(this.reverbNode);
+    this.reverbNode.connect(this.audioContext.destination);
+  }
+  
+  async loadAudioFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const arrayBuffer = await file.arrayBuffer();
+    this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+    this.updateTimeDisplay();
+  }
+  
+  play() {
+    if (!this.audioBuffer) return;
+    
+    if (this.audioContext.state === 'suspended') {
+      this.audioContext.resume();
+    }
+    
+    // Stoppe vorherige Wiedergabe
+    if (this.audioSource) {
+      this.audioSource.disconnect();
+    }
+    
+    // Erstelle neue Quelle
+    this.audioSource = this.audioContext.createBufferSource();
+    this.audioSource.buffer = this.audioBuffer;
+    this.audioSource.connect(this.gainNode);
+    
+    // Starte Wiedergabe
+    const startTime = this.audioContext.currentTime;
+    this.audioSource.start(0, this.pauseTime);
+    this.isPlaying = true;
+    this.startTime = startTime - this.pauseTime;
+    
+    // Starte Fortschrittsaktualisierung
+    this.updateProgress();
+  }
+  
+  pause() {
+    if (!this.isPlaying) return;
+    
+    this.audioSource.stop();
+    this.pauseTime = this.audioContext.currentTime - this.startTime;
+    this.isPlaying = false;
+  }
+  
+  stop() {
+    if (this.audioSource) {
+      this.audioSource.stop();
+      this.audioSource.disconnect();
+      this.audioSource = null;
+    }
+    this.isPlaying = false;
+    this.pauseTime = 0;
+    this.startTime = 0;
+    this.progressBar.value = 0;
+    this.updateTimeDisplay();
+  }
+  
+  updateVolume() {
+    if (this.gainNode) {
+      this.gainNode.gain.value = this.volumeSlider.value;
+    }
+  }
+  
+  updateReverb() {
+    // Vereinfachte Implementierung - in der Realität müsste ein Impulsantwort geladen werden
+    // Für dieses Beispiel simulieren wir den Effekt mit einem Gain-Node
+    if (this.reverbNode) {
+      this.reverbNode.gain.value = this.reverbSlider.value;
+    }
+  }
+  
+  updateDelay() {
+    if (this.delayNode) {
+      this.delayNode.delayTime.value = this.delaySlider.value * 0.5; // Max 500ms
+    }
+  }
+  
+  updateProgress() {
+    if (!this.isPlaying) return;
+    
+    const currentTime = this.audioContext.currentTime - this.startTime;
+    const duration = this.audioBuffer ? this.audioBuffer.duration : 0;
+    
+    if (duration > 0) {
+      const progress = (currentTime / duration) * 100;
+      this.progressBar.value = Math.min(progress, 100);
+      this.updateTimeDisplay(currentTime, duration);
+    }
+    
+    if (currentTime < duration) {
+      requestAnimationFrame(() => this.updateProgress());
+    } else {
+      this.isPlaying = false;
+      this.pauseTime = 0;
+    }
+  }
+  
+  updateTimeDisplay(currentTime = 0, duration = 0) {
+    if (!this.audioBuffer) {
+      duration = this.audioBuffer.duration;
+    }
+    
+    const formatTime = (seconds) => {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+    
+    this.timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+  }
+}
+
+// Initialisiere den Player sobald die Seite geladen ist
+document.addEventListener('DOMContentLoaded', () => {
+  new AudioPlayer();
+});</code></pre>
+    </section>
+
+    <section>
+      <h2>CSS-Styling</h2>
+      <p>
+        Erstelle ein ansprechendes Styling für den Audio-Player:
+      </p>
+      <pre><code class="js-code">/* style.css */
+.player-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-light);
+}
+
+.player-container h1 {
+  text-align: center;
+  color: var(--h1-color);
+  margin-bottom: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.controls button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.controls button:hover {
+  background-color: var(--primary-light);
+}
+
+.progress-container {
+  margin-bottom: 1.5rem;
+}
+
+#progressBar {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+#timeDisplay {
+  display: block;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.volume-control, .effects-controls {
+  margin-bottom: 1.5rem;
+}
+
+.volume-control label, .effects-controls label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.effects-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.effects-controls label {
+  margin-bottom: 0.25rem;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-bottom: 1rem;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Erweiterte Funktionen</h2>
+      
+      <h3>Playlist-Funktionalität</h3>
+      <p>
+        Erweitere den Player um Playlist-Unterstützung:
+      </p>
+      <ul>
+        <li>Hinzufügen mehrerer Dateien</li>
+        <li>Wiedergabeliste anzeigen</li>
+        <li>Weiter/zurück-Schaltflächen</li>
+        <li>Zufallswiedergabe</li>
+        <li>Wiederholungsmodus</li>
+      </ul>
+      
+      <h3>Visualisierung</h3>
+      <p>
+        Füge eine Audio-Visualisierung hinzu:
+      </p>
+      <pre><code class="js-code">// Füge dies zur Klasse hinzu
+initVisualizer() {
+  this.analyser = this.audioContext.createAnalyser();
+  this.analyser.fftSize = 2048;
+  
+  // Verbinde nach dem Gain-Node
+  this.gainNode.connect(this.analyser);
+  this.analyser.connect(this.audioContext.destination);
+  
+  // Canvas für Visualisierung
+  this.canvas = document.createElement('canvas');
+  this.canvas.width = 600;
+  this.canvas.height = 200;
+  document.querySelector('.player-container').appendChild(this.canvas);
+  this.canvasCtx = this.canvas.getContext('2d');
+  
+  this.drawVisualizer();
+}
+
+drawVisualizer() {
+  if (!this.analyser) return;
+  
+  const bufferLength = this.analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  
+  const draw = () => {
+    requestAnimationFrame(draw);
+    
+    this.analyser.getByteTimeDomainData(dataArray);
+    
+    this.canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+    this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    this.canvasCtx.lineWidth = 2;
+    this.canvasCtx.strokeStyle = '#00bcd4';
+    this.canvasCtx.beginPath();
+    
+    const sliceWidth = this.canvas.width * 1.0 / bufferLength;
+    let x = 0;
+    
+    for (let i = 0; i < bufferLength; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = v * this.canvas.height / 2;
+      
+      if (i === 0) {
+        this.canvasCtx.moveTo(x, y);
+      } else {
+        this.canvasCtx.lineTo(x, y);
+      }
+      
+      x += sliceWidth;
+    }
+    
+    this.canvasCtx.lineTo(this.canvas.width, this.canvas.height / 2);
+    this.canvasCtx.stroke();
+  };
+  
+  draw();
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Test und Debugging</h2>
+      
+      <h3>Testfälle</h3>
+      <ul>
+        <li>Laden verschiedener Audioformate (MP3, WAV, OGG)</li>
+        <li>Wiedergabesteuerung (Play, Pause, Stop)</li>
+        <li>Lautstärkeregelung</li>
+        <li>Effektänderungen während der Wiedergabe</li>
+        <li>Positionierung innerhalb der Datei</li>
+        <li>Browser-Kompatibilität</li>
+      </ul>
+      
+      <h3>Debugging-Tipps</h3>
+      <ul>
+        <li>Verwende die Browser-Entwicklertools (insbesondere die Audio-Tab)</li>
+        <li>Überprüfe die Konsole auf Fehlermeldungen</li>
+        <li>Teste auf verschiedenen Geräten und Browsern</li>
+        <li>Überprüfe die Audio-Graph-Verbindungen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Deployment</h2>
+      <p>
+        Um den Audio-Player online verfügbar zu machen:
+      </p>
+      <ol>
+        <li>Stelle sicher, dass alle Dateien korrekt organisiert sind</li>
+        <li>Teste die Anwendung lokal mit einem Webserver</li>
+        <li>Lade die Dateien auf einen Webserver hoch</li>
+        <li>Stelle sicher, dass die Audio-Dateien korrekt bereitgestellt werden</li>
+        <li>Teste die Online-Version auf verschiedenen Geräten</li>
+      </ol>
+      
+      <div class="warnung">
+        ⚠️ <strong>Hinweis:</strong> Einige Browser blockieren Audio-Wiedergabe, 
+        bis der Nutzer eine Interaktion durchgeführt hat (z.B. Klick auf Play-Button).
+      </div>
+    </section>
+
+    <section>
+      <h2>Erweiterungsideen</h2>
+      <ul>
+        <li>Equalizer mit mehreren Bändern</li>
+        <li>Unterstützung für Streaming-URLs</li>
+        <li>Speichern von Effektvoreinstellungen</li>
+        <li>Unterstützung für MIDI-Eingabe</li>
+        <li>Audio-Aufnahmefunktion</li>
+        <li>Unterstützung für WebMIDI</li>
+        <li>Offline-Funktionalität mit Service Worker</li>
+      </ul>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>Glückwunsch! Du hast einen vollständigen Audio-Player erstellt!</p>
+      <a href="../index.html" class="nav-button">→ Zurück zum Hauptmenü</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

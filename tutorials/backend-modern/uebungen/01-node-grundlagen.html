@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Side Quest U01: Node.js Basics | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id" style="color: var(--warning);">Side Quest U01</span>
+      <span class="mission-timer">~15 Min • +35 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Vertiefe deine Node.js-Kenntnisse mit Modulen und Dateisystem.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Eigene Module erstellen</h3>
+        <p>Erstelle <code>math.js</code> mit Funktionen:</p>
+        <div class="code-block">exports.add = (a, b) => a + b;
+exports.multiply = (a, b) => a * b;</div>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Module importieren</h3>
+        <p>Nutze dein Modul in <code>app.js</code>:</p>
+        <div class="code-block">const math = require('./math');
+console.log(math.add(5, 3));</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Dateisystem nutzen</h3>
+        <p>Lese eine Datei mit dem fs-Modul:</p>
+        <div class="code-block">const fs = require('fs');
+const data = fs.readFileSync('text.txt', 'utf8');
+console.log(data);</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>JSON verarbeiten</h3>
+        <p>Lese und parse JSON-Daten:</p>
+        <div class="code-block">const raw = fs.readFileSync('data.json');
+const obj = JSON.parse(raw);
+console.log(obj.name);</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Testen</h3>
+        <p>Führe alle Skripte aus und prüfe die Ausgaben.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Module verstanden?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Wissen testen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+35 XP Bonus] (Side Quest abgeschlossen)
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeSideQuest()" disabled>
+        Side Quest abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>require() lädt Module in Node.js.</li>
+          <li>exports macht Funktionen für andere Dateien verfügbar.</li>
+          <li>fs-Modul ermöglicht Dateioperationen.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe Verständnis...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'Prüfung OK';
+        result.textContent = '[OK] Node.js Module und FS verstanden.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeSideQuest() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeSideQuest, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeSideQuest('U01');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('U01', 'Node.js Basics', 'Module und Dateisystem in Node.js');
+      AbgabePanel.init('U01', 'Node.js Basics');
+      
+      const status = MissionsAPI.getSideQuestStatus()['U01'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+35 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

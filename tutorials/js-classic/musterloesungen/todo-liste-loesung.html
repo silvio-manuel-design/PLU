@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Musterlösung – Todo-Liste | JS-Tutorial</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .code-erklaerung {
+      background: #f8f9fa;
+      padding: 16px;
+      border-left: 4px solid #3498db;
+      margin: 16px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: monospace;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="warnung" style="background:#ffebee; border-left:4px solid #e53935; margin-bottom:24px;">
+    <strong>🔒 Nur für Lehrkraft / Nachbesprechung!</strong><br>
+    Dieser Link ist nicht öffentlich verlinkt.
+  </div>
+
+  <main class="main-content">
+    <section>
+      <h1>📝 Musterlösung: Interaktive Todo-Liste</h1>
+
+      <p>Diese Lösung zeigt eine vollständige, sichere und performante Todo-Liste – 
+      mit allen geforderten Funktionen und Best Practices.</p>
+
+      <h2>Struktur der Lösung</h2>
+      <ul>
+        <li>✅ Globale Todo-Liste als Array von Objekten</li>
+        <li>✅ Lokale Speicherung mit <code>localStorage</code></li>
+        <li>✅ Event-Delegation für dynamische Elemente</li>
+        <li>✅ Sichere Textausgabe (kein raw HTML)</li>
+        <li>✅ Klare Trennung von Logik und Darstellung</li>
+      </ul>
+
+      <div class="code-erklaerung">
+        <h3>1. Globale Variablen und DOM-Referenzen</h3>
+        <p>Wir speichern die Todos in einem Array und referenzieren die wichtigen DOM-Elemente.</p>
+        <div class="code-block">
+const todos = [];<br>
+const todoInput = document.getElementById('todo-input');<br>
+const todoList = document.getElementById('todo-list');<br>
+const STORAGE_KEY = 'meineTodos';
+        </div>
+      </div>
+
+      <div class="code-erklaerung">
+        <h3>2. Speichern und Laden mit LocalStorage</h3>
+        <p>Beim Speichern wird das Array in JSON umgewandelt. Beim Laden wird geprüft, ob Daten existieren.</p>
+        <div class="code-block">
+function speichereTodos() {<br>
+&nbsp;&nbsp;localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));<br>
+}<br><br>
+function ladeTodos() {<br>
+&nbsp;&nbsp;const gespeichert = localStorage.getItem(STORAGE_KEY);<br>
+&nbsp;&nbsp;if (gespeichert) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;todos = JSON.parse(gespeichert);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;zeigeTodos();<br>
+}
+        </div>
+      </div>
+
+      <div class="code-erklaerung">
+        <h3>3. Anzeige der Todos – sicher und effizient</h3>
+        <p>Wir leeren die Liste und fügen jedes Todo als <code>&lt;div&gt;</code> mit Checkbox und Button hinzu.<br>
+        Der Text wird <strong>nicht als HTML interpretiert</strong> – XSS-Schutz ist gewährleistet.</p>
+        <div class="code-block">
+function zeigeTodos() {<br>
+&nbsp;&nbsp;todoList.innerHTML = '';<br>
+&nbsp;&nbsp;todos.forEach((todo, index) =&gt; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;const todoItem = document.createElement('div');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;todoItem.className = `todo-item ${todo.erledigt ? 'erledigt' : ''}`;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;todoItem.innerHTML = `<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="checkbox" ${todo.erledigt ? 'checked' : ''} data-index="${index}"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span class="todo-text"&gt;${todo.text}&lt;/span&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button data-index="${index}"&gt;Löschen&lt;/button&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;todoList.appendChild(todoItem);<br>
+&nbsp;&nbsp;});<br>
+}
+        </div>
+      </div>
+
+      <div class="code-erklaerung">
+        <h3>4. Event-Delegation – effizient und wartbar</h3>
+        <p>Ein einziger Listener auf der Todo-Liste handhabt alle Klicks – 
+        auch für dynamisch hinzugefügte Todos.</p>
+        <div class="code-block">
+todoList.addEventListener('click', function(e) {<br>
+&nbsp;&nbsp;const index = e.target.dataset.index;<br>
+&nbsp;&nbsp;if (index === undefined) return;<br><br>
+&nbsp;&nbsp;if (e.target.type === 'checkbox') {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;todos[index].erledigt = e.target.checked;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;speichereTodos();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;zeigeTodos();<br>
+&nbsp;&nbsp;} else if (e.target.tagName === 'BUTTON') {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;todos.splice(index, 1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;speichereTodos();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;zeigeTodos();<br>
+&nbsp;&nbsp;}<br>
+});
+        </div>
+      </div>
+
+      <div class="code-erklaerung">
+        <h3>5. Initialisierung</h3>
+        <p>Beim Laden der Seite werden die gespeicherten Todos geladen.</p>
+        <div class="code-block">
+document.addEventListener('DOMContentLoaded', ladeTodos);
+        </div>
+      </div>
+
+      <h2>Warum ist diese Lösung optimal?</h2>
+      <ul>
+        <li>🔒 <strong>Sicherheit</strong>: Kein unkontrolliertes <code>innerHTML</code> mit Benutzereingaben</li>
+        <li>⚡ <strong>Performance</strong>: Event-Delegation statt Listener-Flut</li>
+        <li>💾 <strong>Persistenz</strong>: Daten bleiben nach Neuladen erhalten</li>
+        <li>🧼 <strong>Lesbarkeit</strong>: Klare Funktionen, keine Codewüste</li>
+        <li>📱 <strong>Responsive</strong>: Passt sich kleinen Bildschirmen an</li>
+      </ul>
+
+      <h2>✅ Musterlösung testen</h2>
+<p>Du kannst die vollständige, fehlerfreie Todo-Liste hier testen:</p>
+
+<p>Öffne die vollständige, fehlerfreie Todo-Liste:</p>
+<a href="musterloesung-todo.html" class="nav-button">
+  → Musterlösung starten
+</a>
+
+<p class="warnung">
+  ⚠️ Hinweis: Damit die Musterlösung funktioniert, musst du eine Kopie der Seite anlegen:<br>
+  <code>abschluss/musterloesung-todo.html</code><br>
+  und darin den Script-Pfad anpassen:<br>
+  <code>&lt;script src="todo.js"&gt;&lt;/script&gt;</code>
+</p>
+    </section>
+  </main>
+</body>
+</html>

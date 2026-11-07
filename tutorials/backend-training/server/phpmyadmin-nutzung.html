@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XAMPP einrichten | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>🗃️ phpMyAdmin nutzen</h1>
+      <p class="hero-subtitle">Datenbanken verwalten – einfach, visuell, sicher</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was ist phpMyAdmin?</h2>
+      <p>
+        <strong>phpMyAdmin</strong> ist ein webbasiertes Tool, mit dem du MariaDB-Datenbanken 
+        <em>ohne Kommandozeile</em> verwalten kannst.
+      </p>
+      <p>
+        Du kannst damit:
+      </p>
+      <ul>
+        <li>Neue Datenbanken anlegen</li>
+        <li>Tabellen erstellen und bearbeiten</li>
+        <li>Datensätze hinzufügen, ändern oder löschen</li>
+        <li>SQL-Abfragen ausführen</li>
+      </ul>
+      <div class="regel">
+        💡 <strong>Merke:</strong> phpMyAdmin läuft <em>nur lokal</em> – niemals im Internet freigeben!
+      </div>
+    </section>
+
+    <section>
+      <h2>🔓 2. phpMyAdmin aufrufen</h2>
+      <p>
+        Stelle sicher, dass in XAMPP <strong>Apache</strong> und <strong>MySQL</strong> laufen.
+      </p>
+      <p>
+        Öffne dann im Browser:
+      </p>
+      <pre><code>http://localhost/phpmyadmin</code></pre>
+      <p>
+        Du siehst eine Übersicht aller Datenbanken – meistens nur <code>information_schema</code> und <code>mysql</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>🆕 3. Neue Datenbank anlegen</h2>
+      <p>
+        Klicke oben links auf den Reiter <strong>„Datenbanken“</strong>.
+      </p>
+      <ol>
+        <li>Im Feld <strong>„Datenbankname“</strong> gib einen Namen ein, z. B.:<br>
+           <code>kontakt_db</code></li>
+        <li>Wähle als <strong>Kollation</strong>:<br>
+           <strong><code>utf8mb4_unicode_ci</code></strong> ⬅️ <em>(sehr wichtig!)</em></li>
+        <li>Klicke auf <strong>„Datenbank erstellen“</strong></li>
+      </ol>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> 
+        - Keine Leerzeichen oder Sonderzeichen im Namen!<br>
+        - <code>utf8mb4_unicode_ci</code> sorgt dafür, dass <strong>Umlaute, Emojis und Sonderzeichen</strong> korrekt gespeichert werden.
+      </div>
+    </section>
+
+    <section>
+      <h2>📋 4. Tabelle erstellen</h2>
+      <p>
+        Nach dem Anlegen der Datenbank wirst du automatisch weitergeleitet.
+      </p>
+      <ol>
+        <li>Gib einen <strong>Tabellennamen</strong> ein, z. B.:<br>
+           <code>kontakte</code></li>
+        <li>Anzahl der Spalten: <code>4</code></li>
+        <li>Klicke auf <strong>„Ausführen“</strong></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>🧱 5. Spalten definieren</h2>
+      <p>
+        Jetzt legst du fest, welche Daten in der Tabelle gespeichert werden.
+      </p>
+      <p>
+        Beispiel für eine Kontakt-Tabelle:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Typ</th>
+            <th>Länge/Werte</th>
+            <th>Attribut</th>
+            <th>A_I</th>
+            <th>Bemerkung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td><code>INT</code></td>
+            <td>11</td>
+            <td></td>
+            <td>✔️</td>
+            <td>Primärschlüssel, automatisch hochzählend</td>
+          </tr>
+          <tr>
+            <td><code>name</code></td>
+            <td><code>VARCHAR</code></td>
+            <td>100</td>
+            <td></td>
+            <td></td>
+            <td>Name des Absenders</td>
+          </tr>
+          <tr>
+            <td><code>email</code></td>
+            <td><code>VARCHAR</code></td>
+            <td>150</td>
+            <td></td>
+            <td></td>
+            <td>E-Mail-Adresse</td>
+          </tr>
+          <tr>
+            <td><code>nachricht</code></td>
+            <td><code>TEXT</code></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Inhalt der Nachricht</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        ⚙️ <strong>Einstellungen am Ende:</strong>
+      </p>
+      <ul>
+        <li><strong>Primärschlüssel:</strong> Wähle <code>id</code></li>
+        <li><strong>AI (Auto Increment):</strong> Bei <code>id</code> aktiviert</li>
+        <li><strong>Speichern:</strong> Klicke unten auf <strong>„Speichern“</strong></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>✅ 6. Testeintrag hinzufügen</h2>
+      <p>
+        Klicke in der linken Seitenleiste auf deine Tabelle (<code>kontakte</code>).
+      </p>
+      <p>
+        Dann klicke oben auf <strong>„Einfügen“</strong> und fülle das Formular aus:
+      </p>
+      <ul>
+        <li><code>name</code>: Max Mustermann</li>
+        <li><code>email</code>: max@test.at</li>
+        <li><code>nachricht</code>: Hallo, ich habe eine Frage!</li>
+      </ul>
+      <p>
+        Klicke auf <strong>„OK“</strong> – der Eintrag wird gespeichert.
+      </p>
+      <p>
+        Unter <strong>„Durchsuchen“</strong> siehst du alle Einträge.
+      </p>
+    </section>
+
+    <section>
+      <h2>🔐 7. Sicherheitshinweis: Benutzerrechte</h2>
+      <p>
+        In der Schule arbeitest du mit dem Standard-Benutzer <code>root</code> (Passwort: leer).
+      </p>
+      <p>
+        ⚠️ <strong>Aber:</strong> In echten Projekten darfst du <em>niemals</em> den <code>root</code>-Benutzer verwenden!
+      </p>
+      <p>
+        Stattdessen erstellst du einen eigenen Benutzer mit eingeschränkten Rechten – das lernst du später.
+      </p>
+    </section>
+
+    <section>
+        <h2>🌐 8. Ausblick: WordPress</h2>
+        <p>
+            Später im Schuljahr wirst du vielleicht WordPress kennenlernen – ein beliebtes CMS (Content Management System),
+            das auf PHP und MariaDB basiert.
+        </p>
+        <p>
+            WordPress benötigt ebenfalls eine Datenbank – aber du musst sie meist <em>nicht manuell anlegen</em>.
+            Der WordPress-Installationsassistent erstellt die Tabellen automatisch.
+        </p>
+        <p>
+            Dennoch: Das Wissen aus diesem Kapitel hilft dir, die WordPress-Datenbank später zu verstehen,
+            zu sichern oder bei Fehlern zu reparieren.
+        </p>
+        <div class="regel">
+            <strong>Hinweis:</strong> Wenn wir WordPress behandeln, gibt es eine eigene Anleitung 
+            unter „📁 DB & Server → WordPress einrichten“.
+        </div>
+    </section>
+
+    <section class="kapitel-navigation">
+      <h2>➡️ Nächster Schritt: PHP verbinden</h2>
+      <p>
+        Sobald deine Datenbank steht, kannst du sie mit PHP verbinden.
+      </p>
+      <p>
+        🔧 <a href="php-grundlagen.html" class="nav-button">→ Weiter zu „PHP Grundlagen“</a>
+      </p>
+      <p>
+        Dort lernst du, wie du:
+      </p>
+        - Eine Verbindung herstellst<br>
+        - Formulardaten sicher speicherst<br>
+        - Einträge aus der Datenbank abrufst<br>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Deine erste Datenbank ist jetzt bereit!</p>
+      <a href="xampp-einrichten.html" class="nav-button">← Zurück: XAMPP einrichten</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

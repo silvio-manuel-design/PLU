@@ -1,0 +1,130 @@
+/* =========================================
+   COMPONENT: Feature Cards
+   For smartphone camera features (HDR, Night Mode, etc.)
+   Each card has unique accent color — visual variety
+   ========================================= */
+
+.photo-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--photo-space-5);
+  margin-block: var(--photo-space-6);
+}
+
+.photo-feature-grid--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.photo-feature-grid--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.photo-feature-card {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-top: 3px solid var(--feature-color, var(--photo-accent));
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--photo-space-3);
+  overflow: hidden;
+}
+
+.photo-feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg, var(--feature-color, var(--photo-accent)) 0%, transparent 100%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.photo-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+  border-color: var(--feature-color, var(--photo-accent));
+}
+
+.photo-feature-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--photo-radius-md);
+  background: var(--feature-color, var(--photo-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.photo-feature-card__name {
+  font-weight: var(--photo-font-weight-bold);
+  font-size: var(--photo-font-size-base);
+  color: var(--photo-text-primary);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.photo-feature-card__desc {
+  font-size: var(--photo-font-size-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-body);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Color variants */
+.photo-feature-card--teal   { --feature-color: var(--photo-accent); }
+.photo-feature-card--coral  { --feature-color: #e67e50; }
+.photo-feature-card--indigo { --feature-color: var(--photo-accent-secondary); }
+.photo-feature-card--rose   { --feature-color: #c95d78; }
+.photo-feature-card--amber  { --feature-color: #d4a843; }
+.photo-feature-card--emerald{ --feature-color: #4a9b7f; }
+
+/* Share page social / brand variants */
+.photo-feature-card--instagram { --feature-color: #E1306C; }
+.photo-feature-card--tiktok    { --feature-color: #000000; }
+.photo-feature-card--linkedin  { --feature-color: #0A66C2; }
+.photo-feature-card--website   { --feature-color: #10B981; }
+.photo-feature-card--accent    { --feature-color: var(--photo-accent); }
+.photo-feature-card--secondary { --feature-color: var(--photo-accent-secondary); }
+.photo-feature-card--violet    { --feature-color: var(--photo-accent-violet); }
+.photo-feature-card--green     { --feature-color: #10B981; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .photo-feature-grid,
+  .photo-feature-grid--2col,
+  .photo-feature-grid--3col {
+    grid-template-columns: 1fr;
+    gap: var(--photo-space-3);
+  }
+  .photo-feature-card {
+    padding: var(--photo-space-4);
+  }
+  .photo-feature-card__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  .photo-feature-card__name {
+    font-size: var(--photo-font-size-sm);
+  }
+  .photo-feature-card__desc {
+    font-size: var(--photo-font-size-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

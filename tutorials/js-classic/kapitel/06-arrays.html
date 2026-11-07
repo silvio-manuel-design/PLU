@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>06 – Arrays | JavaScript-Tutorial</title>
+  <!-- Favicon – nur .ico wie gewünscht -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+      <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="06-arrays.html">06. Arrays</a></li>
+        <li><a href="07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="08-objekte.html">08. Objekte</a></li>
+        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>06 – Arrays 📋</h1>
+      <p class="hero-subtitle">Geordnete Listen von Daten – der Schlüssel zu strukturierten Programmen</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was ist ein Array?</h2>
+      <p>
+        Ein <strong>Array</strong> ist eine <strong>geordnete Liste von Werten</strong>.  
+        Jeder Wert („Element“) hat eine feste <strong>Position (Index)</strong> – beginnend bei <code>0</code>!
+      </p>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Der erste Index ist <code>0</code>, nicht <code>1</code>!  
+        Dies ist die häufigste Fehlerquelle bei Anfängern („Off-by-one error“).
+      </div>
+    </section>
+
+    <section>
+      <h2>📊 2. Übersicht: Array-Grundlagen</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Konzept</th>
+            <th>Beispiel</th>
+            <th>Erklärung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Erstellen</strong></td>
+            <td><code>const namen = ["Anna", "Ben"];</code></td>
+            <td>Eckige Klammern <code>[]</code> – Werte durch Komma getrennt</td>
+          </tr>
+          <tr>
+            <td><strong>Zugriff</strong></td>
+            <td><code>namen[0]</code> → <code>"Anna"</code></td>
+            <td>Index in eckigen Klammern – beginnt bei <code>0</code></td>
+          </tr>
+          <tr>
+            <td><strong>Länge</strong></td>
+            <td><code>namen.length</code> → <code>2</code></td>
+            <td>Gibt Anzahl der Elemente zurück</td>
+          </tr>
+          <tr>
+            <td><strong>Ändern</strong></td>
+            <td><code>namen[1] = "Chloé";</code></td>
+            <td>Element an Position 1 wird überschrieben</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🎯 3. Einleitung & W3Schools</h2>
+      <p>
+        Arrays sind der erste Schritt zu <strong>strukturierten Daten</strong> – 
+        ohne sie müsstest du hunderte Einzelvariablen erstellen!  
+        Sie bilden die Grundlage für Listen, Tabellen und komplexe Datenstrukturen.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/js/js_arrays.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Arrays</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 4. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, warum der Array-Index bei 0 beginnt – 
+        und wie man mit <code>push</code>, <code>pop</code>, <code>unshift</code>, <code>shift</code> 
+        ein Array verändern kann.
+      </p>
+    </section>
+
+    <!-- 5. Array-Grundlagen -->
+    <section>
+      <h2>🔖 5. Array erstellen und auf Elemente zugreifen</h2>
+      <p>
+        Arrays speichern <strong>mehrere Werte in einer Variable</strong>.  
+        Der Zugriff erfolgt über den <strong>Index</strong> (Position).
+      </p>
+      <button onclick="demoArrayGrundlagen()">Zeige Grundlagen</button>
+      <div id="ausgabe-array-grund" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoArrayGrundlagen() {
+  const farben = ["rot", "grün", "blau"];
+  const ersteFarbe = farben[0];   // Index 0 → erstes Element!
+  const letzteFarbe = farben[2];  // Index 2 → drittes Element
+
+  farben[1] = "gelb"; // Ändere das zweite Element
+
+  document.getElementById("ausgabe-array-grund").innerHTML = 
+    `&lt;p&gt;Array: [&lt;em&gt;"${farben.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;
+     &lt;p&gt;Erste Farbe (Index 0): &lt;strong&gt;${ersteFarbe}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;Letzte Farbe (Index 2): &lt;strong&gt;${letzteFarbe}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;Nach Änderung: [&lt;em&gt;"${farben.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <!-- 6. Wichtige Methoden -->
+    <section>
+      <h2>🛠️ 6. Häufig genutzte Array-Methoden</h2>
+      <p>
+        JavaScript bietet praktische Methoden, um Arrays zu verändern:
+      </p>
+      <ul>
+        <li><code>.push()</code> → Element am <strong>Ende</strong> hinzufügen</li>
+        <li><code>.pop()</code> → Letztes Element <strong>entfernen</strong> und zurückgeben</li>
+        <li><code>.unshift()</code> → Element am <strong>Anfang</strong> hinzufügen</li>
+        <li><code>.shift()</code> → Erstes Element <strong>entfernen</strong> und zurückgeben</li>
+      </ul>
+      <button onclick="demoArrayMethoden()">Array verändern</button>
+      <div id="ausgabe-array-methoden" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoArrayMethoden() {
+  let liste = ["Anna", "Ben"];
+  
+  liste.push("Chloé");     // hinten anhängen
+  liste.unshift("David");  // vorne einfügen
+  const letzter = liste.pop(); // letztes Element entfernen
+
+  document.getElementById("ausgabe-array-methoden").innerHTML = 
+    `&lt;p&gt;Start: ["Anna", "Ben"]&lt;/p&gt;
+     &lt;p&gt;Nach .push("Chloé"): [&lt;em&gt;"${liste.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;
+     &lt;p&gt;Nach .unshift("David"): [&lt;em&gt;"${liste.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;
+     &lt;p&gt;.pop() → entfernt: &lt;strong&gt;${letzter}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;Endstand: [&lt;em&gt;"${liste.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <!-- 7. Arrays mit Schleifen -->
+    <section>
+      <h2>🔁 7. Arrays mit Schleifen durchlaufen</h2>
+      <p>
+        Mit einer <code>for</code>-Schleife kannst du <strong>jedes Element</strong> bearbeiten – 
+        besonders nützlich für Berechnungen oder Ausgaben.
+      </p>
+      <button onclick="demoArraySchleife()">Durchlaufe Array</button>
+      <div id="ausgabe-array-schleife" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoArraySchleife() {
+  const tiere = ["Hund", "Katze", "Vogel"];
+  let ausgabe = "&lt;ul&gt;";
+  
+  for (let i = 0; i &lt; tiere.length; i++) {
+    ausgabe += `&lt;li&gt;Index ${i}: ${tiere[i]}&lt;/li&gt;`;
+  }
+  ausgabe += "&lt;/ul&gt;";
+
+  document.getElementById("ausgabe-array-schleife").innerHTML = ausgabe;
+}</code></pre>
+    </section>
+
+    <!-- 8. Praxisbeispiel: Noten -->
+    <section>
+      <h2>📊 8. Praxis: Durchschnitt einer Notenliste</h2>
+      <p>
+        Arrays machen <strong>statistische Berechnungen</strong> einfach – 
+        wie den Durchschnitt einer Notenliste.
+      </p>
+      <button onclick="demoNotenDurchschnitt()">Berechne Durchschnitt</button>
+      <div id="ausgabe-noten" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoNotenDurchschnitt() {
+  const noten = [2, 3, 1, 4, 2];
+  let summe = 0;
+  
+  for (let i = 0; i &lt; noten.length; i++) {
+    summe += noten[i];
+  }
+  const durchschnitt = (summe / noten.length).toFixed(2);
+
+  document.getElementById("ausgabe-noten").innerHTML = 
+    `&lt;p&gt;Noten: [&lt;em&gt;${noten.join(", ")}&lt;/em&gt;]&lt;/p&gt;
+     &lt;p&gt;Summe: ${summe}&lt;/p&gt;
+     &lt;p&gt;Durchschnitt: &lt;strong&gt;${durchschnitt}&lt;/strong&gt;&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <section class="warnung">
+      <h2>⚠️ 9. Häufige Fehler & Tipps</h2>
+      <ul>
+        <li><strong>Index beginnt bei 0</strong> → letztes Element: <code>arr[arr.length - 1]</code></li>
+        <li><code>arr[100]</code> auf leerem Array → gibt <code>undefined</code> zurück (kein Fehler!)</li>
+        <li>Verwende <code>.length</code> in Schleifen – nie feste Zahlen!</li>
+        <li>Arrays sind <strong>veränderlich</strong> – <code>const</code> verhindert nur Neuzuweisung!</li>
+      </ul>
+      <pre><code class="js-code">// Korrekt: Länge dynamisch nutzen
+for (let i = 0; i &lt; meinArray.length; i++) { ... }
+
+// Falsch: Feste Zahl – bricht bei Änderung
+for (let i = 0; i &lt; 5; i++) { ... } // ❌</code></pre>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du strukturierte Daten effizient verwalten!</p>
+      <a href="./07-funktionen.html" class="nav-button">→ Zu Modul 07: Funktionen</a>
+    </section>
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/06-arrays.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

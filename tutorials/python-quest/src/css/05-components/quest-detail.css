@@ -1,0 +1,1460 @@
+/* ==========================================================================
+   PYTHON QUEST — Quest Detail Page
+   Layout: Sidebar + Content (mobile-first)
+   ========================================================================== */
+
+@layer components {
+
+  /* ── Layout Grid ─────────────────────────────────────────────────────── */
+  .py-quest-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--py-space-6);
+    max-width: var(--py-max-width);
+    margin: 0 auto;
+    padding: var(--py-space-12) var(--py-space-4) var(--py-space-12);
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-layout {
+      padding: var(--py-space-14) var(--py-space-6) var(--py-space-12);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .py-quest-layout {
+      grid-template-columns: 280px 1fr;
+      gap: var(--py-space-8);
+      padding: var(--py-space-16) var(--py-space-6) var(--py-space-12);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .py-quest-layout {
+      grid-template-columns: 320px 1fr;
+    }
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────────────────────── */
+  .py-quest-sidebar {
+    position: sticky;
+    top: calc(var(--py-header-height) + var(--py-space-4));
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-4);
+  }
+
+  @media (max-width: 1023px) {
+    .py-quest-sidebar {
+      position: static;
+      order: -1;
+    }
+  }
+
+  /* Sidebar Welt-Header */
+  .py-quest-sidebar__world {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    overflow: hidden;
+  }
+
+  .py-quest-sidebar__world-header {
+    position: relative;
+    padding: var(--py-space-5);
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-dark) 100%);
+    color: var(--py-white);
+  }
+
+  .py-quest-sidebar__world-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.18;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .py-quest-sidebar__world-number {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--py-radius-md);
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-sidebar__world-title {
+    position: relative;
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    margin-bottom: var(--py-space-1);
+  }
+
+  .py-quest-sidebar__world-subtitle {
+    position: relative;
+    font-size: var(--py-text-sm);
+    opacity: 0.85;
+  }
+
+  /* Sidebar Quest List */
+  .py-quest-sidebar__quest-list {
+    padding: var(--py-space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-1);
+  }
+
+  .py-quest-sidebar__quest-item {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    padding: var(--py-space-3) var(--py-space-3);
+    border-radius: var(--py-radius-lg);
+    text-decoration: none;
+    transition: all var(--py-transition-fast);
+    cursor: pointer;
+  }
+
+  .py-quest-sidebar__quest-item:hover {
+    background: var(--py-bg-hover);
+  }
+
+  .py-quest-sidebar__quest-item.is-active {
+    background: var(--py-bg-hover);
+    border: 1px solid var(--py-primary);
+  }
+
+  .py-quest-sidebar__quest-item.is-completed {
+    opacity: 0.7;
+  }
+
+  .py-quest-sidebar__quest-item.is-completed .py-quest-sidebar__quest-title {
+    text-decoration: line-through;
+  }
+
+  .py-quest-sidebar__quest-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--py-radius-md);
+    background: var(--py-bg-elevated);
+    flex-shrink: 0;
+    font-size: var(--py-text-sm);
+    color: var(--py-text-muted);
+  }
+
+  .py-quest-sidebar__quest-item.is-active .py-quest-sidebar__quest-icon {
+    background: var(--py-primary);
+    color: var(--py-white);
+  }
+
+  .py-quest-sidebar__quest-item.is-completed .py-quest-sidebar__quest-icon {
+    background: var(--py-success-bg);
+    color: var(--py-success);
+  }
+
+  .py-quest-sidebar__quest-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .py-quest-sidebar__quest-title {
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .py-quest-sidebar__quest-meta {
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+
+  .py-quest-sidebar__quest-xp {
+    flex-shrink: 0;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-accent-dark);
+    padding: 2px var(--py-space-2);
+    background: rgba(255, 212, 59, 0.1);
+    border-radius: 100px;
+  }
+
+  /* Sidebar Progress */
+  .py-quest-sidebar__progress {
+    padding: 0 var(--py-space-4) var(--py-space-4);
+  }
+
+  .py-quest-sidebar__progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-sidebar__progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-full);
+    overflow: hidden;
+  }
+
+  .py-quest-sidebar__progress-fill {
+    height: 100%;
+    border-radius: var(--py-radius-full);
+    transition: width var(--py-transition-slow);
+    background: linear-gradient(90deg, var(--py-primary) 0%, var(--py-accent) 100%);
+  }
+
+  /* ── Content Area ────────────────────────────────────────────────────── */
+  .py-quest-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-6);
+  }
+
+  /* ── Quest Hero (Fullscreen Edge-to-Edge) ────────────────────────────── */
+  .py-quest-detail__hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: calc(var(--py-header-height) * -1);
+    padding-top: var(--py-header-height);
+  }
+
+  @media (min-width: 640px) {
+    .py-quest-detail__hero {
+      min-height: 600px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .py-quest-detail__hero {
+      min-height: 720px;
+    }
+  }
+
+  /* Hero background image with fade-in */
+  .py-quest-detail__hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .py-quest-detail__hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.12);
+    animation: questHeroZoomOut 2.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s forwards;
+  }
+
+  @keyframes questHeroZoomOut {
+    0% { opacity: 0; transform: scale(1.12); }
+    20% { opacity: 1; }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Gradient overlay — minimal since images are already dark-themed */
+  .py-quest-detail__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.05) 0%,
+      rgba(15, 23, 42, 0.08) 40%,
+      rgba(15, 23, 42, 0.3) 70%,
+      rgba(15, 23, 42, 0.75) 100%
+    );
+    z-index: 1;
+  }
+
+  html[data-theme="light"] .py-quest-detail__hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.15) 40%,
+      rgba(255, 255, 255, 0.45) 70%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+  }
+
+  /* Hero content — constrained width for readability */
+  .py-quest-detail__hero-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--py-space-12) var(--py-space-4) var(--py-space-16);
+    width: 100%;
+    max-width: var(--py-max-width);
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-detail__hero-content {
+      padding: var(--py-space-14) var(--py-space-6) var(--py-space-20);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .py-quest-detail__hero-content {
+      padding: var(--py-space-16) var(--py-space-6) var(--py-space-20);
+    }
+  }
+
+  .py-quest-detail__hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-1) var(--py-space-3);
+    background: var(--py-primary-bg);
+    border-radius: 100px;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-primary);
+    text-transform: uppercase;
+    margin-bottom: var(--py-space-3);
+  }
+
+  .py-quest-detail__hero-title {
+    font-family: var(--py-font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: var(--py-weight-extrabold);
+    color: var(--py-white);
+    margin-bottom: var(--py-space-3);
+    line-height: var(--py-leading-tight);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    letter-spacing: -0.02em;
+  }
+
+  html[data-theme="light"] .py-quest-detail__hero-title {
+    color: var(--py-text-primary);
+    text-shadow: 0 1px 4px rgba(255,255,255,0.5);
+  }
+
+  .py-quest-detail__hero-desc {
+    font-size: var(--py-text-lg);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-5);
+    max-width: 600px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+
+  html[data-theme="light"] .py-quest-detail__hero-desc {
+    color: var(--py-text-secondary);
+    text-shadow: none;
+  }
+
+  .py-quest-detail__hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--py-space-4);
+    align-items: center;
+  }
+
+  .py-quest-detail__hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-muted);
+  }
+
+  .py-quest-detail__hero-meta i {
+    color: var(--py-primary);
+  }
+
+  .py-quest-detail__hero-xp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    background: rgba(255, 212, 59, 0.1);
+    border-radius: 100px;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-accent-dark);
+  }
+
+  /* ── Story Card ──────────────────────────────────────────────────────── */
+  .py-quest-story {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+    position: relative;
+  }
+
+  .py-quest-story__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-story__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-accent) 0%, var(--py-accent-dark) 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+  }
+
+  .py-quest-story__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-story__text {
+    font-size: var(--py-text-base);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-story__text strong {
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-story__pro-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    margin-top: var(--py-space-4);
+    padding: var(--py-space-4);
+    background: var(--py-primary-bg);
+    border: 1px solid var(--py-primary-border);
+    border-radius: var(--py-radius-lg);
+  }
+
+  .py-quest-story__pro-tip i {
+    color: var(--py-primary);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .py-quest-story__pro-tip-label {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-primary);
+    text-transform: uppercase;
+    margin-bottom: var(--py-space-1);
+  }
+
+  .py-quest-story__pro-tip-text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  /* ── Task Card ───────────────────────────────────────────────────────── */
+  .py-quest-task {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-task__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-task__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-success) 0%, #27ae60 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+  }
+
+  .py-quest-task__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-task__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-3);
+  }
+
+  .py-quest-task__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    padding: var(--py-space-4);
+    background: var(--py-bg-hover);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-lg);
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-task__item:hover {
+    border-color: var(--py-primary);
+  }
+
+  .py-quest-task__item.is-done {
+    background: var(--py-success-bg);
+    border-color: var(--py-success);
+  }
+
+  .py-quest-task__item-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: var(--py-bg-elevated);
+    border-radius: var(--py-radius-md);
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-muted);
+    flex-shrink: 0;
+  }
+
+  .py-quest-task__item.is-done .py-quest-task__item-num {
+    background: var(--py-success);
+    color: var(--py-white);
+  }
+
+  .py-quest-task__item-text {
+    flex: 1;
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-task__item-text strong {
+    color: var(--py-text-primary);
+  }
+
+  /* ── Hint Card ───────────────────────────────────────────────────────── */
+  .py-quest-hint {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-hint__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .py-quest-hint__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+  }
+
+  .py-quest-hint__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-hint__chevron {
+    margin-left: auto;
+    color: var(--py-text-muted);
+    transition: transform var(--py-transition-fast);
+  }
+
+  .py-quest-hint.is-open .py-quest-hint__chevron {
+    transform: rotate(180deg);
+  }
+
+  .py-quest-hint__body {
+    display: none;
+    padding-top: var(--py-space-2);
+  }
+
+  .py-quest-hint.is-open .py-quest-hint__body {
+    display: block;
+  }
+
+  .py-quest-hint__text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    padding: var(--py-space-4);
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-lg);
+    font-family: var(--py-font-mono);
+  }
+
+  .py-quest-hint__mistakes {
+    margin-top: var(--py-space-4);
+  }
+
+  .py-quest-hint__mistakes-title {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-error);
+    text-transform: uppercase;
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-hint__mistakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-2);
+  }
+
+  .py-quest-hint__mistake {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+  }
+
+  .py-quest-hint__mistake i {
+    color: var(--py-error);
+    font-size: var(--py-text-sm);
+  }
+
+  /* ── Sandbox Panel ───────────────────────────────────────────────────── */
+  .py-quest-sandbox-panel {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    overflow: hidden;
+  }
+
+  .py-quest-sandbox-panel__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    padding: var(--py-space-4) var(--py-space-6);
+    background: var(--py-bg-elevated);
+    border-bottom: 1px solid var(--py-border-color);
+  }
+
+  .py-quest-sandbox-panel__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+  }
+
+  .py-quest-sandbox-panel__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-sandbox-panel__body {
+    padding: var(--py-space-6);
+  }
+
+  /* ── Reflection Panel ────────────────────────────────────────────────── */
+  .py-quest-reflection {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-reflection__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-reflection__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+  }
+
+  .py-quest-reflection__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-reflection__prompt {
+    font-size: var(--py-text-base);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+    padding: var(--py-space-4);
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-lg);
+    border-left: 4px solid var(--py-primary);
+  }
+
+  .py-quest-reflection__textarea {
+    width: 100%;
+    min-height: 160px;
+    padding: var(--py-space-4);
+    background: var(--py-bg-elevated);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-text-primary);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-sm);
+    line-height: var(--py-leading-relaxed);
+    resize: vertical;
+    transition: border-color var(--py-transition-fast);
+  }
+
+  .py-quest-reflection__textarea:focus {
+    outline: none;
+    border-color: var(--py-primary);
+  }
+
+  .py-quest-reflection__actions {
+    display: flex;
+    gap: var(--py-space-3);
+    margin-top: var(--py-space-4);
+  }
+
+  /* ── Anti-Cheat / Verification ───────────────────────────────────────── */
+  .py-quest-verify {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-verify__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-verify__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-success) 0%, #27ae60 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+  }
+
+  .py-quest-verify__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-verify__question {
+    font-size: var(--py-text-base);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-verify__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-3);
+  }
+
+  .py-quest-verify__option {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    padding: var(--py-space-4);
+    background: var(--py-bg-hover);
+    border: 2px solid var(--py-border-color);
+    border-radius: var(--py-radius-lg);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-verify__option:hover {
+    border-color: var(--py-primary);
+  }
+
+  .py-quest-verify__option.is-selected {
+    border-color: var(--py-primary);
+    background: var(--py-primary-bg);
+  }
+
+  .py-quest-verify__option.is-correct {
+    border-color: var(--py-success);
+    background: var(--py-success-bg);
+  }
+
+  .py-quest-verify__option.is-wrong {
+    border-color: var(--py-error);
+    background: var(--py-error-bg);
+  }
+
+  .py-quest-verify__option input {
+    accent-color: var(--py-primary);
+  }
+
+  /* ── Navigation ──────────────────────────────────────────────────────── */
+  .py-quest-nav-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--py-space-4);
+    padding-top: var(--py-space-6);
+    border-top: 1px solid var(--py-border-color);
+  }
+
+  .py-quest-nav-footer__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-3) var(--py-space-6);
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    text-decoration: none;
+    transition: all var(--py-transition-fast);
+    border: none;
+    cursor: pointer;
+  }
+
+  .py-quest-nav-footer__btn:hover {
+    box-shadow: var(--py-shadow-glow);
+    transform: translateY(-2px);
+  }
+
+  .py-quest-nav-footer__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .py-quest-nav-footer__btn--secondary {
+    background: var(--py-bg-hover);
+    color: var(--py-text-secondary);
+  }
+
+  .py-quest-nav-footer__btn--secondary:hover {
+    background: var(--py-bg-elevated);
+    color: var(--py-text-primary);
+    box-shadow: none;
+  }
+
+  .py-quest-nav-footer__btn--success {
+    background: linear-gradient(135deg, var(--py-success) 0%, #27ae60 100%);
+  }
+
+  /* Mobile: nur Icons/Pfeile in Nav-Buttons */
+  @media (max-width: 639px) {
+    .py-quest-nav-footer__btn {
+      padding: var(--py-space-2) var(--py-space-3);
+      min-width: 44px;
+      min-height: 44px;
+      justify-content: center;
+    }
+
+    .py-quest-nav-footer__label {
+      display: none;
+    }
+
+    .py-quest-nav-footer__btn--success {
+      flex: 1;
+      padding: var(--py-space-3) var(--py-space-4);
+      font-size: var(--py-text-xs);
+    }
+  }
+
+  /* ── Completion Banner ───────────────────────────────────────────────── */
+  .py-quest-complete {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--py-space-4);
+    padding: var(--py-space-8);
+    background: linear-gradient(135deg, var(--py-success-bg) 0%, rgba(39, 174, 96, 0.1) 100%);
+    border: 2px solid var(--py-success);
+    border-radius: var(--py-radius-xl);
+    text-align: center;
+  }
+
+  .py-quest-complete.is-visible {
+    display: flex;
+  }
+
+  .py-quest-complete__icon {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, var(--py-success) 0%, #27ae60 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--py-white);
+    font-size: 2rem;
+    animation: completePop 0.6s ease both;
+  }
+
+  .py-quest-complete__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-2xl);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-success);
+  }
+
+  .py-quest-complete__text {
+    font-size: var(--py-text-base);
+    color: var(--py-text-secondary);
+  }
+
+  .py-quest-complete__xp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-2) var(--py-space-4);
+    background: rgba(255, 212, 59, 0.2);
+    border-radius: 100px;
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-accent-dark);
+  }
+
+  @keyframes completePop {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .py-quest-complete__icon {
+      animation: none;
+    }
+  }
+
+  /* ── Classic Link ────────────────────────────────────────────────────── */
+  .py-quest-classic-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-3) var(--py-space-4);
+    background: var(--py-bg-hover);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-lg);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    text-decoration: none;
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-classic-link:hover {
+    border-color: var(--py-primary);
+    color: var(--py-primary);
+  }
+
+  .py-quest-classic-link i {
+    color: var(--py-primary);
+  }
+
+  /* ── Copilot Tip on Quest Page ───────────────────────────────────────── */
+  .py-quest-copilot-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-4);
+    padding: var(--py-space-4);
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+  }
+
+  .py-quest-copilot-tip__avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .py-quest-copilot-tip__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .py-quest-copilot-tip__content {
+    flex: 1;
+  }
+
+  .py-quest-copilot-tip__label {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-primary);
+    text-transform: uppercase;
+    margin-bottom: var(--py-space-1);
+  }
+
+  .py-quest-copilot-tip__text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  /* ── Mission Card ────────────────────────────────────────────────────── */
+  .py-quest-mission {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-mission__header,
+  .py-quest-why__header,
+  .py-quest-success__header,
+  .py-quest-mistakes__header,
+  .py-quest-pro-tip__header,
+  .py-quest-docs__header,
+  .py-quest-w3schools__header {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-mission__icon,
+  .py-quest-why__icon,
+  .py-quest-success__icon,
+  .py-quest-mistakes__icon,
+  .py-quest-pro-tip__icon,
+  .py-quest-docs__icon,
+  .py-quest-w3schools__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--py-radius-lg);
+    color: var(--py-white);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .py-quest-mission__icon {
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+  }
+
+  .py-quest-mission__title,
+  .py-quest-why__title,
+  .py-quest-success__title,
+  .py-quest-mistakes__title,
+  .py-quest-pro-tip__title,
+  .py-quest-docs__title,
+  .py-quest-w3schools__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-mission__text,
+  .py-quest-why__text,
+  .py-quest-success__text,
+  .py-quest-pro-tip__text {
+    font-size: var(--py-text-base);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-mission__text strong,
+  .py-quest-why__text strong,
+  .py-quest-success__text strong {
+    color: var(--py-text-primary);
+  }
+
+  /* ── Why Card ────────────────────────────────────────────────────────── */
+  .py-quest-why {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+    border-left: 4px solid var(--py-accent);
+  }
+
+  .py-quest-why__icon {
+    background: linear-gradient(135deg, var(--py-accent) 0%, var(--py-accent-dark) 100%);
+  }
+
+  /* ── Success Card ────────────────────────────────────────────────────── */
+  .py-quest-success {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+    border-left: 4px solid var(--py-success);
+  }
+
+  .py-quest-success__icon {
+    background: linear-gradient(135deg, var(--py-success) 0%, #27ae60 100%);
+  }
+
+  /* ── Mistakes Card ───────────────────────────────────────────────────── */
+  .py-quest-mistakes {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-mistakes__icon {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  }
+
+  .py-quest-mistakes__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-2);
+  }
+
+  .py-quest-mistakes__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    padding: var(--py-space-3) var(--py-space-4);
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-lg);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-mistakes__item i {
+    color: var(--py-error);
+    font-size: var(--py-text-base);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .py-quest-mistakes__item code {
+    background: var(--py-bg-elevated);
+    padding: 1px 4px;
+    border-radius: var(--py-radius-sm);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-primary);
+  }
+
+  /* ── Pro Tip Card ────────────────────────────────────────────────────── */
+  .py-quest-pro-tip {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-pro-tip__icon {
+    background: linear-gradient(135deg, var(--py-accent) 0%, var(--py-accent-dark) 100%);
+  }
+
+  .py-quest-pro-tip__text {
+    font-size: var(--py-text-sm);
+  }
+
+  .py-quest-pro-tip__text code {
+    background: var(--py-bg-elevated);
+    padding: 1px 4px;
+    border-radius: var(--py-radius-sm);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-primary);
+  }
+
+  /* ── Docs Card ───────────────────────────────────────────────────────── */
+  .py-quest-docs {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-docs__icon {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+  }
+
+  .py-quest-docs__intro {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-docs__intro strong {
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-docs__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--py-space-3);
+  }
+
+  .py-quest-docs__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-docs__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--py-accent);
+    color: var(--py-black);
+    border-radius: 50%;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    flex-shrink: 0;
+  }
+
+  .py-quest-docs__item strong {
+    color: var(--py-text-primary);
+  }
+
+  /* ── W3Schools Card ──────────────────────────────────────────────────── */
+  .py-quest-w3schools {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+  }
+
+  .py-quest-w3schools__icon {
+    background: linear-gradient(135deg, #04AA6D 0%, #059862 100%);
+  }
+
+  .py-quest-w3schools__text {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-w3schools__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-3) var(--py-space-4);
+    background: linear-gradient(135deg, #04AA6D 0%, #059862 100%);
+    color: var(--py-white);
+    border-radius: var(--py-radius-lg);
+    text-decoration: none;
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    margin-top: var(--py-space-4);
+    transition: all var(--py-transition-fast);
+  }
+
+  .py-quest-w3schools__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(4, 170, 109, 0.3);
+  }
+
+  /* ── Task Card with Checkboxes ───────────────────────────────────────── */
+  .py-quest-task__intro {
+    font-size: var(--py-text-base);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-task__label {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--py-space-3);
+  }
+
+  .py-quest-task__item {
+    cursor: pointer;
+    align-items: flex-start;
+  }
+
+  .py-quest-task__checkbox {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--py-border-color);
+    border-radius: var(--py-radius-md);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all var(--py-transition-fast);
+    position: relative;
+  }
+
+  .py-quest-task__checkbox:checked {
+    background: var(--py-success);
+    border-color: var(--py-success);
+  }
+
+  .py-quest-task__checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .py-quest-task__item.is-done {
+    background: var(--py-success-bg);
+    border-color: var(--py-success);
+  }
+
+  .py-quest-task__item.is-done .py-quest-task__item-text {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .py-quest-task__counter {
+    text-align: right;
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+    margin-top: var(--py-space-3);
+    font-weight: var(--py-weight-semibold);
+  }
+
+  .py-quest-task__item-text code {
+    background: var(--py-bg-elevated);
+    padding: 1px 4px;
+    border-radius: var(--py-radius-sm);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-primary);
+    word-break: break-word;
+  }
+
+  /* ── Reflection Card Enhancements ────────────────────────────────────── */
+  .py-quest-reflection__intro {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-reflection__question {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--py-space-3);
+    padding: var(--py-space-4);
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-lg);
+    border-left: 4px solid var(--py-primary);
+    margin-bottom: var(--py-space-4);
+    font-size: var(--py-text-sm);
+    color: var(--py-text-primary);
+    font-weight: var(--py-weight-semibold);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-quest-reflection__question i {
+    color: var(--py-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .py-quest-reflection__privacy {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    margin-top: var(--py-space-3);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+
+  .py-quest-reflection__privacy i {
+    color: var(--py-text-muted);
+  }
+
+  /* ── Code styling in cards ───────────────────────────────────────────── */
+  .py-quest-mission__text code,
+  .py-quest-why__text code,
+  .py-quest-success__text code {
+    background: var(--py-bg-elevated);
+    padding: 1px 4px;
+    border-radius: var(--py-radius-sm);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-primary);
+    word-break: break-word;
+  }
+}

@@ -1,0 +1,267 @@
+/* ==========================================================================
+   PARALLAX SECTIONS
+   Premium visual breaks between content sections
+   
+   Dokumentation für Studenten:
+   - Parallax erzeugt visuelle Tiefe und Atmosphäre
+   - CSS-only Lösung mit background-attachment: fixed
+   - Mobile Fallback: statische Bilder (Performance)
+   - Reduced Motion: Respektieren von prefers-reduced-motion
+   ========================================================================== */
+
+/* ========================================================================
+   BASE PARALLAX SECTION
+   ======================================================================== */
+
+.parallax-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ========================================================================
+   HEIGHT VARIANTS
+   ======================================================================== */
+
+.parallax-section--small {
+  height: var(--parallax-sm);
+  min-height: 300px;
+}
+
+.parallax-section--medium {
+  height: var(--parallax-md);
+  min-height: 400px;
+}
+
+.parallax-section--large {
+  height: var(--parallax-lg);
+  min-height: 500px;
+}
+
+/* ========================================================================
+   PARALLAX BACKGROUND
+   ======================================================================== */
+
+.parallax-bg {
+  position: absolute;
+  inset: -10% 0; /* Extended for parallax movement */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* CSS-only parallax effect */
+  will-change: transform; /* Performance optimization hint */
+  transform: translateZ(0); /* Force GPU layer */
+  z-index: 0;
+}
+
+/* Optional: Smooth transition when image loads */
+.parallax-bg.is-loaded {
+  opacity: 1;
+  transition: opacity 0.8s var(--ease-out);
+}
+
+.parallax-bg[data-src] {
+  opacity: 0;
+}
+
+/* ========================================================================
+   OVERLAY FOR TEXT READABILITY
+   ======================================================================== */
+
+.parallax-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-parallax);
+  z-index: 2;
+}
+
+/* Alternative overlays */
+.parallax-overlay--light {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+}
+
+.parallax-overlay--dark {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.parallax-overlay {
+  background: rgba(0, 0, 0, 0.4); /* Einfacher halbtransparenter Overlay */
+}
+
+/* ========================================================================
+   PARALLAX CONTENT
+   ======================================================================== */
+
+.parallax-content {
+  position: absolute;
+  z-index: 3;
+  left: 5%;
+  right: 30%;
+  bottom: 22%; /* Goldener Schnitt im unteren Drittel - unterhalb des Gesichts */
+  text-align: left;
+}
+
+.parallax-content h2,
+.parallax-content .parallax-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: var(--font-bold);
+  color: white;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-4);
+}
+
+.parallax-content p,
+.parallax-content .parallax-text {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: var(--leading-relaxed);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.parallax-content .parallax-message,
+.parallax-content .parallax-quote {
+  font-size: var(--text-xl);
+  position: relative;
+  padding: 0 var(--space-4);
+}
+
+/* Remove quote marks from parallax sections */
+.parallax-content .parallax-quote::before,
+.parallax-content .parallax-quote::after {
+  display: none;
+}
+
+/* ========================================================================
+   PARALLAX CTA BUTTON
+   ======================================================================== */
+
+.parallax-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  margin-top: var(--space-6);
+  background: white;
+  color: var(--text-inverse);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: var(--transition-transform), var(--transition-shadow);
+  box-shadow: var(--shadow-lg);
+}
+
+.parallax-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.parallax-cta--primary {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.parallax-cta--outline {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.parallax-cta--outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+/* ========================================================================
+   PARALLAX SEPARATOR (Subtle transition)
+   ======================================================================== */
+
+.parallax-separator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.parallax-separator--top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg-secondary), transparent);
+}
+
+.parallax-separator--bottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg-secondary), transparent);
+}
+
+/* ========================================================================
+   MOBILE FALLBACK
+   Disable fixed attachment on touch devices for performance
+   ======================================================================== */
+
+@media (max-width: 768px), (pointer: coarse) {
+  .parallax-bg {
+    background-attachment: scroll;
+    inset: 0;
+  }
+  
+  .parallax-section--small,
+  .parallax-section--medium,
+  .parallax-section--large {
+    height: 50vh !important;
+    min-height: 300px;
+  }
+  
+  .parallax-content h2,
+  .parallax-content .parallax-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  .parallax-content .parallax-quote {
+    padding: 0 var(--space-4);
+  }
+}
+
+/* ========================================================================
+   REDUCED MOTION SUPPORT
+   Respect user preferences for motion
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-bg {
+    background-attachment: scroll;
+    inset: 0;
+    transition: none;
+  }
+  
+  .parallax-section {
+    height: 40vh !important;
+  }
+}
+
+/* ========================================================================
+   PRINT STYLES
+   Hide parallax sections in print
+   ======================================================================== */
+
+@media print {
+  .parallax-section {
+    display: none;
+  }
+}

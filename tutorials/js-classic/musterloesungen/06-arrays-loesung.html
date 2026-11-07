@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Musterlösung – Kapitel 6 | JS-Tutorial</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="warnung" style="background:#ffebee; border-left:4px solid #e53935; margin-bottom:24px;">
+    <strong>🔒 Nur für Lehrkraft / Nachbesprechung!</strong><br>
+    Dieser Link ist nicht öffentlich verlinkt.
+  </div>
+
+  <main class="main-content">
+    <section>
+      <h1>📋 Musterlösung – Kapitel 6: Arrays</h1>
+
+      <h2>Aufgabe 1: Index-Falle</h2>
+      <h3>Warum <code>undefined</code>?</h3>
+      <p><code>farben.length</code> ist <code>3</code> (Array hat 3 Elemente).<br>
+      Aber die Indizes sind: <code>0</code> (rot), <code>1</code> (grün), <code>2</code> (blau).<br>
+      → <code>farben[3]</code> existiert nicht → <code>undefined</code>.</p>
+
+      <h3>Zwei korrekte Methoden:</h3>
+      <ul>
+        <li>Mit Index: <code>farben[farben.length - 1]</code></li>
+        <li>Mit Methode: <code>farben.at(-1)</code> (modern) oder <code>farben[farben.length - 1]</code></li>
+      </ul>
+
+      <h3>Sichere Funktion:</h3>
+      <pre><code>function gibLetztesElement(arr) {
+  if (arr.length === 0) {
+    return null;
+  }
+  return arr[arr.length - 1];
+}</code></pre>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle eine Funktion gibLetztesElement(arr), die das letzte Element eines Arrays zurückgibt.
+Wenn das Array leer ist, gib null zurück.
+Verwende arr.length - 1 für den Index.</code></pre>
+
+      <h2>Aufgabe 2: Array-Methoden</h2>
+      <h3>Endzustand:</h3>
+      <ul>
+        <li><code>original</code>: <code>["A", "B", "C", "D"]</code> (wurde durch <code>kopie1</code> verändert!)</li>
+        <li><code>kopie1</code>: <code>["A", "B", "C", "D"]</code> (gleiche Referenz wie original)</li>
+        <li><code>kopie2</code>: <code>["A", "B"]</code> (echte Kopie – <code>pop()</code> wirkt nur hier)</li>
+      </ul>
+
+      <h3>Referenz vs. echte Kopie:</h3>
+      <p>✅ <code>kopie1 = original</code> → beide Variablen zeigen auf **dasselbe Array im Speicher**.<br>
+      ✅ <code>kopie2 = original.slice()</code> → erzeugt ein **neues Array** mit den gleichen Werten.</p>
+
+      <h3>Warum bei Objekten kritischer?</h3>
+      <p>Bei <code>const arr = [{ name: "A" }]; const kopie = arr.slice();</code><br>
+      ist die **äußere Ebene** kopiert – aber die **Objekte darin** sind noch **Referenzen**!<br>
+      → Ändert man <code>kopie[0].name</code>, ändert sich auch <code>arr[0].name</code>.</p>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle eine tiefe Kopie eines flachen Arrays (nur primitive Werte wie Strings, Zahlen).
+Erkläre, warum slice() bei flachen Arrays ausreicht, aber bei verschachtelten Arrays nicht.
+Gib ein Beispiel für beide Fälle.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

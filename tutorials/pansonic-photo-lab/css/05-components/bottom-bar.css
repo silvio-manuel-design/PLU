@@ -1,0 +1,160 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Mobile Bottom Action Bar
+   Minimal icon-only thumb-zone navigation.
+   Only visible on mobile (< 768px).
+   ============================================================ */
+
+@layer components {
+  .photo-bottom-bar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .photo-bottom-bar {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: calc(var(--photo-z-sticky) - 1);
+      background: rgba(10, 12, 16, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--photo-border-subtle);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    [data-theme="light"] .photo-bottom-bar {
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .photo-bottom-bar__track {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--photo-space-2);
+      height: 56px;
+      padding: 0 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Icon-only buttons — compact 36px to match progress ring scale */
+    .photo-bottom-bar__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--photo-radius-md);
+      font-size: var(--photo-text-md);
+      color: var(--photo-text-primary);
+      background: transparent;
+      border: none;
+      text-decoration: none;
+      transition: all var(--photo-transition-fast);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .photo-bottom-bar__btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] .photo-bottom-bar__btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .photo-bottom-bar__btn[aria-disabled="true"] {
+      opacity: 0.25;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* Back button — subtle bordered style like mobile header buttons */
+    .photo-bottom-bar__btn--back {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .photo-bottom-bar__btn--back:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    [data-theme="light"] .photo-bottom-bar__btn--back {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="light"] .photo-bottom-bar__btn--back:hover {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Forward button — compact accent */
+    .photo-bottom-bar__btn--accent {
+      background: var(--module-accent, var(--photo-accent));
+      color: var(--photo-text-inverse);
+    }
+
+    .photo-bottom-bar__btn--accent:hover {
+      opacity: 0.9;
+      background: var(--module-accent, var(--photo-accent));
+    }
+
+    /* Progress center section */
+    .photo-bottom-bar__progress {
+      display: flex;
+      align-items: center;
+      gap: var(--photo-space-2);
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .photo-bottom-bar__ring {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .photo-bottom-bar__ring-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--photo-text-xs);
+      font-weight: var(--photo-font-weight-bold);
+      color: var(--photo-text-primary);
+    }
+
+    .photo-bottom-bar__name {
+      font-size: var(--photo-text-xs);
+      font-weight: var(--photo-font-weight-semibold);
+      color: var(--photo-text-secondary);
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Offset main content to not hide behind bottom bar */
+    body.has-bottom-bar {
+      padding-bottom: 56px;
+    }
+  }
+
+  /* No-JS: Hide bottom bar, use static nav footer instead */
+  @media (scripting: none) {
+    .photo-bottom-bar {
+      display: none !important;
+    }
+
+    body.has-bottom-bar {
+      padding-bottom: 0;
+    }
+  }
+}

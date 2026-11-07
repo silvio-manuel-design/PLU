@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11 – Layout & Responsive | HTML & CSS Tutorial</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .flex-demo {
+      background: #fdf7f0;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #eaeff5;
+      margin: 24px 0;
+    }
+    .flex-container {
+      display: flex;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .flex-item {
+      background: #3498db;
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+    }
+    html.dark-mode .flex-demo {
+      background: #252525 !important;
+      border-color: #444 !important;
+    }
+    html.dark-mode .flex-item {
+      background: #2980b9 !important;
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../assets/logo.svg" alt="HTML/CSS Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link">🏠</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 Module ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+                <li><a href="../kapitel/01-html-elements.html">01. HTML-Elemente</a></li>
+                <li><a href="../kapitel/02-page-structure.html">02. Seitenstruktur</a></li>
+                <li><a href="../kapitel/03-css-basics.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../kapitel/04-colors-and-inheritance.html">04. Farben & Vererbung</a></li>
+                <li><a href="../kapitel/05-box-model.html">05. Box-Modell</a></li>
+                <li><a href="../kapitel/06-folder-structure.html">06. Ordner & Pfade</a></li>
+                <li><a href="../kapitel/07-links.html">07. Links & Navigation</a></li>
+                <li><a href="../kapitel/08-media.html">08. Medien</a></li>
+                <li><a href="../kapitel/09-lists-selectors.html">09. Listen & Selektoren</a></li>
+                <li><a href="../kapitel/10-block-inline.html">10. Block vs. Inline</a></li>
+                <li><a href="../kapitel/11-layout-responsive.html">11. Layout & Responsive</a></li>
+                <li><a href="../kapitel/12-tables-forms.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">✏️ Übungen ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+                <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+                <li><a href="../uebungen/01-html-elements-aufgaben.html">01. HTML-Elemente</a></li>
+                <li><a href="../uebungen/02-page-structure-aufgaben.html">02. Seitenstruktur</a></li>
+                <li><a href="../uebungen/03-css-basics-aufgaben.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../uebungen/04-colors-and-inheritance-aufgaben.html">04. Farben & Vererbung</a></li>
+                <li><a href="../uebungen/05-box-model-aufgaben.html">05. Box-Modell</a></li>
+                <li><a href="../uebungen/06-folder-structure-aufgaben.html">06. Ordner & Pfade</a></li>
+                <li><a href="../uebungen/07-links-aufgaben.html">07. Links & Navigation</a></li>
+                <li><a href="../uebungen/08-media-aufgaben.html">08. Medien</a></li>
+                <li><a href="../uebungen/09-lists-selectors-aufgaben.html">09. Listen & Selektoren</a></li>
+                <li><a href="../uebungen/10-block-inline-aufgaben.html">10. Block vs. Inline</a></li>
+                <li><a href="../uebungen/11-layout-responsive-aufgaben.html">11. Layout & Responsive</a></li>
+                <li><a href="../uebungen/12-tables-forms-aufgaben.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li><a href="../tools/ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+            <li><a href="../tools/vscode.html" class="nav-link">💻 VS Code</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../abschluss/aufgabenstellung.html">📄 Statische Website</a></li>
+              </ul>
+            </li>
+            <li><a href="../resources/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <h1>11 – Layout & Responsive 📱↔️🖥️</h1>
+      <p class="hero-subtitle">Baue Webseiten, die auf jedem Gerät perfekt aussehen</p>
+    </section>
+
+    <!-- 1. Warum Layouts ohne Tabellen? -->
+    <section>
+      <h2>🧩 1. Warum moderne Layouts <em>ohne Tabellen</em>?</h2>
+      <p>
+        Früher baute man Layouts mit <code>&lt;table&gt;</code> – das war <strong>starr, unzugänglich und schwer zu warten</strong>.
+      </p>
+      <p>
+        Heute verwenden wir <strong>Flexbox</strong> und <strong>Grid</strong> – 
+        sie sind:
+      </p>
+      <ul>
+        <li>✅ <strong>flexibel</strong> – passen sich an Bildschirmgröße an</li>
+        <li>✅ <strong>barrierefrei</strong> – Screenreader verstehen die Struktur</li>
+        <li>✅ <strong>einfach</strong> – mit wenigen CSS-Befehlen machbar</li>
+      </ul>
+      <p>
+        In diesem Kapitel lernst du <strong>Flexbox</strong> – das wichtigste Werkzeug für eindimensionale Layouts (Zeilen <em>oder</em> Spalten).
+      </p>
+    </section>
+
+    <!-- 🔗 W3Schools – Flexbox -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – Flexbox</h2>
+      <p>
+        W3Schools erklärt Flexbox Schritt für Schritt – mit interaktiven Beispielen und Visualisierung der Achsen.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css3_flexbox.asp" target="_blank">W3Schools: CSS Flexbox</a>
+      </p>
+    </section>
+
+    <!-- 2. Flexbox – der intelligente Baukasten -->
+    <section>
+      <h2>🧱 2. Flexbox – der intelligente Baukasten</h2>
+      <p>
+        Stell dir Flexbox wie einen <strong>intelligenten Baukasten</strong> vor:
+      </p>
+      <ul>
+        <li>Der <strong>Behälter</strong> (Flex-Container) sagt: „Ordnet euch an!“</li>
+        <li>Die <strong>Teile darin</strong> (Flex-Items) folgen den Anweisungen automatisch.</li>
+      </ul>
+      <p>
+        Du brauchst nur <strong>eine CSS-Eigenschaft</strong>, um das Ganze zu aktivieren:
+      </p>
+      <pre><code>/* Elternelement wird zum Flex-Container */
+.flex-container {
+  display: flex;
+}</code></pre>
+      <p>
+        Sobald du das tust, ändern sich die Regeln:
+      </p>
+      <ul>
+        <li>Alle direkten Kinder werden zu <strong>Flex-Items</strong></li>
+        <li>Sie werden standardmäßig <strong>horizontal in einer Zeile</strong> angeordnet</li>
+        <li>Block/Inline-Unterschiede <strong>gelten nicht mehr</strong></li>
+      </ul>
+    </section>
+
+    <!-- 3. Die zwei Achsen von Flexbox -->
+    <section>
+      <h2>↔️↕️ 3. Die zwei Achsen – Hauptstraße und Seitenstraße</h2>
+      <p>
+        Flexbox arbeitet mit <strong>zwei Achsen</strong>:
+      </p>
+      <ul>
+        <li><strong>Hauptachse (main axis)</strong>: Standardmäßig <em>horizontal</em> (links → rechts)</li>
+        <li><strong>Kreuzachse (cross axis)</strong>: Senkrecht dazu – also <em>vertikal</em> (oben → unten)</li>
+      </ul>
+      <p>
+        Mit diesen beiden Achsen steuerst du alles:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Eigenschaft</th>
+            <th>Wirkung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>justify-content</code></td>
+            <td>Verteilung <strong>entlang der Hauptachse</strong> (z. B. zentriert, verteilt)</td>
+          </tr>
+          <tr>
+            <td><code>align-items</code></td>
+            <td>Ausrichtung <strong>entlang der Kreuzachse</strong> (z. B. oben, mittig)</td>
+          </tr>
+          <tr>
+            <td><code>flex-direction</code></td>
+            <td>Ändert die Richtung der Hauptachse (z. B. <code>column</code> für vertikale Anordnung)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. Praxis: Einfache Flexbox-Demo -->
+    <section>
+      <h2>🧪 4. Praxis: Einfache Flexbox-Demo</h2>
+      <p>
+        Drei Karten teilen sich den Platz – automatisch und gleichmäßig:
+      </p>
+
+      <div class="flex-demo">
+        <div class="flex-container">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+        <p><em>Drei Elemente teilen sich den Platz – automatisch!</em></p>
+      </div>
+
+      <h3>So funktioniert der Code:</h3>
+      <pre><code>&lt;div class="flex-container"&gt;
+  &lt;div class="flex-item"&gt;1&lt;/div&gt;
+  &lt;div class="flex-item"&gt;2&lt;/div&gt;
+  &lt;div class="flex-item"&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <pre><code>.flex-container {
+  display: flex;      /* Aktiviert Flexbox */
+  gap: 12px;         /* Abstand zwischen Items */
+}
+
+.flex-item {
+  flex: 1;           /* Jedes Item bekommt gleichen Platz */
+  padding: 16px;
+  background: #3498db;
+  color: white;
+  text-align: center;
+}</code></pre>
+
+      <div class="regel">
+        💡 <strong>Der Schlüssel ist <code>flex: 1</code>:</strong><br>
+        Es sagt: „Teile den verfügbaren Platz gleichmäßig auf alle Items auf.“<br>
+        Ohne diese Regel würden die Items nur so breit sein wie ihr Inhalt.
+      </div>
+    </section>
+
+    <!-- 5. Mobile-First mit Flexbox -->
+    <section>
+      <h2>📱 5. Mobile-First mit Flexbox</h2>
+      <p>
+        Auf dem Handy sollen die Karten <strong>untereinander</strong> stehen, 
+        auf dem Desktop <strong>nebeneinander</strong>.
+      </p>
+      <p>
+        So geht’s – mit einer <strong>Media Query</strong>:
+      </p>
+      <pre><code>.flex-container {
+  display: flex;
+  flex-direction: column; /* Mobile: vertikal */
+  gap: 12px;
+}
+
+/* Ab 768px (Tablet): horizontal */
+@media (min-width: 768px) {
+  .flex-container {
+    flex-direction: row;
+  }
+}</code></pre>
+      <div class="warnung">
+        ⚠️ <strong>Voraussetzung:</strong> Vergiss nicht den Viewport-Meta-Tag in <code>&lt;head&gt;</code>:<br>
+        <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>
+      </div>
+    </section>
+
+    <!-- 6. div, class, id und Spezifität – kompakt -->
+    <section>
+      <h2>🧱 6. div, class, id – gezielt stylen</h2>
+      <p>
+        <strong><code>&lt;div&gt;</code></strong> ist dein universeller Container – 
+        nutze ihn, wenn kein semantisches Element passt.
+      </p>
+      <p>
+        <strong><code>class</code></strong> für wiederverwendbare Stile, 
+        <strong><code>id</code></strong> für eindeutige Bereiche (z. B. <code>#header</code>).
+      </p>
+      <p>
+        Und denke an die <strong>Spezifitäts-Hierarchie</strong>:
+      </p>
+      <ul>
+        <li>Element: <code>p</code> → schwach</li>
+        <li>Klasse: <code>.karte</code> → stärker</li>
+        <li>ID: <code>#header</code> → noch stärker</li>
+        <li>Inline-Style → am stärksten (vermeiden!)</li>
+      </ul>
+    </section>
+
+    <!-- 7. KI als Lernpartner -->
+    <section>
+      <h2>🧠 7. KI als Lernpartner – guter Prompt</h2>
+      <p>
+        ❌ Schlecht: „Mach mir ein responsives Layout.“  
+        ✅ Gut: „Kannst du mir ein Mobile-First-Flexbox-Layout zeigen, 
+        das auf Desktop drei Spalten und auf Mobil eine Spalte anzeigt? 
+        Erkläre dabei <code>flex-direction</code>, <code>justify-content</code> und <code>gap</code> – 
+        und warum <code>flex: 1</code> wichtig ist.“
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du moderne, flexible Layouts bauen – die auf jedem Gerät funktionieren!</p>
+      <a href="./12-tables-forms.html" class="nav-button">→ Zu Modul 12: Tabellen & Formulare</a>
+    </section>
+
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>HTML & CSS Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

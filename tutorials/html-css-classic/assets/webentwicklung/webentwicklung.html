@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI als Spiegel - Tutorial für Webentwicklung</title>
+    <style>
+        /* Externe CSS - Grundlagen für Schüler */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .highlight h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .example {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #3498db;
+        }
+
+        .example h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #2c3e50;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #3498db;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        /* Dropdown-Menü für Fortgeschrittene */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .dropdown-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            background: #2980b9;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>KI als Spiegel deines Denkens</h1>
+            <p class="subtitle">Ein Tutorial für Schüler der HTBLA und Fachschule Traun - Medientechnik</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Warum dieses Tutorial?</h2>
+                <p>Viele Schüler nutzen KI wie einen magischen Lösungsautomaten: Aufgabenstellung reinkopieren, fertige Lösung raus - ohne nachzudenken.</p>
+                <p>Doch KI ist kein Zauberstab, sondern ein <strong>Spiegel</strong> - sie reflektiert deine Denkfähigkeiten, deine Klarheit und deine Kreativität.</p>
+                
+                <div class="highlight">
+                    <h3>Die Wahrheit über KI</h3>
+                    <p>Je besser du denkst, desto besser antwortet die KI. Je klarer deine Fragen, desto präziser die Lösungen.</p>
+                </div>
+
+                <div class="quote">
+                    "KI verstärkt nicht deine Faulheit, sondern deine Intelligenz. Sie ist der Verstärker deines Denkens, nicht der Ersatz dafür."
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>KI richtig nutzen - Schritt für Schritt</h2>
+                <div class="steps">
+                    <div class="step">
+                        <strong>Verstehe die Aufgabe</strong><br>
+                        Lies die Aufgabenstellung sorgfältig. Was wird wirklich gefordert? Welche HTML-Elemente brauchst du? Welches CSS wird benötigt?
+                    </div>
+                    <div class="step">
+                        <strong>Plane deine Lösung</strong><br>
+                        Überlege dir die Struktur: Header, Navigation, Hauptinhalt, Footer. Welche Klassen brauchst du? Wie soll es aussehen?
+                    </div>
+                    <div class="step">
+                        <strong>Stelle kluge Fragen</strong><br>
+                        Statt "Mach mir eine Website", frage: "Wie erstelle ich ein responsives Navigation-Menü mit Dropdown-Funktion in HTML und CSS?"
+                    </div>
+                    <div class="step">
+                        <strong>Verstehe die Antwort</strong><br>
+                        Lies den KI-Code sorgfältig. Warum funktioniert das? Was macht jede Zeile? Kannst du es erklären?
+                    </div>
+                    <div class="step">
+                        <strong>Experimentiere und verbessere</strong><br>
+                        Ändere Farben, Größen, Layouts. Teste verschiedene Ansätze. Mach die Lösung zu deiner eigenen!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Praktisches Beispiel: Von copy-paste zu eigenem Verständnis</h2>
+            
+            <div class="example">
+                <h4>Schlechte Herangehensweise:</h4>
+                <p><code>"Erstelle mir eine Website für meine Schule mit Navigation"</code></p>
+                <p>→ Ergebnis: Generischer Code, den du nicht verstehst und nicht anpassen kannst.</p>
+            </div>
+
+            <div class="example">
+                <h4>Gute Herangehensweise:</h4>
+                <p><code>"Ich möchte ein horizontales Navigationsmenü in HTML erstellen. Bei Hover über 'Fächer' soll ein Dropdown-Menü mit den Links 'Mathematik', 'Deutsch', 'Medientechnik' erscheinen. Bitte erkläre jeden CSS-Selektor."</code></p>
+                <p>→ Ergebnis: Lernorientierter Code mit Erklärungen, den du verstehst und weiterentwickeln kannst.</p>
+            </div>
+
+            <h3>Dropdown-Menü zum Ausprobieren:</h3>
+            <div class="dropdown">
+                <button class="dropdown-btn">Fächer ▼</button>
+                <div class="dropdown-content">
+                    <a href="#">Mathematik</a>
+                    <a href="#">Deutsch</a>
+                    <a href="#">Medientechnik</a>
+                    <a href="#">Physik</a>
+                </div>
+            </div>
+            <p><em>Dieses Dropdown-Menü wurde mit reinem HTML und CSS erstellt - ohne JavaScript! Verstehe den Code und experimentiere damit.</em></p>
+        </div>
+
+        <footer>
+            <h2>Deine Challenge</h2>
+            <p>Erstelle eine eigene Website über ein Thema, das dich interessiert. Nutze KI als Sparringspartner, nicht als Lösungsautomat.</p>
+            <p><strong>Fragen, die du dir stellen solltest:</strong></p>
+            <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                <li>Was will ich mit dieser Website ausdrücken?</li>
+                <li>Welche HTML-Struktur brauche ich dafür?</li>
+                <li>Wie kann ich CSS kreativ einsetzen?</li>
+                <li>Verstehe ich jeden Teil meines Codes?</li>
+                <li>Wie kann ich meine Lösung verbessern?</li>
+            </ul>
+            <p style="margin-top: 20px; font-weight: bold; color: #2c3e50;">
+                Denke nach, bevor du fragst. Verstehe, bevor du kopierst. Gestalte, bevor du abschickst.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Einfaches JavaScript für interaktive Elemente (optional für Fortgeschrittene)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Füge Hover-Effekte oder Animationen hinzu, wenn gewünscht
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-5px)';
+                    card.style.transition = 'transform 0.3s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

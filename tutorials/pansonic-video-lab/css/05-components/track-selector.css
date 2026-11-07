@@ -1,0 +1,216 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — Track Selector
+   Cinematic track cards with animated glow effects
+   ============================================================ */
+
+.video-track-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--video-space-6);
+  margin-block: var(--video-space-12);
+}
+
+@media (max-width: 768px) {
+  .video-track-selector {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Track Card Base */
+.video-track-card {
+  position: relative;
+  background: var(--video-bg-card);
+  border: 1px solid var(--video-border-subtle);
+  border-radius: var(--video-radius-xl);
+  padding: var(--video-space-8);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--video-transition-slow) var(--video-ease-out);
+  overflow: hidden;
+}
+
+.video-track-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, transparent, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--video-transition-slow);
+  pointer-events: none;
+}
+
+.video-track-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--video-border-active);
+  box-shadow: var(--video-shadow-lg);
+}
+
+/* Track Card Icon */
+.video-track-card__icon {
+  width: 72px;
+  height: 72px;
+  margin-inline: auto;
+  margin-bottom: var(--video-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border-radius: var(--video-radius-lg);
+  background: var(--video-bg-surface);
+  border: 1px solid var(--video-border-subtle);
+  transition: all var(--video-transition-base);
+}
+
+/* Track Card Text */
+.video-track-card__title {
+  font-size: var(--video-text-xl);
+  font-weight: var(--video-font-weight-bold);
+  margin-bottom: var(--video-space-3);
+}
+
+.video-track-card__desc {
+  font-size: var(--video-text-sm);
+  color: var(--video-text-secondary);
+  line-height: var(--video-line-height-normal);
+  margin-bottom: var(--video-space-6);
+}
+
+/* Track Card Button */
+.video-track-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--video-space-2);
+  padding: var(--video-space-3) var(--video-space-6);
+  border-radius: var(--video-radius-full);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  border: 1px solid var(--video-border-subtle);
+  background: var(--video-bg-surface);
+  color: var(--video-text-primary);
+  transition: all var(--video-transition-base);
+}
+
+.video-track-card:hover .video-track-card__btn {
+  background: var(--video-accent-coral);
+  color: var(--video-text-inverse);
+  border-color: var(--video-accent-coral);
+}
+
+/* ============================================================
+   TRACK VARIANTS — Color Accents
+   ============================================================ */
+
+/* Indoor — Coral */
+.video-track-card--indoor .video-track-card__icon {
+  color: var(--video-accent-coral);
+  background: var(--video-accent-coral-dim);
+  border-color: var(--video-border-coral);
+}
+
+.video-track-card--indoor:hover::before {
+  background: linear-gradient(135deg, var(--video-accent-coral), transparent 60%);
+  opacity: 1;
+}
+
+/* Outdoor — Teal */
+.video-track-card--outdoor .video-track-card__icon {
+  color: var(--video-accent-teal);
+  background: var(--video-accent-teal-dim);
+  border-color: var(--video-border-teal);
+}
+
+.video-track-card--outdoor:hover::before {
+  background: linear-gradient(135deg, var(--video-accent-teal), transparent 60%);
+  opacity: 1;
+}
+
+/* Hybrid — Violet */
+.video-track-card--hybrid .video-track-card__icon {
+  color: var(--video-accent-violet);
+  background: var(--video-accent-violet-dim);
+  border-color: rgba(162, 155, 254, 0.3);
+}
+
+.video-track-card--hybrid:hover::before {
+  background: linear-gradient(135deg, var(--video-accent-violet), transparent 60%);
+  opacity: 1;
+}
+
+/* ============================================================
+   ACTIVE STATE
+   ============================================================ */
+
+.video-track-card.is-active {
+  border-width: 2px;
+  transform: translateY(-4px);
+}
+
+.video-track-card--indoor.is-active {
+  border-color: var(--video-accent-coral);
+  box-shadow: 0 0 40px var(--video-accent-coral-glow), var(--video-shadow-lg);
+}
+
+.video-track-card--outdoor.is-active {
+  border-color: var(--video-accent-teal);
+  box-shadow: 0 0 40px var(--video-accent-teal-glow), var(--video-shadow-lg);
+}
+
+.video-track-card--hybrid.is-active {
+  border-color: var(--video-accent-violet);
+  box-shadow: 0 0 40px rgba(162, 155, 254, 0.3), var(--video-shadow-lg);
+}
+
+.video-track-card.is-active .video-track-card__btn {
+  background: transparent;
+  border-style: dashed;
+  pointer-events: none;
+}
+
+.video-track-card--indoor.is-active .video-track-card__btn {
+  color: var(--video-accent-coral);
+  border-color: var(--video-accent-coral);
+}
+
+.video-track-card--outdoor.is-active .video-track-card__btn {
+  color: var(--video-accent-teal);
+  border-color: var(--video-accent-teal);
+}
+
+.video-track-card--hybrid.is-active .video-track-card__btn {
+  color: var(--video-accent-violet);
+  border-color: var(--video-accent-violet);
+}
+
+/* Active pulse animation */
+@keyframes video-track-pulse {
+  0%, 100% { box-shadow: 0 0 40px var(--video-accent-coral-glow), var(--video-shadow-lg); }
+  50% { box-shadow: 0 0 60px var(--video-accent-coral-glow), var(--video-shadow-lg); }
+}
+
+.video-track-card--indoor.is-active {
+  animation: video-track-pulse 3s ease-in-out infinite;
+}
+
+@keyframes video-track-pulse-teal {
+  0%, 100% { box-shadow: 0 0 40px var(--video-accent-teal-glow), var(--video-shadow-lg); }
+  50% { box-shadow: 0 0 60px var(--video-accent-teal-glow), var(--video-shadow-lg); }
+}
+
+.video-track-card--outdoor.is-active {
+  animation: video-track-pulse-teal 3s ease-in-out infinite;
+}
+
+@keyframes video-track-pulse-violet {
+  0%, 100% { box-shadow: 0 0 40px rgba(162, 155, 254, 0.3), var(--video-shadow-lg); }
+  50% { box-shadow: 0 0 60px rgba(162, 155, 254, 0.3), var(--video-shadow-lg); }
+}
+
+.video-track-card--hybrid.is-active {
+  animation: video-track-pulse-violet 3s ease-in-out infinite;
+}

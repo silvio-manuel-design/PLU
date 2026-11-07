@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Suno AI - AI Music Generation for Everyone. From text to finished song in seconds. Tutorials, prompting guide and workflow.">
+  <meta name="theme-color" content="#ff5a5a">
+  <meta name="robots" content="index, follow">
+  <title>Suno AI | AI Music Generation</title>
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    /* Tool Page Specific Styles */
+    .tool-hero {
+      padding: 100px 24px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .tool-hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .tool-hero .subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    
+    .tool-hero .lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    
+    .content-section {
+      padding: 60px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .content-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .content-section h2::before {
+      content: '';
+      width: 4px;
+      height: 28px;
+      background: linear-gradient(180deg, var(--accent-coral), var(--accent-teal));
+      border-radius: 2px;
+    }
+    
+    .content-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 32px 0 16px;
+      color: var(--accent-coral);
+    }
+    
+    .content-section p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    
+    .content-section ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+    
+    .content-section li {
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+    
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      border-color: var(--accent-coral);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-coral-dim);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .feature-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .feature-card p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    /* Prompt Examples */
+    .prompt-example {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-teal);
+      padding: 16px 20px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+    
+    .prompt-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .prompt-text {
+      color: var(--text-primary);
+      font-style: italic;
+    }
+    
+    /* Pricing Table */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+    
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .pricing-card.pro {
+      border-color: var(--accent-coral);
+      position: relative;
+    }
+    
+    .pricing-card.pro::before {
+      content: 'Recommended';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-coral);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    
+    .pricing-tier {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .pricing-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-coral);
+      margin-bottom: 16px;
+    }
+    
+    .pricing-price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    
+    .pricing-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .pricing-features li::before {
+      content: '?';
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+    
+    /* Alternatives Grid */
+    .alt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .alt-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    
+    .alt-card:hover {
+      border-color: var(--accent-teal);
+    }
+    
+    .alt-name {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .alt-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    /* Workflow Steps */
+    .workflow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 24px 0;
+    }
+    
+    .workflow-step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-coral);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .step-content h4 {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .step-content p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    
+    /* Info Boxes */
+    .info-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    
+    .info-box.warning {
+      border-left: 4px solid var(--accent-coral);
+    }
+    
+    .info-box.tip {
+      border-left: 4px solid var(--accent-teal);
+    }
+    
+    .info-box h4 {
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 16px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .breadcrumb a {
+      color: var(--text-secondary);
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--accent-coral);
+    }
+    
+    .breadcrumb-separator {
+      margin: 0 8px;
+    }
+    
+    /* CTA Button */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-coral);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-top: 16px;
+    }
+    
+    .cta-button:hover {
+      background: var(--accent-coral-light);
+      transform: translateY(-2px);
+    }
+    
+    /* Tags System */
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    
+    .tag {
+      background: var(--bg-tertiary);
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Suno Studio Section */
+    .studio-section {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 100%);
+      border: 2px solid rgba(139, 92, 246, 0.2);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 48px auto;
+      max-width: 1000px;
+      position: relative;
+    }
+    
+    .studio-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .studio-version {
+      font-size: 0.6em;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: 100px;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    
+    .studio-lead {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+    
+    .studio-screenshot {
+      margin: 24px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .studio-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .screenshot-caption {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 12px;
+      background: var(--bg-tertiary);
+      margin: 0;
+    }
+    
+    .studio-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+    
+    .studio-feature {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .studio-feature:hover {
+      transform: translateY(-4px);
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+    }
+    
+    .studio-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    
+    .studio-feature h4 {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .studio-feature p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    
+    .studio-cta {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      margin-top: 24px;
+    }
+    
+    .studio-cta:hover {
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+    }
+    
+    .tag.style {
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+    }
+    
+    .tag.mood {
+      background: var(--accent-teal-dim);
+      color: var(--accent-teal);
+    }
+    
+    /* Schema Section */
+    .schema-section {
+      padding: 60px 24px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .schema-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .schema-lead {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .schema-container {
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+    
+    .schema-svg {
+      width: 100%;
+      min-width: 700px;
+      height: auto;
+      display: block;
+    }
+    
+    .schema-legend {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .legend-number {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-teal));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .legend-text strong {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    
+    .legend-text p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    
+    /* Progress Bar */
+    .chapter-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+      z-index: 1001;
+    }
+
+    .chapter-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-coral), var(--accent-teal));
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index-en.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index-en.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link active">Tools</a>
+          <div class="dropdown-menu">
+            <a href="audacity-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+              <span class="dropdown-item-desc">Open Source Foundation</span>
+            </a>
+            <a href="suno-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+              <span class="dropdown-item-desc">AI Music Generation</span>
+            </a>
+            <a href="elevenlabs-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Voice AI</span>
+              <span class="dropdown-item-desc">Voice Cloning</span>
+            </a>
+            <a href="daw-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+              <span class="dropdown-item-desc">Pro Software</span>
+            </a>
+          </div>
+        </div>
+        <a href="../library.html" class="nav-link">Audio Library</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch" aria-label="Select language">
+        <a href="suno.html" class="lang-btn">DE</a>
+        <a href="suno-en.html" class="lang-btn active" aria-current="page">EN</a>
+      </nav>
+      <a href="../../pages/spenden.html" class="btn-support">Support</a>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Dark/Light" aria-label="Toggle theme">🌓</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <a href="suno.html" class="fab-btn" data-tooltip="Deutsch" aria-label="Switch to German">DE</a>
+    <button class="fab-btn" id="backToTop" data-tooltip="Back to top">?</button>
+  </div>
+
+  <!-- Main -->
+  <main class="main">
+    
+    <!-- Hero -->
+    <section class="tool-hero">
+      <div class="tool-badge">
+        <span>🎵</span> AI Music Generation
+      </div>
+      <h1>Suno AI</h1>
+      <p class="subtitle">AI Music Generation for Everyone</p>
+      <p class="lead">From text to finished song in seconds. No prior knowledge required � simply describe what you want to hear, and Suno creates the track.</p>
+      <a href="https://suno.ai" target="_blank" rel="noopener" class="cta-button">🚀 Go to Suno AI →</a>
+    </section>
+    
+    <!-- Interface Schema Section -->
+    <section class="schema-section" id="interface">
+      <div class="schema-content">
+        <h2 class="section-title">The Suno Interface</h2>
+        <p class="schema-lead">
+          Generate music with AI this easily � the 4 steps at a glance
+        </p>
+        
+        <div class="schema-container">
+          <svg viewBox="0 0 900 400" class="schema-svg" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background -->
+            <rect x="0" y="0" width="900" height="400" fill="#1a1a1a" rx="8"/>
+            
+            <!-- Header -->
+            <rect x="0" y="0" width="900" height="50" fill="#2a2a2a" rx="8"/>
+            <text x="450" y="32" fill="#fff" font-size="16" text-anchor="middle" font-family="Inter, sans-serif" font-weight="bold">?— Suno AI Interface</text>
+            
+            <!-- Step 1: Input Area -->
+            <rect x="20" y="70" width="400" height="120" fill="#252525" rx="8" stroke="#ff5a5a" stroke-width="2"/>
+            <text x="40" y="65" fill="#ff5a5a" font-size="11" font-family="Inter, sans-serif" font-weight="bold">1. Prompt Input</text>
+            <rect x="35" y="85" width="370" height="60" fill="#1a1a1a" rx="4"/>
+            <text x="50" y="110" fill="#888" font-size="10" font-family="Inter, sans-serif">Describe your song...</text>
+            <text x="50" y="130" fill="#666" font-size="9" font-family="Inter, sans-serif">e.g. "Upbeat pop song about summer"</text>
+            <rect x="35" y="155" width="80" height="25" fill="#ff5a5a" rx="4"/>
+            <text x="75" y="172" fill="#fff" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">Generate</text>
+            
+            <!-- Step 2: Style Selection -->
+            <rect x="450" y="70" width="200" height="120" fill="#252525" rx="8" stroke="#00d4aa" stroke-width="2"/>
+            <text x="470" y="65" fill="#00d4aa" font-size="11" font-family="Inter, sans-serif" font-weight="bold">2. Style Selection</text>
+            <rect x="465" y="85" width="170" height="25" fill="#1a1a1a" rx="4"/>
+            <text x="475" y="102" fill="#fff" font-size="10" font-family="Inter, sans-serif">🎸 Rock</text>
+            <rect x="465" y="115" width="170" height="25" fill="#1a1a1a" rx="4"/>
+            <text x="475" y="132" fill="#fff" font-size="10" font-family="Inter, sans-serif">🎤 Pop</text>
+            <rect x="465" y="145" width="170" height="25" fill="#00d4aa" rx="4"/>
+            <text x="475" y="162" fill="#000" font-size="10" font-family="Inter, sans-serif">? Electronic</text>
+            
+            <!-- Step 3: Generated Tracks -->
+            <rect x="680" y="70" width="200" height="120" fill="#252525" rx="8" stroke="#00d4aa" stroke-width="2"/>
+            <text x="700" y="65" fill="#00d4aa" font-size="11" font-family="Inter, sans-serif" font-weight="bold">3. Results</text>
+            <rect x="695" y="85" width="170" height="35" fill="#1a1a1a" rx="4"/>
+            <circle cx="715" cy="102" r="10" fill="#00d4aa"/>
+            <text x="712" y="106" fill="#000" font-size="8">?</text>
+            <text x="735" y="106" fill="#fff" font-size="10" font-family="Inter, sans-serif">Version A</text>
+            <rect x="695" y="125" width="170" height="35" fill="#1a1a1a" rx="4"/>
+            <circle cx="715" cy="142" r="10" fill="#00d4aa"/>
+            <text x="712" y="146" fill="#000" font-size="8">?</text>
+            <text x="735" y="146" fill="#fff" font-size="10" font-family="Inter, sans-serif">Version B</text>
+            
+            <!-- Arrow -->
+            <path d="M 430 130 L 440 130 L 435 125 M 440 130 L 435 135" stroke="#888" stroke-width="2" fill="none"/>
+            <path d="M 660 130 L 670 130 L 665 125 M 670 130 L 665 135" stroke="#888" stroke-width="2" fill="none"/>
+            
+            <!-- Step 4: Player/Export -->
+            <rect x="20" y="220" width="860" height="150" fill="#252525" rx="8" stroke="#ff5a5a" stroke-width="2"/>
+            <text x="40" y="215" fill="#ff5a5a" font-size="11" font-family="Inter, sans-serif" font-weight="bold">4. Player & Download</text>
+            
+            <!-- Player Controls -->
+            <circle cx="60" cy="290" r="20" fill="#00d4aa"/>
+            <text x="55" y="296" fill="#000" font-size="12">?</text>
+            <rect x="90" y="282" width="30" height="16" fill="#444" rx="2"/>
+            <text x="95" y="294" fill="#fff" font-size="8">?</text>
+            <rect x="130" y="282" width="30" height="16" fill="#444" rx="2"/>
+            <text x="135" y="294" fill="#fff" font-size="8">?</text>
+            
+            <!-- Progress Bar -->
+            <rect x="180" y="285" width="400" height="10" fill="#1a1a1a" rx="5"/>
+            <rect x="180" y="285" width="150" height="10" fill="#00d4aa" rx="5"/>
+            <text x="590" y="294" fill="#888" font-size="10" font-family="Inter, sans-serif">0:45 / 2:30</text>
+            
+            <!-- Download Button -->
+            <rect x="700" y="275" width="150" height="30" fill="#ff5a5a" rx="4"/>
+            <text x="775" y="295" fill="#fff" font-size="11" text-anchor="middle" font-family="Inter, sans-serif" font-weight="bold">? Download</text>
+            
+            <!-- Waveform -->
+            <path d="M 50 340 Q 100 320, 150 340 T 250 340 T 350 340 T 450 340 T 550 340 T 650 340 T 750 340 T 850 340" 
+                  fill="none" stroke="#00d4aa" stroke-width="2"/>
+          </svg>
+        </div>
+        
+        <div class="schema-legend">
+          <div class="legend-grid">
+            <div class="legend-item">
+              <span class="legend-number">1</span>
+              <div class="legend-text">
+                <strong>Prompt Input</strong>
+                <p>Describe in words what music you want</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">2</span>
+              <div class="legend-text">
+                <strong>Style Selection</strong>
+                <p>Choose genre: Rock, Pop, Electronic, Jazz...</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">3</span>
+              <div class="legend-text">
+                <strong>Results</strong>
+                <p>Suno creates 2 versions � pick the best one</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">4</span>
+              <div class="legend-text">
+                <strong>Download</strong>
+                <p>Save as MP3 or share directly</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suno Studio Section -->
+    <section class="content-section studio-section">
+      <div class="studio-badge">✨ NEW</div>
+      <h2>Suno Studio <span class="studio-version">v1.2</span></h2>
+      <p class="studio-lead">
+        The first web-based AI audio workstation � professional DAW features meet AI generation.
+      </p>
+      
+      <div class="studio-screenshot">
+        <img src="../assets/screenshots/suno_1.png" alt="Suno Studio Interface v1.2" loading="lazy">
+        <p class="screenshot-caption">Suno Studio Interface � Multitrack editor with AI-powered editing features</p>
+      </div>
+      
+      <div class="studio-features">
+        <div class="studio-feature">
+          <div class="studio-feature-icon">🎼</div>
+          <h4>Multitrack Editor</h4>
+          <p>Edit songs like in a professional DAW � cut, arrange and optimize your tracks.</p>
+        </div>
+        <div class="studio-feature">
+          <div class="studio-feature-icon">🎼</div>
+          <h4>Stem Separation</h4>
+          <p>Extract up to 12 individual tracks (vocals, drums, bass, melody) as WAV files.</p>
+        </div>
+        <div class="studio-feature">
+          <div class="studio-feature-icon">🎹</div>
+          <h4>MIDI Export</h4>
+          <p>Convert generated melodies to MIDI for further processing in Ableton, Logic or FL Studio.</p>
+        </div>
+        <div class="studio-feature">
+          <div class="studio-feature-icon">🎹</div>
+          <h4>Add Vocals</h4>
+          <p>Add vocals to existing instrumental tracks � perfect for karaoke or remixes.</p>
+        </div>
+        <div class="studio-feature">
+          <div class="studio-feature-icon">🎹</div>
+          <h4>Add Instrumentals</h4>
+          <p>Upload your vocal recordings and generate matching instrumentation via AI.</p>
+        </div>
+        <div class="studio-feature">
+          <div class="studio-feature-icon">🎹</div>
+          <h4>Inspire</h4>
+          <p>Get song suggestions based on your playlists and music taste.</p>
+        </div>
+      </div>
+      
+      <div class="info-box tip">
+        <h4>🤔 Who is Suno Studio for?</h4>
+        <p>Suno Studio is aimed at <strong>professional musicians</strong>, <strong>producers</strong> and <strong>content creators</strong> who want maximum control over their AI-generated music. It requires a <strong>Premier Plan</strong> (from $30/month).</p>
+      </div>
+      
+      <a href="https://suno.com/studio-welcome" target="_blank" rel="noopener" class="cta-button studio-cta">
+        🔗 Explore Suno Studio →
+      </a>
+    </section>
+    
+
+    <!-- About Suno -->
+    <section class="content-section">
+      <h2>About Suno AI</h2>
+      
+      <h3>What is Suno?</h3>
+      <p>Suno AI is an AI-powered music generation tool that creates complete songs from text descriptions. You enter a prompt � style, mood, instruments � and Suno generates a full track with vocals, instruments, and arrangement within seconds.</p>
+      
+      <h3>How does it work?</h3>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Enter Prompt</h4>
+            <p>Describe the desired song: genre, mood, instruments, tempo</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>AI Generates</h4>
+            <p>Suno analyzes your prompt and creates two song variations</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Listen & Adjust</h4>
+            <p>Select the best version, extend the song, or regenerate</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Download</h4>
+            <p>Download the finished song as MP3 or WAV</p>
+          </div>
+        </div>
+      </div>
+      
+      <h3>Pricing Model</h3>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-tier">Free</div>
+          <div class="pricing-price">$0 <span>/ month</span></div>
+          <ul class="pricing-features">
+            <li>50 credits per day</li>
+            <li>~10 songs daily</li>
+            <li>Non-commercial use</li>
+            <li>Shared queue</li>
+            <li>MP3 download</li>
+          </ul>
+        </div>
+        <div class="pricing-card pro">
+          <div class="pricing-tier">Pro</div>
+          <div class="pricing-price">$10 <span>/ month</span></div>
+          <ul class="pricing-features">
+            <li>2,500 credits per month</li>
+            <li>~500 songs monthly</li>
+            <li>Commercial use</li>
+            <li>Priority queue</li>
+            <li>WAV & MP3 download</li>
+            <li>Song extension</li>
+          </ul>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-tier">Premier</div>
+          <div class="pricing-price">$30 <span>/ month</span></div>
+          <ul class="pricing-features">
+            <li>10,000 credits per month</li>
+            <li>~2,000 songs monthly</li>
+            <li>Full commercial rights</li>
+            <li>Highest priority</li>
+            <li>All download formats</li>
+            <li>API access</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="info-box tip">
+        <h4>💡 Tip for Beginners</h4>
+        <p>Start with the free version to try out Suno. With 50 credits daily, you can create about 10 songs � perfect for learning and experimenting.</p>
+      </div>
+      
+      <h3>Sign Up & Registration</h3>
+      <p>Signing up for Suno is simple:</p>
+      <ul>
+        <li>Visit <a href="https://suno.ai" target="_blank" rel="noopener">suno.ai</a></li>
+        <li>Click "Sign Up" or sign in with Google/Microsoft/Discord</li>
+        <li>Confirm your email address</li>
+        <li>Start immediately with daily free credits</li>
+      </ul>
+    </section>
+    
+    <!-- Features -->
+    <section class="content-section" style="background: var(--bg-secondary);">
+      <h2>Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h4>Text-to-Music</h4>
+          <p>Simply enter a description � Suno transforms text into complete songs with vocals and instruments.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h4>Various Genres</h4>
+          <p>From pop to rock to jazz, classical, EDM, hip-hop and more. Over 100 styles supported.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h4>Custom Mode</h4>
+          <p>Full control over lyrics, style, and title. Write your own lyrics or let the AI create everything.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h4>Instrumental Option</h4>
+          <p>Create songs without vocals � perfect for background music, podcast intros, or soundtracks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">?</div>
+          <h4>Song Extension</h4>
+          <p>Extend your tracks from 2 minutes to 4 minutes or more � seamlessly and harmoniously.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h4>Download Options</h4>
+          <p>Export as MP3 (Free) or WAV in studio quality (Pro/Premier) for professional processing.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Prompting Guide -->
+    <section class="content-section">
+      <h2>Prompting Guide</h2>
+      
+      <h3>How to Write Good Prompts</h3>
+      <p>A good Suno prompt is precise and structured. The more accurately you describe what you want, the better the result.</p>
+      
+      <div class="info-box">
+        <h4>🎯 The Prompt Structure</h4>
+        <p>The ideal structure for Suno prompts:</p>
+        <p><strong>[Style]</strong> � Genre, subgenre, musical direction<br>
+        <strong>[Mood]</strong> � Emotion, atmosphere, energy level<br>
+        <strong>[Instruments]</strong> � Main instruments, special features<br>
+        <strong>[Tempo/BPM]</strong> � Speed (optional)</p>
+      </div>
+      
+      <h3>Example Prompts</h3>
+      
+      <div class="prompt-example">
+        <span class="prompt-label">Electronic Dance Music</span>
+        <p class="prompt-text">"Upbeat electronic dance music, energetic, synthesizer, 128 BPM"</p>
+      </div>
+      
+      <div class="prompt-example">
+        <span class="prompt-label">Lo-Fi Hip Hop</span>
+        <p class="prompt-text">"Lo-fi hip hop, relaxing, piano and rain sounds, study beats, chill atmosphere"</p>
+      </div>
+      
+      <div class="prompt-example">
+        <span class="prompt-label">Epic Orchestral</span>
+        <p class="prompt-text">"Epic orchestral trailer music, dramatic, strings and brass, cinematic, powerful"</p>
+      </div>
+      
+      <div class="prompt-example">
+        <span class="prompt-label">Acoustic Pop</span>
+        <p class="prompt-text">"Acoustic pop ballad, emotional, acoustic guitar and piano, heartfelt vocals, mid-tempo"</p>
+      </div>
+      
+      <h3>The Tags System</h3>
+      <p>Suno understands certain tags particularly well. Use these tags for more precise results:</p>
+      
+      <div class="tags-list">
+        <span class="tag style">pop</span>
+        <span class="tag style">rock</span>
+        <span class="tag style">electronic</span>
+        <span class="tag style">hip-hop</span>
+        <span class="tag style">jazz</span>
+        <span class="tag style">classical</span>
+        <span class="tag style">indie</span>
+        <span class="tag mood">upbeat</span>
+        <span class="tag mood">melancholic</span>
+        <span class="tag mood">energetic</span>
+        <span class="tag mood">relaxing</span>
+        <span class="tag mood">dramatic</span>
+        <span class="tag mood">dreamy</span>
+      </div>
+      
+      <div class="info-box warning">
+        <h4>❌ To Avoid</h4>
+        <ul>
+          <li>Too vague descriptions like "good music"</li>
+          <li>Contradictory styles ("aggressive jazz ballad")</li>
+          <li>Copying artist names (copyright!)</li>
+          <li>Prompts over 200 characters</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- Workflow Tutorials -->
+    <section class="content-section" style="background: var(--bg-secondary);">
+      <h2>Workflow Tutorials</h2>
+      
+      <h3>Create Your First Song</h3>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Choose Simple Mode</h4>
+            <p>Simple Mode is perfect for getting started. Enter your prompt in the text field.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Activate Instrumental (optional)</h4>
+            <p>Check "Instrumental" if you don't want vocals.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Click Create</h4>
+            <p>Click the Create button. Suno generates two variations � about 30-60 seconds wait time.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Select & Save</h4>
+            <p>Listen to both versions. Click the heart to save a song.</p>
+          </div>
+        </div>
+      </div>
+      
+      <h3>Extend a Song</h3>
+      <p>Extension only works with Pro subscription:</p>
+      <ol>
+        <li>Click on the song you want to extend</li>
+        <li>Select "Extend" from the menu</li>
+        <li>Describe how the song should continue (or use the same prompt)</li>
+        <li>Suno seamlessly adds more sections</li>
+      </ol>
+      
+      <h3>Make a Complete Song from MP3</h3>
+      <p>Have a short clip you want to extend?</p>
+      <ol>
+        <li>Upload your MP3 to Suno</li>
+        <li>Describe the desired style for the extension</li>
+        <li>Suno analyzes the clip and generates matching continuations</li>
+        <li>Select the best variation and combine it with the original</li>
+      </ol>
+      
+      <div class="info-box tip">
+        <h4>? Best Practices</h4>
+        <ul>
+          <li>Always start with reference songs from Suno to understand the style</li>
+          <li>Save good prompts as templates for later</li>
+          <li>Experiment with Custom Mode for your own lyrics</li>
+          <li>Use the community gallery for inspiration</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- AI Ethics & Rights -->
+    <section class="content-section">
+      <h2>AI Ethics & Rights</h2>
+      
+      <h3>Copyright with AI Music</h3>
+      <p>The legal situation with AI-generated music is complex and constantly evolving:</p>
+      <ul>
+        <li><strong>Free version:</strong> Songs are intended for personal use</li>
+        <li><strong>Pro/Premier:</strong> Commercial use is allowed (check current T&Cs)</li>
+        <li>You own the rights to your prompts, not necessarily to the AI output</li>
+        <li>Different regulations apply in different countries</li>
+      </ul>
+      
+      <h3>Commercial Use</h3>
+      <p>With a Pro or Premier subscription, you may use Suno songs commercially:</p>
+      <ul>
+        <li>Monetize YouTube videos</li>
+        <li>Use podcast music</li>
+        <li>Use in your own projects</li>
+        <li>Publish on streaming platforms (with restrictions)</li>
+      </ul>
+      
+      <div class="info-box warning">
+        <h4>⚠️ Important</h4>
+        <p>Read the current <a href="https://suno.ai/terms" target="_blank" rel="noopener">Terms of Service from Suno</a> carefully. Rights can change. For commercial projects, legal advice is recommended.</p>
+      </div>
+      
+      <h3>Responsible Use</h3>
+      <ul>
+        <li>Respect the work of human musicians</li>
+        <li>Be transparent about AI-generated content</li>
+        <li>Use Suno as a tool, not a replacement for creativity</li>
+        <li>Don't clone real artists or their voices</li>
+        <li>Watch for sensitive content in lyrics</li>
+      </ul>
+    </section>
+    
+    <!-- Alternatives -->
+    <section class="content-section" style="background: var(--bg-secondary);">
+      <h2>Suno Alternatives</h2>
+      <p>Suno isn't the only AI music tool. Here are alternatives for different use cases:</p>
+      
+      <div class="alt-grid">
+        <div class="alt-card">
+          <div class="alt-name">🎵 Udio</div>
+          <div class="alt-desc">Strong alternative focusing on realistic vocals and professional sound quality</div>
+        </div>
+        <div class="alt-card">
+          <div class="alt-name">🎼 AIVA</div>
+          <div class="alt-desc">Specialized in classical and orchestral music, commercial license included</div>
+        </div>
+        <div class="alt-card">
+          <div class="alt-name">🎹 Soundraw</div>
+          <div class="alt-desc">Royalty-free music for content creators, simple licensing</div>
+        </div>
+        <div class="alt-card">
+          <div class="alt-name">💥 Boomy</div>
+          <div class="alt-desc">Quick beat creation for hip-hop and electronic, direct upload to Spotify</div>
+        </div>
+      </div>
+      
+      <div class="info-box">
+        <h4>🤔 Which Tool is Right for You?</h4>
+        <p><strong>Suno:</strong> Best all-around solution for complete songs<br>
+        <strong>Udio:</strong> Highest vocal quality<br>
+        <strong>AIVA:</strong> Classical/film music<br>
+        <strong>Soundraw:</strong> Content creation & YouTube<br>
+        <strong>Boomy:</strong> Quick beats for beginners</p>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="../../index-en.html">PLU Hub</a>
+      <a href="../index-en.html">Pansonic Lab</a>
+      <a href="../../pages/spenden.html">Support</a>
+      <a href="../../pages/impressum.html">Imprint</a>
+      <a href="../../pages/privacy.html">Privacy</a>
+    </nav>
+    <p class="footer-copy">� PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+        // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          const isTools = window.location.href.includes('/tools/');
+          const isBib = window.location.href.includes('bibliothek') || window.location.href.includes('library');
+          
+          // Build appropriate paths
+          const indexPath = isGerman ? '../index.html' : '../index-en.html';
+          const bibPath = isGerman ? 'bibliothek.html' : 'library.html';
+          const playerPath = isBib ? 'player.html' : '../player.html';
+          const toolsPrefix = isTools ? '' : '../tools/';
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${indexPath}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${toolsPrefix}${isGerman ? 'audacity.html' : 'audacity-en.html'}">Audacity</a>
+              <a href="${toolsPrefix}${isGerman ? 'suno.html' : 'suno-en.html'}">Suno AI</a>
+              <a href="${toolsPrefix}${isGerman ? 'elevenlabs.html' : 'elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${toolsPrefix}${isGerman ? 'daw.html' : 'daw-en.html'}">DAW Guide</a>
+              <a href="${isTools ? '../' : ''}${bibPath}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('plu-theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+      html.setAttribute('data-theme', 'light');
+      themeToggle.textContent = '🌙';
+    } else {
+      themeToggle.textContent = '🌙';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      const isLight = html.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('plu-theme', 'dark');
+        themeToggle.textContent = '🌙';
+      } else {
+        html.setAttribute('data-theme', 'light');
+        localStorage.setItem('plu-theme', 'light');
+        themeToggle.textContent = '🌙';
+      }
+    });
+    
+    // Classroom Mode Toggle
+    const classroomToggle = document.getElementById('classroomToggle');
+    
+    // Load saved classroom state
+    const savedClassroom = localStorage.getItem('plu-classroom');
+    if (savedClassroom === 'true') {
+      html.setAttribute('data-classroom', 'true');
+      classroomToggle.classList.add('active');
+    }
+    
+    classroomToggle.addEventListener('click', () => {
+      const isClassroom = html.getAttribute('data-classroom') === 'true';
+      if (isClassroom) {
+        html.removeAttribute('data-classroom');
+        localStorage.setItem('plu-classroom', 'false');
+        classroomToggle.classList.remove('active');
+      } else {
+        if (window.innerWidth > 900) {
+          html.setAttribute('data-classroom', 'true');
+          localStorage.setItem('plu-classroom', 'true');
+          classroomToggle.classList.add('active');
+        } else {
+          alert('Classroom Mode is only available on desktop.');
+        }
+      }
+    });
+    
+    // Back to Top
+    const backToTop = document.getElementById('backToTop');
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+    backToTop.style.transform = 'translateY(20px)';
+    backToTop.style.transition = 'all 0.3s ease';
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+        backToTop.style.transform = 'translateY(0)';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+        backToTop.style.transform = 'translateY(20px)';
+      }
+    });
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Progress Bar
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) {
+        progressBar.style.width = progress + '%';
+      }
+    });
+  });
+  </script>
+</body>
+</html>
+

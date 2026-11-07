@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>09 – Listen & Selektoren | HTML & CSS Tutorial</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../assets/logo.svg" alt="HTML/CSS Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link">🏠</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 Module ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+                <li><a href="../kapitel/01-html-elements.html">01. HTML-Elemente</a></li>
+                <li><a href="../kapitel/02-page-structure.html">02. Seitenstruktur</a></li>
+                <li><a href="../kapitel/03-css-basics.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../kapitel/04-colors-and-inheritance.html">04. Farben & Vererbung</a></li>
+                <li><a href="../kapitel/05-box-model.html">05. Box-Modell</a></li>
+                <li><a href="../kapitel/06-folder-structure.html">06. Ordner & Pfade</a></li>
+                <li><a href="../kapitel/07-links.html">07. Links & Navigation</a></li>
+                <li><a href="../kapitel/08-media.html">08. Medien</a></li>
+                <li><a href="../kapitel/09-lists-selectors.html">09. Listen & Selektoren</a></li>
+                <li><a href="../kapitel/10-block-inline.html">10. Block vs. Inline</a></li>
+                <li><a href="../kapitel/11-layout-responsive.html">11. Layout & Responsive</a></li>
+                <li><a href="../kapitel/12-tables-forms.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">✏️ Übungen ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+                <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+                <li><a href="../uebungen/01-html-elements-aufgaben.html">01. HTML-Elemente</a></li>
+                <li><a href="../uebungen/02-page-structure-aufgaben.html">02. Seitenstruktur</a></li>
+                <li><a href="../uebungen/03-css-basics-aufgaben.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../uebungen/04-colors-and-inheritance-aufgaben.html">04. Farben & Vererbung</a></li>
+                <li><a href="../uebungen/05-box-model-aufgaben.html">05. Box-Modell</a></li>
+                <li><a href="../uebungen/06-folder-structure-aufgaben.html">06. Ordner & Pfade</a></li>
+                <li><a href="../uebungen/07-links-aufgaben.html">07. Links & Navigation</a></li>
+                <li><a href="../uebungen/08-media-aufgaben.html">08. Medien</a></li>
+                <li><a href="../uebungen/09-lists-selectors-aufgaben.html">09. Listen & Selektoren</a></li>
+                <li><a href="../uebungen/10-block-inline-aufgaben.html">10. Block vs. Inline</a></li>
+                <li><a href="../uebungen/11-layout-responsive-aufgaben.html">11. Layout & Responsive</a></li>
+                <li><a href="../uebungen/12-tables-forms-aufgaben.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li><a href="../tools/ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+            <li><a href="../tools/vscode.html" class="nav-link">💻 VS Code</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../abschluss/aufgabenstellung.html">📄 Statische Website</a></li>
+              </ul>
+            </li>
+            <li><a href="../resources/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <h1>09 – Listen & Selektoren 📋</h1>
+      <p class="hero-subtitle">Strukturierte Inhalte – von Einkaufszetteln bis zum Navigationsmenü</p>
+    </section>
+
+    <!-- 1. Was ist eine Liste? -->
+    <section>
+      <h2>📋 1. Was ist eine Liste?</h2>
+      <p>
+        Eine <strong>Liste</strong> ist eine geordnete oder ungeordnete Sammlung von <strong>gleichartigen Elementen</strong>. 
+        Im echten Leben begegnen wir ständig Listen:
+      </p>
+      <ul>
+        <li>Einkaufszettel</li>
+        <li>Inhaltsverzeichnis eines Buches</li>
+        <li>Schritte einer Anleitung</li>
+        <li>Navigationsmenü einer Website</li>
+      </ul>
+      <p>
+        Im Web werden Listen mit HTML-Elementen strukturiert:  
+        → <code>&lt;ul&gt;</code> für ungeordnete Listen  
+        → <code>&lt;ol&gt;</code> für geordnete Listen  
+        → <code>&lt;li&gt;</code> für jedes einzelne Listenelement
+      </p>
+      <div class="regel">
+        💡 <strong>Warum semantisch korrekt?</strong><br>
+        Screenreader erkennen Listen als Gruppe – das verbessert die Navigation.<br>
+        Suchmaschinen verstehen die Struktur besser.<br>
+        Und du schreibst saubereren, wartbaren Code.
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – HTML Lists -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – HTML Listen</h2>
+      <p>
+        W3Schools zeigt alle Listentypen, Attribute und praktische Beispiele.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/html/html_lists.asp" target="_blank">W3Schools: HTML Lists</a>
+      </p>
+    </section>
+
+    <!-- 2. Ungeordnete Listen (ul) -->
+    <section>
+      <h2>🔘 2. Ungeordnete Listen – <code>&lt;ul&gt;</code></h2>
+      <p>
+        Eine <strong>ungeordnete Liste</strong> (<code>ul</code> = unordered list) 
+        wird für Elemente verwendet, bei denen die <strong>Reihenfolge egal</strong> ist.
+      </p>
+      <pre><code>&lt;ul&gt;
+  &lt;li&gt;Apfel&lt;/li&gt;
+  &lt;li&gt;Banane&lt;/li&gt;
+  &lt;li&gt;Orange&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <p>
+        Standardmäßig werden die Listenelemente mit <strong>schwarzen Punkten</strong> dargestellt.
+      </p>
+    </section>
+
+    <!-- 3. Geordnete Listen (ol) -->
+    <section>
+      <h2>🔢 3. Geordnete Listen – <code>&lt;ol&gt;</code></h2>
+      <p>
+        Eine <strong>geordnete Liste</strong> (<code>ol</code> = ordered list) 
+        wird verwendet, wenn die <strong>Reihenfolge wichtig</strong> ist – z. B. bei Anleitungen.
+      </p>
+      <pre><code>&lt;ol&gt;
+  &lt;li&gt;Eier kochen&lt;/li&gt;
+  &lt;li&gt;Schale abziehen&lt;/li&gt;
+  &lt;li&gt;Mit Mayonnaise mischen&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+      <p>
+        Standardmäßig werden die Elemente mit <strong>fortlaufenden Zahlen</strong> nummeriert.
+      </p>
+      <div class="regel">
+        💡 <strong>Tipp:</strong> Der Browser zählt automatisch – du musst keine Zahlen schreiben!
+      </div>
+    </section>
+
+    <!-- 4. Verschachtelte Listen -->
+    <section>
+      <h2>🔽 4. Verschachtelte Listen – Strukturierung durch Einrückung</h2>
+      <p>
+        Listen können <strong>beliebig tief verschachtelt</strong> werden – 
+        ideal für Inhaltsverzeichnisse oder Kategorien.
+      </p>
+      <pre><code>&lt;ul&gt;
+  &lt;li&gt;Obst
+    &lt;ul&gt;
+      &lt;li&gt;Zitrusfrüchte
+        &lt;ul&gt;
+          &lt;li&gt;Orange&lt;/li&gt;
+          &lt;li&gt;Zitrone&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Beeren&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Gemüse&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <p>
+        Jede Ebene wird automatisch eingerückt – 
+        und verwendet ein anderes Aufzählungszeichen (Punkte → Kreise → Quadrate).
+      </p>
+    </section>
+
+    <!-- 5. Listen mit CSS stylen -->
+    <section>
+      <h2>🎨 5. Listen mit CSS stylen – wichtige Eigenschaften</h2>
+      <p>
+        Mit CSS kannst du das Erscheinungsbild von Listen <strong>vollständig kontrollieren</strong>.
+        Die wichtigsten Eigenschaften:
+      </p>
+
+      <h3><code>list-style-type</code> – Aufzählungszeichen ändern</h3>
+      <pre><code>ul { list-style-type: square; }        /* Quadrate */
+ol { list-style-type: upper-roman; } /* I, II, III */
+ul { list-style-type: none; }        /* Keine Punkte (für Navigation!)</code></pre>
+
+      <h3><code>list-style-position</code> – Position der Punkte</h3>
+      <pre><code>ul { list-style-position: inside; }  /* Punkte im Textblock */
+ul { list-style-position: outside; } /* Standard – Punkte außerhalb */</code></pre>
+
+      <h3><code>list-style-image</code> – Eigene Symbole</h3>
+      <pre><code>ul { list-style-image: url("pfeil.png"); }</code></pre>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> Eigene Bilder müssen exakt die richtige Größe haben – 
+        sonst wirkt die Liste unsauber.
+      </div>
+    </section>
+
+    <!-- 6. Vererbung bei Listen -->
+    <section>
+      <h2>🧬 6. Vererbung bei Listen – wie CSS sich ausbreitet</h2>
+      <p>
+        Listen bestehen aus zwei HTML-Elementen:
+        - dem <strong>List-Container</strong> (<code>ul</code> oder <code>ol</code>)
+        - den <strong>Listenelementen</strong> (<code>li</code>)
+      </p>
+      <p>
+        Viele CSS-Eigenschaften werden <strong>von <code>ul</code>/`ol` auf `li` vererbt</strong>:
+      </p>
+      <ul>
+        <li><code>color</code> – Schriftfarbe</li>
+        <li><code>font-family</code>, <code>font-size</code></li>
+        <li><code>text-align</code></li>
+      </ul>
+      <p>
+        Eigenschaften wie <code>padding</code>, <code>margin</code> oder <code>border</code> 
+        werden <strong>nicht vererbt</strong> – sie müssen explizit gesetzt werden.
+      </p>
+      <div class="regel">
+        💡 <strong>Beispiel:</strong><br>
+        Wenn du <code>ul { color: #e67e22; }</code> setzt,<br>
+        dann sind <em>alle</em> Texte in den <code>&lt;li&gt;</code>-Elementen orange – 
+        ohne dass du jedes <code>li</code> einzeln stylen musst.
+      </div>
+    </section>
+
+    <!-- 7. Praxis: Navigation als Liste -->
+    <section>
+      <h2>🧭 7. Praxis: Navigation als ungeordnete Liste</h2>
+      <p>
+        Eine Website-Navigation ist <strong>semantisch eine Liste von Links</strong>. 
+        Deshalb wird sie mit <code>&lt;ul&gt;</code> umgesetzt – und mit CSS „bereinigt“:
+      </p>
+      <pre><code>&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="start.html"&gt;Start&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="kontakt.html"&gt;Kontakt&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+/* CSS: Punkte und Unterstriche entfernen */
+nav ul {
+  list-style: none;     /* Entfernt die Punkte */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none; /* Entfernt den standardmäßigen Unterstrich */
+  color: #2c3e50;
+}</code></pre>
+      <div class="regel">
+        💡 <strong>Warum <code>text-decoration: none</code> wichtig ist:</strong><br>
+        Alle Links im Web haben standardmäßig einen <em>Unterstrich</em>.<br>
+        In einer Navigation wirkt das oft unruhig oder unprofessionell.<br>
+        Mit <code>text-decoration: none</code> wird der Unterstrich sauber entfernt –<br>
+        besonders wichtig bei horizontalen Menüs!
+      </div>
+    </section>
+
+    <!-- 8. KI als Lernpartner -->
+    <section>
+      <h2>🧠 8. KI als Lernpartner – guter Prompt</h2>
+      <p>
+        ❌ Schlecht: „Mach mir eine Navigation.“  
+        ✅ Gut: „Kannst du mir zeigen, wie ich eine zweistufige Navigation mit HTML-Listen umsetze – 
+        und wie ich per CSS die Punkte entferne, horizontale Ausrichtung erzeuge, 
+        den Link-Unterstrich mit <code>text-decoration: none</code> ausblende 
+        und Hover-Effekte hinzufüge? Erkläre auch, welche Eigenschaften vererbt werden.“
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du strukturierte Inhalte semantisch korrekt und optisch ansprechend darstellen!</p>
+      <a href="./10-block-inline.html" class="nav-button">→ Zu Modul 10: Block vs. Inline</a>
+    </section>
+
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>HTML & CSS Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

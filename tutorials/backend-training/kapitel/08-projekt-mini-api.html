@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01 – Was ist Backend? | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>08 – Mini-API 🌐</h1>
+      <p class="hero-subtitle">Dein erstes eigenes Backend – sicher, funktional, stolz!</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Das Ziel</h2>
+      <p>
+        In diesem Kapitel baust du eine einfache, aber vollständige <strong>API</strong>:
+      </p>
+      <ul>
+        <li>Empfängt Daten per POST (z. B. Nachricht von einem Formular)</li>
+        <li>Speichert sie sicher in einer Datenbank</li>
+        <li>Liefert alle Einträge als JSON zurück</li>
+      </ul>
+      <p>
+        Du wirst sehen: Eine API ist nichts Magisches – sondern logische, sichere Programmierung.
+      </p>
+    </section>
+
+    <section>
+      <h2>📊 2. Projektübersicht & API-Routen</h2>
+      <p>
+        Bevor du programmierst, musst du verstehen: Was ist eine <strong>API-Route</strong>?
+      </p>
+
+      <h3>Was ist eine API-Route?</h3>
+      <p>
+        Eine <strong>Route</strong> ist eine Adresse (URL), über die dein Backend bestimmte Aufgaben erledigt.
+        Stell dir vor, deine API ist ein Restaurant:
+      </p>
+      <ul>
+        <li><code>GET /api/nachrichten</code> = „Zeig mir die Speisekarte“</li>
+        <li><code>POST /api/nachrichten</code> = „Ich möchte bestellen!“</li>
+      </ul>
+      <p>
+        Jede Route versteht nur <em>eine Art von Anfrage</em> (GET, POST, etc.) und führt genau <em>eine Aufgabe</em> aus.
+      </p>
+
+      <h3>Unsere Routen im Detail</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>HTTP-Methode</th>
+            <th>Beschreibung</th>
+            <th>Antwort</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/api/nachrichten</code></td>
+            <td><code>GET</code></td>
+            <td>Holt alle gespeicherten Nachrichten aus der Datenbank</td>
+            <td>JSON-Liste aller Einträge</td>
+          </tr>
+          <tr>
+            <td><code>/api/nachrichten</code></td>
+            <td><code>POST</code></td>
+            <td>Speichert eine neue Nachricht in der Datenbank</td>
+            <td>Bestätigung oder Fehlermeldung (als JSON)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Ordnerstruktur – wichtig bei gemeinsamer PC-Nutzung!</h3>
+      <p>
+        Da mehrere Schüler am selben PC arbeiten und nur <strong>eine XAMPP-Installation</strong> vorhanden ist,
+        muss jeder sein Projekt in einem <strong>eigenen Unterordner</strong> speichern:
+      </p>
+      <pre><code>C:\xampp\htdocs\schueler-max\</code></pre>
+      <p>
+        Ersetze <code>schueler-max</code> durch deinen eigenen Namen (ohne Leerzeichen!).
+      </p>
+      <p>
+        Deine API-Datei (<code>api.php</code>) liegt dann hier:
+      </p>
+      <pre><code>C:\xampp\htdocs\schueler-max\api.php</code></pre>
+      <p>
+        Und du rufst sie im Browser auf mit:
+      </p>
+      <pre><code>http://localhost/schueler-max/api.php</code></pre>
+      <div class="warnung">
+        ⚠️ <strong>Achtung:</strong> 
+        - Keine Sonderzeichen oder Leerzeichen im Ordnernamen!<br>
+        - Jeder Schüler hat seinen eigenen Ordner – niemals gemeinsam nutzen!
+      </div>
+    </section>
+
+    <section>
+      <h2>🛠️ 3. Vorbereitung</h2>
+      <p>
+        Bevor du programmierst, plane auf Papier:
+      </p>
+      <ol>
+        <li>Erstelle in phpMyAdmin eine Datenbank <code>mini_api</code> mit Kollation <code>utf8mb4_unicode_ci</code></li>
+        <li>Lege eine Tabelle <code>nachrichten</code> an mit Spalten:<br>
+           <code>id (INT, AI, PK)</code>, <code>name (VARCHAR 100)</code>, <code>text (TEXT)</code></li>
+        <li>Entscheide: Willst du mit <strong>PHP</strong> oder <strong>Node.js</strong> arbeiten?</li>
+      </ol>
+      <div class="regel">
+        💡 <strong>Tipp:</strong> Versuche beide Varianten – so verstehst du den Unterschied wirklich!
+      </div>
+    </section>
+
+    <section>
+      <h2>🐘 4. PHP-Version (mit XAMPP)</h2>
+      <p>
+        Erstelle eine Datei <code>api.php</code> in deinem persönlichen Ordner:
+      </p>
+      <pre><code>C:\xampp\htdocs\schueler-max\api.php</code></pre>
+      <p>
+        Inhalt der Datei:
+      </p>
+      <pre><code class="js-code">&lt;?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *'); // Nur für lokale Tests!
+
+$method = $_SERVER['REQUEST_METHOD'];
+$pdo = new PDO('mysql:host=localhost;dbname=mini_api;charset=utf8mb4', 'root', '');
+
+if ($method === 'GET') {
+  $stmt = $pdo->query('SELECT * FROM nachrichten ORDER BY id DESC');
+  echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+} 
+elseif ($method === 'POST') {
+  $input = json_decode(file_get_contents('php://input'), true);
+  $name = trim($input['name'] ?? '');
+  $text = trim($input['text'] ?? '');
+
+  if (strlen($name) >= 2 && strlen($text) >= 5) {
+    $stmt = $pdo->prepare('INSERT INTO nachrichten (name, text) VALUES (?, ?)');
+    $stmt->execute([$name, $text]);
+    http_response_code(201);
+    echo json_encode(['status' => 'erfolg']);
+  } else {
+    http_response_code(400);
+    echo json_encode(['fehler' => 'Name (mind. 2 Zeichen), Text (mind. 5 Zeichen)']);
+  }
+}
+?&gt;</code></pre>
+      <p>
+        Teste im Browser:<br>
+        <a href="http://localhost/schueler-max/api.php" target="_blank" rel="noopener">http://localhost/schueler-max/api.php</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🟢 5. Node.js-Version (mit Express)</h2>
+      <p>
+        Erstelle einen Ordner in deinem NodeJS-Verzeichnis:
+      </p>
+      <pre><code>C:\NodeJS\mini-api\</code></pre>
+      <p>
+        Führe im Terminal aus:
+      </p>
+      <pre><code>npm init -y
+npm install express mysql2</code></pre>
+      <p>
+        Erstelle <code>server.js</code> mit folgendem Inhalt:
+      </p>
+      <pre><code class="js-code">const express = require('express');
+const mysql = require('mysql2');
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  database: 'mini_api'
+});
+
+app.get('/api/nachrichten', (req, res) => {
+  db.query('SELECT * FROM nachrichten ORDER BY id DESC', (err, results) => {
+    if (err) return res.status(500).json({ fehler: 'Datenbankfehler' });
+    res.json(results);
+  });
+});
+
+app.post('/api/nachrichten', (req, res) => {
+  const { name, text } = req.body;
+  if (!name || !text || name.length < 2 || text.length < 5) {
+    return res.status(400).json({ fehler: 'Name (mind. 2 Zeichen), Text (mind. 5 Zeichen)' });
+  }
+  db.execute('INSERT INTO nachrichten (name, text) VALUES (?, ?)', [name, text], (err) => {
+    if (err) return res.status(500).json({ fehler: 'Speichern fehlgeschlagen' });
+    res.status(201).json({ status: 'erfolg' });
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Mini-API läuft auf http://localhost:${port}/api/nachrichten`);
+});</code></pre>
+      <p>
+        Starte mit: <code>node server.js</code><br>
+        Teste: <a href="http://localhost:3000/api/nachrichten" target="_blank" rel="noopener">http://localhost:3000/api/nachrichten</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🔒 6. Sicherheit im Einsatz</h2>
+      <p>
+        Beide Versionen enthalten:
+      </p>
+      <ul>
+        <li>✅ <strong>Prepared Statements</strong> – gegen SQL-Injection</li>
+        <li>✅ <strong>Eingabeprüfung</strong> – Name ≥ 2 Zeichen, Text ≥ 5 Zeichen</li>
+        <li>✅ <strong>Kein direktes Echo von Benutzerdaten</strong> – nur JSON</li>
+        <li>✅ <strong>Klare Fehlercodes</strong> (400 = falsche Eingabe, 500 = Serverfehler)</li>
+      </ul>
+      <div class="warnung">
+        ⚠️ <strong>Hinweis:</strong> In echten Projekten darfst du <code>Access-Control-Allow-Origin: *</code> 
+        <em>nicht</em> verwenden – das ist nur für lokale Tests erlaubt!
+      </div>
+    </section>
+
+    <section>
+      <h2>🧠 7. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Zeichne zuerst auf Papier:
+      </p>
+      <ul>
+        <li>Die Datenbankstruktur (Tabelle + Spalten)</li>
+        <li>Die beiden API-Routen (GET / POST)</li>
+        <li>Die Sicherheitsmaßnahmen (was wird geprüft?)</li>
+      </ul>
+      <p>
+        Danach formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um ein konkretes Problem zu lösen – z. B.:  
+        „Wie prüfe ich in Node.js, ob ein Feld existiert und mindestens 2 Zeichen lang ist?“
+      </p>
+    </section>
+
+    <section>
+      <h2>🚀 8. Was du jetzt kannst</h2>
+      <p>
+        Du hast gelernt:
+      </p>
+      <ul>
+        <li>Eine sichere API zu bauen</li>
+        <li>Datenbanken sinnvoll zu strukturieren</li>
+        <li>Formulardaten sicher zu verarbeiten</li>
+        <li>Beide Backend-Technologien bewusst einzusetzen</li>
+      </ul>
+      <p>
+        Herzlichen Glückwunsch – du bist jetzt ein <strong>Backend-Entwickler</strong>!
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Das war’s! Du hast das Backend-Tutorial gemeistert.</p>
+      <a href="../index.html" class="nav-button">← Zurück zur Startseite</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

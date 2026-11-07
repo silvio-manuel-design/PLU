@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01. Node.js | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>00. Server einrichten 🛠️</h1>
+      <p class="hero-subtitle">Deine technische Grundlage für alle Übungen</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Ziel dieser Übung</h2>
+      <p>
+        Du richtest zwei Entwicklungsumgebungen ein:
+      </p>
+      <ol>
+        <li><strong>XAMPP</strong> für PHP-Projekte</li>
+        <li><strong>Node.js</strong> für JavaScript-Backends</li>
+      </ol>
+      <p>
+        Danach kannst du alle folgenden Übungen durchführen.
+      </p>
+    </section>
+
+    <section>
+      <h2>📁 2. Ordnerstruktur – wichtig bei gemeinsamer PC-Nutzung!</h2>
+      <p>
+        Da mehrere Schüler am selben PC arbeiten, gelten folgende Regeln:
+      </p>
+      <ul>
+        <li><strong>PHP-Projekte:</strong> <code>C:\xampp\htdocs\schueler-name\</code></li>
+        <li><strong>Node.js-Projekte:</strong> <code>C:\NodeJS\schueler-name\</code></li>
+      </ul>
+      <p>
+        Ersetze <code>schueler-name</code> durch deinen eigenen Namen (ohne Leerzeichen!).
+      </p>
+      <div class="warnung">
+        ⚠️ Keine Sonderzeichen oder Umlaute im Ordnernamen!
+      </div>
+    </section>
+
+    <section>
+      <h2>🐘 3. XAMPP einrichten</h2>
+      <ol>
+        <li>Lade XAMPP von <a href="https://www.apachefriends.org" target="_blank" rel="noopener">apachefriends.org</a></li>
+        <li>Installiere es in <code>C:\xampp\</code> (nicht in Program Files!)</li>
+        <li>Starte das <strong>XAMPP Control Panel</strong></li>
+        <li>Klicke auf <strong>Start</strong> bei <strong>Apache</strong> und <strong>MySQL</strong></li>
+        <li>Öffne im Browser: <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a> → XAMPP-Seite muss erscheinen</li>
+        <li>Erstelle deinen persönlichen Ordner: <code>C:\xampp\htdocs\schueler-max\</code></li>
+        <li>Lege eine Datei <code>test.php</code> an mit:<br>
+           <code>&lt;?php echo "XAMPP läuft!"; ?&gt;</code></li>
+        <li>Rufe auf: <a href="http://localhost/schueler-max/test.php" target="_blank" rel="noopener">http://localhost/schueler-max/test.php</a></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>🟢 4. Node.js einrichten</h2>
+      <ol>
+        <li>Lade Node.js von <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> (LTS-Version)</li>
+        <li>Installiere es mit Standardoptionen</li>
+        <li>Öffne das Terminal (cmd) und gib ein:<br>
+           <code>node -v</code> → Es muss eine Versionsnummer erscheinen</li>
+        <li>Erstelle den Ordner: <code>C:\NodeJS\schueler-max\</code></li>
+        <li>Erstelle darin eine Datei <code>hallo.js</code> mit:<br>
+           <code>console.log("Node.js läuft!");</code></li>
+        <li>Führe im Terminal aus:<br>
+           <code>cd C:\NodeJS\schueler-max</code><br>
+           <code>node hallo.js</code></li>
+        <li>Im Terminal muss „Node.js läuft!“ erscheinen</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>🧠 5. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Zeichne auf Papier eine Tabelle mit drei Spalten:
+      </p>
+      <ol>
+        <li>Problem (z. B. „Apache startet nicht“)</li>
+        <li>Mögliche Ursache (z. B. „Port 80 belegt“)</li>
+        <li>Lösungsvorschlag (z. B. „Skype beenden oder Apache-Port ändern“)</li>
+      </ol>
+      <p>
+        Danach formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, warum Apache manchmal nicht startet – aber <em>nicht</em> den gesamten Fehlerbericht zu kopieren.
+      </p>
+    </section>
+
+    <section>
+      <h2>✅ 6. Abgabe</h2>
+      <p>
+        Lade folgende Dateien in deinen OneDrive-Ordner hoch:
+      </p>
+      <ul>
+        <li><code>C:\xampp\htdocs\schueler-max\test.php</code></li>
+        <li><code>C:\NodeJS\schueler-max\hallo.js</code></li>
+        <li>Ein Screenshot des Terminals mit der Ausgabe „Node.js läuft!“</li>
+        <li>Ein Screenshot des Browsers mit „XAMPP läuft!“</li>
+      </ul>
+      <p>
+        Erstelle einen <strong>Freigabelink auf den Ordner</strong> (nicht auf einzelne Dateien!) und gib ihn in Moodle ab.
+      </p>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Deine Entwicklungsumgebung ist jetzt bereit!</p>
+      <a href="01-node-grundlagen.html" class="nav-button">→ 01. Node.js-Grundlagen</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

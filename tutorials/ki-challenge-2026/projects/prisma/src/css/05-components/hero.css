@@ -1,0 +1,283 @@
+@layer components {
+  /* ============================================================
+     Hero Section — Cosmic Entry Portal (Evolution-grade)
+     ============================================================ */
+  .challenge-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
+    padding: var(--space-24) var(--space-4);
+    text-align: center;
+    background-image: url('../../assets/images/prisma-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+
+  @supports (background-image: url("data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA")) {
+    .challenge-hero {
+      background-image: url('../../assets/images/prisma-hero-bg.webp');
+    }
+  }
+
+  .challenge-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(15, 23, 42, 0.35) 40%, rgba(15, 23, 42, 0.8) 100%);
+    z-index: 0;
+  }
+
+  /* Floating Orbs */
+  .challenge-hero::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.18) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%);
+    animation: heroDrift 20s ease-in-out infinite alternate;
+    filter: blur(40px);
+    z-index: 0;
+  }
+
+  .challenge-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -15%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, rgba(79, 70, 229, 0.05) 50%, transparent 70%);
+    animation: heroDrift 15s ease-in-out infinite alternate-reverse;
+    filter: blur(40px);
+    z-index: 0;
+  }
+
+  /* Particle Field */
+  .challenge-hero__particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .challenge-hero__particles span {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    animation: particleFloat linear infinite;
+  }
+
+  .challenge-hero__particles span:nth-child(1) { left: 10%; top: 20%; animation-duration: 12s; animation-delay: 0s; }
+  .challenge-hero__particles span:nth-child(2) { left: 20%; top: 60%; animation-duration: 15s; animation-delay: 2s; width: 3px; height: 3px; }
+  .challenge-hero__particles span:nth-child(3) { left: 35%; top: 30%; animation-duration: 10s; animation-delay: 1s; }
+  .challenge-hero__particles span:nth-child(4) { left: 50%; top: 70%; animation-duration: 18s; animation-delay: 3s; width: 2px; height: 2px; background: rgba(79, 70, 229, 0.5); }
+  .challenge-hero__particles span:nth-child(5) { left: 65%; top: 15%; animation-duration: 14s; animation-delay: 0.5s; }
+  .challenge-hero__particles span:nth-child(6) { left: 75%; top: 50%; animation-duration: 11s; animation-delay: 4s; width: 3px; height: 3px; background: rgba(6, 182, 212, 0.4); }
+  .challenge-hero__particles span:nth-child(7) { left: 85%; top: 80%; animation-duration: 16s; animation-delay: 1.5s; }
+  .challenge-hero__particles span:nth-child(8) { left: 45%; top: 40%; animation-duration: 13s; animation-delay: 2.5s; background: rgba(168, 85, 247, 0.4); }
+
+  @keyframes particleFloat {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+  }
+
+  @keyframes heroDrift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(40px, -30px) scale(1.1); }
+  }
+
+  .challenge-hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .challenge-hero__badge-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .challenge-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(79, 70, 229, 0.15);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: #A5B4FC;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-6);
+    backdrop-filter: blur(8px);
+  }
+
+  .challenge-hero__eyebrow::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--challenge-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--challenge-accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--challenge-accent); }
+    50% { opacity: 0.6; box-shadow: 0 0 20px var(--challenge-accent), 0 0 40px var(--challenge-accent); }
+  }
+
+  .challenge-hero__title {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    color: #FFFFFF;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (min-width: 768px) {
+    .challenge-hero__title {
+      font-size: 4.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .challenge-hero__title {
+      font-size: 5.5rem;
+    }
+  }
+
+  .challenge-hero__title--gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #A5B4FC 30%, #22D3EE 60%, #FFFFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .challenge-hero__subtitle {
+    font-size: var(--text-lg);
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: var(--space-10);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: var(--leading-relaxed);
+  }
+
+  @media (min-width: 768px) {
+    .challenge-hero__subtitle {
+      font-size: var(--text-xl);
+    }
+  }
+
+  /* Buttons */
+  .challenge-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    font-weight: 600;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .challenge-btn:hover {
+    transform: translateY(-3px);
+  }
+
+  .challenge-btn i {
+    font-size: var(--text-lg);
+    transition: transform var(--transition-base);
+  }
+
+  .challenge-btn:hover i {
+    transform: translateY(2px);
+  }
+
+  .challenge-btn--primary {
+    background: linear-gradient(135deg, var(--challenge-primary), #A855F7);
+    color: white;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4), 0 0 40px rgba(79, 70, 229, 0.15);
+    border: none;
+  }
+
+  .challenge-btn--primary:hover {
+    box-shadow: 0 8px 30px rgba(79, 70, 229, 0.5), 0 0 60px rgba(79, 70, 229, 0.25);
+  }
+
+  .challenge-btn--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .challenge-btn--primary:hover::before {
+    left: 100%;
+  }
+
+  .challenge-btn--secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+  }
+
+  .challenge-btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Scroll Indicator */
+  .challenge-hero__scroll {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 1;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .challenge-hero__scroll i {
+    font-size: 1.5rem;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+}

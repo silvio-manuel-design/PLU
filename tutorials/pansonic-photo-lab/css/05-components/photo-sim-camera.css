@@ -1,0 +1,365 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Kamera-Simulator
+   Adaptiert vom Video Lab sim-camera, fotografischer Look
+   Brennweite + Blende in Echtzeit
+   ============================================================ */
+
+@layer components {
+  .photo-sim-camera {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-8);
+    margin-block: var(--photo-space-12);
+  }
+
+  /* ── Viewfinder Frame ─────────────────────────────────────── */
+  .photo-sim-camera__viewfinder {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+    aspect-ratio: 3 / 2;
+    border-radius: var(--photo-radius-lg);
+    overflow: hidden;
+    background: var(--photo-bg-secondary);
+    border: 2px solid var(--photo-border-subtle);
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.3);
+  }
+
+  /* Scene with zoom via focal length */
+  .photo-sim-camera__scene {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 30% 40% at 70% 50%, rgba(245,158,11,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 30% 60%, rgba(20,184,166,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0f172a 0%, #1e293b 30%, #334155 60%, #0f172a 100%);
+    transform: scale(var(--sim-scale, 1));
+    transform-origin: center center;
+    transition: transform 0.3s ease-out;
+  }
+
+  /* Simulated subject layers */
+  .photo-sim-camera__subject-far {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 30%;
+    background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+    border-radius: var(--photo-radius-lg) var(--photo-radius-lg) 0 0;
+    opacity: 0.5;
+  }
+
+  .photo-sim-camera__subject-mid {
+    position: absolute;
+    bottom: 12%;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 22%;
+    height: 50%;
+    background: linear-gradient(180deg, #475569 0%, #334155 50%, #1e293b 100%);
+    border-radius: 50% 50% 40% 40%;
+  }
+
+  .photo-sim-camera__subject-near {
+    position: absolute;
+    bottom: 0;
+    left: 28%;
+    width: 14%;
+    height: 28%;
+    background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+    border-radius: 30% 30% 0 0;
+    filter: blur(var(--sim-blur, 0px));
+    transition: filter 0.3s ease-out;
+  }
+
+  /* ── Viewfinder Overlays ─────────────────────────────────── */
+  .photo-sim-camera__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* Corner brackets (focus points style) */
+  .photo-sim-camera__corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: rgba(255,255,255,0.35);
+    border-style: solid;
+    border-width: 0;
+  }
+  .photo-sim-camera__corner--tl { top: 12px; left: 12px; border-top-width: 2px; border-left-width: 2px; }
+  .photo-sim-camera__corner--tr { top: 12px; right: 12px; border-top-width: 2px; border-right-width: 2px; }
+  .photo-sim-camera__corner--bl { bottom: 12px; left: 12px; border-bottom-width: 2px; border-left-width: 2px; }
+  .photo-sim-camera__corner--br { bottom: 12px; right: 12px; border-bottom-width: 2px; border-right-width: 2px; }
+
+  /* Center crosshair (AF point style) */
+  .photo-sim-camera__crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+  }
+  .photo-sim-camera__crosshair::before,
+  .photo-sim-camera__crosshair::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.25);
+  }
+  .photo-sim-camera__crosshair::before { width: 8px; height: 1px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .photo-sim-camera__crosshair::after { width: 1px; height: 8px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+  /* Grid lines (rule of thirds) */
+  .photo-sim-camera__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 33.33% 33.33%;
+  }
+
+  /* Info HUD */
+  .photo-sim-camera__hud {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--photo-font-mono, 'SF Mono', monospace);
+    font-size: var(--photo-text-xs);
+    color: rgba(255,255,255,0.7);
+  }
+
+  .photo-sim-camera__hud-left {
+    display: flex;
+    gap: var(--photo-space-3);
+  }
+
+  .photo-sim-camera__hud-value {
+    color: var(--photo-accent);
+    font-weight: var(--photo-font-weight-bold);
+  }
+
+  /* ── Controls ────────────────────────────────────────────── */
+  .photo-sim-camera__controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--photo-space-6);
+    max-width: 720px;
+    margin-inline: auto;
+    margin-top: var(--photo-space-6);
+  }
+
+  .photo-sim-camera__control {
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-5);
+  }
+
+  .photo-sim-camera__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--photo-space-3);
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-primary);
+  }
+
+  .photo-sim-camera__value {
+    font-family: var(--photo-font-mono, 'SF Mono', monospace);
+    font-size: var(--photo-text-sm);
+    color: var(--photo-accent);
+    background: var(--photo-accent-dim);
+    padding: 2px 10px;
+    border-radius: var(--photo-radius-sm);
+  }
+
+  /* Custom slider */
+  .photo-sim-camera__slider {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--photo-radius-full);
+    background: var(--photo-border-subtle);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .photo-sim-camera__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--photo-accent);
+    border: 3px solid var(--photo-bg-surface);
+    box-shadow: 0 0 0 2px var(--photo-accent);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  .photo-sim-camera__slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .photo-sim-camera__slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--photo-accent);
+    border: 3px solid var(--photo-bg-surface);
+    box-shadow: 0 0 0 2px var(--photo-accent);
+    cursor: pointer;
+  }
+
+  .photo-sim-camera__info {
+    margin-top: var(--photo-space-2);
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-muted);
+    line-height: 1.5;
+    min-height: 2.5em;
+  }
+
+  /* ── Presets ─────────────────────────────────────────────── */
+  .photo-sim-camera__presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--photo-space-2);
+    margin-top: var(--photo-space-4);
+    justify-content: center;
+  }
+
+  .photo-sim-camera__preset {
+    padding: var(--photo-space-2) var(--photo-space-4);
+    border-radius: var(--photo-radius-full);
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-semibold);
+    border: 1px solid var(--photo-border-subtle);
+    background: var(--photo-bg-surface);
+    color: var(--photo-text-secondary);
+    cursor: pointer;
+    transition: all var(--photo-transition-fast);
+  }
+
+  .photo-sim-camera__preset:hover,
+  .photo-sim-camera__preset.is-active {
+    background: var(--photo-accent);
+    color: var(--photo-text-inverse);
+    border-color: var(--photo-accent);
+  }
+
+  .photo-sim-camera__preset:focus-visible {
+    outline: 2px solid var(--photo-accent);
+    outline-offset: 2px;
+  }
+
+  /* ── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .photo-sim-camera__controls {
+      grid-template-columns: 1fr;
+    }
+    .photo-sim-camera {
+      padding: var(--photo-space-4);
+    }
+    .photo-sim-camera__viewfinder {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  /* ── No-JS fallback ──────────────────────────────────────── */
+  @media (scripting: none) {
+    .photo-sim-camera__scene {
+      transform: scale(1.5);
+    }
+    .photo-sim-camera__subject-near {
+      filter: blur(3px);
+    }
+    .photo-sim-camera__slider {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .photo-sim-camera__preset {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+
+  /* ── Reduced motion ──────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .photo-sim-camera__scene,
+    .photo-sim-camera__subject-near {
+      transition: none !important;
+    }
+  }
+
+  /* ── Light Mode ──────────────────────────────────────────── */
+  [data-theme="light"] .photo-sim-camera__viewfinder {
+    background: #f1f5f9;
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="light"] .photo-sim-camera__scene {
+    background:
+      radial-gradient(ellipse 30% 40% at 70% 50%, rgba(245,158,11,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 30% 60%, rgba(20,184,166,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, #e0f2fe 0%, #bae6fd 30%, #7dd3fc 60%, #e0f2fe 100%);
+  }
+
+  [data-theme="light"] .photo-sim-camera__subject-far {
+    background: linear-gradient(180deg, #93c5fd 0%, #bfdbfe 100%);
+    opacity: 0.6;
+  }
+
+  [data-theme="light"] .photo-sim-camera__subject-mid {
+    background: linear-gradient(180deg, #475569 0%, #64748b 50%, #94a3b8 100%);
+  }
+
+  [data-theme="light"] .photo-sim-camera__subject-near {
+    background: linear-gradient(180deg, #94a3b8 0%, #cbd5e1 100%);
+  }
+
+  [data-theme="light"] .photo-sim-camera__corner {
+    border-color: rgba(0,0,0,0.3);
+  }
+
+  [data-theme="light"] .photo-sim-camera__crosshair {
+    border-color: rgba(0,0,0,0.2);
+  }
+  [data-theme="light"] .photo-sim-camera__crosshair::before,
+  [data-theme="light"] .photo-sim-camera__crosshair::after {
+    background: rgba(0,0,0,0.2);
+  }
+
+  [data-theme="light"] .photo-sim-camera__hud {
+    color: rgba(0,0,0,0.6);
+  }
+
+  [data-theme="light"] .photo-sim-camera__control {
+    background: #f8fafc;
+    border-color: var(--photo-border-default);
+  }
+
+  [data-theme="light"] .photo-sim-camera__preset {
+    background: #f8fafc;
+    border-color: var(--photo-border-default);
+    color: var(--photo-text-secondary);
+  }
+  [data-theme="light"] .photo-sim-camera__preset:hover,
+  [data-theme="light"] .photo-sim-camera__preset.is-active {
+    background: var(--photo-accent);
+    color: #fff;
+    border-color: var(--photo-accent);
+  }
+}

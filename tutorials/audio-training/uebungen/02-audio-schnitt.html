@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Übung: Audio-Schnitt | Audio-Tutorial | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="../kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="../kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="../kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="../kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="../kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="../uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="../uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="../tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="../tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="../tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="../tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="../ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="../ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="../ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="../ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="../ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>✏️ Übung: Audio-Schnitt</h1>
+      <p class="hero-subtitle">Lerne die Grundlagen des Audio-Schnitts mit Audacity</p>
+    </section>
+
+    <section>
+      <h2>Lernziele</h2>
+      <p>
+        In dieser Übung wirst du:
+      </p>
+      <ul>
+        <li>Die grundlegenden Techniken des Audio-Schnitts kennenlernen</li>
+        <li>Erfahren, wie man Audiomaterial präzise bearbeitet</li>
+        <li>Die Werkzeuge von Audacity für den Audio-Schnitt anwenden</li>
+        <li>Verstehen, wie man Störgeräusche entfernt</li>
+        <li>Lernen, wie man Übergänge zwischen verschiedenen Audioabschnitten gestaltet</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Voraussetzungen</h2>
+      <ul>
+        <li>Audacity installiert</li>
+        <li>Beispiel-Audiodateien</li>
+        <li>Grundkenntnisse in der Bedienung von Audacity</li>
+        <li>Verständnis für Audio-Grundlagen</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Theoretische Grundlagen</h2>
+      
+      <h3>Was ist Audio-Schnitt?</h3>
+      <p>
+        Audio-Schnitt ist der Prozess, bei dem Audiomaterial bearbeitet wird, 
+        um gewünschte Abschnitte zu behalten, unerwünschte zu entfernen und 
+        verschiedene Elemente nahtlos zu verbinden.
+      </p>
+      
+      <h3>Wichtige Konzepte</h3>
+      <ul>
+        <li><strong>Präzision:</strong> Genauigkeit bei der Auswahl und Bearbeitung</li>
+        <li><strong>Nahtlosigkeit:</strong> Übergänge ohne hörbare Unterbrechungen</li>
+        <li><strong>Synchronisation:</strong> Abgleich mit anderen Medien (Video, etc.)</li>
+        <li><strong>Qualitätserhalt:</strong> Minimierung von Bearbeitungsartefakten</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Aufgabenstellung</h2>
+      
+      <h3>Aufgabe 1: Einfacher Schnitt</h3>
+      <p>
+        Entferne unerwünschte Stellen aus einer Audiodatei:
+      </p>
+      <ol>
+        <li>Öffne die Datei "interview_vollschnitt.wav" in Audacity</li>
+        <li>Identifiziere unerwünschte Stellen (z.B. Räuspern, längere Pausen, Nebengeräusche)</li>
+        <li>Markiere die unerwünschten Abschnitte mit dem Auswahlwerkzeug</li>
+        <li>Lösche die markierten Abschnitte (Entf-Taste)</li>
+        <li>Überprüfe die Übergänge auf Unstimmigkeiten</li>
+        <li>Speichere das Ergebnis als "interview_geschnitten.wav"</li>
+      </ol>
+      
+      <h3>Aufgabe 2: Zusammenfügen von Abschnitten</h3>
+      <p>
+        Kombiniere verschiedene Audioabschnitte zu einem zusammenhängenden Stück:
+      </p>
+      <ol>
+        <li>Öffne die Dateien "intro.wav", "teil1.wav", "teil2.wav" und "outro.wav"</li>
+        <li>Kopiere die Inhalte in eine neue Projektdatei</li>
+        <li>Ordne die Abschnitte in der richtigen Reihenfolge an</li>
+        <li>Stelle sicher, dass die Übergänge nahtlos sind</li>
+        <li>Überprüfe die Lautstärkeangleichung zwischen den Abschnitten</li>
+        <li>Exportiere das Ergebnis als MP3</li>
+      </ol>
+      
+      <h3>Aufgabe 3: Entfernen von Störgeräuschen</h3>
+      <p>
+        Reinige eine Audiodatei von Hintergrundrauschen:
+      </p>
+      <ol>
+        <li>Öffne die Datei "aufnahme_mit_rauschen.wav"</li>
+        <li>Identifiziere einen Abschnitt mit nur Rauschen (kein Signal)</li>
+        <li>Wende "Effect > Noise Reduction" an</li>
+        <li>Verwende den "Get Noise Profile" Button mit dem reinen Rauschabschnitt</li>
+        <li>Markiere die gesamte Datei und wende die Rauschunterdrückung an</li>
+        <li>Experimentiere mit den Einstellungen für optimale Ergebnisse</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Praktische Anwendung</h2>
+      
+      <h3>1. Präzisionsarbeit</h3>
+      <p>
+        Nutze Zoom-Funktionen für präzise Schnitte:
+      </p>
+      <ul>
+        <li>Verwende das Zoom-Werkzeug, um feine Details zu sehen</li>
+        <li>Benutze Tastenkürzel (Z für Zoom, F für Fit to Window)</li>
+        <li>Verwende die Pfeiltasten für Frame-by-Frame-Bewegung</li>
+        <li>Setze Labels für wichtige Schnittpunkte</li>
+      </ul>
+      
+      <h3>2. Übergangsgestaltung</h3>
+      <p>
+        Erstelle sanfte Übergänge zwischen Abschnitten:
+      </p>
+      <ol>
+        <li>Wähle einen kleinen Bereich am Übergangspunkt aus</li>
+        <li>Wende "Effect > Fade In" am Anfang des neuen Abschnitts an</li>
+        <li>Wende "Effect > Fade Out" am Ende des vorherigen Abschnitts an</li>
+        <li>Stelle sicher, dass keine Klippungen entsteht</li>
+        <li>Überprüfe den Übergang durch Abspielen</li>
+      </ol>
+      
+      <h3>3. Lautstärkeanpassung</h3>
+      <p>
+        Angleiche die Lautstärke verschiedener Abschnitte an:
+      </p>
+      <ol>
+        <li>Verwende "Effect > Amplify" für grobe Anpassung</li>
+        <li>Benutze den Envelope-Editor für feine Anpassungen innerhalb einer Spur</li>
+        <li>Wende "Effect > Normalize" für einheitliche Spitzenpegel an</li>
+        <li>Überprüfe die Ergebnisse mit dem Peak Meter</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Erweiterte Techniken</h2>
+      
+      <h3>1. Multitrack-Schnitt</h3>
+      <p>
+        Arbeite mit mehreren Audiospuren gleichzeitig:
+      </p>
+      <ul>
+        <li>Erstelle neue Spuren mit "Tracks > Add New > Audio Track"</li>
+        <li>Platziere verschiedene Elemente auf separaten Spuren</li>
+        <li>Passe Lautstärke und Balance jeder Spur individuell an</li>
+        <li>Wende Effekte auf einzelne Spuren an</li>
+      </ul>
+      
+      <h3>2. Synchronisation</h3>
+      <p>
+        Synchronisiere Audio mit anderen Medien:
+      </p>
+      <ul>
+        <li>Verwende Zeitmarken für genaue Positionierung</li>
+        <li>Importiere Video-Dateien zur visuellen Synchronisation</li>
+        <li>Benutze Labels zur Kennzeichnung wichtiger Zeitpunkte</li>
+        <li>Exportiere synchronisiertes Audio für Video</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Qualitätskontrolle</h2>
+      
+      <h3>Was überprüfen?</h3>
+      <ul>
+        <li>Nahtlosigkeit der Übergänge</li>
+        <li>Konsistente Lautstärke über das ganze Stück</li>
+        <li>Freiheit von Störgeräuschen und Artefakten</li>
+        <li>Korrekte Timing und Synchronisation</li>
+        <li>Gesamte Klangqualität</li>
+      </ul>
+      
+      <h3>Wiedergabetests</h3>
+      <p>
+        Teste dein Ergebnis auf verschiedenen Systemen:
+      </p>
+      <ul>
+        <li>Kopfhörer (für Detailgenauigkeit)</li>
+        <li>Kleinlautsprecher (für Mittenbetonung)</li>
+        <li>Verschiedene Wiedergabegeräte (Smartphone, Computer, etc.)</li>
+        <li>Verschiedene Lautstärkepegel</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Best Practices</h2>
+      
+      <h3>Arbeitsablauf</h3>
+      <ul>
+        <li>Erstelle immer eine Sicherungskopie des Originals</li>
+        <li>Arbeite in einem Projekt (.aup3) und exportiere erst am Ende</li>
+        <li>Verwende Labels für wichtige Schnittpunkte</li>
+        <li>Speichere regelmäßig</li>
+        <li>Organisiere deine Dateien sinnvoll</li>
+      </ul>
+      
+      <h3>Technische Aspekte</h3>
+      <ul>
+        <li>Vermeide abrupte Schnitte in lauten Passagen</li>
+        <li>Verwende Fade-In/Out an Schnittpunkten wenn nötig</li>
+        <li>Achte auf Phasenprobleme bei Multitrack-Arbeiten</li>
+        <li>Vermeide Übersteuerung durch zu hohe Verstärkung</li>
+        <li>Exportiere in geeigneten Formaten für den Verwendungszweck</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Auswertung und Dokumentation</h2>
+      
+      <h3>Zu dokumentierende Ergebnisse</h3>
+      <ul>
+        <li>Welche Schnitte wurden vorgenommen und warum?</li>
+        <li>Welche Techniken wurden angewandt?</li>
+        <li>Welche Probleme traten auf und wie wurden sie gelöst?</li>
+        <li>Wie unterscheidet sich das Ergebnis vom Original?</li>
+        <li>Welche Verbesserungen würdest du bei einer erneuten Bearbeitung vornehmen?</li>
+      </ul>
+      
+      <h3>Reflexion</h3>
+      <p>
+        Beantworte folgende Fragen in deiner Dokumentation:
+      </p>
+      <ol>
+        <li>Wie präzise konntest du die gewünschten Schnitte durchführen?</li>
+        <li>Welche Herausforderungen gab es bei den Übergängen?</li>
+        <li>Wie effektiv war die Rauschunterdrückung?</li>
+        <li>Welche neuen Techniken hast du gelernt?</li>
+        <li>Wie könntest du diese Techniken in zukünftigen Projekten anwenden?</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Vertiefung</h2>
+      
+      <h3>Erweiterungsaufgaben</h3>
+      <ul>
+        <li>Erstelle eine vollständige Podcast-Episode mit Intro, Outro und Werbeblöcken</li>
+        <li>Arbeite an einem Musikstück mit mehreren Instrumenten</li>
+        <li>Erstelle eine Radiosendung mit Musik, Sprache und Soundeffekten</li>
+        <li>Übe das Schneiden von Interviews mit mehreren Sprechern</li>
+        <li>Erstelle eine Hörspiel-Szene mit Dialogen und Geräuschen</li>
+      </ul>
+    </section>
+
+
+    <section class="kapitel-navigation">
+      <p>Du hast die Grundlagen des Audio-Schnitts kennengelernt!</p>
+      <a href="03-web-audio-api.html" class="nav-button">→ Weiter zu Web Audio API</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

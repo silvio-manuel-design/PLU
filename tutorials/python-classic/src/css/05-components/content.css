@@ -1,0 +1,403 @@
+/* ==========================================================================
+   PYTHON CLASSIC — Content Component
+   Hauptlayout für Kapitel-Inhalte
+   ========================================================================== */
+
+@layer components {
+  /* Main Layout */
+  .py-classic-content {
+    max-width: var(--py-max-width);
+    margin: 0 auto;
+    padding: var(--py-space-8) var(--py-space-4);
+  }
+
+  @media (min-width: 768px) {
+    .py-classic-content {
+      padding: var(--py-space-12) var(--py-space-6);
+    }
+  }
+
+  /* Chapter Article — full width like header/footer for design consistency */
+  .py-classic-chapter {
+    max-width: var(--py-max-width);
+    margin: 0 auto;
+  }
+
+  /* Readable text width — body text limited for readability while containers stay wide */
+  .py-classic-chapter p,
+  .py-classic-chapter li {
+    max-width: 70ch;
+  }
+
+  .py-classic-chapter .py-classic-section__text {
+    max-width: 70ch;
+  }
+
+  /* Sections */
+  .py-classic-section {
+    margin-bottom: var(--py-space-16);
+    padding: var(--py-space-10) var(--py-space-6);
+    border-radius: var(--py-radius-xl);
+    position: relative;
+  }
+
+  /* Visual divider between consecutive sections */
+  .py-classic-section + .py-classic-section::before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--py-space-8));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--py-primary), var(--py-accent));
+    border-radius: 2px;
+    opacity: 0.35;
+  }
+
+  /* Subtle card-like background for all sections — creates visual containment */
+  .py-classic-section {
+    background-color: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+  }
+
+  /* First section after hero needs no top divider */
+  .py-classic-section:first-of-type::before {
+    display: none;
+  }
+
+  .py-classic-section__title {
+    font-family: var(--py-font-display);
+    font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-3);
+    position: relative;
+    padding-bottom: var(--py-space-3);
+  }
+
+  /* Gold accent underline beneath section titles */
+  .py-classic-section__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--py-accent) 0%, var(--py-accent-dark) 100%);
+    border-radius: 2px;
+  }
+
+  .py-classic-section__title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-lg);
+    font-size: var(--py-text-base);
+    color: var(--py-white);
+    flex-shrink: 0;
+    box-shadow:
+      0 2px 8px rgb(48 105 152 / 0.25),
+      0 0 0 3px rgb(48 105 152 / 0.08);
+  }
+
+  /* ------------------------------------------------------------------------
+     H3 Sub-headings inside sections — visual anchors for long sections
+     ------------------------------------------------------------------------ */
+  .py-classic-section h3 {
+    font-size: var(--py-text-xl);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-primary);
+    margin-top: var(--py-space-10);
+    margin-bottom: var(--py-space-4);
+    padding-bottom: var(--py-space-2);
+    border-bottom: 2px solid var(--py-border-color);
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .py-classic-section h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Visual breathing room between h3 blocks within a section */
+  .py-classic-section h3 + p,
+  .py-classic-section h3 + .py-classic-code-block,
+  .py-classic-section h3 + .py-classic-box,
+  .py-classic-section h3 + ol,
+  .py-classic-section h3 + ul {
+    margin-top: var(--py-space-2);
+  }
+
+  .py-classic-section__text {
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+  }
+
+  /* Info / Warning / Tip Boxes */
+  .py-classic-box {
+    padding: var(--py-space-5);
+    border-radius: var(--py-radius-lg);
+    border-left: 4px solid var(--py-border-color);
+    background-color: var(--py-bg-hover);
+    margin: var(--py-space-6) 0;
+  }
+
+  .py-classic-box__title {
+    font-family: var(--py-font-display);
+    font-weight: var(--py-weight-semibold);
+    font-size: var(--py-text-base);
+    margin-bottom: var(--py-space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+  }
+
+  .py-classic-box__text {
+    color: var(--py-text-secondary);
+    font-size: var(--py-text-sm);
+    line-height: var(--py-leading-relaxed);
+  }
+
+  .py-classic-box__text code {
+    background-color: var(--py-bg-hover);
+  }
+
+  /* Variants */
+  .py-classic-box--info {
+    border-left-color: var(--py-info);
+    background-color: var(--py-bg-hover);
+  }
+
+  .py-classic-box--info .py-classic-box__title {
+    color: var(--py-info);
+  }
+
+  .py-classic-box--warning {
+    border-left-color: var(--py-warning);
+    background-color: #fff7ed;
+  }
+
+  html[data-theme="dark"] .py-classic-box--warning {
+    background-color: #2a1a00;
+  }
+
+  .py-classic-box--warning .py-classic-box__title {
+    color: var(--py-warning);
+  }
+
+  .py-classic-box--tip {
+    border-left-color: var(--py-success);
+    background-color: #f0fdf4;
+  }
+
+  html[data-theme="dark"] .py-classic-box--tip {
+    background-color: #052e16;
+  }
+
+  .py-classic-box--tip .py-classic-box__title {
+    color: var(--py-success);
+  }
+
+  /* KI Co-Coding Box (Signature Element) */
+  .py-classic-box--ki {
+    border-left-color: var(--py-accent);
+    background: linear-gradient(135deg, var(--py-bg-kibox) 0%, var(--py-bg-card) 100%);
+    border: 1px solid var(--py-accent-dark);
+    border-left-width: 4px;
+  }
+
+  html[data-theme="dark"] .py-classic-box--ki {
+    background: linear-gradient(135deg, #2a1f00 0%, var(--py-bg-card) 100%);
+  }
+
+  .py-classic-box--ki .py-classic-box__title {
+    color: var(--py-accent-dark);
+  }
+
+  html[data-theme="dark"] .py-classic-box--ki .py-classic-box__title {
+    color: var(--py-accent);
+  }
+
+  .py-classic-box--ki .py-classic-box__text {
+    color: var(--py-text-secondary);
+  }
+
+  /* Spaced top variant for boxes following other content */
+  .py-classic-box--spaced-top {
+    margin-top: var(--py-space-10);
+  }
+
+  /* Steps / Numbered Instructions */
+  .py-classic-steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: var(--py-space-6) 0;
+  }
+
+  .py-classic-steps__item {
+    position: relative;
+    padding-left: var(--py-space-12);
+    margin-bottom: var(--py-space-5);
+    min-height: 2.5rem;
+  }
+
+  .py-classic-steps__item::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    color: var(--py-white);
+    font-family: var(--py-font-display);
+    font-weight: var(--py-weight-bold);
+    font-size: var(--py-text-sm);
+    border-radius: var(--py-radius-full);
+    flex-shrink: 0;
+  }
+
+  .py-classic-steps__text {
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    padding-top: var(--py-space-1);
+  }
+
+  .py-classic-steps__text code {
+    background-color: var(--py-bg-hover);
+  }
+
+  /* Keyboard Keys */
+  .py-classic-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0 var(--py-space-2);
+    background: linear-gradient(to bottom, var(--py-bg-elevated) 0%, var(--py-bg-hover) 100%);
+    border: 1px solid var(--py-border-strong);
+    border-radius: var(--py-radius-sm);
+    box-shadow: 0 2px 0 var(--py-border-strong);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-primary);
+    line-height: 1;
+  }
+
+  /* Chapter Grid (for Hub) */
+  .py-classic-chapter-grid {
+    display: grid;
+    gap: var(--py-space-6);
+    margin-top: var(--py-space-8);
+  }
+
+  @media (min-width: 640px) {
+    .py-classic-chapter-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .py-classic-chapter-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .py-classic-chapter-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    padding: var(--py-space-6);
+    transition: transform var(--py-transition-base),
+                box-shadow var(--py-transition-base),
+                border-color var(--py-transition-base);
+  }
+
+  .py-classic-chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--py-shadow-lg);
+    border-color: var(--py-primary-light);
+  }
+
+  .py-classic-chapter-card__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    color: var(--py-white);
+    font-family: var(--py-font-display);
+    font-weight: var(--py-weight-bold);
+    font-size: var(--py-text-sm);
+    border-radius: var(--py-radius-lg);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-classic-chapter-card__title {
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-classic-chapter-card__desc {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    flex-grow: 1;
+  }
+
+  .py-classic-chapter-card__meta {
+    display: flex;
+    gap: var(--py-space-3);
+    margin-top: var(--py-space-4);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+
+  /* Project card variant */
+  .py-classic-chapter-card--project {
+    border-color: rgba(255, 212, 59, 0.3);
+    background: linear-gradient(135deg, var(--py-bg-card) 0%, rgba(255, 212, 59, 0.04) 100%);
+  }
+
+  .py-classic-chapter-card--project:hover {
+    border-color: var(--py-accent);
+    box-shadow: 0 8px 32px rgba(255, 212, 59, 0.12);
+  }
+
+  .py-classic-chapter-card--project .py-classic-chapter-card__number {
+    background: linear-gradient(135deg, var(--py-accent) 0%, #e6b800 100%);
+    color: #1a1a2e;
+  }
+
+  @media (min-width: 640px) {
+    .py-classic-chapter-card--project {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .py-classic-chapter-card--project {
+      grid-column: span 2;
+    }
+  }
+}

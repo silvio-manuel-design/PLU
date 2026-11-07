@@ -1,0 +1,286 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────
+     Landscape Time Playground — M08
+     Interactive landscape time-of-day simulator
+     ────────────────────────────────────────────── */
+
+  .photo-landscape-playground {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-6) 0;
+    overflow: hidden;
+  }
+
+  .photo-landscape-playground__title {
+    font-family: var(--photo-font-display);
+    font-size: var(--photo-font-size-2xl);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-2);
+    text-align: center;
+  }
+
+  .photo-landscape-playground__subtitle {
+    font-size: var(--photo-font-size-base);
+    color: var(--photo-text-secondary);
+    text-align: center;
+    margin-bottom: var(--photo-space-6);
+  }
+
+  /* ── Stage ── */
+  .photo-landscape-playground__stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 260px;
+    border-radius: var(--photo-radius-lg);
+    margin-bottom: var(--photo-space-5);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.5s ease;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 60%, #90EE90 100%);
+  }
+
+  /* Time states — sky gradients */
+  .photo-landscape-playground__stage.is-golden {
+    background: linear-gradient(180deg, #FF8C42 0%, #FFB347 30%, #FFD700 60%, #8B6914 100%);
+  }
+  .photo-landscape-playground__stage.is-blue {
+    background: linear-gradient(180deg, #1a1a4e 0%, #2d3561 30%, #4a6fa5 60%, #6B8E9F 100%);
+  }
+  .photo-landscape-playground__stage.is-midday {
+    background: linear-gradient(180deg, #4A90D9 0%, #87CEEB 40%, #B8E6F0 70%, #90EE90 100%);
+  }
+  .photo-landscape-playground__stage.is-twilight {
+    background: linear-gradient(180deg, #5B4B8A 0%, #8B5A6B 30%, #C4785A 60%, #2F2F4F 100%);
+  }
+  .photo-landscape-playground__stage.is-night {
+    background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3e 40%, #2d3561 70%, #1a2a1a 100%);
+  }
+
+  /* Landscape SVG */
+  .photo-landscape-playground__scene {
+    width: 100%;
+    height: 240px;
+    position: relative;
+  }
+
+  .photo-landscape-playground__scene svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo-landscape-playground__scene .mountain-back {
+    fill: var(--photo-text-primary);
+    opacity: 0.12;
+    transition: opacity 0.5s;
+  }
+  .photo-landscape-playground__scene .mountain-front {
+    fill: var(--photo-text-primary);
+    opacity: 0.2;
+    transition: opacity 0.5s;
+  }
+  .photo-landscape-playground__scene .ground {
+    fill: var(--photo-text-primary);
+    opacity: 0.15;
+    transition: opacity 0.5s;
+  }
+  .photo-landscape-playground__scene .sun {
+    fill: #FFD700;
+    opacity: 0.9;
+    transition: transform 0.5s, fill 0.5s;
+  }
+  .photo-landscape-playground__scene .moon {
+    fill: #E8E8E8;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .photo-landscape-playground__scene .stars {
+    fill: #FFFFFF;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .photo-landscape-playground__scene .clouds {
+    fill: #FFFFFF;
+    opacity: 0.3;
+    transition: opacity 0.5s;
+  }
+
+  /* State-driven element visibility */
+  .photo-landscape-playground__stage.is-golden .sun { fill: #FF6B35; transform: translateY(20px); }
+  .photo-landscape-playground__stage.is-golden .clouds { opacity: 0.2; fill: #FFE4B5; }
+  .photo-landscape-playground__stage.is-golden .mountain-back { opacity: 0.08; }
+  .photo-landscape-playground__stage.is-golden .mountain-front { opacity: 0.15; }
+
+  .photo-landscape-playground__stage.is-blue .sun { opacity: 0; }
+  .photo-landscape-playground__stage.is-blue .moon { opacity: 0.8; }
+  .photo-landscape-playground__stage.is-blue .clouds { opacity: 0.1; }
+  .photo-landscape-playground__stage.is-blue .mountain-back { opacity: 0.06; }
+  .photo-landscape-playground__stage.is-blue .mountain-front { opacity: 0.12; }
+
+  .photo-landscape-playground__stage.is-midday .sun { fill: #FFF5B7; transform: translateY(-10px); }
+  .photo-landscape-playground__stage.is-midday .clouds { opacity: 0.4; }
+
+  .photo-landscape-playground__stage.is-twilight .sun { fill: #FF4757; transform: translateY(40px); opacity: 0.6; }
+  .photo-landscape-playground__stage.is-twilight .clouds { opacity: 0.15; fill: #FFB6C1; }
+  .photo-landscape-playground__stage.is-twilight .mountain-back { opacity: 0.06; }
+
+  .photo-landscape-playground__stage.is-night .sun { opacity: 0; }
+  .photo-landscape-playground__stage.is-night .moon { opacity: 0.9; transform: translateY(-5px); }
+  .photo-landscape-playground__stage.is-night .stars { opacity: 0.7; }
+  .photo-landscape-playground__stage.is-night .mountain-back { opacity: 0.04; }
+  .photo-landscape-playground__stage.is-night .mountain-front { opacity: 0.08; }
+  .photo-landscape-playground__stage.is-night .ground { opacity: 0.06; }
+
+  /* ── Controls ── */
+  .photo-landscape-playground__controls {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--photo-space-3);
+    margin-bottom: var(--photo-space-5);
+  }
+
+  .photo-landscape-playground__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-2);
+    padding: var(--photo-space-4) var(--photo-space-3);
+    background: var(--photo-bg-surface);
+    border: 2px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  .photo-landscape-playground__btn:hover {
+    border-color: var(--photo-border-default);
+    transform: translateY(-2px);
+  }
+
+  .photo-landscape-playground__btn.is-active {
+    border-color: var(--photo-accent);
+    background: color-mix(in srgb, var(--photo-accent) 8%, var(--photo-bg-surface));
+  }
+
+  .photo-landscape-playground__btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--photo-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: background 0.2s;
+  }
+
+  .photo-landscape-playground__btn.is-active .photo-landscape-playground__btn-icon {
+    background: color-mix(in srgb, var(--photo-accent) 15%, transparent);
+  }
+
+  .photo-landscape-playground__btn-label {
+    font-size: var(--photo-font-size-sm);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+  }
+
+  .photo-landscape-playground__btn-desc {
+    font-size: var(--photo-font-size-xs);
+    color: var(--photo-text-tertiary);
+    line-height: 1.3;
+  }
+
+  /* ── Info Panel ── */
+  .photo-landscape-playground__info {
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-5);
+  }
+
+  .photo-landscape-playground__info-title {
+    font-family: var(--photo-font-display);
+    font-size: var(--photo-font-size-lg);
+    font-weight: 600;
+    color: var(--photo-accent);
+    margin-bottom: var(--photo-space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+  }
+
+  .photo-landscape-playground__info-text {
+    font-size: var(--photo-font-size-base);
+    color: var(--photo-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--photo-space-3);
+  }
+
+  .photo-landscape-playground__info-smartphone {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-3);
+    padding: var(--photo-space-3) var(--photo-space-4);
+    background: color-mix(in srgb, var(--photo-accent) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--photo-accent) 15%, transparent);
+    border-radius: var(--photo-radius-md);
+  }
+
+  .photo-landscape-playground__info-smartphone i {
+    color: var(--photo-accent);
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .photo-landscape-playground__info-smartphone span {
+    font-size: var(--photo-font-size-sm);
+    color: var(--photo-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .photo-landscape-playground {
+      padding: var(--photo-space-4);
+    }
+
+    .photo-landscape-playground__controls {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .photo-landscape-playground__stage {
+      min-height: 200px;
+    }
+
+    .photo-landscape-playground__scene {
+      height: 190px;
+    }
+
+    .photo-landscape-playground__title {
+      font-size: var(--photo-font-size-xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-landscape-playground__controls {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--photo-space-2);
+    }
+
+    .photo-landscape-playground__btn {
+      padding: var(--photo-space-3) var(--photo-space-2);
+    }
+
+    .photo-landscape-playground__btn-icon {
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+    }
+  }
+}

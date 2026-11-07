@@ -1,0 +1,270 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────
+     Portrait Light Playground — M07
+     Interactive portrait lighting simulator
+     ────────────────────────────────────────────── */
+
+  .photo-portrait-playground {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-6) 0;
+    overflow: hidden;
+  }
+
+  .photo-portrait-playground__title {
+    font-family: var(--photo-font-display);
+    font-size: var(--photo-font-size-2xl);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-2);
+    text-align: center;
+  }
+
+  .photo-portrait-playground__subtitle {
+    font-size: var(--photo-font-size-base);
+    color: var(--photo-text-secondary);
+    text-align: center;
+    margin-bottom: var(--photo-space-6);
+  }
+
+  /* ── Stage ── */
+  .photo-portrait-playground__stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+    background: var(--photo-bg-surface);
+    border-radius: var(--photo-radius-lg);
+    margin-bottom: var(--photo-space-5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-portrait-playground__face {
+    width: 200px;
+    height: 240px;
+    position: relative;
+  }
+
+  /* Face SVG styling — different shadow states per lighting */
+  .photo-portrait-playground__face .face-base {
+    fill: var(--photo-text-primary);
+    opacity: 0.15;
+    transition: opacity 0.3s, filter 0.3s;
+  }
+
+  .photo-portrait-playground__face .face-highlight {
+    fill: var(--photo-text-primary);
+    opacity: 0.08;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .photo-portrait-playground__face .face-shadow {
+    fill: var(--photo-text-primary);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .photo-portrait-playground__face .eye-reflection {
+    fill: var(--photo-accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* Lighting states */
+  .photo-portrait-playground__stage.is-window .face-highlight { opacity: 0.2; transform: translateX(5px); }
+  .photo-portrait-playground__stage.is-window .face-shadow { opacity: 0.06; transform: translateX(-8px); }
+
+  .photo-portrait-playground__stage.is-butterfly .face-highlight { opacity: 0.22; transform: translateY(-5px); }
+  .photo-portrait-playground__stage.is-butterfly .face-shadow { opacity: 0.08; transform: translateY(10px); }
+  .photo-portrait-playground__stage.is-butterfly .nose-shadow { opacity: 0.12; transform: translateY(4px); }
+
+  .photo-portrait-playground__stage.is-rembrandt .face-highlight { opacity: 0.15; transform: translateX(-3px); }
+  .photo-portrait-playground__stage.is-rembrandt .face-shadow { opacity: 0.12; transform: translateX(8px); }
+  .photo-portrait-playground__stage.is-rembrandt .triangle-light { opacity: 0.18; transform: translateX(4px) translateY(-2px); }
+
+  .photo-portrait-playground__stage.is-ring .face-highlight { opacity: 0.18; }
+  .photo-portrait-playground__stage.is-ring .face-shadow { opacity: 0.03; }
+  .photo-portrait-playground__stage.is-ring .eye-reflection { opacity: 0.6; }
+  .photo-portrait-playground__stage.is-ring .ring-glow { opacity: 0.15; }
+
+  /* Glow overlay */
+  .photo-portrait-playground__glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    mix-blend-mode: soft-light;
+  }
+
+  .photo-portrait-playground__stage.is-window .photo-portrait-playground__glow {
+    background: radial-gradient(circle at 65% 40%, rgba(255, 223, 180, 0.15) 0%, transparent 60%);
+    opacity: 1;
+  }
+  .photo-portrait-playground__stage.is-butterfly .photo-portrait-playground__glow {
+    background: radial-gradient(circle at 50% 20%, rgba(255, 235, 200, 0.18) 0%, transparent 50%);
+    opacity: 1;
+  }
+  .photo-portrait-playground__stage.is-rembrandt .photo-portrait-playground__glow {
+    background: radial-gradient(circle at 30% 40%, rgba(255, 210, 160, 0.14) 0%, transparent 55%);
+    opacity: 1;
+  }
+  .photo-portrait-playground__stage.is-ring .photo-portrait-playground__glow {
+    background: radial-gradient(circle at 50% 35%, rgba(200, 220, 255, 0.12) 0%, transparent 50%);
+    opacity: 1;
+  }
+
+  /* ── Controls ── */
+  .photo-portrait-playground__controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--photo-space-3);
+    margin-bottom: var(--photo-space-5);
+  }
+
+  .photo-portrait-playground__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-2);
+    padding: var(--photo-space-4) var(--photo-space-3);
+    background: var(--photo-bg-surface);
+    border: 2px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  .photo-portrait-playground__btn:hover {
+    border-color: var(--photo-border-default);
+    transform: translateY(-2px);
+  }
+
+  .photo-portrait-playground__btn.is-active {
+    border-color: var(--photo-accent);
+    background: color-mix(in srgb, var(--photo-accent) 8%, var(--photo-bg-surface));
+  }
+
+  .photo-portrait-playground__btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--photo-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: background 0.2s;
+  }
+
+  .photo-portrait-playground__btn.is-active .photo-portrait-playground__btn-icon {
+    background: color-mix(in srgb, var(--photo-accent) 15%, transparent);
+  }
+
+  .photo-portrait-playground__btn-label {
+    font-size: var(--photo-font-size-sm);
+    font-weight: 600;
+    color: var(--photo-text-primary);
+  }
+
+  .photo-portrait-playground__btn-desc {
+    font-size: var(--photo-font-size-xs);
+    color: var(--photo-text-tertiary);
+    line-height: 1.3;
+  }
+
+  /* ── Info Panel ── */
+  .photo-portrait-playground__info {
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-5);
+  }
+
+  .photo-portrait-playground__info-title {
+    font-family: var(--photo-font-display);
+    font-size: var(--photo-font-size-lg);
+    font-weight: 600;
+    color: var(--photo-accent);
+    margin-bottom: var(--photo-space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+  }
+
+  .photo-portrait-playground__info-text {
+    font-size: var(--photo-font-size-base);
+    color: var(--photo-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--photo-space-3);
+  }
+
+  .photo-portrait-playground__info-smartphone {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-3);
+    padding: var(--photo-space-3) var(--photo-space-4);
+    background: color-mix(in srgb, var(--photo-accent) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--photo-accent) 15%, transparent);
+    border-radius: var(--photo-radius-md);
+  }
+
+  .photo-portrait-playground__info-smartphone i {
+    color: var(--photo-accent);
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .photo-portrait-playground__info-smartphone span {
+    font-size: var(--photo-font-size-sm);
+    color: var(--photo-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .photo-portrait-playground {
+      padding: var(--photo-space-4);
+    }
+
+    .photo-portrait-playground__controls {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .photo-portrait-playground__face {
+      width: 160px;
+      height: 190px;
+    }
+
+    .photo-portrait-playground__stage {
+      min-height: 220px;
+    }
+
+    .photo-portrait-playground__title {
+      font-size: var(--photo-font-size-xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-portrait-playground__controls {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--photo-space-2);
+    }
+
+    .photo-portrait-playground__btn {
+      padding: var(--photo-space-3) var(--photo-space-2);
+    }
+
+    .photo-portrait-playground__btn-icon {
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+    }
+  }
+}

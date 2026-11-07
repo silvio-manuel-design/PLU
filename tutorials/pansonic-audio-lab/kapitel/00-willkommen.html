@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul 00: Willkommen | Pansonic Lab</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    .chapter-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 100px 24px 40px;
+    }
+    
+    .chapter-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .chapter-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-breadcrumb a {
+      color: var(--accent-coral);
+      text-decoration: none;
+    }
+    
+    .chapter-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .chapter-nummer {
+      display: inline-block;
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .chapter-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    
+    .content-section {
+      margin-bottom: 64px;
+    }
+    
+    .content-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .content-section h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--accent-coral);
+      border-radius: 2px;
+    }
+    
+    .content-section h3 {
+      font-size: 1.2rem;
+      margin: 32px 0 16px;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .content-section ul, .content-section ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    
+    .content-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .checklist li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 12px;
+    }
+    
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+    
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .tool-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-4px);
+    }
+    
+    .tool-card::after {
+      content: '👆 Klicken für Details';
+      display: block;
+      font-size: 0.7rem;
+      color: var(--accent-coral);
+      margin-top: 8px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .tool-card:hover::after {
+      opacity: 1;
+    }
+    
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      background: var(--accent-coral-dim);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .tool-name {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .tool-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    .practice-box {
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+      border: 1px solid var(--accent-coral);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    
+    .practice-box h3 {
+      color: var(--accent-coral);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .practice-box ol {
+      margin-bottom: 0;
+    }
+    
+    .practice-box li {
+      margin-bottom: 12px;
+    }
+    
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-teal);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .tip-box strong {
+      color: var(--accent-teal);
+    }
+    
+    .warning-box {
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 4px solid #f59e0b;
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .mic-setup-img {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      margin: 24px 0;
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .mic-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .mic-circle {
+      width: 80px;
+      height: 80px;
+      background: var(--bg-card);
+      border: 3px solid var(--accent-coral);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    
+    .distance-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-muted);
+    }
+    
+    .distance-arrow span {
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+    
+    .person-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--accent-teal-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-subtle);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-active);
+    }
+    
+    .nav-btn-primary {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    .nav-btn-primary:hover {
+      background: var(--accent-coral-light);
+    }
+    
+    .recording-test {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-subtle);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin: 32px 0;
+    }
+    
+    .recording-test.recording {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+    
+    .record-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent-coral);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 16px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .record-btn:hover,
+    .record-btn:active {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px var(--accent-coral);
+    }
+    
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+      .record-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+      }
+      
+      .record-btn:hover {
+        transform: none;
+      }
+      
+      .record-btn:active {
+        transform: scale(0.95);
+      }
+    }
+    
+    .record-btn.recording {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 90, 0.7); }
+      50% { box-shadow: 0 0 0 20px rgba(255, 90, 90, 0); }
+    }
+    
+    .audio-visualizer {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 20px 0;
+    }
+    
+    .audio-bar {
+      width: 4px;
+      background: var(--accent-coral);
+      border-radius: 2px;
+      transition: height 0.1s ease;
+    }
+    
+    .chapter-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+      z-index: 1001;
+    }
+    
+    .chapter-progress-bar {
+      height: 100%;
+      background: var(--accent-coral);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+    
+    /* Audio Widget for Chapter Pages */
+    .chapter-audio-widget {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 380px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 1024px) {
+      .chapter-audio-widget {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        width: auto;
+      }
+    }
+    
+    .chapter-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .chapter-widget-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .chapter-widget-toggle {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+    
+    .chapter-widget-content {
+      padding: 16px;
+      display: none;
+    }
+    
+    .chapter-widget.expanded .chapter-widget-content {
+      display: block;
+    }
+    
+    .chapter-widget-upload {
+      border: 2px dashed var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .chapter-widget-upload:hover {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+    
+    .chapter-widget-upload-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    
+    .chapter-widget-upload-text {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .chapter-widget-track-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .chapter-track-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .chapter-track-time {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-progress-container {
+      height: 4px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-progress-fill {
+      height: 100%;
+      background: var(--accent-coral);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+    
+    .chapter-widget-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .chapter-widget-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-tertiary);
+      border: none;
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .chapter-widget-btn:hover {
+      background: var(--border-active);
+    }
+    
+    .chapter-widget-btn.play {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-coral);
+    }
+    
+    .chapter-widget-btn.play:hover {
+      background: var(--accent-coral-light);
+    }
+    
+    .chapter-volume-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .chapter-volume-icon {
+      font-size: 0.85rem;
+    }
+    
+    .chapter-volume-slider {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    
+    .chapter-volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .chapter-volume-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+    
+    /* Tool Modal Popup */
+    .tool-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    
+    .tool-modal-overlay.active {
+      display: flex;
+    }
+    
+    .tool-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlideIn 0.3s ease;
+    }
+    
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    .tool-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      background: var(--bg-tertiary);
+      border: none;
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .tool-modal-close:hover {
+      background: var(--accent-coral);
+      color: white;
+    }
+    
+    .tool-modal-header {
+      padding: 32px 32px 0;
+      text-align: center;
+    }
+    
+    .tool-modal-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--accent-coral-dim);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 16px;
+    }
+    
+    .tool-modal-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .tool-modal-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+    
+    .tool-modal-body {
+      padding: 24px 32px;
+    }
+    
+    .tool-illustration {
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    
+    .tool-illustration svg,
+    .tool-illustration canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    .tool-modal-text {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    
+    .tool-modal-tips {
+      background: var(--accent-teal-dim);
+      border-left: 4px solid var(--accent-teal);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 20px;
+    }
+    
+    .tool-modal-tips strong {
+      color: var(--accent-teal);
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .tool-modal-tips ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .tool-modal-tips li {
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Tools</a>
+          <div class="dropdown-menu">
+            <a href="../tools/audacity.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+              <span class="dropdown-item-desc">Open Source Fundament</span>
+            </a>
+            <a href="../tools/suno.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+              <span class="dropdown-item-desc">KI-Musik Generierung</span>
+            </a>
+            <a href="../tools/elevenlabs.html" class="dropdown-item">
+              <span class="dropdown-item-name">Stimmen-KI</span>
+              <span class="dropdown-item-desc">Voice Cloning</span>
+            </a>
+            <a href="../tools/daw.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+              <span class="dropdown-item-desc">Prof Software</span>
+            </a>
+          </div>
+        </div>
+        <a href="../bibliothek.html" class="nav-link">Bibliothek</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch">
+        <a href="00-willkommen.html" class="lang-btn active">DE</a>
+        <a href="00-welcome.html" class="lang-btn">EN</a>
+      </nav>
+      <a href="../../pages/spenden.html" class="btn-support">Support</a>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="../player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Audio Widget (Tabs: Generator + Player) - Default collapsed -->
+<div class="audio-widget collapsed" id="audioWidget">
+  <div class="audio-widget-header">
+    <span class="audio-widget-title">🎵 Audio Lab</span>
+    <button class="audio-widget-toggle" id="audioWidgetToggle">+</button>
+  </div>
+  <div class="audio-widget-content">
+    <div class="audio-tabs">
+      <button class="audio-tab active" data-tab="generator">Generator</button>
+      <button class="audio-tab" data-tab="player">Player</button>
+    </div>
+    <div class="audio-tab-content active" id="generatorTab">
+      <div class="freq-display">
+        <div class="freq-value" id="freqValue">440 Hz</div>
+        <div class="freq-label">Sine Wave</div>
+      </div>
+      <input type="range" class="freq-slider" id="freqSlider" min="20" max="2000" value="440">
+      <div class="gen-controls">
+        <button class="gen-btn active" data-wave="sine">SINE</button>
+        <button class="gen-btn" data-wave="square">SQUARE</button>
+        <button class="gen-btn" data-wave="sawtooth">SAW</button>
+      </div>
+      <button class="play-btn" id="playBtn">Play Tone</button>
+    </div>
+    <div class="audio-tab-content" id="playerTab">
+      <div class="player-upload" id="playerUpload">
+        <div class="player-upload-text">Audio-Datei laden</div>
+        <div class="player-upload-hint">MP3, WAV, OGG</div>
+      </div>
+      <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+      <div class="player-track-info" id="playerTrackInfo" style="display: none;">
+        <div class="track-name" id="trackName">Keine Datei</div>
+        <div class="track-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+      </div>
+      <div class="progress-container" id="progressContainer" style="display: none;">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="player-controls" id="playerControls" style="display: none;">
+        <button class="player-btn" id="prevBtn">⏮</button>
+        <button class="player-btn" id="playPauseBtn">⏯</button>
+        <button class="player-btn" id="nextBtn">⏭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Hell/Dunkel" aria-label="Theme wechseln">🌓</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <button class="fab-btn" id="langToggle" data-tooltip="English/Deutsch">EN</button>
+    <button class="fab-btn" id="backToTop" data-tooltip="Nach oben">↑</button>
+  </div>
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header-inner">
+      <nav class="chapter-breadcrumb">
+        <a href="../index.html">Pansonic Lab</a>
+        <span>/</span>
+        <span>Modul 00</span>
+      </nav>
+      <span class="chapter-number">Modul 00</span>
+      <h1 class="chapter-title">Willkommen im Pansonic Lab</h1>
+      <p class="chapter-lead">Dein Studio-Setup für 0€. Software, Hardware (die du schon hast) und die ersten Aufnahmen. Keine teuren Mikrofone nötig – wir starten mit dem, was da ist.</p>
+    </div>
+  </header>
+
+  <!-- Chapter Content -->
+  <main class="chapter-content">
+    
+    <section class="content-section">
+      <h2>Das Minimal-Setup</h2>
+      <p>Du brauchst kein Studio für 10.000€. Du brauchst:</p>
+      
+      <div class="tool-grid">
+        <div class="tool-card" data-tool="computer">
+          <div class="tool-icon">💻</div>
+          <div class="tool-name">Computer</div>
+          <div class="tool-desc">Laptop oder PC</div>
+        </div>
+        <div class="tool-card" data-tool="microphone">
+          <div class="tool-icon">🎙️</div>
+          <div class="tool-name">Mikrofon</div>
+          <div class="tool-desc">Headset, USB-Mic oder Smartphone</div>
+        </div>
+        <div class="tool-card" data-tool="headphones">
+          <div class="tool-icon">🎧</div>
+          <div class="tool-name">Kopfhörer</div>
+          <div class="tool-desc">Zum Kontrollieren</div>
+        </div>
+        <div class="tool-card" data-tool="smartphone">
+          <div class="tool-icon">📱</div>
+          <div class="tool-name">Smartphone</div>
+          <div class="tool-desc">Als Recorder-App</div>
+        </div>
+        <div class="tool-card" data-tool="room">
+          <div class="tool-icon">🏠</div>
+          <div class="tool-name">Raum</div>
+          <div class="tool-desc">Kleiner, möblierter Raum</div>
+        </div>
+      </div>
+      
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">
+        👆 Klicke auf ein Element für Details und Tipps
+      </p>
+      
+      <div class="tip-box">
+        <strong>Pro-Tipp:</strong> Ein voller Kleiderschrank ist ein besserer "Studio-Raum" als eine leere Garage. Textilien absorbieren Schall und verhindern hallige Aufnahmen.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Die Software</h2>
+      <p>Wir arbeiten hauptsächlich mit <strong>Open-Source-Tools</strong> – kostenlos, legal, professionell:</p>
+      
+      <ul class="checklist">
+        <li><strong>Audacity</strong> – Dein Haupt-Werkzeug für Aufnahme, Editing, Effekte</li>
+        <li><strong>Suno AI</strong> – Kostenlose Tier: 50 Credits/Tag für KI-Musik</li>
+        <li><strong>ElevenLabs</strong> – Voice Cloning mit kostenloser Testversion</li>
+        <li><strong>Audimee</strong> – Alternativ kostenlose Stimm-Modelle (10 Min/Monat)</li>
+      </ul>
+      
+      <h3>Audacity installieren</h3>
+      <ol>
+        <li>Besuche <a href="https://www.audacityteam.org" target="_blank" style="color: var(--accent-coral);">audacityteam.org</a></li>
+        <li>Lade die Version für dein Betriebssystem herunter</li>
+        <li>Installiere FFmpeg für MP3-Export (wird beim ersten Export gefragt)</li>
+        <li>Starte Audacity – das Interface sieht komplex aus, ist es aber nicht</li>
+      </ol>
+      
+      <div class="warning-box">
+        <strong>Wichtig:</strong> Lade Audacity NUR von der offiziellen Website. "Gecrackte" Versionen enthalten oft Malware. Die echte Software ist gratis.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Erste Aufnahme</h2>
+      <p>Bevor wir Musik machen, nehmen wir deine Stimme auf. Das ist der schnellste Weg, um mit dem Workflow vertraut zu werden.</p>
+      
+      <div class="mic-setup-img">
+        <div class="mic-diagram">
+          <div class="person-icon">👤</div>
+          <div class="distance-arrow">
+            <span>|</span>
+            <span>|</span>
+            <span>|</span>
+            <span>15-30 cm</span>
+            <span>|</span>
+            <span>|</span>
+            <span>|</span>
+          </div>
+          <div class="mic-circle">🎙️</div>
+        </div>
+        <p style="margin-top: 20px; color: var(--text-muted);">
+          Halte das Mikrofon 15-30 cm entfernt. Nicht direkt davor pusten – seitlich oder leicht schräg sprechen.
+        </p>
+      </div>
+      
+      <h3>Setup-Check</h3>
+      <ul class="checklist">
+        <li>Laptop-Lüfter weit weg oder im Leise-Modus</li>
+        <li>Fenster schließen (Straßenlärm)</li>
+        <li>Handy auf Flugmodus (keine Störgeräusche)</li>
+        <li>Kleiner Raum bevorzugt (weniger Hall)</li>
+        <li>Handtuch vor harte Oberflächen legen (Tisch, Wand)</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2>Mut zur Praxis</h2>
+      
+      <div class="practice-box">
+        <h3>Deine erste Übung</h3>
+        <ol>
+          <li>Öffne Audacity</li>
+          <li>Klicke auf den roten <strong>Record</strong>-Button</li>
+          <li>Sage: "Das ist meine erste Aufnahme im Pansonic Lab. Heute ist [Datum]."</li>
+          <li>Sprich 30 Sekunden über dein Lieblingslied – warum gefällt es dir?</li>
+          <li>Klicke auf <strong>Stop</strong> (Quadrat)</li>
+          <li>Spiele es ab (Spacebar oder Play-Button)</li>
+          <li>Exportiere als MP3: File → Export → Export as MP3</li>
+          <li><strong>Lade deine Aufnahme hier im Audio-Player (links) hoch!</strong></li>
+        </ol>
+      </div>
+      
+      <div class="recording-test" id="recordingTest">
+        <button class="record-btn" id="recordBtn">⏺</button>
+        <p id="recordStatus">Klicke, um eine Testaufnahme zu starten</p>
+        <div class="audio-visualizer" id="visualizer" style="display: none;"></div>
+        <audio id="audioPlayback" controls style="display: none; margin-top: 16px; width: 100%;"></audio>
+      </div>
+      
+      <div class="tip-box">
+        <strong>Analyse:</strong> Höre dir die Aufnahme kritisch an. Hörst du Echo? Laptop-Lüfter? Deine Atmung? Das sind keine Fehler – das sind Lernchancen für die nächste Aufnahme.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Was kommt als Nächstes?</h2>
+      <p>In den nächsten Modulen lernst du:</p>
+      
+      <ul>
+        <li><strong>Modul 01:</strong> Wie Schall funktioniert (Frequenzen, Wellenformen)</li>
+        <li><strong>Modul 02:</strong> Rhythmus und Groove verstehen</li>
+        <li><strong>Modul 03:</strong> Bessere Aufnahmen durch Mikrofon-Technik</li>
+        <li><strong>Modul 04:</strong> Audacity im Detail – Cut, Copy, Effekte</li>
+        <li><strong>Modul 05:</strong> KI-Vocals mit ElevenLabs & Audimee</li>
+        <li><strong>Modul 06:</strong> Komplette Produktion mit Suno AI</li>
+        <li><strong>Modul 07:</strong> Mastering für Streaming-Qualität</li>
+        <li><strong>Modul 08:</strong> Zukunft der Musikproduktion</li>
+      </ul>
+      
+      <p>Jedes Modul baut auf dem vorherigen auf. Du wirst nicht nur Knöpfe drücken – du wirst <strong>verstehen</strong>, warum du sie drückst.</p>
+    </section>
+
+  </main>
+
+  <!-- Navigation Footer -->
+  <nav class="nav-footer">
+    <a href="../index.html" class="nav-btn">
+      Zurück
+    </a>
+    <a href="../index.html#module" class="nav-btn">
+      Modulübersicht
+    </a>
+    <a href="01-schall.html" class="nav-btn nav-btn-primary">
+      Weiter
+    </a>
+  </nav>
+
+  <!-- Tool Detail Modal -->
+  <div class="tool-modal-overlay" id="toolModalOverlay">
+    <div class="tool-modal">
+      <button class="tool-modal-close" id="toolModalClose">×</button>
+      <div class="tool-modal-header">
+        <div class="tool-modal-icon" id="modalIcon">💻</div>
+        <div class="tool-modal-title" id="modalTitle">Computer</div>
+        <div class="tool-modal-subtitle" id="modalSubtitle">Das Herzstück deines Studios</div>
+      </div>
+      <div class="tool-modal-body">
+        <div class="tool-illustration" id="modalIllustration"></div>
+        <div class="tool-modal-text" id="modalText">Beschreibungstext...</div>
+        <div class="tool-modal-tips" id="modalTips">
+          <strong>💡 Pro-Tipps:</strong>
+          <ul id="modalTipsList">
+            <li>Tipp 1</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="../index.html">Start</a>
+      <a href="../../pages/spenden.html">Support</a>
+      <a href="../../pages/impressum.html">Impressum</a>
+    </nav>
+    <p class="footer-copy"> PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+    <script>
+    // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${isGerman ? '../index.html' : '../index-en.html'}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${isGerman ? '../tools/audacity.html' : '../tools/audacity-en.html'}">Audacity</a>
+              <a href="${isGerman ? '../tools/suno.html' : '../tools/suno-en.html'}">Suno AI</a>
+              <a href="${isGerman ? '../tools/elevenlabs.html' : '../tools/elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${isGerman ? '../tools/daw.html' : '../tools/daw-en.html'}">DAW Guide</a>
+              <a href="${isGerman ? '../bibliothek.html' : '../library.html'}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (Dark/Light)
+    // ==========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check saved preference
+    const savedTheme = localStorage.getItem('sonicLabTheme');
+    
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+    
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    } else {
+      // Default to dark
+      html.setAttribute('data-theme', 'dark');
+      updateThemeIcon('dark');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sonicLabTheme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    // ==========================================
+    // CLASSROOM MODE
+    // ==========================================
+    const classroomToggle = document.getElementById('classroomToggle');
+    
+    const savedClassroom = localStorage.getItem('sonicLabClassroom');
+    if (savedClassroom === 'true') {
+      html.setAttribute('data-classroom', 'true');
+      classroomToggle.classList.add('active');
+    }
+    
+    classroomToggle.addEventListener('click', function() {
+      const isClassroom = html.getAttribute('data-classroom') === 'true';
+      
+      if (isClassroom) {
+        html.removeAttribute('data-classroom');
+        localStorage.setItem('sonicLabClassroom', 'false');
+        classroomToggle.classList.remove('active');
+      } else {
+        html.setAttribute('data-classroom', 'true');
+        localStorage.setItem('sonicLabClassroom', 'true');
+        classroomToggle.classList.add('active');
+      }
+    });
+
+    // ==========================================
+    // BACK TO TOP
+    // ==========================================
+    const backToTop = document.getElementById('backToTop');
+    
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+    
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==========================================
+    // PROGRESS BAR
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // ==========================================
+    // LANGUAGE TOGGLE
+    // ==========================================
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        window.location.href = '00-welcome.html';
+      });
+    }
+
+    // ==========================================
+    // AUDIO WIDGET - TABS (GENERATOR + PLAYER)
+    // ==========================================
+    const audioWidget = document.getElementById('audioWidget');
+    const audioWidgetToggle = document.getElementById('audioWidgetToggle');
+    
+    // Initialize widget state
+    if (audioWidget && !audioWidget.classList.contains('collapsed')) {
+      audioWidget.classList.add('expanded');
+    }
+    
+    // Tabs
+    const audioTabs = document.querySelectorAll('.audio-tab');
+    const tabContents = document.querySelectorAll('.audio-tab-content');
+    
+    audioTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetTab = this.dataset.tab;
+        
+        audioTabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById(targetTab + 'Tab').classList.add('active');
+      });
+    });
+    
+    // --- GENERATOR TAB ---
+    const freqSlider = document.getElementById('freqSlider');
+    const freqValue = document.getElementById('freqValue');
+    const playBtn = document.getElementById('playBtn');
+    const waveButtons = document.querySelectorAll('.gen-btn[data-wave]');
+    
+    let audioContext = null;
+    let oscillator = null;
+    let gainNode = null;
+    let isPlaying = false;
+    let currentWaveform = 'sine';
+    let currentFrequency = 440;
+    
+    // Audio Context for Generator
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+    
+    function playTone() {
+      initAudio();
+      
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+      }
+      
+      oscillator = audioContext.createOscillator();
+      gainNode = audioContext.createGain();
+      
+      oscillator.type = currentWaveform;
+      oscillator.frequency.value = currentFrequency;
+      
+      gainNode.gain.value = 0.1;
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.start();
+      isPlaying = true;
+      playBtn.textContent = '⏸ Pause Tone';
+      playBtn.classList.add('playing');
+    }
+    
+    function stopTone() {
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+        oscillator = null;
+      }
+      isPlaying = false;
+      playBtn.textContent = '▶ Play Tone';
+      playBtn.classList.remove('playing');
+    }
+    
+    playBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        stopTone();
+      } else {
+        playTone();
+      }
+    });
+    
+    freqSlider.addEventListener('input', function() {
+      currentFrequency = parseInt(this.value);
+      freqValue.textContent = currentFrequency + ' Hz';
+      
+      if (oscillator) {
+        oscillator.frequency.value = currentFrequency;
+      }
+    });
+    
+    waveButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        waveButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentWaveform = this.dataset.wave;
+        
+        if (isPlaying && oscillator) {
+          oscillator.type = currentWaveform;
+        }
+      });
+    });
+    
+    // --- PLAYER TAB ---
+    const playerUpload = document.getElementById('playerUpload');
+    const audioFileInput = document.getElementById('audioFileInput');
+    const playerTrackInfo = document.getElementById('playerTrackInfo');
+    const trackName = document.getElementById('trackName');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const playerControls = document.getElementById('playerControls');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    
+    let playerAudio = null;
+    let isPlayerPlaying = false;
+    let playerAnimationId = null;
+    
+    // File Upload
+    playerUpload.addEventListener('click', () => audioFileInput.click());
+    
+    audioFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadAudioFile(file);
+      }
+    });
+    
+    // Drag & Drop
+    playerUpload.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = 'var(--accent-teal)';
+    });
+    
+    playerUpload.addEventListener('dragleave', () => {
+      playerUpload.style.borderColor = '';
+    });
+    
+    playerUpload.addEventListener('drop', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = '';
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('audio/')) {
+        loadAudioFile(file);
+      }
+    });
+    
+    function loadAudioFile(file) {
+      if (playerAudio) {
+        playerAudio.pause();
+        playerAudio = null;
+      }
+      
+      const url = URL.createObjectURL(file);
+      playerAudio = new Audio(url);
+      playerAudio.volume = 0.8;
+      
+      trackName.textContent = file.name;
+      
+      playerAudio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(playerAudio.duration);
+        currentTimeEl.textContent = '0:00';
+        
+        playerUpload.style.display = 'none';
+        playerTrackInfo.style.display = 'block';
+        progressContainer.style.display = 'block';
+        playerControls.style.display = 'flex';
+      });
+      
+      playerAudio.addEventListener('ended', () => {
+        isPlayerPlaying = false;
+        playPauseBtn.textContent = '▶';
+      });
+    }
+    
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function updateProgress() {
+      if (playerAudio && isPlayerPlaying) {
+        const progress = (playerAudio.currentTime / playerAudio.duration) * 100;
+        progressFill.style.width = progress + '%';
+        currentTimeEl.textContent = formatTime(playerAudio.currentTime);
+        playerAnimationId = requestAnimationFrame(updateProgress);
+      }
+    }
+    
+    playPauseBtn.addEventListener('click', function() {
+      if (!playerAudio) return;
+      
+      if (isPlayerPlaying) {
+        playerAudio.pause();
+        isPlayerPlaying = false;
+        this.textContent = '▶';
+        cancelAnimationFrame(playerAnimationId);
+      } else {
+        playerAudio.play();
+        isPlayerPlaying = true;
+        this.textContent = '▶';
+        updateProgress();
+      }
+    });
+    
+    progressContainer.addEventListener('click', function(e) {
+      if (!playerAudio) return;
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percentage = clickX / rect.width;
+      playerAudio.currentTime = percentage * playerAudio.duration;
+    });
+    
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = 0;
+      }
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = Math.min(playerAudio.currentTime + 10, playerAudio.duration);
+      }
+    });
+    
+    // Widget minimize
+    audioWidgetToggle.addEventListener('click', function() {
+      audioWidget.classList.toggle('collapsed');
+      audioWidget.classList.toggle('expanded');
+      this.textContent = audioWidget.classList.contains('collapsed') ? '+' : '-';
+    });
+    
+    // Stop audio when leaving page
+    window.addEventListener('beforeunload', () => {
+      stopTone();
+      if (playerAudio) playerAudio.pause();
+    });
+
+    // ==========================================
+    // TOOL MODAL POPUPS
+    // ==========================================
+    const toolModalOverlay = document.getElementById('toolModalOverlay');
+    const toolModalClose = document.getElementById('toolModalClose');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalText = document.getElementById('modalText');
+    const modalTipsList = document.getElementById('modalTipsList');
+    const modalIllustration = document.getElementById('modalIllustration');
+
+    // Tool-Daten mit Grafiken und Tipps
+    const toolData = {
+      computer: {
+        icon: '💻',
+        title: 'Computer',
+        subtitle: 'Das Herzstück deines Studios',
+        text: 'Jeder Laptop oder PC funktioniert. Du brauchst keinen Gaming-PC oder teures MacBook. Wichtig: Stille! Laptop-Lüfter können laut sein – stelle den Laptop weit weg oder nutze den "Leise-Modus".',
+        tips: [
+          'Laptop-Lüfter auf "Leise" oder "Energiesparen" stellen',
+          'Computer auf harter Unterlage stellen (kein Kissen, das den Lüfter blockiert)',
+          'Externe Tastatur/Maus erlauben mehr Abstand zum Lüfter',
+          'Mindestens 10 GB freier Speicherplatz für Audiodateien'
+        ],
+        drawCanvas: function(canvas) {
+          const ctx = canvas.getContext('2d');
+          // Laptop zeichnen
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-tertiary');
+          ctx.fillRect(20, 40, 160, 100);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--border-subtle');
+          ctx.fillRect(25, 45, 150, 85);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-coral');
+          ctx.fillRect(30, 50, 140, 75);
+          // Tastatur-Basis
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-tertiary');
+          ctx.fillRect(10, 140, 180, 15);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-teal');
+          ctx.fillRect(80, 142, 40, 4);
+        }
+      },
+      microphone: {
+        icon: '🎙️',
+        title: 'Mikrofon',
+        subtitle: 'Deine Stimme in höchster Qualität',
+        text: 'Du hast mehrere Optionen: Ein USB-Mikrofon (ab 20) ist ideal. Ein Headset-Mikrofon funktioniert auch. Dein Smartphone als Mikrofon-App ist die kostenlose Alternative.',
+        tips: [
+          'Abstand: 15-30 cm zum Mund halten',
+          'Nie direkt ins Mikrofon pusten – Popgeräusche vermeiden',
+          'Seitlich oder leicht schräg sprechen',
+          'Improvisierter Pop-Filter: Socke über das Mikrofon'
+        ],
+        drawCanvas: function(canvas) {
+          const ctx = canvas.getContext('2d');
+          // Mikrofon zeichnen
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-tertiary');
+          ctx.beginPath();
+          ctx.ellipse(100, 60, 40, 50, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-coral');
+          ctx.beginPath();
+          ctx.ellipse(100, 60, 30, 40, 0, 0, Math.PI * 2);
+          ctx.fill();
+          // Gitter
+          ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--border-active');
+          ctx.lineWidth = 2;
+          for(let i = 70; i <= 130; i += 15) {
+            ctx.beginPath();
+            ctx.moveTo(i, 25);
+            ctx.lineTo(i, 95);
+            ctx.stroke();
+          }
+          // Ständer
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-secondary');
+          ctx.fillRect(95, 110, 10, 50);
+          ctx.fillRect(60, 160, 80, 8);
+        }
+      },
+      headphones: {
+        icon: '🎧',
+        title: 'Kopfhörer',
+        subtitle: 'Kontrolle in Echtzeit',
+        text: 'Geschlossene Kopfhörer (Over-Ear) sind ideal – sie verhindern, dass das Mikrofon das Playback aufnimmt. In-Ear-Kopfhörer oder Earbuds funktionieren auch, sind aber weniger präzise.',
+        tips: [
+          'Geschlossene Kopfhörer verhindern "Bleed" (Rückkopplung)',
+          'Nie Lautsprecher statt Kopfhörer nutzen',
+          'Lautstärke nicht zu hoch – schont die Ohren',
+          'Bei Recording immer Kopfhörer tragen, auch wenn es komisch wirkt'
+        ],
+        drawCanvas: function(canvas) {
+          const ctx = canvas.getContext('2d');
+          // Kopfhörer zeichnen
+          ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent-teal');
+          ctx.lineWidth = 8;
+          ctx.beginPath();
+          ctx.arc(100, 80, 60, Math.PI, 0);
+          ctx.stroke();
+          // Ohrmuscheln
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-tertiary');
+          ctx.fillRect(25, 60, 35, 60);
+          ctx.fillRect(140, 60, 35, 60);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-coral');
+          ctx.fillRect(30, 70, 25, 40);
+          ctx.fillRect(145, 70, 25, 40);
+        }
+      },
+      smartphone: {
+        icon: '📱',
+        title: 'Smartphone',
+        subtitle: 'Mobiler Recorder',
+        text: 'Dein Handy ist ein professioneller Audio-Recorder! Apps wie "Voice Recorder" (iOS) oder "Easy Voice Recorder" (Android) nehmen in hoher Qualität auf. Ideal für unterwegs oder als Backup.',
+        tips: [
+          'Flugmodus aktivieren – keine Anrufe/Störgeräusche',
+          'Aufnahme-App testen VOR dem wichtigen Take',
+          'Genug Speicherplatz frei schaffen (1 Min = ca. 10 MB)',
+          'Dateien sofort nach dem Recording auf den Computer übertragen'
+        ],
+        drawCanvas: function(canvas) {
+          const ctx = canvas.getContext('2d');
+          // Smartphone zeichnen
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-tertiary');
+          ctx.fillRect(70, 20, 60, 120);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--border-active');
+          ctx.fillRect(75, 30, 50, 90);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-coral');
+          ctx.fillRect(80, 40, 40, 70);
+          // Aufnahme-Icon
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-primary');
+          ctx.beginPath();
+          ctx.arc(100, 110, 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-coral');
+          ctx.beginPath();
+          ctx.arc(100, 110, 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      },
+      room: {
+        icon: '🏠',
+        title: 'Raum',
+        subtitle: 'Akustik ist alles',
+        text: 'Ein kleiner, möblierter Raum ist besser als ein großer, leerer Raum. Textilien (Vorhänge, Betten, Sofas) absorbieren Schall und verhindern Hall. Ein voller Kleiderschrank ist der Pro-Tipp für 0€!',
+        tips: [
+          'Kleiner Raum > Großer Raum (weniger Hall)',
+          'Vollgestopfter Kleiderschrank = perfekte Akustik',
+          'Handtuch vor harte Oberflächen legen',
+          'Fenster schließen (Straßenlärm)',
+          'Badezimmer vermeiden (Fliesen = viel Hall)'
+        ],
+        drawCanvas: function(canvas) {
+          const ctx = canvas.getContext('2d');
+          // Raum zeichnen
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-tertiary');
+          ctx.fillRect(20, 40, 160, 110);
+          // Tür
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--border-active');
+          ctx.fillRect(130, 70, 35, 80);
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-teal');
+          ctx.fillRect(135, 75, 25, 70);
+          // Vorhang/Schallabsorber
+          ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-coral');
+          ctx.beginPath();
+          ctx.moveTo(30, 50);
+          ctx.lineTo(50, 130);
+          ctx.lineTo(70, 50);
+          ctx.fill();
+          // Wellen für Schall
+          ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--text-secondary');
+          ctx.lineWidth = 2;
+          for(let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            ctx.arc(100, 90, 20 + i * 15, -0.5, 0.5);
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    // Tool-Karten Event Listener
+    document.querySelectorAll('.tool-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const toolKey = this.dataset.tool;
+        const tool = toolData[toolKey];
+        if (tool) {
+          openToolModal(tool);
+        }
+      });
+    });
+
+    // Modal öffnen
+    function openToolModal(tool) {
+      modalIcon.textContent = tool.icon;
+      modalTitle.textContent = tool.title;
+      modalSubtitle.textContent = tool.subtitle;
+      modalText.textContent = tool.text;
+      
+      // Tipps rendern
+      modalTipsList.innerHTML = tool.tips.map(tip => `<li>${tip}</li>`).join('');
+      
+      // Canvas-Grafik erstellen
+      modalIllustration.innerHTML = '';
+      const canvas = document.createElement('canvas');
+      canvas.width = 200;
+      canvas.height = 180;
+      canvas.style.width = '100%';
+      canvas.style.height = 'auto';
+      canvas.style.maxWidth = '200px';
+      modalIllustration.appendChild(canvas);
+      
+      if (tool.drawCanvas) {
+        tool.drawCanvas(canvas);
+      }
+      
+      // Modal anzeigen
+      toolModalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Modal schließen
+    function closeToolModal() {
+      toolModalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    toolModalClose.addEventListener('click', closeToolModal);
+    toolModalOverlay.addEventListener('click', function(e) {
+      if (e.target === toolModalOverlay) {
+        closeToolModal();
+      }
+    });
+
+    // ESC-Taste schließt Modal
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && toolModalOverlay.classList.contains('active')) {
+        closeToolModal();
+      }
+    });
+
+// ==========================================
+// AUDIO RECORDING FIX
+// ==========================================
+// Wrap in DOMContentLoaded to ensure DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+const recordBtn = document.getElementById('recordBtn');
+const recordStatus = document.getElementById('recordStatus');
+const visualizer = document.getElementById('visualizer');
+const audioPlayback = document.getElementById('audioPlayback');
+const recordingTest = document.getElementById('recordingTest');
+
+let mediaRecorder = null;
+let audioChunks = [];
+let recordingAudioContext = null;
+let analyser = null;
+let dataArray = null;
+let animationId = null;
+let isRecording = false;
+
+// Create visualizer bars
+function createVisualizerBars() {
+  visualizer.innerHTML = '';
+  for (let i = 0; i < 20; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'audio-bar';
+    bar.style.width = '4px';
+    bar.style.height = '20px';
+    bar.style.background = 'var(--accent-coral)';
+    bar.style.borderRadius = '2px';
+    bar.style.transition = 'height 0.1s ease';
+    visualizer.appendChild(bar);
+  }
+}
+createVisualizerBars();
+
+// Animate visualizer
+function animateVisualizer() {
+  if (!analyser) return;
+  
+  analyser.getByteFrequencyData(dataArray);
+  const bars = visualizer.querySelectorAll('.audio-bar');
+  
+  bars.forEach((bar, i) => {
+    const value = dataArray[i * 2] || 0;
+    const height = Math.max(4, (value / 255) * 60);
+    bar.style.height = height + 'px';
+  });
+  
+  animationId = requestAnimationFrame(animateVisualizer);
+}
+
+// Mobile-friendly recording handler
+async function handleRecordToggle(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  
+  if (!isRecording) {
+    // Start recording
+    try {
+      // Check for HTTPS (required for getUserMedia on mobile)
+      if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        recordStatus.textContent = 'Fehler: HTTPS erforderlich für Mikrofon-Zugriff';
+        return;
+      }
+      
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true
+        } 
+      });
+      
+      // Create AudioContext (must be after user gesture on mobile)
+      recordingAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Resume AudioContext if suspended (required for mobile)
+      if (recordingAudioContext.state === 'suspended') {
+        await recordingAudioContext.resume();
+      }
+      
+      const source = recordingAudioContext.createMediaStreamSource(stream);
+      analyser = recordingAudioContext.createAnalyser();
+      analyser.fftSize = 64;
+      source.connect(analyser);
+      
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      
+      // Determine supported MIME type
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm') 
+        ? 'audio/webm' 
+        : MediaRecorder.isTypeSupported('audio/mp4')
+        ? 'audio/mp4'
+        : 'audio/ogg';
+      
+      mediaRecorder = new MediaRecorder(stream, { mimeType });
+      audioChunks = [];
+      
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) {
+          audioChunks.push(e.data);
+        }
+      };
+      
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: mimeType });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        audioPlayback.src = audioUrl;
+        audioPlayback.style.display = 'block';
+        
+        // Stop all tracks
+        stream.getTracks().forEach(track => track.stop());
+        if (recordingAudioContext) {
+          recordingAudioContext.close();
+          recordingAudioContext = null;
+        }
+      };
+      
+      // Request data every 100ms for more responsive recording
+      mediaRecorder.start(100);
+      isRecording = true;
+      
+      // Update UI
+      recordBtn.textContent = '⏹';
+      recordBtn.classList.add('recording');
+      recordStatus.textContent = 'Nimmt auf... Tippe zum Stoppen';
+      visualizer.style.display = 'flex';
+      recordingTest.classList.add('recording');
+      
+      // Start animation
+      animateVisualizer();
+      
+    } catch (err) {
+      console.error('Recording error:', err);
+      let errorMsg = 'Fehler: Mikrofon-Zugriff verweigert';
+      if (err.name === 'NotAllowedError') {
+        errorMsg = 'Bitte erlaube Mikrofon-Zugriff in den Browser-Einstellungen';
+      } else if (err.name === 'NotFoundError') {
+        errorMsg = 'Kein Mikrofon gefunden';
+      } else if (err.name === 'NotSupportedError') {
+        errorMsg = 'Aufnahme wird auf diesem Gerät nicht unterstützt';
+      }
+      recordStatus.textContent = errorMsg;
+    }
+    
+  } else {
+    // Stop recording
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+    }
+    
+    isRecording = false;
+    
+    // Update UI
+    recordBtn.textContent = '⏺';
+    recordBtn.classList.remove('recording');
+    recordStatus.textContent = 'Aufnahme gespeichert! Tippe Play zum Anhören';
+    recordingTest.classList.remove('recording');
+    
+    // Stop animation
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+    const bars = visualizer.querySelectorAll('.audio-bar');
+    bars.forEach(bar => bar.style.height = '4px');
+  }
+}
+
+// Support both click and touch events for mobile compatibility
+recordBtn.addEventListener('click', handleRecordToggle);
+recordBtn.addEventListener('touchstart', handleRecordToggle, { passive: false });
+}); // Close DOMContentLoaded wrapper
+  </script>
+</body>
+</html>
+
+

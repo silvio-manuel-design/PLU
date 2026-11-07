@@ -1,0 +1,668 @@
+/* ==========================================================================
+   VISION PAGE STYLES
+   Premium Design für die Vision-Seite
+   Akademische Code-Struktur - Keine Inline-Styles!
+   
+   Kartendesign-Variationen:
+   1. vision-card--featured (Team Section)
+   2. bridge-card (Bridges Section)
+   3. value-card (Values Section)
+   4. responsibility-card (Responsibility Section)
+   5. pledge-card (Pledge Section)
+   ========================================================================== */
+
+/* ========================================================================
+   SECTION HEADER VARIANTS
+   ======================================================================== */
+
+.section-header--left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* ========================================================================
+   1. VISION CARD - FEATURED (Team Section)
+   Große zentrale Karte mit Icon
+   ======================================================================== */
+
+.vision-card--featured {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.1) 0%, 
+    rgba(139, 92, 246, 0.08) 50%,
+    rgba(57, 208, 216, 0.05) 100%
+  );
+  border: 2px solid rgba(88, 166, 255, 0.25);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-10) var(--space-8);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.vision-card--featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--accent-primary), 
+    var(--accent-violet),
+    transparent
+  );
+  border-radius: 0 0 4px 4px;
+}
+
+.vision-card--featured__icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(139, 92, 246, 0.1)
+  );
+  border: 2px solid rgba(88, 166, 255, 0.3);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  position: relative;
+}
+
+.vision-card--featured__icon::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(135deg, 
+    var(--accent-primary), 
+    var(--accent-violet)
+  );
+  border-radius: inherit;
+  opacity: 0.3;
+  filter: blur(12px);
+  z-index: -1;
+}
+
+.vision-card--featured__icon i {
+  font-size: 48px;
+  color: var(--accent-primary);
+}
+
+.vision-card--featured h3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.vision-card--featured p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================================================
+   2. BRIDGE CARDS (Bridges Section)
+   Horizontal-Design mit Icon links
+   ======================================================================== */
+
+.bridge-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.bridge-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--card-accent, var(--accent-primary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bridge-card:hover {
+  transform: translateX(8px);
+  border-color: var(--card-accent, var(--accent-primary));
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 0 20px var(--card-glow, rgba(88, 166, 255, 0.1));
+}
+
+.bridge-card:hover::before {
+  opacity: 1;
+}
+
+.bridge-card__icon {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, 
+    var(--card-accent-bg, rgba(88, 166, 255, 0.15)), 
+    transparent
+  );
+  border: 1px solid var(--card-accent-border, rgba(88, 166, 255, 0.2));
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bridge-card__icon i {
+  font-size: 32px;
+  color: var(--card-accent, var(--accent-primary));
+}
+
+.bridge-card__content {
+  flex: 1;
+}
+
+.bridge-card__content h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.bridge-card__content p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-3);
+}
+
+.bridge-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--card-accent, var(--accent-primary));
+  transition: gap 0.3s ease;
+}
+
+.bridge-card:hover .bridge-card__link {
+  gap: var(--space-2);
+}
+
+/* Bridge Card Themes */
+.bridge-card[data-theme="generations"] {
+  --card-accent: var(--accent-primary);
+  --card-accent-bg: rgba(88, 166, 255, 0.15);
+  --card-accent-border: rgba(88, 166, 255, 0.25);
+  --card-glow: rgba(88, 166, 255, 0.15);
+}
+
+.bridge-card[data-theme="disciplines"] {
+  --card-accent: var(--accent-violet);
+  --card-accent-bg: rgba(139, 92, 246, 0.15);
+  --card-accent-border: rgba(139, 92, 246, 0.25);
+  --card-glow: rgba(139, 92, 246, 0.15);
+}
+
+.bridge-card[data-theme="cultures"] {
+  --card-accent: var(--accent-cyan);
+  --card-accent-bg: rgba(57, 208, 216, 0.15);
+  --card-accent-border: rgba(57, 208, 216, 0.25);
+  --card-glow: rgba(57, 208, 216, 0.15);
+}
+
+.bridge-card[data-theme="theory-practice"] {
+  --card-accent: var(--accent-orange);
+  --card-accent-bg: rgba(245, 158, 11, 0.15);
+  --card-accent-border: rgba(245, 158, 11, 0.25);
+  --card-glow: rgba(245, 158, 11, 0.15);
+}
+
+/* ========================================================================
+   3. VALUE CARDS (Values Section)
+   Gradient-Cards mit großem Icon
+   ======================================================================== */
+
+.value-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    var(--card-gradient-start, rgba(88, 166, 255, 0.15)),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--card-accent, var(--accent-primary));
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 40px var(--card-glow, rgba(88, 166, 255, 0.15));
+}
+
+.value-card:hover::before {
+  opacity: 1;
+}
+
+.value-card__icon {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    var(--card-gradient-start, rgba(88, 166, 255, 0.2)), 
+    var(--card-gradient-end, rgba(88, 166, 255, 0.05))
+  );
+  border: 2px solid var(--card-accent-border, rgba(88, 166, 255, 0.25));
+  border-radius: 50%;
+  transition: transform 0.4s ease;
+}
+
+.value-card:hover .value-card__icon {
+  transform: scale(1.1);
+}
+
+.value-card__icon i {
+  font-size: 40px;
+  color: var(--card-accent, var(--accent-primary));
+}
+
+.value-card h3 {
+  position: relative;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.value-card p {
+  position: relative;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-5);
+}
+
+.value-card__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: linear-gradient(135deg, 
+    var(--card-accent-bg, rgba(88, 166, 255, 0.1)), 
+    transparent
+  );
+  border: 1px solid var(--card-accent-border, rgba(88, 166, 255, 0.2));
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--card-accent, var(--accent-primary));
+  transition: all 0.3s ease;
+}
+
+.value-card:hover .value-card__link {
+  background: var(--card-accent, var(--accent-primary));
+  color: white;
+}
+
+/* Value Card Themes */
+.value-card[data-theme="social-skills"] {
+  --card-accent: var(--accent-primary);
+  --card-accent-bg: rgba(88, 166, 255, 0.15);
+  --card-accent-border: rgba(88, 166, 255, 0.3);
+  --card-gradient-start: rgba(88, 166, 255, 0.2);
+  --card-gradient-end: rgba(88, 166, 255, 0.05);
+  --card-glow: rgba(88, 166, 255, 0.15);
+}
+
+.value-card[data-theme="cultural-expression"] {
+  --card-accent: var(--accent-violet);
+  --card-accent-bg: rgba(139, 92, 246, 0.15);
+  --card-accent-border: rgba(139, 92, 246, 0.3);
+  --card-gradient-start: rgba(139, 92, 246, 0.2);
+  --card-gradient-end: rgba(236, 72, 153, 0.05);
+  --card-glow: rgba(139, 92, 246, 0.15);
+}
+
+.value-card[data-theme="language-diversity"] {
+  --card-accent: var(--accent-cyan);
+  --card-accent-bg: rgba(57, 208, 216, 0.15);
+  --card-accent-border: rgba(57, 208, 216, 0.3);
+  --card-gradient-start: rgba(57, 208, 216, 0.2);
+  --card-gradient-end: rgba(88, 166, 255, 0.05);
+  --card-glow: rgba(57, 208, 216, 0.15);
+}
+
+.value-card[data-theme="ethical-judgment"] {
+  --card-accent: var(--accent-orange);
+  --card-accent-bg: rgba(245, 158, 11, 0.15);
+  --card-accent-border: rgba(245, 158, 11, 0.3);
+  --card-gradient-start: rgba(245, 158, 11, 0.2);
+  --card-gradient-end: rgba(236, 72, 153, 0.05);
+  --card-glow: rgba(245, 158, 11, 0.15);
+}
+
+/* ========================================================================
+   4. RESPONSIBILITY CARDS (Responsibility Section)
+   2×2 Grid mit Hover-Effekt
+   ======================================================================== */
+
+.responsibility-grid {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 900px;
+  margin: var(--space-10) auto 0;
+}
+
+@media (min-width: 768px) {
+  .responsibility-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.responsibility-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.responsibility-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    var(--card-gradient-start, rgba(16, 185, 129, 0.1)), 
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.responsibility-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-accent, var(--accent-green));
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.responsibility-card:hover::before {
+  opacity: 1;
+}
+
+.responsibility-card__icon {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, 
+    var(--card-accent-bg, rgba(16, 185, 129, 0.15)), 
+    transparent
+  );
+  border: 1px solid var(--card-accent-border, rgba(16, 185, 129, 0.25));
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.responsibility-card__icon i {
+  font-size: 28px;
+  color: var(--card-accent, var(--accent-green));
+}
+
+.responsibility-card h4 {
+  position: relative;
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.responsibility-card p {
+  position: relative;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* Responsibility Card Themes */
+.responsibility-card[data-theme="energy"] {
+  --card-accent: var(--accent-primary);
+  --card-accent-bg: rgba(88, 166, 255, 0.15);
+  --card-accent-border: rgba(88, 166, 255, 0.25);
+  --card-gradient-start: rgba(88, 166, 255, 0.1);
+}
+
+.responsibility-card[data-theme="transparency"] {
+  --card-accent: var(--accent-cyan);
+  --card-accent-bg: rgba(57, 208, 216, 0.15);
+  --card-accent-border: rgba(57, 208, 216, 0.25);
+  --card-gradient-start: rgba(57, 208, 216, 0.1);
+}
+
+.responsibility-card[data-theme="abuse"] {
+  --card-accent: var(--accent-red);
+  --card-accent-bg: rgba(248, 113, 113, 0.15);
+  --card-accent-border: rgba(248, 113, 113, 0.25);
+  --card-gradient-start: rgba(248, 113, 113, 0.1);
+}
+
+.responsibility-card[data-theme="education"] {
+  --card-accent: var(--accent-green);
+  --card-accent-bg: rgba(16, 185, 129, 0.15);
+  --card-accent-border: rgba(16, 185, 129, 0.25);
+  --card-gradient-start: rgba(16, 185, 129, 0.1);
+}
+
+/* ========================================================================
+   5. PLEDGE CARDS (Pledge Section)
+   Numbered Step Cards
+   ======================================================================== */
+
+.pledge-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 800px;
+  margin: var(--space-10) auto 0;
+}
+
+.pledge-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5) var(--space-6);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pledge-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(180deg, 
+    var(--card-accent, var(--accent-primary)), 
+    var(--card-accent-secondary, var(--accent-violet))
+  );
+  transition: width 0.3s ease;
+}
+
+.pledge-card:hover {
+  transform: translateX(12px);
+  border-color: var(--card-accent, var(--accent-primary));
+}
+
+.pledge-card:hover::before {
+  width: 4px;
+}
+
+.pledge-card__number {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, 
+    var(--card-accent, var(--accent-primary)), 
+    var(--card-accent-secondary, var(--accent-violet))
+  );
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: white;
+  box-shadow: 0 8px 16px var(--card-glow, rgba(88, 166, 255, 0.3));
+}
+
+.pledge-card__content {
+  position: relative;
+  flex: 1;
+}
+
+.pledge-card__content p {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.pledge-card__content strong {
+  color: var(--text-primary);
+}
+
+/* Pledge Card Themes */
+.pledge-card[data-theme="1"] {
+  --card-accent: var(--accent-primary);
+  --card-accent-secondary: var(--accent-violet);
+  --card-glow: rgba(88, 166, 255, 0.3);
+}
+
+.pledge-card[data-theme="2"] {
+  --card-accent: var(--accent-violet);
+  --card-accent-secondary: var(--accent-pink);
+  --card-glow: rgba(139, 92, 246, 0.3);
+}
+
+.pledge-card[data-theme="3"] {
+  --card-accent: var(--accent-cyan);
+  --card-accent-secondary: var(--accent-primary);
+  --card-glow: rgba(57, 208, 216, 0.3);
+}
+
+.pledge-card[data-theme="4"] {
+  --card-accent: var(--accent-orange);
+  --card-accent-secondary: var(--accent-yellow);
+  --card-glow: rgba(245, 158, 11, 0.3);
+}
+
+.pledge-card[data-theme="5"] {
+  --card-accent: var(--accent-green);
+  --card-accent-secondary: var(--accent-cyan);
+  --card-glow: rgba(16, 185, 129, 0.3);
+}
+
+/* ========================================================================
+   CTA SECTION
+   ======================================================================== */
+
+.cta-section {
+  padding-bottom: var(--space-20);
+}
+
+.cta-card {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08) 0%, 
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-card__icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+}
+
+.cta-card__icon i {
+  font-size: 40px;
+  color: white;
+}
+
+.cta-card__title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+.cta-card__text {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+}
+
+.back-link {
+  text-align: center;
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border-primary);
+}

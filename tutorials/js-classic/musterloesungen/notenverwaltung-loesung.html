@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📊 Musterlösung: Notenverwaltung | JS-Tutorial</title>
+  <style>
+    /* === GLOBALE RESETS UND TYPOGRAPHIE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #2c3e50;
+      background-color: #f9fbfd;
+      padding: 20px;
+    }
+
+    .header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 0.8rem 0;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .main-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .main-content > section {
+      background: white;
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #eaeff5;
+    }
+
+    .main-content h1 {
+      font-size: 2.2rem;
+      margin-bottom: 24px;
+      color: #2c3e50;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .main-content h2 {
+      font-size: 1.6rem;
+      margin: 24px 0 18px 0;
+      color: #2980b9;
+    }
+
+    .regel {
+      background-color: #e8f4fc;
+      border-left: 4px solid #3498db;
+      padding: 16px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .warnung {
+      background-color: #fff8e1;
+      color: #5d4037;
+      padding: 16px;
+      border-left: 4px solid #ffc107;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* === NOTEN-SPEZIFISCHES DESIGN === */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .stats {
+      background: #e8f4fc;
+      padding: 16px;
+      border-radius: 6px;
+      margin: 24px 0;
+    }
+
+    .schueler-card {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .schueler-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .schueler-noten {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .note {
+      background: #3498db;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .durchschnitt {
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .hinweis {
+      color: #6c757d;
+      font-style: italic;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #7f8c8d;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../kapitel/02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../kapitel/03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="../kapitel/04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="../kapitel/05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="../kapitel/06-arrays.html">06. Arrays</a></li>
+        <li><a href="../kapitel/07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="../kapitel/08-objekte.html">08. Objekte</a></li>
+        <li><a href="../kapitel/09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="../kapitel/10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section>
+      <h1>📊 Musterlösung: Interaktive Notenverwaltung</h1>
+
+      <p class="regel">
+        💡 Diese Seite ist eine <strong>vollständig lauffähige Musterlösung</strong> – 
+        alle Funktionen sind aktiv und nutzen die optimale Implementierung.
+      </p>
+
+      <!-- Eingabeformular -->
+      <div class="form-group">
+        <label for="schueler-name">Schülername</label>
+        <input type="text" id="schueler-name" placeholder="z. B. Anna Müller">
+      </div>
+
+      <div class="form-group">
+        <label for="schueler-noten">Noten (durch Komma getrennt, 1–5)</label>
+        <input type="text" id="schueler-noten" placeholder="z. B. 2,3,1,4">
+      </div>
+
+      <div class="button-group">
+        <button id="add-schueler">Schüler hinzufügen</button>
+        <button id="clear-all">Alle löschen</button>
+      </div>
+
+      <!-- Filter -->
+      <div class="form-group">
+        <label>Filter</label>
+        <select id="filter-select">
+          <option value="alle">Alle Schüler</option>
+          <option value="ungenuegend">Nur ungenügende Noten (&lt; 4)</option>
+        </select>
+      </div>
+
+      <!-- Statistik -->
+      <div class="stats" id="stats">
+        <!-- Wird dynamisch gefüllt -->
+      </div>
+
+      <!-- Schülerliste -->
+      <div id="schueler-liste">
+        <!-- Wird dynamisch gefüllt -->
+      </div>
+
+      <p class="warnung">
+        ⚠️ Diese Musterlösung speichert Daten im Browser (Local Storage).<br>
+        Sie ist für Vorführungen gedacht – Schüler\*innen haben keinen Zugriff darauf.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script>
+    /**
+     * ABSCHLUSSPROJEKT 2: NOTENVERWALTUNG
+     * Vollständige, optimale Referenzimplementierung
+     */
+    let schuelerListe = [];
+    const STORAGE_KEY = 'musterloesung_noten_schueler';
+
+    // DOM-Elemente
+    const nameInput = document.getElementById('schueler-name');
+    const notenInput = document.getElementById('schueler-noten');
+    const addBtn = document.getElementById('add-schueler');
+    const clearBtn = document.getElementById('clear-all');
+    const filterSelect = document.getElementById('filter-select');
+    const statsDiv = document.getElementById('stats');
+    const listeDiv = document.getElementById('schueler-liste');
+
+    // Hilfsfunktion: Durchschnitt berechnen
+    function berechneDurchschnitt(noten) {
+      if (noten.length === 0) return 0;
+      const summe = noten.reduce((a, b) => a + b, 0);
+      return parseFloat((summe / noten.length).toFixed(2));
+    }
+
+    // Hilfsfunktion: Hat ungenügende Noten?
+    function hatUngenuegend(noten) {
+      return noten.some(note => note < 4);
+    }
+
+    // Speichern
+    function speichereSchueler() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(schuelerListe));
+      zeigeSchueler();
+    }
+
+    // Laden
+    function ladeSchueler() {
+      const gespeichert = localStorage.getItem(STORAGE_KEY);
+      if (gespeichert) {
+        try {
+          schuelerListe = JSON.parse(gespeichert);
+          // Validierung
+          schuelerListe = schuelerListe.map(s => ({
+            name: String(s.name || ''),
+            noten: Array.isArray(s.noten) ? s.noten.map(n => Number(n)).filter(n => !isNaN(n) && n >= 1 && n <= 5) : []
+          })).filter(s => s.name.trim() !== '' && s.noten.length > 0);
+        } catch (e) {
+          schuelerListe = [];
+        }
+      }
+      zeigeSchueler();
+    }
+
+    // Anzeige
+    function zeigeSchueler() {
+      const filter = filterSelect.value;
+      let gefilterteListe = schuelerListe;
+
+      if (filter === 'ungenuegend') {
+        gefilterteListe = schuelerListe.filter(s => hatUngenuegend(s.noten));
+      }
+
+      // Statistik
+      const gesamtNoten = schuelerListe.flatMap(s => s.noten);
+      const gesamtDurchschnitt = berechneDurchschnitt(gesamtNoten);
+      statsDiv.innerHTML = `
+        <p><strong>Anzahl Schüler:</strong> ${gefilterteListe.length}</p>
+        <p><strong>Gesamtdurchschnitt aller Noten:</strong> <span class="durchschnitt">${gesamtDurchschnitt}</span></p>
+      `;
+
+      // Liste
+      if (gefilterteListe.length === 0) {
+        listeDiv.innerHTML = '<p class="hinweis">Keine Schüler vorhanden.</p>';
+        return;
+      }
+
+      listeDiv.innerHTML = '';
+      gefilterteListe.forEach(schueler => {
+        const durchschnitt = berechneDurchschnitt(schueler.noten);
+        const notenHtml = schueler.noten.map(note => `<span class="note">${note}</span>`).join(' ');
+        
+        const card = document.createElement('div');
+        card.className = 'schueler-card';
+        card.innerHTML = `
+          <div class="schueler-header">
+            <strong>${schueler.name}</strong>
+            <span class="durchschnitt">⌀ ${durchschnitt}</span>
+          </div>
+          <div class="schueler-noten">${notenHtml}</div>
+        `;
+        listeDiv.appendChild(card);
+      });
+    }
+
+    // Hinzufügen
+    function fuegeSchuelerHinzu() {
+      const name = nameInput.value.trim();
+      const notenText = notenInput.value.trim();
+      
+      if (name === '' || notenText === '') {
+        alert('Bitte Name und Noten eingeben!');
+        return;
+      }
+
+      const noten = notenText.split(',').map(n => n.trim()).map(n => Number(n)).filter(n => !isNaN(n) && n >= 1 && n <= 5);
+      
+      if (noten.length === 0) {
+        alert('Bitte gültige Noten (1–5) eingeben!');
+        return;
+      }
+
+      schuelerListe.push({ name, noten });
+      speichereSchueler();
+      
+      nameInput.value = '';
+      notenInput.value = '';
+      nameInput.focus();
+    }
+
+    // Alle löschen
+    function loescheAlle() {
+      if (confirm('Wirklich alle Schüler löschen?')) {
+        schuelerListe = [];
+        speichereSchueler();
+      }
+    }
+
+    // Event-Listener
+    addBtn.addEventListener('click', fuegeSchuelerHinzu);
+    notenInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') fuegeSchuelerHinzu();
+    });
+    clearBtn.addEventListener('click', loescheAlle);
+    filterSelect.addEventListener('change', zeigeSchueler);
+
+    // Initialisierung
+    document.addEventListener('DOMContentLoaded', ladeSchueler);
+  </script>
+</body>
+</html>

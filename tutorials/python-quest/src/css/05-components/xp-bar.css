@@ -1,0 +1,145 @@
+/* ==========================================================================
+   PYDESIGN QUEST — XP Bar Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-xp-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--py-z-sticky);
+    background: linear-gradient(180deg, var(--py-bg-card) 0%, var(--py-bg-hover) 100%);
+    border-top: 1px solid var(--py-border-color);
+    padding: var(--py-space-2) var(--py-space-3);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-xp-bar {
+      padding: var(--py-space-3) var(--py-space-4);
+    }
+  }
+
+  .py-quest-xp-bar__container {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-4);
+    max-width: var(--py-max-width);
+    margin: 0 auto;
+  }
+
+  .py-quest-xp-bar__info {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    flex-shrink: 0;
+  }
+
+  .py-quest-xp-bar__level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-md);
+    color: var(--py-white);
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+  }
+
+  .py-quest-xp-bar__label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .py-quest-xp-bar__label span:first-child {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+  }
+
+  .py-quest-xp-bar__label span:last-child {
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+
+  /* Mobile: nur Level + Balken, XP-Text ausblenden */
+  @media (max-width: 767px) {
+    .py-quest-xp-bar__label span:last-child {
+      display: none;
+    }
+
+    .py-quest-xp-bar__level {
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: var(--py-text-xs);
+    }
+
+    .py-quest-xp-bar__track {
+      height: 0.375rem;
+    }
+  }
+
+  .py-quest-xp-bar__track {
+    flex: 1;
+    height: 0.5rem;
+    background: var(--py-bg-hover);
+    border-radius: var(--py-radius-full);
+    overflow: hidden;
+  }
+
+  .py-quest-xp-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--py-primary) 0%, var(--py-accent) 100%);
+    border-radius: var(--py-radius-full);
+    transition: width var(--py-transition-slow);
+    min-width: 0;
+  }
+
+  .py-quest-xp-bar__badge {
+    display: none;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    background: var(--py-success-bg);
+    border-radius: 100px;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-success);
+    animation: xp-badge-pop 0.5s ease;
+  }
+
+  @media (min-width: 640px) {
+    .py-quest-xp-bar__badge {
+      display: inline-flex;
+    }
+  }
+
+  @keyframes xp-badge-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+}
+
+/* XP Float Animation (injected by xp-system.js) */
+.py-quest-xp-float {
+  position: fixed;
+  z-index: 9999;
+  font-family: var(--py-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--py-accent);
+  text-shadow: 0 2px 10px rgba(255,212,59,0.5);
+  pointer-events: none;
+  animation: xpFloatUp 1s ease forwards;
+}
+
+@keyframes xpFloatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(1.2); }
+}

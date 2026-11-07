@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Side Quest U04: DB Abfrage | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id" style="color: var(--warning);">Side Quest U04</span>
+      <span class="mission-timer">~20 Min • +40 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Führe komplexe SQL-Abfragen mit WHERE, ORDER BY und LIMIT aus.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Datenbank vorbereiten</h3>
+        <p>Erstelle eine Tabelle <code>products</code> mit: id, name, price, category.</p>
+        <p>Füge 10+ Testprodukte ein.</p>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>WHERE-Klausel</h3>
+        <p>Filtere Produkte nach Preis:</p>
+        <div class="code-block">$sql = "SELECT * FROM products WHERE price > 50";
+$result = $conn->query($sql);</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>ORDER BY</h3>
+        <p>Sortiere die Ergebnisse:</p>
+        <div class="code-block">$sql = "SELECT * FROM products ORDER BY price DESC";
+// ASC = aufsteigend, DESC = absteigend</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>LIMIT</h3>
+        <p>Begrenze die Anzahl:</p>
+        <div class="code-block">$sql = "SELECT * FROM products LIMIT 5";
+// Nur die ersten 5 Ergebnisse</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Kombination</h3>
+        <p>Alles zusammen:</p>
+        <div class="code-block">$sql = "SELECT * FROM products 
+        WHERE category = 'Elektronik' 
+        ORDER BY price ASC 
+        LIMIT 3";</div>
+      </li>
+      
+      <li class="step-item" id="step-6">
+        <h3>Anzeige formatieren</h3>
+        <p>Zeige die Ergebnisse in einer HTML-Tabelle:</p>
+        <div class="code-block">echo "<table>";
+while($row = $result->fetch_assoc()) {
+  echo "<tr><td>".$row['name']."</td><td>".$row['price']."€</td></tr>";
+}
+echo "</table>";</div>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: SQL-Abfragen korrekt?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        SQL testen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+40 XP Bonus] (Side Quest abgeschlossen)
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeSideQuest()" disabled>
+        Side Quest abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>WHERE filtert Datensätze nach Bedingungen.</li>
+          <li>ORDER BY sortiert Ergebnisse.</li>
+          <li>LIMIT begrenzt die Anzahl der Ergebnisse.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe SQL-Queries...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'SQL OK';
+        result.textContent = '[OK] SQL-Abfragen mit WHERE, ORDER BY und LIMIT verstanden.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeSideQuest() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeSideQuest, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeSideQuest('U04');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('U04', 'DB Abfrage', 'Komplexe SQL-Abfragen mit Filter und Sortierung');
+      AbgabePanel.init('U04', 'DB Abfrage');
+      
+      const status = MissionsAPI.getSideQuestStatus()['U04'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+40 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,546 @@
+@layer components {
+  /* ============================================================
+     HERO — Game-Style Dramatic Redesign
+     ============================================================ */
+
+  .quest-hero {
+    position: relative;
+    padding: var(--space-20) var(--space-4) var(--space-16);
+    text-align: center;
+    overflow: hidden;
+    /* Hero ends straight — no rounded bottom corners */
+    margin-bottom: var(--space-10);
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Background Image Layer */
+  .quest-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .quest-hero__bg img,
+  .quest-hero__bg picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    animation: heroZoom 20s ease forwards;
+  }
+
+  @keyframes heroZoom {
+    from { transform: scale(1.1); }
+    to   { transform: scale(1.0); }
+  }
+
+  /* Dark Overlay for Text Readability */
+  .quest-hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 12, 16, 0.75) 0%,
+      rgba(10, 12, 16, 0.40) 40%,
+      rgba(10, 12, 16, 0.65) 100%
+    );
+    z-index: 1;
+  }
+
+  /* ============================================================
+     FLOATING LIGHT ORBS — CSS Only Particles
+     ============================================================ */
+  .quest-hero__particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .quest-hero__particles::before,
+  .quest-hero__particles::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .quest-hero__particles::before {
+    width: 200px;
+    height: 200px;
+    left: 10%;
+    top: 15%;
+    background: radial-gradient(circle, rgba(243, 156, 18, 0.12) 0%, transparent 70%);
+    animation: orbFloat1 12s ease-in-out infinite;
+  }
+
+  .quest-hero__particles::after {
+    width: 250px;
+    height: 250px;
+    right: 5%;
+    bottom: 10%;
+    background: radial-gradient(circle, rgba(155, 89, 182, 0.1) 0%, transparent 70%);
+    animation: orbFloat2 15s ease-in-out infinite;
+  }
+
+  .quest-hero__particles-accent {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .quest-hero__particles-accent::before {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    right: 30%;
+    top: 25%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(39, 174, 96, 0.08) 0%, transparent 70%);
+    filter: blur(30px);
+    animation: orbFloat3 10s ease-in-out infinite;
+  }
+
+  .quest-hero__particles-accent::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 30%;
+    bottom: 20%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%);
+    filter: blur(35px);
+    animation: orbFloat4 18s ease-in-out infinite;
+  }
+
+  @keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.1); }
+    66% { transform: translate(-20px, 15px) scale(0.9); }
+  }
+
+  @keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, -30px) scale(1.15); }
+  }
+
+  @keyframes orbFloat3 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 25px); }
+  }
+
+  @keyframes orbFloat4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-15px, -10px) scale(1.05); }
+    75% { transform: translate(10px, 20px) scale(0.95); }
+  }
+
+  /* ============================================================
+     HERO CONTENT — Dramatic Typography
+     ============================================================ */
+  .quest-hero__content {
+    position: relative;
+    z-index: 3;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .quest-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-4);
+    background: rgba(243, 156, 18, 0.12);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--quest-primary);
+    margin-bottom: var(--space-5);
+    backdrop-filter: blur(8px);
+  }
+
+  .quest-hero__eyebrow i {
+    font-size: var(--text-sm);
+  }
+
+  .quest-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    font-weight: 800;
+    color: var(--quest-white);
+    margin-bottom: var(--space-5);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    letter-spacing: -1px;
+    line-height: 1.05;
+    overflow-wrap: break-word;
+  }
+
+  .quest-hero__title-accent {
+    color: var(--quest-primary);
+    text-shadow: 0 0 40px rgba(243, 156, 18, 0.4), 0 0 80px rgba(243, 156, 18, 0.15);
+    position: relative;
+  }
+
+  .quest-hero__title-accent::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, var(--quest-primary), var(--quest-accent));
+    opacity: 0.3;
+    border-radius: var(--radius-full);
+    z-index: -1;
+  }
+
+  .quest-hero__subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(var(--text-lg), 3vw, var(--text-xl));
+    color: rgba(255,255,255,0.75);
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
+    padding: 0 var(--space-4);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ============================================================
+     HERO STATS — 5 Stats with Icons: Quests, Worlds, Badges, XP, Level
+     ============================================================ */
+  .quest-hero__stats {
+    display: flex;
+    justify-content: center;
+    gap: clamp(var(--space-3), 3vw, var(--space-6));
+    flex-wrap: wrap;
+    margin-bottom: var(--space-8);
+  }
+
+  .quest-hero__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    background: rgba(255,255,255,0.05);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    min-width: 90px;
+  }
+
+  .quest-hero__stat:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(243, 156, 18, 0.25);
+    transform: translateY(-3px);
+  }
+
+  .quest-hero__stat-icon {
+    font-size: var(--text-xl);
+    color: rgba(255,255,255,0.4);
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+
+  .quest-hero__stat:hover .quest-hero__stat-icon {
+    color: var(--quest-primary);
+  }
+
+  .quest-hero__stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-xl), 4vw, var(--text-3xl));
+    font-weight: 800;
+    color: var(--quest-primary);
+    text-shadow: 0 0 20px rgba(243, 156, 18, 0.4);
+    line-height: 1.1;
+  }
+
+  .quest-hero__stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  /* ============================================================
+     SCROLL INDICATOR
+     ============================================================ */
+  .quest-hero__scroll {
+    position: absolute;
+    bottom: var(--space-6);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    animation: scrollBounce 2s ease-in-out infinite;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .quest-hero__scroll:hover {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .quest-hero__scroll i {
+    font-size: var(--text-xl);
+    color: var(--quest-primary);
+    opacity: 0.7;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ============================================================
+     CTA BUTTON — Pulsing Glow
+     ============================================================ */
+  .quest-hero__cta {
+    position: relative;
+    z-index: 1;
+  }
+
+  .quest-hero__cta .quest-btn--primary {
+    animation: ctaPulse 3s ease-in-out infinite;
+    font-size: var(--text-lg);
+    padding: var(--space-4) var(--space-10);
+  }
+
+  .quest-hero__cta .quest-btn--primary::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--quest-primary), var(--quest-accent));
+    opacity: 0;
+    filter: blur(12px);
+    z-index: -1;
+    animation: ctaGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes ctaPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+
+  @keyframes ctaGlow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.05); }
+  }
+
+  /* ============================================================
+     CONTINUE BANNER — "Welcome back, developer!"
+     ============================================================ */
+  .quest-hero__continue {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .quest-hero__continue-text {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+  }
+
+  .quest-hero__continue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-5);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--quest-primary);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .quest-hero__continue-link:hover {
+    background: rgba(243, 156, 18, 0.12);
+    border-color: rgba(243, 156, 18, 0.25);
+    transform: translateY(-2px);
+  }
+
+  /* ============================================================
+     PORTAL TRANSITION OVERLAY — Smooth cinematic fade
+     ============================================================ */
+  .portal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .portal-overlay--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .portal-overlay__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    filter: blur(0px);
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), filter 1s ease;
+  }
+
+  .portal-overlay--active .portal-overlay__image {
+    transform: scale(1.1);
+    filter: blur(3px);
+  }
+
+  /* Soft gradient overlay — blends image into dark hero */
+  .portal-overlay__soft-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 12, 16, 0) 0%,
+      rgba(10, 12, 16, 0.3) 40%,
+      rgba(10, 12, 16, 0.7) 70%,
+      rgba(10, 12, 16, 0.95) 100%
+    );
+    opacity: 0;
+    transition: opacity 1.2s ease 0.2s;
+    z-index: 2;
+  }
+
+  .portal-overlay--active .portal-overlay__soft-fade {
+    opacity: 1;
+  }
+
+  /* Gentle vignette — softer than before */
+  .portal-overlay__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.5) 80%);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    z-index: 3;
+  }
+
+  .portal-overlay--active .portal-overlay__vignette {
+    opacity: 1;
+  }
+
+  /* World color tint — very subtle */
+  .portal-overlay__color {
+    position: absolute;
+    inset: 0;
+    background: var(--portal-color, var(--quest-primary));
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    transition: opacity 1s ease 0.3s;
+    z-index: 4;
+  }
+
+  .portal-overlay--active .portal-overlay__color {
+    opacity: 0.25;
+  }
+
+  .portal-overlay__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px);
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl));
+    font-weight: 800;
+    color: var(--quest-white);
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 0.6s ease 0.5s;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 90vw;
+    padding: 0 var(--space-4);
+    z-index: 5;
+  }
+
+  .portal-overlay--active .portal-overlay__title {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+
+  .portal-overlay__entering {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    transition: opacity 0.4s ease 0.8s;
+    z-index: 5;
+  }
+
+  .portal-overlay--active .portal-overlay__entering {
+    opacity: 1;
+    animation: enteringPulse 1s ease-in-out infinite 1s;
+  }
+
+  @keyframes enteringPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Dark mode adjustments */
+  html.dark-mode .quest-hero__bg::after {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 17, 21, 0.80) 0%,
+      rgba(15, 17, 21, 0.50) 40%,
+      rgba(15, 17, 21, 0.70) 100%
+    );
+  }
+
+  html.dark-mode .quest-hero__stat {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.05);
+  }
+}

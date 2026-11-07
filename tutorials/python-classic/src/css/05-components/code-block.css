@@ -1,0 +1,252 @@
+/* ==========================================================================
+   PYTHON CLASSIC — Code Block Component
+   Syntax Highlighting & Terminal-Styling
+   ========================================================================== */
+
+@layer components {
+  .py-classic-code-block {
+    position: relative;
+    margin: var(--py-space-8) 0;
+    border-radius: var(--py-radius-lg);
+    overflow: hidden;
+    background-color: var(--py-bg-code);
+    box-shadow: var(--py-shadow-md);
+  }
+
+  /* Header */
+  .py-classic-code-block__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--py-space-3) var(--py-space-4);
+    background-color: rgb(0 0 0 / 0.2);
+    border-bottom: 1px solid rgb(255 255 255 / 0.05);
+  }
+
+  .py-classic-code-block__lang {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    color: var(--py-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .py-classic-code-block__lang::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--py-accent);
+    border-radius: var(--py-radius-full);
+  }
+
+  /* Copy Button */
+  .py-classic-code-block__copy {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-1) var(--py-space-3);
+    background-color: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--py-radius-md);
+    color: var(--py-text-code);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-medium);
+    transition: background-color var(--py-transition-fast),
+                border-color var(--py-transition-fast);
+  }
+
+  .py-classic-code-block__copy:hover {
+    background-color: rgb(255 255 255 / 0.15);
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  .py-classic-code-block__copy.is-copied {
+    background-color: var(--py-success);
+    border-color: var(--py-success);
+    color: var(--py-white);
+  }
+
+  .py-classic-code-block__copy svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  /* Code Area */
+  .py-classic-code-block__pre {
+    padding: var(--py-space-5) var(--py-space-6);
+    overflow-x: auto;
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-sm);
+    line-height: 1.7;
+    color: var(--py-text-code);
+  }
+
+  .py-classic-code-block__pre code {
+    font-family: inherit;
+    background: none;
+    padding: 0;
+    color: inherit;
+    word-break: normal;
+    white-space: pre;
+  }
+
+  /* Mobile: wrap long lines instead of horizontal scroll */
+  @media (max-width: 640px) {
+    .py-classic-code-block__pre {
+      overflow-x: visible;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .py-classic-code-block__pre code {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  }
+
+  /* ========================================================================
+     CODE FOLDING — toggle for long blocks
+     ======================================================================== */
+  .py-classic-code-block.is-foldable .py-classic-code-block__pre {
+    max-height: 14rem;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .py-classic-code-block.is-foldable .py-classic-code-block__pre {
+      transition: none;
+    }
+  }
+
+  .py-classic-code-block.is-unfolded .py-classic-code-block__pre {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .py-classic-code-block__fold-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    background-color: rgb(255 255 255 / 0.08);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: var(--py-radius-md);
+    color: var(--py-text-code);
+    font-family: var(--py-font-sans);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-medium);
+    cursor: pointer;
+    transition: background-color var(--py-transition-fast),
+                border-color var(--py-transition-fast);
+  }
+
+  .py-classic-code-block__fold-toggle:hover {
+    background-color: rgb(255 255 255 / 0.15);
+    border-color: rgb(255 255 255 / 0.2);
+  }
+
+  .py-classic-code-block__fold-icon {
+    display: inline-flex;
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+
+  /* Simple Syntax Highlighting (without Prism) */
+  .py-classic-code-block__pre .token-keyword {
+    color: #ff7b72;
+    font-weight: var(--py-weight-semibold);
+  }
+
+  .py-classic-code-block__pre .token-string {
+    color: #a5d6ff;
+  }
+
+  .py-classic-code-block__pre .token-comment {
+    color: #8b949e;
+    font-style: italic;
+  }
+
+  .py-classic-code-block__pre .token-number {
+    color: #79c0ff;
+  }
+
+  .py-classic-code-block__pre .token-function {
+    color: #d2a8ff;
+  }
+
+  .py-classic-code-block__pre .token-operator {
+    color: #ff7b72;
+  }
+
+  .py-classic-code-block__pre .token-builtin {
+    color: #ffa657;
+  }
+
+  /* Terminal Block Variant */
+  .py-classic-code-block--terminal {
+    border-radius: var(--py-radius-xl);
+  }
+
+  .py-classic-code-block--terminal .py-classic-code-block__header {
+    background-color: rgb(0 0 0 / 0.3);
+    padding: var(--py-space-3) var(--py-space-4);
+  }
+
+  /* Window Controls (for Terminal look) */
+  .py-classic-code-block__window-controls {
+    display: flex;
+    gap: var(--py-space-1);
+  }
+
+  .py-classic-code-block__window-control {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+  }
+
+  .py-classic-code-block__window-control--close {
+    background-color: #ff5f56;
+  }
+
+  .py-classic-code-block__window-control--minimize {
+    background-color: #ffbd2e;
+  }
+
+  .py-classic-code-block__window-control--maximize {
+    background-color: #27c93f;
+  }
+
+  /* Output Block */
+  .py-classic-code-block__output {
+    padding: var(--py-space-4) var(--py-space-6);
+    background-color: rgb(0 0 0 / 0.15);
+    border-top: 1px dashed rgb(255 255 255 / 0.1);
+    font-family: var(--py-font-mono);
+    font-size: var(--py-text-sm);
+    color: rgb(255 255 255 / 0.7);
+    line-height: 1.6;
+  }
+
+  .py-classic-code-block__output-label {
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgb(255 255 255 / 0.4);
+    margin-bottom: var(--py-space-2);
+  }
+
+  /* Inline in exercises */
+  .py-classic-exercise .py-classic-code-block {
+    margin: var(--py-space-4) 0;
+    box-shadow: var(--py-shadow-sm);
+  }
+
+  .py-classic-exercise .py-classic-code-block__pre {
+    padding: var(--py-space-4);
+  }
+}

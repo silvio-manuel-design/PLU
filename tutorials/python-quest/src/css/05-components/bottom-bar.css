@@ -1,0 +1,68 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Bottom Action Bar (Mobile)
+   ========================================================================== */
+
+@layer components {
+  .py-quest-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--py-z-sticky);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 64px;
+    background: var(--py-bg-card);
+    border-top: 1px solid var(--py-border-color);
+    backdrop-filter: blur(20px);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  @media (min-width: 768px) {
+    .py-quest-bottom-bar {
+      display: none;
+    }
+  }
+
+  .py-quest-bottom-bar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex: 1;
+    height: 100%;
+    color: var(--py-text-muted);
+    text-decoration: none;
+    font-size: 0.625rem;
+    font-weight: var(--py-weight-medium);
+    transition: all var(--py-transition-fast);
+    position: relative;
+  }
+
+  .py-quest-bottom-bar__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--py-primary);
+    border-radius: 0 0 var(--py-radius-full) var(--py-radius-full);
+    transition: width var(--py-transition-fast);
+  }
+
+  .py-quest-bottom-bar__item.is-active {
+    color: var(--py-primary);
+  }
+
+  .py-quest-bottom-bar__item.is-active::before {
+    width: 40%;
+  }
+
+  .py-quest-bottom-bar__item i {
+    font-size: 1.25rem;
+  }
+}

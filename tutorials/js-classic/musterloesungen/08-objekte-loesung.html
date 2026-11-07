@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Musterlösung – Kapitel 8 | JS-Tutorial</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="warnung" style="background:#ffebee; border-left:4px solid #e53935; margin-bottom:24px;">
+    <strong>🔒 Nur für Lehrkraft / Nachbesprechung!</strong><br>
+    Dieser Link ist nicht öffentlich verlinkt.
+  </div>
+
+  <main class="main-content">
+    <section>
+      <h1>🧱 Musterlösung – Kapitel 8: Objekte</h1>
+
+      <h2>Aufgabe 1: Objekt vs. Array</h2>
+      <h3>Lesbarkeit:</h3>
+      <p>✅ <strong>Objekt (Variante B)</strong> ist viel lesbarer:<br>
+      <code>schuelerB.alter</code> ist selbsterklärend – bei <code>schuelerA[1]</code> muss man raten, was Index 1 bedeutet.</p>
+
+      <h3>Zugriff auf Alter:</h3>
+      <ul>
+        <li>Array: <code>schuelerA[1]</code> → fehleranfällig (Index-Fehler)</li>
+        <li>Objekt: <code>schuelerB.alter</code> → klar, robust</li>
+      </ul>
+
+      <h3>E-Mail hinzufügen:</h3>
+      <ul>
+        <li>Array: Reihenfolge stört – muss an letzte Stelle, aber was ist mit anderen Schülern?</li>
+        <li>Objekt: Einfach <code>schuelerB.email = "a@example.com"</code> – keine Reihenfolge nötig!</li>
+      </ul>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle ein JavaScript-Objekt für einen Schüler mit den Eigenschaften:
+name (string), alter (number), klasse (string), noten (Array of numbers).
+Erkläre, warum ein Objekt hier besser geeignet ist als ein Array mit fester Reihenfolge.</code></pre>
+
+      <h2>Aufgabe 2: <code>this</code> und Methoden</h2>
+      <h3>Warum der Fehler?</h3>
+      <p><code>breite</code> und <code>hoehe</code> sind **Eigenschaften des Objekts** – nicht globale Variablen.<br>
+      Innerhalb der Methode muss man auf sie mit <code>this.breite</code> und <code>this.hoehe</code> zugreifen.</p>
+
+      <h3>Verbesserte Methode:</h3>
+      <pre><code>flaeche: function() {
+  return this.breite * this.hoehe;
+}</code></pre>
+
+      <h3>Methode <code>info()</code>:</h3>
+      <pre><code>info: function() {
+  return `Rechteck ${this.breite}×${this.hoehe} = ${this.flaeche()} cm²`;
+}</code></pre>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle ein Objekt "rechteck" mit breite, hoehe und Methoden flaeche() und info().
+Verwende this.breite und this.hoehe in den Methoden.
+Gib in info() einen formatierten String zurück.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

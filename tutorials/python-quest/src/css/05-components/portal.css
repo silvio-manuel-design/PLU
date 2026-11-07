@@ -1,0 +1,140 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Portal Transition Overlay
+   Welt-Karte → Fullscreen Zoom → Quest-Seite
+   ========================================================================== */
+
+@layer components {
+  .py-quest-portal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .py-quest-portal.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  /* Fullscreen world image */
+  .py-quest-portal__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    filter: blur(0px);
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), filter 1s ease;
+  }
+
+  .py-quest-portal.is-active .py-quest-portal__image {
+    transform: scale(1.1);
+    filter: blur(3px);
+  }
+
+  /* Soft gradient overlay — blends image into dark */
+  .py-quest-portal__soft-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 12, 16, 0) 0%,
+      rgba(10, 12, 16, 0.3) 40%,
+      rgba(10, 12, 16, 0.7) 70%,
+      rgba(10, 12, 16, 0.95) 100%
+    );
+    opacity: 0;
+    transition: opacity 1.2s ease 0.2s;
+    z-index: 2;
+  }
+
+  .py-quest-portal.is-active .py-quest-portal__soft-fade {
+    opacity: 1;
+  }
+
+  /* Gentle vignette */
+  .py-quest-portal__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.5) 80%);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    z-index: 3;
+  }
+
+  .py-quest-portal.is-active .py-quest-portal__vignette {
+    opacity: 1;
+  }
+
+  /* World color tint — very subtle */
+  .py-quest-portal__color {
+    position: absolute;
+    inset: 0;
+    background: var(--portal-color, var(--py-primary));
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    transition: opacity 1s ease 0.3s;
+    z-index: 4;
+  }
+
+  .py-quest-portal.is-active .py-quest-portal__color {
+    opacity: 0.25;
+  }
+
+  /* World title */
+  .py-quest-portal__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px);
+    font-family: var(--py-font-display);
+    font-size: clamp(var(--py-text-3xl), 6vw, var(--py-text-5xl));
+    font-weight: var(--py-weight-extrabold);
+    color: var(--py-white);
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 0.6s ease 0.5s;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 90vw;
+    padding: 0 var(--py-space-4);
+    z-index: 5;
+  }
+
+  .py-quest-portal.is-active .py-quest-portal__title {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+
+  /* Entering text */
+  .py-quest-portal__entering {
+    position: absolute;
+    bottom: var(--py-space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    opacity: 0;
+    transition: opacity 0.4s ease 0.8s;
+    z-index: 5;
+  }
+
+  .py-quest-portal.is-active .py-quest-portal__entering {
+    opacity: 1;
+    animation: portalEnteringPulse 1s ease-in-out infinite 1s;
+  }
+
+  @keyframes portalEnteringPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+}

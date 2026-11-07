@@ -1,0 +1,1001 @@
+/* === GLOBALE RESETS UND TYPOGRAPHIE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === CSS-VARIABLEN – CYBERPUNK THEME === */
+:root {
+  /* Neon Primary Colors */
+  --primary: #00f5ff;         /* Electric Cyan */
+  --primary-light: #00c8cc;   /* Darker Cyan */
+  --primary-bg: #0a0a0f;      /* Deep Space */
+  --text: #ffffff;            /* White */
+  --text-secondary: #a0a0b0;
+  --success: #39ff14;         /* Neon Green */
+  --border-light: rgba(0, 245, 255, 0.3);
+  --shadow: rgba(0, 245, 255, 0.15);
+  --card-bg: #12121a;
+  --input-bg: #1a1a25;
+  
+  /* Additional Cyberpunk Colors */
+  --neon-magenta: #ff00ff;
+  --neon-green: #39ff14;
+  --neon-yellow: #ffff00;
+  --neon-red: #ff0040;
+  --bg-dark: #050508;
+  --bg-elevated: #1a1a25;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--primary-bg);
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* === KAPITEL-CONTAINER === */
+.main-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* === ÜBERSCHRIFTEN === */
+.main-content h1 {
+  font-size: 2.6rem;
+  margin-bottom: 28px;
+  color: var(--text);
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--primary);
+  font-weight: 800;
+}
+
+.main-content h2 {
+  font-size: 1.8rem;
+  margin: 32px 0 20px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.main-content h3 {
+  font-size: 1.4rem;
+  margin: 24px 0 16px;
+  color: var(--primary-light);
+  font-weight: 600;
+}
+
+/* === ABSÄTZE UND LISTS === */
+.main-content p,
+.main-content ul,
+.main-content ol {
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+}
+
+.main-content ul,
+.main-content ol {
+  padding-left: 28px;
+}
+
+/* === ABSCHNITT ALS 'KARTE' === */
+.main-content > section {
+  background: linear-gradient(to bottom, var(--card-bg), #fdf6e3);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.main-content > section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+/* === CODE & PRE === */
+pre {
+  background-color: #fdf6e3;
+  border-left: 4px solid var(--primary);
+  padding: 18px;
+  margin: 24px 0;
+  overflow-x: auto;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.95rem;
+  border-radius: 0 8px 8px 0;
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+  background-color: #fff8e1;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+  font-size: 0.95em;
+}
+
+/* === WARNUNGEN & HINWEISE === */
+.warnung {
+  background-color: #fff8e1;
+  color: #5d4037;
+  padding: 18px;
+  border-left: 4px solid #ffc107;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.regel {
+  background-color: #fffde7;
+  border-left: 4px solid var(--primary);
+  padding: 18px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+/* === BUTTONS === */
+button,
+.nav-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  margin: 10px 10px 18px 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-weight: 600;
+  text-decoration: none !important; /* ← verhindert Unterstreichung */
+  min-height: 46px; /* Ensure minimum height for proper text wrapping */
+  display: inline-flex; /* Use flexbox for better text alignment */
+  align-items: center; /* Vertically center text */
+  justify-content: center; /* Horizontally center text */
+  text-align: center; /* Center text horizontally */
+  white-space: normal; /* Allow text to wrap */
+  width: auto; /* Allow width to adjust to content */
+}
+
+button:hover,
+.nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+  background-color: var(--primary-light);
+}
+
+/* === HEADER & NAVIGATION === */
+.header {
+  background: linear-gradient(135deg, #2c3e50, #1a2530);
+  color: white;
+  padding: 1rem 0;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 24px;
+  gap: 16px;
+  position: relative;
+}
+
+/* Header layout with logo on left, nav in center, dark mode on right */
+.header-container {
+  display: flex;
+  align-items: center;
+  min-height: 80px; /* Ensure consistent height */
+}
+
+.header-container > .logo {
+  order: 1;
+  flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.header-container > .mobile-menu-toggle {
+  order: 2;
+  margin-right: 16px;
+  flex-shrink: 0; /* Prevent hamburger from shrinking */
+}
+
+.header-container > .nav-wrapper {
+  order: 3;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center the navigation */
+  align-items: center;
+}
+
+/* Position the dark mode toggle button on the far right */
+.header-container > #dark-mode-toggle {
+  order: 4;
+  margin-left: 16px;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Brand name next to logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand__name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.brand__name--quest {
+  color: var(--neon-cyan);
+}
+
+.brand:hover .brand__name {
+  text-decoration: underline;
+  text-decoration-color: var(--neon-cyan);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+  .brand__name {
+    font-size: 1.25rem;
+  }
+}
+
+#dark-mode-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Prevents the button from shrinking */
+}
+
+#dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  position: relative;
+  padding: 6px 0;
+  white-space: nowrap;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* === FOOTER === */
+.footer {
+  text-align: center;
+  padding: 2.2rem 0;
+  color: var(--text-secondary);
+  border-top: 1px solid #eee;
+  margin-top: 50px;
+  font-size: 0.95rem;
+}
+
+/* === RESPONSIVE – MOBILE === */
+@media (max-width: 768px) {
+  body {
+    padding: 14px;
+  }
+  .header-container {
+    padding: 1rem 16px;
+  }
+  #dark-mode-toggle {
+    font-size: 1.3rem;
+    width: 36px;
+    height: 36px;
+  }
+  button,
+  .nav-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 8px auto 16px;
+    min-height: 46px; /* Maintain minimum height for proper text wrapping */
+    white-space: normal; /* Allow text to wrap */
+    display: inline-flex; /* Use flexbox for better text alignment */
+    align-items: center; /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+    text-align: center; /* Center text horizontally */
+  }
+
+  /* Mobile header layout: logo centered, hamburger left, dark mode right */
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px; /* Maintain consistent height */
+  }
+
+  .header-container > .mobile-menu-toggle {
+    order: 1; /* Left side */
+  }
+
+  .header-container > .logo {
+    order: 2; /* Center */
+    margin: 0 auto; /* Center the logo */
+  }
+
+  .header-container > .nav-wrapper {
+    order: 3; /* This will be positioned separately */
+    /* Don't hide the nav wrapper completely, just position it off-screen */
+  }
+
+  .header-container > #dark-mode-toggle {
+    order: 4; /* Right side */
+  }
+
+  /* Make headings smaller in mobile to prevent line breaks */
+  .main-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+
+  .main-content h2 {
+    font-size: 1.6rem;
+    margin: 24px 0 16px;
+  }
+
+  .main-content h3 {
+    font-size: 1.3rem;
+    margin: 20px 0 14px;
+  }
+
+  /* Improve table display in mobile */
+  .comparison-table-container {
+    overflow-x: auto;
+    padding: 0;
+    width: 100%;
+    margin: 24px 0;
+    /* Standard scrolling behavior for modern browsers */
+  }
+
+  .comparison-table-container table {
+    min-width: 100%; /* Make table at least full width of container */
+    width: max-content; /* Allow table to expand to fit content */
+    font-size: 0.8rem;
+    border-collapse: collapse;
+  }
+
+  .comparison-table-container th,
+  .comparison-table-container td {
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid var(--border-light);
+  }
+
+  /* On mobile, transform table to definition list-like layout */
+  @media (max-width: 768px) {
+    .comparison-table-container {
+      overflow-x: visible; /* Disable horizontal scroll for transformed layout */
+      width: 100% !important;
+      max-width: 100vw; /* Ensure it doesn't exceed viewport width */
+      padding: 0 10px; /* Add some padding to prevent edge touching */
+    }
+
+    .comparison-table-container table,
+    .comparison-table-container thead,
+    .comparison-table-container tbody,
+    .comparison-table-container th,
+    .comparison-table-container td,
+    .comparison-table-container tr {
+      display: block; /* Force all elements to be blocks */
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+      box-sizing: border-box;
+    }
+
+    .comparison-table-container thead {
+      display: none; /* Completely hide table headers on mobile */
+    }
+
+    .comparison-table-container tr {
+      border: 1px solid var(--border-light);
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      background: white;
+      box-sizing: border-box;
+      width: 100% !important;
+      position: relative;
+      overflow: visible; /* Ensure content is visible */
+      /* Content height handled by layout */
+    }
+
+    .comparison-table-container td {
+      display: block;
+      border: none;
+      border-bottom: 1px dashed var(--border-light); /* Visual separation */
+      padding: 12px 0;
+      text-align: left;
+      white-space: normal;
+      width: 100% !important;
+      box-sizing: border-box;
+      margin: 8px 0;
+      word-wrap: break-word; /* Ensure long words break */
+      overflow-wrap: break-word; /* Ensure content wraps */
+      hyphens: auto; /* Enable hyphenation for better wrapping */
+      line-height: 1.5; /* Ensure proper line height */
+      /* Content height handled by layout */
+      clear: both; /* Ensure proper stacking */
+    }
+
+    /* Add labels to each cell using data attributes - display as separate elements */
+    .comparison-table-container td::before {
+      content: attr(data-label) ": ";
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      padding: 5px;
+      background: rgba(212, 160, 23, 0.1); /* Light background for labels */
+      border-radius: 3px;
+      clear: both;
+      word-wrap: break-word; /* Ensure label text wraps */
+      overflow-wrap: break-word; /* Ensure label content wraps */
+    }
+
+    /* Last td in a row doesn't need bottom border */
+    .comparison-table-container tr > td:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    /* Mobile table card styling for dark mode */
+    html.dark-mode .comparison-table-container tr {
+      background: var(--card-bg) !important;
+      border: 1px solid #444 !important;
+    }
+
+    html.dark-mode .comparison-table-container td::before {
+      background: rgba(255, 204, 0, 0.15) !important;
+    }
+  }
+}
+
+/* === DROPDOWN MENÜ === */
+.nav-item.dropdown {
+  position: relative !important;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100% !important;
+  left: 0 !important;
+  background: white;
+  list-style: none;
+  min-width: 250px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  display: none;
+  z-index: 10000 !important;
+  border: 1px solid #eee;
+  margin-top: 8px !important;
+}
+
+.dropdown-menu a {
+  color: var(--text);
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #fffde7;
+  color: var(--primary);
+  padding-left: 24px;
+}
+
+/* === HERO-BEREICH MIT ANIMATION === */
+.hero-section {
+  text-align: center;
+  padding: 80px 24px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid var(--border-light);
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(245,247,250,0.95) 100%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='60' font-family='monospace' font-size='40' fill='%23d4a01722'%3E%7B %7D%3C/text%3E%3C/svg%3E");
+  background-size: 120px;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--shadow) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 1;
+  font-size: 2.8rem;
+  color: var(--text);
+  animation: fadeInUp 1s ease-out;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-top: 16px;
+  animation: fadeInUp 1s ease-out 0.2s both;
+  font-weight: 600;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === KAPITEL-NAVIGATION === */
+.kapitel-navigation {
+  margin-top: 40px;
+  padding-top: 28px;
+  text-align: center;
+  border-top: 2px dashed var(--primary);
+}
+
+.kapitel-navigation p {
+  margin-bottom: 20px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* === BACK-TO-TOP === */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+/* === VERGLEICHSKARTEN === */
+.comparison-cards {
+  display: flex;
+  gap: 24px;
+  margin: 28px 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  flex: 1;
+  min-width: 250px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-light);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.icon {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+/* === VERGLEICHSTABELLE MIT RAHMEN === */
+.comparison-table-container {
+  background-color: #fffde7;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+  box-shadow: 0 4px 12px rgba(212, 160, 23, 0.15);
+  overflow-x: auto;
+}
+
+.comparison-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  min-width: 600px;
+}
+
+.comparison-table-container th,
+.comparison-table-container td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+}
+
+.comparison-table-container th:last-child,
+.comparison-table-container td:last-child {
+  border-right: none;
+}
+
+.comparison-table-container th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.comparison-table-container td {
+  background-color: white;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+/* ================================================================== */
+/*                        DARK MODE – GRAFIK-OCKER                    */
+/* ================================================================== */
+
+html.dark-mode {
+  --primary: #ffcc00;         /* Helles Gelb */
+  --primary-light: #ffb300;
+  --primary-bg: #1e1a15;      /* Dunkles Holzbraun */
+  --text: #f9f3d8;            /* Helles Elfenbein */
+  --text-secondary: #d7ccc8;
+  --border-light: #444;
+  --shadow: rgba(255, 204, 0, 0.25);
+  --card-bg: #252525;
+  --input-bg: #333;
+}
+
+html.dark-mode body {
+  background-color: #121212;
+  color: var(--text);
+}
+
+html.dark-mode .header {
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+}
+
+html.dark-mode .main-content > section {
+  background: linear-gradient(to bottom, var(--card-bg), #2a2a2a);
+  border-color: #444;
+}
+
+html.dark-mode .regel {
+  background-color: #2a251a !important;
+  border-left-color: var(--primary) !important;
+}
+
+html.dark-mode .warnung {
+  background-color: #3a2a2a !important;
+  border-left-color: #e74c3c !important;
+  color: #ffe0b2 !important;
+}
+
+html.dark-mode a {
+  color: #ffcc00 !important;
+}
+
+html.dark-mode pre,
+html.dark-mode code {
+  background-color: #2d2d2d !important;
+  color: #fff9c4 !important;
+}
+
+html.dark-mode .dropdown-menu {
+  background: #2d2d2d !important;
+  border-color: #444 !important;
+}
+
+html.dark-mode .dropdown-menu a {
+  color: #f0f0f0 !important;
+}
+
+html.dark-mode .dropdown-menu a:hover {
+  background-color: #3a3a3a !important;
+  color: var(--primary) !important;
+}
+
+html.dark-mode .card {
+  background: var(--card-bg);
+  color: var(--text);
+  border-color: #444;
+}
+
+html.dark-mode .card h3 {
+  color: var(--primary);
+}
+
+/* === OPTIMIERTE TABELLEN IM DARK MODE === */
+html.dark-mode .comparison-table-container {
+  background-color: #252525;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(255, 204, 0, 0.25);
+}
+
+html.dark-mode .comparison-table-container th {
+  background-color: #e6b800; /* ← sanfteres Gelb */
+  color: #1a1a1a;           /* ← dunkle Schrift für besseren Komfort */
+  font-weight: 700;
+}
+
+html.dark-mode .comparison-table-container td {
+  background-color: #2a2a2a;
+  color: var(--text);
+  border-bottom: 1px solid #444;
+  border-right: 1px solid #444;
+}
+
+html.dark-mode .comparison-table-container th:last-child,
+html.dark-mode .comparison-table-container td:last-child {
+  border-right: none;
+}
+
+/* === DARK MODE: BUTTONS === */
+html.dark-mode .nav-button,
+html.dark-mode button:not(#dark-mode-toggle):not(.mobile-menu-toggle) {
+  color: #1a1a1a !important; /* ← weicheres Schwarz auf hellem Gelb */
+  background-color: #ffcc00 !important;
+}
+
+/* Dark mode toggle button should remain without background in dark mode */
+html.dark-mode #dark-mode-toggle {
+  background: none !important;
+  color: #f0f0f0 !important;
+}
+
+/* Mobile menu toggle should remain without background in dark mode */
+html.dark-mode .mobile-menu-toggle {
+  background: transparent !important;
+}
+
+html.dark-mode .nav-button:hover,
+html.dark-mode button:hover {
+  background-color: #ffb300 !important;
+}
+
+/* Dark Mode: Schrift in Demo-Einträgen hell machen */
+html.dark-mode .demo-entry,
+html.dark-mode .demo-entry strong,
+html.dark-mode .demo-entry small {
+  color: #f0f0f0 !important;
+}
+
+/* ================================================================== */
+/*                     MOBILE HAMBURGER MENÜ                          */
+/* ================================================================== */
+
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 36px;
+  height: 36px;
+  background: transparent; /* Remove background color */
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2000;
+}
+
+.mobile-menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: white; /* Keep white stripes */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: #2c3e50;
+    transition: right 0.4s ease;
+    z-index: 1500;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+    padding-top: 60px;
+    /* Take out of flex flow */
+    flex: none;
+  }
+
+  .nav-wrapper.active {
+    right: 0;
+  }
+
+
+  .nav-list {
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 0 20px;
+    align-items: stretch !important;
+    margin: 0;
+  }
+
+  .nav-link,
+  .dropdown-menu a {
+    padding: 16px 24px !important;
+    color: white !important;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #3a4a5a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-item.dropdown > .nav-link::after {
+    content: "▼";
+    font-size: 0.8rem;
+    color: #ddd;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    background: #34495e !important;
+    margin-top: 0 !important;
+    display: none !important;
+    padding-left: 20px !important;
+    border: none !important;
+    list-style: none;
+  }
+
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  .dropdown-menu a {
+    font-size: 1rem;
+    padding-left: 40px !important;
+    border-bottom: 1px solid #3a4a5a;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+  }
+}
+
+/* === BILDER MIT RAHMEN FÜR SCREENSHOTS === */
+.screenshot {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.screenshot-caption {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+/* === ZENTRIERTE BUTTON-GRUPPE FÜR DOWNLOAD-LINKS === */
+.center-button-container {
+  text-align: center;
+  margin: 20px 0;
+}

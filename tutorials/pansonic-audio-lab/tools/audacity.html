@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Audacity - Das Open-Source Fundament für Audio-Produktion. Kostenlos, professionell, plattformübergreifend. Lerne Aufnahme, Bearbeitung und Mixing mit Audacity.">
+  <meta name="theme-color" content="#ff5a5a">
+  <meta name="robots" content="index, follow">
+  
+  <title>Audacity | Open Source Audio-Editor - Pansonic Lab</title>
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    /* Tool Page Specific Styles */
+    .tool-hero {
+      padding: 100px 24px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .tool-hero h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    }
+    
+    .tool-hero h1 span {
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .tool-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    
+    .tool-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-teal-dim);
+      color: var(--accent-teal);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    
+    .tool-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+    }
+    
+    /* Download Section */
+    .download-section {
+      padding: 60px 24px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .download-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .download-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    
+    .download-btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 48px;
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-coral-light));
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(255, 90, 90, 0.3);
+    }
+    
+    .download-btn-main:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255, 90, 90, 0.4);
+    }
+    
+    .download-btn-main svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .download-platforms {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    
+    .platform-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    
+    .platform-link:hover {
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+      background: var(--accent-teal-dim);
+    }
+    
+    .download-meta {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    
+    .download-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Feature Grid */
+    .features-section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-active);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--accent-coral-dim);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 20px;
+    }
+    
+    .feature-card:nth-child(2) .feature-icon { background: var(--accent-teal-dim); }
+    .feature-card:nth-child(3) .feature-icon { background: rgba(255, 215, 0, 0.15); }
+    .feature-card:nth-child(4) .feature-icon { background: rgba(139, 92, 246, 0.15); }
+    .feature-card:nth-child(5) .feature-icon { background: rgba(236, 72, 153, 0.15); }
+    .feature-card:nth-child(6) .feature-icon { background: rgba(59, 130, 246, 0.15); }
+    
+    .feature-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .feature-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Schema Section */
+    .schema-section {
+      padding: 80px 24px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .schema-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .schema-lead {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.05rem;
+    }
+    
+    .schema-container {
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 32px;
+      overflow-x: auto;
+    }
+    
+    .schema-svg {
+      width: 100%;
+      min-width: 700px;
+      height: auto;
+      display: block;
+    }
+    
+    .schema-legend {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .legend-item.full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .legend-nummer {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-teal));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .legend-text strong {
+      display: block;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .legend-text p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .schema-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(255, 90, 90, 0.05));
+      border: 1px solid rgba(0, 212, 170, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+    }
+    
+    .tip-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .tip-content strong {
+      color: var(--accent-teal);
+    }
+    
+    .tip-content p {
+      color: var(--text-secondary);
+      margin: 4px 0 0 0;
+    }
+    
+    .screenshot-placeholder {
+      width: 100%;
+      height: 200px;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    /* Screenshots Section */
+    .screenshots-section {
+      padding: 80px 24px;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .screenshots-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .screenshots-lead {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .screenshots-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+    
+    .screenshot-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .screenshot-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-teal);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .screenshot-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: var(--bg-tertiary);
+      min-height: 200px;
+    }
+    
+    .screenshot-caption {
+      padding: 20px 24px;
+    }
+    
+    .screenshot-caption h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .screenshot-caption p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    /* Quick Start Section */
+    .quickstart-section {
+      padding: 80px 24px;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .quickstart-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .quickstart-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .quickstart-lead {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .step-card {
+      display: flex;
+      gap: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .step-card:hover {
+      border-color: var(--accent-coral);
+    }
+    
+    .step-nummer {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-coral), var(--accent-teal));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .step-content {
+      flex: 1;
+    }
+    
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .step-screenshot {
+      width: 200px;
+      height: 120px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    
+    /* Tutorials Section */
+    .tutorials-section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .tutorials-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    
+    .tutorials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .tutorial-link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .tutorial-link-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-teal);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .tutorial-link-card.external::after {
+      content: '↗';
+      margin-left: 8px;
+      opacity: 0.5;
+    }
+    
+    .tutorial-source {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-coral);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    
+    .tutorial-link-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .tutorial-link-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Pro Tips Section */
+    .protips-section {
+      padding: 80px 24px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .protips-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .protips-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    
+    .protips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    
+    .protip-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    
+    .protip-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--accent-teal);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .protip-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .protip-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    
+    .protip-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .protip-list li::before {
+      content: '→';
+      color: var(--accent-coral);
+      font-weight: 700;
+    }
+    
+    .shortcut-key {
+      background: var(--bg-tertiary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      padding: 80px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .faq-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    
+    .faq-question:hover {
+      background: var(--bg-tertiary);
+    }
+    
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--accent-coral);
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 24px 20px;
+    }
+    
+    .faq-answer p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    .faq-answer a {
+      color: var(--accent-coral);
+      text-decoration: underline;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .step-card {
+        flex-direction: column;
+      }
+      
+      .step-screenshot,
+      .video-thumbnail {
+        width: 100%;
+        height: 160px;
+      }
+      
+      .download-btn-main {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .protip-list li {
+        flex-wrap: wrap;
+      }
+      
+      .shortcut-key {
+        margin-left: 24px;
+        margin-top: 4px;
+      }
+    }
+    /* Video Modal Styles */
+    .video-thumbnail {
+      position: relative;
+      width: 200px;
+      height: 120px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-thumbnail:hover {
+      border-color: var(--accent-coral);
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(255, 90, 90, 0.2);
+    }
+    
+    .video-thumbnail::before {
+      content: '▶';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 90, 90, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+    
+    .video-thumbnail:hover::before {
+      background: var(--accent-coral);
+      transform: scale(1.1);
+    }
+    
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    .video-thumbnail:hover img {
+      opacity: 0.9;
+    }
+    
+    .video-thumbnail-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-align: center;
+      background: rgba(10, 10, 15, 0.8);
+      padding: 4px 8px;
+      border-radius: 4px;
+      z-index: 3;
+    }
+    
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    
+    .video-modal.active {
+      display: flex;
+    }
+    
+    .video-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+    }
+    
+    .video-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-modal-close:hover {
+      background: var(--accent-coral);
+      transform: scale(1.1);
+    }
+    
+    .video-modal video {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      display: block;
+    }
+    
+    @media (max-width: 768px) {
+      .video-modal {
+        padding: 20px;
+      }
+      
+      .video-modal-content {
+        max-width: 100%;
+      }
+    }
+    
+    /* Mobile hamburger menu visibility */
+    @media (max-width: 1024px) {
+      .mobile-toggle {
+        display: flex !important;
+      }
+    }
+    
+    /* Progress Bar */
+    .chapter-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+      z-index: 1001;
+    }
+
+    .chapter-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-coral), var(--accent-teal));
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link active">Tools</a>
+          <div class="dropdown-menu">
+            <a href="audacity.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+              <span class="dropdown-item-desc">Open Source Fundament</span>
+            </a>
+            <a href="suno.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+              <span class="dropdown-item-desc">KI-Musik Generierung</span>
+            </a>
+            <a href="elevenlabs.html" class="dropdown-item">
+              <span class="dropdown-item-name">Stimmen-KI</span>
+              <span class="dropdown-item-desc">Voice Cloning</span>
+            </a>
+            <a href="daw.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+              <span class="dropdown-item-desc">Prof Software</span>
+            </a>
+          </div>
+        </div>
+        <a href="../bibliothek.html" class="nav-link">Audio-Bibliothek</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch" aria-label="Sprache wählen">
+        <a href="audacity.html" class="lang-btn active" aria-current="page">DE</a>
+        <a href="audacity-en.html" class="lang-btn">EN</a>
+      </nav>
+      
+      <a href="../../pages/spenden.html" class="btn-support">Support</a>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menü" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Hell/Dunkel" aria-label="Theme wechseln">🌓</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <button class="fab-btn" id="langToggle" data-tooltip="English" aria-label="Zu English wechseln">EN</button>
+    <button class="fab-btn" id="backToTop" data-tooltip="Nach oben">↑</button>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main">
+    
+    <!-- Hero Section -->
+    <section class="tool-hero">
+      <div class="tool-badge">Open Source</div>
+      <h1><span>Audacity</span></h1>
+      <p class="tool-subtitle">Das Open-Source Fundament für Audio-Produktion</p>
+      <p class="tool-description">
+        Kostenlos, professionell, plattformübergreifend. Audacity ist die weltweit beliebteste 
+        Open-Source-Software für Audio-Aufnahme und -Bearbeitung – perfekt für Einsteiger und Profis.
+      </p>
+    </section>
+    
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+      <div class="download-content">
+        <h2>Jetzt herunterladen</h2>
+        
+        <a href="https://www.audacityteam.org/download/" target="_blank" rel="noopener" class="download-btn-main">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Audacity kostenlos downloaden
+        </a>
+        
+        <div class="download-platforms">
+          <a href="https://www.audacityteam.org/download/windows/" target="_blank" rel="noopener" class="platform-link">
+            <span>🪟</span> Windows
+          </a>
+          <a href="https://www.audacityteam.org/download/mac/" target="_blank" rel="noopener" class="platform-link">
+            <span>🍎</span> macOS
+          </a>
+          <a href="https://www.audacityteam.org/download/linux/" target="_blank" rel="noopener" class="platform-link">
+            <span>🐧</span> Linux
+          </a>
+        </div>
+        
+        <div class="download-meta">
+          <span>🔖 Version 3.4.2</span>
+          <span>💾 ~15 MB</span>
+          <span>✅ 100% Kostenlos & Open Source</span>
+          <span>🔒 Spyware-frei</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <h2 class="section-title">Leistungsstarke Features</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎙️</div>
+          <h3 class="feature-title">Multi-Track Recording</h3>
+          <p class="feature-desc">
+            Nimm mehrere Spuren gleichzeitig auf. Perfekt für Podcasts, Musikaufnahmen 
+            und Voice-Overs mit professioneller Qualität.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎛️</div>
+          <h3 class="feature-title">Effekte & Plugins</h3>
+          <p class="feature-desc">
+            Integrierte Effekte wie EQ, Kompressor, Reverb und Echo. Unterstützt 
+            VST-, LV2- und AU-Plugins für unendliche Möglichkeiten.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔇</div>
+          <h3 class="feature-title">Noise Reduction</h3>
+          <p class="feature-desc">
+            Entferne Hintergrundgeräusche mit einem Klick. Ideal für Aufnahmen 
+            in nicht-optimalen Umgebungen.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 class="feature-title">Spectrogram View</h3>
+          <p class="feature-desc">
+            Visualisiere dein Audio im Frequenzbereich. Präzise Bearbeitung 
+            von Frequenzen und Entfernung unerwünschter Geräusche.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3 class="feature-title">Audio Analysis Tools</h3>
+          <p class="feature-desc">
+            Frequenzanalyse, Lautstärke-Meter, Spektralanalyse – alles was du 
+            brauchst, um dein Audio zu verstehen und zu optimieren.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎵</div>
+          <h3 class="feature-title">Format-Support</h3>
+          <p class="feature-desc">
+            Exportiere in WAV, MP3, FLAC, OGG, AIFF und mehr. Inklusive 
+            FFmpeg-Unterstützung für alle gängigen Formate.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Interface Schema Section (Beginner-Friendly) -->
+    <section class="schema-section" id="interface">
+      <div class="schema-content">
+        <h2 class="section-title">Die Audacity-Oberfläche</h2>
+        <p class="schema-lead">
+          Diese schematische Übersicht zeigt dir die wichtigsten Bereiche – 
+          ideal für den ersten Einstieg ohne Überforderung
+        </p>
+        
+        <!-- Schematic Diagram -->
+        <div class="schema-container">
+          <svg viewBox="0 0 900 500" class="schema-svg" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background -->
+            <rect x="0" y="0" width="900" height="500" fill="#1a1a1a" rx="8"/>
+            
+            <!-- Title Bar -->
+            <rect x="0" y="0" width="900" height="30" fill="#2a2a2a" rx="8"/>
+            <text x="450" y="20" fill="#888" font-size="12" text-anchor="middle" font-family="Inter, sans-serif">Audacity Project Window</text>
+            
+            <!-- Menu Bar -->
+            <rect x="0" y="30" width="900" height="25" fill="#222"/>
+            <text x="20" y="48" fill="#ccc" font-size="11" font-family="Inter, sans-serif">Datei   Bearbeiten   Ansicht   Transport   Effekte   Hilfe</text>
+            <rect x="10" y="32" width="880" height="20" fill="none" stroke="#ff5a5a" stroke-width="2" stroke-dasharray="4"/>
+            <text x="15" y="25" fill="#ff5a5a" font-size="10" font-family="Inter, sans-serif" font-weight="bold">1. Menüleiste</text>
+            
+            <!-- Transport Toolbar -->
+            <rect x="10" y="65" width="350" height="50" fill="#2a2a2a" rx="4"/>
+            <text x="20" y="60" fill="#00d4aa" font-size="10" font-family="Inter, sans-serif" font-weight="bold">2. Transport-Buttons</text>
+            <!-- Record Button -->
+            <circle cx="40" cy="90" r="15" fill="#cc0000"/>
+            <circle cx="40" cy="90" r="6" fill="#fff"/>
+            <!-- Play Button -->
+            <circle cx="80" cy="90" r="15" fill="#00aa00"/>
+            <polygon points="76,82 76,98 88,90" fill="#fff"/>
+            <!-- Stop Button -->
+            <circle cx="120" cy="90" r="15" fill="#ffcc00"/>
+            <rect x="113" y="83" width="14" height="14" fill="#000"/>
+            <text x="150" y="95" fill="#888" font-size="11" font-family="Inter, sans-serif">R = Record | Space = Play/Stop</text>
+            
+            <!-- Tools Toolbar -->
+            <rect x="370" y="65" width="250" height="50" fill="#2a2a2a" rx="4"/>
+            <text x="380" y="60" fill="#00d4aa" font-size="10" font-family="Inter, sans-serif" font-weight="bold">3. Werkzeuge</text>
+            <rect x="385" y="80" width="30" height="25" fill="#333" rx="2"/>
+            <text x="395" y="97" fill="#fff" font-size="12">I</text>
+            <rect x="420" y="80" width="30" height="25" fill="#333" rx="2"/>
+            <text x="425" y="97" fill="#fff" font-size="12">⌘</text>
+            <rect x="455" y="80" width="30" height="25" fill="#333" rx="2"/>
+            <text x="460" y="97" fill="#fff" font-size="12">✎</text>
+            <text x="495" y="97" fill="#888" font-size="10" font-family="Inter, sans-serif">Auswahl | Verschieben | Zeichnen</text>
+            
+            <!-- Level Meters -->
+            <rect x="630" y="65" width="260" height="50" fill="#2a2a2a" rx="4"/>
+            <text x="640" y="60" fill="#00d4aa" font-size="10" font-family="Inter, sans-serif" font-weight="bold">4. Pegelanzeigen</text>
+            <rect x="650" y="80" width="80" height="25" fill="#111" rx="2"/>
+            <rect x="655" y="85" width="20" height="15" fill="#0f0"/>
+            <rect x="677" y="85" width="20" height="15" fill="#0f0"/>
+            <rect x="699" y="85" width="20" height="15" fill="#ff0"/>
+            <text x="740" y="97" fill="#888" font-size="10" font-family="Inter, sans-serif">Mic Level (grün = gut, rot = zu laut)</text>
+            
+            <!-- Timeline Ruler -->
+            <rect x="10" y="125" width="880" height="30" fill="#222"/>
+            <text x="20" y="120" fill="#00d4aa" font-size="10" font-family="Inter, sans-serif" font-weight="bold">5. Zeitachse (Timeline)</text>
+            <line x1="10" y1="140" x2="890" y2="140" stroke="#444" stroke-width="1"/>
+            <text x="30" y="145" fill="#888" font-size="9" font-family="Inter, sans-serif">0s</text>
+            <text x="230" y="145" fill="#888" font-size="9" font-family="Inter, sans-serif">5s</text>
+            <text x="430" y="145" fill="#888" font-size="9" font-family="Inter, sans-serif">10s</text>
+            <text x="630" y="145" fill="#888" font-size="9" font-family="Inter, sans-serif">15s</text>
+            <text x="830" y="145" fill="#888" font-size="9" font-family="Inter, sans-serif">20s</text>
+            
+            <!-- Track 1 -->
+            <rect x="10" y="165" width="880" height="100" fill="#252525" rx="4" stroke="#333" stroke-width="1"/>
+            <text x="20" y="160" fill="#00d4aa" font-size="10" font-family="Inter, sans-serif" font-weight="bold">6. Audio-Spur (Track)</text>
+            <!-- Track Control Panel -->
+            <rect x="15" y="170" width="150" height="90" fill="#1a1a1a" rx="2"/>
+            <text x="25" y="190" fill="#fff" font-size="11" font-family="Inter, sans-serif" font-weight="bold">Track 1</text>
+            <circle cx="35" cy="210" r="8" fill="#cc0000"/>
+            <text x="30" y="214" fill="#fff" font-size="8">R</text>
+            <text x="50" y="214" fill="#888" font-size="9">Aufnahme</text>
+            <circle cx="35" cy="230" r="8" fill="#00aa00"/>
+            <text x="30" y="234" fill="#fff" font-size="8">M</text>
+            <text x="50" y="234" fill="#888" font-size="9">Stumm</text>
+            <rect x="25" y="245" width="60" height="10" fill="#444" rx="2"/>
+            <text x="90" y="253" fill="#888" font-size="9">Lautstärke</text>
+            
+            <!-- Waveform Area -->
+            <rect x="170" y="175" width="715" height="85" fill="#1a1a1a" rx="2"/>
+            <!-- Waveform -->
+            <path d="M 170 217 Q 200 200, 230 217 T 290 217 T 350 217 T 410 217 T 470 217 T 530 217 T 590 217 T 650 217 T 710 217 T 770 217 T 830 217 T 885 217" 
+                  fill="none" stroke="#00d4aa" stroke-width="2"/>
+            <text x="500" y="260" fill="#666" font-size="10" text-anchor="middle" font-family="Inter, sans-serif">Audio-Wellenform (deine Aufnahme)</text>
+            
+            <!-- Track 2 -->
+            <rect x="10" y="275" width="880" height="100" fill="#252525" rx="4" stroke="#333" stroke-width="1"/>
+            <!-- Track Control Panel -->
+            <rect x="15" y="280" width="150" height="90" fill="#1a1a1a" rx="2"/>
+            <text x="25" y="300" fill="#fff" font-size="11" font-family="Inter, sans-serif" font-weight="bold">Track 2</text>
+            <circle cx="35" cy="320" r="8" fill="#cc0000"/>
+            <text x="30" y="324" fill="#fff" font-size="8">R</text>
+            <circle cx="35" cy="340" r="8" fill="#00aa00"/>
+            <text x="30" y="344" fill="#fff" font-size="8">M</text>
+            <rect x="25" y="355" width="60" height="10" fill="#444" rx="2"/>
+            
+            <!-- Waveform Area 2 -->
+            <rect x="170" y="285" width="715" height="85" fill="#1a1a1a" rx="2"/>
+            <path d="M 170 327 Q 210 300, 250 327 T 330 327 T 410 327 T 490 327 T 570 327 T 650 327 T 730 327 T 810 327 T 885 327" 
+                  fill="none" stroke="#ff5a5a" stroke-width="2"/>
+            
+            <!-- Bottom Status Bar -->
+            <rect x="0" y="470" width="900" height="30" fill="#222"/>
+            <text x="20" y="490" fill="#888" font-size="10" font-family="Inter, sans-serif">Projektrate: 44100 Hz | Format: 32-bit float</text>
+            <text x="750" y="490" fill="#888" font-size="10" font-family="Inter, sans-serif">7. Statusleiste</text>
+          </svg>
+        </div>
+        
+        <!-- Legend -->
+        <div class="schema-legend">
+          <div class="legend-grid">
+            <div class="legend-item">
+              <span class="legend-number">1</span>
+              <div class="legend-text">
+                <strong>Menüleiste</strong>
+                <p>Alle Befehle unter Datei, Bearbeiten, Effekte, etc.</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">2</span>
+              <div class="legend-text">
+                <strong>Transport-Buttons</strong>
+                <p>🔴 Record (R) | 🟢 Play (Space) | 🟡 Stop</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">3</span>
+              <div class="legend-text">
+                <strong>Werkzeuge</strong>
+                <p>Auswahl, Verschieben, Zeichnen für Bearbeitung</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">4</span>
+              <div class="legend-text">
+                <strong>Pegelanzeigen</strong>
+                <p>Zeigen Mic-Lautstärke an (nicht im Roten bleiben!)</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">5</span>
+              <div class="legend-text">
+                <strong>Zeitachse</strong>
+                <p>Zeigt Zeit in Sekunden – wie ein Lineal für Audio</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-number">6</span>
+              <div class="legend-text">
+                <strong>Audio-Spur (Track)</strong>
+                <p>Hier wird dein Audio angezeigt. Mehrere Spuren = Mehrere Tracks</p>
+              </div>
+            </div>
+            <div class="legend-item full-width">
+              <span class="legend-number">7</span>
+              <div class="legend-text">
+                <strong>Statusleiste</strong>
+                <p>Zeigt technische Infos wie Sample-Rate und Projekt-Einstellungen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="schema-tip">
+          <div class="tip-icon">💡</div>
+          <div class="tip-content">
+            <strong>Tipp für Anfänger:</strong> Starte mit nur einer Spur! Erst wenn du 
+            dich wohlfühlst, arbeite mit mehreren Spuren (z.B. Stimme + Musik).
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Real Screenshots (for reference after learning the basics) -->
+    <section class="screenshots-section" id="screenshots-real">
+      <div class="screenshots-content">
+        <h2 class="section-title">Echte Screenshots</h2>
+        <p class="screenshots-lead">
+          Sobald du das Schema verstanden hast, helfen dir diese echten Screenshots 
+          bei der Orientierung in der echten Anwendung
+        </p>
+        
+        <div class="screenshots-gallery">
+          <div class="screenshot-item">
+            <img src="../assets/screenshots/audacity_1.png" alt="Audacity Hauptfenster" class="screenshot-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="screenshot-placeholder" style="display:none;">
+              <span>Screenshot 1<br>(Bald verfügbar)</span>
+            </div>
+            <div class="screenshot-caption">
+              <h4>Hauptfenster</h4>
+              <p>Die zentrale Arbeitsfläche mit Timeline, Tracks und Transport-Buttons</p>
+            </div>
+          </div>
+          
+          <div class="screenshot-item">
+            <img src="../assets/screenshots/audacity_2.png" alt="Audacity Effekte" class="screenshot-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="screenshot-placeholder" style="display:none;">
+              <span>Screenshot 2<br>(Bald verfügbar)</span>
+            </div>
+            <div class="screenshot-caption">
+              <h4>Effekte-Panel</h4>
+              <p>EQ, Kompressor, Noise Reduction und viele weitere Effekte</p>
+            </div>
+          </div>
+          
+          <div class="screenshot-item">
+            <img src="../assets/screenshots/audacity_3.png" alt="Audacity Aufnahme" class="screenshot-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="screenshot-placeholder" style="display:none;">
+              <span>Screenshot 3<br>(Bald verfügbar)</span>
+            </div>
+            <div class="screenshot-caption">
+              <h4>Aufnahmemodus</h4>
+              <p>Live-Aufnahme mit Pegelanzeige und Monitoring</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Quick Start Section -->
+    <section class="quickstart-section" id="schnellstart">
+      <div class="quickstart-content">
+        <h2>Schnellstart-Guide</h2>
+        <p class="quickstart-lead">
+          In 4 einfachen Schritten zu deiner ersten Aufnahme mit Audacity
+        </p>
+        
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Installation & Setup</h3>
+              <p class="step-desc">
+                Lade Audacity herunter und installiere es. Wähle dein Mikrofon 
+                unter "Bearbeiten&quot; → "Einstellungen&quot; → "Audio&quot;. Stelle sicher, 
+                dass die richtige Aufnahmequelle ausgewählt ist.
+              </p>
+            </div>
+            <div class="video-thumbnail" data-video="../assets/screenshots/audacity_01.mp4">
+              <div class="video-thumbnail-label">▶ Video: Installation</div>
+            </div>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Erste Aufnahme</h3>
+              <p class="step-desc">
+                Klicke auf den roten Aufnahme-Button oder drücke "R&quot;. Audacity 
+                zeichnet deine Stimme auf. Klicke auf den gelben Stopp-Button 
+                oder drücke Leertaste, um zu stoppen.
+              </p>
+            </div>
+            <div class="video-thumbnail" data-video="../assets/screenshots/audacity_02.mp4">
+              <div class="video-thumbnail-label">▶ Video: Erste Aufnahme</div>
+            </div>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="step-title">Grundlegende Bearbeitung</h3>
+              <p class="step-desc">
+                Markiere Bereiche mit der Maus und löse sie mit Entf. Verschiebe 
+                Clips mit dem Time-Shift-Tool. Nutze "Effekte&quot; → "Rauschentfernung&quot; 
+                für sauberes Audio.
+              </p>
+            </div>
+            <div class="step-screenshot">Screenshot: Bearbeitung</div>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3 class="step-title">Exportieren</h3>
+              <p class="step-desc">
+                Gehe zu "Datei&quot; → "Exportieren&quot; und wähle dein Format (MP3 für 
+                Podcasts, WAV für höchste Qualität). Füge Metadaten hinzu und 
+                speichere dein Projekt als .aup3-Datei.
+              </p>
+            </div>
+            <div class="step-screenshot">Screenshot: Export</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Tutorials Section -->
+    <section class="tutorials-section" id="tutorials">
+      <h2>Tutorials & Ressourcen</h2>
+      
+      <div class="tutorials-grid">
+        <a href="https://manual.audacityteam.org/" target="_blank" rel="noopener" class="tutorial-link-card external">
+          <div class="tutorial-source">Offiziell</div>
+          <h3 class="tutorial-link-title">Audacity Handbuch</h3>
+          <p class="tutorial-link-desc">Die offizielle Dokumentation mit detaillierten Anleitungen zu allen Features.</p>
+        </a>
+        
+        <a href="https://www.audacityteam.org/quickstart/" target="_blank" rel="noopener" class="tutorial-link-card external">
+          <div class="tutorial-source">Offiziell</div>
+          <h3 class="tutorial-link-title">Quickstart Guide</h3>
+          <p class="tutorial-link-desc">Offizieller Schnellstart-Guide für absolute Anfänger.</p>
+        </a>
+        
+        <a href="https://www.youtube.com/c/AudacityTeam" target="_blank" rel="noopener" class="tutorial-link-card external">
+          <div class="tutorial-source">YouTube</div>
+          <h3 class="tutorial-link-title">Audacity Official Channel</h3>
+          <p class="tutorial-link-desc">Offizielle Video-Tutorials vom Audacity Team.</p>
+        </a>
+        
+        <a href="https://www.youtube.com/results?search_query=audacity+tutorial+deutsch" target="_blank" rel="noopener" class="tutorial-link-card external">
+          <div class="tutorial-source">YouTube</div>
+          <h3 class="tutorial-link-title">Deutschsprachige Tutorials</h3>
+          <p class="tutorial-link-desc">Community-erstellte Tutorials auf Deutsch für alle Level.</p>
+        </a>
+        
+        <a href="https://forum.audacityteam.org/" target="_blank" rel="noopener" class="tutorial-link-card external">
+          <div class="tutorial-source">Community</div>
+          <h3 class="tutorial-link-title">Audacity Forum</h3>
+          <p class="tutorial-link-desc">Hilfe und Support von der weltweiten Audacity-Community.</p>
+        </a>
+        
+        <a href="../kapitel/04-audacity.html" class="tutorial-link-card">
+          <div class="tutorial-source">Pansonic Lab</div>
+          <h3 class="tutorial-link-title">Modul 04: Audacity</h3>
+          <p class="tutorial-link-desc">Unser umfassendes Modul zu Audacity im Pansonic Lab Kurs.</p>
+        </a>
+      </div>
+    </section>
+    
+    <!-- Pro Tips Section -->
+    <section class="protips-section" id="protips">
+      <div class="protips-content">
+        <h2>Profi-Tipps</h2>
+        
+        <div class="protips-grid">
+          <div class="protip-card">
+            <h3>⌨️ Keyboard Shortcuts</h3>
+            <ul class="protip-list">
+              <li>Aufnahme starten <span class="shortcut-key">R</span></li>
+              <li>Stopp / Pause <span class="shortcut-key">Leertaste</span></li>
+              <li>Rückgängig <span class="shortcut-key">Strg + Z</span></li>
+              <li>Zoom Auswahl <span class="shortcut-key">Strg + E</span></li>
+              <li>Alles auswählen <span class="shortcut-key">Strg + A</span></li>
+            </ul>
+          </div>
+          
+          <div class="protip-card">
+            <h3>🔌 Plugin-Empfehlungen</h3>
+            <ul class="protip-list">
+              <li>FFmpeg Import/Export</li>
+              <li>LAME MP3 Encoder</li>
+              <li>Nyquist Plugins</li>
+              <li>ACX Check (Podcast)</li>
+              <li>Noise Gate</li>
+            </ul>
+          </div>
+          
+          <div class="protip-card">
+            <h3>⚡ Workflow-Optimierung</h3>
+            <ul class="protip-list">
+              <li>Projekte regelmäßig speichern</li>
+              <li>Keyboard Shortcuts lernen</li>
+              <li>Effekte-Ketten nutzen</li>
+              <li>Label Tracks für Kapitel</li>
+              <li>Envelope Tool für Fades</li>
+            </ul>
+          </div>
+          
+          <div class="protip-card">
+            <h3>🛠️ Troubleshooting</h3>
+            <ul class="protip-list">
+              <li>Audio-Gerät prüfen</li>
+              <li>Buffer-Size anpassen</li>
+              <li>Latenz-Kompensation</li>
+              <li>Projekt-Rate einstellen</li>
+              <li>Plug-ins deaktivieren</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <h2>Häufig gestellte Fragen</h2>
+      
+      <div class="faq-item">
+        <button class="faq-question">Ist Audacity wirklich kostenlos?</button>
+        <div class="faq-answer">
+          <p>
+            Ja, Audacity ist zu 100% kostenlos und Open Source. Es gibt keine versteckten Kosten, 
+            keine Abonnements und keine Funktionseinschränkungen. Die Software wird von einer 
+            Gemeinschaft von Entwicklern gepflegt und ist unter der GNU GPL Lizenz verfügbar. 
+            Du kannst Audacity für kommerzielle und private Zwecke uneingeschränkt nutzen.
+          </p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question">Für welche Projekte ist Audacity geeignet?</button>
+        <div class="faq-answer">
+          <p>
+            Audacity ist extrem vielseitig einsetzbar: Podcast-Produktion, Voice-Over für Videos, 
+            Musikaufnahmen, Audio-Bearbeitung für Filme, Sprachaufnahmen für E-Learning, 
+            Field Recording, Sampling, und vieles mehr. Für professionelle Musikproduktion 
+            mit MIDI und virtuellen Instrumenten ist eine kommerzielle DAW jedoch besser geeignet.
+          </p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question">Wie ist Audacity im Vergleich zu kostenpflichtigen DAWs?</button>
+        <div class="faq-answer">
+          <p>
+            Audacity ist ein Audio-Editor, keine vollständige DAW (Digital Audio Workstation). 
+            Für Aufnahme, Bearbeitung, Restauration und Mastering einzelner Tracks ist es 
+            erstklassig und kann mit teuren Alternativen mithalten. Für komplexe Musikproduktion 
+            mit MIDI, virtuellen Instrumenten und umfangreichem Mixing empfehlen sich Tools wie 
+            <a href="daw.html">Reaper, Ableton Live oder Logic Pro</a>.
+          </p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question">Ist Audacity sicher und spyware-frei?</button>
+        <div class="faq-answer">
+          <p>
+            Audacity ist Open Source, was bedeutet, dass der Quellcode öffentlich einsehbar ist. 
+            Versionen, die direkt von <a href="https://www.audacityteam.org/" target="_blank" rel="noopener">audacityteam.org</a> 
+            heruntergeladen werden, sind vollständig spyware-frei. Die Community achtet streng 
+            darauf, dass keine unerwünschte Telemetrie oder Datensammlung eingebaut wird.
+          </p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question">Welche Systemanforderungen hat Audacity?</button>
+        <div class="faq-answer">
+          <p>
+            Audacity läuft auf den meisten Computern: Windows 10/11, macOS 10.13+, oder Linux. 
+            Mindestens 2 GB RAM werden empfohlen, 4 GB oder mehr für größere Projekte. 
+            Die Software ist extrem ressourcenschonend und läuft sogar auf älteren Hardware-Konfigurationen 
+            noch flüssig.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="../../index.html">PLU Hub</a>
+      <a href="../../pages/spenden.html">Support</a>
+      <a href="../../pages/impressum.html">Impressum</a>
+      <a href="../../pages/privacy.html">Datenschutz</a>
+    </nav>
+    <p class="footer-copy">© PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          const isTools = window.location.href.includes('/tools/');
+          const isBib = window.location.href.includes('bibliothek') || window.location.href.includes('library');
+          
+          // Build appropriate paths
+          const indexPath = isGerman ? '../index.html' : '../index-en.html';
+          const bibPath = isGerman ? 'bibliothek.html' : 'library.html';
+          const playerPath = isBib ? 'player.html' : '../player.html';
+          const toolsPrefix = isTools ? '' : '../tools/';
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${indexPath}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${toolsPrefix}${isGerman ? 'audacity.html' : 'audacity-en.html'}">Audacity</a>
+              <a href="${toolsPrefix}${isGerman ? 'suno.html' : 'suno-en.html'}">Suno AI</a>
+              <a href="${toolsPrefix}${isGerman ? 'elevenlabs.html' : 'elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${toolsPrefix}${isGerman ? 'daw.html' : 'daw-en.html'}">DAW Guide</a>
+              <a href="${isTools ? '../' : ''}${bibPath}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        // Close all items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+    
+    // Language toggle for tool pages
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        window.location.href = 'audacity-en.html';
+      });
+    }
+
+    // Progress Bar
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+  });
+  </script>
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-content">
+      <button class="video-modal-close" id="videoModalClose">×</button>
+      <video controls id="modalVideo">
+        <source src="" type="video/mp4">
+        Ihr Browser unterstützt das Video-Format nicht.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    // Video Modal Functionality
+    const videoModal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const videoModalClose = document.getElementById('videoModalClose');
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    
+    videoThumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+        const videoSrc = this.getAttribute('data-video');
+        modalVideo.querySelector('source').src = videoSrc;
+        modalVideo.load();
+        videoModal.classList.add('active');
+        modalVideo.play();
+      });
+    });
+    
+    videoModalClose.addEventListener('click', function() {
+      videoModal.classList.remove('active');
+      modalVideo.pause();
+      modalVideo.currentTime = 0;
+    });
+    
+    videoModal.addEventListener('click', function(e) {
+      if (e.target === videoModal) {
+        videoModal.classList.remove('active');
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+      }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+        videoModal.classList.remove('active');
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+      }
+    });
+  </script>
+</body>
+</html>

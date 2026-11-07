@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>04 – Farben & Vererbung | HTML & CSS Tutorial</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .color-demo-container {
+      margin: 24px 0;
+      padding: 20px;
+      background: #fdf7f0;
+      border-radius: 12px;
+      border: 1px solid #eaeff5;
+      text-align: center;
+    }
+
+    #color-preview {
+      width: 200px;
+      height: 100px;
+      margin: 0 auto 24px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .slider-group {
+      margin: 16px 0;
+      width: 80%;
+    }
+
+    .slider-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../assets/logo.svg" alt="HTML/CSS Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav" aria-label="Hauptnavigation">
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link">🏠</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">📚 Module ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+                <li><a href="../kapitel/01-html-elements.html">01. HTML-Elemente</a></li>
+                <li><a href="../kapitel/02-page-structure.html">02. Seitenstruktur</a></li>
+                <li><a href="../kapitel/03-css-basics.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../kapitel/04-colors-and-inheritance.html">04. Farben & Vererbung</a></li>
+                <li><a href="../kapitel/05-box-model.html">05. Box-Modell</a></li>
+                <li><a href="../kapitel/06-folder-structure.html">06. Ordner & Pfade</a></li>
+                <li><a href="../kapitel/07-links.html">07. Links & Navigation</a></li>
+                <li><a href="../kapitel/08-media.html">08. Medien</a></li>
+                <li><a href="../kapitel/09-lists-selectors.html">09. Listen & Selektoren</a></li>
+                <li><a href="../kapitel/10-block-inline.html">10. Block vs. Inline</a></li>
+                <li><a href="../kapitel/11-layout-responsive.html">11. Layout & Responsive</a></li>
+                <li><a href="../kapitel/12-tables-forms.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">✏️ Übungen ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+                <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+                <li><a href="../uebungen/01-html-elements-aufgaben.html">01. HTML-Elemente</a></li>
+                <li><a href="../uebungen/02-page-structure-aufgaben.html">02. Seitenstruktur</a></li>
+                <li><a href="../uebungen/03-css-basics-aufgaben.html">03. CSS-Grundlagen</a></li>
+                <li><a href="../uebungen/04-colors-and-inheritance-aufgaben.html">04. Farben & Vererbung</a></li>
+                <li><a href="../uebungen/05-box-model-aufgaben.html">05. Box-Modell</a></li>
+                <li><a href="../uebungen/06-folder-structure-aufgaben.html">06. Ordner & Pfade</a></li>
+                <li><a href="../uebungen/07-links-aufgaben.html">07. Links & Navigation</a></li>
+                <li><a href="../uebungen/08-media-aufgaben.html">08. Medien</a></li>
+                <li><a href="../uebungen/09-lists-selectors-aufgaben.html">09. Listen & Selektoren</a></li>
+                <li><a href="../uebungen/10-block-inline-aufgaben.html">10. Block vs. Inline</a></li>
+                <li><a href="../uebungen/11-layout-responsive-aufgaben.html">11. Layout & Responsive</a></li>
+                <li><a href="../uebungen/12-tables-forms-aufgaben.html">12. Tabellen & Formulare</a></li>
+              </ul>
+            </li>
+            <li><a href="../tools/ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+            <li><a href="../tools/vscode.html" class="nav-link">💻 VS Code</a></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+              <ul class="dropdown-menu">
+                <li><a href="../abschluss/aufgabenstellung.html">📄 Statische Website</a></li>
+              </ul>
+            </li>
+            <li><a href="../resources/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+            <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <h1>04 – Farben & Vererbung 🎨</h1>
+      <p class="hero-subtitle">Verstehe, wie Farben definiert und weitergegeben werden</p>
+    </section>
+
+    <!-- 1. Farben deklarieren -->
+    <section>
+      <h2>🌈 1. Farben deklarieren – drei Wege</h2>
+      <p>
+        In CSS kannst du Farben auf drei Arten angeben:
+      </p>
+      <ul>
+        <li><strong>Farbnamen</strong>: <code>tomato</code>, <code>blue</code> (ca. 140 Standardnamen)</li>
+        <li><strong>HEX</strong>: <code>#e67e22</code> (6-stellig, basierend auf RGB)</li>
+        <li><strong>RGB</strong>: <code>rgb(230, 126, 34)</code> (0–255 pro Kanal)</li>
+      </ul>
+      <div class="regel">
+        💡 <strong>Empfehlung:</strong> Nutze <code>HEX</code> – es ist kurz, präzise und überall unterstützt.
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Farben -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – CSS Farben</h2>
+      <p>
+        Alle Farbformate im Überblick – mit Farbwähler und Beispielen.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_colors.asp" target="_blank">W3Schools: CSS Colors</a>
+      </p>
+    </section>
+
+    <!-- 2. Interaktive Farbmischung -->
+    <section>
+      <h2>🎨 2. Interaktive Farbmischung – RGB verstehen</h2>
+      <p>
+        Farben im Web basieren auf dem <strong>additiven RGB-System</strong>:
+      </p>
+      <ul>
+        <li>Rot + Grün = Gelb</li>
+        <li>Rot + Blau = Magenta</li>
+        <li>Grün + Blau = Cyan</li>
+        <li>Alle drei gleich = Grau/Weiß</li>
+      </ul>
+      <p>
+        Jeder Kanal (Rot, Grün, Blau) hat einen Wert zwischen <code>0</code> und <code>255</code>.
+        HEX ist dabei nur eine Kurzschreibweise für diese drei Zahlen.
+      </p>
+
+      <div class="color-demo-container">
+        <div id="color-preview"></div>
+        
+        <div class="slider-group">
+          <label>Rot: <span id="r-value">128</span></label>
+          <input type="range" id="r-slider" min="0" max="255" value="128" style="width: 80%;">
+        </div>
+        
+        <div class="slider-group">
+          <label>Grün: <span id="g-value">128</span></label>
+          <input type="range" id="g-slider" min="0" max="255" value="128" style="width: 80%;">
+        </div>
+        
+        <div class="slider-group">
+          <label>Blau: <span id="b-value">128</span></label>
+          <input type="range" id="b-slider" min="0" max="255" value="128" style="width: 80%;">
+        </div>
+
+        <div style="margin-top: 20px; font-family: monospace; font-size: 1.1rem;">
+          RGB: <span id="rgb-output">rgb(128, 128, 128)</span><br>
+          HEX: <span id="hex-output">#808080</span>
+        </div>
+
+        <div class="regel" style="margin-top: 20px;">
+          💡 <strong>Tipp:</strong> Gleiche Werte = Graustufe! Höhere Werte = heller.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Farbvererbung -->
+    <section>
+      <h2>🧬 3. Farbvererbung – wie Farben weitergegeben werden</h2>
+      <p>
+        In CSS <strong>erben</strong> Kind-Elemente bestimmte Eigenschaften von ihren Eltern.
+        Das ist ein zentrales Prinzip – besonders bei Schrift und Farbe.
+      </p>
+      <p>
+        <strong>Folgende Eigenschaften werden vererbt:</strong>
+      </p>
+      <ul>
+        <li><code>color</code> (Schriftfarbe)</li>
+        <li><code>font-family</code></li>
+        <li><code>font-size</code> (nur bei relativen Einheiten wie <code>em</code>, <code>%</code>)</li>
+        <li><code>text-align</code></li>
+        <li><code>line-height</code></li>
+      </ul>
+      <p>
+        <strong>Folgende Eigenschaften werden NICHT vererbt:</strong>
+      </p>
+      <ul>
+        <li><code>background-color</code></li>
+        <li><code>padding</code>, <code>margin</code>, <code>border</code></li>
+        <li><code>width</code>, <code>height</code></li>
+      </ul>
+
+      <div class="regel">
+        <p>
+          <strong>Beispiel:</strong><br>
+          <code>body { color: #e67e22; }</code><br>
+          → Alle Texte auf der Seite sind orange – es sei denn, ein Element überschreibt die Farbe explizit.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. Farbschemata -->
+    <section>
+      <h2>🎨 4. Farbschemata – harmonische Kombinationen</h2>
+      <p>
+        Eine professionelle Website nutzt maximal **3 Farben**:
+      </p>
+      <ul>
+        <li><strong>Primärfarbe</strong>: Dein Markenfarbton (z. B. unser Orange <code>#E67E22</code>)</li>
+        <li><strong>Sekundärfarbe</strong>: Für Hintergründe oder neutrale Bereiche</li>
+        <li><strong>Akzentfarbe</strong>: Für Buttons, Links oder Warnungen</li>
+      </ul>
+      <div class="warnung">
+        ⚠️ <strong>Vermeide zu viele Farben</strong> – das wirkt unruhig und unprofessionell!
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Vererbung -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – CSS Vererbung</h2>
+      <p>
+        Erfahre, welche CSS-Eigenschaften standardmäßig vererbt werden und warum das wichtig ist.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_inherit.asp" target="_blank">W3Schools: CSS Inherit</a>
+      </p>
+    </section>
+
+    <!-- 5. Maßeinheiten – neu -->
+    <section>
+      <h2>📏 5. Absolute und relative Maßeinheiten</h2>
+      <p>
+        In CSS gibst du Abstände, Schriftgrößen oder Breiten mit <strong>Maßeinheiten</strong> an.
+        Es gibt zwei Arten: <strong>absolute</strong> (fest) und <strong>relative</strong> (flexibel).
+      </p>
+
+      <h3>✅ Absolute Einheiten – für feste Werte</h3>
+      <p>
+        Diese Einheiten haben eine feste Größe – unabhängig vom Kontext:
+      </p>
+      <ul>
+        <li><code>px</code> (Pixel) – am häufigsten verwendet</li>
+        <li><code>mm</code>, <code>cm</code>, <code>in</code>, <code>pt</code> – für Druckmedien</li>
+      </ul>
+      <div class="warnung">
+        ⚠️ <strong>Wichtig:</strong> Vermeide <code>px</code> für <em>Schriftgrößen</em>!  
+        Viele Browser erlauben es Benutzern nicht, <code>px</code>-Schriften zu vergrößern – das verletzt Barrierefreiheitsstandards.
+      </div>
+
+      <h3>🔄 Relative Einheiten – für flexible, zugängliche Layouts</h3>
+      <p>
+        Diese Einheiten passen sich an den Kontext an – ideal für barrierefreie und responsive Webseiten:
+      </p>
+      <ul>
+        <li><code>%</code> – Prozent des Elternelements (z. B. <code>width: 80%</code>)</li>
+        <li><code>em</code> – Relativ zur <strong>Schriftgröße des Elternelements</strong></li>
+        <li><code>rem</code> – Relativ zur <strong>Schriftgröße des <code>&lt;html&gt;</code>-Elements</strong> („root em“)</li>
+      </ul>
+
+      <h3>📐 Umrechnung & Vergleich</h3>
+      <p>
+        Standardmäßig hat das <code>&lt;html&gt;</code>-Element eine Schriftgröße von <code>16px</code>.
+        Daraus ergibt sich:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Einheit</th>
+            <th>Bedeutung</th>
+            <th>Äquivalent zu</th>
+            <th>Verwendung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>16px</code></td>
+            <td>16 Pixel</td>
+            <td>—</td>
+            <td>Linienstärke, Icon-Größe</td>
+          </tr>
+          <tr>
+            <td><code>1rem</code></td>
+            <td>Root-EM</td>
+            <td><code>16px</code></td>
+            <td><strong>Schriftgrößen</strong>, Abstände im ganzen Dokument</td>
+          </tr>
+          <tr>
+            <td><code>1em</code></td>
+            <td>Eltern-EM</td>
+            <td><code>16px</code> (wenn Elternelement 16px hat)</td>
+            <td>Abstände innerhalb eines Blocks (z. B. Padding)</td>
+          </tr>
+          <tr>
+            <td><code>100%</code></td>
+            <td>Vollbreite des Elternelements</td>
+            <td>—</td>
+            <td>Container, Bilder</td>
+          </tr>
+          <tr>
+            <td><code>1mm</code></td>
+            <td>1 Millimeter</td>
+            <td><code>3.78px</code></td>
+            <td><strong>Nur für Druck</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="regel">
+        💡 <strong>Praxis-Tipp:</strong><br>
+        Verwende <code>rem</code> für Schriftgrößen und <code>%</code> oder <code>em</code> für Abstände – so bleibt deine Seite flexibel und barrierefrei.
+      </div>
+    </section>
+
+    <!-- 🔗 W3Schools – CSS Maßeinheiten -->
+    <section class="regel">
+      <h2>📚 Vertiefung auf W3Schools – CSS Maßeinheiten</h2>
+      <p>
+        Alle verfügbaren Einheiten im Überblick – mit Beispielen und Browser-Support.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/css/css_units.asp" target="_blank">W3Schools: CSS Units</a>
+      </p>
+    </section>
+
+    <!-- 6. KI als Lernpartner -->
+    <section>
+      <h2>🧠 6. KI als Lernpartner – guter Prompt</h2>
+      <p>
+        ❌ Schlecht: „Mach mir eine schöne Website.“  
+        ✅ Gut: „Kannst du mir ein harmonisches Farbschema für eine Künstlerseite vorschlagen – mit Primärfarbe, Sekundärfarbe und Akzentfarbe – und zeig mir, wie ich das in CSS mit <code>rem</code> für Schriftgrößen und <code>%</code> für Container umsetze?“
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt verstehst du, wie Farben funktionieren, vererbt werden – und welche Maßeinheiten du wann nutzen sollst!</p>
+      <a href="./05-box-model.html" class="nav-button">→ Zu Modul 05: Box-Modell</a>
+    </section>
+
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>HTML & CSS Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const rSlider = document.getElementById('r-slider');
+  const gSlider = document.getElementById('g-slider');
+  const bSlider = document.getElementById('b-slider');
+  const rValue = document.getElementById('r-value');
+  const gValue = document.getElementById('g-value');
+  const bValue = document.getElementById('b-value');
+  const rgbOutput = document.getElementById('rgb-output');
+  const hexOutput = document.getElementById('hex-output');
+  const colorPreview = document.getElementById('color-preview');
+
+  // Funktion zur Farbaktualisierung
+  function updateColor() {
+    if (!rSlider) return;
+    const r = rSlider.value;
+    const g = gSlider.value;
+    const b = bSlider.value;
+
+    rValue.textContent = r;
+    gValue.textContent = g;
+    bValue.textContent = b;
+
+    const rgb = `rgb(${r}, ${g}, ${b})`;
+    const hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`.toUpperCase();
+
+    rgbOutput.textContent = rgb;
+    hexOutput.textContent = hex;
+    colorPreview.style.backgroundColor = rgb;
+  }
+
+  // Funktion zur Schriftfarben-Anpassung (Dark/Light)
+  function updateTextColors() {
+  const isDark = document.documentElement.classList.contains('dark-mode');
+  const textColor = isDark ? '#f0f0f0' : '#2c3e50';
+  const bgColor = isDark ? '#2a2a2a' : '#e8f4fc';
+  const borderColor = isDark ? '#555' : '#ccc';
+  
+  if (rgbOutput) rgbOutput.style.color = textColor;
+  if (hexOutput) hexOutput.style.color = textColor;
+  if (colorPreview) {
+    colorPreview.style.color = textColor;
+    colorPreview.style.backgroundColor = bgColor;
+    colorPreview.style.borderColor = borderColor;
+  }
+}
+
+  // Event-Listener für Slider
+  if (rSlider) rSlider.addEventListener('input', updateColor);
+  if (gSlider) gSlider.addEventListener('input', updateColor);
+  if (bSlider) bSlider.addEventListener('input', updateColor);
+
+  // Initiale Aktualisierung
+  updateColor();
+  updateTextColors();
+
+  // 🔥 WICHTIG: Beobachte Dark-Mode-Wechsel
+  const observer = new MutationObserver(() => {
+    updateTextColors();
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  // Back-to-Top
+  const button = document.getElementById('back-to-top');
+  if (button) {
+    window.addEventListener('scroll', () => {
+      button.classList.toggle('show', window.scrollY > 600);
+    });
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+</script>
+</body>
+</html>

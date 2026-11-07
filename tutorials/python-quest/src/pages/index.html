@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" data-i18n="index.metaDesc" content="Python Quest — Learn Python playfully as an AI Copilot for web designers. 5 worlds, 15 quests, real Python sandbox.">
+  <meta name="theme-color" content="#306998">
+  <title data-i18n="index.title">Python Quest | Python for Web Designers</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <!-- Supabase entfernt — wird durch PHP-Backend ersetzt -->
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="u-sr-only u-sr-only--focusable">Zum Hauptinhalt springen</a>
+
+  <!-- Scroll Progress -->
+  <div class="py-quest-scroll-progress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="py-quest-header" data-header>
+    <div class="py-quest-header__container">
+      <a href="index.html" class="py-quest-logo" data-i18n-aria="index.logoLabel">
+        <img src="../assets/logo.svg" alt="PLU" width="32" height="32">
+        Python<span class="py-quest-logo__accent">Quest</span>
+      </a>
+
+      <nav class="py-quest-nav" data-i18n-aria="nav.mainNav">
+        <a href="index.html" class="py-quest-nav__link is-active" data-i18n="nav.hub">Hub</a>
+        <a href="index.html#welten" class="py-quest-nav__link" data-i18n="nav.worlds">Welten</a>
+        <a href="index.html#badges" class="py-quest-nav__link" data-i18n="nav.badges">Badges</a>
+        <a href="tools.html" class="py-quest-nav__link" data-i18n="nav.tools">Tools</a>
+      </nav>
+
+      <div class="py-quest-header__actions">
+        <div class="py-quest-xp-badge" data-i18n-aria="nav.xpLabel">
+          <i class="ph ph-lightning" aria-hidden="true"></i>
+          <span id="xp-display">0 XP</span>
+        </div>
+        <div class="py-quest-lang">
+          <button class="py-quest-lang__btn is-active" data-lang="de" data-lang-toggle aria-label="Deutsch">DE</button>
+          <button class="py-quest-lang__btn" data-lang="en" data-lang-toggle aria-label="English">EN</button>
+        </div>
+        <button class="py-quest-header__btn" data-theme-toggle data-i18n-aria="nav.themeToggle" title="Farbmodus umschalten">
+          <i class="ph ph-sun" aria-hidden="true"></i>
+        </button>
+        <button class="py-quest-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-aria="nav.classroomToggle" title="Klassenraummodus (Shift+C)">
+          <i class="ph ph-presentation" aria-hidden="true"></i>
+        </button>
+        <button class="py-quest-mobile-toggle" data-mobile-toggle data-i18n-aria="mobile.toggleOpen" aria-expanded="false" title="Menü öffnen">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="py-quest-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-quest-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <div class="py-quest-mobile-nav__header">
+      <span class="py-quest-mobile-nav__title">Navigation</span>
+      <button class="py-quest-mobile-nav__close" data-mobile-close data-i18n-aria="mobile.close" title="Menü schließen">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="py-quest-mobile-nav__links">
+      <a href="index.html" class="py-quest-mobile-nav__link is-active" data-i18n="nav.hub">Hub</a>
+      <a href="index.html#welten" class="py-quest-mobile-nav__link" data-i18n="nav.worlds">Welten</a>
+      <a href="index.html#badges" class="py-quest-mobile-nav__link" data-i18n="nav.badges">Badges</a>
+      <a href="tools.html" class="py-quest-mobile-nav__link" data-i18n="nav.tools">Tools</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="py-quest-hero" data-i18n-aria="hero.sectionLabel">
+      <div class="py-quest-hero__bg" aria-hidden="true">
+        <div class="py-quest-hero__bg-image"></div>
+        <div class="py-quest-hero__bg-overlay"></div>
+        <div class="py-quest-hero__orb py-quest-hero__orb--1"></div>
+        <div class="py-quest-hero__orb py-quest-hero__orb--2"></div>
+        <div class="py-quest-hero__orb py-quest-hero__orb--3"></div>
+        <div class="py-quest-hero__orb py-quest-hero__orb--4"></div>
+      </div>
+      <div class="py-quest-hero__content">
+        <div class="py-quest-hero__badge" id="welcome-back">
+          <i class="ph ph-code" aria-hidden="true"></i>
+          <span data-i18n="hero.adventure">Python Abenteuer</span>
+        </div>
+        <h1 class="py-quest-hero__title">
+          <span data-i18n="hero.titleLine1">Python</span>
+          <span class="py-quest-hero__accent" data-i18n="hero.titleLine2">Quest</span>
+        </h1>
+        <p class="py-quest-hero__subtitle" data-i18n="hero.subtitle">
+          Willkommen im Code-Verlies. 15 Quests durch 5 Welten.
+          Baue deinen KI-Copiloten — und werde zum Python-Meister.
+          <span class="py-quest-hero__cursor" aria-hidden="true"></span>
+        </p>
+        <div class="py-quest-hero__actions">
+          <a href="#welten" class="py-quest-btn py-quest-btn--accent py-quest-btn--lg">
+            <i class="ph ph-rocket-launch" aria-hidden="true"></i>
+            <span data-i18n="hero.ctaPrimary">Quest starten</span>
+          </a>
+          <a href="index.html#welten" class="py-quest-btn py-quest-btn--ghost py-quest-btn--lg">
+            <i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>
+            <span data-i18n="hero.ctaSecondary">Welten entdecken</span>
+          </a>
+        </div>
+        <div class="py-quest-hero__stats" id="hero-stats">
+          <div class="py-quest-hero__stat">
+            <span class="py-quest-hero__stat-value" data-stat="quests" data-target="0">0</span>
+            <span class="py-quest-hero__stat-label" data-i18n="hero.statQuests">Quests</span>
+          </div>
+          <div class="py-quest-hero__stat">
+            <span class="py-quest-hero__stat-value" data-stat="worlds" data-target="0">0</span>
+            <span class="py-quest-hero__stat-label" data-i18n="hero.statWorlds">Welten</span>
+          </div>
+          <div class="py-quest-hero__stat">
+            <span class="py-quest-hero__stat-value" data-stat="badges" data-target="0">0</span>
+            <span class="py-quest-hero__stat-label" data-i18n="hero.statBadges">Badges</span>
+          </div>
+          <div class="py-quest-hero__stat">
+            <span class="py-quest-hero__stat-value" data-stat="xp" data-target="0">0</span>
+            <span class="py-quest-hero__stat-label" data-i18n="hero.statXp">XP</span>
+          </div>
+          <div class="py-quest-hero__stat">
+            <span class="py-quest-hero__stat-value" data-stat="level" data-target="1">1</span>
+            <span class="py-quest-hero__stat-label" data-i18n="hero.statLevel">Level</span>
+          </div>
+        </div>
+      </div>
+      <div class="py-quest-hero__scroll" aria-hidden="true">
+        <span data-i18n="hero.scroll">Scroll</span>
+        <i class="ph ph-caret-down"></i>
+      </div>
+    </section>
+
+    <!-- Feature Section -->
+    <section class="py-quest-section" id="so-funktionierts" aria-labelledby="features-title">
+      <div class="py-quest-section__container">
+        <h2 class="py-quest-section__title u-reveal" id="features-title">
+          <span class="py-quest-section__title-accent py-quest-section__title-accent--no-line" data-i18n="features.title">So funktioniert's</span>
+        </h2>
+        <div class="py-quest-section__divider u-reveal"></div>
+        <p class="py-quest-section__subtitle u-reveal" data-i18n="features.subtitle">Vier Schritte. Ein Ziel. Werde zum Python-Meister.</p>
+        <div class="py-quest-feature-grid">
+          <div class="py-quest-feature-card u-reveal u-reveal--delay-1" data-step="01" data-color="primary">
+            <div class="py-quest-feature-card__icon">
+              <span class="py-quest-feature-card__step">1</span>
+              <i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>
+            </div>
+            <h3 class="py-quest-feature-card__title" data-i18n="features.worldTitle">5 Welten entdecken</h3>
+            <p class="py-quest-feature-card__text" data-i18n="features.worldText">Jede Welt öffnet neue Python-Fähigkeiten. Von Variablen bis APIs — Schritt für Schritt.</p>
+          </div>
+          <div class="py-quest-feature-card u-reveal u-reveal--delay-2" data-step="02" data-color="orange">
+            <div class="py-quest-feature-card__icon">
+              <span class="py-quest-feature-card__step">2</span>
+              <i class="ph ph-code" aria-hidden="true"></i>
+            </div>
+            <h3 class="py-quest-feature-card__title" data-i18n="features.sandboxTitle">Echte Sandbox</h3>
+            <p class="py-quest-feature-card__text" data-i18n="features.sandboxText">Schreibe Python direkt im Browser. Mit Matplotlib, Pandas und echter Ausführung.</p>
+          </div>
+          <div class="py-quest-feature-card u-reveal u-reveal--delay-3" data-step="03" data-color="green">
+            <div class="py-quest-feature-card__icon">
+              <span class="py-quest-feature-card__step">3</span>
+              <i class="ph ph-trophy" aria-hidden="true"></i>
+            </div>
+            <h3 class="py-quest-feature-card__title" data-i18n="features.badgeTitle">Badges sammeln</h3>
+            <p class="py-quest-feature-card__text" data-i18n="features.badgeText">13 einzigartige Badges warten auf dich. Zeig, was du kannst!</p>
+          </div>
+          <div class="py-quest-feature-card u-reveal u-reveal--delay-4" data-step="04" data-color="purple">
+            <div class="py-quest-feature-card__icon">
+              <span class="py-quest-feature-card__step">4</span>
+              <i class="ph ph-robot" aria-hidden="true"></i>
+            </div>
+            <h3 class="py-quest-feature-card__title" data-i18n="features.copilotTitle">KI-Copilot</h3>
+            <p class="py-quest-feature-card__text" data-i18n="features.copilotText">Dein persönlicher Avatar wächst mit dir. Lerne mit KI-Unterstützung.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Worlds Section -->
+    <section class="py-quest-section py-quest-section--alt" id="welten" aria-labelledby="worlds-title">
+      <div class="py-quest-section__container">
+        <h2 class="py-quest-section__title u-reveal" id="worlds-title">
+          <span class="py-quest-section__title-accent py-quest-section__title-accent--no-line" data-i18n="worlds.title">Die 5 Welten</span>
+        </h2>
+        <div class="py-quest-section__divider u-reveal"></div>
+        <p class="py-quest-section__subtitle u-reveal" data-i18n="worlds.subtitle">Wähle deine Welt. Jede ist ein neues Abenteuer.</p>
+        <div class="py-quest-worlds-grid" id="worlds-grid">
+          <!-- Worlds werden dynamisch gerendert -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Badges Section -->
+    <section class="py-quest-section" id="badges" aria-labelledby="badges-title">
+      <div class="py-quest-section__container">
+        <h2 class="py-quest-section__title u-reveal" id="badges-title">
+          <span class="py-quest-section__title-accent py-quest-section__title-accent--no-line" data-i18n="badges.title">Badges & Erfolge</span>
+        </h2>
+        <div class="py-quest-section__divider u-reveal"></div>
+        <p class="py-quest-section__subtitle u-reveal" data-i18n="badges.subtitle">Sammle alle 12 Badges und werde zur Python-Legende.</p>
+        <div class="py-quest-badges-container u-reveal">
+          <div class="py-quest-badges-grid" id="badges-grid">
+            <!-- Badges werden dynamisch gerendert -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Curve Section -->
+    <section class="py-quest-section py-quest-section--alt" id="fortschritt" aria-labelledby="progress-title">
+      <div class="py-quest-section__container">
+        <h2 class="py-quest-section__title u-reveal" id="progress-title">
+          <span class="py-quest-section__title-accent py-quest-section__title-accent--no-line" data-i18n="progress.title">Dein Lernfortschritt</span>
+        </h2>
+        <div class="py-quest-section__divider u-reveal"></div>
+        <div class="py-quest-progress-dashboard u-reveal" id="progress-dashboard">
+          <!-- Main Ring + Level -->
+          <div class="py-quest-progress-dashboard__main">
+            <div class="py-quest-progress-ring" id="progress-ring">
+              <svg viewBox="0 0 120 120" class="py-quest-progress-ring__svg">
+                <defs>
+                  <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:var(--py-primary);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:var(--py-accent);stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <circle class="py-quest-progress-ring__track" cx="60" cy="60" r="54" />
+                <circle class="py-quest-progress-ring__fill" cx="60" cy="60" r="54" id="progress-ring-fill" />
+              </svg>
+              <div class="py-quest-progress-ring__content">
+                <span class="py-quest-progress-ring__percent" id="progress-percent">0%</span>
+                <span class="py-quest-progress-ring__label" data-i18n="progress.completed">Gesamt</span>
+              </div>
+            </div>
+            <div class="py-quest-progress-level">
+              <div class="py-quest-progress-level__badge" id="progress-level-badge">
+                <span class="py-quest-progress-level__number" id="progress-level-num">1</span>
+                <span class="py-quest-progress-level__label" data-i18n="progress.levelLabel">Level</span>
+              </div>
+              <div class="py-quest-progress-level__xp">
+                <div class="py-quest-progress-level__xp-bar">
+                  <div class="py-quest-progress-level__xp-fill" id="progress-xp-fill"></div>
+                </div>
+                <span class="py-quest-progress-level__xp-text" id="progress-xp-text">0 / 100 XP</span>
+              </div>
+            </div>
+          </div>
+          <!-- Streak + Stats -->
+          <div class="py-quest-progress-dashboard__stats">
+            <div class="py-quest-progress-stat py-quest-progress-stat--streak" id="progress-streak">
+              <i class="ph ph-fire" aria-hidden="true"></i>
+              <span class="py-quest-progress-stat__value" id="streak-count">0</span>
+              <span class="py-quest-progress-stat__label" data-i18n="progress.streakLabel">Tage Streak</span>
+            </div>
+            <div class="py-quest-progress-stat">
+              <i class="ph ph-check-circle" aria-hidden="true"></i>
+              <span class="py-quest-progress-stat__value" id="stat-quests-completed">0</span>
+              <span class="py-quest-progress-stat__label" data-i18n="progress.questsDone">Quests erledigt</span>
+            </div>
+            <div class="py-quest-progress-stat">
+              <i class="ph ph-globe" aria-hidden="true"></i>
+              <span class="py-quest-progress-stat__value" id="stat-worlds-completed">0</span>
+              <span class="py-quest-progress-stat__label" data-i18n="progress.worldsDone">Welten erledigt</span>
+            </div>
+            <div class="py-quest-progress-stat">
+              <i class="ph ph-trophy" aria-hidden="true"></i>
+              <span class="py-quest-progress-stat__value" id="stat-badges-earned">0</span>
+              <span class="py-quest-progress-stat__label" data-i18n="progress.badgesEarned">Badges</span>
+            </div>
+          </div>
+          <!-- Next Badge Hint -->
+          <div class="py-quest-progress-badge-hint" id="progress-badge-hint" style="display: none;"></div>
+          <!-- Motivation Callout -->
+          <div class="py-quest-progress-callout" id="progress-callout" style="display: none;">
+            <div class="py-quest-progress-callout__icon">
+              <i class="ph ph-lightning" aria-hidden="true"></i>
+            </div>
+            <div class="py-quest-progress-callout__content">
+              <h3 class="py-quest-progress-callout__title" id="callout-title" data-i18n="progress.calloutNewTitle">Starte deine Quest-Reise!</h3>
+              <p class="py-quest-progress-callout__text" id="callout-text" data-i18n="progress.calloutNewText">Jede Quest bringt dich näher zum Python-Meister. Dein KI-Copilot wartet schon.</p>
+            </div>
+            <a href="#welten" class="py-quest-btn py-quest-btn--accent py-quest-btn--sm">
+              <i class="ph ph-rocket-launch" aria-hidden="true"></i>
+              <span data-i18n="progress.calloutCta">Los geht's</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Partners -->
+    <section class="py-quest-section" id="partner" aria-labelledby="partner-title">
+      <div class="py-quest-section__container">
+        <h2 class="py-quest-section__title u-reveal" id="partner-title">
+          <span class="py-quest-section__title-accent py-quest-section__title-accent--no-line" data-i18n="partner.sectionTitle">Deine Lern-Partner</span>
+        </h2>
+        <div class="py-quest-section__divider u-reveal"></div>
+        <p class="py-quest-section__subtitle u-reveal" data-i18n="partner.sectionSubtitle">Zwei starke Begleiter für deinen Python-Weg — wähle, was du gerade brauchst.</p>
+
+        <div class="py-quest-partner-grid">
+          <!-- Python Classic -->
+          <div class="py-quest-partner-card u-reveal" data-partner="classic">
+            <div class="py-quest-partner-card__accent"></div>
+            <div class="py-quest-partner-card__header">
+              <div class="py-quest-partner-card__icon">
+                <i class="ph ph-book-open" aria-hidden="true"></i>
+              </div>
+              <span class="py-quest-partner-card__label" data-i18n="partner.classicLabel">Python Classic</span>
+            </div>
+            <h3 class="py-quest-partner-card__title" data-i18n="partner.classicTitle">Strukturiert lernen</h3>
+            <p class="py-quest-partner-card__text" data-i18n="partner.classicText">Ausführliche Erklärungen, Übungen und das PyBuddy-Projekt. Der perfekte Begleiter, wenn du ein Thema wirklich verstehen willst.</p>
+            <div class="py-quest-partner-card__links">
+              <a href="../../../python-classic/src/pages/kapitel/00-setup.html" class="py-quest-partner-card__link" target="_blank" data-i18n="partner.linkSetup">
+                <i class="ph ph-book" aria-hidden="true"></i> Setup
+              </a>
+              <a href="../../../python-classic/src/pages/kapitel/01-variablen.html" class="py-quest-partner-card__link" target="_blank" data-i18n="partner.linkVariables">
+                <i class="ph ph-brackets-curly" aria-hidden="true"></i> Variablen
+              </a>
+              <a href="../../../python-classic/src/pages/kapitel/04-bedingungen.html" class="py-quest-partner-card__link" target="_blank" data-i18n="partner.linkConditions">
+                <i class="ph ph-git-branch" aria-hidden="true"></i> Bedingungen
+              </a>
+              <a href="../../../python-classic/src/pages/kapitel/08-funktionen.html" class="py-quest-partner-card__link" target="_blank" data-i18n="partner.linkFunctions">
+                <i class="ph ph-brackets-angle" aria-hidden="true"></i> Funktionen
+              </a>
+            </div>
+            <a href="../../../python-classic/src/pages/index.html" class="py-quest-partner-card__cta" target="_blank" data-i18n="partner.classicCta">
+              <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
+              <span>Zum Classic Tutorial</span>
+            </a>
+          </div>
+
+          <!-- W3Schools -->
+          <div class="py-quest-partner-card u-reveal u-reveal--delay-1" data-partner="w3schools">
+            <div class="py-quest-partner-card__accent"></div>
+            <div class="py-quest-partner-card__header">
+              <div class="py-quest-partner-card__icon">
+                <i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>
+              </div>
+              <span class="py-quest-partner-card__label" data-i18n="partner.w3sLabel">W3Schools</span>
+            </div>
+            <h3 class="py-quest-partner-card__title" data-i18n="partner.w3sTitle">Sofort ausprobieren</h3>
+            <p class="py-quest-partner-card__text" data-i18n="partner.w3sText">Die weltweit beliebteste Python-Referenz mit interaktivem Try-it-Editor. Perfekt, wenn du schnell eine Syntax nachschlagen oder Code testen willst.</p>
+            <div class="py-quest-partner-card__links">
+              <a href="https://www.w3schools.com/python/" class="py-quest-partner-card__link" target="_blank" rel="noopener" data-i18n="partner.linkW3sTutorial">
+                <i class="ph ph-book-open" aria-hidden="true"></i> Tutorial
+              </a>
+              <a href="https://www.w3schools.com/python/python_reference.asp" class="py-quest-partner-card__link" target="_blank" rel="noopener" data-i18n="partner.linkW3sRef">
+                <i class="ph ph-bookmarks" aria-hidden="true"></i> Referenz
+              </a>
+              <a href="https://www.w3schools.com/python/trypython.asp" class="py-quest-partner-card__link" target="_blank" rel="noopener" data-i18n="partner.linkW3sTry">
+                <i class="ph ph-code" aria-hidden="true"></i> Try-it Editor
+              </a>
+              <a href="https://www.w3schools.com/python/python_exercises.asp" class="py-quest-partner-card__link" target="_blank" rel="noopener" data-i18n="partner.linkW3sEx">
+                <i class="ph ph-check-circle" aria-hidden="true"></i> Übungen
+              </a>
+            </div>
+            <a href="https://www.w3schools.com/python/" class="py-quest-partner-card__cta" target="_blank" rel="noopener" data-i18n="partner.w3sCta">
+              <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
+              <span>W3Schools öffnen</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-quest-footer" role="contentinfo">
+    <div class="py-quest-footer__container">
+      <div class="py-quest-footer__main">
+        <div class="py-quest-footer__brand">
+          <div class="py-quest-footer__logo">
+            <img src="../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-quest-footer__logo-text">
+              <span class="py-quest-footer__logo-title">Python Quest</span>
+              <span class="py-quest-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-quest-footer__tagline" data-i18n="footer.slogan">Mit KI denken. Menschlich handeln.</p>
+        </div>
+        <div class="py-quest-footer__links">
+          <div class="py-quest-footer__col">
+            <h4 data-i18n="footer.platform">Plattform</h4>
+            <nav>
+              <a href="../../../index.html">PLU Hub</a>
+              <a href="../../../pages/lexikon.html">KI-Lexikon</a>
+              <a href="../../../pages/vision.html">Vision</a>
+              <a href="teacher.html">Lehrer-Dashboard</a>
+            </nav>
+          </div>
+          <div class="py-quest-footer__col">
+            <h4 data-i18n="footer.learn">Lernen</h4>
+            <nav>
+              <a href="../../../python-classic/src/pages/index.html" target="_blank">Python Classic</a>
+              <a href="../../../python-classic/src/pages/lexikon.html" target="_blank">Lexikon</a>
+              <a href="https://docs.python.org/3/" target="_blank" rel="noopener">Python Doku</a>
+            </nav>
+          </div>
+          <div class="py-quest-footer__col">
+            <h4 data-i18n="footer.legal">Rechtliches</h4>
+            <nav>
+              <a href="../../../pages/impressum.html">Impressum</a>
+              <a href="../../../pages/datenschutz.html">Datenschutz</a>
+              <a href="../../../pages/disclaimer.html">Disclaimer</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="py-quest-footer__bottom">
+        <div class="py-quest-footer__legal">
+          <span>© 2025 PANTAM Learning Universe</span>
+          <span class="py-quest-footer__dot">·</span>
+          <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+          <span class="py-quest-footer__dot">·</span>
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>
+        </div>
+        <div class="py-quest-footer__meta">
+          <a href="../../../pages/spenden.html" class="py-quest-footer__support">
+            <i class="ph ph-heart" aria-hidden="true"></i> <span data-i18n="footer.support">Unterstützen</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB (Floating Action Buttons) -->
+  <div class="py-quest-fab" data-i18n-aria="fab.sectionLabel">
+    <button class="py-quest-fab__btn py-quest-fab__btn--classroom" data-classroom-toggle data-i18n-aria="fab.classroom">
+      <i class="ph ph-presentation" aria-hidden="true"></i>
+      <span class="py-quest-fab__tooltip">Classroom</span>
+    </button>
+    <button class="py-quest-fab__btn py-quest-fab__btn--worlds" onclick="document.getElementById('welten').scrollIntoView({behavior:'smooth'})" data-i18n-aria="fab.scrollWorlds">
+      <i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>
+      <span class="py-quest-fab__tooltip">Welten</span>
+    </button>
+    <button class="py-quest-fab__btn py-quest-fab__btn--top" data-back-to-top data-i18n-aria="fab.scrollTop">
+      <i class="ph ph-arrow-up" aria-hidden="true"></i>
+      <span class="py-quest-fab__tooltip">Top</span>
+    </button>
+  </div>
+
+  <!-- Portal Transition Overlay -->
+  <div class="py-quest-portal" id="portal-overlay" aria-hidden="true">
+    <img class="py-quest-portal__image" id="portal-image" src="" alt="">
+    <div class="py-quest-portal__soft-fade"></div>
+    <div class="py-quest-portal__vignette"></div>
+    <div class="py-quest-portal__color" id="portal-color"></div>
+    <div class="py-quest-portal__title" id="portal-title"></div>
+    <div class="py-quest-portal__entering" data-i18n="portal.entering">Betrete die Welt...</div>
+  </div>
+
+  <!-- Level Up Modal -->
+  <div class="py-quest-modal" id="levelup-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="levelup-title">
+    <div class="py-quest-modal__backdrop"></div>
+    <div class="py-quest-modal__content">
+      <div class="py-quest-modal__icon">
+        <i class="ph ph-trophy" aria-hidden="true"></i>
+      </div>
+      <h2 class="py-quest-modal__title" id="levelup-title">Level Up!</h2>
+      <p class="py-quest-modal__text">Du bist jetzt <strong id="levelup-level">Level 2</strong>!</p>
+      <button class="py-quest-btn py-quest-btn--primary" data-modal-close>Weiter!</button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="py-quest-toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Confetti Canvas -->
+  <canvas class="py-quest-confetti" id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- XP Bar -->
+  <div class="py-quest-xp-bar">
+    <div class="py-quest-xp-bar__container">
+      <div class="py-quest-xp-bar__info">
+        <span class="py-quest-xp-bar__level" id="level-display">1</span>
+        <div class="py-quest-xp-bar__label">
+          <span>Level <span id="level-text">1</span></span>
+          <span id="xp-text">0 / 100 XP</span>
+        </div>
+      </div>
+      <div class="py-quest-xp-bar__track">
+        <div class="py-quest-xp-bar__fill" id="xp-fill" style="width: 0%"></div>
+      </div>
+      <div class="py-quest-xp-bar__badge" id="level-up-badge" style="display: none;">
+        <i class="ph ph-trophy" aria-hidden="true"></i> Level Up!
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar (Mobile) -->
+  <nav class="py-quest-bottom-bar" data-i18n-aria="bottomBar.label">
+    <a href="index.html" class="py-quest-bottom-bar__item is-active">
+      <i class="ph ph-house" aria-hidden="true"></i>
+      <span data-i18n="nav.hub">Hub</span>
+    </a>
+    <a href="index.html#welten" class="py-quest-bottom-bar__item">
+      <i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>
+      <span data-i18n="nav.worlds">Welten</span>
+    </a>
+    <a href="index.html#badges" class="py-quest-bottom-bar__item">
+      <i class="ph ph-trophy" aria-hidden="true"></i>
+      <span data-i18n="nav.badges">Badges</span>
+    </a>
+    <a href="../../python-quest/pages/tools.html" class="py-quest-bottom-bar__item">
+      <i class="ph ph-wrench" aria-hidden="true"></i>
+      <span data-i18n="nav.tools">Tools</span>
+    </a>
+  </nav>
+
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

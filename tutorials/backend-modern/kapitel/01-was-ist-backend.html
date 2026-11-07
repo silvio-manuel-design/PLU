@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission 01: Server erkennen | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id">Mission 01</span>
+      <span class="mission-timer">~10 Min</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Verstehe, dass Browser eine Anfrage senden und Server antworten – wie bei einem Game-Server.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>Was ist der Unterschied?</h3>
+        <p>Frontend = was du siehst. Backend = was im Hintergrund läuft. Ohne Backend kein Login, kein Speicherstand.</p>
+        <div class="code-block">Frontend: HTML, CSS, JavaScript (im Browser)
+Backend: Server, Datenbank, Logik (im Rechenzentrum)</div>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Der Request-Response-Zyklus</h3>
+        <p>1. Dein Browser schickt eine Anfrage (Request).<br>2. Der Server verarbeitet sie.<br>3. Der Server sendet eine Antwort (Response).</p>
+        <div class="code-block">Browser: "Gib mir die Startseite"
+Server: "Hier ist die HTML-Datei"</div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Warum kann Frontend nicht alles?</h3>
+        <p>Dein Browser kann nicht direkt auf Datenbanken zugreifen – das wäre unsicher. Alles im Browser ist für jeden sichtbar.</p>
+        <div class="code-block">// Das geht NICHT im Browser:
+Speichere Passwort in Datenbank
+Lese Dateien vom Server
+Sende E-Mail direkt</div>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>Der Server macht das möglich</h3>
+        <p>Nur der Server kann: Daten speichern, Passwörter prüfen, E-Mails senden, mit anderen Servern reden.</p>
+        <div class="code-block">Backend-Aufgaben:
+- Login überprüfen
+- Daten in Datenbank speichern
+- Sensible Daten schützen</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Zusammenfassung</h3>
+        <p>Backend = der unsichtbare Motor. Du schickst Anfragen, der Server antwortet. Genau wie bei Multiplayer-Games.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Hast du verstanden?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Test starten
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+50 XP] [Mission 02 freigeschaltet]
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeMission()" disabled>
+        Mission abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>Frontend läuft im Browser, Backend auf dem Server.</li>
+          <li>Der Browser sendet Requests, der Server antwortet mit Responses.</li>
+          <li>Sensible Daten und Datenbanken gehören immer ins Backend.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Teste Verbindung...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'Verbindung erfolgreich';
+        result.textContent = '[OK] Verstanden: Browser fragt, Server antwortet.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeMission() {
+      console.log('completeMission clicked');
+      
+      if (typeof MissionsAPI === 'undefined') {
+        console.error('MissionsAPI not loaded yet, retrying...');
+        setTimeout(completeMission, 500);
+        return;
+      }
+      
+      console.log('Calling MissionsAPI.completeMission("01")');
+      const success = MissionsAPI.completeMission('01');
+      console.log('Result:', success);
+      
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    // Initialize when DOM and scripts are ready
+    function initPage() {
+      console.log('Initializing page...');
+      
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        console.log('Waiting for scripts...');
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      console.log('Scripts loaded, setting up...');
+      
+      // Setup KI Panel
+      AIPanel.init('01', 'Server erkennen', 'Verstehe, dass Browser eine Anfrage senden und Server antworten');
+      
+      // Setup Abgabe Panel
+      AbgabePanel.init('01', 'Server erkennen');
+      
+      // Check if already completed
+      const status = MissionsAPI.getMissionStatus()['01'];
+      console.log('Current status:', status);
+      
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+50 XP erhalten]';
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

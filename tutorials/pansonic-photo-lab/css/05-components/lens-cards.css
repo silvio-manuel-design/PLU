@@ -1,0 +1,143 @@
+/* =========================================
+   COMPONENT: Lens Cards
+   For focal length displays — lens barrel aesthetic
+   Replaces Polaroids for small item counts
+   ========================================= */
+
+.photo-lens-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--photo-space-5);
+  margin-block: var(--photo-space-6);
+}
+
+.photo-lens-card {
+  background: var(--photo-bg-card);
+  border: 1px solid var(--photo-border-subtle);
+  border-radius: var(--photo-radius-lg);
+  padding: var(--photo-space-6);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-lens-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+  border-color: var(--photo-border-default);
+}
+
+/* Lens ring visual */
+.photo-lens-card__ring {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--photo-space-4);
+  border-radius: 50%;
+  border: 3px solid var(--lens-color, var(--photo-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.photo-lens-card__ring::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 2px dashed var(--lens-color, var(--photo-accent));
+  opacity: 0.4;
+}
+
+.photo-lens-card__ring i {
+  font-size: 1.75rem;
+  color: var(--lens-color, var(--photo-accent));
+}
+
+.photo-lens-card__mm {
+  font-size: var(--photo-font-size-xl);
+  font-weight: var(--photo-font-weight-black);
+  color: var(--photo-text-primary);
+  line-height: 1;
+  margin-bottom: var(--photo-space-1);
+}
+
+.photo-lens-card__mm span {
+  font-size: var(--photo-font-size-sm);
+  font-weight: var(--photo-font-weight-normal);
+  color: var(--photo-text-muted);
+}
+
+.photo-lens-card__title {
+  font-weight: var(--photo-font-weight-bold);
+  font-size: var(--photo-font-size-base);
+  color: var(--photo-text-primary);
+  margin-bottom: var(--photo-space-2);
+}
+
+.photo-lens-card__desc {
+  font-size: var(--photo-font-size-sm);
+  color: var(--photo-text-secondary);
+  line-height: var(--photo-line-height-body);
+}
+
+/* Color variants */
+.photo-lens-card--wide   { --lens-color: #5b9bd5; }
+.photo-lens-card--normal { --lens-color: var(--photo-accent); }
+.photo-lens-card--tele   { --lens-color: var(--photo-accent-secondary); }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .photo-lens-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--photo-space-3);
+  }
+  .photo-lens-card {
+    padding: var(--photo-space-4) var(--photo-space-3);
+  }
+  .photo-lens-card__ring {
+    width: 56px;
+    height: 56px;
+  }
+  .photo-lens-card__ring i {
+    font-size: 1.25rem;
+  }
+  .photo-lens-card__mm {
+    font-size: var(--photo-font-size-lg);
+  }
+  .photo-lens-card__title {
+    font-size: var(--photo-font-size-sm);
+  }
+  .photo-lens-card__desc {
+    font-size: var(--photo-font-size-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 400px) {
+  .photo-lens-grid {
+    grid-template-columns: 1fr;
+    gap: var(--photo-space-3);
+  }
+  .photo-lens-card {
+    display: flex;
+    align-items: center;
+    gap: var(--photo-space-4);
+    text-align: left;
+    padding: var(--photo-space-4);
+  }
+  .photo-lens-card__ring {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .photo-lens-card__mm {
+    font-size: var(--photo-font-size-base);
+    margin-bottom: 0;
+  }
+}

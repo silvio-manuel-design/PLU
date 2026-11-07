@@ -1,0 +1,156 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Button Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--py-space-2);
+    padding: var(--py-space-3) var(--py-space-5);
+    font-family: var(--py-font-sans);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-semibold);
+    line-height: 1;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: var(--py-radius-lg);
+    cursor: pointer;
+    transition: all var(--py-transition-fast);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .py-quest-btn:focus-visible {
+    outline: 2px solid var(--py-primary);
+    outline-offset: 2px;
+  }
+
+  /* Primary */
+  .py-quest-btn--primary {
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    color: var(--py-white);
+    border-color: transparent;
+  }
+
+  .py-quest-btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--py-shadow-glow);
+  }
+
+  .py-quest-btn--primary:active {
+    transform: translateY(0);
+  }
+
+  /* Accent — Gold/Yellow CTA */
+  .py-quest-btn--accent {
+    background: linear-gradient(135deg, #e6c200 0%, var(--py-accent) 50%, #ffe066 100%);
+    color: #1a1200;
+    border-color: transparent;
+    font-weight: var(--py-weight-bold);
+    text-shadow: none;
+  }
+
+  .py-quest-btn--accent:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 20px rgba(255, 212, 59, 0.4),
+      0 0 60px rgba(255, 212, 59, 0.15),
+      0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .py-quest-btn--accent:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary */
+  .py-quest-btn--secondary {
+    background: var(--py-bg-card);
+    color: var(--py-text-primary);
+    border-color: var(--py-border-color);
+  }
+
+  .py-quest-btn--secondary:hover {
+    background: var(--py-bg-hover);
+    border-color: var(--py-primary);
+    color: var(--py-primary);
+  }
+
+  /* Ghost */
+  .py-quest-btn--ghost {
+    background: transparent;
+    color: var(--py-text-secondary);
+    border-color: var(--py-border-color);
+  }
+
+  .py-quest-btn--ghost:hover {
+    background: var(--py-bg-hover);
+    color: var(--py-text-primary);
+    border-color: var(--py-text-secondary);
+  }
+
+  /* Success */
+  .py-quest-btn--success {
+    background: var(--py-success);
+    color: var(--py-white);
+    border-color: transparent;
+  }
+
+  .py-quest-btn--success:hover {
+    background: #16a34a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  }
+
+  /* Magic */
+  .py-quest-btn--magic {
+    background: linear-gradient(135deg, var(--py-ki) 0%, var(--py-ki-glow) 100%);
+    color: var(--py-white);
+    border-color: transparent;
+  }
+
+  .py-quest-btn--magic:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--py-shadow-ki);
+  }
+
+  /* Sizes */
+  .py-quest-btn--sm {
+    padding: var(--py-space-2) var(--py-space-3);
+    font-size: var(--py-text-xs);
+  }
+
+  .py-quest-btn--lg {
+    padding: var(--py-space-4) var(--py-space-8);
+    font-size: var(--py-text-base);
+  }
+
+  .py-quest-btn--lg i {
+    font-size: var(--py-text-lg);
+  }
+
+  /* Ripple Effect */
+  .py-quest-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .py-quest-btn:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+    transition: 0s;
+  }
+}

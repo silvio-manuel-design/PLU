@@ -1,0 +1,333 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Track Selector
+   Cinematic track cards with animated glow effects
+   ============================================================ */
+
+@layer components {
+  .photo-track-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--photo-space-6);
+    margin-block: var(--photo-space-12);
+  }
+
+  @media (max-width: 768px) {
+    .photo-track-selector {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Track Card Base */
+  .photo-track-card {
+    position: relative;
+    background: var(--photo-bg-card);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-8);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--photo-transition-base);
+    overflow: hidden;
+  }
+
+  /* Recommended badge */
+  .photo-track-card__recommended {
+    position: absolute;
+    top: var(--photo-space-3);
+    right: var(--photo-space-3);
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--photo-space-1) var(--photo-space-3);
+    border-radius: var(--photo-radius-full);
+    background: var(--photo-accent);
+    color: #1a1a1a;
+    z-index: 1;
+  }
+
+  .photo-track-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, transparent, transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--photo-transition-base);
+    pointer-events: none;
+  }
+
+  .photo-track-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--photo-border-default);
+    box-shadow: var(--photo-shadow-lg);
+  }
+
+  /* Track Card Icon */
+  .photo-track-card__icon {
+    width: 72px;
+    height: 72px;
+    margin-inline: auto;
+    margin-bottom: var(--photo-space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: var(--photo-radius-lg);
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    transition: all var(--photo-transition-base);
+  }
+
+  /* Track Card Text */
+  .photo-track-card__title {
+    font-size: var(--photo-text-xl);
+    font-weight: var(--photo-font-weight-bold);
+    margin-bottom: var(--photo-space-3);
+    color: var(--photo-text-primary);
+  }
+
+  .photo-track-card__desc {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+    margin-bottom: var(--photo-space-6);
+  }
+
+  /* Track Card Button */
+  .photo-track-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+    padding: var(--photo-space-3) var(--photo-space-6);
+    border-radius: var(--photo-radius-full);
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-semibold);
+    border: 1px solid var(--photo-border-subtle);
+    background: var(--photo-bg-surface);
+    color: var(--photo-text-primary);
+    transition: all var(--photo-transition-base);
+  }
+
+  .photo-track-card:hover .photo-track-card__btn {
+    background: var(--photo-accent);
+    color: #1a1a1a;
+    border-color: var(--photo-accent);
+  }
+
+  /* ============================================================
+     TRACK VARIANTS — Color Accents
+     ============================================================ */
+
+  /* ── M11 Capstone Variants ───────────────────────────────── */
+
+  /* Portrait — Coral/Rose (warm, human, emotional) */
+  .photo-track-card--portrait .photo-track-card__icon {
+    color: var(--photo-accent-coral);
+    background: var(--photo-accent-coral-dim);
+    border-color: var(--photo-accent-coral-glow);
+  }
+
+  .photo-track-card--portrait:hover::before {
+    background: linear-gradient(135deg, var(--photo-accent-coral), transparent 60%);
+    opacity: 1;
+  }
+
+  .photo-track-card--portrait.is-active {
+    border-color: var(--photo-accent-coral);
+    box-shadow: 0 0 40px rgba(251, 113, 133, 0.2), var(--photo-shadow-lg);
+    animation: photo-track-pulse-coral 3s ease-in-out infinite;
+  }
+
+  .photo-track-card--portrait.is-active .photo-track-card__btn {
+    color: var(--photo-accent-coral);
+    border-color: var(--photo-accent-coral);
+  }
+
+  @keyframes photo-track-pulse-coral {
+    0%, 100% { box-shadow: 0 0 40px rgba(251, 113, 133, 0.2), var(--photo-shadow-lg); }
+    50% { box-shadow: 0 0 60px rgba(251, 113, 133, 0.2), var(--photo-shadow-lg); }
+  }
+
+  /* Landscape — Teal (cool, nature, vast) */
+  .photo-track-card--landscape .photo-track-card__icon {
+    color: var(--photo-accent-secondary);
+    background: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.3);
+  }
+
+  .photo-track-card--landscape:hover::before {
+    background: linear-gradient(135deg, var(--photo-accent-secondary), transparent 60%);
+    opacity: 1;
+  }
+
+  .photo-track-card--landscape.is-active {
+    border-color: var(--photo-accent-secondary);
+    box-shadow: 0 0 40px rgba(20, 184, 166, 0.2), var(--photo-shadow-lg);
+    animation: photo-track-pulse-teal 3s ease-in-out infinite;
+  }
+
+  .photo-track-card--landscape.is-active .photo-track-card__btn {
+    color: var(--photo-accent-secondary);
+    border-color: var(--photo-accent-secondary);
+  }
+
+  /* Story — Violet (creative, imaginative, unique) */
+  .photo-track-card--story .photo-track-card__icon {
+    color: #7B61FF;
+    background: rgba(123, 97, 255, 0.1);
+    border-color: rgba(123, 97, 255, 0.3);
+  }
+
+  .photo-track-card--story:hover::before {
+    background: linear-gradient(135deg, #7B61FF, transparent 60%);
+    opacity: 1;
+  }
+
+  .photo-track-card--story.is-active {
+    border-color: #7B61FF;
+    box-shadow: 0 0 40px rgba(123, 97, 255, 0.2), var(--photo-shadow-lg);
+    animation: photo-track-pulse-violet 3s ease-in-out infinite;
+  }
+
+  .photo-track-card--story.is-active .photo-track-card__btn {
+    color: #7B61FF;
+    border-color: #7B61FF;
+  }
+
+  /* ── Legacy M00 Variants (keep for compatibility) ───────── */
+
+  /* Smartphone — Amber/Orange */
+  .photo-track-card--smartphone .photo-track-card__icon {
+    color: var(--photo-accent);
+    background: var(--photo-accent-dim);
+    border-color: var(--photo-accent-glow);
+  }
+
+  .photo-track-card--smartphone:hover::before {
+    background: linear-gradient(135deg, var(--photo-accent), transparent 60%);
+    opacity: 1;
+  }
+
+  /* Camera — Teal */
+  .photo-track-card--camera .photo-track-card__icon {
+    color: var(--photo-accent-secondary);
+    background: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.3);
+  }
+
+  .photo-track-card--camera:hover::before {
+    background: linear-gradient(135deg, var(--photo-accent-secondary), transparent 60%);
+    opacity: 1;
+  }
+
+  /* Hybrid — Purple */
+  .photo-track-card--hybrid .photo-track-card__icon {
+    color: #7B61FF;
+    background: rgba(123, 97, 255, 0.1);
+    border-color: rgba(123, 97, 255, 0.3);
+  }
+
+  .photo-track-card--hybrid:hover::before {
+    background: linear-gradient(135deg, #7B61FF, transparent 60%);
+    opacity: 1;
+  }
+
+  /* ============================================================
+     ACTIVE STATE
+     ============================================================ */
+
+  .photo-track-card.is-active {
+    border-width: 2px;
+    transform: translateY(-4px);
+  }
+
+  .photo-track-card--smartphone.is-active {
+    border-color: var(--photo-accent);
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.2), var(--photo-shadow-lg);
+  }
+
+  .photo-track-card--camera.is-active {
+    border-color: var(--photo-accent-secondary);
+    box-shadow: 0 0 40px rgba(20, 184, 166, 0.2), var(--photo-shadow-lg);
+  }
+
+  .photo-track-card--hybrid.is-active {
+    border-color: #7B61FF;
+    box-shadow: 0 0 40px rgba(123, 97, 255, 0.2), var(--photo-shadow-lg);
+  }
+
+  .photo-track-card.is-active .photo-track-card__btn {
+    background: transparent;
+    border-style: dashed;
+    pointer-events: none;
+  }
+
+  .photo-track-card--smartphone.is-active .photo-track-card__btn {
+    color: var(--photo-accent);
+    border-color: var(--photo-accent);
+  }
+
+  .photo-track-card--camera.is-active .photo-track-card__btn {
+    color: var(--photo-accent-secondary);
+    border-color: var(--photo-accent-secondary);
+  }
+
+  .photo-track-card--hybrid.is-active .photo-track-card__btn {
+    color: #7B61FF;
+    border-color: #7B61FF;
+  }
+
+  /* Active pulse animation */
+  @keyframes photo-track-pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.2), var(--photo-shadow-lg); }
+    50% { box-shadow: 0 0 60px rgba(245, 158, 11, 0.2), var(--photo-shadow-lg); }
+  }
+
+  .photo-track-card--smartphone.is-active {
+    animation: photo-track-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes photo-track-pulse-teal {
+    0%, 100% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.2), var(--photo-shadow-lg); }
+    50% { box-shadow: 0 0 60px rgba(20, 184, 166, 0.2), var(--photo-shadow-lg); }
+  }
+
+  .photo-track-card--camera.is-active {
+    animation: photo-track-pulse-teal 3s ease-in-out infinite;
+  }
+
+  @keyframes photo-track-pulse-violet {
+    0%, 100% { box-shadow: 0 0 40px rgba(123, 97, 255, 0.2), var(--photo-shadow-lg); }
+    50% { box-shadow: 0 0 60px rgba(123, 97, 255, 0.2), var(--photo-shadow-lg); }
+  }
+
+  .photo-track-card--hybrid.is-active {
+    animation: photo-track-pulse-violet 3s ease-in-out infinite;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .photo-track-card__icon {
+      width: 52px;
+      height: 52px;
+      font-size: 22px;
+      margin-bottom: var(--photo-space-4);
+    }
+    .photo-track-card__title {
+      font-size: var(--photo-text-lg);
+    }
+    .photo-track-card__desc {
+      font-size: var(--photo-text-sm);
+      margin-bottom: var(--photo-space-4);
+    }
+    .photo-track-card {
+      padding: var(--photo-space-6);
+    }
+  }
+}

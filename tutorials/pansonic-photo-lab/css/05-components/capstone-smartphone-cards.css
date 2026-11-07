@@ -1,0 +1,150 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Capstone Smartphone Cards (M11)
+   Vertical color-coded cards replacing broken mode-card layout
+   ============================================================ */
+
+@layer components {
+  .photo-smartphone-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--photo-space-5);
+    margin-block: var(--photo-space-8);
+  }
+
+  @media (max-width: 640px) {
+    .photo-smartphone-grid {
+      grid-template-columns: 1fr;
+      gap: var(--photo-space-4);
+    }
+  }
+
+  .photo-smartphone-card {
+    background: var(--photo-bg-card);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-7);
+    text-align: center;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-smartphone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--photo-accent));
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .photo-smartphone-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--card-accent, var(--photo-accent));
+    box-shadow: 0 12px 32px rgba(0,0,0,0.2), 0 0 0 1px var(--card-accent-glow, var(--photo-accent-glow));
+  }
+
+  .photo-smartphone-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Icon ring */
+  .photo-smartphone-card__icon {
+    width: 64px;
+    height: 64px;
+    margin-inline: auto;
+    margin-bottom: var(--photo-space-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    border-radius: var(--photo-radius-full);
+    background: var(--card-accent-dim, var(--photo-accent-dim));
+    border: 2px solid var(--card-accent-glow, var(--photo-accent-glow));
+    color: var(--card-accent, var(--photo-accent));
+    transition: all 0.3s ease;
+  }
+
+  .photo-smartphone-card:hover .photo-smartphone-card__icon {
+    transform: scale(1.1);
+    box-shadow: 0 0 24px var(--card-accent-glow, var(--photo-accent-glow));
+  }
+
+  .photo-smartphone-card__title {
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    color: var(--photo-text-primary);
+    margin-bottom: var(--photo-space-3);
+    line-height: var(--photo-line-height-tight);
+  }
+
+  .photo-smartphone-card__text {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: var(--photo-line-height-normal);
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  /* Color variants */
+  .photo-smartphone-card--portrait {
+    --card-accent: var(--photo-accent-coral);
+    --card-accent-dim: rgba(251, 113, 133, 0.1);
+    --card-accent-glow: rgba(251, 113, 133, 0.25);
+  }
+
+  .photo-smartphone-card--raw {
+    --card-accent: var(--photo-accent-secondary);
+    --card-accent-dim: rgba(20, 184, 166, 0.1);
+    --card-accent-glow: rgba(20, 184, 166, 0.25);
+  }
+
+  .photo-smartphone-card--burst {
+    --card-accent: var(--photo-accent-violet);
+    --card-accent-dim: rgba(167, 139, 250, 0.1);
+    --card-accent-glow: rgba(167, 139, 250, 0.25);
+  }
+
+  .photo-smartphone-card--edit {
+    --card-accent: var(--photo-accent);
+    --card-accent-dim: rgba(245, 158, 11, 0.1);
+    --card-accent-glow: rgba(245, 158, 11, 0.25);
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .photo-smartphone-card {
+      padding: var(--photo-space-6);
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--photo-space-4);
+    }
+
+    .photo-smartphone-card__icon {
+      width: 52px;
+      height: 52px;
+      font-size: 1.5rem;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .photo-smartphone-card__content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .photo-smartphone-card__title {
+      font-size: var(--photo-text-base);
+      margin-bottom: var(--photo-space-2);
+    }
+
+    .photo-smartphone-card__text {
+      margin-inline: 0;
+      max-width: none;
+    }
+  }
+}

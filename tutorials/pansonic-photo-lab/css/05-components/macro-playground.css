@@ -1,0 +1,293 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────
+     Macro Zoom Playground — M09
+     Circular viewfinder with zoomable subject
+     ────────────────────────────────────────────── */
+
+  .photo-macro-playground {
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6);
+    margin: var(--photo-space-6) 0;
+    overflow: hidden;
+  }
+
+  /* ── Viewfinder Stage ── */
+  .photo-macro-playground__stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-6);
+    margin-bottom: var(--photo-space-5);
+  }
+
+  /* Circular viewfinder */
+  .photo-macro-playground__viewfinder {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 12px solid #2a2a2a;
+    background: #0f0f14;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      inset 0 0 60px rgba(0,0,0,0.8),
+      0 0 0 4px var(--photo-border-default),
+      0 0 40px rgba(16, 185, 129, 0.15);
+  }
+
+  /* Crosshair overlay */
+  .photo-macro-playground__viewfinder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      linear-gradient(to right, transparent 49%, rgba(16, 185, 129, 0.3) 49%, rgba(16, 185, 129, 0.3) 51%, transparent 51%),
+      linear-gradient(to bottom, transparent 49%, rgba(16, 185, 129, 0.3) 49%, rgba(16, 185, 129, 0.3) 51%, transparent 51%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Corner brackets */
+  .photo-macro-playground__viewfinder::after {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border-radius: 50%;
+    border: 1px dashed rgba(16, 185, 129, 0.2);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Magnification label on viewfinder */
+  .photo-macro-playground__mag-label {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--photo-font-mono, monospace);
+    font-size: var(--photo-font-size-sm);
+    font-weight: 700;
+    color: rgba(16, 185, 129, 0.8);
+    background: rgba(0,0,0,0.6);
+    padding: 2px 12px;
+    border-radius: var(--photo-radius-full);
+    z-index: 3;
+    letter-spacing: 0.1em;
+  }
+
+  /* Subject container */
+  .photo-macro-playground__subject-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .photo-macro-playground__subject {
+    width: 600px;
+    height: 600px;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+  }
+
+  /* Zoom states */
+  .photo-macro-playground.is-1-10 .photo-macro-playground__subject { transform: scale(0.4) translate(0, 0); }
+  .photo-macro-playground.is-1-4  .photo-macro-playground__subject { transform: scale(0.8) translate(0, 0); }
+  .photo-macro-playground.is-1-2  .photo-macro-playground__subject { transform: scale(1.6) translate(0, 0); }
+  .photo-macro-playground.is-1-1  .photo-macro-playground__subject { transform: scale(3.2) translate(0, 0); }
+
+  /* ── Controls ── */
+  .photo-macro-playground__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-4);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  /* Range slider */
+  .photo-macro-playground__slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--photo-border-subtle);
+    border-radius: var(--photo-radius-full);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .photo-macro-playground__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--photo-accent);
+    border: 3px solid var(--photo-bg-elevated);
+    box-shadow: 0 0 0 2px var(--photo-accent), 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .photo-macro-playground__slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .photo-macro-playground__slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--photo-accent);
+    border: 3px solid var(--photo-bg-elevated);
+    box-shadow: 0 0 0 2px var(--photo-accent), 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+
+  /* Preset buttons */
+  .photo-macro-playground__presets {
+    display: flex;
+    gap: var(--photo-space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .photo-macro-playground__preset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--photo-space-1);
+    padding: var(--photo-space-3) var(--photo-space-4);
+    background: var(--photo-bg-surface);
+    border: 2px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    min-width: 72px;
+  }
+
+  .photo-macro-playground__preset:hover {
+    border-color: var(--photo-border-default);
+    transform: translateY(-2px);
+  }
+
+  .photo-macro-playground__preset.is-active {
+    border-color: var(--photo-accent);
+    background: color-mix(in srgb, var(--photo-accent) 8%, var(--photo-bg-surface));
+  }
+
+  .photo-macro-playground__preset-ratio {
+    font-size: var(--photo-font-size-lg);
+    font-weight: 700;
+    color: var(--photo-text-primary);
+    font-family: var(--photo-font-mono, monospace);
+  }
+
+  .photo-macro-playground__preset-label {
+    font-size: var(--photo-font-size-xs);
+    color: var(--photo-text-tertiary);
+  }
+
+  /* ── Info Panel ── */
+  .photo-macro-playground__info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--photo-space-3);
+    background: var(--photo-bg-surface);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-lg);
+    padding: var(--photo-space-5);
+  }
+
+  .photo-macro-playground__info-item {
+    text-align: center;
+    padding: var(--photo-space-3);
+  }
+
+  .photo-macro-playground__info-value {
+    font-size: var(--photo-font-size-xl);
+    font-weight: 700;
+    color: var(--photo-accent);
+    font-family: var(--photo-font-mono, monospace);
+    line-height: 1.2;
+    margin-bottom: var(--photo-space-1);
+  }
+
+  .photo-macro-playground__info-label {
+    font-size: var(--photo-font-size-xs);
+    color: var(--photo-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .photo-macro-playground__info-note {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--photo-space-3);
+    padding: var(--photo-space-3) var(--photo-space-4);
+    background: color-mix(in srgb, var(--photo-accent) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--photo-accent) 15%, transparent);
+    border-radius: var(--photo-radius-md);
+    margin-top: var(--photo-space-2);
+  }
+
+  .photo-macro-playground__info-note i {
+    color: var(--photo-accent);
+    font-size: 1.125rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .photo-macro-playground__info-note span {
+    font-size: var(--photo-font-size-sm);
+    color: var(--photo-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .photo-macro-playground {
+      padding: var(--photo-space-4);
+    }
+
+    .photo-macro-playground__viewfinder {
+      width: 260px;
+      height: 260px;
+      border-width: 8px;
+    }
+
+    .photo-macro-playground__info {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .photo-macro-playground__subject {
+      width: 500px;
+      height: 500px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-macro-playground__viewfinder {
+      width: 220px;
+      height: 220px;
+    }
+
+    .photo-macro-playground__preset {
+      min-width: 60px;
+      padding: var(--photo-space-2) var(--photo-space-3);
+    }
+
+    .photo-macro-playground__preset-ratio {
+      font-size: var(--photo-font-size-base);
+    }
+  }
+}

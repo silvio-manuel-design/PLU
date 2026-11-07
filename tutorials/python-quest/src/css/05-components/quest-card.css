@@ -1,0 +1,147 @@
+/* ==========================================================================
+   PYDESIGN QUEST — Quest Card Component
+   ========================================================================== */
+
+@layer components {
+  .py-quest-card {
+    background: var(--py-bg-card);
+    border: 1px solid var(--py-border-color);
+    border-radius: var(--py-radius-xl);
+    overflow: hidden;
+    transition: transform var(--py-transition-base),
+                box-shadow var(--py-transition-base);
+    cursor: pointer;
+  }
+
+  .py-quest-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--py-shadow-lg);
+  }
+
+  .py-quest-card.is-locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .py-quest-card.is-locked:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .py-quest-card__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .py-quest-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--py-transition-slow);
+  }
+
+  .py-quest-card:hover .py-quest-card__image img {
+    transform: scale(1.05);
+  }
+
+  .py-quest-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+  }
+
+  .py-quest-card__number {
+    position: absolute;
+    top: var(--py-space-3);
+    left: var(--py-space-3);
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--py-primary) 0%, var(--py-primary-light) 100%);
+    border-radius: var(--py-radius-md);
+    color: var(--py-white);
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-sm);
+    font-weight: var(--py-weight-bold);
+  }
+
+  .py-quest-card__status {
+    position: absolute;
+    top: var(--py-space-3);
+    right: var(--py-space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    padding: var(--py-space-1) var(--py-space-3);
+    border-radius: 100px;
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    text-transform: uppercase;
+  }
+
+  .py-quest-card__status--completed {
+    background: var(--py-success-bg);
+    color: var(--py-success);
+  }
+
+  .py-quest-card__status--active {
+    background: var(--py-warning-bg);
+    color: var(--py-warning);
+  }
+
+  .py-quest-card__status--locked {
+    background: var(--py-bg-hover);
+    color: var(--py-text-muted);
+  }
+
+  .py-quest-card__content {
+    padding: var(--py-space-5);
+  }
+
+  .py-quest-card__title {
+    font-family: var(--py-font-display);
+    font-size: var(--py-text-lg);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-text-primary);
+    margin-bottom: var(--py-space-2);
+  }
+
+  .py-quest-card__description {
+    font-size: var(--py-text-sm);
+    color: var(--py-text-secondary);
+    line-height: var(--py-leading-relaxed);
+    margin-bottom: var(--py-space-4);
+  }
+
+  .py-quest-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--py-space-3);
+  }
+
+  .py-quest-card__xp {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    font-size: var(--py-text-xs);
+    font-weight: var(--py-weight-bold);
+    color: var(--py-accent-dark);
+  }
+
+  html[data-theme="dark"] .py-quest-card__xp {
+    color: var(--py-accent);
+  }
+
+  .py-quest-card__tasks {
+    display: flex;
+    align-items: center;
+    gap: var(--py-space-1);
+    font-size: var(--py-text-xs);
+    color: var(--py-text-muted);
+  }
+}

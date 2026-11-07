@@ -1,0 +1,920 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Module 4: System Prompts - Defining Roles & Context. Learn how to shape AI personalities.">
+  <meta name="keywords" content="System Prompts, AI Role, AI Context, Prompt Engineering">
+  
+  <meta property="og:title" content="Module 4: System Prompts | AI Academy Senior">
+  <meta property="og:description" content="Defining Roles & Context - Shape the AI Personality">
+  <meta property="og:image" content="../../../assets/images/sprints/m04_hero.jpg">
+  <meta property="og:type" content="website">
+  
+  <title>Module 4: System Prompts | AI Academy Senior</title>
+<meta name="theme-color" content="#F4A261">
+  <link rel="icon" type="image/svg+xml" href="../../../assets/images/icons/favicon-ki.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="../../../css/main.css?v=56">
+  <link rel="stylesheet" href="../../../css/layout.css?v=58">
+  <link rel="stylesheet" href="../../../css/components.css?v=56">
+  <link rel="stylesheet" href="../../../css/premium-startpage.css?v=15">
+  <link rel="stylesheet" href="../../../css/responsive.css?v=58">
+  <link rel="stylesheet" href="../../module-styles-m04.css?v=36">
+  <!-- Fallback: Falls JavaScript nicht lädt, bleiben Inhalte sichtbar -->
+  <noscript>
+    <style>
+      .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-delay-3 {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    </style>
+  </noscript>
+
+</head>
+
+<body class="module-page">
+  <!-- Progress Indicator -->
+  <div class="module-progress">
+    <div class="module-progress-bar" id="progress-bar"></div>
+  </div>
+  
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Navigation -->
+  <nav class="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../../../index-en.html" class="nav-logo" aria-label="AI Academy Homepage">
+        <img src="../../../assets/images/icons/logo-ki-academy.svg" alt="" class="logo-icon" width="40" height="40" onerror="this.style.display='none'">
+        <span class="logo-text">AI Academy</span>
+      </a>
+
+      <div class="nav-controls nav-controls-desktop">
+        <div class="language-switcher" role="group" aria-label="Language selection">
+          <a href="../../de/04-system-prompts/module-04.html" class="lang-btn" data-lang="de" aria-label="Deutsch">DE</a>
+          <span class="lang-divider">|</span>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Dark Mode">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          </svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="classroom-toggle" aria-label="Toggle classroom mode" title="Classroom Mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="module-dropdown nav-module-dropdown nav-module-dropdown-desktop">
+        <button class="module-dropdown-toggle" aria-expanded="false" aria-controls="module-menu" aria-label="Select module">
+          <span class="current-module-label">Module 04</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <nav class="module-dropdown-menu" id="module-menu" aria-label="Module navigation">
+          <a href="../../../index-en.html" class="module-dropdown-item module-dropdown-home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="module-dropdown-name">Home</span>
+          </a>
+          <div class="module-dropdown-divider"></div>
+          <div class="module-dropdown-section">Sprint 1: Understand</div>
+          <a href="../00-welcome/module-00-en.html" class="module-dropdown-item"><span class="module-dropdown-num">0</span><span class="module-dropdown-name">Welcome</span></a>
+          <a href="../01-basics/module-01-en.html" class="module-dropdown-item"><span class="module-dropdown-num">1</span><span class="module-dropdown-name">Basics</span></a>
+          <a href="../02-everyday/module-02-en.html" class="module-dropdown-item"><span class="module-dropdown-num">2</span><span class="module-dropdown-name">Everyday</span></a>
+          <div class="module-dropdown-section">Sprint 2: Apply</div>
+          <a href="../03-dialog-basics/module-03-en.html" class="module-dropdown-item"><span class="module-dropdown-num">3</span><span class="module-dropdown-name">Dialog Basics</span></a>
+          <a href="module-04-en.html" class="module-dropdown-item active" aria-current="page"><span class="module-dropdown-num">4</span><span class="module-dropdown-name">System Prompts <small style="opacity:0.6;font-weight:400">(AI instructions)</small></span></a>
+          <a href="../05-chain-of-thought/module-05-en.html" class="module-dropdown-item"><span class="module-dropdown-num">5</span><span class="module-dropdown-name">Chain of Thought <small style="opacity:0.6;font-weight:400">(Step-by-step thinking)</small></span></a>
+          <div class="module-dropdown-section">Sprint 3: Master</div>
+          <a href="../06-creativity/module-06-en.html" class="module-dropdown-item"><span class="module-dropdown-num">6</span><span class="module-dropdown-name">Creativity</span></a>
+          <a href="../07-critical-thinking/module-07-en.html" class="module-dropdown-item"><span class="module-dropdown-num">7</span><span class="module-dropdown-name">Critical Thinking</span></a>
+          <a href="../08-glossary/module-08-en.html" class="module-dropdown-item"><span class="module-dropdown-num">8</span><span class="module-dropdown-name">Glossary</span></a>
+          <div class="module-dropdown-divider"></div>
+          <a href="../09-completion/module-09-en.html" class="module-dropdown-item module-dropdown-highlight"><span class="module-dropdown-num">✓</span><span class="module-dropdown-name">Certificate</span></a>
+        </nav>
+      </div>
+
+      <div class="nav-controls nav-controls-mobile">
+        <div class="language-switcher" role="group" aria-label="Language selection">
+          <a href="../../de/04-system-prompts/module-04.html" class="lang-btn" data-lang="de" aria-label="Deutsch">DE</a>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Dark Mode">
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="back-to-top-nav" aria-label="Scroll to top" title="To top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation"><span class="hamburger"></span></button>
+
+      <ul id="nav-menu" class="nav-menu" role="menubar">
+        <li role="none"><a href="../../../index-en.html" class="nav-link" role="menuitem">Home</a></li>
+        <li role="none" class="nav-menu-section">Sprint 1: Understand</li>
+        <li role="none"><a href="../00-welcome/module-00-en.html" class="nav-link" role="menuitem">0 Welcome</a></li>
+        <li role="none"><a href="../01-basics/module-01-en.html" class="nav-link" role="menuitem">1 Basics</a></li>
+        <li role="none"><a href="../02-everyday/module-02-en.html" class="nav-link" role="menuitem">2 Everyday</a></li>
+        <li role="none" class="nav-menu-section">Sprint 2: Apply</li>
+        <li role="none"><a href="../03-dialog-basics/module-03-en.html" class="nav-link" role="menuitem">3 Dialog Basics</a></li>
+        <li role="none"><a href="module-04-en.html" class="nav-link active" role="menuitem" aria-current="page">4 System Prompts</a></li>
+        <li role="none"><a href="../05-chain-of-thought/module-05-en.html" class="nav-link" role="menuitem">5 Chain of Thought</a></li>
+        <li role="none" class="nav-menu-section">Sprint 3: Master</li>
+        <li role="none"><a href="../06-creativity/module-06-en.html" class="nav-link" role="menuitem">6 Creativity</a></li>
+        <li role="none"><a href="../07-critical-thinking/module-07-en.html" class="nav-link" role="menuitem">7 Critical Thinking</a></li>
+        <li role="none"><a href="../08-glossary/module-08-en.html" class="nav-link" role="menuitem">8 Glossary</a></li>
+        <li role="none" class="nav-menu-section">Completion</li>
+        <li role="none"><a href="../09-completion/module-09-en.html" class="nav-link" role="menuitem">Certificate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- HERO SECTION -->
+  <section class="m04-hero" id="hero" role="banner">
+    <div class="m04-hero-bg">
+      <picture>
+        <source srcset="../../../assets/images/sprints/m04_hero.webp" type="image/webp">
+        <img src="../../../assets/images/sprints/m04_hero.jpg" alt="System Prompts Visualization" id="hero-bg-img" loading="eager">
+      </picture>
+    </div>
+    <div class="m04-hero-overlay"></div>
+    
+    <div class="m04-hero-content">
+      <div class="m04-hero-badge">
+        <i class="ph ph-user-gear"></i>
+        <span>Module 04 · Sprint 2 · 10 Minutes</span>
+      </div>
+      
+      <h1 class="m04-hero-title reveal">
+        Defining Roles<br><em>& Context</em>
+      </h1>
+      
+      <p class="m04-hero-subtitle reveal reveal-delay-1">
+        Learn how to shape AI personality and behavior through system prompts.
+      </p>
+      
+      <a href="#intro" class="m04-hero-cta reveal reveal-delay-2">
+        <span>Start now</span>
+        <i class="ph ph-arrow-down"></i>
+      </a>
+      
+      <!-- Content outline for orientation -->
+      <div class="hero-content-outline reveal">
+        <p class="outline-label"><i class="ph ph-list-checks"></i> In this module:</p>
+        <div class="outline-steps">
+          <span class="outline-step"><i class="ph ph-users"></i> Discover Roles</span>
+          <span class="outline-step"><i class="ph ph-wrench"></i> Test Roles</span>
+          <span class="outline-step"><i class="ph ph-eye"></i> Before / After</span>
+          <span class="outline-step"><i class="ph ph-check-square"></i> Knowledge Check</span>
+        </div>
+        <p class="outline-time"><i class="ph ph-clock"></i> ~12 min · At your pace · Repeat anytime</p>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <!-- SECTION 1: INTRO -->
+    <section class="section-intro" id="intro">
+      <div class="intro-container">
+        <div class="section-header reveal">
+          <span class="section-tag-premium">
+            <i class="ph ph-lightbulb"></i>
+            The AI Role
+          </span>
+          <h2 class="section-title-premium">What are System Prompts?</h2>
+          <p class="section-subtitle-premium">
+            System prompts are the "background instructions" that give the AI its role and character.
+          </p>
+        </div>
+        
+        <div class="analogy-card reveal reveal-delay-1">
+          <div class="analogy-visual">
+            <div class="analogy-icon">
+              <i class="ph ph-chef-hat"></i>
+            </div>
+          </div>
+          <div class="analogy-content">
+            <h3>The Restaurant Analogy</h3>
+            <p>
+              The system prompt is like the job posting for a head chef. Before the first guest 
+              orders, it's already defined: Is it a fine dining restaurant or a family pizzeria? 
+              Should the chef cook traditionally or experimentally? This "background information" 
+              determines everything that follows.
+            </p>
+            <div class="analogy-example">
+              <strong>Example of a system prompt:</strong>
+              <p>"You are a patient teacher for digital technology with 20 years of experience 
+              in senior education. Explain everything in simple words, use everyday examples, and 
+              encourage questions. Avoid jargon unless you explain it immediately."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ROLES -->
+    <section class="section-rollen detektiv-section" id="rollen">
+      <div class="rollen-container">
+        <div class="section-header reveal">
+          <span class="section-tag-premium">
+            <i class="ph ph-users"></i>
+            Different Roles
+          </span>
+          <h2 class="section-title-premium">Choose the Right AI Personality</h2>
+          <p class="section-subtitle-premium">Click the cards to discover the system prompts and use cases</p>
+        </div>
+        
+        <div class="detektiv-progress">
+          <div class="detektiv-progress-bar"></div>
+          <span class="detektiv-progress-text">0 of 6 roles discovered</span>
+        </div>
+        
+        <div class="rollen-grid detektiv-grid">
+          <!-- Role 1: The Patient Teacher -->
+          <div class="rollen-card detektiv-card reveal" data-rolle="lehrer" onclick="toggleDetektiv(this)">
+            <div class="rollen-icon"><i class="ph ph-chalkboard-teacher"></i></div>
+            <h4>The Patient Teacher</h4>
+            <p>Explains complex topics step by step, repeats gladly, celebrates small successes</p>
+            <div class="rollen-example">
+              <strong>Ideal for:</strong> Learning new topics, understanding technical basics
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-gear"></i> System Prompt</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:12px;">"You are a patient teacher for digital technology with 20 years of experience in senior education. Explain everything in simple words, use everyday examples, and encourage questions. Avoid jargon unless you explain it immediately."</p>
+              <span class="explanation-badge protip"><i class="ph ph-lightbulb"></i> Pro Tip</span>
+              <p style="font-size:0.9rem; color:#5D4037;">Perfect when setting up a new device or learning a new app. The AI will be patient and repeat without getting tired.</p>
+            </div>
+          </div>
+          
+          <!-- Role 2: The Creative Partner -->
+          <div class="rollen-card detektiv-card reveal reveal-delay-1" data-rolle="kreativ" onclick="toggleDetektiv(this)">
+            <div class="rollen-icon"><i class="ph ph-pen-nib"></i></div>
+            <h4>The Creative Partner</h4>
+            <p>Thinks unconventionally, brings fresh ideas, inspires with unexpected perspectives</p>
+            <div class="rollen-example">
+              <strong>Ideal for:</strong> Brainstorming, creative projects, finding gift ideas
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-gear"></i> System Prompt</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:12px;">"You are a creative brainstorming partner with a penchant for the unconventional. Bring fresh ideas, inspire with unexpected perspectives, and think outside the box. No idea is too crazy."</p>
+              <span class="explanation-badge protip"><i class="ph ph-lightbulb"></i> Pro Tip</span>
+              <p style="font-size:0.9rem; color:#5D4037;">Ideal for gift ideas, garden design, or when you simply want to break out of everyday routine.</p>
+            </div>
+          </div>
+          
+          <!-- Role 3: The Critical Analyst -->
+          <div class="rollen-card detektiv-card reveal reveal-delay-2" data-rolle="analytiker" onclick="toggleDetektiv(this)">
+            <div class="rollen-icon"><i class="ph ph-scales"></i></div>
+            <h4>The Critical Analyst</h4>
+            <p>Questions assumptions, shows different perspectives, uncovers weaknesses</p>
+            <div class="rollen-example">
+              <strong>Ideal for:</strong> Preparing decisions, pro-contra lists, checking risks
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-gear"></i> System Prompt</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:12px;">"You are a critical analyst. Question assumptions, show different perspectives, and uncover weaknesses in arguments. Be factual but fair."</p>
+              <span class="explanation-badge protip"><i class="ph ph-lightbulb"></i> Pro Tip</span>
+              <p style="font-size:0.9rem; color:#5D4037;">Use this role before important decisions — whether buying new insurance or planning a trip.</p>
+            </div>
+          </div>
+          
+          <!-- Role 4: The Precise Expert -->
+          <div class="rollen-card detektiv-card reveal" data-rolle="experte" onclick="toggleDetektiv(this)">
+            <div class="rollen-icon"><i class="ph ph-certificate"></i></div>
+            <h4>The Precise Expert</h4>
+            <p>Delivers sound knowledge, cites sources, argues factually and in detail</p>
+            <div class="rollen-example">
+              <strong>Ideal for:</strong> Research, fact-checking, detailed explanations
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-gear"></i> System Prompt</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:12px;">"You are a precise expert in your field. Deliver sound knowledge, cite sources where possible, and argue factually and in detail. Structure complex information clearly."</p>
+              <span class="explanation-badge protip"><i class="ph ph-lightbulb"></i> Pro Tip</span>
+              <p style="font-size:0.9rem; color:#5D4037;">When you want to dive deep into a topic — health, history, technology — this expert gives you reliable answers.</p>
+            </div>
+          </div>
+          
+          <!-- Role 5: The Friendly Coach -->
+          <div class="rollen-card detektiv-card reveal reveal-delay-1" data-rolle="coach" onclick="toggleDetektiv(this)">
+            <div class="rollen-icon"><i class="ph ph-heart"></i></div>
+            <h4>The Friendly Coach</h4>
+            <p>Motivates, gives constructive feedback, accompanies change processes with empathy</p>
+            <div class="rollen-example">
+              <strong>Ideal for:</strong> Changing habits, setting goals, building self-confidence
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-gear"></i> System Prompt</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:12px;">"You are a friendly coach. Motivate, give constructive feedback, and accompany change processes with empathy. Celebrate progress and encourage during setbacks."</p>
+              <span class="explanation-badge protip"><i class="ph ph-lightbulb"></i> Pro Tip</span>
+              <p style="font-size:0.9rem; color:#5D4037;">When you want to bring more movement into your daily life or start a new hobby — this coach stays by your side.</p>
+            </div>
+          </div>
+          
+          <!-- Role 6: The Experienced Advisor -->
+          <div class="rollen-card detektiv-card reveal reveal-delay-2" data-rolle="berater" onclick="toggleDetektiv(this)">
+            <div class="rollen-icon"><i class="ph ph-briefcase"></i></div>
+            <h4>The Experienced Advisor</h4>
+            <p>Knows best practices, gives strategic advice, considers long-term consequences</p>
+            <div class="rollen-example">
+              <strong>Ideal for:</strong> Financial decisions, career planning, complex life questions
+            </div>
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-gear"></i> System Prompt</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:12px;">"You are an experienced advisor. Know best practices, give strategic advice, and consider long-term consequences. Be pragmatic and solution-oriented."</p>
+              <span class="explanation-badge protip"><i class="ph ph-lightbulb"></i> Pro Tip</span>
+              <p style="font-size:0.9rem; color:#5D4037;">For complex questions like financial planning or important life decisions — this advisor helps you keep perspective.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="detektiv-reveal">
+          <div class="detektiv-reveal-icon">
+            <i class="ph ph-trophy"></i>
+          </div>
+          <h3>All 6 roles discovered!</h3>
+          <p>You now know the most important AI personalities. In the next section, you can test directly how the answers change.</p>
+          <div class="detektiv-counter">
+            <i class="ph ph-check-circle"></i>
+            <span>6 of 6 roles discovered</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE 1 -->
+    <section class="parallax-quote-section" id="parallax-quote-1">
+      <div class="parallax-bg parallax-bg-m04-1" role="img" aria-label="Abstract representation of identity and role"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content reveal">
+        <i class="ph ph-quotes"></i>
+        <blockquote>
+          "The <em>role</em> you give the AI determines the <em>quality</em> 
+          of the answer more than any other single component."
+        </blockquote>
+        <a href="#tester" class="parallax-cta-btn">
+          <span>Test Roles</span>
+          <i class="ph ph-arrow-down"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ROLE TESTER -->
+    <section class="section-tester" id="tester">
+      <div class="tester-container">
+        <div class="section-header reveal">
+          <span class="section-tag-premium">
+            <i class="ph ph-wrench"></i>
+            Interactive
+          </span>
+          <h2 class="section-title-premium">Test Different Roles</h2>
+          <p class="section-subtitle-premium">Choose a role and see how the AI response changes</p>
+        </div>
+        
+        <div class="tester-workspace reveal reveal-delay-1">
+          <div class="tester-tabs">
+            <button class="tester-tab active" data-tab="lehrer">
+              <i class="ph ph-chalkboard-teacher"></i>
+              <span>Teacher</span>
+            </button>
+            <button class="tester-tab" data-tab="experte">
+              <i class="ph ph-certificate"></i>
+              <span>Expert</span>
+            </button>
+            <button class="tester-tab" data-tab="coach">
+              <i class="ph ph-heart"></i>
+              <span>Coach</span>
+            </button>
+          </div>
+          
+          <div class="tester-content">
+            <!-- Teacher Tab -->
+            <div class="tester-panel active" data-panel="lehrer">
+              <div class="tester-system-prompt">
+                <h4><i class="ph ph-gear"></i> System Prompt:</h4>
+                <div class="tester-prompt-text">
+                  "You are a patient technology teacher for seniors. Explain everything in simple words, 
+                  use everyday analogies and always encourage participation. Celebrate small successes and 
+                  repeat important points kindly."
+                </div>
+              </div>
+              <div class="tester-user-prompt">
+                <h4><i class="ph ph-chat-circle-text"></i> Your Request:</h4>
+                <div class="tester-user-text">"What is a browser?"</div>
+              </div>
+              <div class="tester-response">
+                <h4><i class="ph ph-robot"></i> AI Response:</h4>
+                <div class="tester-response-text">
+                  <p>Imagine your computer is like a big library. The <strong>browser</strong> 
+                  is your friendly librarian! 🎉</p>
+                  <p>Just like a librarian knows where each book is and gets it for you, the browser knows 
+                  how to find websites on the internet and show them to you.</p>
+                  <p>The most famous "librarians" are Chrome, Firefox and Safari - but they all do 
+                  the same thing: They fetch information from the internet and display it clearly for you.</p>
+                  <p><em>And the best part: You don't have to memorize anything! The browser remembers 
+                  what you visited for you. Great, isn't it?</em> 😊</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Expert Tab -->
+            <div class="tester-panel" data-panel="experte">
+              <div class="tester-system-prompt">
+                <h4><i class="ph ph-gear"></i> System Prompt:</h4>
+                <div class="tester-prompt-text">
+                  "You are an IT expert with solid technical background. Answer precisely, 
+                  factually and concisely. Use correct technical terminology and structure information 
+                  clearly."
+                </div>
+              </div>
+              <div class="tester-user-prompt">
+                <h4><i class="ph ph-chat-circle-text"></i> Your Request:</h4>
+                <div class="tester-user-text">"What is a browser?"</div>
+              </div>
+              <div class="tester-response">
+                <h4><i class="ph ph-robot"></i> AI Response:</h4>
+                <div class="tester-response-text">
+                  <p>A <strong>web browser</strong> (short: browser) is a software application for retrieving, 
+                  presenting and navigating resources on the World Wide Web.</p>
+                  <p><strong>Core functions:</strong></p>
+                  <ul>
+                    <li>HTTP/HTTPS communication with web servers</li>
+                    <li>Rendering of HTML, CSS and JavaScript</li>
+                    <li>URL management and DNS resolution</li>
+                    <li>Caching and session management</li>
+                  </ul>
+                  <p><strong>Market leaders (2024):</strong> Chrome (~65%), Safari (~18%), Edge (~5%), Firefox (~3%)</p>
+                  <p>The rendering engines (Blink, WebKit, Gecko) determine how web pages are displayed.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Coach Tab -->
+            <div class="tester-panel" data-panel="coach">
+              <div class="tester-system-prompt">
+                <h4><i class="ph ph-gear"></i> System Prompt:</h4>
+                <div class="tester-prompt-text">
+                  "You are a motivating digital coach. Your focus is on giving people the courage to 
+                  explore technology. Emphasize that mistakes are part of learning and every small step counts."
+                </div>
+              </div>
+              <div class="tester-user-prompt">
+                <h4><i class="ph ph-chat-circle-text"></i> Your Request:</h4>
+                <div class="tester-user-text">"What is a browser?"</div>
+              </div>
+              <div class="tester-response">
+                <h4><i class="ph ph-robot"></i> AI Response:</h4>
+                <div class="tester-response-text">
+                  <p>First of all: <strong>Great that you're asking!</strong> 🌟 Everyone starts somewhere, 
+                  and the first step is always the most important.</p>
+                  <p>A <strong>browser</strong> is simply the window through which you view the internet. 
+                  You probably use it every day - without perhaps knowing it!</p>
+                  <p>When you look at Facebook, use Google or read news - all of that happens 
+                  through your browser.</p>
+                  <p><strong>My tip for you:</strong> Look at the top of your screen. Do you see a 
+                  colorful icon or the name Chrome, Safari or Edge? That's your browser! Click on it 
+                  and explore - you can't break anything! 💪</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: BEFORE/AFTER -->
+    <section class="section-examples detektiv-section" id="examples">
+      <div class="examples-container">
+        <div class="section-header reveal">
+          <span class="section-tag-premium">
+            <i class="ph ph-eye"></i>
+            Before / After
+          </span>
+          <h2 class="section-title-premium">How to Improve with System Prompts</h2>
+          <p class="section-subtitle-premium">Click the examples to see why the system prompt makes the difference</p>
+        </div>
+        
+        <div class="detektiv-progress">
+          <div class="detektiv-progress-bar"></div>
+          <span class="detektiv-progress-text">0 of 3 examples discovered</span>
+        </div>
+        
+        <div class="examples-grid detektiv-grid">
+          <!-- Example 1: Email -->
+          <div class="example-card detektiv-card reveal" onclick="toggleDetektiv(this)">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-envelope"></i>
+              </div>
+              <h4>Email Writing</h4>
+            </div>
+            
+            <div class="example-comparison">
+              <div class="example-side example-weak">
+                <div class="example-badge weak">
+                  <i class="ph ph-x-circle"></i> Without System Prompt
+                </div>
+                <div class="example-prompt weak-prompt">
+                  Help me write an email to my landlord.
+                </div>
+                <div class="example-problems">
+                  <span class="problem-tag"><i class="ph ph-question"></i> Unclear tone</span>
+                  <span class="problem-tag"><i class="ph ph-user"></i> No role definition</span>
+                  <span class="problem-tag"><i class="ph ph-target"></i> No strategy</span>
+                </div>
+              </div>
+              
+              <div class="example-arrow">
+                <i class="ph ph-arrow-right"></i>
+                <span>+System Prompt</span>
+              </div>
+              
+              <div class="example-side example-strong">
+                <div class="example-badge strong">
+                  <i class="ph ph-check-circle"></i> With System Prompt
+                </div>
+                <div class="example-prompt strong-prompt">
+                  <div class="prompt-block system">
+                    <span class="block-label"><i class="ph ph-gear"></i> System Prompt</span>
+                    <p>You are a communication expert for tenancy law. You help formulate politely but firmly and pay attention to legally relevant wording.</p>
+                  </div>
+                  <div class="prompt-block aufgabe">
+                    <span class="block-label"><i class="ph ph-target"></i> Request</span>
+                    <p>My radiator has been broken for 3 days. Write an email to the landlord.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Why this works</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:8px;">Without a system prompt, the AI writes a generic email. With the role definition as a communication expert for tenancy law, it automatically pays attention to polite but firm wording and mentions legally relevant aspects like the landlord's obligation to remedy defects.</p>
+              <span class="explanation-badge protip"><i class="ph ph-star"></i> Especially important for seniors</span>
+              <p style="font-size:0.9rem; color:#5D4037;">Many seniors feel uncertain in tenancy matters. The AI as an expert gives you confidence in your wording — without an expensive lawyer.</p>
+            </div>
+          </div>
+          
+          <!-- Example 2: Research -->
+          <div class="example-card detektiv-card reveal reveal-delay-1" onclick="toggleDetektiv(this)">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-magnifying-glass"></i>
+              </div>
+              <h4>Research</h4>
+            </div>
+            
+            <div class="example-comparison">
+              <div class="example-side example-weak">
+                <div class="example-badge weak">
+                  <i class="ph ph-x-circle"></i> Without System Prompt
+                </div>
+                <div class="example-prompt weak-prompt">
+                  What are the best travel destinations for seniors?
+                </div>
+                <div class="example-problems">
+                  <span class="problem-tag"><i class="ph ph-warning"></i> Too general</span>
+                  <span class="problem-tag"><i class="ph ph-user"></i> No expertise</span>
+                  <span class="problem-tag"><i class="ph ph-heart"></i> No consideration of needs</span>
+                </div>
+              </div>
+              
+              <div class="example-arrow">
+                <i class="ph ph-arrow-right"></i>
+                <span>+System Prompt</span>
+              </div>
+              
+              <div class="example-side example-strong">
+                <div class="example-badge strong">
+                  <i class="ph ph-check-circle"></i> With System Prompt
+                </div>
+                <div class="example-prompt strong-prompt">
+                  <div class="prompt-block system">
+                    <span class="block-label"><i class="ph ph-gear"></i> System Prompt</span>
+                    <p>You are a travel advisor for the 60+ target group. You consider mobility, 
+                    medical care on site, cultural offerings and travel pace.</p>
+                  </div>
+                  <div class="prompt-block aufgabe">
+                    <span class="block-label"><i class="ph ph-target"></i> Request</span>
+                    <p>Recommend 3 travel destinations for an active 70-year-old in spring.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Why this works</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:8px;">The general query delivers stereotypical answers. With the system prompt as a specialized travel advisor, aspects like barrier-free hotels, nearby hospitals, and relaxed travel pace are considered.</p>
+              <span class="explanation-badge protip"><i class="ph ph-star"></i> Especially important for seniors</span>
+              <p style="font-size:0.9rem; color:#5D4037;">Health and mobility are important travel criteria. The AI as an expert for 60+ considers this automatically.</p>
+            </div>
+          </div>
+          
+          <!-- Example 3: Creative Writing -->
+          <div class="example-card detektiv-card reveal reveal-delay-2" onclick="toggleDetektiv(this)">
+            <div class="example-header">
+              <div class="example-icon">
+                <i class="ph ph-pen-nib"></i>
+              </div>
+              <h4>Creative Writing</h4>
+            </div>
+            
+            <div class="example-comparison">
+              <div class="example-side example-weak">
+                <div class="example-badge weak">
+                  <i class="ph ph-x-circle"></i> Without System Prompt
+                </div>
+                <div class="example-prompt weak-prompt">
+                  Write a story for my granddaughter.
+                </div>
+                <div class="example-problems">
+                  <span class="problem-tag"><i class="ph ph-question"></i> No age target</span>
+                  <span class="problem-tag"><i class="ph ph-heart"></i> No emotionality</span>
+                  <span class="problem-tag"><i class="ph ph-clock"></i> No length specification</span>
+                </div>
+              </div>
+              
+              <div class="example-arrow">
+                <i class="ph ph-arrow-right"></i>
+                <span>+System Prompt</span>
+              </div>
+              
+              <div class="example-side example-strong">
+                <div class="example-badge strong">
+                  <i class="ph ph-check-circle"></i> With System Prompt
+                </div>
+                <div class="example-prompt strong-prompt">
+                  <div class="prompt-block system">
+                    <span class="block-label"><i class="ph ph-gear"></i> System Prompt</span>
+                    <p>You are a children's book author for 5-7 year olds. Your stories are warm-hearted, 
+                    have a clear moral and contain magical elements. Maximum 300 words.</p>
+                  </div>
+                  <div class="prompt-block aufgabe">
+                    <span class="block-label"><i class="ph ph-target"></i> Request</span>
+                    <p>Write a story about a brave little fox.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="detektiv-explanation">
+              <span class="explanation-badge"><i class="ph ph-lightbulb"></i> Why this works</span>
+              <p style="font-size:0.9rem; color:#5D4037; margin-bottom:8px;">Without specification, the story could be too long, too complex, or for the wrong age. The system prompt ensures age-appropriate language, a suitable length, and the warm tone that grandchildren love.</p>
+              <span class="explanation-badge protip"><i class="ph ph-star"></i> Especially important for seniors</span>
+              <p style="font-size:0.9rem; color:#5D4037;">Grandparents can create very personal stories for their grandchildren — an unforgettable gift!</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="detektiv-reveal">
+          <div class="detektiv-reveal-icon">
+            <i class="ph ph-check-circle"></i>
+          </div>
+          <h3>All 3 examples reviewed!</h3>
+          <p>You now understand how system prompts turn vague requests into precise, tailored answers.</p>
+          <div class="detektiv-counter">
+            <i class="ph ph-trend-up"></i>
+            <span>3 of 3 examples discovered</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX QUOTE 2 -->
+    <section class="parallax-quote-section" id="parallax-quote-2">
+      <div class="parallax-bg parallax-bg-m04-2" role="img" aria-label="Context and perspective"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content reveal">
+        <i class="ph ph-quotes"></i>
+        <blockquote>
+          "The right <em>context</em> transforms a generic answer 
+          into tailor-made <em>wisdom</em>."
+        </blockquote>
+        <a href="#quiz" class="parallax-cta-btn">
+          <span>To Knowledge Check</span>
+          <i class="ph ph-arrow-down"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 5: QUIZ -->
+    <section class="section-quiz" id="quiz">
+      <div class="quiz-container">
+        <div class="section-header reveal">
+          <span class="section-tag-premium">
+            <i class="ph ph-check-circle"></i>
+            Test Your Knowledge
+          </span>
+          <h2 class="section-title-premium">How well do you know System Prompts?</h2>
+          <p class="section-subtitle-premium">Test your understanding – every attempt counts!</p>
+        </div>
+
+        <div class="quiz-progress-wrapper reveal">
+          <div class="quiz-progress-header">
+            <span class="quiz-progress-label">Your Progress</span>
+            <span class="quiz-progress-count" id="quiz-progress-count">Question 1 of 3</span>
+          </div>
+          <div class="quiz-progress-bar-track">
+            <div class="quiz-progress-bar-fill" id="quiz-progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card reveal reveal-delay-1" id="quiz-q1" data-question="1">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">1</span>
+              <h4 class="quiz-card-title">What is the main purpose of a system prompt?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 1)">Give the AI a role and personality</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 1)">Limit the answer length</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 1)">Correct spelling errors</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 1)">
+                💬 I see this differently...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-1"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card reveal reveal-delay-2" id="quiz-q2" data-question="2">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">2</span>
+              <h4 class="quiz-card-title">Which role would be best for complex financial decisions?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 2)">The creative partner</button>
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 2)">The experienced advisor</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 2)">The friendly coach</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 2)">
+                💬 I see this differently...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-2"></div>
+          </div>
+        </div>
+        
+        <div class="quiz-question-card reveal reveal-delay-3" id="quiz-q3" data-question="3">
+          <div class="quiz-card">
+            <div class="quiz-card-header">
+              <span class="quiz-card-number">3</span>
+              <h4 class="quiz-card-title">When is a system prompt passed to the AI?</h4>
+            </div>
+            <div class="quiz-options">
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 3)">After every user question</button>
+              <button class="quiz-option" data-correct="true" onclick="QuizModule.checkAnswer(this, 3)">Before the conversation begins</button>
+              <button class="quiz-option" onclick="QuizModule.checkAnswer(this, 3)">Only when errors occur</button>
+              <button class="quiz-option quiz-option-own" data-own="true" onclick="QuizModule.checkAnswer(this, 3)">
+                💬 I see this differently...
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-3"></div>
+          </div>
+        </div>
+
+        <div id="quiz-result" class="quiz-result-box">
+          <div class="quiz-result-icon" id="quiz-result-icon"><i class="ph ph-trophy"></i></div>
+          <h3 class="quiz-result-title" id="quiz-result-title">Fantastic!</h3>
+          <p class="quiz-result-text" id="quiz-result-text">You answered all questions correctly. You can now specifically shape AI personalities!</p>
+          <div class="quiz-result-score" id="quiz-result-score">0 of 3 correct</div>
+          <div class="quiz-result-badges" id="quiz-result-badges"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: ROADMAP -->
+    <section class="section-roadmap">
+      <div class="container-premium">
+        <div class="section-roadmap-header">
+          <span class="section-roadmap-tag">
+            <i class="ph ph-compass"></i>
+            Sprint 2 of 3
+          </span>
+          <h2 class="section-roadmap-title">Your Progress</h2>
+          <p class="section-roadmap-subtitle">Sprint 2: 3 Modules · Dialog & Prompting · Step by Step</p>
+        </div>
+        
+        <div class="roadmap-grid">
+          <div class="roadmap-card completed">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-check-circle"></i>Completed
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-puzzle-piece"></i>
+            </div>
+            <h4 class="roadmap-card-title">Dialog Basics</h4>
+            <p class="roadmap-card-desc">Module 03 · The 5 Building Blocks</p>
+          </div>
+          
+          <div class="roadmap-card current">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-user-gear"></i>Current
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-users"></i>
+            </div>
+            <h4 class="roadmap-card-title">System Prompts</h4>
+            <p class="roadmap-card-desc">Module 04 · Roles & Context</p>
+          </div>
+          
+          <div class="roadmap-card upcoming">
+            <div class="roadmap-card-badge">
+              <i class="ph ph-clock"></i>Coming Soon
+            </div>
+            <div class="roadmap-card-icon">
+              <i class="ph ph-brain"></i>
+            </div>
+            <h4 class="roadmap-card-title">Chain of Thought</h4>
+            <p class="roadmap-card-desc">Module 05 · Structured Thinking</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section-final-cta">
+      <div class="final-cta-container reveal">
+        <h2 class="final-cta-title">You have completed Module 04</h2>
+        <p class="final-cta-text">
+          You now understand System Prompts - the background instructions that give AI its role and character.
+        </p>
+        <div class="final-cta-checklist">
+          <p class="final-cta-checklist-item"><i class="ph ph-check-circle"></i> Roles & System Prompts understood</p>
+          <p class="final-cta-checklist-item"><i class="ph ph-check-circle"></i> Different personalities tested</p>
+          <p class="final-cta-checklist-item"><i class="ph ph-check-circle"></i> Before/After examples analyzed</p>
+          <p class="final-cta-checklist-pending" id="quiz-pending-en"><i class="ph ph-circle"></i> Knowledge check pending – no problem, you can return anytime</p>
+        </div>
+        <a href="../05-chain-of-thought/module-05-en.html" class="btn-final-cta">
+          <span>To Module 5</span>
+          <i class="ph ph-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav-senior" aria-label="Module Navigation">
+    <div class="bottom-nav-inner">
+      <a href="../../../index-en.html" class="bottom-nav-btn home" title="Back to homepage">
+        <i class="ph ph-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="../03-dialog-basics/module-03-en.html" class="bottom-nav-btn nav-prev">
+        <i class="ph ph-caret-left"></i>
+        <span>Back</span>
+      </a>
+      <div class="bottom-nav-progress">
+        <span class="bottom-nav-progress-label">Sprint 2 · Module 04</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 66%"></div>
+        </div>
+      </div>
+      <a href="../05-chain-of-thought/module-05-en.html" class="bottom-nav-btn nav-next">
+        <i class="ph ph-caret-right"></i>
+        <span>Next</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- FOOTER -->
+  <footer class="main-footer footer-premium">
+    <div class="container-premium">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="../../../assets/images/icons/logo-ki-academy.svg" alt="" width="36" height="36">
+          <span>AI Academy</span>
+        </div>
+        <p class="footer-license">A project of <a href="https://pantam.at" target="_blank">Pantam Learning Universe</a></p>
+        <nav class="footer-nav">
+          <a href="../../../index-en.html">Home</a>
+          <a href="../../../index-en.html#sprints">Learning Path</a>
+          <a href="https://pantam.at/tutorials/pages/spenden.html" target="_blank">Support</a>
+          <a href="../../../pages/privacy-en.html">Privacy</a>
+        </nav>
+        <p class="footer-copyright">© Pantam, Art & Culture – Austria</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="../../../js/theme.js"></script>
+  <script src="../../../js/back-to-top.js"></script>
+  <script src="../../../js/navigation.js"></script>
+  <script src="../../../js/premium-parallax.js"></script>
+  <script src="../../js/module-04.js?v=6"></script>
+</body>
+</html>

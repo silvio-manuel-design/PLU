@@ -1,0 +1,1035 @@
+/* ==========================================================================
+   🎮 GAMIFICATION SYSTEM - Grafik Quest 2.0
+   Cyberpunk Edition - Neon Gaming Style
+   ========================================================================== */
+
+/* === XP & LEVEL SYSTEM - HUD STYLE === */
+.gq-xp-bar-container {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 15, 0.98);
+  backdrop-filter: blur(20px);
+  padding: 10px 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 30px rgba(0, 245, 255, 0.2);
+  border-bottom: 2px solid var(--neon-cyan);
+}
+
+.gq-level-badge {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-magenta) 100%);
+  color: var(--bg-void);
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 20px var(--neon-cyan-glow);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gq-level-badge::before {
+  content: "⚡";
+}
+
+.gq-xp-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gq-xp-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gq-xp-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-subtle);
+}
+
+.gq-xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--neon-cyan) 0%, 
+    var(--neon-magenta) 50%,
+    var(--neon-cyan) 100%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 20px var(--neon-cyan-glow);
+  animation: xpShimmer 2s infinite;
+}
+
+@keyframes xpShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.gq-xp-gain {
+  position: fixed;
+  top: 140px;
+  right: 24px;
+  background: linear-gradient(135deg, var(--neon-green) 0%, #00e676 100%);
+  color: var(--bg-void);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 0 30px var(--neon-green-glow);
+  opacity: 0;
+  transform: translateY(-20px) scale(0.9);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gq-xp-gain.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.gq-xp-gain::before {
+  content: "✨";
+  font-size: 1.3rem;
+}
+
+/* === QUEST CARDS - MISSION STYLE === */
+.gq-quest-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  margin: 24px 0;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.gq-quest-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-cyber);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.gq-quest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px var(--neon-cyan-glow);
+  border-color: var(--neon-cyan);
+}
+
+.gq-quest-card:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 20px var(--neon-cyan-glow);
+}
+
+.gq-quest-card.completed {
+  border-color: var(--neon-green);
+  background: linear-gradient(145deg, rgba(57, 255, 20, 0.05) 0%, var(--bg-card) 100%);
+}
+
+.gq-quest-card.completed::before {
+  background: var(--neon-green);
+  opacity: 1;
+  box-shadow: 0 0 20px var(--neon-green-glow);
+}
+
+.gq-quest-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.gq-quest-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  background: var(--neon-cyan-dim);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan-dim);
+}
+
+.gq-quest-title {
+  flex: 1;
+}
+
+.gq-quest-title h3 {
+  color: var(--neon-cyan);
+  margin: 0 0 6px 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gq-quest-xp {
+  background: var(--neon-cyan-dim);
+  color: var(--neon-cyan);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 1px solid var(--neon-cyan);
+  text-transform: uppercase;
+}
+
+.gq-quest-xp::before {
+  content: "⚡ ";
+}
+
+.gq-quest-status {
+  font-size: 2rem;
+}
+
+.gq-quest-description {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.gq-quest-reward {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.gq-reward-tag {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* === ACHIEVEMENT BADGES - NEON STYLE === */
+.gq-achievement {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  border: 2px solid var(--neon-magenta);
+  box-shadow: 0 0 40px var(--neon-magenta-glow), 0 10px 40px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transform: translateX(500px);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10001;
+  max-width: 400px;
+}
+
+.gq-achievement.show {
+  transform: translateX(0);
+}
+
+.gq-achievement-icon {
+  width: 70px;
+  height: 70px;
+  background: var(--gradient-cyber);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 0 30px var(--neon-magenta-glow);
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--neon-magenta-glow); }
+  50% { transform: scale(1.1); box-shadow: 0 0 40px var(--neon-magenta-glow); }
+}
+
+.gq-achievement-text h4 {
+  color: var(--neon-magenta);
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gq-achievement-text p {
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.gq-achievement-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 4px;
+  width: auto;
+  height: auto;
+}
+
+.gq-achievement-close:hover {
+  color: var(--neon-red);
+  background: none;
+  box-shadow: none;
+}
+
+/* === QUIZ SYSTEM - TERMINAL STYLE === */
+.gq-quiz-container {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  margin: 32px 0;
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 30px var(--neon-cyan-dim);
+}
+
+.gq-quiz-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.gq-quiz-header h3 {
+  color: var(--neon-cyan);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gq-quiz-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.gq-quiz-progress {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.gq-quiz-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.gq-quiz-dot.active {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 15px var(--neon-cyan-glow);
+  border-color: var(--neon-cyan);
+}
+
+.gq-quiz-dot.correct {
+  background: var(--neon-green);
+  box-shadow: 0 0 15px var(--neon-green-glow);
+}
+
+.gq-quiz-dot.wrong {
+  background: var(--neon-red);
+  box-shadow: 0 0 15px rgba(255, 0, 64, 0.5);
+}
+
+.gq-question {
+  margin-bottom: 28px;
+}
+
+.gq-question-text {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.gq-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gq-option {
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+.gq-option:hover {
+  background: var(--neon-cyan-dim);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan-dim);
+}
+
+.gq-option.selected {
+  background: rgba(0, 245, 255, 0.15);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.gq-option.correct {
+  background: rgba(57, 255, 20, 0.15);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.gq-option.wrong {
+  background: rgba(255, 0, 64, 0.15);
+  border-color: var(--neon-red);
+  color: var(--neon-red);
+}
+
+.gq-option-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.gq-option.correct .gq-option-indicator {
+  background: var(--neon-green);
+  border-color: var(--neon-green);
+  color: var(--bg-void);
+}
+
+.gq-option.wrong .gq-option-indicator {
+  background: var(--neon-red);
+  border-color: var(--neon-red);
+  color: white;
+}
+
+.gq-quiz-feedback {
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  margin-top: 24px;
+  display: none;
+  border: 1px solid;
+}
+
+.gq-quiz-feedback.show {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gq-quiz-feedback.correct {
+  background: rgba(57, 255, 20, 0.1);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.gq-quiz-feedback.wrong {
+  background: rgba(255, 0, 64, 0.1);
+  border-color: var(--neon-red);
+  color: var(--neon-red);
+}
+
+.gq-quiz-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.gq-quiz-result {
+  text-align: center;
+  padding: 40px;
+}
+
+.gq-result-score {
+  font-size: 5rem;
+  font-weight: 800;
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  text-shadow: 0 0 30px var(--neon-cyan-glow);
+}
+
+.gq-result-message {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.gq-result-rewards {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.gq-result-reward {
+  background: var(--neon-cyan-dim);
+  border: 1px solid var(--neon-cyan);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* === PROGRESS DASHBOARD === */
+.gq-dashboard {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  margin: 32px 0;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.gq-dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.gq-avatar {
+  width: 90px;
+  height: 90px;
+  background: var(--gradient-cyber);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: 0 0 40px var(--neon-cyan-glow);
+  border: 3px solid var(--neon-cyan);
+}
+
+.gq-player-info h3 {
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gq-player-info p {
+  color: var(--neon-cyan);
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.gq-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.gq-stat-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-subtle);
+}
+
+.gq-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan-dim);
+}
+
+.gq-stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px var(--neon-cyan-glow);
+}
+
+.gq-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gq-modules-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gq-module-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.gq-module-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--neon-cyan);
+}
+
+.gq-module-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--neon-cyan-dim);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border: 1px solid var(--neon-cyan);
+}
+
+.gq-module-info {
+  flex: 1;
+}
+
+.gq-module-info h4 {
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+}
+
+.gq-module-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.gq-module-fill {
+  height: 100%;
+  background: var(--gradient-cyber);
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+.gq-module-status {
+  font-size: 1.5rem;
+}
+
+/* === CHECKPOINT MARKERS === */
+.gq-checkpoint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(57, 255, 20, 0.1);
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px var(--neon-green-glow);
+}
+
+.gq-checkpoint::before {
+  content: "✓";
+  width: 22px;
+  height: 22px;
+  background: var(--neon-green);
+  color: var(--bg-void);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* === STREAK COUNTER === */
+.gq-streak {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--neon-orange) 0%, var(--neon-red) 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 0.95rem;
+  animation: flame 1.5s ease-in-out infinite;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+}
+
+@keyframes flame {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.gq-streak::before {
+  content: "🔥";
+}
+
+/* === HINT BOX - TERMINAL STYLE === */
+.gq-hint {
+  background: rgba(0, 245, 255, 0.05);
+  border-left: 4px solid var(--neon-cyan);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+  position: relative;
+}
+
+.gq-hint::before {
+  content: "> SYSTEM.HINT";
+  display: block;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+/* === LOCKED CONTENT === */
+.gq-locked {
+  opacity: 0.4;
+  pointer-events: none;
+  position: relative;
+  filter: grayscale(1);
+}
+
+.gq-locked::after {
+  content: "🔒";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  opacity: 0.8;
+}
+
+/* === SKILL TREE (NEW) === */
+.gq-skill-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+}
+
+.gq-skill-branch {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gq-skill-branch:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan-dim);
+}
+
+.gq-skill-branch.completed {
+  border-color: var(--neon-green);
+  background: rgba(57, 255, 20, 0.05);
+}
+
+.gq-skill-branch.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gq-skill-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--neon-cyan-dim);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 1px solid var(--neon-cyan);
+}
+
+.gq-skill-branch.completed .gq-skill-icon {
+  background: var(--neon-green);
+  border-color: var(--neon-green);
+}
+
+.gq-skill-info {
+  flex: 1;
+}
+
+.gq-skill-info h4 {
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.gq-skill-info p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.gq-skill-status {
+  font-size: 1.5rem;
+}
+
+/* === RESPONSIVE - MOBILE OPTIMIZED === */
+@media (max-width: 768px) {
+  /* XP Bar Mobile */
+  .gq-xp-bar-container {
+    top: 60px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .gq-level-badge {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .gq-xp-info {
+    font-size: 0.7rem;
+  }
+  
+  .gq-xp-bar {
+    height: 6px;
+  }
+  
+  /* Main content margin for XP bar */
+  .main-content {
+    margin-top: 45px;
+  }
+  
+  /* Achievement popup mobile */
+  .gq-achievement {
+    left: 12px;
+    right: 12px;
+    max-width: none;
+    bottom: 12px;
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .gq-achievement-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .gq-achievement-text h4 {
+    font-size: 0.75rem;
+  }
+  
+  .gq-achievement-text p {
+    font-size: 1rem;
+  }
+  
+  /* Dashboard mobile */
+  .gq-dashboard {
+    padding: 20px;
+  }
+  
+  .gq-dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .gq-avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+  }
+  
+  .gq-player-info h3 {
+    font-size: 1.4rem;
+  }
+  
+  .gq-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .gq-stat-card {
+    padding: 16px;
+  }
+  
+  .gq-stat-value {
+    font-size: 1.8rem;
+  }
+  
+  /* Quest cards mobile */
+  .gq-quest-card {
+    padding: 20px;
+  }
+  
+  .gq-quest-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .gq-quest-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+  }
+  
+  .gq-quest-title h3 {
+    font-size: 1.1rem;
+  }
+  
+  /* Quiz mobile */
+  .gq-quiz-container {
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .gq-quiz-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .gq-question-text {
+    font-size: 1.1rem;
+  }
+  
+  .gq-option {
+    padding: 14px 16px;
+  }
+  
+  .gq-result-score {
+    font-size: 3rem;
+  }
+  
+  .gq-result-message {
+    font-size: 1.1rem;
+  }
+  
+  /* Skill tree mobile */
+  .gq-skill-tree {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .gq-skill-branch {
+    padding: 14px;
+  }
+  
+  .gq-skill-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  /* XP gain notification mobile */
+  .gq-xp-gain {
+    top: 120px;
+    right: 12px;
+    left: 12px;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+  .gq-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .gq-result-score {
+    font-size: 2.5rem;
+  }
+  
+  .gq-quest-xp {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+  
+  .gq-quiz-container {
+    padding: 16px;
+  }
+  
+  .gq-option {
+    padding: 12px 14px;
+  }
+}

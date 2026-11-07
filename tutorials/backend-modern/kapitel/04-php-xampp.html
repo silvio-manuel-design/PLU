@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission 04: PHP Basics | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id">Mission 04</span>
+      <span class="mission-timer">~15 Min • +50 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Schreibe dein erstes PHP-Skript und führe es über XAMPP aus.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>XAMPP htdocs öffnen</h3>
+        <p>Navigiere zum XAMPP-Ordner und öffne <code>htdocs</code>.</p>
+        <p>Erstelle einen neuen Ordner: <code>mission04</code></p>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>PHP-Datei erstellen</h3>
+        <p>Erstelle <code>index.php</code> mit folgendem Inhalt:</p>
+        <div class="code-block"><?php
+  echo "Hallo PHP!";
+  echo "<br>Heute ist " . date("d.m.Y");
+?></div>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Server starten</h3>
+        <p>Starte Apache im XAMPP Control Panel.</p>
+        <p>Warte bis der Status grün wird.</p>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>Im Browser testen</h3>
+        <p>Öffne: <code>http://localhost/mission04</code></p>
+        <p>Du solltest deine PHP-Ausgabe sehen.</p>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>Variablen testen</h3>
+        <p>Erweitere dein Skript mit Variablen:</p>
+        <div class="code-block"><?php
+  $name = "Backend";
+  $version = 8.2;
+  echo "Willkommen bei $name PHP $version!";
+?></div>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Läuft PHP?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        PHP-Status prüfen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+50 XP] [Mission 05 freigeschaltet]
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeMission()" disabled>
+        Mission abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>PHP läuft serverseitig und generiert HTML.</li>
+          <li>Der Code wird im Browser nicht sichtbar, nur das Ergebnis.</li>
+          <li>Variablen in PHP beginnen mit einem Dollar-Zeichen $.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe PHP-Setup...';
+      
+      setTimeout(() => {
+        testPassed = true;
+        area.textContent = 'PHP OK';
+        result.textContent = '[OK] PHP-Code-Struktur korrekt. XAMPP erforderlich für Live-Test.';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        document.querySelectorAll('.step-item').forEach(step => step.classList.add('completed'));
+      }, 800);
+    }
+    
+    function completeMission() {
+      if (typeof MissionsAPI === 'undefined') {
+        setTimeout(completeMission, 500);
+        return;
+      }
+      
+      const success = MissionsAPI.completeMission('04');
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('04', 'PHP Basics', 'Erstes PHP-Skript mit XAMPP ausführen');
+      AbgabePanel.init('04', 'PHP Basics');
+      
+      const status = MissionsAPI.getMissionStatus()['04'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+50 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* ============================================================
+   Start Options — "So startest du" Section v2
+   Holographic Portal Cards with Glassmorphism
+   ============================================================ */
+
+@layer components {
+  .section--start {
+    position: relative;
+    padding: var(--space-24) 0;
+    background: linear-gradient(180deg, var(--bg-body) 0%, rgba(34, 211, 238, 0.08) 35%, rgba(168, 85, 247, 0.06) 65%, var(--bg-body) 100%);
+  }
+
+  .section--start::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .start-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    margin-top: var(--space-16);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .start-options {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .start-options {
+      gap: var(--space-8);
+    }
+  }
+
+  .start-option {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10) var(--space-8);
+    text-align: center;
+    transition: all var(--transition-slow);
+    backdrop-filter: blur(16px);
+    overflow: hidden;
+  }
+
+  .start-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--challenge-primary-light), transparent);
+    opacity: 0.5;
+  }
+
+  .start-option::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--radius-2xl);
+    padding: 1px;
+    background: linear-gradient(135deg, transparent 40%, rgba(99, 102, 241, 0.3), transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    pointer-events: none;
+  }
+
+  .start-option:hover {
+    transform: translateY(-8px);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--shadow-card-hover), 0 0 60px rgba(99, 102, 241, 0.1);
+  }
+
+  .start-option:hover::after {
+    opacity: 1;
+  }
+
+  /* Number Badge */
+  .start-option__number {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(99, 102, 241, 0.2);
+    opacity: 0.6;
+    transition: all var(--transition-slow);
+  }
+
+  .start-option:hover .start-option__number {
+    -webkit-text-stroke: 1px rgba(99, 102, 241, 0.5);
+    opacity: 1;
+  }
+
+  /* Icon Ring */
+  .start-option__icon-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .start-option__icon-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-body), var(--bg-body)) padding-box,
+                linear-gradient(135deg, var(--challenge-primary), var(--challenge-accent)) border-box;
+    opacity: 0.6;
+    transition: all var(--transition-slow);
+  }
+
+  .start-option:hover .start-option__icon-ring {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+  }
+
+  .start-option__icon {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    color: var(--challenge-primary-light);
+    transition: all var(--transition-slow);
+  }
+
+  .start-option:hover .start-option__icon {
+    color: var(--challenge-accent-light);
+    transform: scale(1.1);
+  }
+
+  .start-option__title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .start-option__desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+  }
+
+  .start-option__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--challenge-primary-light);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .start-option__cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--challenge-primary), #A855F7);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 0;
+  }
+
+  .start-option__cta span,
+  .start-option__cta i {
+    position: relative;
+    z-index: 1;
+  }
+
+  .start-option__cta:hover {
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .start-option__cta:hover::before {
+    opacity: 1;
+  }
+
+  .start-option__cta i {
+    transition: transform var(--transition-base);
+  }
+
+  .start-option__cta:hover i {
+    transform: translateX(3px);
+  }
+
+  /* Accent variations per card */
+  .start-option:nth-child(2) .start-option__icon-ring {
+    background: linear-gradient(var(--bg-body), var(--bg-body)) padding-box,
+                linear-gradient(135deg, var(--challenge-accent), var(--challenge-primary)) border-box;
+  }
+
+  .start-option:nth-child(2):hover {
+    box-shadow: var(--shadow-card-hover), 0 0 60px rgba(34, 211, 238, 0.1);
+  }
+
+  .start-option:nth-child(3) .start-option__icon-ring {
+    background: linear-gradient(var(--bg-body), var(--bg-body)) padding-box,
+                linear-gradient(135deg, var(--challenge-gold), var(--challenge-primary)) border-box;
+  }
+
+  .start-option:nth-child(3):hover {
+    box-shadow: var(--shadow-card-hover), 0 0 60px rgba(245, 158, 11, 0.1);
+  }
+
+  html.dark-mode .start-option:nth-child(2) .start-option__icon {
+    color: var(--challenge-accent-light);
+  }
+
+  html.dark-mode .start-option:nth-child(3) .start-option__icon {
+    color: var(--challenge-gold-light);
+  }
+
+
+  /* ============================================================
+     LIGHT MODE OVERRIDES
+     ============================================================ */
+
+  html[data-theme="light"] .start-option {
+    background: #FFFFFF;
+    border: 1px solid var(--challenge-gray-200);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: none;
+  }
+
+  html[data-theme="light"] .start-option:hover {
+    border-color: var(--challenge-gray-300);
+    box-shadow: var(--shadow-xl);
+  }
+
+  html[data-theme="light"] .start-option__number {
+    -webkit-text-stroke: 1px rgba(99, 102, 241, 0.12);
+  }
+
+  html[data-theme="light"] .start-option:hover .start-option__number {
+    -webkit-text-stroke: 1px rgba(99, 102, 241, 0.3);
+  }
+
+  html[data-theme="light"] .start-option__desc {
+    color: var(--challenge-gray-500);
+  }
+
+  html[data-theme="light"] .start-option__cta {
+    background: rgba(99, 102, 241, 0.06);
+    color: var(--challenge-primary);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  html[data-theme="light"] .start-option__cta:hover {
+    color: white;
+  }
+}

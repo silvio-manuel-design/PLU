@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Module 09: Mastering - The Final Touch before release. LUFS, Limiting, Export for streaming platforms.">
+  <meta name="theme-color" content="#ff5a5a">
+  <title>Module 09: Mastering | Pansonic Lab</title>
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    .chapter-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 100px 24px 40px;
+    }
+    
+    .chapter-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .chapter-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-breadcrumb a {
+      color: var(--accent-coral);
+      text-decoration: none;
+    }
+    
+    .chapter-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .chapter-nummer {
+      display: inline-block;
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .chapter-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    
+    .content-section {
+      margin-bottom: 64px;
+    }
+    
+    .content-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .content-section h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--accent-coral);
+      border-radius: 2px;
+    }
+    
+    .content-section h3 {
+      font-size: 1.2rem;
+      margin: 32px 0 16px;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    .content-section p strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .content-section ul, .content-section ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    
+    .content-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--accent-teal);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .tip-box strong {
+      color: var(--accent-teal);
+    }
+    
+    .warning-box {
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 4px solid #f59e0b;
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+    
+    .practice-box {
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+      border: 1px solid var(--accent-coral);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    
+    .practice-box h3 {
+      color: var(--accent-coral);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .lufs-visual {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 24px 0;
+      text-align: center;
+    }
+    
+    .lufs-meter {
+      height: 60px;
+      background: linear-gradient(90deg, 
+        var(--accent-teal) 0%, 
+        var(--accent-teal) 60%, 
+        var(--accent-gold) 60%, 
+        var(--accent-gold) 85%, 
+        var(--accent-coral) 85%, 
+        var(--accent-coral) 100%);
+      border-radius: 8px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .lufs-marker {
+      position: absolute;
+      top: -10px;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    .lufs-marker.streaming { left: 60%; color: var(--accent-teal); }
+    .lufs-marker.cd { left: 85%; color: var(--accent-gold); }
+    .lufs-marker.max { left: 100%; color: var(--accent-coral); }
+    
+    .lufs-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    .lufs-target {
+      background: var(--bg-card);
+      border: 2px solid var(--accent-teal);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .lufs-target h4 {
+      color: var(--accent-teal);
+      margin: 0 0 12px 0;
+    }
+    
+    .chain-visual {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    
+    .chain-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .chain-step {
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: center;
+      min-width: 100px;
+    }
+    
+    .chain-step.active {
+      border-color: var(--accent-coral);
+      background: var(--accent-coral-dim);
+    }
+    
+    .chain-step-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    
+    .chain-step-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .chain-arrow {
+      color: var(--accent-coral);
+      font-size: 1.2rem;
+    }
+    
+    .platform-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+    }
+    
+    .platform-table th,
+    .platform-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .platform-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .platform-table td {
+      color: var(--text-secondary);
+    }
+    
+    .platform-table tr:hover td {
+      color: var(--text-primary);
+    }
+    
+    .platform-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    
+    .platform-badge.spotify { background: #1db954; color: white; }
+    .platform-badge.youtube { background: #ff0000; color: white; }
+    .platform-badge.soundcloud { background: #ff5500; color: white; }
+    .platform-badge.bandcamp { background: #629aa9; color: white; }
+    
+    .checklist-mastering {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    
+    .checklist-mastering h4 {
+      margin: 0 0 16px 0;
+      color: var(--accent-coral);
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+    }
+    
+    .checklist-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-active);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    
+    .checklist-content h5 {
+      margin: 0 0 4px 0;
+      font-size: 0.95rem;
+    }
+    
+    .checklist-content p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .free-plugin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .plugin-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .plugin-card h4 {
+      margin: 0 0 8px 0;
+      color: var(--accent-teal);
+    }
+    
+    .plugin-card .type {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    
+    .plugin-card p {
+      font-size: 0.9rem;
+      margin: 0 0 12px 0;
+    }
+    
+    .plugin-card a {
+      color: var(--accent-coral);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-subtle);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-active);
+    }
+    
+    .nav-btn-primary {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    .nav-btn-primary:hover {
+      background: var(--accent-coral-light);
+    }
+    
+    .chapter-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bg-tertiary);
+      z-index: 1001;
+    }
+    
+    .chapter-progress-bar {
+      height: 100%;
+      background: var(--accent-coral);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+    
+    @media (max-width: 1024px) {
+      .mobile-toggle {
+        display: flex !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .chain-flow {
+        flex-direction: column;
+      }
+      
+      .chain-arrow {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index-en.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index-en.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Tools</a>
+          <div class="dropdown-menu">
+            <a href="../tools/audacity-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+              <span class="dropdown-item-desc">Open Source Foundation</span>
+            </a>
+            <a href="../tools/suno-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+              <span class="dropdown-item-desc">AI Music Generation</span>
+            </a>
+            <a href="../tools/elevenlabs-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">Voice AI</span>
+              <span class="dropdown-item-desc">Voice Cloning</span>
+            </a>
+            <a href="../tools/daw-en.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+              <span class="dropdown-item-desc">Pro Software</span>
+            </a>
+          </div>
+        </div>
+        <a href="../library.html" class="nav-link">Library</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch">
+        <a href="09-mastering.html" class="lang-btn">DE</a>
+        <a href="09-mastering-en.html" class="lang-btn active">EN</a>
+      </nav>
+      <a href="../../pages/donate.html" class="btn-support">Support</a>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="../player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Audio Widget (Tabs: Generator + Player) - Default collapsed -->
+  <div class="audio-widget collapsed" id="audioWidget">
+    <div class="audio-widget-header">
+      <span class="audio-widget-title">🎵 Audio Lab</span>
+      <button class="audio-widget-toggle" id="audioWidgetToggle">+</button>
+    </div>
+    <div class="audio-widget-content">
+      
+      <!-- Tabs -->
+      <div class="audio-tabs">
+        <button class="audio-tab active" data-tab="generator">Generator</button>
+        <button class="audio-tab" data-tab="player">Player</button>
+      </div>
+      
+      <!-- Generator Tab -->
+      <div class="audio-tab-content active" id="generatorTab">
+        <div class="freq-display">
+          <div class="freq-value" id="freqValue">440 Hz</div>
+          <div class="freq-label">Sine Wave  Test Tone</div>
+        </div>
+        <div class="waveform-container">
+          <canvas id="waveformCanvas"></canvas>
+        </div>
+        <input type="range" class="freq-slider" id="freqSlider" min="20" max="2000" value="440">
+        <div class="gen-controls">
+          <button class="gen-btn active" data-wave="sine">SINE</button>
+          <button class="gen-btn" data-wave="square">SQUARE</button>
+          <button class="gen-btn" data-wave="sawtooth">SAW</button>
+        </div>
+        <button class="play-btn" id="playBtn">▶ Play Tone</button>
+      </div>
+      
+      <!-- Player Tab -->
+      <div class="audio-tab-content" id="playerTab">
+        <div class="player-upload" id="playerUpload">
+          <div class="player-upload-icon">🎵</div>
+          <div class="player-upload-text">Load Audio File</div>
+          <div class="player-upload-hint">MP3, WAV, OGG (max 10MB)</div>
+        </div>
+        <input type="file" id="audioFileInput" accept="audio/*">
+        
+        <div class="player-track-info" id="playerTrackInfo" style="display: none;">
+          <div class="track-name" id="trackName">track.mp3</div>
+          <div class="track-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+        </div>
+        
+        <div class="progress-container" id="progressContainer" style="display: none;">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="player-controls" id="playerControls" style="display: none;">
+          <button class="player-btn" id="prevBtn">⏮</button>
+          <button class="player-btn play" id="playerPlayBtn">▶</button>
+          <button class="player-btn" id="nextBtn">⏭</button>
+        </div>
+        
+        <div class="volume-control" id="volumeControl" style="display: none;">
+          <span class="volume-icon">🔊</span>
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
+        </div>
+        
+        <!-- Audio Effects Section -->
+        <div class="audio-effects" id="audioEffects" style="display: none;">
+          <div class="effects-header">
+            <span class="effects-icon">🎛️</span>
+            <span class="effects-title">Audio Effects</span>
+          </div>
+          
+          <div class="effect-group">
+            <label class="effect-label">Filter Type:</label>
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-filter="none">Off</button>
+              <button class="filter-btn" data-filter="lowpass">Lowpass</button>
+              <button class="filter-btn" data-filter="highpass">Highpass</button>
+              <button class="filter-btn" data-filter="bandpass">Bandpass</button>
+            </div>
+            <div class="filter-desc" id="filterDesc">No filter active</div>
+          </div>
+          
+          <div class="effect-group">
+            <div class="effect-label-row">
+              <label class="effect-label">Filter Frequency:</label>
+              <span class="effect-value" id="filterFreqValue">1000 Hz</span>
+            </div>
+            <input type="range" class="effect-slider" id="filterFreqSlider" min="20" max="10000" value="1000" step="10">
+            <div class="effect-hint" id="filterHint">Let bass through, dampen highs</div>
+          </div>
+          
+          <div class="effect-group">
+            <div class="effect-label-row">
+              <label class="effect-label">🎵 Delay:</label>
+              <span class="effect-value" id="delayValue">0.0 s</span>
+            </div>
+            <input type="range" class="effect-slider" id="delaySlider" min="0" max="1000" value="0" step="10">
+            <div class="effect-hint">Echo effect in milliseconds</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Dark/Light" aria-label="Toggle theme">🌙</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <button class="fab-btn" id="langToggle" data-tooltip="German" aria-label="Switch to German">DE</button>
+    <button class="fab-btn" id="backToTop" data-tooltip="Back to top">↑</button>
+  </div>
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header-inner">
+      <nav class="chapter-breadcrumb">
+        <a href="../index-en.html">Pansonic Lab</a>
+        <span>/</span>
+        <span>Module 09</span>
+      </nav>
+      <span class="chapter-number">Module 09</span>
+      <h1 class="chapter-title">Mastering: The Final Touch</h1>
+      <p class="chapter-lead">From mix to release-ready track. Learn LUFS, the mastering chain, and export for all streaming platforms.</p>
+    </div>
+  </header>
+
+  <!-- Chapter Content -->
+  <main class="chapter-content">
+    
+    <section class="content-section">
+      <h2>What is Mastering?</h2>
+      <p>Mastering is the final step in music production. Imagine: The mix is the painting, mastering is the frame and lighting in the gallery. It ensures that your track:</p>
+      
+      <ul>
+        <li><strong>Sounds good on all systems</strong>  from phone speaker to club sound system</li>
+        <li><strong>Is commercially loud enough</strong>  without distorting</li>
+        <li><strong>Is consistent with other tracks</strong>  not too quiet or too loud in a playlist</li>
+        <li><strong>Is technically flawless</strong>  no clipping, correct formats</li>
+      </ul>
+      
+      <div class="tip-box">
+        <strong>Important:</strong> You can't fix a bad mix with mastering, but good mastering can enhance a good mix. Focus on the mix first  mastering comes after.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>LUFS: The Loudness Revolution</h2>
+      <p>In the past, volume was measured in Peak Level (the highest peaks). The problem: A track with compressed dynamics sounds louder than one with natural dynamics, even if both reach the same peak.</p>
+      
+      <p><strong>LUFS</strong> (Loudness Units Full Scale) is the modern solution. It measures how loud a track actually sounds to the human ear.</p>
+      
+      <div class="lufs-visual">
+        <h3>The LUFS Scale</h3>
+        <div class="lufs-meter">
+          <div class="lufs-marker streaming">-14</div>
+          <div class="lufs-marker cd">-9</div>
+          <div class="lufs-marker max">0</div>
+        </div>
+        <div class="lufs-labels">
+          <span>Quiet</span>
+          <span>Streaming Standard</span>
+          <span>CD/Vinyl</span>
+          <span>Max/Clip</span>
+        </div>
+        
+        <div class="lufs-target">
+          <h4>🎵 Target for Streaming: -14 LUFS integrated</h4>
+          <p>This is the standard for Spotify, YouTube Music, Apple Music, and most platforms. If you're below, they'll make your track louder. If you're above, they'll make it quieter  with possible quality loss.</p>
+        </div>
+      </div>
+      
+      <h3>Important Terms</h3>
+      <ul>
+        <li><strong>Integrated LUFS:</strong> The average loudness of the entire track</li>
+        <li><strong>Short-term LUFS:</strong> Loudness of the last 3 seconds (shows moments)</li>
+        <li><strong>True Peak:</strong> The absolute maximum, including between samples (should be below -1 dB)</li>
+        <li><strong>Dynamic Range (LRA):</strong> How much does the loudness vary? (4-8 LU is normal for modern music)</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2>The Mastering Chain</h2>
+      <p>A typical mastering goes through these stages in this order:</p>
+      
+      <div class="chain-visual">
+        <div class="chain-flow">
+          <div class="chain-step">
+            <div class="chain-step-icon">🔊</div>
+            <div class="chain-step-name">Gain Staging</div>
+          </div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-step">
+            <div class="chain-step-icon">🎚️</div>
+            <div class="chain-step-name">EQ</div>
+          </div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-step">
+            <div class="chain-step-icon">🗜️</div>
+            <div class="chain-step-name">Compression</div>
+          </div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-step active">
+            <div class="chain-step-icon">⛔</div>
+            <div class="chain-step-name">Limiter</div>
+          </div>
+          <div class="chain-arrow">→</div>
+          <div class="chain-step">
+            <div class="chain-step-icon">📊</div>
+            <div class="chain-step-name">Metering</div>
+          </div>
+        </div>
+      </div>
+      
+      <h3>1. Gain Staging</h3>
+      <p>Make sure your mix comes in with enough headroom. Ideally, you should peak at -6 dB to -3 dB. This gives you room for the mastering tools to work.</p>
+      
+      <h3>2. EQ (Equalizer)</h3>
+      <p>Fine adjustments, not radical changes:</p>
+      <ul>
+        <li><strong>High-Pass Filter:</strong> Remove below 20-30 Hz (there's only unnecessary rumble there)</li>
+        <li><strong>Air Band:</strong> Slight boost at 12-16 kHz for "brilliance" (max +1 dB)</li>
+        <li><strong>Low-End:</strong> Small cut at 200-250 Hz for more clarity (max -1 dB)</li>
+        <li><strong>Presence:</strong> Slight boost at 2-4 kHz for definition</li>
+      </ul>
+      
+      <div class="warning-box">
+        <strong>Warning:</strong> If you need more than 3 dB EQ boost in mastering, the mix wasn't finished. Go back to the mix!
+      </div>
+      
+      <h3>3. Compression</h3>
+      <p>Multiband compression (e.g., in Audacity: no multiband available, so skip or use free plugin) controls different frequency ranges separately:</p>
+      <ul>
+        <li><strong>Low-Band:</strong> Controls the bass, prevents "boominess"</li>
+        <li><strong>Mid-Band:</strong> Binds vocals and instruments together</li>
+        <li><strong>High-Band:</strong> Keeps highs in check, prevents harshness</li>
+      </ul>
+      
+      <h3>4. Limiter (The Most Important Step)</h3>
+      <p>The limiter is the gatekeeper of your loudness:</p>
+      <ul>
+        <li>Set the Output Ceiling to <strong>-1.0 dB</strong> (True Peak safety)</li>
+        <li>Reduce the Threshold until you reach about <strong>-14 LUFS</strong></li>
+        <li>Gain Reduction should not exceed 3-6 dB (otherwise it sounds squashed)</li>
+      </ul>
+      
+      <h3>Free Mastering Tools</h3>
+      <div class="free-plugin-grid">
+        <div class="plugin-card">
+          <h4>YouLean Loudness Meter</h4>
+          <div class="type">LUFS Meter (Free)</div>
+          <p>Shows exactly your LUFS, True Peak, and Dynamic Range. Essential!</p>
+          <a href="https://youlean.co/youlean-loudness-meter/" target="_blank">Download →</a>
+        </div>
+        
+        <div class="plugin-card">
+          <h4>LoudMax</h4>
+          <div class="type">Limiter (Free)</div>
+          <p>Simple, transparent limiter. Perfect for beginners.</p>
+          <a href="https://loudmax.blogspot.com/" target="_blank">Download →</a>
+        </div>
+        
+        <div class="plugin-card">
+          <h4>TDR Nova</h4>
+          <div class="type">Dynamic EQ (Free)</div>
+          <p>Parametric equalizer with dynamic function. Very versatile.</p>
+          <a href="https://www.tokyodawn.net/tdr-nova/" target="_blank">Download →</a>
+        </div>
+        
+        <div class="plugin-card">
+          <h4>OrilRiver</h4>
+          <div class="type">Reverb (Free)</div>
+          <p>Often adds subtle space in mastering for "glue".</p>
+          <a href="https://www.kvraudio.com/product/orilriver-by-denis-tihanov" target="_blank">Download →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Platform-Specific Exports</h2>
+      <p>Every platform has its preferences. Here are the most important ones:</p>
+      
+      <table class="platform-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Format</th>
+            <th>Target LUFS</th>
+            <th>Special Features</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="platform-badge spotify">Spotify</span></td>
+            <td>WAV 44.1kHz/16bit</td>
+            <td>-14 LUFS</td>
+            <td>Normalizes to -14 LUFS</td>
+          </tr>
+          <tr>
+            <td><span class="platform-badge youtube">YouTube</span></td>
+            <td>WAV 48kHz/24bit</td>
+            <td>-14 LUFS</td>
+            <td>Higher resolution = better</td>
+          </tr>
+          <tr>
+            <td><span class="platform-badge soundcloud">SoundCloud</span></td>
+            <td>WAV 44.1kHz/16bit</td>
+            <td>-8 to -10 LUFS</td>
+            <td>Allows louder tracks</td>
+          </tr>
+          <tr>
+            <td><span class="platform-badge bandcamp">Bandcamp</span></td>
+            <td>FLAC 48kHz/24bit</td>
+            <td>-14 LUFS</td>
+            <td>Lossless formats possible</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="tip-box">
+        <strong>Pro Tip:</strong> Master for -14 LUFS. If you make it louder, Spotify & Co. will turn your track down  which can lead to quality loss. Better quiet but clean than loud and distorted.
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>The Mastering Workflow</h2>
+      
+      <div class="checklist-mastering">
+        <h4>🎵 Mastering Checklist</h4>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>1. Load References</h5>
+            <p>Load 2-3 commercial tracks from your genre into your project. Compare loudness and sound.</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>2. Gain Staging</h5>
+            <p>Make sure your mix comes in with -6 to -3 dB headroom.</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>3. High-Pass Filter</h5>
+            <p>Filter out below 30 Hz. This relieves the limiter and makes the bass more defined.</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>4. EQ Adjustments</h5>
+            <p>Fine corrections: Air-Band boost (+0.5 dB), mid clarity (subtle cut at 250 Hz).</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>5. Set Limiter</h5>
+            <p>Output Ceiling: -1.0 dB. Lower Threshold until -14 LUFS reached. Max 6 dB Gain Reduction.</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>6. Check LUFS</h5>
+            <p>With YouLean Meter: Integrated LUFS should be -14, True Peak below -1 dB.</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>7. A/B Comparison</h5>
+            <p>Switch between your master and references. Does it sound similarly loud and professional?</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>8. Test on Different Systems</h5>
+            <p>Export and listen on: headphones, speakers, phone speaker, car.</p>
+          </div>
+        </div>
+        
+        <div class="checklist-item">
+          <div class="checklist-checkbox"></div>
+          <div class="checklist-content">
+            <h5>9. Export</h5>
+            <p>WAV 44.1kHz/16bit for streaming. For archive: WAV 48kHz/24bit or FLAC.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Common Mastering Mistakes</h2>
+      
+      <div class="warning-box">
+        <strong>⚠️ Making it too loud</strong><br>
+        A track at -8 LUFS sounds "better" on first listen, but becomes tiring over time. Streaming platforms turn it down anyway.
+      </div>
+      
+      <div class="warning-box">
+        <strong>⚠️ Too much limiting</strong><br>
+        If the limiter constantly shows 10+ dB Gain Reduction, you're destroying the dynamics. The track sounds "squashed" and lifeless.
+      </div>
+      
+      <div class="warning-box">
+        <strong>⚠️ Ignoring True Peaks</strong><br>
+        Even if your peak meter shows below 0 dB, "True Peaks" (between the samples) can clip. Always use a True Peak limiter!
+      </div>
+      
+      <div class="warning-box">
+        <strong>⚠️ Fixing the mix in mastering</strong><br>
+        If the mix has problems (e.g., too much bass), you won't solve them in mastering. Go back to the mix!
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Quick Mastering in Audacity</h2>
+      <p>If you don't have external plugins, you can do a "Quick Mastering" in Audacity:</p>
+      
+      <ol>
+        <li><strong>Normalize:</strong> Effect → Normalize → Peak Level: -3 dB</li>
+        <li><strong>EQ:</strong> Effect → Filter Curve EQ → Preset "Bass Boost" slightly adjust or Custom:
+          <ul>
+            <li>High-Pass at 30 Hz (steep slope)</li>
+            <li>Slight shelving boost at 10 kHz (+2 dB)</li>
+          </ul>
+        </li>
+        <li><strong>Compression:</strong> Effect → Compressor → Threshold -20 dB, Ratio 3:1, Attack 0.2s, Release 1.0s</li>
+        <li><strong>Limiter:</strong> Effect → Limiter → Type "Soft Limit", Limit to -2.0 dB, adjust Input Gain so it's loud enough</li>
+        <li><strong>Normalize final:</strong> Effect → Normalize → Peak Level: -1 dB</li>
+      </ol>
+      
+      <div class="practice-box">
+        <h3>🎵 Final Project: Master Your Track</h3>
+        <ol>
+          <li>Take one of your produced tracks (e.g., from Module 07 or 08)</li>
+          <li>Install YouLean Loudness Meter (Free)</li>
+          <li>Apply the mastering checklist</li>
+          <li>Aim for -14 LUFS, True Peak below -1 dB</li>
+          <li>Export as WAV 44.1kHz/16bit</li>
+          <li>Compare with a commercial reference at the same volume</li>
+          <li>Upload your finished, mastered track!</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>What's Next?</h2>
+      <p>In <strong>Module 10</strong>, you'll learn how to share your music with the community, get feedback, and plan your first release.</p>
+      
+      <div class="tip-box">
+        <strong>Remember:</strong> Mastering is both technique and art. The best mastering engineers have years of experience. For your first release, a clean -14 LUFS track is enough  perfect is the enemy of good!
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Navigation Footer -->
+  <nav class="nav-footer">
+    <a href="08-ki-tools-en.html" class="nav-btn">
+      Back
+    </a>
+    <a href="../index-en.html#module" class="nav-btn">
+      Module Overview
+    </a>
+    <a href="10-community-en.html" class="nav-btn nav-btn-primary">Next</a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="../index-en.html">Start</a>
+      <a href="../library-en.html">Library</a>
+      <a href="../../pages/donate.html">Support</a>
+    </nav>
+    <p class="footer-copy"> PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+    <script>
+    // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${isGerman ? '../index.html' : '../index-en.html'}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${isGerman ? '../tools/audacity.html' : '../tools/audacity-en.html'}">Audacity</a>
+              <a href="${isGerman ? '../tools/suno.html' : '../tools/suno-en.html'}">Suno AI</a>
+              <a href="${isGerman ? '../tools/elevenlabs.html' : '../tools/elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${isGerman ? '../tools/daw.html' : '../tools/daw-en.html'}">DAW Guide</a>
+              <a href="${isGerman ? '../bibliothek.html' : '../library.html'}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (Dark/Light)
+    // ==========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check saved preference
+    const savedTheme = localStorage.getItem('sonicLabTheme');
+    
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+    
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    } else {
+      // Default to dark
+      html.setAttribute('data-theme', 'dark');
+      updateThemeIcon('dark');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sonicLabTheme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    // ==========================================
+    // CLASSROOM MODE
+    // ==========================================
+    const classroomToggle = document.getElementById('classroomToggle');
+    
+    const savedClassroom = localStorage.getItem('sonicLabClassroom');
+    if (savedClassroom === 'true') {
+      html.setAttribute('data-classroom', 'true');
+      classroomToggle.classList.add('active');
+    }
+    
+    classroomToggle.addEventListener('click', function() {
+      const isClassroom = html.getAttribute('data-classroom') === 'true';
+      
+      if (isClassroom) {
+        html.removeAttribute('data-classroom');
+        localStorage.setItem('sonicLabClassroom', 'false');
+        classroomToggle.classList.remove('active');
+      } else {
+        html.setAttribute('data-classroom', 'true');
+        localStorage.setItem('sonicLabClassroom', 'true');
+        classroomToggle.classList.add('active');
+      }
+    });
+
+    // ==========================================
+    // BACK TO TOP
+    // ==========================================
+    const backToTop = document.getElementById('backToTop');
+    
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+    
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==========================================
+    // PROGRESS BAR
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // ==========================================
+    // LANGUAGE TOGGLE
+    // ==========================================
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        window.location.href = '09-mastering.html';
+      });
+    }
+
+    // ==========================================
+    // AUDIO WIDGET
+    // ==========================================
+    const audioWidget = document.getElementById('audioWidget');
+    const audioWidgetToggle = document.getElementById('audioWidgetToggle');
+    const audioTabs = document.querySelectorAll('.audio-tab');
+    const audioTabContents = document.querySelectorAll('.audio-tab-content');
+    
+    // Toggle widget collapse
+    if (audioWidgetToggle && audioWidget) {
+      audioWidgetToggle.addEventListener('click', function() {
+        audioWidget.classList.toggle('collapsed');
+        audioWidgetToggle.textContent = audioWidget.classList.contains('collapsed') ? '+' : '-';
+      });
+    }
+
+    // ==========================================
+    // ==========================================
+    // PROFESSIONAL WAVEFORM VISUALIZER CANVAS
+    // ==========================================
+    const wfCanvas = document.getElementById('waveformCanvas');
+    if (wfCanvas) {
+      const wfctx = wfCanvas.getContext('2d');
+      let animationPhase = 0;
+      
+      function setupCanvas() {
+        const rect = wfCanvas.parentElement.getBoundingClientRect();
+        wfCanvas.width = rect.width;
+        wfCanvas.height = 150;
+      }
+      setupCanvas();
+      window.addEventListener('resize', setupCanvas);
+      
+      function drawWaveform() {
+        const w = wfCanvas.width;
+        const h = wfCanvas.height;
+        const centerY = h / 2;
+        
+        // Background with gradient
+        const bgGradient = wfctx.createLinearGradient(0, 0, 0, h);
+        bgGradient.addColorStop(0, getComputedStyle(document.documentElement).getPropertyValue('--bg-tertiary') || '#2a2a2a');
+        bgGradient.addColorStop(1, getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary') || '#252525');
+        wfctx.fillStyle = bgGradient;
+        wfctx.fillRect(0, 0, w, h);
+        
+        // Grid lines
+        wfctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border-subtle') || '#333';
+        wfctx.lineWidth = 1;
+        wfctx.globalAlpha = 0.3;
+        for (let i = -2; i <= 2; i++) {
+          const y = centerY + i * 30;
+          wfctx.beginPath();
+          wfctx.moveTo(0, y);
+          wfctx.lineTo(w, y);
+          wfctx.stroke();
+        }
+        wfctx.globalAlpha = 1;
+        
+        // Animated waveform with gradient
+        const waveGradient = wfctx.createLinearGradient(0, centerY - 50, 0, centerY + 50);
+        waveGradient.addColorStop(0, '#00d4aa');
+        waveGradient.addColorStop(0.5, '#ff5a5a');
+        waveGradient.addColorStop(1, '#00d4aa');
+        
+        wfctx.strokeStyle = waveGradient;
+        wfctx.lineWidth = 2.5;
+        wfctx.lineCap = 'round';
+        wfctx.lineJoin = 'round';
+        wfctx.beginPath();
+        
+        for (let x = 0; x < w; x += 2) {
+          const freq1 = 0.02;
+          const freq2 = 0.05;
+          const envelope = Math.sin((x / w) * Math.PI);
+          const amplitude = 40 * envelope + 10;
+          
+          const t1 = x * freq1 + animationPhase;
+          const t2 = x * freq2 + animationPhase * 1.5;
+          const y = centerY + (Math.sin(t1) * 0.7 + Math.sin(t2) * 0.3) * amplitude;
+          
+          if (x === 0) wfctx.moveTo(x, y);
+          else wfctx.lineTo(x, y);
+        }
+        wfctx.stroke();
+        
+        // Center line
+        wfctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border-subtle') || '#333';
+        wfctx.lineWidth = 1;
+        wfctx.beginPath();
+        wfctx.moveTo(0, centerY);
+        wfctx.lineTo(w, centerY);
+        wfctx.stroke();
+        
+        // Frequency label
+        wfctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-muted') || '#666';
+        wfctx.font = '10px Inter, system-ui, sans-serif';
+        wfctx.textAlign = 'right';
+        wfctx.fillText('440 Hz  Sine Wave', w - 10, 20);
+        
+        // Update animation
+        animationPhase += 0.03;
+        requestAnimationFrame(drawWaveform);
+      }
+      
+      drawWaveform();
+    }
+    
+    // Tab switching
+    audioTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetTab = this.getAttribute('data-tab');
+        
+        audioTabs.forEach(t => t.classList.remove('active'));
+        audioTabContents.forEach(c => c.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById(targetTab + 'Tab').classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>09 – DOM-Manipulation | JavaScript-Tutorial</title>
+  <!-- Favicon – nur .ico wie gewünscht -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+      <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="06-arrays.html">06. Arrays</a></li>
+        <li><a href="07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="08-objekte.html">08. Objekte</a></li>
+        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>09 – DOM-Manipulation 🌐</h1>
+      <p class="hero-subtitle">Brücke zwischen HTML & JavaScript – Inhalte dynamisch steuern</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was ist der DOM?</h2>
+      <p>
+        Der <strong>Document Object Model (DOM)</strong> ist eine programmierbare Repräsentation deiner Webseite.  
+        Der Browser wandelt HTML in einen <strong>Baum aus Objekten</strong> um – den DOM-Baum.
+      </p>
+      <div class="dom-tree">
+&lt;html&gt;
+└── &lt;head&gt;
+│   └── &lt;title&gt;
+└── &lt;body&gt;
+    ├── &lt;h1&gt;
+    ├── &lt;button&gt;
+    └── &lt;div id="output"&gt;
+      </div>
+      <p>
+        Mit JavaScript kannst du diesen Baum <strong>durchsuchen, ändern, erweitern oder löschen</strong>.
+      </p>
+    </section>
+
+    <section>
+      <h2>📊 2. Übersicht: DOM-Methoden</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Aufgabe</th>
+            <th>Methode</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Element finden</td>
+            <td><code>querySelector()</code></td>
+            <td><code>document.querySelector("#id")</code></td>
+          </tr>
+          <tr>
+            <td>Text ändern</td>
+            <td><code>.textContent</code></td>
+            <td><code>el.textContent = "Hallo";</code></td>
+          </tr>
+          <tr>
+            <td>HTML ändern</td>
+            <td><code>.innerHTML</code></td>
+            <td><code>el.innerHTML = "&lt;strong&gt;Hallo&lt;/strong&gt;";</code></td>
+          </tr>
+          <tr>
+            <td>Neues Element</td>
+            <td><code>createElement()</code></td>
+            <td><code>const li = document.createElement("li");</code></td>
+          </tr>
+          <tr>
+            <td>Stil ändern</td>
+            <td><code>.style</code></td>
+            <td><code>el.style.color = "red";</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🎯 3. Einleitung & W3Schools</h2>
+      <p>
+        DOM-Manipulation ist der Schlüssel zu <strong>dynamischen Webseiten</strong>.  
+        Ohne sie wäre JavaScript „blind“ gegenüber deiner HTML-Struktur.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript HTML DOM</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 4. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, wann man <code>.textContent</code> und wann <code>.innerHTML</code> verwendet – 
+        und wie man sicher neue Elemente im DOM erstellt.
+      </p>
+    </section>
+
+    <!-- 5. Elemente finden -->
+    <section>
+      <h2>🔍 5. Elemente im DOM finden</h2>
+      <p>
+        Bevor du ein Element ändern kannst, musst du es <strong>adressieren</strong>.  
+        Die moderne Methode: <code>querySelector()</code> mit CSS-Selektoren.
+      </p>
+      <button onclick="demoSuchen()">Zeige Element-Suche</button>
+      <div id="demo-suchen-ausgabe" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoSuchen() {
+  const h1 = document.querySelector("h1");
+  const button = document.querySelector("button");
+  
+  document.getElementById("demo-suchen-ausgabe").innerHTML = 
+    `&lt;p&gt;Gefunden: &lt;code&gt;h1&lt;/code&gt;-Text = „${h1.textContent}“&lt;/p&gt;
+     &lt;p&gt;Button-Text = „${button.textContent}“&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <!-- 6. Inhalte ändern -->
+    <section class="warnung">
+      <h2>✏️ 6. Inhalte ändern: Text vs. HTML</h2>
+      <p>
+        ⚠️ <strong>Sicherheit:</strong> <code>innerHTML</code> kann XSS-Angriffe ermöglichen!  
+        → Für Benutzereingaben <strong>immer <code>.textContent</code> verwenden</strong>.
+      </p>
+      <button onclick="demoInhalt()">Text vs. HTML testen</button>
+      <div id="demo-inhalt-ausgabe" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoInhalt() {
+  const bereich = document.getElementById("demo-inhalt-ausgabe");
+  
+  bereich.textContent = "Dieser Text enthält &lt;strong&gt;kein HTML&lt;/strong&gt;!";
+  setTimeout(() => {
+    bereich.innerHTML = "Dieser Text enthält &lt;strong&gt;fettes HTML&lt;/strong&gt;!";
+  }, 1500);
+}</code></pre>
+    </section>
+
+    <!-- 7. Elemente erstellen -->
+    <section>
+      <h2>➕ 7. Neue Elemente erstellen</h2>
+      <p>
+        Dynamische Webseiten fügen oft Inhalte zur Laufzeit hinzu (z. B. neue Kommentare).
+      </p>
+      <button onclick="demoErstellen()">Neues Element erstellen</button>
+      <div id="demo-erstellen-liste"></div>
+      <pre><code class="js-code">function demoErstellen() {
+  const liste = document.getElementById("demo-erstellen-liste");
+  
+  const neuesLi = document.createElement("li");
+  neuesLi.textContent = "🕗 " + new Date().toLocaleTimeString();
+  
+  if (liste.children.length === 0) {
+    const ul = document.createElement("ul");
+    ul.appendChild(neuesLi);
+    liste.appendChild(ul);
+  } else {
+    liste.querySelector("ul").appendChild(neuesLi);
+  }
+}</code></pre>
+    </section>
+
+    <!-- 8. Stil & Attribute -->
+    <section>
+      <h2>🎨 8. Stil und Attribute ändern</h2>
+      <p>
+        Du kannst auch das Aussehen und Verhalten von Elementen steuern.
+      </p>
+      <button onclick="demoStil()">Farbe ändern</button>
+      <button onclick="demoAttribut()">Attribut ändern</button>
+      <div id="demo-stil-ziel" style="padding: 1rem; margin: 1rem 0; border: 1px solid #ccc;">
+        Dieser Bereich ändert sich.
+      </div>
+      <pre><code class="js-code">function demoStil() {
+  const div = document.getElementById("demo-stil-ziel");
+  div.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+}
+
+function demoAttribut() {
+  const div = document.getElementById("demo-stil-ziel");
+  div.setAttribute("data-geaendert", "ja");
+  div.textContent = "Attribut 'data-geaendert' wurde gesetzt!";
+}</code></pre>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du Webseiten dynamisch steuern!</p>
+      <a href="./10-ereignisse.html" class="nav-button">→ Zu Modul 10: Ereignisse & Timing</a>
+    </section>
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/09-dom.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

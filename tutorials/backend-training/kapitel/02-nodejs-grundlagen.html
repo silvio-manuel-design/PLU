@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01 – Was ist Backend? | Backend-Tutorial</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="../css/style.css">
+  <meta name="theme-color" content="#27ae60">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="../assets/logo.svg" alt="Backend Classic" height="40">
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../kapitel/01-was-ist-backend.html">01. Was ist Backend?</a></li>
+        <li><a href="../kapitel/02-nodejs-grundlagen.html">02. Node.js-Grundlagen</a></li>
+        <li><a href="../kapitel/03-express-webserver.html">03. Express.js</a></li>
+        <li><a href="../kapitel/04-php-xampp.html">04. PHP & XAMPP</a></li>
+        <li><a href="../kapitel/05-formulare-datenbank.html">05. Formulare & DB</a></li>
+        <li><a href="../kapitel/06-vergleich-node-php.html">06. Node.js vs. PHP</a></li>
+        <li><a href="../kapitel/07-sicherheit.html">07. Sicherheit</a></li>
+        <li><a href="../kapitel/08-projekt-mini-api.html">08. Mini-API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-server-einrichten.html">00. Server einrichten</a></li>
+        <li><a href="../uebungen/01-node-grundlagen.html">01. Node.js</a></li>
+        <li><a href="../uebungen/02-express-routing.html">02. Express</a></li>
+        <li><a href="../uebungen/03-php-formular.html">03. PHP-Formular</a></li>
+        <li><a href="../uebungen/04-datenbank-abfrage.html">04. DB-Abfrage</a></li>
+        <li><a href="../uebungen/05-datenbank-verwaltung.html">05. Datenbank-Verwaltung</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📁 DB & Server ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../server/xampp-einrichten.html">🔧 XAMPP einrichten</a></li>
+        <li><a href="../server/phpmyadmin-nutzung.html">🗃️ phpMyAdmin nutzen</a></li>
+        <li><a href="../server/php-grundlagen.html">🐘 PHP-Grundlagen</a></li>
+        <li><a href="../server/php-datenbank.html">💾 PHP & Datenbank</a></li>
+        <li><a href="../server/nodejs-server.html">🟢 Node.js als Server</a></li>
+        <li><a href="../server/vergleich-umgebungen.html">⚖️ XAMPP vs. Node.js</a></li>
+        <li><a href="../server/wordpress-einrichten.html">🌐 WordPress</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/kontaktformular.html">📧 Kontaktformular</a></li>
+        <li><a href="../abschluss/schuelerliste.html">👥 Schülerliste</a></li>
+        <li><a href="../abschluss/buchungsformular.html">📅 Buchungsformular</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>02 – Node.js-Grundlagen 🟢</h1>
+      <p class="hero-subtitle">JavaScript verlässt den Browser – und wird zum Server</p>
+    </section>
+
+    <!-- NEU: Frontend vs. Backend mit Node.js -->
+    <section>
+      <figure class="illustration-center">
+        <svg width="100%" height="240" viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nodejs-svg-title">
+          <title id="nodejs-svg-title">Node.js im Kontext von Frontend und Backend</title>
+          
+          <!-- Frontend-Bereich -->
+          <rect x="20" y="20" width="250" height="200" rx="12" fill="#f0f8ff" stroke="#3498db" stroke-width="2"/>
+          <text x="145" y="50" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#2c3e50" font-weight="bold">Frontend</text>
+          <text x="145" y="80" font-family="monospace" font-size="14" text-anchor="middle" fill="#2980b9">HTML</text>
+          <text x="145" y="110" font-family="monospace" font-size="14" text-anchor="middle" fill="#2980b9">CSS</text>
+          <text x="145" y="140" font-family="monospace" font-size="14" text-anchor="middle" fill="#2980b9">JavaScript</text>
+          <text x="145" y="180" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">Läuft im Browser</text>
+
+          <!-- Backend-Bereich mit Node.js -->
+          <rect x="430" y="20" width="250" height="200" rx="12" fill="#f0fff4" stroke="#27ae60" stroke-width="2"/>
+          <text x="555" y="50" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#2c3e50" font-weight="bold">Backend</text>
+          <text x="555" y="80" font-family="monospace" font-size="14" text-anchor="middle" fill="#219653">Node.js</text>
+          <text x="555" y="110" font-family="monospace" font-size="14" text-anchor="middle" fill="#219653">Datenbank</text>
+          <text x="555" y="140" font-family="monospace" font-size="14" text-anchor="middle" fill="#219653">APIs</text>
+          <text x="555" y="180" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#7f8c8d">Läuft auf dem Server</text>
+
+          <!-- Pfeil zwischen beiden -->
+          <line x1="270" y1="120" x2="430" y2="120" stroke="#555" stroke-width="2" marker-end="url(#arrow2)"/>
+          <defs>
+            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#555" />
+            </marker>
+          </defs>
+        </svg>
+        <figcaption class="illustration-caption">
+          Mit Node.js wird JavaScript zur Serversprache – ideal für modernes Backend.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was ist Node.js?</h2>
+      <p>
+        <strong>Node.js</strong> ist eine <strong>Laufzeitumgebung</strong>, mit der du <em>JavaScript außerhalb des Browsers</em> ausführen kannst.
+        Damit wird JavaScript zur <strong>Server-Sprache</strong>.
+      </p>
+      <p>
+        Während das Frontend (HTML, CSS, JS) im Browser läuft, führt Node.js JavaScript direkt auf deinem Computer oder einem Server aus –
+        ohne Webseite, ohne Tab, sondern im <strong>Terminal</strong>.
+      </p>
+      <div class="regel">
+        💡 <strong>Vorteil:</strong> Du nutzt dieselbe Sprache (JavaScript) für Frontend <em>und</em> Backend – kein Wechsel nötig!
+      </div>
+    </section>
+
+    <section>
+      <h2>🔄 2. Verbindung zum Request-Response-Zyklus</h2>
+      <p>
+        In <strong>Kapitel 1</strong> hast du gelernt, dass jede Webanwendung auf dem Request/Response-Zyklus beruht.
+        Mit Node.js kannst du diesen Zyklus <em>selbst programmieren</em>:
+      </p>
+      <ul>
+        <li>Der Browser sendet einen <strong>Request</strong></li>
+        <li>Dein Node.js-Server empfängt ihn über das <code>http</code>-Modul</li>
+        <li>Du verarbeitest die Anfrage (z. B. Datenbankabfrage)</li>
+        <li>Du sendest eine <strong>Response</strong> zurück (HTML, JSON, Text)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📊 3. Übersicht: Wichtige Befehle & Module</h2>
+
+      <h3>Häufige Terminal-Befehle</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Befehl</th>
+            <th>Beschreibung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>node -v</code></td>
+            <td>Prüft die installierte Node.js-Version</td>
+          </tr>
+          <tr>
+            <td><code>node datei.js</code></td>
+            <td>Führt ein Node.js-Skript aus</td>
+          </tr>
+          <tr>
+            <td><code>cd ordnername</code></td>
+            <td>Wechselt in einen Ordner</td>
+          </tr>
+          <tr>
+            <td><code>mkdir mein-projekt</code></td>
+            <td>Erstellt einen neuen Ordner</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Wichtige integrierte Module</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Modul</th>
+            <th>Beschreibung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>fs</code></td>
+            <td>Dateisystem – lesen/schreiben</td>
+            <td><code>const fs = require('fs');</code></td>
+          </tr>
+          <tr>
+            <td><code>http</code></td>
+            <td>Einfacher Webserver</td>
+            <td><code>const http = require('http');</code></td>
+          </tr>
+          <tr>
+            <td><code>path</code></td>
+            <td>Pfad-Manipulation</td>
+            <td><code>const path = require('path');</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🎯 4. Einstieg & W3Schools</h2>
+      <p>
+        In diesem Kapitel lernst du, wie du Node.js installierst, Skripte ausführst 
+        und mit integrierten Modulen arbeitest.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/nodejs/" target="_blank" rel="noopener">W3Schools – Node.js Tutorial</a><br>
+        🔗 <a href="https://www.w3schools.com/nodejs/nodejs_get_started.asp" target="_blank" rel="noopener">W3Schools – Erste Schritte</a><br>
+        🔗 <a href="https://www.w3schools.com/nodejs/nodejs_filesystem.asp" target="_blank" rel="noopener">W3Schools – File System</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 5. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um den Unterschied zwischen <code>console.log()</code> im Browser und in Node.js zu erklären.
+        Außerdem: Zeig mir, wie ich mit dem <code>fs</code>-Modul eine Textdatei erstelle – 
+        aber ohne den gesamten Code zu kopieren.
+      </p>
+    </section>
+
+    <section>
+      <h2>📁 6. Projektordner einrichten – Schritt für Schritt</h2>
+      <p>
+        Damit deine Arbeit übersichtlich bleibt, legst du einen eigenen Ordner für Node.js-Projekte an:
+      </p>
+      <ol>
+        <li>Öffne den <strong>Datei-Explorer</strong></li>
+        <li>Gehe auf <code>C:\</code></li>
+        <li>Erstelle einen neuen Ordner: <code>C:\NodeJS</code></li>
+        <li>Darin erstellst du für jedes Projekt einen Unterordner, z. B.:<br>
+           <code>C:\NodeJS\01-hallo-server</code></li>
+        <li>Speichere alle deine <code>.js</code>-Dateien dort</li>
+        <li>Öffne das <strong>Terminal</strong> in diesem Ordner:<br>
+           → Rechtsklick im Ordner → „<em>Terminal hier öffnen</em>“</li>
+        <li>Führe dein Skript aus: <code>node hallo.js</code></li>
+      </ol>
+      <div class="regel">
+        💡 <strong>Tipp:</strong> Dieser Ordner ist unabhängig von XAMPP – 
+        Node.js braucht keinen Webserver wie Apache, weil es <em>selbst</em> ein Server sein kann.
+      </div>
+    </section>
+
+    <section>
+      <h2>🖨️ 7. Dein erstes Node.js-Skript</h2>
+      <p>
+        Erstelle eine Datei <code>hallo.js</code> im Ordner <code>C:\NodeJS\01-hallo-server\</code>:
+      </p>
+      <pre><code class="js-code">// hallo.js
+console.log("Hallo vom Server!");</code></pre>
+      <p>
+        Öffne das Terminal in diesem Ordner und gib ein:
+      </p>
+      <pre><code class="js-code">$ node hallo.js</code></pre>
+      <p>
+        Im Terminal erscheint: <code>Hallo vom Server!</code>
+      </p>
+      <div class="warnung">
+        ⚠️ <strong>Hinweis:</strong> Die Ausgabe erscheint <em>im Terminal</em>, nicht im Browser!
+        Node.js läuft auf dem Server – nicht in der Webseite.
+      </div>
+    </section>
+
+    <section>
+      <h2>🌐 8. Node.js als Webserver – Request & Response in Aktion</h2>
+      <p>
+        Mit dem integrierten <code>http</code>-Modul kannst du einen echten Webserver bauen –
+        der genau den Request/Response-Zyklus aus Kapitel 1 umsetzt.
+      </p>
+      <pre><code class="js-code">// server.js
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  // req = Request (vom Client)
+  // res = Response (zurück an Client)
+
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hallo vom Node.js-Server!');
+});
+
+server.listen(3000, () => {
+  console.log('Server läuft auf http://localhost:3000');
+});</code></pre>
+      <p>
+        Führe das Skript aus: <code>node server.js</code><br>
+        Öffne dann im Browser: <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a>
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/nodejs/nodejs_http.asp" target="_blank" rel="noopener">W3Schools – Node.js HTTP</a>
+      </p>
+      <div class="regel">
+        💡 <strong>Merke:</strong> 
+        <code>req</code> enthält die <strong>Anfrage</strong> des Browsers.<br>
+        <code>res</code> wird verwendet, um die <strong>Antwort</strong> zu senden.
+      </div>
+    </section>
+
+    <section>
+      <h2>📦 9. Module laden mit <code>require()</code></h2>
+      <p>
+        Mit <code>require()</code> lädst du eingebaute Module wie <code>fs</code> (File System).
+      </p>
+      <pre><code class="js-code">// datei-erstellen.js
+const fs = require('fs');
+
+fs.writeFile('nachricht.txt', 'Hallo aus Node.js!', (err) => {
+  if (err) throw err;
+  console.log('Datei wurde gespeichert!');
+});</code></pre>
+      <p>
+        Nach dem Ausführen findest du <code>nachricht.txt</code> im selben Ordner.
+      </p>
+    </section>
+
+    <section>
+      <h2>📄 10. Brauche ich <code>package.json</code>?</h2>
+      <p>
+        Die Datei <code>package.json</code> speichert Projektinformationen und externe Bibliotheken (z. B. Express.js).
+      </p>
+      <p>
+        <strong>Für die ersten Schritte brauchst du sie nicht.</strong><br>
+        Solange du nur mit integrierten Modulen (<code>fs</code>, <code>http</code>) arbeitest, reicht ein einfacher Ordner.
+      </p>
+      <p>
+        Später, wenn du Express.js installierst, wirst du diese Datei benötigen – dann zeige ich dir, wie du sie erstellst.
+      </p>
+    </section>
+
+    <section>
+      <h2>💡 11. Warum ist das wichtig für das Backend?</h2>
+      <p>
+        Mit Node.js kannst du:
+      </p>
+      <ul>
+        <li>Daten dauerhaft speichern (nicht nur im Browser-Cache)</li>
+        <li>Mit Dateien und Ordnern arbeiten</li>
+        <li>Einen Webserver bauen – und den Request/Response-Zyklus selbst steuern</li>
+        <li>Auf sensible Logik zugreifen – ohne sie im Frontend preiszugeben</li>
+      </ul>
+      <div class="regel">
+        💡 <strong>Merke:</strong> Alles, was <em>nicht im Browser</em> passieren darf, 
+        gehört ins Backend – und Node.js macht das mit JavaScript möglich.
+      </div>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt verstehst du, wie Node.js den Request/Response-Zyklus umsetzt!</p>
+      <a href="./03-express-webserver.html" class="nav-button">→ Zu Modul 03: Express.js</a>
+    </section>
+  </div>
+
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>Backend-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+/* ==========================================================================
+   BUTTON COMPONENTS
+   Mobile-First Button System
+   
+   Dokumentation für Studenten:
+   - Mobile: Mindestgröße 44x44px (Touch-Target)
+   - Desktop: Größere Padding für bessere Ästhetik
+   - Classroom Mode: Noch größer für Präsentationen
+   - Keine !important (außer Utilities)
+   ========================================================================== */
+
+/* ========================================================================
+   BASE BUTTON (Mobile First)
+   ======================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.25rem; /* Mobile: kompakt */
+  min-height: 44px; /* Touch-Target Mindestgröße */
+  min-width: 44px;
+  
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  
+  cursor: pointer;
+  transition: var(--transition-colors), var(--transition-transform), var(--transition-shadow);
+  
+  /* Accessibility */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover States - nur auf Desktop (kein :hover auf Touch) */
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Active State */
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Focus State */
+.btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ========================================================================
+   BUTTON SIZES
+   ======================================================================== */
+
+/* Small - für sekundäre Aktionen */
+.btn--sm {
+  padding: 0.5rem 0.875rem;
+  font-size: var(--text-xs);
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+}
+
+/* Large - für primäre CTA */
+.btn--lg {
+  padding: 1rem 1.75rem; /* Mobile */
+  font-size: var(--text-base);
+  min-height: 52px;
+  border-radius: var(--radius-lg);
+}
+
+/* Tablet+ */
+@media (min-width: 768px) {
+  .btn--lg {
+    padding: 1.125rem 2rem;
+    font-size: var(--text-lg);
+    min-height: 56px;
+  }
+}
+
+/* Extra Large - für Hero CTAs */
+.btn--xl {
+  padding: 1.125rem 2rem;
+  font-size: var(--text-base);
+  min-height: 56px;
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .btn--xl {
+    padding: 1.25rem 2.5rem;
+    font-size: var(--text-lg);
+    min-height: 60px;
+  }
+}
+
+/* Full Width - Mobile Optimierung */
+.btn--full {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .btn--full {
+    width: auto;
+  }
+}
+
+/* ========================================================================
+   BUTTON VARIANTS
+   ======================================================================== */
+
+/* PRIMARY - Hauptaktion */
+.btn--primary {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(88, 166, 255, 0.3);
+}
+
+@media (hover: hover) {
+  .btn--primary:hover {
+    box-shadow: 0 6px 20px rgba(88, 166, 255, 0.4);
+  }
+}
+
+.btn--primary:active {
+  box-shadow: 0 2px 8px rgba(88, 166, 255, 0.3);
+}
+
+/* SECONDARY - Alternative Aktion */
+.btn--secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+@media (hover: hover) {
+  .btn--secondary:hover {
+    background: var(--bg-card);
+    border-color: var(--accent-primary);
+  }
+}
+
+/* GHOST - Subtile Aktion */
+.btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
+}
+
+@media (hover: hover) {
+  .btn--ghost:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+  }
+}
+
+/* OUTLINE - Akzentuiert */
+.btn--outline {
+  background: transparent;
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+@media (hover: hover) {
+  .btn--outline:hover {
+    background: rgba(88, 166, 255, 0.1);
+  }
+}
+
+/* SUPPORT - Spenden/Button */
+.btn--support {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.3);
+}
+
+@media (hover: hover) {
+  .btn--support:hover {
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+  }
+}
+
+/* Academy-spezifische Buttons */
+.btn--academy-junior {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+}
+
+.btn--academy-premium {
+  background: var(--gradient-orange);
+  color: white;
+  border-color: transparent;
+}
+
+.btn--academy-senior {
+  background: var(--gradient-green);
+  color: white;
+  border-color: transparent;
+}
+
+/* ========================================================================
+   BUTTON WITH ICON
+   ======================================================================== */
+
+.btn .ph,
+.btn svg {
+  font-size: 1.2em;
+  flex-shrink: 0;
+}
+
+/* Icon nur (kein Text) */
+.btn--icon {
+  padding: 0.75rem;
+  aspect-ratio: 1;
+}
+
+.btn--icon.btn--sm {
+  padding: 0.5rem;
+}
+
+/* ========================================================================
+   BUTTON GROUPS
+   ======================================================================== */
+
+.btn-group {
+  display: flex;
+  flex-direction: column; /* Mobile: stacked */
+  gap: var(--space-3);
+}
+
+@media (min-width: 480px) {
+  .btn-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ========================================================================
+   SCROLL INDICATOR
+   ======================================================================== */
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+/* Keine Animation im Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator {
+    animation: none;
+  }
+}
+
+.scroll-indicator .ph {
+  font-size: 1.5rem;
+}
+
+@media (hover: hover) {
+  .scroll-indicator:hover {
+    color: var(--text-primary);
+  }
+}
+
+
+
+
+
+/* ========================================================================
+   LIGHT MODE - Premium Button Styling
+   ======================================================================== */
+
+/* Light Mode: Primary Button - Enhanced Glow */
+html.light-theme .btn--primary {
+  box-shadow: 
+    0 4px 14px rgba(88, 166, 255, 0.4),
+    0 0 20px rgba(88, 166, 255, 0.2);
+}
+
+html.light-theme .btn--primary:hover {
+  box-shadow: 
+    0 6px 20px rgba(88, 166, 255, 0.5),
+    0 0 30px rgba(88, 166, 255, 0.3);
+}
+
+/* Light Mode: Ghost Button */
+html.light-theme .btn--ghost {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(88, 166, 255, 0.25);
+  color: var(--accent-primary);
+}
+
+html.light-theme .btn--ghost:hover {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+/* Light Mode: Support Button - Pink/Orange Glow */
+html.light-theme .btn--support {
+  box-shadow: 
+    0 4px 14px rgba(236, 72, 153, 0.4),
+    0 0 20px rgba(236, 72, 153, 0.2);
+}

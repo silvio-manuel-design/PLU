@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arbeitsblatt 8 – Schleifen, Arrays, Funktionen</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../../index.html"><img src="../../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../../kapitel/01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../../kapitel/02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../../kapitel/03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="../../kapitel/04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="../../kapitel/05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="../../kapitel/06-arrays.html">06. Arrays</a></li>
+        <li><a href="../../kapitel/07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="../../kapitel/08-objekte.html">08. Objekte</a></li>
+        <li><a href="../../kapitel/09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="../../kapitel/10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../../vscode.html" class="nav-link">💻 VS Code</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section>
+      <h1>Arbeitsblatt 8 – Schleifen, Arrays, Funktionen</h1>
+      
+      <p class="regel"><strong>Name:</strong> ________________________  <strong>Klasse:</strong> _________  <strong>Datum:</strong> 17.12.2025</p>
+      <p class="regel"><strong>Punkte:</strong> ___ / 20</p>
+      
+      <div class="hinweis">
+        💡 Du darfst KI-Tools und VS Code nutzen – aber du musst in eigenen Worten begründen, warum ein Code funktioniert, fehlerhaft ist oder wie er verbessert werden kann.<br>
+        Reines Kopieren der KI-Antwort ohne Erklärung bringt keine Punkte.<br><br>
+        • Beantworte <strong>Aufgabe 1–3 direkt auf diesem Blatt</strong>.<br>
+        • Beantworte <strong>Aufgabe 4 und 5 auf einem separaten A4-Blatt</strong> – mit Begründung und Code.
+      </div>
+
+      <h2>Aufgabe 1 (2 Punkte)</h2>
+      <p>Warum ist es besser, <code>for (let element of arr)</code> zu verwenden, wenn du nur die Werte – nicht die Indizes – brauchst?</p>
+      <p>Antwort:</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+      <h2>Aufgabe 2 (2 Punkte)</h2>
+      <p>Was ist der Unterschied zwischen <code>arr = []</code> und <code>arr.length = 0</code> hinsichtlich der Referenz?</p>
+      <p>Antwort:</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+      <h2>Aufgabe 3 (2 Punkte)</h2>
+      <p>Warum ist es sinnvoll, eine Funktion wie <code>transformiere(liste, umwandlung)</code> zu schreiben, bei der <code>umwandlung</code> eine weitere Funktion ist?</p>
+      <p>Antwort:</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+      <div style="page-break-before: always;"></div>
+
+      <h2>Aufgabe 4 (7 Punkte)</h2>
+      <p>Eine KI schlägt folgende Funktion vor, um ein Array zu „leeren“ und neu zu befüllen:</p>
+      <pre><code>function leerenUndBefuellen(arr, neueWerte) {
+  arr = [];
+  for (let wert of neueWerte) {
+    arr.push(wert);
+  }
+  return arr;
+}</code></pre>
+      <p>a) Warum hat diese Funktion <strong>keinen Effekt</strong> auf das ursprüngliche Array außerhalb der Funktion? (2 P)<br>
+         b) Was gibt die Funktion zurück – und warum hilft das nicht, wenn man das Original ändern möchte? (2 P)<br>
+         c) Schreibe eine Version, die das übergebene Array <strong>tatsächlich leert und befüllt</strong>. (3 P)</p>
+
+      <h2>Aufgabe 5 (7 Punkte)</h2>
+      <p>Ein Mitschüler möchte prüfen, ob ein Array <strong>mindestens ein Element</strong> enthält, das eine Bedingung erfüllt (z. B. gerade Zahl). Sein Code:</p>
+      <pre><code>function hatErfuellt(arr, bedingung) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    if (bedingung(arr[i])) {
+      return true;
+    }
+  }
+  return false;
+}</code></pre>
+      <p>a) Warum ist es clever, eine <strong>Funktion als Parameter</strong> zu übergeben? (2 P)<br>
+         b) Wie könntest du diese Funktion aufrufen, um zu prüfen, ob mindestens eine <strong>gerade Zahl</strong> vorhanden ist? (3 P)<br>
+         c) Warum ist der Name <code>hatErfuellt</code> besser als <code>pruefe</code>? (2 P)</p>
+
+      <p class="footer-hinweis">
+        ➤ <strong>Beantworte Aufgabe 4 und 5 auf einem separaten A4-Blatt.</strong> Gib Name, Klasse und Datum an. Erkläre in vollständigen Sätzen – KI-Antworten ohne eigene Worte werden nicht gewertet.
+      </p>
+    </section>
+  </main>
+
+  <!-- ================= Musterlösung – Nur für Lehrkräfte ================= -->
+  <div class="musterloesung" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ccc; background-color: #f9f9f9;">
+    <h2>✅ Musterlösung – Arbeitsblatt 8</h2>
+    <p><strong>Thema:</strong> Schleifen, Arrays, Funktionen</p>
+
+    <h3>Aufgabe 1 (2 P)</h3>
+    <p>Der Code wird lesbarer und kürzer – man muss sich nicht um Indizes kümmern. Außerdem gibt es keine Gefahr von Off-by-one-Fehlern.</p>
+
+    <h3>Aufgabe 2 (2 P)</h3>
+    <p><code>arr = []</code> erstellt ein <em>neues</em> Array – die alte Referenz bleibt unverändert für andere, die sie halten.<br>
+       <code>arr.length = 0</code> leert das <em>bestehende</em> Array – alle, die die Referenz haben, sehen die Änderung.</p>
+
+    <h3>Aufgabe 3 (2 P)</h3>
+    <p>Die Funktion wird universell: Man kann beliebige Umwandlungen (z. B. verdoppeln, in Großbuchstaben, runden) übergeben – ohne den Code zu ändern.</p>
+
+    <h3>Aufgabe 4 (7 P)</h3>
+    <p><strong>a)</strong> 
+       <code>arr = []</code> ändert nur die <em>lokale Variable</em> innerhalb der Funktion. Die ursprüngliche Referenz außerhalb bleibt unberührt. (2 P)<br>
+       <strong>b)</strong> 
+       Gibt ein neues Array zurück – aber wer das Original ändern will, müsste <code>meinArray = leerenUndBefuellen(meinArray, ...)</code> schreiben. Direkte Änderung ist nicht möglich. (2 P)<br>
+       <strong>c)</strong>
+       <pre><code>function leerenUndBefuellen(arr, neueWerte) {
+  arr.length = 0; // Original leeren
+  for (let wert of neueWerte) {
+    arr.push(wert);
+  }
+  return arr; // optional
+}</code></pre>
+       (3 P)</p>
+
+    <h3>Aufgabe 5 (7 P)</h3>
+    <p><strong>a)</strong> 
+       Man kann beliebige Bedingungen (gerade, positiv, Stringlänge > 5) einsetzen – ohne die Funktion zu ändern. (2 P)<br>
+       <strong>b)</strong>
+       <pre><code>hatErfuellt([1, 3, 5], x => x % 2 === 0); // false
+hatErfuellt([1, 2, 3], x => x % 2 === 0); // true</code></pre>
+       (3 P)<br>
+       <strong>c)</strong> 
+       <code>hatErfuellt</code> beschreibt klar das Ergebnis (boolscher Wert: ja/nein). <code>pruefe</code> ist vage – was wird geprüft? Was wird zurückgegeben? (2 P)</p>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+</body>
+</html>

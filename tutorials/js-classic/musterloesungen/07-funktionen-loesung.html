@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Musterlösung – Kapitel 7 | JS-Tutorial</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="warnung" style="background:#ffebee; border-left:4px solid #e53935; margin-bottom:24px;">
+    <strong>🔒 Nur für Lehrkraft / Nachbesprechung!</strong><br>
+    Dieser Link ist nicht öffentlich verlinkt.
+  </div>
+
+  <main class="main-content">
+    <section>
+      <h1>📦 Musterlösung – Kapitel 7: Funktionen</h1>
+
+      <h2>Aufgabe 1: Rückgabewert vs. Seiteneffekt</h2>
+      <h3>Unterschied:</h3>
+      <ul>
+        <li><strong>Variante A (Seiteneffekt)</strong>: Verändert das übergebene Array direkt → <code>original</code> wird geändert.</li>
+        <li><strong>Variante B (reine Funktion)</strong>: Gibt ein **neues Array** zurück → <code>original</code> bleibt unberührt.</li>
+      </ul>
+
+      <h3>Anwendungsbeispiele:</h3>
+      <ul>
+        <li>✅ **Seiteneffekt sinnvoll**: Todo-Liste im DOM – du willst das Original aktualisieren.</li>
+        <li>✅ **Reine Funktion sinnvoll**: Berechnung von Zwischenergebnissen – du willst das Original erhalten.</li>
+      </ul>
+
+      <h3>Testergebnis:</h3>
+      <pre><code>const original = ["Apfel"];
+fuegeHinzuA(original, "Banane");     // original = ["Apfel", "Banane"]
+const neueListe = fuegeHinzuB(original, "Orange"); // neueListe = ["Apfel", "Banane", "Orange"]
+// original bleibt = ["Apfel", "Banane"]</code></pre>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle eine Funktion fuegeHinzu(liste, element), die ein neues Array zurückgibt,
+ohne das Original-Array zu verändern.
+Verwende den Spread-Operator [...liste, element].</code></pre>
+
+      <h2>Aufgabe 2: Scope und Closure</h2>
+      <h3>Warum bleibt <code>zaehler</code> erhalten?</h3>
+      <p>Die innere Funktion („Closure“) **merkt sich ihre Umgebung** – also die Variable <code>zaehler</code> – 
+      auch nachdem <code>zaehlerErzeugen()</code> beendet ist.</p>
+
+      <h3>Zweiter Zähler:</h3>
+      <pre><code>const zaehler2 = zaehlerErzeugen();
+console.log(zaehler2()); // → 1
+console.log(zaehler1()); // → 3 (unabhängig!)</code></pre>
+      <p>✅ Jeder Aufruf von <code>zaehlerErzeugen()</code> erzeugt einen **eigenen Scope** mit eigenem <code>zaehler</code>.</p>
+
+      <h3>Warum ist das Closure?</h3>
+      <p>Die innere Funktion **„schließt“** („closes over“) die Variable <code>zaehler</code> aus ihrem äußeren Scope ein – 
+      daher der Name **Closure**.</p>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle eine Funktion zaehlerErzeugen(), die eine Closure zurückgibt,
+die bei jedem Aufruf einen internen Zähler erhöht und zurückgibt.
+Erkläre, warum jeder erzeugte Zähler unabhängig ist.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dateien lesen und schreiben, Konfigurationen speichern, JSON-Daten verarbeiten.">
+  <meta name="theme-color" content="#306998">
+  <title>10 – File I/O & JSON | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/10-fileio.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/kapitel/10-fileio-en.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="../index.html" class="py-classic-logo">
+        <img src="../../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label" data-i18n="nav.home">
+        <a href="../index.html" class="py-classic-nav__link" data-i18n="nav.home">Start</a>
+        <a href="../index.html#kapitel" class="py-classic-nav__link is-active" data-i18n="nav.chapters">Kapitel</a>
+        <a href="../lexikon.html" class="py-classic-nav__link" data-i18n="nav.lexikon">Lexikon</a>
+        <a href="../abschlussprojekt.html" class="py-classic-nav__link" data-i18n="nav.project">Projekt</a>
+        <a href="../../../../index.html" class="py-classic-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="10-fileio.html" class="py-classic-lang__btn is-active" data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="10-fileio-en.html" class="py-classic-lang__btn " data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle data-i18n-attr="aria-label" data-i18n="common.toggleTheme" aria-label="Dunkelmodus umschalten">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle data-i18n-attr="aria-label" data-i18n="common.toggleClassroom" aria-label="Klassenraum-Modus" title="Klassenraum-Modus (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle data-i18n-attr="aria-label" data-i18n="common.toggleMenu" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close data-i18n-attr="aria-label" data-i18n="common.close" aria-label="Menü schließen"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.home">Start</a></li>
+      <li><a href="../index.html#kapitel" class="py-classic-mobile-nav__link is-active" data-i18n="nav.chapters">Kapitel</a></li>
+      <li><a href="../lexikon.html" class="py-classic-mobile-nav__link" data-i18n="nav.lexikon">Lexikon</a></li>
+      <li><a href="../abschlussprojekt.html" class="py-classic-mobile-nav__link" data-i18n="nav.project">Projekt</a></li>
+      <li><a href="../../../../index.html" class="py-classic-mobile-nav__link" data-i18n="nav.pluHub" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../../assets/images/kapitel/k10-fileio.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span><span data-i18n="nav.chapterNum">Kapitel</span> 10</span>
+      </nav>
+      <h1 class="py-classic-hero__title">File I/O & JSON</h1>
+      <p class="py-classic-hero__subtitle">Dateien lesen und schreiben, Konfigurationen speichern, JSON-Daten verarbeiten.</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__meta-item"><i class="ph ph-clock"></i> 50 Min</span>
+        <span class="py-classic-hero__meta-item"><i class="ph ph-circle"></i> Mittel</span>
+      </div>
+    </div>
+  </section>
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+      <div class="py-classic-learning-goals">
+        <h2 class="py-classic-learning-goals__title"><i class="ph ph-target"></i> <span data-i18n="chapter.learningGoals">Lernziele dieses Kapitels</span></h2>
+        <ul class="py-classic-learning-goals__list">
+        <li class="py-classic-learning-goals__item">Du liest und schreibst Dateien sicher mit with open()</li>
+        <li class="py-classic-learning-goals__item">Du speicherst und lädst Python-Daten als JSON</li>
+        <li class="py-classic-learning-goals__item">Du fängst Fehler mit try/except ab und machst Code robust</li>
+        <li class="py-classic-learning-goals__item">Du speicherst PyBuddy's Konfiguration persistent</li>
+        </ul>
+      </div>
+
+      <section class="py-classic-section" id="section-1">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-folder"></i></span>
+          Dateien lesen und schreiben
+        </h2>
+        <p>Mit <code>with open()</code> öffnest du Dateien <strong>sicher</strong>. Das <code>with</code>-Statement schließt die Datei automatisch — auch wenn ein Fehler auftritt. Nie wieder vergessene <code>close()</code>!</p><ul><li><code>'r'</code> — lesen (Standard)</li><li><code>'w'</code> — schreiben (überschreibt!)</li><li><code>'a'</code> — anhängen</li><li><code>encoding='utf-8'</code> — für Umlaute</li></ul>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Datei schreiben
+with open("notiz.txt", "w", encoding="utf-8") as f:
+    f.write("Python ist cool!\n")
+    f.write("Heute lerne ich File I/O.\n")
+
+# Datei lesen
+with open("notiz.txt", "r", encoding="utf-8") as f:
+    inhalt = f.read()
+    print(inhalt)
+
+# Zeile für Zeile lesen
+with open("notiz.txt", "r", encoding="utf-8") as f:
+    for zeile in f:
+        print(f"→ {zeile.strip()}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Python ist cool!
+Heute lerne ich File I/O.
+
+→ Python ist cool!
+→ Heute lerne ich File I/O.
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>with open('datei.txt', 'w') as f:
+    f.write('Hallo')</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>const fs = require('fs');
+fs.writeFileSync('datei.txt', 'Hallo');</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>with open()</code> ist elegant und sicher. JavaScript (Node.js): <code>fs.writeFileSync()</code> oder Promises. Python's Ansatz ist kürzer und lesbarer.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-2">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-chart-bar"></i></span>
+          JSON verarbeiten
+        </h2>
+        <p><strong>JSON</strong> (JavaScript Object Notation) ist das Standardformat für Daten im Web. Python hat das <code>json</code>-Modul eingebaut: <code>json.dump()</code> speichert, <code>json.load()</code> lädt.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import json
+
+# Dictionary als JSON speichern
+spieler = {
+    "name": "PyKnight",
+    "level": 5,
+    "items": ["Schwert", "Schild"]
+}
+
+with open("spieler.json", "w", encoding="utf-8") as f:
+    json.dump(spieler, f, indent=2, ensure_ascii=False)
+
+# JSON laden
+with open("spieler.json", "r", encoding="utf-8") as f:
+    geladen = json.load(f)
+
+print(geladen["name"])
+print(f"Items: {geladen['items']}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            PyKnight
+Items: ['Schwert', 'Schild']
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>import json
+json.dump(daten, f, indent=2)
+json.load(f)</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>const fs = require('fs');
+fs.writeFileSync('daten.json', JSON.stringify(daten, null, 2));
+JSON.parse(fs.readFileSync('daten.json'));</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python: <code>json.dump()</code> schreibt direkt in eine Datei. JavaScript: <code>JSON.stringify()</code> gibt einen String zurück, den du mit <code>fs</code> speichern musst.</div>
+          </div>
+        </div>
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Zeige mir ein Python-Beispiel, das ein Dictionary mit verschachtelten Daten als JSON speichert und wieder lädt. Nutze indent und ensure_ascii=False."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-3">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-shield"></i></span>
+          Error Handling mit try/except
+        </h2>
+        <p>Fehler passieren — besonders beim Dateizugriff. Mit <code>try/except</code> fängst du sie ab und reagierst elegant, anstatt dass das Programm abstürzt.</p><div class="py-classic-box py-classic-box--warning"><h3 class="py-classic-box__title"><i class="ph ph-warning"></i> Achtung</h3><p class="py-classic-box__text">Fange nur Fehler ab, die du auch behandeln kannst. Niemals einen leeren <code>except:</code> Block ohne Fehlertyp verwenden!</p></div>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># Robuster Dateizugriff
+try:
+    with open("config.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
+        print(f"Theme: {config['theme']}")
+except FileNotFoundError:
+    print("  config.json nicht gefunden. Erstelle Standard-Konfiguration.")
+    config = {"theme": "dark", "sprache": "de"}
+except json.JSONDecodeError:
+    print(" config.json ist beschädigt!")
+    config = {"theme": "dark"}
+
+# Mehrere Fehlertypen
+try:
+    zahl = int(input("Zahl: "))
+    ergebnis = 100 / zahl
+    print(f"Ergebnis: {ergebnis}")
+except ValueError:
+    print(" Das war keine gültige Zahl!")
+except ZeroDivisionError:
+    print(" Division durch Null ist nicht erlaubt!")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+              config.json nicht gefunden. Erstelle Standard-Konfiguration.
+Zahl: 0
+ Division durch Null ist nicht erlaubt!
+          </div>
+        </div>
+        <div class="py-classic-js-compare">
+          <div class="py-classic-js-compare__header">
+            <span class="py-classic-js-compare__header-icon"><i class="ph ph-arrows-clockwise"></i></span>
+            <span data-i18n="jsCompare.title">Python vs. JavaScript — Das kennst du schon!</span>
+          </div>
+          <div class="py-classic-js-compare__body">
+            <p class="py-classic-js-compare__text" data-i18n="jsCompare.intro">Du kennst bereits JavaScript aus dem JS-Quest. Hier ist der direkte Vergleich:</p>
+            <div class="py-classic-js-compare__grid">
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--py">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-code"></i> <span data-i18n="jsCompare.python">Python</span></div>
+                <pre><code>try:
+    with open('datei.txt') as f:
+        data = f.read()
+except FileNotFoundError:
+    print('Nicht gefunden')</code></pre>
+              </div>
+              <div class="py-classic-js-compare__col py-classic-js-compare__col--js">
+                <div class="py-classic-js-compare__col-header"><i class="ph ph-lightning"></i> <span data-i18n="jsCompare.javascript">JavaScript</span></div>
+                <pre><code>try {
+    const data = fs.readFileSync('datei.txt', 'utf8');
+} catch (err) {
+    if (err.code === 'ENOENT') {
+        console.log('Nicht gefunden');
+    }
+}</code></pre>
+              </div>
+            </div>
+            <div class="py-classic-js-compare__note"><strong><i class="ph ph-lightbulb"></i> <span data-i18n="jsCompare.note">Merke</span>:</strong> Python und JavaScript haben beide try/catch (bzw. try/except). Python unterscheidet Fehlertypen sauberer, in JS prüfst du oft <code>err.code</code>.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="py-classic-section" id="section-4">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-list"></i></span>
+          CSV-Dateien
+        </h2>
+        <p><strong>CSV</strong> (Comma-Separated Values) ist das Standardformat für Tabellen-Daten. Python hat das <code>csv</code>-Modul eingebaut, das das Parsing korrekt handhabt — auch bei Kommas in Zellen.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import csv
+
+# CSV schreiben
+with open("noten.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Name", "Fach", "Note"])
+    writer.writerow(["Anna", "Mathe", 1])
+    writer.writerow(["Ben", "Englisch", 2])
+
+# CSV lesen
+with open("noten.csv", "r", encoding="utf-8") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(f"{row[0]:10} | {row[1]:10} | {row[2]}")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Name       | Fach       | Note
+Anna       | Mathe      | 1
+Ben        | Englisch   | 2
+          </div>
+        </div>
+
+        <aside class="py-classic-box py-classic-box--ki">
+          <h3 class="py-classic-box__title"><i class="ph ph-robot"></i> <span data-i18n="boxes.kiPrompt">KI Prompt-Tipp</span></h3>
+          <p class="py-classic-box__text"><em>"Erstelle ein Python-Skript, das eine CSV-Datei mit Schülernoten liest, den Durchschnitt pro Schüler berechnet und das Ergebnis als neue CSV speichert."</em></p>
+        </aside>
+      </section>
+
+      <section class="py-classic-section" id="section-5">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-trophy"></i></span>
+          File I/O in Aktion: Highscore-Liste
+        </h2>
+        <p>Stell dir ein Spiel vor, das die besten Punktestände speichert. Wir nutzen JSON für eine Highscore-Liste, die beim Start geladen und beim Beenden gespeichert wird.</p>
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Python</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import json
+
+# Highscore laden oder erstellen
+try:
+    with open("highscores.json", "r", encoding="utf-8") as f:
+        scores = json.load(f)
+except FileNotFoundError:
+    scores = []
+
+# Neuen Score hinzufügen
+name = input("Dein Name: ")
+punkte = int(input("Deine Punkte: "))
+scores.append({"name": name, "punkte": punkte})
+
+# Sortieren (absteigend)
+scores.sort(key=lambda x: x["punkte"], reverse=True)
+
+# Top 5 speichern
+scores = scores[:5]
+with open("highscores.json", "w", encoding="utf-8") as f:
+    json.dump(scores, f, indent=2, ensure_ascii=False)
+
+print("\n Highscores:")
+for i, s in enumerate(scores, 1):
+    print(f"  {i}. {s['name']}: {s['punkte']} Punkte")</code></pre>
+          <div class="py-classic-code-block__output">
+            <div class="py-classic-code-block__output-label" data-i18n="code.output">Ausgabe</div>
+            Dein Name: Max
+Deine Punkte: 1250
+
+ Highscores:
+  1. Max: 1250 Punkte
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-1">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-fire"></i></span>
+          <h2 class="py-classic-exercise__title">Warm-Up: Notizbuch mit JSON</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Erstelle ein Programm, das Notizen als JSON-Liste speichert und lädt. Nutze try/except für den Fall, dass die Datei noch nicht existiert.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-1-1">
+            <label for="task-10-1-1" class="py-classic-exercise__task-text">Erstelle notizbuch.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-1-2">
+            <label for="task-10-1-2" class="py-classic-exercise__task-text">Lade notizen.json mit try/except</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-1-3">
+            <label for="task-10-1-3" class="py-classic-exercise__task-text">Füge neue Notiz hinzu</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-1-4">
+            <label for="task-10-1-4" class="py-classic-exercise__task-text">Speichere als JSON mit indent</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>import json
+
+try:
+    with open('notizen.json', 'r') as f:
+        notizen = json.load(f)
+except FileNotFoundError:
+    notizen = []
+
+text = input('Neue Notiz: ')
+notizen.append(text)
+
+with open('notizen.json', 'w') as f:
+    json.dump(notizen, f, indent=2)
+
+print(f' {len(notizen)} Notiz(en) gespeichert.')</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-10-1">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-10-1">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import json
+
+try:
+    with open('notizen.json', 'r') as f:
+        notizen = json.load(f)
+except FileNotFoundError:
+    notizen = []
+
+text = input('Neue Notiz: ')
+notizen.append(text)
+
+with open('notizen.json', 'w') as f:
+    json.dump(notizen, f, indent=2)
+
+print(f' {len(notizen)} Notiz(en) gespeichert.')</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-2">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-lightning"></i></span>
+          <h2 class="py-classic-exercise__title">Challenge: Todo-Liste speichern/laden</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>Erstelle eine Todo-Liste, die Aufgaben mit Status (offen/erledigt) als JSON speichert. Beim Start werden vorhandene Aufgaben geladen.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-2-1">
+            <label for="task-10-2-1" class="py-classic-exercise__task-text">Erstelle todos.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-2-2">
+            <label for="task-10-2-2" class="py-classic-exercise__task-text">Lade todos.json mit try/except</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-2-3">
+            <label for="task-10-2-3" class="py-classic-exercise__task-text">Implementiere add, list, save</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-2-4">
+            <label for="task-10-2-4" class="py-classic-exercise__task-text">Speichere Dict-Liste mit Status</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code>import json
+
+try:
+    with open('todos.json', 'r') as f:
+        todos = json.load(f)
+except FileNotFoundError:
+    todos = []
+
+while True:
+    cmd = input('[add, list, save, exit] ').lower()
+    if cmd == 'exit': break
+    elif cmd == 'add':
+        task = input('Aufgabe: ')
+        todos.append({'task': task, 'done': False})
+    elif cmd == 'list':
+        for i, t in enumerate(todos, 1):
+            status = '' if t['done'] else '⬜'
+            print(f'  {i}. {status} {t["task"]}')
+    elif cmd == 'save':
+        with open('todos.json', 'w') as f:
+            json.dump(todos, f, indent=2)</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-10-2">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-10-2">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code>import json
+
+try:
+    with open('todos.json', 'r') as f:
+        todos = json.load(f)
+except FileNotFoundError:
+    todos = []
+
+while True:
+    cmd = input('[add, list, save, exit] ').lower()
+    if cmd == 'exit': break
+    elif cmd == 'add':
+        task = input('Aufgabe: ')
+        todos.append({'task': task, 'done': False})
+    elif cmd == 'list':
+        for i, t in enumerate(todos, 1):
+            status = '' if t['done'] else '⬜'
+            print(f'  {i}. {status} {t["task"]}')
+    elif cmd == 'save':
+        with open('todos.json', 'w') as f:
+            json.dump(todos, f, indent=2)</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <section class="py-classic-exercise" id="uebung-3">
+        <div class="py-classic-exercise__header">
+          <span class="py-classic-exercise__icon"><i class="ph ph-code"></i></span>
+          <h2 class="py-classic-exercise__title">PyBuddy-Checkpoint: Konfiguration speichern</h2>
+        </div>
+        <p class="py-classic-exercise__text"><p>PyBuddy speichert seinen Namen, das Theme und die Sprache in einer <code>config.json</code>. Beim Start wird die Konfiguration geladen.</p></p>
+        <ul class="py-classic-exercise__tasks">
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-3-1">
+            <label for="task-10-3-1" class="py-classic-exercise__task-text">Öffne pybuddy/main.py</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-3-2">
+            <label for="task-10-3-2" class="py-classic-exercise__task-text">Erstelle lade_config() mit try/except</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-3-3">
+            <label for="task-10-3-3" class="py-classic-exercise__task-text">Erstelle speichere_config()</label>
+          </li>
+          <li class="py-classic-exercise__task">
+            <input type="checkbox" class="py-classic-exercise__task-checkbox" id="task-10-3-4">
+            <label for="task-10-3-4" class="py-classic-exercise__task-text">Teste Laden und Speichern</label>
+          </li>
+        </ul>
+        <div class="py-classic-exercise__hint">
+          <span class="py-classic-exercise__hint-icon"><i class="ph ph-lightbulb"></i></span>
+          <p class="py-classic-exercise__hint-text"><strong data-i18n="exercise.hint">Hinweis:</strong> <code># pybuddy/main.py
+import json
+
+def lade_config():
+    try:
+        with open('config.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {'name': 'PyBuddy', 'theme': 'dark', 'sprache': 'de'}
+
+def speichere_config(config):
+    with open('config.json', 'w') as f:
+        json.dump(config, f, indent=2)
+
+config = lade_config()
+print(f" {config['name']} startet...")
+print(f"🎨 Theme: {config['theme']}")
+config['name'] = input('Neuer Name: ') or config['name']
+speichere_config(config)
+print('💾 Konfiguration gespeichert!')</code></p>
+        </div>
+        <button class="py-classic-exercise__solution-toggle" data-solution-toggle="solution-10-3">
+          <span><i class="ph ph-lock-key-open"></i></span><span data-i18n="exercise.showSolution">Lösung anzeigen</span>
+        </button>
+        <div class="py-classic-exercise__solution" id="solution-10-3">
+        <div class="py-classic-code-block" data-code-block>
+          <div class="py-classic-code-block__header">
+            <span class="py-classic-code-block__lang">Lösung</span>
+            <button class="py-classic-code-block__copy" data-copy-btn data-i18n-attr="aria-label" data-i18n="code.copy" aria-label="Code kopieren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span data-i18n="common.copy">Kopieren</span>
+            </button>
+          </div>
+          <pre class="py-classic-code-block__pre"><code># pybuddy/main.py
+import json
+
+def lade_config():
+    try:
+        with open('config.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {'name': 'PyBuddy', 'theme': 'dark', 'sprache': 'de'}
+
+def speichere_config(config):
+    with open('config.json', 'w') as f:
+        json.dump(config, f, indent=2)
+
+config = lade_config()
+print(f" {config['name']} startet...")
+print(f"🎨 Theme: {config['theme']}")
+config['name'] = input('Neuer Name: ') or config['name']
+speichere_config(config)
+print('💾 Konfiguration gespeichert!')</code></pre>
+        </div>
+        </div>
+      </section>
+
+      <div class="py-classic-funfact">
+        <span class="py-classic-funfact__label"><i class="ph ph-game-controller"></i> Didaktische Pause</span>
+        <p class="py-classic-funfact__text">In <strong>The Legend of Zelda: Breath of the Wild</strong> speichert das Spiel deinen Fortschritt in einer Datei — ähnlich wie JSON. Waffen, Rüstungen, Karten-Markierungen: Alles wird serialisiert und beim nächsten Start wieder geladen. Du baust gerade das Speichersystem für dein eigenes Spiel!</p>
+      </div>
+
+      <div class="py-classic-summary">
+        <h2 class="py-classic-summary__title"><i class="ph ph-books"></i> <span data-i18n="chapter.summary">Zusammenfassung</span></h2>
+        <ul class="py-classic-summary__list">
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-folder"></i></span><span>with open() → sicher Dateien verarbeiten</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-chart-bar"></i></span><span>json.dump() / json.load() für strukturierte Daten</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-shield"></i></span><span> try/except für robusten Code ohne Abstürze</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-list"></i></span><span>csv-Modul für Tabellen-Daten</span></li>
+        <li class="py-classic-summary__item"><span class="py-classic-summary__item-icon"><i class="ph ph-trophy"></i></span><span>Dateien machen Daten persistent zwischen Programmstarts</span></li>
+        </ul>
+      </div>
+    </article>
+  </main>
+  <nav class="py-classic-chapter-nav" aria-label="Kapitelnavigation">
+    <a href="09-module.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+      <span class="py-classic-chapter-nav__label">← <span data-i18n="common.prev">Zurück</span></span>
+      <span class="py-classic-chapter-nav__title">09 – Module & OOP</span>
+    </a>
+    <a href="11-apis.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+      <span class="py-classic-chapter-nav__label"><span data-i18n="common.next">Weiter</span> →</span>
+      <span class="py-classic-chapter-nav__title">11 – APIs & Requests</span>
+    </a>
+  </nav>
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline" data-i18n="footer.tagline">Mit KI denken. Menschlich handeln.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span data-i18n="common.classroomMode">Klassenraum-Modus</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.chapters">Kapitel</h4><nav><a href="../index.html#kapitel">Alle Kapitel</a><a href="06-listen.html">06. Listen</a><a href="12-ki-cocoding.html">12. KI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.resources">Ressourcen</h4><nav><a href="../lexikon.html">Lexikon</a><a href="../abschlussprojekt.html">Abschlussprojekt</a><a href="../../../../index.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4 data-i18n="footer.legal">Rechtliches</h4><nav><a href="../../../../pages/impressum.html">Impressum</a><a href="../../../../pages/datenschutz.html">Datenschutz</a><a href="../../../../pages/disclaimer.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../../pages/spenden.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> <span data-i18n="footer.support">Unterstützen</span></a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top data-i18n-attr="aria-label" data-i18n="common.backToTop" aria-label="Zum Seitenanfang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <!-- Classroom Mode toggle is available in the footer -->
+  <script type="module" src="../../js/chapter.js"></script>
+</body>
+</html>

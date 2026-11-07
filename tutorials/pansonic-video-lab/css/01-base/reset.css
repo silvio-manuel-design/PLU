@@ -1,0 +1,185 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — CSS Reset
+   Minimal, moderner Reset auf Basis von modern-normalize
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  line-height: var(--video-line-height-normal);
+  font-family: var(--video-font-sans);
+  font-size: var(--video-text-base);
+  color: var(--video-text-primary);
+  background-color: var(--video-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+  line-height: var(--video-line-height-tight);
+}
+
+p {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--video-accent-coral);
+  outline-offset: 2px;
+}
+
+/* Skip link — accessible focus target */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--video-space-4);
+  z-index: var(--video-z-skip-link);
+  padding: var(--video-space-3) var(--video-space-6);
+  background: var(--video-bg-elevated);
+  color: var(--video-accent-coral);
+  font-weight: var(--video-font-weight-semibold);
+  border: 2px solid var(--video-accent-coral);
+  border-radius: var(--video-radius-md);
+  text-decoration: none;
+  transition: top var(--video-transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--video-space-4);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── No-JS Fallback Banner ──────────────────────────────── */
+.video-noscript-banner {
+  padding: var(--video-space-4) var(--video-space-6);
+  background: var(--video-bg-elevated);
+  border-bottom: 2px solid var(--video-accent-coral);
+  color: var(--video-text-primary);
+  text-align: center;
+  font-size: var(--video-text-sm);
+  line-height: var(--video-line-height-normal);
+}
+
+.video-noscript-banner strong {
+  display: block;
+  margin-bottom: var(--video-space-2);
+  font-size: var(--video-text-base);
+  color: var(--video-accent-coral);
+}
+
+.video-noscript-banner p + p {
+  margin-top: var(--video-space-2);
+}
+
+/* ── No-JS Navigation ──────────────────────────────── */
+.video-noscript-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--video-space-4);
+  padding: var(--video-space-4) var(--video-space-6);
+  background: var(--video-bg-surface);
+  border-bottom: 1px solid var(--video-border-subtle);
+}
+
+.video-noscript-nav__link {
+  padding: var(--video-space-2) var(--video-space-4);
+  background: var(--video-bg-elevated);
+  border: 1px solid var(--video-border-default);
+  border-radius: var(--video-radius-md);
+  color: var(--video-text-primary);
+  font-size: var(--video-text-sm);
+  font-weight: var(--video-font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--video-transition-fast);
+  white-space: nowrap;
+}
+
+.video-noscript-nav__link:hover {
+  background: var(--video-accent-coral-dim);
+  border-color: var(--video-accent-coral);
+}
+
+.video-noscript-nav__link.is-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: default;
+}
+
+.video-noscript-nav__link--center {
+  background: transparent;
+  border-color: transparent;
+  color: var(--video-text-secondary);
+}
+
+.video-noscript-nav__link--center:hover {
+  background: var(--video-bg-elevated);
+  border-color: var(--video-border-default);
+  color: var(--video-text-primary);
+}

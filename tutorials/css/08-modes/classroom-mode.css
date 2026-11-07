@@ -1,0 +1,429 @@
+/* ==========================================================================
+   CLASSROOM MODE - Hörsaal/Präsentation Optimierung
+   
+   - Maximale Bildschirmbreite nutzen (nur kleiner Rand)
+   - Sehr große Schriftarten für Lesbarkeit aus 10-15m
+   - Höherer Kontrast für Projektoren
+   - Größere Klick-Targets für Touch-Displays
+   - Reduzierte Animationen
+   - Keine Parallax-Effekte (Performance)
+   ========================================================================== */
+
+/* =======================================================================
+   CONTAINER - MAXIMALE BREITE FÜR PROJEKTOREN
+   ======================================================================== */
+
+html.classroom-mode .container {
+  max-width: 100%;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+/* =======================================================================
+   BASE TYPOGRAPHY - EXTRA GROß FÜR DISTANZ
+   ======================================================================== */
+
+html.classroom-mode {
+  /* Extra große Basis-Schrift für Distanz-Lesbarkeit */
+  --text-xs: clamp(0.875rem, 1.2vw, 1rem);
+  --text-sm: clamp(1rem, 1.4vw, 1.25rem);
+  --text-base: clamp(1.25rem, 1.8vw, 1.75rem);
+  --text-lg: clamp(1.5rem, 2.2vw, 2.25rem);
+  --text-xl: clamp(1.75rem, 2.8vw, 3rem);
+  --text-2xl: clamp(2rem, 3.5vw, 4rem);
+  --text-3xl: clamp(2.5rem, 4.5vw, 5rem);
+  --text-4xl: clamp(3rem, 6vw, 7rem);
+  --text-5xl: clamp(4rem, 8vw, 10rem);
+  
+  /* Höherer Zeilenabstand für Lesbarkeit */
+  --leading-tight: 1.2;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+  
+  /* Mehr Spacing */
+  --section-padding-y: clamp(3rem, 6vw, 8rem);
+}
+
+/* =======================================================================
+   HEADINGS - EXTRA GROß
+   ======================================================================== */
+
+html.classroom-mode h1,
+html.classroom-mode .hero__title {
+  font-size: var(--text-5xl);
+  line-height: 1.05;
+  font-weight: 800;
+  max-width: 100%;
+}
+
+/* Text-shadow nur im Dark Mode für bessere Lesbarkeit */
+html.classroom-mode.dark-theme .hero__title,
+html.classroom-mode .hero__title {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+html.classroom-mode h2,
+html.classroom-mode .section-title {
+  font-size: var(--text-4xl);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+html.classroom-mode h3,
+html.classroom-mode .section-subtitle {
+  font-size: var(--text-3xl);
+  line-height: 1.2;
+}
+
+html.classroom-mode h4 {
+  font-size: var(--text-2xl);
+}
+
+html.classroom-mode p,
+html.classroom-mode .card-desc {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+}
+
+/* =======================================================================
+   HERO - VOLLBREITE
+   ======================================================================== */
+
+html.classroom-mode .hero {
+  min-height: 85vh;
+}
+
+/* Keep hero zoom animation running in classroom mode for design consistency */
+html.classroom-mode .hero .hero__bg img,
+html.classroom-mode .hero .hero__bg picture,
+html.classroom-mode .hero .hero__image {
+  animation-duration: 20s !important;
+  animation-iteration-count: 1 !important;
+}
+
+html.classroom-mode .hero__content {
+  max-width: 100%;
+  padding: 0 4vw;
+}
+
+html.classroom-mode .hero__tagline {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+}
+
+html.classroom-mode .hero__description {
+  font-size: var(--text-xl);
+  max-width: 90%;
+}
+
+/* Hero Buttons nebeneinander und größer */
+html.classroom-mode .hero__cta {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* =======================================================================
+   BUTTONS - EXTRA GROßE TARGETS
+   ======================================================================== */
+
+html.classroom-mode .btn {
+  padding: 1.25rem 2.5rem;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  min-height: 64px;
+  min-width: 180px;
+  border-radius: var(--radius-lg);
+}
+
+html.classroom-mode .btn--lg {
+  padding: 1.5rem 3rem;
+  font-size: var(--text-xl);
+  min-height: 80px;
+  min-width: 220px;
+}
+
+/* =======================================================================
+   CARDS - GRÖßER UND BREITER
+   ======================================================================== */
+
+/* Tutorial Cards */
+html.classroom-mode .tutorial-card h4 {
+  font-size: var(--text-xl);
+}
+
+html.classroom-mode .tutorial-card .card-desc {
+  font-size: var(--text-base);
+}
+
+html.classroom-mode .card-link {
+  font-size: var(--text-base);
+  padding: 0.75rem 1.5rem;
+}
+
+/* Grid: Mehr Spalten bei großen Screens */
+html.classroom-mode .grid--auto {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+html.classroom-mode .grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+html.classroom-mode .grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* =======================================================================
+   SKILLS SECTION
+   ======================================================================== */
+
+html.classroom-mode .tutorial-group__title {
+  font-size: var(--text-3xl);
+  margin-bottom: 3rem;
+}
+
+html.classroom-mode .skills-pathway {
+  margin-top: 4rem;
+}
+
+/* =======================================================================
+   PARALLAX - OPTIMIERT
+   ======================================================================== */
+
+html.classroom-mode .parallax-section {
+  min-height: 400px;
+}
+
+html.classroom-mode .parallax-content h2 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  text-shadow: 0 5px 40px rgba(0, 0, 0, 0.9);
+}
+
+html.classroom-mode .parallax-content p,
+html.classroom-mode .parallax-message {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  max-width: 95%;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Keine Parallax-Effekte (Performance) */
+html.classroom-mode .parallax-bg {
+  background-attachment: scroll !important;
+  transform: none !important;
+}
+
+/* =======================================================================
+   NAVIGATION
+   ======================================================================== */
+
+html.classroom-mode .site-header {
+  height: 100px;
+}
+
+html.classroom-mode .brand__name {
+  font-size: var(--text-xl);
+}
+
+html.classroom-mode .nav-link {
+  padding: 1.25rem 2rem;
+  font-size: var(--text-lg);
+}
+
+html.classroom-mode .nav-dropdown {
+  min-width: 400px;
+}
+
+html.classroom-mode .nav-dropdown__link {
+  font-size: var(--text-base);
+  padding: 1rem 1.5rem;
+}
+
+/* =======================================================================
+   SECTION SPACING
+   ======================================================================== */
+
+html.classroom-mode .section {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+html.classroom-mode .section-header {
+  margin-bottom: 4rem;
+}
+
+/* =======================================================================
+   KI CHARTER - GRÖßERE KARTEN
+   ======================================================================== */
+
+html.classroom-mode .charter-card {
+  padding: 2.5rem;
+}
+
+html.classroom-mode .charter-card__number {
+  font-size: 3rem;
+  width: 60px;
+  height: 60px;
+}
+
+html.classroom-mode .charter-card__title {
+  font-size: var(--text-xl);
+}
+
+html.classroom-mode .charter-card__text {
+  font-size: var(--text-base);
+}
+
+/* =======================================================================
+   SUPPORT CARDS
+   ======================================================================== */
+
+html.classroom-mode .support-card {
+  padding: 3rem;
+}
+
+html.classroom-mode .support-card__icon {
+  width: 80px;
+  height: 80px;
+  font-size: 2.5rem;
+}
+
+html.classroom-mode .support-card__title {
+  font-size: var(--text-2xl);
+}
+
+html.classroom-mode .support-card__text {
+  font-size: var(--text-lg);
+}
+
+html.classroom-mode .support-card__btn {
+  font-size: var(--text-lg);
+  padding: 1rem 2rem;
+}
+
+/* =======================================================================
+   FOOTER
+   ======================================================================== */
+
+html.classroom-mode .site-footer {
+  padding: 4rem 0 2rem;
+}
+
+html.classroom-mode .footer-logo {
+  font-size: var(--text-xl);
+}
+
+html.classroom-mode .footer-col h4 {
+  font-size: var(--text-base);
+}
+
+html.classroom-mode .footer-col nav a {
+  font-size: var(--text-base);
+}
+
+/* =======================================================================
+   BADGES & LABELS
+   ======================================================================== */
+
+html.classroom-mode .section-badge {
+  font-size: var(--text-sm);
+  padding: 0.75rem 1.5rem;
+}
+
+html.classroom-mode .card-badge {
+  font-size: var(--text-xs);
+  padding: 0.5rem 1rem;
+}
+
+/* =======================================================================
+   REDUCED MOTION
+   ======================================================================== */
+
+html.classroom-mode *,
+html.classroom-mode *::before,
+html.classroom-mode *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* =======================================================================
+   TOAST NOTIFICATION
+   ======================================================================== */
+
+.classroom-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  padding: 1.5rem 3rem;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  box-shadow: var(--shadow-2xl);
+  border: 1px solid var(--border-primary);
+  z-index: 9999;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  text-align: center;
+}
+
+.classroom-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* =======================================================================
+   QUOTE CARD
+   ======================================================================== */
+
+html.classroom-mode .quote-card {
+  padding: 4rem;
+}
+
+html.classroom-mode .quote-card__quote-mark {
+  font-size: 4rem;
+}
+
+html.classroom-mode .quote-card__text {
+  font-size: var(--text-2xl);
+}
+
+html.classroom-mode .quote-card__author {
+  padding: 1rem 2rem;
+}
+
+html.classroom-mode .quote-card__avatar {
+  width: 56px;
+  height: 56px;
+  font-size: 1.75rem;
+}
+
+/* =======================================================================
+   EXTRA LARGE SCREENS (4K/Projektoren)
+   ======================================================================== */
+
+@media (min-width: 1920px) {
+  html.classroom-mode .container {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+  
+  html.classroom-mode .grid--auto {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+/* =======================================================================
+   PRINT STYLES
+   ======================================================================== */
+
+@media print {
+  html.classroom-mode .parallax-section,
+  html.classroom-mode .classroom-toast {
+    display: none;
+  }
+}

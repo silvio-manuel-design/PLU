@@ -1,0 +1,423 @@
+/* ==========================================================================
+   PLU v3.0 - DESIGN TOKENS
+   Zentrale Variablen für Farben, Typografie, Spacing, Animationen
+   ITCSS Layer 1: Settings
+   
+   Dokumentation für Studenten:
+   - Alle Werte zentral definiert für Konsistenz
+   - CSS Custom Properties (Variablen) ermöglichen Theming
+   - Keine hartkodierten Werte in Komponenten!
+   ========================================================================== */
+
+:root {
+  /* ========================================================================
+     01. COLOR SYSTEM - Core Palette
+     ======================================================================== */
+  
+  /* Background Colors */
+  --bg-primary: #0a0c10;
+  --bg-primary-rgb: 10, 12, 16;
+  --bg-secondary: #11131a;
+  --bg-secondary-rgb: 17, 19, 26;
+  --bg-tertiary: #1a1d27;
+  --bg-tertiary-rgb: 26, 29, 39;
+  --bg-elevated: #222635;
+  --bg-card: #161922;
+  
+  /* Text Colors */
+  --text-primary: #f0f2f5;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-inverse: #111827;
+  
+  /* Border & Divider */
+  --border-primary: rgba(255, 255, 255, 0.08);
+  --border-secondary: rgba(255, 255, 255, 0.05);
+  --border-focus: rgba(88, 166, 255, 0.5);
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(17, 19, 26, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(20px);
+  
+  /* ========================================================================
+     02. ACCENT COLORS - Brand & Academy System
+     ======================================================================== */
+  
+  /* Core Brand */
+  --accent-primary: #58a6ff;
+  --accent-primary-rgb: 88, 166, 255;
+  --accent-primary-glow: rgba(88, 166, 255, 0.4);
+  
+  --accent-cyan: #39d0d8;
+  --accent-cyan-rgb: 57, 208, 216;
+  --accent-cyan-glow: rgba(57, 208, 216, 0.4);
+  
+  --accent-violet: #8b5cf6;
+  --accent-violet-rgb: 139, 92, 246;
+  --accent-violet-glow: rgba(139, 92, 246, 0.4);
+  
+  --accent-pink: #ec4899;
+  --accent-pink-rgb: 236, 72, 153;
+  --accent-pink-glow: rgba(236, 72, 153, 0.4);
+  
+  /* Semantic Colors */
+  --accent-orange: #f59e0b;
+  --accent-orange-rgb: 245, 158, 11;
+  --accent-orange-glow: rgba(245, 158, 11, 0.4);
+  
+  --accent-green: #3fb950;
+  --accent-green-rgb: 63, 185, 80;
+  --accent-green-glow: rgba(63, 185, 80, 0.4);
+  
+  --accent-yellow: #f1c40f;
+  --accent-yellow-rgb: 241, 196, 15;
+  --accent-yellow-glow: rgba(241, 196, 15, 0.4);
+  
+  --accent-red: #ef4444;
+  --accent-red-rgb: 239, 68, 68;
+  --accent-red-glow: rgba(239, 68, 68, 0.4);
+  
+  /* ========================================================================
+     03. ACADEMY THEME COLORS
+     Altersadaptive Farbschemata
+     ======================================================================== */
+  
+  /* Default / Premium (Erwachsene) */
+  --academy-primary: var(--accent-primary);
+  --academy-secondary: var(--accent-cyan);
+  --academy-accent: var(--accent-violet);
+  --animation-level: moderate;
+  --font-size-scale: 1;
+  
+  /* ========================================================================
+     04. GRADIENTS
+     ======================================================================== */
+  
+  --gradient-primary: linear-gradient(135deg, #58a6ff 0%, #39d0d8 100%);
+  --gradient-violet: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-orange: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --gradient-green: linear-gradient(135deg, #3fb950 0%, #39d0d8 100%);
+  --gradient-hero: linear-gradient(180deg, #0a0c10 0%, #11131a 50%, #0a0c10 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(88, 166, 255, 0.15) 0%, transparent 70%);
+  
+  /* Category Gradients */
+  --gradient-web: linear-gradient(135deg, #58a6ff 0%, #39d0d8 100%);
+  --gradient-ai: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-design: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
+  --gradient-audio: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  
+  /* Parallax Overlay Gradient */
+  --gradient-parallax: linear-gradient(
+    180deg,
+    rgba(10, 12, 16, 0.7) 0%,
+    rgba(10, 12, 16, 0.4) 50%,
+    rgba(10, 12, 16, 0.7) 100%
+  );
+}
+
+/* ========================================================================
+   ACADEMY THEME OVERRIDES
+   ======================================================================== */
+
+/* Junior Academy (Jugendliche 14-20) */
+[data-academy="junior"] {
+  --academy-primary: #58a6ff;
+  --academy-secondary: #39d0d8;
+  --academy-accent: #8b5cf6;
+  --animation-level: playful;
+  --font-size-scale: 1;
+  
+  /* Playful Gradients */
+  --gradient-academy: linear-gradient(135deg, #58a6ff 0%, #8b5cf6 100%);
+}
+
+/* Premium Academy (Erwachsene 25-50) */
+[data-academy="premium"] {
+  --academy-primary: #f59e0b;
+  --academy-secondary: #ec4899;
+  --academy-accent: #8b5cf6;
+  --animation-level: moderate;
+  --font-size-scale: 1;
+  
+  --gradient-academy: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
+}
+
+/* Senior Academy (50+) */
+[data-academy="senior"] {
+  --academy-primary: #3fb950;
+  --academy-secondary: #27ae60;
+  --academy-accent: #39d0d8;
+  --animation-level: calm;
+  --font-size-scale: 1.125; /* 18px Base */
+  
+  --gradient-academy: linear-gradient(135deg, #3fb950 0%, #39d0d8 100%);
+}
+
+/* ========================================================================
+   LIGHT THEME
+   ======================================================================== */
+
+html.light-theme {
+  /* Background - Neutral warm for adults/seniors */
+  --bg-primary: #f8fafc;        /* slate-50 - Hero section */
+  --bg-primary-rgb: 248, 250, 252;
+  --bg-secondary: #ffffff;       /* Clean white - KI Charter */
+  --bg-secondary-rgb: 255, 255, 255;
+  --bg-tertiary: #f1f5f9;        /* slate-100 - About KI */
+  --bg-tertiary-rgb: 241, 245, 249;
+  --bg-elevated: #f5f3ff;        /* violet-50 - softer than violet-100 */
+  --bg-card: #ffffff;
+  
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-inverse: #f0f2f5;
+  
+  /* Border */
+  --border-primary: rgba(0, 0, 0, 0.08);
+  --border-secondary: rgba(0, 0, 0, 0.05);
+  --border-focus: rgba(37, 99, 235, 0.5);
+  
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  
+  /* Accents - Desaturated for adult/senior-friendly light mode */
+  --accent-primary: #4a90e2;
+  --accent-primary-rgb: 74, 144, 226;
+  --accent-primary-glow: rgba(74, 144, 226, 0.2);
+
+  --accent-cyan: #0e7490;
+  --accent-cyan-rgb: 14, 116, 144;
+  --accent-cyan-glow: rgba(14, 116, 144, 0.2);
+
+  --accent-violet: #6d28d9;
+  --accent-violet-rgb: 109, 40, 217;
+  --accent-violet-glow: rgba(109, 40, 217, 0.2);
+
+  --accent-pink: #c2185b;
+  --accent-pink-rgb: 194, 24, 91;
+  --accent-pink-glow: rgba(194, 24, 91, 0.2);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4a90e2 0%, #7c3aed 100%);
+  --gradient-violet: linear-gradient(135deg, #6d28d9 0%, #c2185b 100%);
+  --gradient-hero: linear-gradient(180deg, #fafafa 0%, #ffffff 50%, #fafafa 100%);
+  
+  /* Parallax Overlay - Darker for light theme */
+  --gradient-parallax: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Academy Themes in Light Mode */
+html.light-theme[data-academy="junior"] {
+  --academy-primary: #2563eb;
+  --gradient-academy: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+}
+
+html.light-theme[data-academy="premium"] {
+  --academy-primary: #b45309;
+  --gradient-academy: linear-gradient(135deg, #b45309 0%, #be185d 100%);
+}
+
+html.light-theme[data-academy="senior"] {
+  --academy-primary: #059669;
+  --gradient-academy: linear-gradient(135deg, #059669 0%, #0891b2 100%);
+}
+
+/* ========================================================================
+   05. TYPOGRAPHY SCALE
+   Fluid Typography mit clamp() für responsiven Text
+   ======================================================================== */
+
+:root {
+  /* Font Families */
+  --font-display: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  
+  /* Fluid Font Sizes */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.65vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.4rem + 2.4vw, 3rem);
+  --text-4xl: clamp(2.25rem, 1.5rem + 3.75vw, 4rem);
+  --text-5xl: clamp(3rem, 2rem + 5vw, 5rem);
+  
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+}
+
+/* ========================================================================
+   06. SPACING SYSTEM (8-Point Grid)
+   ======================================================================== */
+
+:root {
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+  
+  /* Section Spacing */
+  --section-padding-y: clamp(3rem, 5vw, 7.5rem);
+  --section-padding-x: clamp(1rem, 3vw, 2rem);
+  
+  /* Container */
+  --container-max: 1280px;
+  --container-padding: var(--space-4);
+  
+  /* Header */
+  --header-height: 80px;
+}
+
+/* ========================================================================
+   07. BORDER RADIUS
+   ======================================================================== */
+
+:root {
+  --radius-none: 0;
+  --radius-sm: 0.5rem;    /* 8px */
+  --radius-md: 0.75rem;   /* 12px */
+  --radius-lg: 1.25rem;   /* 20px */
+  --radius-xl: 1.75rem;   /* 28px */
+  --radius-2xl: 2rem;     /* 32px */
+  --radius-full: 9999px;
+}
+
+/* ========================================================================
+   08. SHADOWS
+   ======================================================================== */
+
+:root {
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Glow Shadows */
+  --shadow-glow-primary: 0 0 20px var(--accent-primary-glow);
+  --shadow-glow-violet: 0 0 20px var(--accent-violet-glow);
+  --shadow-glow-cyan: 0 0 20px var(--accent-cyan-glow);
+}
+
+/* ========================================================================
+   09. TRANSITIONS & ANIMATION
+   ======================================================================== */
+
+:root {
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  
+  /* Easing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Transition Presets */
+  --transition-colors: color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  --transition-transform: transform var(--duration-normal) var(--ease-spring);
+  --transition-opacity: opacity var(--duration-fast) var(--ease-out);
+  --transition-shadow: box-shadow var(--duration-fast) var(--ease-out);
+  --transition-all: all var(--duration-normal) var(--ease-out);
+}
+
+/* ========================================================================
+   10. Z-INDEX SCALE
+   ======================================================================== */
+
+:root {
+  --z-behind: -1;
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+  --z-toast: 800;
+  --z-preloader: 900;
+}
+
+/* ========================================================================
+   11. BREAKPOINTS (Reference for JS)
+   ======================================================================== */
+
+:root {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ========================================================================
+   12. PARALLAX VARIABLES
+   ======================================================================== */
+
+:root {
+  /* Parallax Section Heights */
+  --parallax-sm: 40vh;
+  --parallax-md: 60vh;
+  --parallax-lg: 80vh;
+  
+  /* Overlay Opacity */
+  --parallax-overlay-opacity: 0.7;
+}
+
+/* ========================================================================
+   13. KI ACCENT - Academic Consistency
+   ======================================================================== */
+
+/* KI in "KI Grundlagen" - White in Dark Mode */
+.ki-accent {
+  color: #ffffff;
+}
+
+/* Light Mode: Black */
+html.light-theme .ki-accent {
+  color: #000000;
+}

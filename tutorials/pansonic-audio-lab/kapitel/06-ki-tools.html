@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul 06: KI-Tools | Pansonic Lab</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../css/style-v3.css">
+  <style>
+    .chapter-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 100px 24px 40px;
+    }
+    
+    .chapter-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .chapter-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .chapter-breadcrumb a {
+      color: var(--accent-coral);
+      text-decoration: none;
+    }
+    
+    .chapter-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .chapter-nummer {
+      display: inline-block;
+      background: var(--accent-coral-dim);
+      color: var(--accent-coral);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    
+    .chapter-lead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .chapter-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    
+    .content-section {
+      margin-bottom: 64px;
+    }
+    
+    .content-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .content-section h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--accent-coral);
+      border-radius: 2px;
+    }
+    
+    .content-section p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    .coming-soon-box {
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+      border: 2px solid var(--accent-coral);
+      border-radius: 16px;
+      padding: 48px;
+      text-align: center;
+      margin: 48px 0;
+    }
+    
+    .coming-soon-box h3 {
+      color: var(--accent-coral);
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .coming-soon-box p {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-subtle);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-active);
+    }
+    
+    .nav-btn-primary {
+      background: var(--accent-coral);
+      border-color: var(--accent-coral);
+      color: white;
+    }
+    
+    /* Voice Cloning Styles */
+    .voice-process {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+
+    .process-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .process-step {
+      flex: 1;
+      min-width: 140px;
+      max-width: 180px;
+      text-align: center;
+      padding: 20px;
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      position: relative;
+    }
+
+    .step-num {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--accent-coral);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      margin: 8px 0 12px;
+    }
+
+    .step-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .step-arrow {
+      font-size: 1.5rem;
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .tools-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .tool-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-4px);
+    }
+
+    .tool-card.featured {
+      border-color: var(--accent-coral);
+      background: linear-gradient(135deg, var(--accent-coral-dim), transparent);
+    }
+
+    .tool-badge {
+      position: absolute;
+      top: -8px;
+      right: 16px;
+      background: var(--accent-coral);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .tool-logo {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .tool-card h4 {
+      margin: 0 0 12px 0;
+      font-size: 1.1rem;
+    }
+
+    .tool-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px 0;
+    }
+
+    .tool-card li {
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .tool-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .tool-link {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--accent-coral);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .tool-link:hover {
+      background: var(--accent-coral-light);
+    }
+
+    @media (max-width: 768px) {
+      .process-steps {
+        flex-direction: column;
+      }
+      
+      .step-arrow {
+        transform: rotate(90deg);
+      }
+      
+      .process-step {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+    
+    /* Voice Cloning Professional Styles */
+    .vc-expert-box {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(139, 92, 246, 0.05) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    
+    .vc-expert-box h3 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: var(--accent-coral);
+      font-size: 1.3rem;
+    }
+    
+    .vc-tech-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    
+    .vc-tech-step {
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+    }
+    
+    .vc-tech-step:first-child {
+      border-radius: 16px 16px 0 0;
+    }
+    
+    .vc-tech-step:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+    
+    .tech-connector {
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--accent-teal);
+      padding: 8px;
+      background: var(--bg-card);
+    }
+    
+    .tech-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    
+    .vc-tech-step h4 {
+      margin: 0 0 12px 0;
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+    }
+    
+    .vc-tech-step p {
+      margin: 0 0 12px 0;
+      font-size: 0.95rem;
+    }
+    
+    .vc-tech-step ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .vc-tech-step li {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    .vc-visualization {
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    
+    .vc-visualization h4 {
+      margin: 0 0 16px 0;
+      text-align: center;
+      color: var(--text-primary);
+    }
+    
+    .vc-arch-svg {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+    }
+    
+    .tool-specs {
+      display: flex;
+      gap: 12px;
+      margin: -8px 0 12px 0;
+      flex-wrap: wrap;
+    }
+    
+    .spec {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      background: var(--bg-tertiary);
+      border-radius: 100px;
+      color: var(--text-secondary);
+    }
+    
+    .vc-usecases {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      margin: 32px 0;
+    }
+    
+    .vc-usecases h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    
+    .usecase {
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .usecase:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-teal);
+    }
+    
+    .usecase-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    
+    .usecase h4 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+    }
+    
+    .usecase p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .vc-legal-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+      border: 2px solid #f59e0b;
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 32px;
+    }
+    
+    .legal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .legal-icon {
+      font-size: 1.5rem;
+    }
+    
+    .vc-legal-box h4 {
+      margin: 0;
+      color: #f59e0b;
+    }
+    
+    .vc-legal-box p {
+      margin: 0 0 12px 0;
+    }
+    
+    .vc-legal-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .vc-legal-box li {
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="chapter-progress">
+    <div class="chapter-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="../index.html" class="header-logo">
+        <div class="header-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="header-logo-text">PAN<span>SONIC</span></span>
+      </a>
+      
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Start</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link">Tools</a>
+          <div class="dropdown-menu">
+            <a href="../tools/audacity.html" class="dropdown-item">
+              <span class="dropdown-item-name">Audacity</span>
+            </a>
+            <a href="../tools/suno.html" class="dropdown-item">
+              <span class="dropdown-item-name">Suno AI</span>
+            </a>
+            <a href="../tools/elevenlabs.html" class="dropdown-item">
+              <span class="dropdown-item-name">Stimmen-KI</span>
+            </a>
+            <a href="../tools/daw.html" class="dropdown-item">
+              <span class="dropdown-item-name">DAW Guide</span>
+            </a>
+          </div>
+        </div>
+        <a href="../bibliothek.html" class="nav-link">Bibliothek</a>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <a href="../player.html" target="_blank" class="header-link" style="margin-right: 16px; display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.2rem;">🎵</span>
+        <span class="hide-mobile">Player</span>
+      </a>
+      <nav class="lang-switch">
+        <a href="06-ki-tools.html" class="lang-btn active">DE</a>
+        <a href="06-ki-tools-en.html" class="lang-btn">EN</a>
+      </nav>
+    </div>
+    
+    <!-- Mobile Player Icon -->
+    <a href="../player.html" target="_blank" class="header-link mobile-player-icon" style="display: none;" aria-label="Player">🎵</a>
+    
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Audio Widget (Tabs: Generator + Player) - Default collapsed -->
+<div class="audio-widget collapsed" id="audioWidget">
+  <div class="audio-widget-header">
+    <span class="audio-widget-title">🎵 Audio Lab</span>
+    <button class="audio-widget-toggle" id="audioWidgetToggle">+</button>
+  </div>
+  <div class="audio-widget-content">
+    <div class="audio-tabs">
+      <button class="audio-tab active" data-tab="generator">Generator</button>
+      <button class="audio-tab" data-tab="player">Player</button>
+    </div>
+    <div class="audio-tab-content active" id="generatorTab">
+      <div class="freq-display">
+        <div class="freq-value" id="freqValue">440 Hz</div>
+        <div class="freq-label">Sine Wave</div>
+      </div>
+      <input type="range" class="freq-slider" id="freqSlider" min="20" max="2000" value="440">
+      <div class="gen-controls">
+        <button class="gen-btn active" data-wave="sine">SINE</button>
+        <button class="gen-btn" data-wave="square">SQUARE</button>
+        <button class="gen-btn" data-wave="sawtooth">SAW</button>
+      </div>
+      <button class="play-btn" id="playBtn">Play Tone</button>
+    </div>
+    <div class="audio-tab-content" id="playerTab">
+      <div class="player-upload" id="playerUpload">
+        <div class="player-upload-text">Audio-Datei laden</div>
+        <div class="player-upload-hint">MP3, WAV, OGG</div>
+      </div>
+      <input type="file" id="audioFileInput" accept="audio/*" style="display: none;">
+      <div class="player-track-info" id="playerTrackInfo" style="display: none;">
+        <div class="track-name" id="trackName">Keine Datei</div>
+        <div class="track-time"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>
+      </div>
+      <div class="progress-container" id="progressContainer" style="display: none;">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="player-controls" id="playerControls" style="display: none;">
+        <button class="player-btn" id="prevBtn">⏮</button>
+        <button class="player-btn" id="playPauseBtn">▶</button>
+        <button class="player-btn" id="nextBtn">⏭</button>
+      </div>
+    </div>
+  </div>
+</div><!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab-btn" id="themeToggle" data-tooltip="Hell/Dunkel" aria-label="Theme wechseln">🌓</button>
+    <button class="fab-btn" id="classroomToggle" data-tooltip="Classroom Mode">🖥</button>
+    <button class="fab-btn" id="langToggle" data-tooltip="English" aria-label="Zu English wechseln">EN</button>
+    <button class="fab-btn" id="backToTop" data-tooltip="Nach oben">↑</button>
+  </div>
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header-inner">
+      <nav class="chapter-breadcrumb">
+        <a href="../index.html">Pansonic Lab</a>
+        <span>/</span>
+        <span>Modul 08</span>
+      </nav>
+      <span class="chapter-number">Modul 06</span>
+      <h1 class="chapter-title">KI-Tools & Workflow</h1>
+      <p class="chapter-lead">Künstliche Intelligenz in der Audio-Produktion. Suno AI, Voice-Cloning und der moderne KI-gestützte Workflow.</p>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="chapter-content">
+    <!-- Voice Cloning Section -->
+    <section class="content-section">
+      <h2>Voice Cloning: Deine Stimme, unendliche Möglichkeiten</h2>
+      <p>Voice Cloning ist eine revolutionäre KI-Technologie, die es ermöglicht, eine Stimme zu analysieren, zu modellieren und beliebigen Text damit sprechen zu lassen. Was früher teure Studios und Tage voller Aufnahmen erforderte, ist heute in Minuten erledigt.</p>
+      
+      <!-- Wie funktioniert Voice Cloning - Professionelle Erklärung -->
+      <div class="vc-expert-box">
+        <h3>🧠 Wie funktioniert Voice Cloning technisch?</h3>
+        
+        <div class="vc-tech-flow">
+          <div class="vc-tech-step">
+            <div class="tech-icon">1️⃣</div>
+            <h4>Audio-Analyse</h4>
+            <p>Die KI zerlegt deine Aufnahme in <strong>Tausende Features</strong>:</p>
+            <ul>
+              <li><strong>Timbre (Klangfarbe):</strong> Die charakteristische Farbe deiner Stimme</li>
+              <li><strong>Prosodie:</strong> Betonung, Rhythmus, Satzmelodie</li>
+              <li><strong>Formanten:</strong> Resonanzen im Vokaltrakt</li>
+              <li><strong>Atemmuster:</strong> Natürliche Pausen und Ausatmung</li>
+            </ul>
+          </div>
+          
+          <div class="tech-connector">↓</div>
+          
+          <div class="vc-tech-step">
+            <div class="tech-icon">2️⃣</div>
+            <h4>Neuronales Training</h4>
+            <p>Das KI-Modell lernt die <strong>akustische Identität</strong>:</p>
+            <ul>
+              <li><strong>Deep Neural Networks</strong> analysieren Muster über 100.000+ Parameter</li>
+              <li><strong>Latent Space:</strong> Deine Stimme wird zu einem mathematischen Modell</li>
+              <li><strong>Spektrogramm-Vorhersage:</strong> Die KI lernt, wie Text in deine Frequenzen übersetzt wird</li>
+            </ul>
+          </div>
+          
+          <div class="tech-connector">↓</div>
+          
+          <div class="vc-tech-step">
+            <div class="tech-icon">3️⃣</div>
+            <h4>Synthese & Vocoder</h4>
+            <p>Aus Text wird Sprache in <strong>deiner Stimme</strong>:</p>
+            <ul>
+              <li><strong>Text-to-Phoneme:</strong> Wörter → Lautschrift</li>
+              <li><strong>Duration Model:</strong> Wie lang wird jeder Laut gesprochen?</li>
+              <li><strong>Neural Vocoder:</strong> Erzeugt die eigentliche Audio-Welle (HiFi-GAN, WaveNet)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="vc-visualization">
+          <h4>🔬 Die Architektur im Überblick</h4>
+          <svg viewBox="0 0 700 200" class="vc-arch-svg">
+            <!-- Background -->
+            <rect x="0" y="0" width="700" height="200" fill="var(--bg-tertiary)" rx="10"/>
+            
+            <!-- Input -->
+            <rect x="20" y="70" width="100" height="60" fill="#ff5a5a" rx="8" opacity="0.8"/>
+            <text x="70" y="105" fill="white" font-size="11" text-anchor="middle" font-weight="bold">Input Audio</text>
+            <text x="70" y="120" fill="white" font-size="8" text-anchor="middle">3-10 Min</text>
+            
+            <!-- Arrow -->
+            <path d="M 130 100 L 160 100" stroke="#00d4aa" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- Feature Extraction -->
+            <rect x="170" y="50" width="100" height="100" fill="var(--bg-card)" stroke="#00d4aa" stroke-width="2" rx="8"/>
+            <text x="220" y="80" fill="var(--text-primary)" font-size="10" text-anchor="middle" font-weight="bold">Feature</text>
+            <text x="220" y="95" fill="var(--text-primary)" font-size="10" text-anchor="middle" font-weight="bold">Extraction</text>
+            <text x="220" y="115" fill="var(--text-secondary)" font-size="8" text-anchor="middle">Spectrogram</text>
+            <text x="220" y="130" fill="var(--text-secondary)" font-size="8" text-anchor="middle">Formanten</text>
+            
+            <!-- Arrow -->
+            <path d="M 280 100 L 310 100" stroke="#00d4aa" stroke-width="2"/>
+            
+            <!-- Neural Network -->
+            <rect x="320" y="40" width="120" height="120" fill="var(--bg-card)" stroke="#ffd700" stroke-width="2" rx="8"/>
+            <text x="380" y="65" fill="var(--text-primary)" font-size="10" text-anchor="middle" font-weight="bold">Neural Network</text>
+            <text x="380" y="85" fill="var(--text-secondary)" font-size="8" text-anchor="middle">Encoder-Decoder</text>
+            <text x="380" y="100" fill="var(--text-secondary)" font-size="8" text-anchor="middle">Transformer</text>
+            <text x="380" y="115" fill="var(--text-secondary)" font-size="8" text-anchor="middle">Latent Space</text>
+            <text x="380" y="135" fill="#ffd700" font-size="9" text-anchor="middle" font-weight="bold">Voice Model</text>
+            
+            <!-- Arrow -->
+            <path d="M 450 100 L 480 100" stroke="#00d4aa" stroke-width="2"/>
+            
+            <!-- Text Input -->
+            <rect x="490" y="30" width="80" height="50" fill="#8b5cf6" rx="8" opacity="0.8"/>
+            <text x="530" y="50" fill="white" font-size="10" text-anchor="middle" font-weight="bold">Text</text>
+            <text x="530" y="65" fill="white" font-size="8" text-anchor="middle">Phoneme</text>
+            
+            <!-- Arrow down -->
+            <path d="M 530 85 L 530 110" stroke="#8b5cf6" stroke-width="2"/>
+            
+            <!-- Synthesis -->
+            <rect x="490" y="110" width="80" height="60" fill="var(--bg-card)" stroke="#8b5cf6" stroke-width="2" rx="8"/>
+            <text x="530" y="135" fill="var(--text-primary)" font-size="10" text-anchor="middle" font-weight="bold">Synthese</text>
+            <text x="530" y="155" fill="var(--text-secondary)" font-size="8" text-anchor="middle">Vocoder</text>
+            
+            <!-- Arrow -->
+            <path d="M 580 140 L 610 140" stroke="#00d4aa" stroke-width="2"/>
+            
+            <!-- Output -->
+            <rect x="620" y="110" width="60" height="60" fill="#00d4aa" rx="8"/>
+            <text x="650" y="135" fill="white" font-size="10" text-anchor="middle" font-weight="bold">Output</text>
+            <text x="650" y="155" fill="white" font-size="9" text-anchor="middle">🔊</text>
+            
+            <!-- Arrow marker -->
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#00d4aa"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Praxis-Workflow -->
+      <h3>Der Workflow in der Praxis</h3>
+      <div class="voice-process">
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div class="step-icon">🎙️</div>
+            <div class="step-title">Qualitätssample</div>
+            <div class="step-desc">Mindestens 3 Minuten (besser 10) klare Sprache ohne Hintergrundgeräusche</div>
+          </div>
+          
+          <div class="step-arrow">→</div>
+          
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div class="step-icon">⚡</div>
+            <div class="step-title">Instant Training</div>
+            <div class="step-desc">ElevenLabs trainiert in 30 Sekunden, Audimee in wenigen Minuten</div>
+          </div>
+          
+          <div class="step-arrow">→</div>
+          
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <div class="step-icon">🎛️</div>
+            <div class="step-title">Feinabstimmung</div>
+            <div class="step-desc">Stabilität, Klarheit, Stil und Emotionen einstellen</div>
+          </div>
+          
+          <div class="step-arrow">→</div>
+          
+          <div class="process-step">
+            <div class="step-num">4</div>
+            <div class="step-icon">🚀</div>
+            <div class="step-title">Produktion</div>
+            <div class="step-desc">Unbegrenzt Text generieren, herunterladen, verwenden</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tools Comparison -->
+      <h3>Tools im professionellen Vergleich</h3>
+      <div class="tools-comparison">
+        <div class="tool-card featured">
+          <div class="tool-badge">🏆 Empfohlen</div>
+          <div class="tool-logo">🎯</div>
+          <h4>ElevenLabs</h4>
+          <div class="tool-specs">
+            <span class="spec quality">Qualität: ⭐⭐⭐⭐⭐</span>
+            <span class="spec speed">Speed: ⚡ Instant</span>
+          </div>
+          <ul>
+            <li>Professionelle Broadcast-Qualität</li>
+            <li>Nur 1 Minute Sample nötig</li>
+            <li>29+ Sprachen mit Akzent</li>
+            <li>Emotionssteuerung (glücklich, traurig, wütend)</li>
+            <li>API für Integration</li>
+          </ul>
+          <a href="../tools/elevenlabs.html" class="tool-link">Zum ElevenLabs Guide →</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-logo">🎵</div>
+          <h4>Audimee</h4>
+          <div class="tool-specs">
+            <span class="spec quality">Qualität: ⭐⭐⭐⭐</span>
+            <span class="spec speed">Speed: ~5 Min</span>
+          </div>
+          <ul>
+            <li>Kostenloses Starterpaket</li>
+            <li>Besonders gut für Sänger</li>
+            <li>MIDI-Import möglich</li>
+            <li>Stimmumfang erweitern</li>
+            <li>Eigene Modelle trainieren</li>
+          </ul>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-logo">☁️</div>
+          <h4>Microsoft Azure</h4>
+          <div class="tool-specs">
+            <span class="spec quality">Qualität: ⭐⭐⭐⭐</span>
+            <span class="spec speed">Speed: ~10 Min</span>
+          </div>
+          <ul>
+            <li>Enterprise-Grade API</li>
+            <li>SSML für volle Kontrolle</li>
+            <li>Hohe Verfügbarkeit</li>
+            <li>Pay-per-Character</li>
+            <li>Für professionelle Projekte</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Anwendungsbereiche -->
+      <div class="vc-usecases">
+        <h3>🎯 Professionelle Anwendungsbereiche</h3>
+        <div class="usecase-grid">
+          <div class="usecase">
+            <div class="usecase-icon">🎙️</div>
+            <h4>Podcast-Produktion</h4>
+            <p>Intros, Outros und Werbung in deiner Stimme, ohne ins Studio zu müssen</p>
+          </div>
+          <div class="usecase">
+            <div class="usecase-icon">📚</div>
+            <h4>E-Learning & Hörbücher</h4>
+            <p>Lange Texte aufnehmen, ohne Heiserkeit. Konsistente Qualität über Stunden</p>
+          </div>
+          <div class="usecase">
+            <div class="usecase-icon">🎮</div>
+            <h4>Game Development</h4>
+            <p>NPC-Dialoge in professioneller Qualität, nachbearbeitbar jederzeit</p>
+          </div>
+          <div class="usecase">
+            <div class="usecase-icon">📞</div>
+            <h4>Voice-Response-Systeme</h4>
+            <p>Telefonansagen, Chatbots, automatische Benachrichtigungen</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rechtlicher Hinweis - Prominent -->
+      <div class="vc-legal-box">
+        <div class="legal-header">
+          <span class="legal-icon">⚖️</span>
+          <h4>Rechtliche Verantwortung</h4>
+        </div>
+        <p><strong>Klone nur deine eigene Stimme oder Stimmen mit ausdrücklicher schriftlicher Erlaubnis.</strong></p>
+        <ul>
+          <li>Die unbefugte Nutzung fremder Stimmen ist in vielen Ländern strafbar</li>
+          <li>Werbezwecke immer offenlegen, wenn KI-Stimmen verwendet werden</li>
+          <li>Einige Plattformen (YouTube, Spotify) verlangen Kennzeichnung</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Navigation -->
+  <nav class="nav-footer">
+    <a href="07-daw.html" class="nav-btn">Zurück</a>
+    <a href="../index.html#module" class="nav-btn">Modulübersicht</a>
+    <a href="09-mastering.html" class="nav-btn nav-btn-primary">Weiter</a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-copy"> PANTAM LEARNING UNIVERSE</p>
+  </footer>
+
+    <script>
+    // ==========================================
+    // MOBILE NAVIGATION (matches index.html style)
+    // ==========================================
+    const mobileToggle = document.getElementById('mobileToggle');
+    
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        
+        // Create mobile menu if doesn't exist
+        let mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenu) {
+          mobileMenu = document.createElement('div');
+          mobileMenu.className = 'mobile-menu';
+          
+          // Detect if German or English file
+          const isGerman = window.location.href.includes('-en.html') === false;
+          
+          mobileMenu.innerHTML = `
+            <nav class="mobile-nav">
+              <a href="${isGerman ? '../index.html' : '../index-en.html'}">${isGerman ? 'Start' : 'Home'}</a>
+              <a href="${isGerman ? '../tools/audacity.html' : '../tools/audacity-en.html'}">Audacity</a>
+              <a href="${isGerman ? '../tools/suno.html' : '../tools/suno-en.html'}">Suno AI</a>
+              <a href="${isGerman ? '../tools/elevenlabs.html' : '../tools/elevenlabs-en.html'}">${isGerman ? 'Stimmen-KI' : 'Voice AI'}</a>
+              <a href="${isGerman ? '../tools/daw.html' : '../tools/daw-en.html'}">DAW Guide</a>
+              <a href="${isGerman ? '../bibliothek.html' : '../library.html'}">${isGerman ? 'Bibliothek' : 'Library'}</a>
+            </nav>
+          `;
+          document.body.appendChild(mobileMenu);
+          
+          // Add mobile menu styles (matching index.html)
+          const style = document.createElement('style');
+          style.textContent = `
+            .mobile-menu {
+              position: fixed;
+              top: 64px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: var(--bg-primary);
+              z-index: 999;
+              padding: 24px;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+            .mobile-menu.active {
+              transform: translateX(0);
+            }
+            .mobile-nav {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+            }
+            .mobile-nav a {
+              padding: 16px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 1.1rem;
+              font-weight: 600;
+              border-radius: 8px;
+              transition: all 0.2s ease;
+            }
+            .mobile-nav a:hover {
+              background: var(--bg-tertiary);
+              color: var(--text-primary);
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        mobileMenu.classList.toggle('active');
+      });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (Dark/Light)
+    // ==========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check saved preference
+    const savedTheme = localStorage.getItem('sonicLabTheme');
+    
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+    
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    } else {
+      // Default to dark
+      html.setAttribute('data-theme', 'dark');
+      updateThemeIcon('dark');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('sonicLabTheme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    // ==========================================
+    // CLASSROOM MODE
+    // ==========================================
+    const classroomToggle = document.getElementById('classroomToggle');
+    
+    const savedClassroom = localStorage.getItem('sonicLabClassroom');
+    if (savedClassroom === 'true') {
+      html.setAttribute('data-classroom', 'true');
+      classroomToggle.classList.add('active');
+    }
+    
+    classroomToggle.addEventListener('click', function() {
+      const isClassroom = html.getAttribute('data-classroom') === 'true';
+      
+      if (isClassroom) {
+        html.removeAttribute('data-classroom');
+        localStorage.setItem('sonicLabClassroom', 'false');
+        classroomToggle.classList.remove('active');
+      } else {
+        html.setAttribute('data-classroom', 'true');
+        localStorage.setItem('sonicLabClassroom', 'true');
+        classroomToggle.classList.add('active');
+      }
+    });
+
+    // ==========================================
+    // BACK TO TOP
+    // ==========================================
+    const backToTop = document.getElementById('backToTop');
+    
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+    
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==========================================
+    // PROGRESS BAR
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // ==========================================
+    // LANGUAGE TOGGLE
+    // ==========================================
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        window.location.href = '06-ki-tools-en.html';
+      });
+    }
+
+        // ==========================================
+    // AUDIO WIDGET - TABS (GENERATOR + PLAYER)
+    // ==========================================
+    const audioWidget = document.getElementById('audioWidget');
+    const audioWidgetToggle = document.getElementById('audioWidgetToggle');
+    
+    // Initialize widget state
+    if (audioWidget && !audioWidget.classList.contains('collapsed')) {
+      audioWidget.classList.add('expanded');
+    }
+    
+    // Tabs
+    const audioTabs = document.querySelectorAll('.audio-tab');
+    const tabContents = document.querySelectorAll('.audio-tab-content');
+    
+    audioTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetTab = this.dataset.tab;
+        
+        audioTabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById(targetTab + 'Tab').classList.add('active');
+      });
+    });
+    
+    // --- GENERATOR TAB ---
+    const freqSlider = document.getElementById('freqSlider');
+    const freqValue = document.getElementById('freqValue');
+    const playBtn = document.getElementById('playBtn');
+    const waveButtons = document.querySelectorAll('.gen-btn[data-wave]');
+    
+    let audioContext = null;
+    let oscillator = null;
+    let gainNode = null;
+    let isPlaying = false;
+    let currentWaveform = 'sine';
+    let currentFrequency = 440;
+    
+    // Audio Context for Generator
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+    
+    function playTone() {
+      initAudio();
+      
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+      }
+      
+      oscillator = audioContext.createOscillator();
+      gainNode = audioContext.createGain();
+      
+      oscillator.type = currentWaveform;
+      oscillator.frequency.value = currentFrequency;
+      
+      gainNode.gain.value = 0.1;
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.start();
+      isPlaying = true;
+      playBtn.textContent = '⏸ Pause Tone';
+      playBtn.classList.add('playing');
+    }
+    
+    function stopTone() {
+      if (oscillator) {
+        oscillator.stop();
+        oscillator.disconnect();
+        oscillator = null;
+      }
+      isPlaying = false;
+      playBtn.textContent = '▶ Play Tone';
+      playBtn.classList.remove('playing');
+    }
+    
+    playBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        stopTone();
+      } else {
+        playTone();
+      }
+    });
+    
+    freqSlider.addEventListener('input', function() {
+      currentFrequency = parseInt(this.value);
+      freqValue.textContent = currentFrequency + ' Hz';
+      
+      if (oscillator) {
+        oscillator.frequency.value = currentFrequency;
+      }
+    });
+    
+    waveButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        waveButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentWaveform = this.dataset.wave;
+        
+        if (isPlaying && oscillator) {
+          oscillator.type = currentWaveform;
+        }
+      });
+    });
+    
+    // --- PLAYER TAB ---
+    const playerUpload = document.getElementById('playerUpload');
+    const audioFileInput = document.getElementById('audioFileInput');
+    const playerTrackInfo = document.getElementById('playerTrackInfo');
+    const trackName = document.getElementById('trackName');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const playerControls = document.getElementById('playerControls');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    
+    let playerAudio = null;
+    let isPlayerPlaying = false;
+    let playerAnimationId = null;
+    
+    // File Upload
+    playerUpload.addEventListener('click', () => audioFileInput.click());
+    
+    audioFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        loadAudioFile(file);
+      }
+    });
+    
+    // Drag & Drop
+    playerUpload.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = 'var(--accent-teal)';
+    });
+    
+    playerUpload.addEventListener('dragleave', () => {
+      playerUpload.style.borderColor = '';
+    });
+    
+    playerUpload.addEventListener('drop', (e) => {
+      e.preventDefault();
+      playerUpload.style.borderColor = '';
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('audio/')) {
+        loadAudioFile(file);
+      }
+    });
+    
+    function loadAudioFile(file) {
+      if (playerAudio) {
+        playerAudio.pause();
+        playerAudio = null;
+      }
+      
+      const url = URL.createObjectURL(file);
+      playerAudio = new Audio(url);
+      playerAudio.volume = 0.8;
+      
+      trackName.textContent = file.name;
+      
+      playerAudio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(playerAudio.duration);
+        currentTimeEl.textContent = '0:00';
+        
+        playerUpload.style.display = 'none';
+        playerTrackInfo.style.display = 'block';
+        progressContainer.style.display = 'block';
+        playerControls.style.display = 'flex';
+      });
+      
+      playerAudio.addEventListener('ended', () => {
+        isPlayerPlaying = false;
+        playPauseBtn.textContent = '▶';
+      });
+    }
+    
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    
+    function updateProgress() {
+      if (playerAudio && isPlayerPlaying) {
+        const progress = (playerAudio.currentTime / playerAudio.duration) * 100;
+        progressFill.style.width = progress + '%';
+        currentTimeEl.textContent = formatTime(playerAudio.currentTime);
+        playerAnimationId = requestAnimationFrame(updateProgress);
+      }
+    }
+    
+    playPauseBtn.addEventListener('click', function() {
+      if (!playerAudio) return;
+      
+      if (isPlayerPlaying) {
+        playerAudio.pause();
+        isPlayerPlaying = false;
+        this.textContent = '⏸';
+        cancelAnimationFrame(playerAnimationId);
+      } else {
+        playerAudio.play();
+        isPlayerPlaying = true;
+        this.textContent = '⏸';
+        updateProgress();
+      }
+    });
+    
+    progressContainer.addEventListener('click', function(e) {
+      if (!playerAudio) return;
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percentage = clickX / rect.width;
+      playerAudio.currentTime = percentage * playerAudio.duration;
+    });
+    
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = 0;
+      }
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (playerAudio) {
+        playerAudio.currentTime = Math.min(playerAudio.currentTime + 10, playerAudio.duration);
+      }
+    });
+    
+    // Widget minimize
+    audioWidgetToggle.addEventListener('click', function() {
+      audioWidget.classList.toggle('collapsed');
+      audioWidget.classList.toggle('expanded');
+      this.textContent = audioWidget.classList.contains('collapsed') ? '+' : '−';
+    });
+    
+    // Stop audio when leaving page
+    window.addEventListener('beforeunload', () => {
+      stopTone();
+      if (playerAudio) playerAudio.pause();
+    });
+
+  </script>
+</body>
+</html>

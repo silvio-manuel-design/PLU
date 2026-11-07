@@ -1,0 +1,524 @@
+@layer components {
+  /* ============================================================
+     SITE HEADER — Game-Style Redesign
+     Größer, präsenter, XP-Bar entfernt
+     ============================================================ */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    z-index: var(--z-sticky);
+    background: linear-gradient(180deg,
+      rgba(10, 12, 16, 0.98) 0%,
+      rgba(10, 12, 16, 0.92) 50%,
+      rgba(10, 12, 16, 0.85) 100%
+    );
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Scrolled state — stronger glass effect */
+  .site-header--scrolled {
+    background: linear-gradient(180deg,
+      rgba(10, 12, 16, 0.99) 0%,
+      rgba(10, 12, 16, 0.97) 100%
+    );
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  }
+
+  html.dark-mode .site-header {
+    background: linear-gradient(180deg,
+      rgba(10, 12, 16, 0.98) 0%,
+      rgba(10, 12, 16, 0.92) 50%,
+      rgba(10, 12, 16, 0.85) 100%
+    );
+  }
+
+  .site-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+    gap: var(--space-4);
+  }
+
+  /* ============================================================
+     BRAND — Larger, more prominent
+     ============================================================ */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .brand img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .brand:hover img {
+    transform: scale(1.05) rotate(-3deg);
+  }
+
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--quest-white);
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+
+  .brand__name--quest {
+    color: var(--quest-primary);
+  }
+
+  .brand__name::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--quest-primary), var(--quest-accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .brand:hover .brand__name::after {
+    transform: scaleX(1);
+  }
+
+  /* ============================================================
+     NAVIGATION — Pill-style, game-like
+     ============================================================ */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-full);
+    padding: var(--space-1);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .nav-link i {
+    font-size: 1.1em;
+  }
+
+  .nav-link:hover {
+    color: var(--quest-primary);
+    background: rgba(243, 156, 18, 0.1);
+  }
+
+  .nav-link--active {
+    color: var(--quest-white);
+    background: linear-gradient(135deg, var(--quest-primary), var(--quest-accent));
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+  }
+
+  /* ============================================================
+     ACTIONS — Theme toggle + Menu
+     ============================================================ */
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* Header Top Button — Mobile back-to-top */
+  .header-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .header-btn:hover {
+    background: rgba(243, 156, 18, 0.15);
+    color: var(--quest-primary);
+    border-color: rgba(243, 156, 18, 0.3);
+  }
+
+  /* Hidden by default, shown on scroll via JS */
+  .header-btn--top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .header-btn--top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Desktop: hide top button (FAB handles this) */
+  @media (min-width: 1024px) {
+    .site-header__actions .header-btn--top {
+      display: none;
+    }
+  }
+
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xl);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(243, 156, 18, 0.15);
+    color: var(--quest-primary);
+    border-color: rgba(243, 156, 18, 0.3);
+    transform: rotate(15deg);
+  }
+
+  /* ============================================================
+     LANGUAGE SWITCHER
+     ============================================================ */
+  .lang-switcher {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .lang-switcher__btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 44px;
+    padding: 0 12px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .lang-switcher__btn:hover {
+    background: rgba(243, 156, 18, 0.15);
+    color: var(--quest-primary);
+    border-color: rgba(243, 156, 18, 0.3);
+  }
+
+  .lang-switcher__code {
+    text-transform: uppercase;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .lang-switcher__dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 140px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: var(--z-dropdown);
+  }
+
+  .lang-switcher.is-open .lang-switcher__dropdown {
+    display: flex;
+  }
+
+  .lang-switcher.is-open .lang-switcher__btn {
+    background: rgba(243, 156, 18, 0.15);
+    color: var(--quest-primary);
+    border-color: rgba(243, 156, 18, 0.3);
+  }
+
+  .lang-switcher__option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--transition-fast);
+  }
+
+  .lang-switcher__option:hover {
+    background: var(--surface-hover);
+  }
+
+  .lang-switcher__option.is-active {
+    background: rgba(243, 156, 18, 0.12);
+    color: var(--quest-primary);
+    font-weight: 600;
+  }
+
+  [dir="rtl"] .lang-switcher__dropdown {
+    right: auto;
+    left: 0;
+  }
+
+  /* Mobile Menu Toggle */
+  .menu-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    font-size: var(--text-xl);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+  }
+
+  .menu-toggle:hover {
+    background: rgba(243, 156, 18, 0.15);
+    color: var(--quest-primary);
+  }
+
+  /* ============================================================
+     MOBILE NAV OVERLAY — Premium Slide-in Panel
+     Light & Dark Mode compatible with glassmorphism
+     ============================================================ */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: calc(var(--z-sticky) - 1);
+    padding: var(--space-4) var(--space-5) calc(var(--space-4) + env(safe-area-inset-bottom));
+    flex-direction: column;
+    gap: var(--space-1);
+    overflow-y: auto;
+
+    /* Glassmorphism background that works in BOTH modes */
+    background: linear-gradient(
+      180deg,
+      rgba(var(--bg-rgb, 250, 248, 245), 0.98) 0%,
+      rgba(var(--bg-rgb, 250, 248, 245), 0.95) 100%
+    );
+    backdrop-filter: blur(30px) saturate(1.5);
+    -webkit-backdrop-filter: blur(30px) saturate(1.5);
+
+    /* Subtle top shadow for depth */
+    box-shadow: inset 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .mobile-nav.active {
+    display: flex;
+    animation: navSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes navSlideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .mobile-nav a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-lg);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle left accent bar on hover */
+  .mobile-nav a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 4px;
+    height: 60%;
+    background: linear-gradient(180deg, var(--quest-primary), var(--quest-accent));
+    border-radius: var(--radius-full);
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-nav a:hover::before,
+  .mobile-nav a:focus::before {
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  .mobile-nav a:hover,
+  .mobile-nav a:focus {
+    background: var(--bg-body);
+    color: var(--quest-primary);
+    transform: translateX(4px);
+  }
+
+  .mobile-nav a i {
+    font-size: var(--text-xl);
+    color: var(--quest-primary);
+    opacity: 0.9;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  /* Divider in mobile nav */
+  .mobile-nav hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+    margin: var(--space-2) 0;
+  }
+
+  /* Active/Current page indicator */
+  .mobile-nav a[href*="index.html"][aria-current="page"],
+  .mobile-nav a[href^="#"] {
+    background: rgba(243, 156, 18, 0.08);
+  }
+
+  /* Dark mode adjustments */
+  html.dark-mode .mobile-nav {
+    background: linear-gradient(
+      180deg,
+      rgba(15, 17, 21, 0.98) 0%,
+      rgba(15, 17, 21, 0.95) 100%
+    );
+    box-shadow: inset 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  html.dark-mode .mobile-nav a:hover,
+  html.dark-mode .mobile-nav a:focus {
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ========== MOBILE ========== */
+  @media (max-width: 768px) {
+    .site-header {
+      height: 64px;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .brand__name {
+      display: none;
+    }
+
+    .site-nav {
+      display: none;
+    }
+
+    /* Back-to-top stays visible on mobile (managed by .visible class) */
+    .header-btn--top {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .header-btn--top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lang-switcher__btn {
+      padding: 0 8px;
+      height: 40px;
+    }
+
+    .lang-switcher__code {
+      font-size: var(--text-xs);
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+    }
+
+    .mobile-nav {
+      top: 64px;
+    }
+  }
+
+  /* ========== TABLET ========== */
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .site-nav {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }
+
+  /* Mobile Nav Divider (replaces inline <hr style>) */
+  .mobile-nav__divider {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: var(--space-2) 0;
+  }
+}

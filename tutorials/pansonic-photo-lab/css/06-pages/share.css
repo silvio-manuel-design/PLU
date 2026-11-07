@@ -1,0 +1,527 @@
+/* ============================================================
+   Share / Publish Page (veroeffentlichen.html / publish.html)
+   Premium BEM components — zero inline styles
+   ============================================================ */
+
+@layer pages {
+
+  /* Page content spacing when preceded by module-style hero */
+  .photo-page-content {
+    padding-block: var(--photo-space-12);
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .photo-share-hero {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto var(--photo-space-10);
+  }
+
+  .photo-share-hero__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--photo-radius-lg);
+    background: linear-gradient(135deg, var(--photo-accent) 0%, var(--photo-accent-violet) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--photo-space-4);
+    font-size: 1.75rem;
+    color: #fff;
+  }
+
+  .photo-share-hero__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: var(--photo-font-weight-extrabold);
+    margin-bottom: var(--photo-space-3);
+    line-height: 1.2;
+  }
+
+  .photo-share-hero__subtitle {
+    font-size: var(--photo-font-size-lg);
+    color: var(--photo-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     SECTION HEADER (badge + title + subtitle)
+     ============================================================ */
+  .photo-share-section-head {
+    text-align: center;
+    margin-bottom: var(--photo-space-10);
+  }
+
+  .photo-share-section-head__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--photo-space-2);
+    background: var(--photo-accent-dim);
+    color: var(--photo-accent);
+    padding: var(--photo-space-2) var(--photo-space-4);
+    border-radius: var(--photo-radius-full);
+    font-size: var(--photo-font-size-sm);
+    font-weight: var(--photo-font-weight-semibold);
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-share-section-head__title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: var(--photo-font-weight-extrabold);
+    margin-bottom: var(--photo-space-3);
+    line-height: 1.2;
+  }
+
+  .photo-share-section-head__subtitle {
+    color: var(--photo-text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: var(--photo-font-size-lg);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     PLATFORM GRID & CARDS
+     ============================================================ */
+  .photo-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--photo-space-5);
+    margin: var(--photo-space-6) 0;
+  }
+
+  .photo-platform-card {
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-6);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .photo-platform-card:hover {
+    transform: translateY(-6px);
+  }
+
+  /* Pexels — green */
+  .photo-platform-card--pexels {
+    background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #bbf7d0;
+  }
+
+  .photo-platform-card--pexels:hover {
+    box-shadow: 0 24px 48px rgba(7, 160, 129, 0.14);
+  }
+
+  /* Unsplash — gold/premium */
+  .photo-platform-card--unsplash {
+    background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%);
+    border-color: #fde68a;
+  }
+
+  .photo-platform-card--unsplash:hover {
+    box-shadow: 0 24px 48px rgba(212, 168, 67, 0.18);
+  }
+
+  /* Pixabay — blue */
+  .photo-platform-card--pixabay {
+    background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #bfdbfe;
+  }
+
+  .photo-platform-card--pixabay:hover {
+    box-shadow: 0 24px 48px rgba(74, 144, 217, 0.14);
+  }
+
+  /* Stock (Shutterstock/Adobe) — violet */
+  .photo-platform-card--stock {
+    background: linear-gradient(145deg, #faf5ff 0%, #f3e8ff 100%);
+    border-color: #e9d5ff;
+  }
+
+  .photo-platform-card--stock:hover {
+    box-shadow: 0 24px 48px rgba(139, 92, 246, 0.14);
+  }
+
+  .photo-platform-card__badge {
+    position: absolute;
+    top: var(--photo-space-4);
+    right: var(--photo-space-4);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: var(--photo-radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .photo-platform-card--pexels .photo-platform-card__badge {
+    background: #07A081;
+    box-shadow: 0 2px 8px rgba(7, 160, 129, 0.3);
+  }
+
+  .photo-platform-card--unsplash .photo-platform-card__badge {
+    background: #d4a843;
+    box-shadow: 0 2px 8px rgba(212, 168, 67, 0.3);
+  }
+
+  .photo-platform-card--pixabay .photo-platform-card__badge {
+    background: #4A90D9;
+    box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+  }
+
+  .photo-platform-card--stock .photo-platform-card__badge {
+    background: #8B5CF6;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  }
+
+  .photo-platform-card__icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--photo-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: var(--photo-space-4);
+  }
+
+  .photo-platform-card--pexels .photo-platform-card__icon {
+    background: #07A081;
+    box-shadow: 0 8px 20px rgba(7, 160, 129, 0.25);
+  }
+
+  .photo-platform-card--unsplash .photo-platform-card__icon {
+    background: #d4a843;
+    box-shadow: 0 8px 20px rgba(212, 168, 67, 0.25);
+  }
+
+  .photo-platform-card--pixabay .photo-platform-card__icon {
+    background: #4A90D9;
+    box-shadow: 0 8px 20px rgba(74, 144, 217, 0.25);
+  }
+
+  .photo-platform-card--stock .photo-platform-card__icon {
+    background: #8B5CF6;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+  }
+
+  .photo-platform-card__title {
+    font-size: var(--photo-font-size-xl);
+    font-weight: var(--photo-font-weight-bold);
+    margin-bottom: var(--photo-space-2);
+  }
+
+  .photo-platform-card--pexels .photo-platform-card__title {
+    color: #065f46;
+  }
+
+  .photo-platform-card--unsplash .photo-platform-card__title {
+    color: #92400e;
+  }
+
+  .photo-platform-card--pixabay .photo-platform-card__title {
+    color: #1e40af;
+  }
+
+  .photo-platform-card--stock .photo-platform-card__title {
+    color: #5b21b6;
+  }
+
+  .photo-platform-card__text {
+    color: var(--photo-text-secondary);
+    font-size: var(--photo-font-size-sm);
+    line-height: 1.65;
+    margin-bottom: var(--photo-space-5);
+  }
+
+  .photo-platform-card__stats {
+    display: flex;
+    gap: var(--photo-space-5);
+    margin-bottom: var(--photo-space-5);
+  }
+
+  .photo-platform-card__stat-value {
+    font-size: 1.35rem;
+    font-weight: var(--photo-font-weight-bold);
+    line-height: 1;
+  }
+
+  .photo-platform-card--pexels .photo-platform-card__stat-value {
+    color: #07A081;
+  }
+
+  .photo-platform-card--unsplash .photo-platform-card__stat-value {
+    color: #d4a843;
+  }
+
+  .photo-platform-card--pixabay .photo-platform-card__stat-value {
+    color: #4A90D9;
+  }
+
+  .photo-platform-card--stock .photo-platform-card__stat-value {
+    color: #8B5CF6;
+  }
+
+  .photo-platform-card__stat-label {
+    font-size: 0.7rem;
+    color: var(--photo-text-tertiary);
+    margin-top: 2px;
+  }
+
+  .photo-platform-card__why {
+    font-size: var(--photo-font-size-xs);
+    padding: var(--photo-space-3) var(--photo-space-4);
+    border-radius: var(--photo-radius-md);
+    line-height: 1.5;
+  }
+
+  .photo-platform-card--pexels .photo-platform-card__why {
+    color: #065f46;
+    background: rgba(7, 160, 129, 0.1);
+  }
+
+  .photo-platform-card--unsplash .photo-platform-card__why {
+    color: #78350f;
+    background: rgba(212, 168, 67, 0.12);
+  }
+
+  .photo-platform-card--pixabay .photo-platform-card__why {
+    color: #1e3a8a;
+    background: rgba(74, 144, 217, 0.1);
+  }
+
+  .photo-platform-card--stock .photo-platform-card__why {
+    color: #5b21b6;
+    background: rgba(139, 92, 246, 0.1);
+  }
+
+  /* ============================================================
+     SHARE CTA BOX
+     ============================================================ */
+  .photo-share-cta {
+    text-align: center;
+    margin-top: var(--photo-space-10);
+  }
+
+  .photo-share-cta__box {
+    display: inline-block;
+    background: var(--photo-bg-elevated);
+    border: 1px solid var(--photo-border-default);
+    border-radius: var(--photo-radius-xl);
+    padding: var(--photo-space-8) var(--photo-space-10);
+    max-width: 680px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-share-cta__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .photo-share-cta__glow--top {
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--photo-accent) 0%, var(--photo-accent-violet) 100%);
+  }
+
+  .photo-share-cta__glow--bottom {
+    bottom: -30px;
+    left: -30px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--photo-accent-secondary) 0%, var(--photo-accent) 100%);
+  }
+
+  .photo-share-cta__emoji {
+    font-size: 2.5rem;
+    margin-bottom: var(--photo-space-4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .photo-share-cta__title {
+    font-size: var(--photo-font-size-xl);
+    font-weight: var(--photo-font-weight-bold);
+    margin-bottom: var(--photo-space-3);
+    position: relative;
+    z-index: 1;
+  }
+
+  .photo-share-cta__text {
+    color: var(--photo-text-secondary);
+    margin-bottom: var(--photo-space-6);
+    position: relative;
+    z-index: 1;
+    font-size: var(--photo-font-size-base);
+  }
+
+  .photo-share-cta__actions {
+    display: flex;
+    gap: var(--photo-space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============================================================
+     CONTENT SECTION HELPERS
+     ============================================================ */
+  .photo-content-section__icon {
+    margin-right: var(--photo-space-2);
+    vertical-align: middle;
+  }
+
+  .photo-content-section__icon--accent  { color: var(--photo-accent); }
+  .photo-content-section__icon--violet  { color: var(--photo-accent-violet); }
+  .photo-content-section__icon--gold    { color: var(--photo-accent-gold, #d4a843); }
+  .photo-content-section__icon--coral   { color: var(--photo-accent-coral, #e67e50); }
+
+  .photo-content-section__lead {
+    margin-bottom: var(--photo-space-6);
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 640px) {
+    .photo-share-hero__title {
+      font-size: 1.5rem;
+    }
+
+    .photo-share-section-head__title {
+      font-size: 1.35rem;
+    }
+
+    .photo-platform-grid {
+      grid-template-columns: 1fr;
+      gap: var(--photo-space-4);
+    }
+
+    .photo-platform-card {
+      padding: var(--photo-space-5);
+    }
+
+    .photo-platform-card__badge {
+      font-size: 0.6rem;
+      padding: 4px 10px;
+    }
+
+    .photo-share-cta__box {
+      padding: var(--photo-space-6);
+      max-width: 100%;
+    }
+
+    .photo-share-cta__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .photo-share-cta__actions .photo-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  /* ============================================================
+     DARK MODE OVERRIDES
+     ============================================================ */
+
+  /* Platform cards — tinted dark backgrounds, readable text */
+  [data-theme="dark"] .photo-platform-card--pexels {
+    background: linear-gradient(145deg, rgba(6, 78, 59, 0.45) 0%, rgba(6, 78, 59, 0.25) 100%);
+    border-color: rgba(52, 211, 153, 0.2);
+  }
+
+  [data-theme="dark"] .photo-platform-card--unsplash {
+    background: linear-gradient(145deg, rgba(120, 90, 20, 0.35) 0%, rgba(80, 60, 10, 0.2) 100%);
+    border-color: rgba(212, 168, 67, 0.25);
+  }
+
+  [data-theme="dark"] .photo-platform-card--pixabay {
+    background: linear-gradient(145deg, rgba(30, 58, 138, 0.45) 0%, rgba(30, 58, 138, 0.25) 100%);
+    border-color: rgba(96, 165, 250, 0.2);
+  }
+
+  [data-theme="dark"] .photo-platform-card--stock {
+    background: linear-gradient(145deg, rgba(76, 29, 149, 0.45) 0%, rgba(76, 29, 149, 0.25) 100%);
+    border-color: rgba(167, 139, 250, 0.2);
+  }
+
+  /* Card title colors in dark mode */
+  [data-theme="dark"] .photo-platform-card--pexels .photo-platform-card__title {
+    color: #34d399;
+  }
+
+  [data-theme="dark"] .photo-platform-card--unsplash .photo-platform-card__title {
+    color: #fbbf24;
+  }
+
+  [data-theme="dark"] .photo-platform-card--pixabay .photo-platform-card__title {
+    color: #60a5fa;
+  }
+
+  [data-theme="dark"] .photo-platform-card--stock .photo-platform-card__title {
+    color: #a78bfa;
+  }
+
+  /* Stat values in dark mode */
+  [data-theme="dark"] .photo-platform-card--pexels .photo-platform-card__stat-value {
+    color: #34d399;
+  }
+
+  [data-theme="dark"] .photo-platform-card--unsplash .photo-platform-card__stat-value {
+    color: #fbbf24;
+  }
+
+  [data-theme="dark"] .photo-platform-card--pixabay .photo-platform-card__stat-value {
+    color: #60a5fa;
+  }
+
+  [data-theme="dark"] .photo-platform-card--stock .photo-platform-card__stat-value {
+    color: #a78bfa;
+  }
+
+  /* Why-box dark mode */
+  [data-theme="dark"] .photo-platform-card--pexels .photo-platform-card__why {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.12);
+  }
+
+  [data-theme="dark"] .photo-platform-card--unsplash .photo-platform-card__why {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+  }
+
+  [data-theme="dark"] .photo-platform-card--pixabay .photo-platform-card__why {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.12);
+  }
+
+  [data-theme="dark"] .photo-platform-card--stock .photo-platform-card__why {
+    color: #a78bfa;
+    background: rgba(167, 139, 250, 0.12);
+  }
+
+  /* CTA box dark mode */
+  [data-theme="dark"] .photo-share-cta__box {
+    background: var(--photo-bg-elevated);
+    border-color: var(--photo-border-default);
+  }
+
+  /* Glow opacity bump in dark mode for visibility */
+  [data-theme="dark"] .photo-share-cta__glow {
+    opacity: 0.25;
+  }
+}

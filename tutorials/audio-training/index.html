@@ -1,0 +1,899 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Audio-Tutorial | Audacity | HTBLA Traun</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#00bcd4">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html"><img src="assets/logo.svg" alt="Audio Lab Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="kapitel/00-welcome.html">00. Willkommen & Mindset</a></li>
+        <li><a href="kapitel/01-audio-grundlagen.html">01. Audio-Grundlagen</a></li>
+        <li><a href="kapitel/02-audio-formate.html">02. Audio-Formate</a></li>
+        <li><a href="kapitel/03-web-audio-api.html">03. Web Audio API</a></li>
+        <li><a href="kapitel/04-effekte-filter.html">04. Effekte & Filter</a></li>
+        <li><a href="kapitel/05-projekt-audio-player.html">05. Projekt: Audio-Player</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="uebungen/01-physik-des-schalls.html">01. Physik des Schalls</a></li>
+        <li><a href="uebungen/02-audio-schnitt.html">02. Audio-Schnitt</a></li>
+        <li><a href="uebungen/03-web-audio-api.html">03. Web Audio API</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎤 Audacity ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="tools/audacity-installation.html">🔧 Installation & Setup</a></li>
+        <li><a href="tools/audacity-oberflaeche.html">🎛️ Oberfläche & Werkzeuge</a></li>
+        <li><a href="tools/audacity-effekte.html">🌀 Effekte & Filter</a></li>
+        <li><a href="tools/audacity-export.html">📤 Export: MP3, WAV, OGG</a></li>
+        <li><a href="tools/audacity-abschluss.html">🎯 Abschluss: Podcast-Schnitt</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🎵 KI Musik ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="ki-musik/einfuehrung.html">🤖 Einführung in KI-Musik</a></li>
+        <li><a href="ki-musik/suno-grundlagen.html">🌟 Suno Grundlagen</a></li>
+        <li><a href="ki-musik/prompt-engineering.html">🎼 Prompt-Engineering</a></li>
+        <li><a href="ki-musik/musikstile.html">🎛️ Musikstile & Genres</a></li>
+        <li><a href="ki-musik/export-weiterverarbeitung.html">🎧 Export & Weiterverarbeitung</a></li>
+        <li><a href="ki-musik/traditionelle-kombination.html">🔄 Kombination mit traditioneller Produktion</a></li>
+      </ul>
+    </li>
+    <li><a href="bibliothek/bibliothek.html" class="nav-link">📖 Bibliothek</a></li>
+    <li><a href="info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>🎧 Gestalte Audio & lerne Technik</h1>
+      <p class="hero-subtitle">Dein Weg zu professionellen Tonaufnahmen – mit Open Source, Verständnis und Kreativität.</p>
+    </section>
+
+    <!-- ABSCHNITT: WAS IST AUDIO? -->
+    <section>
+      <h2>🔊 Was ist digitales Audio?</h2>
+      <p>
+        Audio ist überall: Podcasts, Musik, Hörspiele, Voiceovers, Soundeffekte.
+        Doch hinter jedem Ton steckt Physik:
+        <strong>Schallwellen</strong>, <strong>Frequenzen</strong> und <strong>Amplituden</strong>.
+        Diese Parameter bestimmen, ob ein Ton klar klingt – oder verrauscht ist.
+      </p>
+    </section>
+
+    <!-- ABSCHNITT: DIE PHYSIK DES SCHALLS -->
+    <section>
+      <h2>🔬 Die Physik des Schalls</h2>
+      <p>
+        Im Gegensatz zum Web (HTML/CSS/JS) arbeiten wir hier mit <strong>Schallwellen</strong> und <strong>Audioprogrammen</strong>.
+        Schall ist eine <strong>mechanische Welle</strong>, die sich durch ein Medium (Luft, Wasser, Festkörper) ausbreitet.
+      </p>
+
+      <div class="regel">
+        💡 <strong>Merke:</strong> Schall benötigt ein Medium zum Ausbreiten – im Vakuum gibt es keinen Schall!
+      </div>
+
+      <h3>Longitudinale vs. Transversale Wellen</h3>
+      <p>
+        Es gibt zwei grundlegende Arten von Wellen:
+      </p>
+
+      <h4>Longitudinale Wellen (Schallwellen)</h4>
+      <ul>
+        <li>Partikel schwingen <strong>parallel</strong> zur Ausbreitungsrichtung</li>
+        <li>Verursachen <strong>Druckänderungen</strong> (Verdichtungen und Verdünnungen)</li>
+        <li>Beispiele: Schall in Luft, Wasserwellen, seismische P-Wellen</li>
+        <li>Können sich in Festkörpern, Flüssigkeiten und Gasen ausbreiten</li>
+      </ul>
+
+      <h4>Transversale Wellen (z.B. Licht, Radio)</h4>
+      <ul>
+        <li>Partikel schwingen <strong>senkrecht</strong> zur Ausbreitungsrichtung</li>
+        <li>Verursachen <strong>elektrische und magnetische Felder</strong></li>
+        <li>Beispiele: Licht, Radio, Mikrowellen, Röntgenstrahlen</li>
+        <li>Können sich auch im Vakuum ausbreiten</li>
+      </ul>
+
+      <figure class="illustration-center">
+        <svg width="100%" height="370" viewBox="0 0 800 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="wellen-title wellen-desc">
+          <title id="wellen-title">Vergleich longitudinaler und transversaler Wellen</title>
+          <desc id="wellen-desc">Darstellung von longitudinalen Schallwellen (Partikelbewegung parallel zur Ausbreitungsrichtung) und transversalen elektromagnetischen Wellen (Partikelbewegung senkrecht zur Ausbreitungsrichtung)</desc>
+
+          <!-- Hintergrund -->
+          <rect x="0" y="0" width="800" height="370" fill="#e0f7fa" />
+
+          <!-- Longitudinale Welle (Schall) -->
+          <text x="200" y="40" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Longitudinale Welle (Schall)</text>
+          <text x="200" y="55" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">Partikel schwingen parallel zur Ausbreitungsrichtung</text>
+
+          <!-- Wellenlinie für longitudinale Welle -->
+          <path d="M 50 100 
+                   C 150 70, 250 130, 350 100
+                   S 550 130, 650 100"
+                stroke="#00bcd4" stroke-width="3" fill="none" />
+
+          <!-- Moleküle entlang der Welle mit Verdichtungen und Verdünnungen -->
+          <g id="molekuel">
+            <circle cx="0" cy="0" r="4" fill="#004d40" />
+            <circle cx="10" cy="0" r="4" fill="#004d40" />
+            <circle cx="20" cy="0" r="4" fill="#004d40" />
+            <circle cx="30" cy="0" r="4" fill="#004d40" />
+            <circle cx="40" cy="0" r="4" fill="#004d40" />
+          </g>
+
+          <!-- Moleküle entlang der Welle -->
+          <g transform="translate(50,100)">
+            <!-- Verdichtungsbereiche -->
+            <g transform="translate(0,-25)">
+              <use href="#molekuel" x="0" y="0" />
+              <use href="#molekuel" x="10" y="0" />
+              <use href="#molekuel" x="20" y="0" />
+              <use href="#molekuel" x="30" y="0" />
+              <use href="#molekuel" x="40" y="0" />
+            </g>
+
+            <g transform="translate(100,25)">
+              <use href="#molekuel" x="0" y="0" />
+              <use href="#molekuel" x="10" y="0" />
+              <use href="#molekuel" x="20" y="0" />
+              <use href="#molekuel" x="30" y="0" />
+              <use href="#molekuel" x="40" y="0" />
+            </g>
+
+            <g transform="translate(200,-25)">
+              <use href="#molekuel" x="0" y="0" />
+              <use href="#molekuel" x="10" y="0" />
+              <use href="#molekuel" x="20" y="0" />
+              <use href="#molekuel" x="30" y="0" />
+              <use href="#molekuel" x="40" y="0" />
+            </g>
+
+            <g transform="translate(300,25)">
+              <use href="#molekuel" x="0" y="0" />
+              <use href="#molekuel" x="10" y="0" />
+              <use href="#molekuel" x="20" y="0" />
+              <use href="#molekuel" x="30" y="0" />
+              <use href="#molekuel" x="40" y="0" />
+            </g>
+
+            <g transform="translate(400,-25)">
+              <use href="#molekuel" x="0" y="0" />
+              <use href="#molekuel" x="10" y="0" />
+              <use href="#molekuel" x="20" y="0" />
+              <use href="#molekuel" x="30" y="0" />
+              <use href="#molekuel" x="40" y="0" />
+            </g>
+
+            <g transform="translate(500,25)">
+              <use href="#molekuel" x="0" y="0" />
+              <use href="#molekuel" x="10" y="0" />
+              <use href="#molekuel" x="20" y="0" />
+              <use href="#molekuel" x="30" y="0" />
+              <use href="#molekuel" x="40" y="0" />
+            </g>
+
+            <!-- Ausbreitungsrichtungspfeil -->
+            <line x1="0" y1="60" x2="600" y2="60" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+            <text x="300" y="80" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40" font-weight="bold">Ausbreitungsrichtung</text>
+          </g>
+
+          <!-- Transversale Welle (Licht/Radio) -->
+          <text x="600" y="40" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Transversale Welle (Licht/Radio)</text>
+          <text x="600" y="55" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">Partikel schwingen senkrecht zur Ausbreitungsrichtung</text>
+
+          <g transform="translate(50,220)">
+            <!-- Sinuswelle für transversale Welle -->
+            <path d="M 0 0
+                     C 100 -80, 300 80, 400 0
+                     S 600 80, 700 0"
+                  stroke="#00838f" stroke-width="3" fill="none" />
+
+            <!-- Pfeile für transversale Schwingung -->
+            <g>
+              <!-- Senkrechte Bewegungspfeile -->
+              <line x1="0" y1="0" x2="0" y2="-40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="0" y1="0" x2="0" y2="40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="100" y1="0" x2="100" y2="40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="100" y1="0" x2="100" y2="-40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="200" y1="0" x2="200" y2="-40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="300" y1="0" x2="300" y2="40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="400" y1="0" x2="400" y2="-40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="500" y1="0" x2="500" y2="40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="600" y1="0" x2="600" y2="-40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+              <line x1="700" y1="0" x2="700" y2="40" stroke="#004d40" stroke-width="1" stroke-dasharray="2,2" />
+
+              <!-- Pfeile für Schwingungsrichtung -->
+              <polygon points="-3,-35 -7,-40 1,-40" fill="#004d40" />
+              <polygon points="-3,35 -7,40 1,40" fill="#004d40" />
+              <polygon points="97,35 93,40 101,40" fill="#004d40" />
+              <polygon points="197,-35 193,-40 201,-40" fill="#004d40" />
+              <polygon points="297,35 293,40 301,40" fill="#004d40" />
+              <polygon points="397,-35 393,-40 401,-40" fill="#004d40" />
+              <polygon points="497,35 493,40 501,40" fill="#004d40" />
+              <polygon points="597,-35 593,-40 601,-40" fill="#004d40" />
+              <polygon points="697,35 693,40 701,40" fill="#004d40" />
+            </g>
+
+            <!-- Ausbreitungsrichtungspfeil -->
+            <line x1="0" y1="80" x2="700" y2="80" stroke="#004d40" stroke-width="2" marker-end="url(#arrow)" />
+            <text x="350" y="100" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40" font-weight="bold">Ausbreitungsrichtung</text>
+          </g>
+
+          <!-- Pfeildefinitionen -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#004d40" />
+            </marker>
+          </defs>
+
+          <!-- Überschrift -->
+          <text x="400" y="20" font-family="sans-serif" font-size="18" text-anchor="middle" fill="#004d40" font-weight="bold">Vergleich von Wellentypen</text>
+        </svg>
+        <figcaption class="illustration-caption">
+          Oben: Longitudinale Schallwelle - Partikel schwingen parallel zur Ausbreitungsrichtung (Druckänderungen)
+          <br>Unten: Transversale elektromagnetische Welle - Partikel schwingen senkrecht zur Ausbreitungsrichtung (elektrische/magnetische Felder)
+        </figcaption>
+      </figure>
+
+    </section>
+
+    <!-- ABSCHNITT: DIE VIER GRUNDLEGENDES KONZEPTE -->
+    <section>
+      <h3>Die vier grundlegenden Audio-Konzepte</h3>
+      <p>
+        In der Audio-Welt unterscheiden wir vier grundlegende Konzepte:
+      </p>
+      <ul>
+        <li><strong>Ton</strong> – eine einzelne Frequenz<br>
+          Reiner Sinuston, wie bei einem Stimmgabel</li>
+        <li><strong>Klang</strong> – mehrere Frequenzen zusammen<br>
+          Musikinstrumente, Stimme – komplexe Wellenformen</li>
+        <li><strong>Geräusch</strong> – unregelmäßige Frequenzen<br>
+          Rauschen, Umgebungsgeräusche, Störungen</li>
+        <li><strong>Knall</strong> – plötzliche Druckänderung<br>
+          Kurzer, intensiver Schallimpuls mit breitem Frequenzspektrum</li>
+      </ul>
+
+      <!-- VERGLEICHSTABELLE -->
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Typ</th>
+              <th>Beschreibung</th>
+              <th>Vorteile</th>
+              <th>Nachteile</th>
+              <th>Verwendung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ton</strong></td>
+              <td>Reine Frequenz (Sinuswelle)</td>
+              <td>Klar, präzise, keine Störungen</td>
+              <td>Eintönig, künstlich</td>
+              <td>Testtöne, Stimmgabel, Frequenzanalyse</td>
+            </tr>
+            <tr>
+              <td><strong>Klang</strong></td>
+              <td>Grundton + Obertöne</td>
+              <td>Reichhaltig, natürlich, emotional</td>
+              <td>Komplex, schwer zu analysieren</td>
+              <td>Musik, Stimme, Instrumente</td>
+            </tr>
+            <tr>
+              <td><strong>Geräusch</strong></td>
+              <td>Zufällige Frequenzen</td>
+              <td>Realistisch, atmosphärisch</td>
+              <td>Störend, unklar</td>
+              <td>Umgebungsgeräusche, Effekte</td>
+            </tr>
+            <tr>
+              <td><strong>Knall</strong></td>
+              <td>Plötzliche Druckänderung</td>
+              <td>Intensiv, markant, kurze Dauer</td>
+              <td>Störend, kann schädlich sein</td>
+              <td>Explosionen, Schläge, Impulsantworten</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="regel">
+          💡 <strong>Tipp:</strong> Für Podcasts: Klarer <strong>Klang</strong> (Stimme) + minimales <strong>Geräusch</strong> (Rauschen)!
+        </p>
+      </div>
+
+      <p>
+        📌 <strong>Merke:</strong> Jeder Ton besteht aus einer <strong>Frequenz</strong> (Hz) und einer <strong>Amplitude</strong> (Lautstärke)!
+      </p>
+    </section>
+
+    <!-- ABSCHNITT: FREQUENZ UND AMPLITUDE -->
+    <section>
+      <h2>🎵 Frequenz und Amplitude</h2>
+      <p>
+        In der Audio-Welt unterscheiden wir zwei grundlegende Parameter:
+      </p>
+
+      <figure class="illustration-center">
+        <svg width="100%" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="freq-amp-title freq-amp-desc">
+          <title id="freq-amp-title">Frequenz und Amplitude in Schallwellen</title>
+          <desc id="freq-amp-desc">Darstellung von Frequenz (Anzahl der Wellen pro Zeit) und Amplitude (Höhe der Wellen) in Schallwellen</desc>
+
+          <!-- Hintergrund -->
+          <rect x="0" y="0" width="800" height="300" fill="#e0f7fa" />
+
+          <!-- Niedrige Frequenz, hohe Amplitude -->
+          <path d="M 50 100
+                   C 150 50, 250 150, 350 100
+                   S 550 150, 650 100"
+                stroke="#00bcd4" stroke-width="3" fill="none" />
+          <text x="200" y="40" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Niedrige Frequenz</text>
+          <text x="200" y="55" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">Viele Wellen pro Sekunde</text>
+          <text x="200" y="250" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40">Hohe Amplitude = Laut</text>
+
+          <!-- Hohe Frequenz, niedrige Amplitude -->
+          <path d="M 450 125
+                   C 475 110, 500 140, 525 125
+                   S 575 140, 600 125
+                   S 650 140, 675 125
+                   S 725 140, 750 125"
+                stroke="#00838f" stroke-width="3" fill="none" />
+          <text x="600" y="40" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40" font-weight="bold">Hohe Frequenz</text>
+          <text x="600" y="55" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#006064">Viele Wellen pro Sekunde</text>
+          <text x="600" y="250" font-family="sans-serif" font-size="14" text-anchor="middle" fill="#004d40">Niedrige Amplitude = Leise</text>
+
+          <!-- Amplitudenlinien -->
+          <line x1="100" y1="100" x2="100" y2="50" stroke="#004d40" stroke-width="2" stroke-dasharray="5,5" />
+          <line x1="100" y1="100" x2="100" y2="150" stroke="#004d40" stroke-width="2" stroke-dasharray="5,5" />
+          <text x="100" y="165" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40" font-weight="bold">Amplitude</text>
+
+          <!-- Frequenzdarstellung -->
+          <line x1="50" y1="200" x2="350" y2="200" stroke="#004d40" stroke-width="2" marker-start="url(#arrow-reverse)" marker-end="url(#arrow)" />
+          <text x="200" y="220" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40" font-weight="bold">Frequenz (Perioden pro Sekunde)</text>
+
+          <line x1="450" y1="200" x2="750" y2="200" stroke="#004d40" stroke-width="2" marker-start="url(#arrow-reverse)" marker-end="url(#arrow)" />
+          <text x="600" y="220" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#004d40" font-weight="bold">Mehr Perioden pro Sekunde = Höhere Frequenz</text>
+
+          <!-- Pfeildefinitionen -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#004d40" />
+            </marker>
+            <marker id="arrow-reverse" markerWidth="10" markerHeight="10" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M9,0 L9,6 L0,3 z" fill="#004d40" />
+            </marker>
+          </defs>
+
+          <!-- Überschrift -->
+          <text x="400" y="20" font-family="sans-serif" font-size="16" text-anchor="middle" fill="#004d40" font-weight="bold">Frequenz vs. Amplitude</text>
+        </svg>
+        <figcaption class="illustration-caption">
+          Frequenz bestimmt die Tonhöhe (hoch/tief), Amplitude bestimmt die Lautstärke (leise/laut)
+        </figcaption>
+      </figure>
+
+      <div class="regel">
+        💡 <strong>W3Schools Ressource:</strong> Für grundlegende Informationen über Audio-Programmierung im Web siehe
+        <a href="https://www.w3schools.com/html/html5_audio.asp" target="_blank" rel="noopener noreferrer">HTML5 Audio auf W3Schools</a>
+      </div>
+
+      <p>
+        📌 <strong>Merke:</strong> <strong>Frequenz</strong> (Hz) bestimmt die <em>Tonhöhe</em>, 
+        <strong>Amplitude</strong> bestimmt die <em>Lautstärke</em>!
+      </p>
+    </section>
+
+    <!-- ABSCHNITT: DEMO AUDIO-PLAYER -->
+    <section>
+      <h2>🎵 Demoversion eines Audio-Players</h2>
+      <p>
+        Hier ist eine funktionierende Demoversion eines Audio-Players mit grundlegenden Funktionen:
+      </p>
+
+      <div class="demo-container">
+        <div class="player-container">
+          <h3>🎵 Web Audio Player - Demo</h3>
+
+          <!-- Audio-Datei-Auswahl -->
+          <div class="file-input">
+            <label for="audioFile">Audio-Datei auswählen:</label>
+            <input type="file" id="audioFile" accept="audio/*">
+          </div>
+
+          <!-- Wiedergabesteuerung -->
+          <div class="controls">
+            <button id="playBtn">▶ Play</button>
+            <button id="pauseBtn">⏸ Pause</button>
+            <button id="stopBtn">⏹ Stop</button>
+            <button id="loadDemoBtn">🎵 Demo laden</button>
+          </div>
+
+          <!-- Fortschrittsanzeige -->
+          <div class="time-display">
+            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <!-- Lautstärke -->
+          <div class="effect-control">
+            <label for="volumeSlider">🔊 Lautstärke: <span id="volumeValue">50%</span></label>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+          </div>
+
+          <!-- Effekte -->
+          <div class="effects-panel">
+            <h4>🌀 Audio-Effekte</h4>
+
+            <div class="effect-control">
+              <label for="filterType">Filter-Typ: </label>
+              <select id="filterType">
+                <option value="lowpass">Lowpass (Bässe durchlassen)</option>
+                <option value="highpass">Highpass (Höhen durchlassen)</option>
+                <option value="bandpass">Bandpass (Mitten durchlassen)</option>
+              </select>
+            </div>
+
+            <div class="effect-control">
+              <label for="filterFreq">Filter-Frequenz: <span id="filterFreqValue">1000 Hz</span></label>
+              <input type="range" id="filterFreq" min="20" max="20000" step="1" value="1000">
+            </div>
+
+            <div class="effect-control">
+              <label for="delayTime">⏱️ Verzögerung: <span id="delayValue">0.2 s</span></label>
+              <input type="range" id="delayTime" min="0" max="1" step="0.01" value="0.2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABSCHNITT: WARUM AUDACITY? -->
+    <section>
+      <h2>🎤 Warum Audacity?</h2>
+      <p>
+        Audacity ist <strong>kostenlos</strong>, <strong>Open Source</strong> und läuft auf allen Systemen.
+        Es ist professionell genug für echte Projekte – und perfekt für den Unterricht.
+      </p>
+      <div class="comparison-cards">
+        <div class="card">
+          <div class="icon">🎤</div>
+          <h3>Audacity</h3>
+          <ul>
+            <li>Aufnahme von <strong>Mikrofon</strong> oder <strong>Systemaudio</strong></li>
+            <li>Schnitt, Trimmen, Normalisieren</li>
+            <li>Effekte: Rauschunterdrückung, Equalizer, Kompressor</li>
+            <li>Export nach MP3, WAV, OGG, FLAC</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="icon">🔊</div>
+          <h3>Web-Audio</h3>
+          <ul>
+            <li>Audio-Dateien in HTML einbinden mit <code>&lt;audio&gt;</code></li>
+            <li>MP3 für Web, WAV für Archivierung</li>
+            <li>OGG für Open Source Projekte</li>
+            <li>Kleine Dateigrößen durch Komprimierung</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABSCHNITT: KI ALS PARTNER -->
+    <section>
+      <h2>🧠 KI als kreativer Partner – nicht als Blackbox</h2>
+      <p>
+        KI kann dir helfen, schneller zu lernen – aber nur, wenn du <em>selbst denkst</em>.
+        Statt "Mach mir einen Podcast", frage:
+        <em>"Wie plane ich ein Podcast-Projekt in Audacity Schritt für Schritt?"</em>
+      </p>
+      <div class="regel">
+        💡 <strong>Unser Ansatz:</strong><br>
+        Die KI ist dein <em>Denksparringpartner</em>.<br>
+        Du lieferst die <strong>Idee</strong>, die <strong>Struktur</strong> und die <strong>Entscheidung</strong>.<br>
+        Die KI liefert Impulse – du machst sie <em>wirklich</em>.
+      </div>
+      <p>
+        So entstehen Projekte, die <strong>nur du</strong> machen kannst – mit Unterstützung, nicht mit Delegation.
+      </p>
+    </section>
+
+    <!-- ABSCHNITT: WAS DU LERNEN WIRST -->
+    <section>
+      <h2>🎯 Was du am Ende beherrschst</h2>
+      <ul>
+        <li>Den Unterschied zwischen Ton, Klang, Geräusch und Knall erklären</li>
+        <li>Eine Audiodatei in Audacity aufnehmen und schneiden</li>
+        <li>Rauschunterdrückung und Equalizer anwenden</li>
+        <li>MP3 und OGG korrekt in eine Webseite einbinden</li>
+        <li>Einen eigenen Audio-Player mit Web Audio API erstellen</li>
+        <li>Und: <strong>mit KI so arbeiten</strong>, dass du deine eigenen Denkfähigkeiten stärkst</li>
+      </ul>
+    </section>
+
+    <!-- ABSCHNITT: DEMO TONGENERATOREN -->
+    <section>
+      <h2>🎵 Nützlicher Online-Tongenerator für Demozwecke</h2>
+      <p>
+        Hier ist ein nützlicher Online-Tongenerator für Demozwecke:
+      </p>
+      <div class="comparison-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Funktionen</th>
+              <th>Vorteile</th>
+              <th>Nachteile</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tone Generator (www.szynalski.com)</strong></td>
+              <td>Reine Sinustöne, Frequenzanpassung, Dauer</td>
+              <td>Einfach zu bedienen, präzise Frequenzkontrolle</td>
+              <td>Nur Sinustöne, keine komplexen Wellenformen</td>
+              <td><a href="https://www.szynalski.com/tone-generator/" target="_blank" rel="noopener noreferrer">Zum Generator</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ABSCHNITT: LOSGEHT'S -->
+    <section>
+      <h2>🚀 Bereit zum Start?</h2>
+      <p>
+        Beginne mit <strong>Modul 00 – Willkommen</strong> oder wähle ein Thema aus dem Menü oben.
+        Lies, probiere aus, denke nach – und gestalte deine ersten digitalen Audios mit Absicht!
+      </p>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="kapitel-navigation">
+      <p>🎓 Super! Du kennst jetzt das Mindset dieses Tutorials.</p>
+      <a href="kapitel/00-welcome.html" class="nav-button">→ Starte mit Modul 00: Willkommen</a>
+    </section>
+  </main>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>© 2026 | Audio-Tutorial | Medientechnik, HTBLA & Fachschule für IT, Traun</p>
+  </footer>
+
+  <script>
+    // Audio-Player Implementierung
+    class AudioPlayer {
+      constructor() {
+        // Audio-Kontext erstellen
+        this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Audio-Elemente
+        this.audioFileInput = document.getElementById('audioFile');
+        this.playBtn = document.getElementById('playBtn');
+        this.pauseBtn = document.getElementById('pauseBtn');
+        this.stopBtn = document.getElementById('stopBtn');
+        this.loadDemoBtn = document.getElementById('loadDemoBtn');
+        this.currentTimeSpan = document.getElementById('currentTime');
+        this.totalTimeSpan = document.getElementById('totalTime');
+        this.progressBar = document.getElementById('progressBar');
+
+        // Effekt-Elemente
+        this.volumeSlider = document.getElementById('volumeSlider');
+        this.volumeValue = document.getElementById('volumeValue');
+        this.filterType = document.getElementById('filterType');
+        this.filterFreq = document.getElementById('filterFreq');
+        this.filterFreqValue = document.getElementById('filterFreqValue');
+        this.delayTime = document.getElementById('delayTime');
+        this.delayValue = document.getElementById('delayValue');
+
+        // Audio-Buffer und -Quelle
+        this.audioBuffer = null;
+        this.source = null;
+        this.isPlaying = false;
+        this.startTime = 0;
+        this.pauseTime = 0;
+        this.isDemoMode = false;
+
+        // Effekt-Nodes
+        this.gainNode = null;
+        this.filterNode = null;
+        this.delayNode = null;
+        this.feedbackNode = null;
+        this.demoSource = null;
+
+        // Event-Listener einrichten
+        this.setupEventListeners();
+
+        // Effekte initialisieren
+        this.initEffects();
+
+        // Fortschrittsaktualisierung initialisieren
+        this.initProgressUpdater();
+      }
+
+      setupEventListeners() {
+        // Wiedergabesteuerung
+        this.playBtn.addEventListener('click', () => this.play());
+        this.pauseBtn.addEventListener('click', () => this.pause());
+        this.stopBtn.addEventListener('click', () => this.stop());
+
+        // Dateiauswahl
+        this.audioFileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+
+        // Demo-Button
+        this.loadDemoBtn.addEventListener('click', () => this.loadDemoAudio());
+
+        // Effekt-Steuerung
+        this.volumeSlider.addEventListener('input', (e) => this.setVolume(parseFloat(e.target.value)));
+        this.filterType.addEventListener('change', () => this.setFilterType());
+        this.filterFreq.addEventListener('input', (e) => this.setFilterFreq(parseInt(e.target.value)));
+        this.delayTime.addEventListener('input', (e) => this.setDelayTime(parseFloat(e.target.value)));
+      }
+
+      initProgressUpdater() {
+        // Fortschrittsaktualisierung
+        setInterval(() => this.updateProgress(), 100);
+      }
+
+      initEffects() {
+        // Gain-Node für Lautstärke
+        this.gainNode = this.audioCtx.createGain();
+        this.gainNode.gain.value = parseFloat(this.volumeSlider.value);
+
+        // Filter-Node
+        this.filterNode = this.audioCtx.createBiquadFilter();
+        this.filterNode.type = this.filterType.value;
+        this.filterNode.frequency.value = parseInt(this.filterFreq.value);
+
+        // Delay-Node
+        this.delayNode = this.audioCtx.createDelay(1.0);
+        this.feedbackNode = this.audioCtx.createGain();
+        this.feedbackNode.gain.value = 0.3;
+
+        // Verbindungen: Quelle -> Gain -> Filter -> Delay -> Feedback -> Destination
+        this.gainNode.connect(this.filterNode);
+        this.filterNode.connect(this.delayNode);
+        this.delayNode.connect(this.feedbackNode);
+        this.feedbackNode.connect(this.delayNode); // Feedback-Schleife
+        this.delayNode.connect(this.audioCtx.destination);
+
+        // Aktualisiere Anzeige
+        this.volumeValue.textContent = Math.round(this.volumeSlider.value * 100) + '%';
+        this.filterFreqValue.textContent = this.filterFreq.value + ' Hz';
+        this.delayValue.textContent = this.delayTime.value + ' s';
+      }
+
+      async handleFileSelect(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          const arrayBuffer = await file.arrayBuffer();
+          this.audioBuffer = await this.audioCtx.decodeAudioData(arrayBuffer);
+          this.updateTimeDisplay();
+        } catch (error) {
+          console.error('Fehler beim Laden der Audiodatei:', error);
+          alert('Fehler beim Laden der Audiodatei: ' + error.message);
+        }
+      }
+
+      async loadDemoAudio() {
+        try {
+          // Erstelle einen Demo-Ton (Sinuswelle)
+          if (this.demoSource) {
+            this.demoSource.stop();
+          }
+
+          this.demoSource = this.audioCtx.createOscillator();
+          this.demoSource.type = 'sine';
+          this.demoSource.frequency.value = 440; // A4 Note
+
+          // Verbinde mit Effekt-Chain
+          this.demoSource.connect(this.gainNode);
+
+          // Starte den Oszillator
+          this.demoSource.start();
+
+          // Setze Flag für Demo-Modus
+          this.isDemoMode = true;
+          this.totalTimeSpan.textContent = '∞';
+
+          console.log('Demo-Ton geladen');
+        } catch (error) {
+          console.error('Fehler beim Erstellen des Demo-Tons:', error);
+        }
+      }
+
+      play() {
+        if (this.isDemoMode) {
+          // In Demo-Modus starte den Oszillator
+          if (this.audioCtx.state === 'suspended') {
+            this.audioCtx.resume();
+          }
+          this.isPlaying = true;
+          this.startTime = this.audioCtx.currentTime;
+          return;
+        }
+
+        if (!this.audioBuffer) {
+          alert('Bitte wähle zuerst eine Audiodatei aus oder lade die Demo!');
+          return;
+        }
+
+        if (this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+
+        // Stoppe vorherige Quelle falls vorhanden
+        if (this.source) {
+          this.source.stop();
+        }
+
+        // Erstelle neue Quelle
+        this.source = this.audioCtx.createBufferSource();
+        this.source.buffer = this.audioBuffer;
+        this.source.connect(this.gainNode);
+
+        // Starte Wiedergabe
+        this.source.start(0, this.pauseTime);
+        this.isPlaying = true;
+        this.startTime = this.audioCtx.currentTime - this.pauseTime;
+      }
+
+      pause() {
+        if (!this.isPlaying) return;
+
+        if (this.isDemoMode) {
+          // Für Demo-Modus pausieren wir den Oszillator
+          if (this.demoSource) {
+            this.demoSource.stop();
+            this.demoSource = null;
+          }
+          this.isPlaying = false;
+          return;
+        }
+
+        // Speichere aktuelle Position
+        this.pauseTime = this.audioCtx.currentTime - this.startTime;
+
+        // Stoppe aktuelle Quelle
+        if (this.source) {
+          this.source.stop();
+          this.source = null;
+        }
+
+        this.isPlaying = false;
+      }
+
+      stop() {
+        if (this.source) {
+          this.source.stop();
+          this.source = null;
+        }
+
+        if (this.demoSource) {
+          this.demoSource.stop();
+          this.demoSource = null;
+        }
+
+        this.isPlaying = false;
+        this.pauseTime = 0;
+        this.startTime = 0;
+        this.progressBar.style.width = '0%';
+        this.currentTimeSpan.textContent = '0:00';
+      }
+
+      setVolume(value) {
+        if (this.gainNode) {
+          this.gainNode.gain.value = value;
+        }
+        this.volumeValue.textContent = Math.round(value * 100) + '%';
+      }
+
+      setFilterType() {
+        if (this.filterNode) {
+          this.filterNode.type = this.filterType.value;
+        }
+      }
+
+      setFilterFreq(value) {
+        if (this.filterNode) {
+          this.filterNode.frequency.value = value;
+        }
+        this.filterFreqValue.textContent = value + ' Hz';
+      }
+
+      setDelayTime(value) {
+        if (this.delayNode) {
+          this.delayNode.delayTime.value = value;
+        }
+        this.delayValue.textContent = value + ' s';
+      }
+
+      updateProgress() {
+        if (!this.isPlaying) return;
+
+        let currentTime = 0;
+        if (this.isDemoMode) {
+          // In Demo-Modus zeigen wir eine fiktive Zeit an
+          currentTime = (this.audioCtx.currentTime - this.startTime) % 10; // Zyklus von 10 Sekunden
+        } else {
+          currentTime = this.audioCtx.currentTime - this.startTime;
+        }
+
+        // Aktualisiere Fortschrittsbalken
+        if (this.audioBuffer && !this.isDemoMode) {
+          const progress = (currentTime / this.audioBuffer.duration) * 100;
+          this.progressBar.style.width = Math.min(progress, 100) + '%';
+        } else {
+          // In Demo-Modus füllen wir den Balken zyklisch
+          this.progressBar.style.width = ((currentTime % 10) / 10) * 100 + '%';
+        }
+
+        // Aktualisiere Zeit-Anzeige
+        this.currentTimeSpan.textContent = this.formatTime(currentTime);
+      }
+
+      updateTimeDisplay() {
+        if (this.audioBuffer) {
+          this.totalTimeSpan.textContent = this.formatTime(this.audioBuffer.duration);
+        }
+      }
+
+      formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return mins + ':' + (secs < 10 ? '0' : '') + secs;
+      }
+    }
+
+    // Initialisiere den Player wenn die Seite geladen ist
+    document.addEventListener('DOMContentLoaded', () => {
+      new AudioPlayer();
+    });
+  </script>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

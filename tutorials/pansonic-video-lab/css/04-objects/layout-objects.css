@@ -1,0 +1,88 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — ITCSS Objects (OOCSS Patterns)
+   Reusable layout primitives extracted from existing components
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   O-CONTAINER
+   Max-width container pattern (from .video-container)
+   ---------------------------------------------------------- */
+.o-container {
+  width: 100%;
+  max-width: var(--video-container-max);
+  margin-inline: auto;
+  padding-inline: var(--video-content-padding);
+}
+
+@media (max-width: 640px) {
+  .o-container {
+    padding-inline: 16px;
+  }
+}
+
+/* ----------------------------------------------------------
+   O-GRID
+   Basic grid pattern (from .video-grid)
+   ---------------------------------------------------------- */
+.o-grid {
+  display: grid;
+  gap: var(--video-space-6);
+}
+
+/* ----------------------------------------------------------
+   O-STACK
+   Vertical spacing pattern — margin-block "lobotomized owl"
+   Used throughout the project for consistent vertical rhythm
+   ---------------------------------------------------------- */
+.o-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.o-stack > * {
+  margin-block: 0;
+}
+
+.o-stack > * + * {
+  margin-block-start: var(--video-space-4);
+}
+
+/* Variant: tight spacing */
+.o-stack--tight > * + * {
+  margin-block-start: var(--video-space-2);
+}
+
+/* Variant: loose spacing */
+.o-stack--loose > * + * {
+  margin-block-start: var(--video-space-8);
+}
+
+/* ----------------------------------------------------------
+   O-MEDIA
+   Flex media object pattern (image + body side by side)
+   ---------------------------------------------------------- */
+.o-media {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--video-space-4);
+}
+
+.o-media__figure {
+  flex-shrink: 0;
+}
+
+.o-media__body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Variant: centered alignment */
+.o-media--center {
+  align-items: center;
+}
+
+/* Variant: reversed (figure on the right) */
+.o-media--reverse {
+  flex-direction: row-reverse;
+}

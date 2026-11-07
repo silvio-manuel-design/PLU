@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>05 – Schleifen | JavaScript-Tutorial</title>
+  <!-- Favicon – nur .ico wie gewünscht -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+      <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="06-arrays.html">06. Arrays</a></li>
+        <li><a href="07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="08-objekte.html">08. Objekte</a></li>
+        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>05 – Schleifen 🔁</h1>
+      <p class="hero-subtitle">Wie du Code wiederholt ausführst – effizient und kontrolliert</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was sind Schleifen?</h2>
+      <p>
+        <strong>Schleifen</strong> führen einen Code-Block <strong>mehrfach</strong> aus – 
+        solange eine Bedingung erfüllt ist oder für eine bestimmte Anzahl von Durchläufen.
+      </p>
+    </section>
+
+    <section>
+      <h2>📊 2. Übersicht: Arten von Schleifen</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Schleife</th>
+            <th>Verwendung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>for</code></td>
+            <td>Feste Anzahl von Durchläufen</td>
+            <td><code>for (let i = 0; i &lt; 5; i++) { ... }</code></td>
+          </tr>
+          <tr>
+            <td><code>while</code></td>
+            <td>Solange Bedingung wahr ist</td>
+            <td><code>while (punkte &lt; 100) { ... }</code></td>
+          </tr>
+          <tr>
+            <td><code>do...while</code></td>
+            <td>Mindestens ein Durchlauf</td>
+            <td><code>do { ... } while (weiterMachen);</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🎯 3. Einleitung & W3Schools</h2>
+      <p>
+        In diesem Kapitel lernst du, wie du mit Schleifen repetitive Aufgaben automatisierst – 
+        vom Hochzählen bis zum Verarbeiten von Daten.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/js/js_loop_for.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Loops</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 4. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, wann man <code>for</code> und wann <code>while</code> verwendet – 
+        und warum man aufpassen muss, dass Schleifen nicht endlos laufen.
+      </p>
+    </section>
+
+    <!-- 5. for-Schleife -->
+    <section>
+      <h2>🔢 5. <code>for</code>-Schleife</h2>
+      <p>
+        Ideal für <strong>festgelegte Anzahl</strong> von Durchläufen (z. B. Zählen, Arrays durchlaufen).
+      </p>
+      <button onclick="demoFor()">for-Schleife testen</button>
+      <div id="ausgabe-for" class="ausgabe-bereich"></div> <!-- ID korrekt -->
+      <pre><code class="js-code">function demoFor() {
+  let ausgabe = "&lt;ol&gt;";
+  for (let i = 1; i &lt;= 5; i++) {
+    ausgabe += `&lt;li&gt;Durchlauf ${i}&lt;/li&gt;`;
+  }
+  ausgabe += "&lt;/ol&gt;";
+  document.getElementById("ausgabe-for").innerHTML = ausgabe;
+}</code></pre>
+    </section>
+
+    <!-- 6. while-Schleife -->
+    <section>
+      <h2>🔄 6. <code>while</code>-Schleife</h2>
+      <p>
+        Führt Code aus, <strong>solange</strong> eine Bedingung <code>true</code> ist.
+      </p>
+      <button onclick="demoWhile()">while-Schleife testen</button>
+      <div id="ausgabe-while" class="ausgabe-bereich"></div> <!-- ID korrekt -->
+      <pre><code class="js-code">function demoWhile() {
+  let i = 3;
+  let ausgabe = "&lt;ul&gt;";
+  while (i > 0) {
+    ausgabe += `&lt;li&gt;Noch ${i} Sekunden...&lt;/li&gt;`;
+    i--; // Update – sonst Endlosschleife!
+  }
+  ausgabe += "&lt;li&gt;Start! 🚀&lt;/li&gt;&lt;/ul&gt;";
+  document.getElementById("ausgabe-while").innerHTML = ausgabe;
+}</code></pre>
+    </section>
+
+    <!-- 7. do...while -->
+    <section>
+      <h2>🎲 7. <code>do...while</code>-Schleife</h2>
+      <p>
+        Führt den Code-Block <strong>mindestens einmal</strong> aus – 
+        dann wird die Bedingung geprüft.
+      </p>
+      <button onclick="demoDoWhile()">do...while testen</button>
+      <div id="ausgabe-do-while" class="ausgabe-bereich"></div> <!-- ID korrekt -->
+      <pre><code class="js-code">function demoDoWhile() {
+  let versuch = 0;
+  let zahl;
+  let ausgabe = "";
+
+  do {
+    versuch++;
+    zahl = Math.floor(Math.random() * 10) + 1; // Zufallszahl 1–10
+    ausgabe += `Versuch ${versuch}: Zahl = ${zahl}&lt;br&gt;`;
+  } while (zahl !== 7 && versuch &lt; 5);
+
+  ausgabe += (zahl === 7)
+    ? "&lt;p&gt;🎉 Erfolg! Die Zahl 7 wurde gefunden!&lt;/p&gt;"
+    : "&lt;p&gt;❌ Kein Glück – 5 Versuche ohne 7.&lt;/p&gt;";
+
+  document.getElementById("ausgabe-do-while").innerHTML = ausgabe;
+}</code></pre>
+    </section>
+
+    <!-- 8. switch-Anweisung -->
+    <section>
+      <h2>🔀 8. <code>switch</code>-Anweisung</h2>
+      <p>
+        Die <code>switch</code>-Anweisung ist eine <strong>Alternative zu langen <code>if...else if...else</code>-Ketten</strong>, 
+        wenn du <strong>feste Werte</strong> vergleichst (z. B. Menü-Auswahl, Wochentage).
+      </p>
+      <p>
+        ⚠️ <strong>Wichtig:</strong> Vergiss <strong>nicht <code>break</code></strong>!  
+        Ohne <code>break</code> „fällt“ der Code in den nächsten Fall – das nennt man <strong>Fallthrough</strong>.
+      </p>
+      <button onclick="demoSwitch()">switch testen</button>
+      <div id="ausgabe-switch" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoSwitch() {
+  const tag = 3; // 1=Mo, 2=Di, ..., 7=So
+  let wochentag;
+
+  switch (tag) {
+    case 1:
+      wochentag = "Montag";
+      break; // ⚠️ Ohne break: fällt in case 2!
+    case 2:
+      wochentag = "Dienstag";
+      break;
+    case 3:
+      wochentag = "Mittwoch";
+      break;
+    case 4:
+      wochentag = "Donnerstag";
+      break;
+    case 5:
+      wochentag = "Freitag";
+      break;
+    case 6:
+      wochentag = "Samstag";
+      break;
+    case 7:
+      wochentag = "Sonntag";
+      break;
+    default:
+      wochentag = "Ungültiger Tag";
+  }
+
+  document.getElementById("ausgabe-switch").innerHTML = 
+    `&lt;p&gt;Tag-Nummer: &lt;strong&gt;${tag}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;Wochentag: &lt;strong&gt;${wochentag}&lt;/strong&gt;&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <section class="warnung">
+      <h2>⚠️ 8. Wichtige Regeln für Schleifen</h2>
+      <ul>
+        <li>Vermeide <strong>Endlosschleifen</strong> – stelle sicher, dass die Bedingung irgendwann <code>false</code> wird!</li>
+        <li>Verwende <code>for</code> bei bekannter Anzahl, <code>while</code> bei unbekannter Anzahl.</li>
+        <li>Initialisiere Zähler-Variable <strong>immer</strong> (z. B. <code>let i = 0</code>).</li>
+      </ul>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du repetitive Aufgaben effizient automatisieren!</p>
+      <a href="./06-arrays.html" class="nav-button">→ Zu Modul 06: Arrays</a>
+    </section>
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/05-schleifen.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

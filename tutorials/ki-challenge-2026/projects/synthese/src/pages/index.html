@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNTHESE — KI Challenge</title>
+  <meta name="description" content="Baue ein interaktives Medien-Kompendium — als Team-Projekt oder allein. KI hilft dir beim Recherchieren und Strukturieren. — ein Team-Projekt der KI Challenge.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- Preload Hero Background for premium LCP -->
+  <link rel="preload" as="image" href="../assets/images/synthese-hero-bg.jpg" type="image/jpeg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+  <a href="#main-content" class="u-sr-only skip-link">Zum Hauptinhalt springen</a>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="site-header__container u-container">
+      <a href="../../../../evolution/src/pages/index.html" class="brand" aria-label="Zurück zur Evolution">
+        <span class="brand__logo">
+          <i class="ph ph-books" aria-hidden="true"></i>
+        </span>
+        <span class="brand__name">KI-Challenge <span class="brand__name--highlight">SYNTHESE</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="../../../../evolution/src/pages/index.html" class="nav-link" data-i18n="nav.backToEvolution">Zurück zu Evolution</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Language Switcher -->
+        <div id="lang-switcher" class="lang-switcher">
+          <button class="lang-switcher__btn" aria-haspopup="listbox" aria-expanded="false" id="lang-current">DE</button>
+          <div class="lang-switcher__options" role="listbox">
+            <button class="lang-switcher__option is-active" data-lang="de" role="option">DE</button>
+            <button class="lang-switcher__option" data-lang="en" role="option">EN</button>
+          </div>
+        </div>
+
+        <!-- XP Bar -->
+        <div class="challenge-xp" id="header-xp" aria-label="Fortschritt">
+          <div class="challenge-xp__level" id="xp-level">1</div>
+          <div class="challenge-xp__info">
+            <span class="challenge-xp__label">XP</span>
+            <div class="challenge-xp__bar-container">
+              <div class="challenge-xp__bar-fill" id="xp-bar-fill" style="--xp-bar-width: 0%;"></div>
+            </div>
+            <span class="challenge-xp__value" id="xp-value">0 / 100</span>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Dunkelmodus aktivieren">
+          <i class="ph ph-moon" aria-hidden="true"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="icon-btn icon-btn--mobile" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile Navigation">
+      <a href="../../../../evolution/src/pages/index.html" class="mobile-nav__link" data-i18n="nav.backToEvolution">Zurück zu Evolution</a>
+      <a href="/tutorials/" class="mobile-nav__link" data-i18n="nav.backToPlu">Zurück zu PLU</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="challenge-hero challenge-hero--synthese" aria-labelledby="hero-title">
+      <div class="challenge-hero__overlay" aria-hidden="true"></div>
+      <div class="challenge-hero__particles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="challenge-hero__content u-container">
+        <div class="challenge-hero__eyebrow">KI Challenge — Medien</div>
+        <h1 id="hero-title" class="challenge-hero__title challenge-hero__title--gradient" data-i18n="hero.title">SYNTHESE</h1>
+        <p class="challenge-hero__subtitle" data-i18n="hero.subtitle">Das interaktive Medien-Kompendium</p>
+
+        <!-- Search Bar -->
+        <div class="challenge-search">
+          <div class="challenge-search__input-wrapper">
+            <i class="ph ph-magnifying-glass challenge-search__icon" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="topic-search"
+              class="challenge-search__input"
+              data-i18n="hero.searchPlaceholder"
+              placeholder="Thema suchen..."
+              aria-label="Thema suchen"
+            >
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="challenge-filter">
+          <div class="challenge-filter__group">
+            <span class="challenge-filter__label" data-i18n="filter.category">Kategorie</span>
+            <div class="challenge-filter__options" id="category-filters">
+              <button class="challenge-filter__btn is-active" data-filter="all" data-i18n="filter.all">Alle</button>
+              <button class="challenge-filter__btn" data-filter="grundlagen">Grundlagen</button>
+              <button class="challenge-filter__btn" data-filter="design">Design</button>
+              <button class="challenge-filter__btn" data-filter="technik">Technik</button>
+            </div>
+          </div>
+          <div class="challenge-filter__group">
+            <span class="challenge-filter__label" data-i18n="filter.difficulty">Schwierigkeit</span>
+            <div class="challenge-filter__options" id="difficulty-filters">
+              <button class="challenge-filter__btn is-active" data-filter="all" data-i18n="filter.all">Alle</button>
+              <button class="challenge-filter__btn" data-filter="easy" data-i18n="filter.easy">Leicht</button>
+              <button class="challenge-filter__btn" data-filter="medium" data-i18n="filter.medium">Mittel</button>
+              <button class="challenge-filter__btn" data-filter="hard" data-i18n="filter.hard">Schwer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="challenge-hero__scroll" aria-hidden="true">
+        <span>Scroll</span>
+        <i class="ph ph-caret-down"></i>
+      </div>
+    </section>
+
+    <!-- Onboarding / Mission Experience -->
+    <section class="challenge-onboarding" id="onboarding" aria-labelledby="onboarding-title">
+      <div class="challenge-onboarding__container u-container">
+        <h2 id="onboarding-title" class="u-sr-only" data-i18n="onboarding.team.title">Willkommen im Team A</h2>
+
+        <!-- Progress Indicator -->
+        <div class="challenge-progress" role="list" aria-label="Onboarding progress">
+          <div class="challenge-progress__step is-active" role="listitem">
+            <div class="challenge-progress__dot">1</div>
+            <span class="challenge-progress__label" data-i18n="onboarding.progress.step1">Team</span>
+          </div>
+          <div class="challenge-progress__step" role="listitem">
+            <div class="challenge-progress__dot">2</div>
+            <span class="challenge-progress__label" data-i18n="onboarding.progress.step2">Rolle</span>
+          </div>
+          <div class="challenge-progress__step" role="listitem">
+            <div class="challenge-progress__dot">3</div>
+            <span class="challenge-progress__label" data-i18n="onboarding.progress.step3">Mission</span>
+          </div>
+          <div class="challenge-progress__step" role="listitem">
+            <div class="challenge-progress__dot">4</div>
+            <span class="challenge-progress__label" data-i18n="onboarding.progress.step4">Workflow</span>
+          </div>
+        </div>
+
+        <!-- Step 1: Team Welcome -->
+        <div class="challenge-onboarding__step u-reveal">
+          <div class="challenge-team-welcome">
+            <div class="challenge-team-welcome__badge">
+              <i class="ph ph-users-three" aria-hidden="true"></i>
+              <span data-i18n="onboarding.team.eyebrow">KI Challenge</span>
+            </div>
+            <h2 class="challenge-team-welcome__title" data-i18n="onboarding.team.title">Willkommen im Team A</h2>
+            <p class="challenge-team-welcome__subtitle" data-i18n="onboarding.team.subtitle">SYNTHESE — Das interaktive Medien-Kompendium</p>
+            <p class="challenge-team-welcome__hook" data-i18n="onboarding.team.hook">Deine Aufgabe: Baue ein interaktives Medien-Kompendium — eine digitale Enzyklopädie, in der Studenten Themen wie HTML, CSS, Accessibility und mehr erkunden können. Wähle eine Rolle und starte.</p>
+            <div class="challenge-scroll-hint">
+              <i class="ph ph-arrow-down" aria-hidden="true"></i>
+              <span data-i18n="onboarding.team.cta">Wähle deine Rolle</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Choose Your Role -->
+        <div class="challenge-onboarding__step u-reveal u-reveal--delay-1">
+          <h3 class="challenge-role-section__title" data-i18n="onboarding.roles.heading">Wähle deine Rolle</h3>
+          <div class="challenge-role-grid" id="challenge-role-grid" role="group" aria-label="Rollen-Auswahl">
+            <button class="challenge-role-card" type="button" data-role="frontend">
+              <div class="challenge-role-card__icon"><i class="ph ph-code" aria-hidden="true"></i></div>
+              <h4 class="challenge-role-card__title" data-i18n="onboarding.roles.frontend.title">Frontend Developer</h4>
+              <span class="challenge-role-card__superpower" data-i18n="onboarding.roles.frontend.superpower">Du machst Wissen klickbar</span>
+              <p class="challenge-role-card__short" data-i18n="onboarding.roles.frontend.short">Du kennst HTML, CSS & JS bereits. Du baust das Kartensystem, die Suche und Filter, die Lernen zum Erlebnis machen.</p>
+              <span class="challenge-role-card__slots" data-i18n="onboarding.roles.slots2">2 Plätze</span>
+            </button>
+
+            <button class="challenge-role-card" type="button" data-role="content">
+              <div class="challenge-role-card__icon"><i class="ph ph-pencil-simple" aria-hidden="true"></i></div>
+              <h4 class="challenge-role-card__title" data-i18n="onboarding.roles.content.title">Content Author</h4>
+              <span class="challenge-role-card__superpower" data-i18n="onboarding.roles.content.superpower">Du machst Komplexes einfach</span>
+              <p class="challenge-role-card__short" data-i18n="onboarding.roles.content.short">Du kannst komplexe Themen einfach erklären. Du recherchierst und schreibst Artikel mit Beispielen und Visuals.</p>
+              <span class="challenge-role-card__slots" data-i18n="onboarding.roles.slots2">2 Plätze</span>
+            </button>
+
+            <button class="challenge-role-card" type="button" data-role="uiux">
+              <div class="challenge-role-card__icon"><i class="ph ph-layout" aria-hidden="true"></i></div>
+              <h4 class="challenge-role-card__title" data-i18n="onboarding.roles.uiux.title">UI/UX Designer</h4>
+              <span class="challenge-role-card__superpower" data-i18n="onboarding.roles.uiux.superpower">Du machst Information schön</span>
+              <p class="challenge-role-card__short" data-i18n="onboarding.roles.uiux.short">Du kennst Design-Prinzipien und Figma. Du gestaltest Card-Layouts, Modal-Ansichten und das Leseerlebnis.</p>
+              <span class="challenge-role-card__slots" data-i18n="onboarding.roles.slots1">1 Platz</span>
+            </button>
+
+            <button class="challenge-role-card" type="button" data-role="ai">
+              <div class="challenge-role-card__icon"><i class="ph ph-brain" aria-hidden="true"></i></div>
+              <h4 class="challenge-role-card__title" data-i18n="onboarding.roles.ai.title">AI Researcher</h4>
+              <span class="challenge-role-card__superpower" data-i18n="onboarding.roles.ai.superpower">Du findest, was andere übersehen</span>
+              <p class="challenge-role-card__short" data-i18n="onboarding.roles.ai.short">Du kannst wie ein Profi mit KI sprechen. Du nutzt AI-Tools zum Recherchieren, Fakten prüfen und gute Beispiele finden.</p>
+              <span class="challenge-role-card__slots" data-i18n="onboarding.roles.slots1">1 Platz</span>
+            </button>
+
+            <button class="challenge-role-card" type="button" data-role="qa">
+              <div class="challenge-role-card__icon"><i class="ph ph-check-circle" aria-hidden="true"></i></div>
+              <h4 class="challenge-role-card__title" data-i18n="onboarding.roles.qa.title">QA & Testing Lead</h4>
+              <span class="challenge-role-card__superpower" data-i18n="onboarding.roles.qa.superpower">Du zerstörst, um zu reparieren</span>
+              <p class="challenge-role-card__short" data-i18n="onboarding.roles.qa.short">Du entdeckst Bugs vor allen anderen. Du testest jedes Feature und stellst sicher, dass das Kompendium auf allen Geräten läuft.</p>
+              <span class="challenge-role-card__slots" data-i18n="onboarding.roles.slots1">1 Platz</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Your Mission (dynamic) -->
+        <div class="challenge-onboarding__step">
+          <div id="challenge-mission-panel" class="challenge-mission-panel" aria-live="polite" aria-atomic="true"></div>
+        </div>
+
+        <!-- Step 4: Team Workflow -->
+        <div class="challenge-onboarding__step u-reveal u-reveal--delay-2">
+          <h3 class="challenge-workflow__title" data-i18n="onboarding.workflow.title">Der 3-Tage Workflow</h3>
+          <div class="challenge-workflow__timeline">
+            <div class="challenge-workflow__item">
+              <div class="challenge-workflow__day">1</div>
+              <h4 class="challenge-workflow__heading" data-i18n="onboarding.workflow.day1.title">Tag 1: Recherche & Struktur</h4>
+              <p class="challenge-workflow__desc" data-i18n="onboarding.workflow.day1.desc">Recherchiert Themen, verteilt Rollen und baut die erste Struktur.</p>
+            </div>
+            <div class="challenge-workflow__item">
+              <div class="challenge-workflow__day">2</div>
+              <h4 class="challenge-workflow__heading" data-i18n="onboarding.workflow.day2.title">Tag 2: Bauen & Schreiben</h4>
+              <p class="challenge-workflow__desc" data-i18n="onboarding.workflow.day2.desc">Schreibt Artikel, baut Features und integriert alles zusammen.</p>
+            </div>
+            <div class="challenge-workflow__item">
+              <div class="challenge-workflow__day">3</div>
+              <h4 class="challenge-workflow__heading" data-i18n="onboarding.workflow.day3.title">Tag 3: Polieren & Präsentieren</h4>
+              <p class="challenge-workflow__desc" data-i18n="onboarding.workflow.day3.desc">Testet, poliert und präsentiert euer Kompendium der Klasse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topics Grid -->
+    <section class="section" aria-labelledby="topics-title">
+      <div class="u-container">
+        <h2 id="topics-title" class="section__title" data-i18n="topics.title">Themen</h2>
+        <p class="section__subtitle" data-i18n="topics.subtitle">Entdecke die Welt der Medientechnik</p>
+
+        <div id="topics-grid" class="topics-grid">
+          <!-- Static example topic cards -->
+          <article class="topic-card" data-category="grundlagen" data-difficulty="easy">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-farbe.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Grundlagen</span>
+                  <span class="topic-card__badge topic-card__badge--difficulty easy">Leicht</span>
+                </div>
+                <button class="topic-card__bookmark" aria-label="Lesezeichen">
+                  <i class="ph ph-bookmark" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 class="topic-card__title">RGB vs CMYK</h3>
+              <p class="topic-card__summary">Verstehe den Unterschied zwischen additivem und subtraktivem Farbmodell und wann du welches verwendest.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">farbe</span>
+                  <span class="topic-card__tag">druck</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMore">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="topic-card" data-category="technik" data-difficulty="medium">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-codec.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Technik</span>
+                  <span class="topic-card__badge topic-card__badge--difficulty medium">Mittel</span>
+                </div>
+                <button class="topic-card__bookmark" aria-label="Lesezeichen">
+                  <i class="ph ph-bookmark" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 class="topic-card__title">Codec Basics: Lossy vs Lossless</h3>
+              <p class="topic-card__summary">Wie Kompression funktioniert, welche Codecs es gibt und wann Qualität wirklich verloren geht.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">video</span>
+                  <span class="topic-card__tag">audio</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMore">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="topic-card" data-category="design" data-difficulty="easy">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-responsive.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Design</span>
+                  <span class="topic-card__badge topic-card__badge--difficulty easy">Leicht</span>
+                </div>
+                <button class="topic-card__bookmark" aria-label="Lesezeichen">
+                  <i class="ph ph-bookmark" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 class="topic-card__title">Responsive Design Principles</h3>
+              <p class="topic-card__summary">Vom festen Layout zum flexiblen Grid: Wie deine Designs auf jedem Bildschirm großartig aussehen.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">css</span>
+                  <span class="topic-card__tag">mobile</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMore">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="topic-card" data-category="technik" data-difficulty="medium">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-druck.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Technik</span>
+                  <span class="topic-card__badge topic-card__badge--difficulty medium">Mittel</span>
+                </div>
+                <button class="topic-card__bookmark" aria-label="Lesezeichen">
+                  <i class="ph ph-bookmark" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 class="topic-card__title">Prepress & PDF/X Standards</h3>
+              <p class="topic-card__summary">Alles was du über Druckvorstufe wissen musst: PDF/X-Compliance, Farbprofile und Beschnitt.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">druck</span>
+                  <span class="topic-card__tag">pdf</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMore">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="topic-card" data-category="design" data-difficulty="easy">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-typo.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Design</span>
+                  <span class="topic-card__badge topic-card__badge--difficulty easy">Leicht</span>
+                </div>
+                <button class="topic-card__bookmark" aria-label="Lesezeichen">
+                  <i class="ph ph-bookmark" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 class="topic-card__title">Typography Hierarchy</h3>
+              <p class="topic-card__summary">Wie Schriftgrößen, Gewichte und Abstände zusammenarbeiten, um Lesbarkeit und Struktur zu schaffen.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">typo</span>
+                  <span class="topic-card__tag">layout</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMore">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="topic-card" data-category="grundlagen" data-difficulty="easy">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-farbe.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Grundlagen</span>
+                  <span class="topic-card__badge topic-card__badge--difficulty easy">Leicht</span>
+                </div>
+                <button class="topic-card__bookmark" aria-label="Lesezeichen">
+                  <i class="ph ph-bookmark" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 class="topic-card__title">Color Theory for Web</h3>
+              <p class="topic-card__summary">Farben wirken emotionsgeladen. Lerne Komplementärkontraste, Harmonien und accessible Paletten zu nutzen.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">farbe</span>
+                  <span class="topic-card__tag">a11y</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMore">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- "Dein Thema" Slot 1 — Coming Soon -->
+          <article class="topic-card topic-card--soon" data-category="design" data-difficulty="medium">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-grid.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Design</span>
+                  <span class="topic-card__badge topic-card__badge--soon">Dein Thema</span>
+                </div>
+              </div>
+              <h3 class="topic-card__title">CSS Grid & Flexbox</h3>
+              <p class="topic-card__summary">Moderne Layout-Techniken für responsive Designs. Von Grundlagen bis zu komplexen Grid-Strukturen.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">css</span>
+                  <span class="topic-card__tag">layout</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMoreSoon">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- "Dein Thema" Slot 2 — Coming Soon -->
+          <article class="topic-card topic-card--soon" data-category="grundlagen" data-difficulty="medium">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-a11y.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Grundlagen</span>
+                  <span class="topic-card__badge topic-card__badge--soon">Dein Thema</span>
+                </div>
+              </div>
+              <h3 class="topic-card__title">Web Accessibility (A11y)</h3>
+              <p class="topic-card__summary">Websites für alle zugänglich machen. Kontraste, Screenreader, Tastaturnavigation und semantisches HTML.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">a11y</span>
+                  <span class="topic-card__tag">html</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMoreSoon">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- "Dein Thema" Slot 3 — Multi Language / i18n -->
+          <article class="topic-card topic-card--soon" data-category="technik" data-difficulty="medium">
+            <div class="topic-card__image">
+              <img src="../assets/images/synthese-topic-i18n.jpg" alt="" loading="lazy">
+            </div>
+            <div class="topic-card__content">
+              <div class="topic-card__header">
+                <div class="topic-card__meta">
+                  <span class="topic-card__badge topic-card__badge--category">Technik</span>
+                  <span class="topic-card__badge topic-card__badge--soon">Dein Thema</span>
+                </div>
+              </div>
+              <h3 class="topic-card__title">Multi Language & i18n</h3>
+              <p class="topic-card__summary">Websites für alle Nationen zugänglich machen. Übersetzungsstrategien, RTL-Support, Locale-Handling und Kultur-Sensitivität.</p>
+              <div class="topic-card__footer">
+                <div class="topic-card__tags">
+                  <span class="topic-card__tag">i18n</span>
+                  <span class="topic-card__tag">js</span>
+                </div>
+                <span class="topic-card__read-more" data-i18n="card.readMoreSoon">Mehr lesen <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- TODO: Team implementiert das Topic-Detail Modal -->
+        <div id="topic-modal" class="challenge-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+          <div class="challenge-modal__backdrop"></div>
+          <div class="challenge-modal__content">
+            <button class="challenge-modal__close" type="button" aria-label="Schließen">
+              <i class="ph ph-x" aria-hidden="true"></i>
+            </button>
+            <div id="modal-body"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__main">
+        <div class="site-footer__brand-wrap">
+          <div class="site-footer__logo">
+            <span class="site-footer__logo-icon"><i class="ph ph-books" aria-hidden="true"></i></span>
+            <div class="site-footer__logo-text">
+              <span class="site-footer__logo-title">SYNTHESE</span>
+              <span class="site-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="site-footer__tagline">Mit KI denken. Menschlich handeln.</p>
+        </div>
+        <div class="site-footer__links-grid">
+          <div class="site-footer__col">
+            <h4>Projekt</h4>
+            <nav>
+              <a href="index.html">Themen Kompendium</a>
+              <a href="../../../../evolution/src/pages/index.html">Evolution Showcase</a>
+              <a href="../../../../projects/prisma/src/pages/index.html">PRISMA Workshop</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4>PLU</h4>
+            <nav>
+              <a href="/tutorials/" target="_blank" rel="noopener">PLU Hub</a>
+              <a href="/tutorials/python-classic/src/pages/index.html" target="_blank" rel="noopener">Python Classic</a>
+            </nav>
+          </div>
+          <div class="site-footer__col">
+            <h4>Rechtliches</h4>
+            <nav>
+              <a href="/tutorials/pages/impressum.html">Impressum</a>
+              <a href="/tutorials/pages/datenschutz.html">Datenschutz</a>
+              <a href="/tutorials/pages/disclaimer.html">Disclaimer</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div class="site-footer__legal">
+          <span>© PANTAM Learning Universe</span>
+          <span class="site-footer__dot">·</span>
+          <a href="#">MIT License</a>
+          <span class="site-footer__dot">·</span>
+          <a href="#">CC BY-NC-SA 4.0</a>
+        </div>
+        <div class="site-footer__meta">
+          <a href="/tutorials/pages/spenden.html" class="site-footer__support-link"><i class="ph ph-heart"></i> Unterstützen</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB -->
+  <div class="fab" role="group" aria-label="Schnellaktionen">
+    <button id="classroom-toggle" class="fab__btn" type="button" aria-pressed="false" data-tooltip="Classroom Mode (Shift+C)">
+      <i class="ph ph-presentation" aria-hidden="true"></i>
+    </button>
+    <button id="back-to-top" class="fab__btn" type="button" aria-label="Zum Seitenanfang">
+      <i class="ph ph-arrow-up" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

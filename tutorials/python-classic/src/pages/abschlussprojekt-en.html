@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Final Project Python Classic — PyBuddy CLI. All learned concepts in one project: variables, conditions, loops, lists, dictionaries, functions, modules, file I/O.">
+  <meta name="theme-color" content="#306998">
+  <title>Final Project | Python Classic</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css?v=2">
+  <link rel="alternate" hreflang="de" href="https://pantam.at/tutorials/python-classic/src/pages/abschlussprojekt.html" />
+  <link rel="alternate" hreflang="en" href="https://pantam.at/tutorials/python-classic/src/pages/abschlussprojekt-en.html" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+</head>
+<body>
+  <div class="py-classic-scroll-progress" aria-hidden="true">
+    <div class="py-classic-scroll-progress__bar" data-scroll-progress></div>
+  </div>
+
+  <header class="py-classic-header">
+    <div class="py-classic-header__container">
+      <a href="index-en.html" class="py-classic-logo">
+        <img src="../assets/logo.svg" alt="PLU" width="32" height="32">
+        <span>Python <span class="py-classic-logo__accent">Classic</span></span>
+      </a>
+      <nav class="py-classic-nav" aria-label="Hauptnavigation">
+        <a href="index-en.html" class="py-classic-nav__link">Home</a>
+        <a href="index.html#kapitel" class="py-classic-nav__link">Chapters</a>
+        <a href="lexikon-en.html" class="py-classic-nav__link">Glossary</a>
+        <a href="abschlussprojekt-en.html" class="py-classic-nav__link is-active">Project</a>
+        <a href="../../../index-en.html" class="py-classic-nav__link" target="_blank" rel="noopener">PLU Hub</a>
+      </nav>
+      <div class="py-classic-header__actions">
+        <div class="py-classic-lang">
+          <a href="abschlussprojekt.html" class="py-classic-lang__btn" data-lang="de" aria-label="Deutsch">DE</a>
+          <a href="abschlussprojekt-en.html" class="py-classic-lang__btn is-active" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button class="py-classic-header__btn" data-theme-toggle aria-label="Toggle dark mode" title="Dark mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-mobile" data-classroom-toggle aria-label="Classroom mode" title="Classroom mode (Shift+C)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <button class="py-classic-header__btn u-hidden-desktop" data-back-to-top aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <button class="py-classic-menu-toggle" data-mobile-toggle aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="py-classic-mobile-nav__backdrop" data-mobile-backdrop aria-hidden="true"></div>
+  <nav class="py-classic-mobile-nav" data-mobile-nav aria-label="Mobile Navigation">
+    <button class="py-classic-mobile-nav__close" data-mobile-close aria-label="Close menu"><i class="ph ph-x"></i></button>
+    <ul class="py-classic-mobile-nav__list">
+      <li><a href="index-en.html" class="py-classic-mobile-nav__link">Home</a></li>
+      <li><a href="index.html#kapitel" class="py-classic-mobile-nav__link">Chapters</a></li>
+      <li><a href="lexikon-en.html" class="py-classic-mobile-nav__link">Glossary</a></li>
+      <li><a href="abschlussprojekt-en.html" class="py-classic-mobile-nav__link is-active">Project</a></li>
+      <li><a href="../../../index-en.html" class="py-classic-mobile-nav__link" target="_blank" rel="noopener">PLU Hub</a></li>
+    </ul>
+  </nav>
+
+  <section class="py-classic-hero py-classic-hero--full-image">
+    <img src="../assets/images/kapitel/projekt-abschluss.jpg" alt="" class="py-classic-hero__bg-img" aria-hidden="true">
+    <div class="py-classic-hero__overlay"></div>
+    <div class="py-classic-hero__content">
+      <nav class="py-classic-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="index-en.html">Python Classic</a>
+        <span class="py-classic-hero__breadcrumb-separator">/</span>
+        <span>Final Project</span>
+      </nav>
+      <h1 class="py-classic-hero__title">PyBuddy <span style="color:var(--py-accent)">CLI</span></h1>
+      <p class="py-classic-hero__subtitle">The Final Project — all learned concepts in one interactive assistant</p>
+      <div class="py-classic-hero__meta">
+        <span class="py-classic-hero__badge">🕐 90 Min</span>
+        <span class="py-classic-hero__badge">🏆 Final Project</span>
+        <span class="py-classic-hero__badge"><i class="ph ph-code"></i> Python 3.10+</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="py-classic-content">
+    <article class="py-classic-chapter">
+
+      <!-- Intro -->
+      <div class="py-classic-box py-classic-box--tip">
+        <h3 class="py-classic-box__title"><i class="ph ph-lightbulb"></i> What awaits you?</h3>
+        <p class="py-classic-box__text">In this project you build <strong>PyBuddy CLI</strong> — an interactive command-line assistant, that combines all concepts from the 13 chapters. In the end you have a complete program, that you can proudly showcase in your portfolio.</p>
+      </div>
+
+      <!-- Section 1: Project Overview -->
+      <section class="py-classic-section" id="projekt">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-rocket"></i></span>
+          Project Overview
+        </h2>
+        <p class="py-classic-section__text">PyBuddy CLI is a personal assistant in the terminal. It greets the user, saves a profile, runs small tools and remembers everything in a JSON file. This project uses <strong>all</strong> chapter concepts:</p>
+        <div class="py-classic-learning-goals__list" style="margin-top:var(--py-space-4);">
+          <div class="py-classic-learning-goals__item"><strong>Chapter 01:</strong> Variables for username, Level, XP</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 02:</strong> <code>input()</code> and f-strings for the greeting</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 03:</strong> Operators for XP calculations</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 04:</strong> Conditions for menu decisions</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 05:</strong> <code>while</code> loop for the main menu</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 06:</strong> Lists for tasks and badges</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 07:</strong> Dictionary for the user profile</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 08:</strong> Functions for all tools</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 09:</strong> Module (<code>datetime</code>, <code>json</code>, <code>random</code>)</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 10:</strong> JSON file for saving the profile</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 11:</strong> Optional: Weather API integration</div>
+          <div class="py-classic-learning-goals__item"><strong>Chapter 12:</strong> AI-assisted code review of your project</div>
+        </div>
+      </section>
+
+      <!-- Section 2: Requirements -->
+      <section class="py-classic-section" id="anforderungen">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-check-square"></i></span>
+          Requirements
+        </h2>
+        <p class="py-classic-section__text">Your PyBuddy CLI must have the following features. Work through the points step by step:</p>
+        <ol class="py-classic-steps">
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>Greeting:</strong> Asks for the name and greets the user personally.</p>
+          </li>
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>Profile System:</strong> Saves name, level, XP and badges in a dictionary.</p>
+          </li>
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>Main Menu:</strong> Shows a menu with options and repeats until "exit".</p>
+          </li>
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>XP Calculator:</strong> Calculates total XP from base XP, multiplier and bonus.</p>
+          </li>
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>To-Do List:</strong> Add, display and complete tasks.</p>
+          </li>
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>Random Quote:</strong> Shows a random motivational quote from a list.</p>
+          </li>
+          <li class="py-classic-steps__item">
+            <p class="py-classic-steps__text"><strong>Save & Load:</strong> Save profile as JSON and reload on startup.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Section 3: Step by Step -->
+      <section class="py-classic-section" id="schritte">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-footprints"></i></span>
+          Step by Step
+        </h2>
+
+        <h3>Step 1: Project Structure</h3>
+        <p class="py-classic-section__text">Create a folder <code>pybuddy-cli/</code> with two files:</p>
+        <div class="py-classic-code">
+          <div class="py-classic-code__header">
+            <span class="py-classic-code__lang">bash</span>
+            <button class="py-classic-code__copy" data-copy aria-label="Copy"><i class="ph ph-copy"></i></button>
+          </div>
+          <pre class="py-classic-code__pre"><code class="language-bash">pybuddy-cli/
+├── main.py          # Main program
+└── profile.json      # Created automatically</code></pre>
+        </div>
+
+        <h3>Step 2: The Basic Structure</h3>
+        <p class="py-classic-section__text">Start with imports and profile management:</p>
+        <div class="py-classic-code">
+          <div class="py-classic-code__header">
+            <span class="py-classic-code__lang">python</span>
+            <button class="py-classic-code__copy" data-copy aria-label="Copy"><i class="ph ph-copy"></i></button>
+          </div>
+          <pre class="py-classic-code__pre"><code class="language-python">import json
+import random
+from datetime import datetime
+
+PROFILE_FILE = "profile.json"
+
+QUOTES = [
+    "Every expert was once a beginner.",
+    "Code is like humor — if you have to explain it, it is bad.",
+    "The best way to learn Python: Typing, not just reading!",
+    "Errors are not mistakes — they are debugging opportunities.",
+    "A program that runs is better than a perfect one that does not exist."
+]
+
+def load_profile():
+    """Loads the profile from the JSON file or creates a new one."""
+    try:
+        with open(PROFILE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {
+            "name": "",
+            "level": 1,
+            "xp": 0,
+            "badges": ["PyBuddy User"],
+            "tasks": []
+        }
+
+def save_profile(profile):
+    """Saves the profile as JSON."""
+    with open(PROFILE_FILE, "w", encoding="utf-8") as f:
+        json.dump(profil, f, indent=2, ensure_ascii=False)</code></pre>
+        </div>
+
+        <h3>Step 3: The Tool Functions</h3>
+        <p class="py-classic-section__text">Each menu feature is implemented as its own function:</p>
+        <div class="py-classic-code">
+          <div class="py-classic-code__header">
+            <span class="py-classic-code__lang">python</span>
+            <button class="py-classic-code__copy" data-copy aria-label="Copy"><i class="ph ph-copy"></i></button>
+          </div>
+          <pre class="py-classic-code__pre"><code class="language-python">def show_status(profile):
+    """Displays the current profile."""
+    print(f"\n{'='*30}")
+    print(f"  👤  {profil['name']}")
+    print(f"  🏆  Level {profil['level']}")
+    print(f"  ⭐  {profil['xp']} XP")
+    print(f"  🎖️  Badges: {', '.join(profil['badges'])}")
+    print(f"{'='*30}\n")
+
+def xp_calculator(profile):
+    """Calculates new XP and checks for level-up."""
+    basis = int(input("Base XP: "))
+    mult = float(input("Multiplier (e.g. 1.5): "))
+    bonus = int(input("Bonus-XP: "))
+    
+    new_xp = int(basis * mult + bonus)
+    profil["xp"] += new_xp
+    
+    # Level-Up alle 500 XP
+    new_level = profil["xp"] // 500 + 1
+    if new_level > profil["level"]:
+        profil["level"] = new_level
+        badge = f"Level {new_level}"
+        if badge not in profil["badges"]:
+            profil["badges"].append(badge)
+        print(f"🎉 Level-Up! You are now level {new_level}!")
+    
+    print(f"➕ +{new_xp} XP received!")
+    print(f"⭐ Total: {profil['xp']} XP")
+
+def todo_manager(profil):
+    """Manages the to-do list."""
+    print("\n📋 To-Do Manager")
+    print("[1] Add task")
+    print("[2] Show tasks")
+    print("[3] Complete task")
+    wahl = input("Choice: ")
+    
+    if wahl == "1":
+        task = input("New task: ")
+        profil["tasks"].append({"text": task, "done": False})
+        print("✅ Added!")
+    elif wahl == "2":
+        if not profil["tasks"]:
+            print("ℹ️ No tasks available.")
+        for i, task in enumerate(profil["tasks"], 1):
+            status = "✓" if task["done"] else "□"
+            print(f"  {i}. {status} {task['text']}")
+    elif wahl == "3":
+        nr = int(input("Number of completed task: "))
+        if 1 &lt;= nr &lt;= len(profil["tasks"]):
+            profil["tasks"][nr-1]["done"] = True
+            profil["xp"] += 10
+            print("✅ Done! +10 XP")
+
+def zufalls_zitat():
+    """Shows a random quote."""
+    print(f"\n💬 {random.choice(QUOTES)}\n")
+
+def uhrzeit_anzeigen():
+    """Shows the current time."""
+    now = datetime.now()
+    print(f"🕐 {now.strftime('%H:%M:%S')} — {now.strftime('%d.%m.%Y')}")</code></pre>
+        </div>
+
+        <h3>Step 4: The Main Menu</h3>
+        <p class="py-classic-section__text">The heart: A <code>while</code> loop that shows the menu and processes the input:</p>
+        <div class="py-classic-code">
+          <div class="py-classic-code__header">
+            <span class="py-classic-code__lang">python</span>
+            <button class="py-classic-code__copy" data-copy aria-label="Copy"><i class="ph ph-copy"></i></button>
+          </div>
+          <pre class="py-classic-code__pre"><code class="language-python">def main_menu(profile):
+    """Shows the main menu and processes input."""
+    while True:
+        print(f"\n{'='*30}")
+        print(f"  🤖  PyBuddy CLI")
+        print(f"  Hello, {profile['name']}!")
+        print(f"{'='*30}")
+        print("  [1] 👤  Show profile")
+        print("  [2] ➕  Calculate XP")
+        print("  [3] 📋  To-Do Manager")
+        print("  [4] 💬  Random Quote")
+        print("  [5] 🕐  Time")
+        print("  [0] 🚪  Exit")
+        print(f"{'='*30}")
+        
+        wahl = input("\nChoose (0-5): ").strip()
+        
+        if wahl == "0":
+            save_profile(profile)
+            print(f"💾 Profile saved. Goodbye, {profil['name']}!")
+            break
+        elif wahl == "1":
+            show_status(profile)
+        elif wahl == "2":
+            xp_calculator(profile)
+        elif wahl == "3":
+            todo_manager(profil)
+        elif wahl == "4":
+            zufalls_zitat()
+        elif wahl == "5":
+            uhrzeit_anzeigen()
+        else:
+            print("⚠️ Invalid input. Please enter 0-5.")</code></pre>
+        </div>
+
+        <h3>Step 5: The Entry Point</h3>
+        <p class="py-classic-section__text">Connect everything in the <code>main()</code> function:</p>
+        <div class="py-classic-code">
+          <div class="py-classic-code__header">
+            <span class="py-classic-code__lang">python</span>
+            <button class="py-classic-code__copy" data-copy aria-label="Copy"><i class="ph ph-copy"></i></button>
+          </div>
+          <pre class="py-classic-code__pre"><code class="language-python">def main():
+    print("🤖 Welcome to PyBuddy CLI!")
+    
+    profil = load_profile()
+    
+    # Erster Start?
+    if not profil["name"]:
+        profil["name"] = input("What is your name? ").strip()
+        print(f"\n👋 Hello {profil['name']}! Nice to have you here.")
+        save_profile(profile)
+    else:
+        print(f"\n👋 Welcome back, {profil['name']}!")
+    
+    main_menu(profile)
+
+if __name__ == "__main__":
+    main()</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 4: Complete Program -->
+      <section class="py-classic-section" id="komplett">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-file-py"></i></span>
+          The Complete Program
+        </h2>
+        <p class="py-classic-section__text">Here is the complete code in one file. Copy it to <code>main.py</code> and run it with <code>python main.py</code>:</p>
+        <div class="py-classic-code">
+          <div class="py-classic-code__header">
+            <span class="py-classic-code__lang">python</span>
+            <button class="py-classic-code__copy" data-copy aria-label="Copy"><i class="ph ph-copy"></i></button>
+          </div>
+          <pre class="py-classic-code__pre"><code class="language-python">"""
+PyBuddy CLI — Abschlussprojekt Python Classic
+All 13 chapters united in one interactive assistant.
+"""
+import json
+import random
+from datetime import datetime
+
+PROFILE_FILE = "profile.json"
+
+QUOTES = [
+    "Every expert was once a beginner.",
+    "Code is like humor — if you have to explain it, it is bad.",
+    "The best way to learn Python: Typing, not just reading!",
+    "Errors are not mistakes — they are debugging opportunities.",
+    "A program that runs is better than a perfect one that does not exist."
+]
+
+# ── Profile Management ───────────────────────────────
+def load_profile():
+    try:
+        with open(PROFILE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {
+            "name": "", "level": 1, "xp": 0,
+            "badges": ["PyBuddy User"], "tasks": []
+        }
+
+def save_profile(profile):
+    with open(PROFILE_FILE, "w", encoding="utf-8") as f:
+        json.dump(profil, f, indent=2, ensure_ascii=False)
+
+# ── Tool-Funktionen ─────────────────────────────────
+def show_status(profile):
+    print(f"\n{'='*35}")
+    print(f"  Profile: {profile['name']}")
+    print(f"  Level {profil['level']}  |  {profil['xp']} XP")
+    print(f"  Badges: {', '.join(profil['badges'])}")
+    print(f"  Tasks: {len(profil['tasks'])}")
+    print(f"{'='*35}\n")
+
+def xp_calculator(profile):
+    basis = int(input("Base XP: "))
+    mult = float(input("Multiplier: "))
+    bonus = int(input("Bonus: "))
+    new_xp = int(basis * mult + bonus)
+    profil["xp"] += new_xp
+    new_level = profil["xp"] // 500 + 1
+    if new_level > profil["level"]:
+        profil["level"] = new_level
+        profil["badges"].append(f"Level {new_level}")
+        print(f">>> Level-Up! Level {new_level}!")
+    print(f">>> +{new_xp} XP | Total: {profil['xp']}")
+
+def todo_manager(profil):
+    print("\n--- To-Do Manager ---")
+    print("[1] Add  [2] Show  [3] Done")
+    wahl = input("Choice: ")
+    if wahl == "1":
+        profil["tasks"].append({"text": input("Task: "), "done": False})
+        print("Added!")
+    elif wahl == "2":
+        for i, t in enumerate(profil["tasks"], 1):
+            s = "[x]" if t["done"] else "[ ]"
+            print(f"  {i}. {s} {t['text']}")
+    elif wahl == "3":
+        nr = int(input("Nummer: "))
+        profil["tasks"][nr-1]["done"] = True
+        profil["xp"] += 10
+        print("Done! +10 XP")
+
+def zufalls_zitat():
+    print(f"\n>>> {random.choice(QUOTES)}\n")
+
+def uhrzeit_anzeigen():
+    j = datetime.now()
+    print(f">>> {j.strftime('%H:%M:%S')} — {j.strftime('%d.%m.%Y')}")
+
+# ── Main Menu ───────────────────────────────────────
+def main_menu(profile):
+    while True:
+        print(f"\n{'='*35}")
+        print(f"  PyBuddy CLI — {profil['name']}")
+        print(f"{'='*35}")
+        print("  [1] Profile    [2] XP Calculator")
+        print("  [3] To-Do     [4] Quote")
+        print("  [5] Time   [0] Exit")
+        print(f"{'='*35}")
+        wahl = input("Choose (0-5): ").strip()
+        
+        if wahl == "0":
+            save_profile(profile)
+            print(f"Saved. Goodbye, {profil['name']}!")
+            break
+        elif wahl == "1": show_status(profile)
+        elif wahl == "2": xp_calculator(profile)
+        elif wahl == "3": todo_manager(profil)
+        elif wahl == "4": zufalls_zitat()
+        elif wahl == "5": uhrzeit_anzeigen()
+        else: print("Invalid. Please enter 0-5.")
+
+# ── Start ───────────────────────────────────────────
+def main():
+    print("=== PyBuddy CLI ===")
+    profil = load_profile()
+    if not profil["name"]:
+        profil["name"] = input("What is your name? ").strip()
+        print(f"Hello {profil['name']}!")
+        save_profile(profile)
+    else:
+        print(f"Welcome back, {profil['name']}!")
+    main_menu(profile)
+
+if __name__ == "__main__":
+    main()</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 5: Extensions -->
+      <section class="py-classic-section" id="erweiterungen">
+        <h2 class="py-classic-section__title">
+          <span class="py-classic-section__title-icon"><i class="ph ph-lightning"></i></span>
+          Extension Ideas
+        </h2>
+        <p class="py-classic-section__text">Your PyBuddy CLI is finished — but you can expand it further. Here are ideas you can implement with the chapter concepts:</p>
+        <div class="py-classic-learning-goals__list" style="margin-top:var(--py-space-4);">
+          <div class="py-classic-learning-goals__item"><i class="ph ph-globe"></i> <strong>Weather Integration:</strong> Fetch current weather with <code>requests</code> (Chapter 11)</div>
+          <div class="py-classic-learning-goals__item"><i class="ph ph-game-controller"></i> <strong>Number Guessing:</strong> Add the game from Chapter 5 as a menu item</div>
+          <div class="py-classic-learning-goals__item"><i class="ph ph-chart-bar"></i> <strong>Statistics:</strong> Show XP progress as a chart with <code>matplotlib</code></div>
+          <div class="py-classic-learning-goals__item"><i class="ph ph-password"></i> <strong>Password Generator:</strong> Create secure passwords with <code>random</code></div>
+          <div class="py-classic-learning-goals__item"><i class="ph ph-notebook"></i> <strong>Notebook:</strong> Save notes as separate JSON files</div>
+          <div class="py-classic-learning-goals__item"><i class="ph ph-users"></i> <strong>Multiple Profiles:</strong> Manage multiple users with different JSON files</div>
+        </div>
+      </section>
+
+      <!-- Fun Fact -->
+      <div class="py-classic-funfact">
+        <div class="py-classic-funfact__icon">🏆</div>
+        <h3 class="py-classic-funfact__title">🏆 Congratulations!</h3>
+        <p class="py-classic-funfact__text">You have completed all 13 chapters and built a complete Python program. That is more than many programmers accomplish in their first month. Your PyBuddy CLI uses variables, conditions, loops, lists, dictionaries, functions, modules and file I/O — all in one project. Show it to your friends, expand it further and above all: <strong>Keep coding!</strong></p>
+      </div>
+
+      <!-- Chapter Nav -->
+      <nav class="py-classic-chapter-nav" aria-label="Chapter navigation">
+        <a href="kapitel/12-ki-cocoding.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--prev">
+          <span class="py-classic-chapter-nav__label">← Back</span>
+          <span class="py-classic-chapter-nav__title">12 – AI Co-Coding</span>
+        </a>
+        <a href="index-en.html" class="py-classic-chapter-nav__link py-classic-chapter-nav__link--next">
+          <span class="py-classic-chapter-nav__label">To Homepage →</span>
+          <span class="py-classic-chapter-nav__title">Python Classic</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <footer class="py-classic-footer">
+    <div class="py-classic-footer__container">
+      <div class="py-classic-footer__main">
+        <div class="py-classic-footer__brand-wrap">
+          <div class="py-classic-footer__logo">
+            <img src="../assets/logo.svg" alt="PLU Logo" width="40" height="40">
+            <div class="py-classic-footer__logo-text">
+              <span class="py-classic-footer__logo-title">Python Classic</span>
+              <span class="py-classic-footer__logo-subtitle">PANTAM LEARNING UNIVERSE</span>
+            </div>
+          </div>
+          <p class="py-classic-footer__tagline">Think with AI. Act human.</p>
+          <div class="py-classic-footer__classroom">
+            <button class="py-classic-footer__classroom-btn" data-classroom-toggle>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span>Classroom Mode</span>
+            </button>
+          </div>
+        </div>
+        <div class="py-classic-footer__links-grid">
+          <div class="py-classic-footer__col"><h4>Chapters</h4><nav><a href="index.html#kapitel">Alle Kapitel</a><a href="kapitel/06-listen.html">06. Listen</a><a href="kapitel/12-ki-cocoding.html">12. KI Co-Coding</a></nav></div>
+          <div class="py-classic-footer__col"><h4>Resources</h4><nav><a href="lexikon-en.html">Glossary</a><a href="abschlussprojekt-en.html">Final Project</a><a href="../../../index-en.html" target="_blank" rel="noopener">PLU Hub</a></nav></div>
+          <div class="py-classic-footer__col"><h4>Legal</h4><nav><a href="../../../pages/impressum-en.html">Imprint</a><a href="../../../pages/datenschutz-en.html">Privacy</a><a href="../../../pages/disclaimer-en.html">Disclaimer</a></nav></div>
+        </div>
+      </div>
+      <div class="py-classic-footer__bottom">
+        <div class="py-classic-footer__legal"><span>© 2026 PANTAM Learning Universe</span><span class="py-classic-footer__dot">·</span><a href="#">MIT License</a><span class="py-classic-footer__dot">·</span><a href="#">CC BY-NC-SA 4.0</a></div>
+        <div class="py-classic-footer__meta"><a href="../../../pages/spenden-en.html" class="py-classic-footer__support-link"><i class="ph ph-heart"></i> Support</a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="py-classic-back-to-top u-hidden-mobile" data-back-to-top aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1496 @@
+/* === GLOBALE RESETS UND TYPOGRAPHIE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === CSS-VARIABLEN – AUDIO-TUTORIAL (PRÄGNANTES BLAU) === */
+:root {
+  /* Light Mode */
+  --primary: #0288d1;         /* Intensives Blau (prägnanter als #00bcd4) */
+  --primary-light: #0277bd;   /* Dunkleres Blau für Hover */
+  --primary-bg: #e1f5fe;      /* Helles Blau für Hintergrund */
+  --text: #0d47a1;            /* Dunkelblau für Haupttext (besserer Kontrast) */
+  --text-secondary: #424242;  /* Neutrale Sekundärtextfarbe */
+  --success: #00c853;
+  --border-light: #b3e5fc;
+  --shadow: rgba(2, 136, 209, 0.2);  /* Blauer Schatten für Konsistenz */
+  --card-bg: white;
+  --input-bg: white;
+  --h1-color: #0d47a1;        /* Dunkelblau für H1 (besserer Kontrast) */
+  --h2-color: #0288d1;        /* Helles Blau für H2 (primär) */
+  --h3-color: #0277bd;        /* Mittleres Blau für H3 */
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  line-height: 1.8;
+  color: var(--text);
+  background-color: var(--primary-bg);
+  padding: 20px;
+}
+
+/* === KAPITEL-CONTAINER === */
+.main-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* === ÜBERSCHRIFTEN – MIT HIERARCHIE === */
+.main-content h1 {
+  font-size: 2.6rem;
+  margin-bottom: 28px;
+  color: var(--h1-color);
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--primary);
+  font-weight: 800;
+}
+
+.main-content h2 {
+  font-size: 1.8rem;
+  margin: 32px 0 20px;
+  color: var(--h2-color);
+  font-weight: 700;
+}
+
+.main-content h3 {
+  font-size: 1.4rem;
+  margin: 24px 0 16px;
+  color: var(--h3-color);
+  font-weight: 600;
+}
+
+.main-content h4 {
+  font-size: 1.2rem;
+  margin: 20px 0 12px;
+  color: var(--primary-light);
+  font-weight: 600;
+}
+
+/* === ABSÄTZE UND LISTS === */
+.main-content p,
+.main-content ul,
+.main-content ol {
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.main-content ul,
+.main-content ol {
+  padding-left: 28px;
+  color: var(--text);
+}
+
+.main-content li {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* === ABSCHNITT ALS 'KARTE' === */
+.main-content > section {
+  background: linear-gradient(to bottom, var(--card-bg), #e0f7fa);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.main-content > section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+/* === CODE & PRE === */
+pre {
+  background-color: #e0f7fa;
+  border-left: 4px solid var(--primary);
+  padding: 18px;
+  margin: 24px 0;
+  overflow-x: auto;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.95rem;
+  border-radius: 0 8px 8px 0;
+  color: var(--text);
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+  background-color: #b3e5fc;  /* Helles Blau statt hellem Türkis */
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+  font-size: 0.95em;
+}
+
+.js-code {
+  color: var(--text);
+  background: none;
+  padding: 0;
+}
+
+/* === AUSGABE-BEREICH === */
+.ausgabe-bereich {
+  margin-top: 18px;
+  padding: 18px;
+  background-color: #e0f7fa;
+  border: 1px dashed var(--primary);
+  border-radius: 8px;
+  min-height: 2.5rem;
+}
+
+/* === WARNUNGEN & HINWEISE === */
+.warnung {
+  background-color: #fff8e1;
+  color: #5d4037;
+  padding: 18px;
+  border-left: 4px solid #ffc107;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.regel {
+  background-color: #b3e5fc;
+  border-left: 4px solid var(--primary);
+  padding: 18px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text);
+}
+
+/* === BUTTONS === */
+button,
+.nav-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  margin: 10px 10px 18px 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+button:hover,
+.nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+  background-color: var(--primary-light);
+}
+
+/* === HEADER & NAVIGATION === */
+.header {
+  background: linear-gradient(135deg, #2c3e50, #1a2530);
+  color: white;
+  padding: 1rem 0;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  overflow: visible !important;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  padding: 1rem 24px;
+  gap: 24px;
+  position: relative;
+}
+
+/* Logo ganz links */
+.header-container > .logo {
+  order: 1;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+
+/* Navigation in der Mitte mit max Platz */
+.header-container > .nav-wrapper {
+  order: 2;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+}
+
+/* Mobile Menu Toggle */
+.header-container > .mobile-menu-toggle {
+  order: 3;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+/* PLU Nav nach dem Mobile Toggle */
+.header-container > .plu-nav {
+  order: 4;
+  flex-shrink: 0;
+}
+
+/* Dark Mode ganz rechts */
+.header-container > #dark-mode-toggle {
+  order: 5;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#dark-mode-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Prevents the button from shrinking */
+}
+
+#dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  position: relative;
+  padding: 6px 0;
+  white-space: nowrap;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #4fc3f7;  /* Helles Blau für bessere Lesbarkeit statt direkte Verwendung von --primary */
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* === FOOTER === */
+.footer {
+  text-align: center;
+  padding: 2.2rem 0;
+  color: var(--text-secondary);
+  border-top: 1px solid #eee;
+  margin-top: 50px;
+  font-size: 0.95rem;
+}
+
+/* === RESPONSIVE – DESKTOP BLEIBT, MOBILE WIRD ÜBERSCHRIEBEN === */
+@media (max-width: 768px) {
+  body {
+    padding: 14px;
+  }
+  .header-container {
+    padding: 1rem 16px;
+  }
+  button,
+  .nav-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 8px auto 16px;
+  }
+}
+
+/* === DROPDOWN MENÜ (Desktop) === */
+.nav-item.dropdown {
+  position: relative !important;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100% !important;
+  left: 0 !important;
+  background: white;
+  list-style: none;
+  min-width: 250px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  display: none;
+  z-index: 10000 !important;
+  border: 1px solid #eee;
+  margin-top: 8px !important;
+}
+
+.dropdown-menu a {
+  color: var(--text);
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #b3e5fc;  /* Helles Blau für Hover-Effekt */
+  color: var(--primary);
+  padding-left: 24px;
+}
+
+/* === HERO-BEREICH MIT DYNAMISCHER ANIMATION === */
+.hero-section {
+  text-align: center;
+  padding: 80px 24px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid var(--border-light);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(224,247,250,0.95) 100%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='60' font-family='monospace' font-size='40' fill='%2326c6da22'%3E%7B %7D%3C/text%3E%3C/svg%3E");
+  background-size: 120px;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--shadow) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 1;
+  font-size: 2.8rem;
+  color: var(--h1-color);
+  animation: fadeInUp 1s ease-out;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  color: var(--h2-color);
+  margin-top: 16px;
+  animation: fadeInUp 1s ease-out 0.2s both;
+  font-weight: 600;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === KAPITEL-NAVIGATION AM ENDE === */
+.kapitel-navigation {
+  margin-top: 40px;
+  padding-top: 28px;
+  text-align: center;
+  border-top: 2px dashed var(--primary);
+}
+
+.kapitel-navigation p {
+  margin-bottom: 20px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.nav-button {
+  display: inline-block;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(38, 198, 218, 0.3);
+  font-size: 1rem;
+}
+
+.nav-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(38, 198, 218, 0.4);
+  background: linear-gradient(to right, var(--primary-light), #014d4e);  /* Dunkleres Blau statt dunklem Türkis */
+}
+
+/* === BACK-TO-TOP BUTTON === */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+/* === TABELLEN MIT RAHMEN === */
+.main-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.main-content th,
+.main-content td {
+  padding: 14px;
+  text-align: left;
+  border: 1px solid #dfe6ec;
+}
+
+.main-content th {
+  background-color: #b3e5fc;
+  font-weight: 700;
+  color: #004d40;
+}
+
+/* ================================================================== */
+/*                        DARK MODE – BLAU                            */
+/* ================================================================== */
+
+html.dark-mode {
+  /* Dark Mode Farben */
+  --primary-bg: #0a1520;      /* Dunkles Blau-Marine */
+  --card-bg: #152330;         /* Mittleres Blau-Grau */
+  --text: #e1f5fe;            /* Helles Blau-Weiß */
+  --text-secondary: #81d4fa;  /* Hellblaue Sekundärtextfarbe */
+  --border-light: #0288d1;
+  --shadow: rgba(2, 136, 209, 0.35);  /* Angepasster blauer Schatten */
+
+  /* Überschriften mit Hierarchie */
+  --h1-color: #42a5f5;        /* H1: Mittleres Blau */
+  --h2-color: #0288d1;        /* H2: Helles Blau (angepasst an neue Primary) */
+  --h3-color: #29b6f6;        /* H3: Helleres Blau */
+  --h4-color: #4fc3f7;        /* H4: Sehr helles Blau */
+
+  /* Akzente */
+  --primary: #0288d1;         /* Blau für Akzente */
+  --primary-light: #0277bd;   /* Dunkleres Blau für Hover */
+}
+
+/* Dark Mode Body */
+html.dark-mode body {
+  background-color: #0f1a25;
+  color: var(--text);
+}
+
+/* Dark Mode Header */
+html.dark-mode .header {
+  background: linear-gradient(135deg, #0a1520, #0d2a3a);  /* Dunkles Blau-Marine */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  color: white;  /* Stellt sicher, dass Texte weiß im Dark Mode sind */
+}
+
+/* Dark Mode Sections */
+html.dark-mode .main-content > section {
+  background: linear-gradient(to bottom, var(--card-bg), #1a2a3a);
+  border: 1px solid #0288d1;  /* Blaue statt türkiser Rahmen */
+}
+
+/* Dark Mode Table Containers - verbesserte Kontraste */
+html.dark-mode .comparison-table-container {
+  background-color: var(--card-bg) !important;  /* Verwendet die definierte Kartenhintergrundfarbe */
+  border: 1px solid var(--border-light) !important;  /* Verwendet die definierte Randfarbe */
+}
+
+/* Dark Mode Illustration Containers - verbesserte Kontraste */
+html.dark-mode .illustration-center {
+  background-color: #0d2a3a !important;  /* Dunkleres Blau für besseren Kontrast */
+  border: 1px solid #0288d1 !important;
+}
+
+/* Dark Mode Card Containers - verbesserte Kontraste */
+html.dark-mode .comparison-cards .card {
+  background: #152330 !important;  /* Dunkleres Blau-Grau */
+  border: 1px solid #0288d1 !important;
+  color: #e0f7fa !important;  /* Hellerer Text für besseren Kontrast */
+}
+
+/* Dark Mode Table Headers - verbesserte Kontraste */
+html.dark-mode .main-content table th {
+  background-color: #0277bd !important;  /* Dunkleres Blau */
+  color: #e0f7fa !important;  /* Hellerer Text */
+}
+
+/* Dark Mode Table Cells - verbesserte Kontraste */
+html.dark-mode .main-content table td {
+  background-color: #1a2a3a !important;  /* Dunklerer Hintergrund */
+  color: #e0f7fa !important;  /* Hellerer Text */
+}
+
+/* Dark Mode Überschriften – MIT HIERARCHIE */
+html.dark-mode .main-content h1 {
+  color: var(--h1-color) !important;
+}
+
+html.dark-mode .main-content h2 {
+  color: var(--h2-color) !important;
+}
+
+html.dark-mode .main-content h2 {
+  color: var(--h2-color) !important;
+}
+
+html.dark-mode .main-content h3 {
+  color: var(--h3-color) !important;
+}
+
+html.dark-mode .main-content h4 {
+  color: var(--h4-color) !important;
+}
+
+/* Dark Mode Text */
+html.dark-mode .main-content p,
+html.dark-mode .main-content li,
+html.dark-mode .main-content ul,
+html.dark-mode .main-content ol {
+  color: var(--text) !important;
+  line-height: 1.8; /* Sicherstellen, dass Zeilenabstand erhalten bleibt */
+}
+
+/* Dark Mode Body - verbesserte Lesbarkeit */
+html.dark-mode body {
+  background-color: #0f1a25;
+  color: #e0f7fa; /* Helltürkiser Text für bessere Lesbarkeit */
+}
+
+/* Dark Mode Hero-Bereich */
+html.dark-mode .hero-section {
+  background:
+    linear-gradient(135deg, rgba(15, 26, 37, 0.95) 0%, rgba(26, 42, 58, 0.98) 100%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='60' font-family='monospace' font-size='40' fill='%230288d122'%3E%7B %7D%3C/text%3E%3C/svg%3E");
+  border-color: #0288d1;  /* Blaue statt türkiser Rahmen */
+}
+
+/* Dark Mode Toggle Button - Entferne Hintergrund */
+html.dark-mode #dark-mode-toggle,
+#dark-mode-toggle {
+  background: none !important;
+  border: none !important;
+  color: inherit !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  padding: 8px !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background-color 0.3s ease !important;
+  flex-shrink: 0 !important; /* Verhindert, dass der Button schrumpft */
+}
+html.dark-mode #dark-mode-toggle:hover,
+#dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .hero-section h1 {
+  color: var(--h1-color) !important;
+}
+
+html.dark-mode .hero-section .hero-subtitle {
+  color: var(--h2-color) !important;
+}
+
+/* Dark Mode Warnungen & Hinweise */
+html.dark-mode .regel {
+  background-color: #0d2a3a !important;
+  border-left-color: var(--primary) !important;
+  color: var(--text) !important;
+}
+
+html.dark-mode .warnung {
+  background-color: #3a2a2a !important;
+  border-left-color: #e74c3c !important;
+  color: #ffe0b2 !important;
+}
+
+/* Dark Mode Links */
+html.dark-mode a {
+  color: #4dd0e1 !important;
+}
+
+html.dark-mode a:hover {
+  color: #4fc3f7 !important;  /* Helles Blau statt Türkis */
+}
+
+/* Dark Mode Code */
+html.dark-mode pre,
+html.dark-mode code {
+  background-color: #1a2a3a !important;
+  color: #80deea !important;  /* Helles Blau statt hellem Türkis */
+}
+
+/* Dark Mode Dropdown-Menü */
+html.dark-mode .dropdown-menu {
+  background: #152330 !important;  /* Dunkles Blau-Grau */
+  border-color: #0288d1 !important;  /* Primäres Blau */
+}
+
+html.dark-mode .dropdown-menu a {
+  color: #e1f5fe !important;  /* Helles Blau-Weiß */
+}
+
+html.dark-mode .dropdown-menu a:hover {
+  background-color: #0277bd !important;  /* Mittleres Blau */
+  color: #4fc3f7 !important;  /* Helles Blau */
+  padding-left: 24px !important;
+}
+
+/* Dark Mode Karten */
+html.dark-mode .card {
+  background: var(--card-bg);
+  color: var(--text);
+  border-color: #0288d1;  /* Blaue Farbe statt türkis */
+}
+
+html.dark-mode .card h3 {
+  color: var(--h3-color) !important;
+}
+
+/* Dark Mode Tabellen */
+html.dark-mode .main-content table th {
+  background-color: #2a3a4a !important;
+  color: var(--text) !important;
+  border-color: #555 !important;
+}
+
+html.dark-mode .main-content table td {
+  background-color: #1a2a3a !important;
+  color: var(--text) !important;
+  border-color: #555 !important;
+}
+
+/* Dark Mode Buttons */
+html.dark-mode .nav-button,
+html.dark-mode button {
+  color: #0a1929 !important;
+  background: linear-gradient(to right, #0288d1, #0277bd) !important;  /* Blaue Farbpalette */
+  border-color: #0288d1 !important;
+}
+
+html.dark-mode .nav-button:hover,
+html.dark-mode button:hover {
+  background: linear-gradient(to right, #0277bd, #01579b) !important;  /* Dunkleres Blau */
+  transform: translateY(-2px);
+}
+
+/* Dark Mode Navigation Links */
+html.dark-mode .nav-link {
+  color: #e1f5fe !important;  /* Helles Blau-Weiß statt weiß für bessere Kontraste */
+}
+
+html.dark-mode .nav-link:hover {
+  color: #80deea !important;  /* Noch helleres Blau für Hover-Effekt */
+}
+
+/* Dark Mode Footer */
+html.dark-mode .footer {
+  color: #e0f7fa !important;  /* Helles Blau-Weiß statt türkis */
+  border-top-color: #0288d1 !important;  /* Blaue Farbe */
+}
+
+/* Dark Mode Back-to-Top */
+html.dark-mode #back-to-top {
+  background-color: #0288d1 !important;  /* Blaue Farbe */
+}
+
+html.dark-mode #back-to-top:hover {
+  background-color: #0277bd !important;  /* Dunkleres Blau */
+}
+
+/* Dark Mode: Schrift in Demo-Einträgen hell machen */
+html.dark-mode .demo-entry,
+html.dark-mode .demo-entry strong,
+html.dark-mode .demo-entry small {
+  color: #f0f0f0 !important;
+}
+
+/* ================================================================== */
+/*                     MOBILE HAMBURGER MENÜ                          */
+/* ================================================================== */
+
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2000;
+}
+
+.mobile-menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 16px;
+    position: relative;
+  }
+
+  .header-container > .logo {
+    order: 1;
+    flex-shrink: 0;
+  }
+
+  .header-container > .mobile-menu-toggle {
+    order: 2;
+    position: absolute; /* Absolute Positionierung für Zentrierung */
+    left: 50%;
+    transform: translateX(-50%); /* Zentriert den Button */
+    flex-shrink: 0;
+    z-index: 2000; /* Stellt sicher, dass der Button über anderen Elementen ist */
+  }
+
+  .header-container > .nav-wrapper {
+    order: 3;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-container > #dark-mode-toggle {
+    order: 4;
+    flex-shrink: 0;
+    position: absolute;
+    right: 24px; /* Positioniert den Button am rechten Rand */
+    z-index: 1999; /* Stellt sicher, dass der Button unter dem Hamburger-Button ist */
+  }
+
+  /* Dark Mode für mobiles Menü - Entferne blauen Hintergrund */
+  html.dark-mode .header-container > .mobile-menu-toggle {
+    background: transparent !important;
+  }
+
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: #0a1520;  /* Dunkles Blau für mobiles Menü */
+    transition: right 0.4s ease;
+    z-index: 1500;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+  }
+
+  /* Mobile Ansicht: Tabellen als Lernkarten untereinander */
+  @media (max-width: 768px) {
+    .comparison-table-container table {
+      display: block;
+      overflow-x: auto;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .comparison-table-container tbody,
+    .comparison-table-container thead {
+      display: block;
+      width: 100%;
+    }
+
+    .comparison-table-container tr {
+      display: block;
+      margin-bottom: 15px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 15px;
+      background: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box; /* Berücksichtigt Padding und Border in der Breite */
+    }
+
+    .comparison-table-container td,
+    .comparison-table-container th {
+      display: block;
+      border: none;
+      padding: 5px 0;
+      width: 100%;
+      word-wrap: break-word;
+    }
+
+    .comparison-table-container th {
+      background: none;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .comparison-table-container td:first-child,
+    .comparison-table-container th:first-child {
+      font-weight: bold;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .nav-wrapper.active {
+    right: 0;
+  }
+
+  .nav-list {
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 60px 0 20px;
+    align-items: stretch !important;
+  }
+
+  .nav-link,
+  .dropdown-menu a {
+    padding: 16px 24px !important;
+    color: white !important;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #1a2a3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    background: #1a2a3a !important;
+    margin-top: 0 !important;
+    display: none !important;
+    padding-left: 20px !important;
+    border: none !important;
+  }
+
+  .dropdown-menu.show {
+    display: block !important;
+  }
+
+  /* Animation für Hamburger → X */
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+  }
+}
+
+/* === VERGLEICHSKARTEN === */
+.comparison-cards {
+  display: flex;
+  gap: 24px;
+  margin: 28px 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  flex: 1;
+  min-width: 250px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-light);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.icon {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  color: var(--h3-color);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.card ul {
+  padding-left: 20px;
+}
+
+.illustration-center {
+  text-align: center;
+  margin: 32px 0;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 16px;
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.illustration-caption {
+  margin-top: 12px;
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* === VERGLEICHSTABELLE MIT RAHMEN === */
+.comparison-table-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+  box-shadow: 0 4px 12px var(--shadow);
+  overflow-x: auto;
+}
+
+.comparison-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  min-width: 600px;
+}
+
+.comparison-table-container th,
+.comparison-table-container td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+}
+
+.comparison-table-container th:last-child,
+.comparison-table-container td:last-child {
+  border-right: none;
+}
+
+.comparison-table-container th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.comparison-table-container td {
+  background-color: white;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+/* === BILDER MIT RAHMEN FÜR SCREENSHOTS === */
+.screenshot {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.screenshot-caption {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+/* === ZENTRIERTE BUTTON-GRUPPE FÜR DOWNLOAD-LINKS === */
+.center-button-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* === DEMO FÜR MUSTERLÖSUNG === */
+.demo-container {
+  margin: 30px 0;
+  padding: 20px;
+  background-color: #f0f9ff;
+  border: 1px solid #b3e5fc;
+  border-radius: 8px;
+}
+
+.demo-entries,
+.demo-edit-form {
+  margin-top: 15px;
+}
+
+.demo-entry {
+  background: var(--card-bg, white);
+  padding: 15px;
+  margin: 10px 0;
+  border-left: 4px solid #3498db;
+  color: var(--text-color, #333);
+}
+
+.demo-entry strong {
+  color: var(--text-color, #333);
+}
+
+.demo-entry small {
+  color: var(--text-color, #666);
+}
+
+.demo-entry p {
+  margin: 8px 0;
+  color: var(--text-color, #333);
+}
+
+.demo-entry a {
+  color: #e74c3c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.demo-edit-form {
+  display: none;
+  padding: 15px;
+  border: 1px solid #3498db;
+  background: var(--card-bg, white);
+  color: var(--text-color, #333);
+}
+
+.demo-edit-form label {
+  display: block;
+  margin: 8px 0 4px;
+  font-weight: bold;
+  color: var(--text-color, #333);
+}
+
+.demo-edit-form input,
+.demo-edit-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: var(--input-bg, white);
+  color: var(--text-color, #333);
+}
+
+.demo-edit-form button {
+  margin: 10px 10px 0 0;
+}
+
+/* === PRÄSENTATIONS-MUSTERLÖSUNGEN === */
+.tab-container {
+  margin: 25px 0;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  background: #d0d0d0;
+}
+
+.tab-button.active {
+  background: var(--primary, #3498db);
+  color: white;
+}
+
+.code-block {
+  background: #2d2d2d !important;
+  color: #f8f8f2 !important;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 20px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.file-label {
+  font-weight: bold;
+  color: var(--text, #2c3e50);
+  margin: 25px 0 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+.demo-list,
+.demo-form {
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px 0;
+  border: 1px solid var(--border-light, #ccc);
+  background: var(--card-bg, #f9f9f9);
+}
+
+.demo-entry {
+  padding: 12px;
+  margin: 10px 0;
+  border-left: 4px solid #3498db;
+  background: white;
+}
+
+.demo-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: var(--input-bg, white);
+  color: var(--text, #333);
+}
+
+.demo-form button {
+  background: var(--primary, #3498db);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.demo-actions a {
+  color: #e74c3c;
+  text-decoration: underline;
+  margin-right: 15px;
+}
+
+/* Dark Mode Anpassung für Demo */
+html.dark-mode .demo-list,
+html.dark-mode .demo-form {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+html.dark-mode .demo-entry {
+  background: #3a3a3a;
+  color: #f0f0f0;
+}
+
+html.dark-mode .demo-form input {
+  background: #3a3a3a;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+/* === PLU Navigation & Support Button === */
+.plu-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.plu-link {
+  color: #e74c3c;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.plu-link:hover {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #ec7063;
+}
+
+.support-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+}
+
+.support-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4);
+  filter: brightness(1.1);
+}
+
+@media (max-width: 900px) {
+  .plu-nav {
+    gap: 8px;
+  }
+  .plu-link {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  .support-btn {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .plu-nav {
+    margin-right: 8px;
+  }
+  .support-btn {
+    display: none;
+  }
+}
+
+/* === PLAYER-STYLES FÜR DEMO === */
+.player-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.player-container h3 {
+  text-align: center;
+  color: #004d40;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  margin-bottom: 20px;
+}
+
+.file-input label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #004d40;
+}
+
+.file-input input[type="file"] {
+  width: 100%;
+  padding: 8px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.controls button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00bcd4;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.controls button:hover {
+  background-color: #00838f;
+}
+
+.time-display {
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+.progress-container {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #00bcd4;
+  width: 0%;
+  transition: width 0.1s;
+}
+
+.effect-control {
+  margin: 15px 0;
+}
+
+.effect-control label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #004d40;
+}
+
+.effect-control input[type="range"],
+.effect-control select {
+  width: 100%;
+}
+
+.effects-panel {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.effects-panel h4 {
+  margin-top: 0;
+  color: #004d40;
+}
+
+/* Dark Mode Player-Styles */
+html.dark-mode .player-container {
+  background-color: #1a2a3a;
+  border: 1px solid #0288d1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+html.dark-mode .player-container h3 {
+  color: #e0f7fa;
+}
+
+html.dark-mode .file-input label {
+  color: #e0f7fa;
+}
+
+html.dark-mode .controls button {
+  background-color: #0288d1;
+  color: white;
+}
+
+html.dark-mode .controls button:hover {
+  background-color: #0277bd;
+}
+
+html.dark-mode .effect-control label {
+  color: #e0f7fa;
+}
+
+html.dark-mode .progress-container {
+  background-color: #333;
+}
+
+html.dark-mode .progress-bar {
+  background-color: #0288d1;
+}
+
+html.dark-mode .effects-panel {
+  background-color: #2a3a4a;
+  border: 1px solid #0288d1;
+}
+
+html.dark-mode .effects-panel h4 {
+  color: #4fc3f7;
+}

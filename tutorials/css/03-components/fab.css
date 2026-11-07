@@ -1,0 +1,159 @@
+/* ==========================================================================
+   FAB - FLOATING ACTION BUTTONS
+   Fixed position buttons (bottom right)
+   
+   Original PLU Pattern:
+   - Theme Toggle (Dark/Light)
+   - Classroom Mode
+   - Back to Top
+   - Search (optional)
+   ========================================================================== */
+
+.fab-container {
+  position: fixed;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  right: 1.5rem;
+  z-index: calc(var(--z-fixed) - 1);
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  
+  /* Hidden on mobile when bottom nav is visible */
+}
+
+/* Mobile: Hide FAB buttons (moved to header) */
+@media (max-width: 1023px) {
+  .fab-container {
+    display: none;
+  }
+}
+
+/* Desktop: Show FAB buttons */
+@media (min-width: 1024px) {
+  .fab-container {
+    display: flex;
+  }
+}
+
+/* Individual FAB Button */
+.fab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  
+  cursor: pointer;
+  transition: var(--transition-transform), var(--transition-shadow), background-color 0.2s ease;
+  box-shadow: var(--shadow-lg);
+  
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .fab-btn {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (hover: hover) {
+  .fab-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-xl);
+    background: var(--bg-elevated);
+  }
+}
+
+.fab-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.fab-btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Active State (for toggle buttons) */
+.fab-btn.active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: transparent;
+}
+
+/* Back to Top - Hidden by default */
+.fab-btn--backtop {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.fab-btn--backtop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Tooltip on hover */
+.fab-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  
+  padding: 0.5rem 0.875rem;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .fab-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+/* Classroom Mode FAB */
+.fab-btn--classroom.active {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+  animation: pulse-subtle 2s infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(236, 72, 153, 0); }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .fab-btn,
+  .fab-btn--backtop {
+    transition: none;
+  }
+  
+  .fab-btn--classroom.active {
+    animation: none;
+  }
+}

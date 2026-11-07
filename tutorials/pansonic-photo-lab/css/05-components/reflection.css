@@ -1,0 +1,302 @@
+/* ============================================================
+   PANSONIC PHOTO LAB — Reflection: Kamera-Notizblock / Exif-Style
+   LCD display aesthetic for Gen Z engagement
+   ============================================================ */
+
+@layer components {
+  /* ── Reflection Container ────────────────────────────────── */
+  .photo-reflection {
+    background: linear-gradient(180deg, #1a1a26 0%, #13131c 100%);
+    border: 2px solid #2a2a38;
+    border-radius: 16px;
+    padding: 0;
+    margin-bottom: var(--photo-space-8);
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.06),
+      0 20px 60px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  /* LCD texture */
+  .photo-reflection::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Header ──────────────────────────────────────────────── */
+  .photo-reflection__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(180deg, #222230 0%, #1a1a26 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    z-index: 2;
+  }
+
+  .photo-reflection__header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .photo-reflection__header-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--photo-accent), var(--photo-accent-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    font-size: 1.2rem;
+  }
+
+  .photo-reflection__header-title {
+    font-size: var(--photo-text-lg);
+    font-weight: var(--photo-font-weight-bold);
+    color: #f0f0f5;
+    margin: 0;
+  }
+
+  .photo-reflection__header-subtitle {
+    font-size: var(--photo-text-sm);
+    color: rgba(255,255,255,0.4);
+    margin: 0;
+  }
+
+  .photo-reflection__header-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--photo-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--photo-font-mono);
+    padding: 4px 10px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 6px;
+  }
+
+  /* ── Questions ───────────────────────────────────────────── */
+  .photo-reflection__questions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .photo-reflection__question {
+    padding: var(--photo-space-6) var(--photo-space-8);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+  }
+
+  .photo-reflection__question:last-child {
+    border-bottom: none;
+  }
+
+  /* Question number badge */
+  .photo-reflection__question::before {
+    content: attr(data-num);
+    position: absolute;
+    top: var(--photo-space-6);
+    left: var(--photo-space-8);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--photo-accent);
+    font-family: var(--photo-font-mono);
+    background: rgba(245,158,11,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .photo-reflection__label {
+    display: block;
+    font-size: var(--photo-text-md);
+    font-weight: var(--photo-font-weight-semibold);
+    color: #e8e8f0;
+    margin-bottom: var(--photo-space-3);
+    padding-left: 48px;
+    line-height: 1.5;
+  }
+
+  /* ── LCD Input ───────────────────────────────────────────── */
+  .photo-reflection__input-wrap {
+    position: relative;
+  }
+
+  .photo-reflection__input {
+    width: 100%;
+    padding: var(--photo-space-4) var(--photo-space-5);
+    padding-bottom: var(--photo-space-8);
+    background: #0c0c14;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    color: #a8e6cf;
+    font-size: var(--photo-text-md);
+    font-family: var(--photo-font-mono);
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.2s ease;
+    line-height: 1.6;
+  }
+
+  .photo-reflection__input::placeholder {
+    color: rgba(168,230,207,0.25);
+    font-family: var(--photo-font-mono);
+  }
+
+  .photo-reflection__input:focus {
+    outline: none;
+    border-color: var(--photo-accent);
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.1), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+
+  /* LCD glow effect */
+  .photo-reflection__input:focus {
+    text-shadow: 0 0 8px rgba(168,230,207,0.15);
+  }
+
+  /* ── Counter ─────────────────────────────────────────────── */
+  .photo-reflection__counter {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    font-family: var(--photo-font-mono);
+    background: rgba(0,0,0,0.4);
+    padding: 2px 8px;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  /* ── Bottom decoration ───────────────────────────────────── */
+  .photo-reflection::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--photo-accent-secondary), transparent);
+    opacity: 0.3;
+  }
+
+  /* ── Light Mode ──────────────────────────────────────────── */
+  [data-theme="light"] .photo-reflection {
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border-color: var(--photo-border-default);
+    box-shadow: var(--photo-shadow-lg);
+  }
+
+  [data-theme="light"] .photo-reflection::before {
+    background-image:
+      linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  }
+
+  [data-theme="light"] .photo-reflection__header {
+    background: linear-gradient(180deg, #f8f9fa 0%, #f0f0f5 100%);
+    border-bottom-color: var(--photo-border-subtle);
+  }
+
+  [data-theme="light"] .photo-reflection__header-title {
+    color: var(--photo-text-primary);
+  }
+
+  [data-theme="light"] .photo-reflection__header-subtitle {
+    color: var(--photo-text-tertiary);
+  }
+
+  [data-theme="light"] .photo-reflection__header-badge {
+    background: rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.15);
+  }
+
+  [data-theme="light"] .photo-reflection__question {
+    border-bottom-color: var(--photo-border-subtle);
+  }
+
+  [data-theme="light"] .photo-reflection__label {
+    color: var(--photo-text-primary);
+  }
+
+  [data-theme="light"] .photo-reflection__input {
+    background: #f5f5f7;
+    border-color: var(--photo-border-default);
+    color: #1a4d3a;
+  }
+
+  [data-theme="light"] .photo-reflection__input::placeholder {
+    color: rgba(26,77,58,0.3);
+  }
+
+  [data-theme="light"] .photo-reflection__input:focus {
+    border-color: var(--photo-accent);
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.08);
+  }
+
+  [data-theme="light"] .photo-reflection__counter {
+    color: var(--photo-text-tertiary);
+    background: rgba(0,0,0,0.05);
+  }
+
+  /* ── Mobile ──────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .photo-reflection__header {
+      padding: 12px 16px;
+      gap: var(--photo-space-3);
+    }
+    .photo-reflection__header-left {
+      gap: 8px;
+    }
+    .photo-reflection__header-icon {
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+    }
+    .photo-reflection__header-title {
+      font-size: var(--photo-text-md);
+    }
+    .photo-reflection__header-subtitle {
+      font-size: var(--photo-text-xs);
+    }
+    .photo-reflection__header-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+    }
+    .photo-reflection__question {
+      padding: var(--photo-space-4) var(--photo-space-4);
+    }
+    .photo-reflection__question::before {
+      top: var(--photo-space-4);
+      left: var(--photo-space-4);
+    }
+    .photo-reflection__label {
+      font-size: var(--photo-text-sm);
+      padding-left: 42px;
+      margin-bottom: var(--photo-space-2);
+    }
+    .photo-reflection__input {
+      padding: var(--photo-space-3) var(--photo-space-4);
+      padding-bottom: var(--photo-space-6);
+      font-size: var(--photo-text-sm);
+      min-height: 80px;
+    }
+  }
+}

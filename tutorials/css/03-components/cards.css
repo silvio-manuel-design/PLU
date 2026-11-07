@@ -1,0 +1,2177 @@
+/* ==========================================================================
+   CARD COMPONENTS
+   BEM-Methodologie: .block__element--modifier
+   
+   Dokumentation für Studenten:
+   - .academy-card = Block
+   - .academy-card__visual = Element
+   - .academy-card--junior = Modifier (Theme)
+   - Keine IDs für Styling!
+   - Keine !important (außer Utilities)
+   ========================================================================== */
+
+/* ========================================================================
+   ACADEMY CARD
+   Hauptkomponente für Academy-Auswahl
+   ======================================================================== */
+
+.academy-card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.academy-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Card Visual (Bild/Icon Bereich) */
+.academy-card__visual {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15) 0%, 
+    rgba(57, 208, 216, 0.1) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.academy-card__visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 50%
+  );
+}
+
+/* Card Icon Wrapper */
+.academy-card__icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.academy-card__icon-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, 
+    rgba(88, 166, 255, 0.4), 
+    transparent 70%
+  );
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.academy-card__icon svg,
+.academy-card__icon i {
+  font-size: 48px;
+  color: var(--accent-primary);
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Content */
+.academy-card__content {
+  padding: var(--space-6);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.academy-card__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.academy-card__badge {
+  padding: var(--space-1) var(--space-3);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(88, 166, 255, 0.05)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.academy-card__badge--age {
+  background: rgba(57, 208, 216, 0.1);
+  border-color: transparent;
+  color: var(--accent-cyan);
+}
+
+.academy-card__title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.academy-card__description {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+.academy-card__features {
+  list-style: none;
+  margin: 0 0 var(--space-6) 0;
+}
+
+.academy-card__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.academy-card__feature svg,
+.academy-card__feature i {
+  color: var(--accent-green);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.academy-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: var(--transition-transform), var(--transition-shadow);
+  box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+}
+
+.academy-card__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.4);
+}
+
+.academy-card__cta--disabled {
+  background: linear-gradient(135deg, 
+    rgba(107, 114, 128, 0.3), 
+    rgba(107, 114, 128, 0.1)
+  );
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.academy-card__cta--disabled:hover {
+  transform: none;
+}
+
+/* ========================================================================
+   ACADEMY CARD THEMES (Modifiers)
+   ======================================================================== */
+
+/* Junior Theme */
+.academy-card--junior {
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+.academy-card--junior:hover {
+  border-color: rgba(88, 166, 255, 0.5);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(88, 166, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.academy-card--junior .academy-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2) 0%, 
+    rgba(139, 92, 246, 0.1) 100%
+  );
+}
+
+.academy-card--junior .academy-card__icon-bg {
+  background: radial-gradient(circle, 
+    rgba(88, 166, 255, 0.5), 
+    transparent 70%
+  );
+}
+
+.academy-card--junior .academy-card__icon svg,
+.academy-card--junior .academy-card__icon i {
+  color: var(--accent-primary);
+}
+
+.academy-card--junior .academy-card__badge {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(88, 166, 255, 0.05)
+  );
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+.academy-card--junior .academy-card__cta {
+  background: var(--gradient-primary);
+  box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+}
+
+/* Premium Theme */
+.academy-card--premium {
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.academy-card--premium:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(245, 158, 11, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.academy-card--premium .academy-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2) 0%, 
+    rgba(236, 72, 153, 0.1) 100%
+  );
+}
+
+.academy-card--premium .academy-card__icon-bg {
+  background: radial-gradient(circle, 
+    rgba(245, 158, 11, 0.5), 
+    transparent 70%
+  );
+}
+
+.academy-card--premium .academy-card__icon svg,
+.academy-card--premium .academy-card__icon i {
+  color: var(--accent-orange);
+}
+
+.academy-card--premium .academy-card__badge {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2), 
+    rgba(245, 158, 11, 0.05)
+  );
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--accent-orange);
+}
+
+.academy-card--premium .academy-card__cta {
+  background: var(--gradient-orange);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+}
+
+/* Senior Theme */
+.academy-card--senior {
+  border-color: rgba(63, 185, 80, 0.3);
+}
+
+.academy-card--senior:hover {
+  border-color: rgba(63, 185, 80, 0.5);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(63, 185, 80, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.academy-card--senior .academy-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(63, 185, 80, 0.2) 0%, 
+    rgba(57, 208, 216, 0.1) 100%
+  );
+}
+
+.academy-card--senior .academy-card__icon-bg {
+  background: radial-gradient(circle, 
+    rgba(63, 185, 80, 0.5), 
+    transparent 70%
+  );
+}
+
+.academy-card--senior .academy-card__icon svg,
+.academy-card--senior .academy-card__icon i {
+  color: var(--accent-green);
+}
+
+.academy-card--senior .academy-card__badge {
+  background: linear-gradient(135deg, 
+    rgba(63, 185, 80, 0.2), 
+    rgba(63, 185, 80, 0.05)
+  );
+  border-color: rgba(63, 185, 80, 0.3);
+  color: var(--accent-green);
+}
+
+.academy-card--senior .academy-card__cta {
+  background: var(--gradient-green);
+  box-shadow: 0 4px 20px rgba(63, 185, 80, 0.3);
+}
+
+/* ========================================================================
+   KI HUB GRID LAYOUT
+   Premium 2+3 Grid für Über KI & Lernen Section
+   ======================================================================== */
+
+.ki-hub-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Reihe mit 2 großen Karten (oben) */
+.ki-hub-row--large {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .ki-hub-row--large {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .ki-hub-row--large .tutorial-card {
+    min-height: 280px;
+  }
+}
+
+/* Reihe mit 3 Karten (unten) */
+.ki-hub-row--small {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .ki-hub-row--small {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ki-hub-row--small {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================================================================
+   KI HUB CARDS - Harmonisches Blau/Violett Design
+   ======================================================================== */
+
+.tutorial-card--ki-hub {
+  --hub-color: rgba(139, 92, 246, 0.5);
+  --hub-glow: rgba(139, 92, 246, 0.15);
+}
+
+.tutorial-card--ki-hub:hover {
+  border-color: var(--hub-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px var(--hub-glow);
+}
+
+/* Theme Variations - Alle im Blau-Violett Spektrum für Harmonie */
+.tutorial-card--ki-hub[data-hub-theme="violet"] {
+  --hub-color: rgba(139, 92, 246, 0.5);
+  --hub-glow: rgba(139, 92, 246, 0.15);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="violet"] .card-visual {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(236, 72, 153, 0.06) 100%);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="violet"] .card-badge {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="violet"] .card-link {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="violet"] .card-link:hover {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  color: white;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="orange"] {
+  --hub-color: rgba(245, 158, 11, 0.5);
+  --hub-glow: rgba(245, 158, 11, 0.15);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="orange"] .card-visual {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="orange"] .card-badge {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="orange"] .card-link {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="orange"] .card-link:hover {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #1a1a1a;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="pink"] {
+  --hub-color: rgba(236, 72, 153, 0.5);
+  --hub-glow: rgba(236, 72, 153, 0.15);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="pink"] .card-visual {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="pink"] .card-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05));
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="pink"] .card-link {
+  background: rgba(236, 72, 153, 0.1);
+  border-color: rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="pink"] .card-link:hover {
+  background: linear-gradient(135deg, #ec4899, #f472b6);
+  color: white;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="amber"] {
+  --hub-color: rgba(251, 191, 36, 0.5);
+  --hub-glow: rgba(251, 191, 36, 0.15);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="amber"] .card-visual {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.05) 100%);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="amber"] .card-badge {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05));
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="amber"] .card-link {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="amber"] .card-link:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a1a;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="cyan"] {
+  --hub-color: rgba(57, 208, 216, 0.5);
+  --hub-glow: rgba(57, 208, 216, 0.15);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="cyan"] .card-visual {
+  background: linear-gradient(135deg, rgba(57, 208, 216, 0.1) 0%, rgba(88, 166, 255, 0.05) 100%);
+}
+
+.tutorial-card--ki-hub[data-hub-theme="cyan"] .card-badge {
+  background: linear-gradient(135deg, rgba(57, 208, 216, 0.15), rgba(57, 208, 216, 0.05));
+  border: 1px solid rgba(57, 208, 216, 0.2);
+  color: #5eead4;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="cyan"] .card-link {
+  background: rgba(57, 208, 216, 0.1);
+  border-color: rgba(57, 208, 216, 0.2);
+  color: #5eead4;
+}
+
+.tutorial-card--ki-hub[data-hub-theme="cyan"] .card-link:hover {
+  background: linear-gradient(135deg, #39d0d8, #5eead4);
+  color: #0f172a;
+}
+
+/* ========================================================================
+   TUTORIAL CARD - PATHWAY-BASED COLOR SYSTEM
+   Harmonische Farbpsychologie: 3 Pathways statt 7 bunte Karten
+   ======================================================================== */
+
+.tutorial-card {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(51, 65, 85, 0.4) 0%, 
+    rgba(30, 41, 59, 0.2) 100%
+  );
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Border glow effect */
+.tutorial-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    var(--pathway-color, rgba(88, 166, 255, 0.4)) 0%, 
+    transparent 60%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tutorial-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.tutorial-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--pathway-color, rgba(88, 166, 255, 0.3));
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 40px var(--pathway-glow, rgba(88, 166, 255, 0.1));
+}
+
+.tutorial-card:hover::before {
+  opacity: 0.8;
+}
+
+/* ========================================================================
+   PATHWAY VARIATIONS - 3 harmonische Farbschemata
+   ======================================================================== */
+
+/* CLASSIC PATHWAY - Blau/Cyan (Vertrauen, Professionalität) */
+.tutorial-card--classic {
+  --pathway-color: rgba(88, 166, 255, 0.5);
+  --pathway-glow: rgba(88, 166, 255, 0.15);
+}
+
+.tutorial-card--classic .card-visual {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.12) 0%, 
+    rgba(57, 208, 216, 0.08) 100%
+  );
+}
+
+.tutorial-card--classic .card-badge {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(88, 166, 255, 0.05)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  color: #58a6ff;
+}
+
+.tutorial-card--classic .card-link {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(57, 208, 216, 0.1)
+  );
+  border-color: rgba(88, 166, 255, 0.3);
+  color: #58a6ff;
+}
+
+.tutorial-card--classic .card-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.9), 
+    rgba(57, 208, 216, 0.8)
+  );
+  color: white;
+}
+
+/* MODERN PATHWAY - Violett/Magenta (Energie, Innovation) */
+.tutorial-card--modern {
+  --pathway-color: rgba(217, 70, 239, 0.5);
+  --pathway-glow: rgba(217, 70, 239, 0.15);
+}
+
+.tutorial-card--modern .card-visual {
+  background: linear-gradient(135deg, 
+    rgba(217, 70, 239, 0.1) 0%, 
+    rgba(236, 72, 153, 0.08) 100%
+  );
+}
+
+.tutorial-card--modern .card-badge {
+  background: linear-gradient(135deg, 
+    rgba(217, 70, 239, 0.12), 
+    rgba(236, 72, 153, 0.05)
+  );
+  border: 1px solid rgba(217, 70, 239, 0.2);
+  color: #d946ef;
+}
+
+.tutorial-card--modern .card-link {
+  background: linear-gradient(135deg, 
+    rgba(217, 70, 239, 0.15), 
+    rgba(236, 72, 153, 0.1)
+  );
+  border-color: rgba(217, 70, 239, 0.25);
+  color: #d946ef;
+}
+
+.tutorial-card--modern .card-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(217, 70, 239, 0.9), 
+    rgba(236, 72, 153, 0.8)
+  );
+  color: white;
+}
+
+/* PANSONIC PATHWAY - Gold/Orange (Inspiration, Abenteuer) */
+.tutorial-card--pansonic {
+  --pathway-color: rgba(251, 191, 36, 0.5);
+  --pathway-glow: rgba(251, 191, 36, 0.15);
+}
+
+.tutorial-card--pansonic .card-visual {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.08) 0%, 
+    rgba(251, 146, 60, 0.06) 100%
+  );
+}
+
+.tutorial-card--pansonic .card-badge {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.12), 
+    rgba(251, 146, 60, 0.05)
+  );
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.tutorial-card--pansonic .card-link {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.15), 
+    rgba(251, 146, 60, 0.1)
+  );
+  border-color: rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+}
+
+.tutorial-card--pansonic .card-link:hover {
+  background: linear-gradient(135deg, 
+    rgba(251, 191, 36, 0.9), 
+    rgba(251, 146, 60, 0.8)
+  );
+  color: #1a1a1a;
+}
+
+/* ========================================================================
+   CARD ELEMENTS
+   ======================================================================== */
+
+.card-visual {
+  height: 140px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.06) 0%, 
+    transparent 50%
+  );
+}
+
+.card-visual i {
+  font-size: 48px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.tutorial-card:hover .card-visual i {
+  transform: scale(1.1);
+}
+
+.card-badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 3;
+  backdrop-filter: blur(8px);
+}
+
+.card-badge--new {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(245, 158, 11, 0.1));
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.tutorial-card h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  margin: var(--space-4) var(--space-5) var(--space-2);
+  color: var(--text-primary);
+}
+
+.tutorial-card .card-desc {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin: 0 var(--space-5) var(--space-4);
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 var(--space-5) var(--space-5);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card-link--disabled {
+  background: rgba(107, 114, 128, 0.15);
+  border-color: rgba(107, 114, 128, 0.2);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.card-link--disabled:hover {
+  transform: none;
+  background: rgba(107, 114, 128, 0.15);
+}
+
+/* ========================================================================
+   SKILLS PATHWAY - Group Headers
+   ======================================================================== */
+
+.skills-pathway {
+  position: relative;
+}
+
+/* ========================================================================
+   TUTORIAL GROUP (Skills Pathway Headers)
+   ======================================================================== */
+
+.tutorial-group {
+  margin-bottom: var(--space-12);
+}
+
+.tutorial-group__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-4);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .tutorial-group__title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-10);
+  }
+}
+
+/* Unterstrich mit mehr Abstand zu den Karten */
+.tutorial-group__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--accent-primary) 0%, 
+    transparent 100%
+  );
+  border-radius: var(--radius-full);
+}
+
+.tutorial-group__title .ph {
+  font-size: 1.2em;
+  color: var(--accent-primary);
+}
+
+/* Gradient Text für Pathway-Namen */
+.tutorial-group__title .text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pathway-spezifische Icon-Farben */
+[data-pathway="classic"] .tutorial-group__title .ph {
+  color: #58a6ff;
+}
+
+[data-pathway="modern"] .tutorial-group__title .ph {
+  color: #d946ef;
+}
+
+[data-pathway="pansonic"] .tutorial-group__title .ph {
+  color: #fbbf24;
+}
+
+/* ========================================================================
+   TARGET GROUP CARDS (Zielgruppen Section)
+   ======================================================================== */
+
+.tutorial-card--target {
+  --target-color: rgba(139, 92, 246, 0.5);
+  --target-glow: rgba(139, 92, 246, 0.15);
+}
+
+.tutorial-card--target:hover {
+  border-color: var(--target-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px var(--target-glow);
+}
+
+.tutorial-card--target .card-content {
+  padding: var(--space-5);
+}
+
+.tutorial-card--target h4 {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--text-xl);
+}
+
+.tutorial-card--target .card-desc {
+  margin: 0 0 var(--space-4) 0;
+}
+
+/* Feature Lists */
+.card-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.card-features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.card-features li:last-child {
+  margin-bottom: 0;
+}
+
+.card-features .ph {
+  color: var(--accent-green);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Target Theme Variations */
+.tutorial-card--target[data-target-theme="violet"] {
+  --target-color: rgba(139, 92, 246, 0.5);
+  --target-glow: rgba(139, 92, 246, 0.15);
+}
+
+.tutorial-card--target[data-target-theme="violet"] .card-visual {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(236, 72, 153, 0.06) 100%);
+}
+
+.tutorial-card--target[data-target-theme="cyan"] {
+  --target-color: rgba(57, 208, 216, 0.5);
+  --target-glow: rgba(57, 208, 216, 0.15);
+}
+
+.tutorial-card--target[data-target-theme="cyan"] .card-visual {
+  background: linear-gradient(135deg, rgba(57, 208, 216, 0.12) 0%, rgba(88, 166, 255, 0.06) 100%);
+}
+
+.tutorial-card--target[data-target-theme="orange"] {
+  --target-color: rgba(245, 158, 11, 0.5);
+  --target-glow: rgba(245, 158, 11, 0.15);
+}
+
+.tutorial-card--target[data-target-theme="orange"] .card-visual {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(251, 146, 60, 0.06) 100%);
+}
+
+/* ========================================================================
+   CARD VISUAL VARIANTS (for About KI section)
+   ======================================================================== */
+
+.card-visual--ai {
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.2), 
+    rgba(236, 72, 153, 0.1)
+  );
+}
+
+.card-visual--practice {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2), 
+    rgba(239, 68, 68, 0.1)
+  );
+}
+
+.card-visual--pledge {
+  background: linear-gradient(135deg, 
+    rgba(236, 72, 153, 0.2), 
+    rgba(139, 92, 246, 0.1)
+  );
+}
+
+.card-visual--success {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2), 
+    rgba(236, 72, 153, 0.1)
+  );
+}
+
+.card-visual--lexicon {
+  background: linear-gradient(135deg, 
+    rgba(63, 185, 80, 0.2), 
+    rgba(57, 208, 216, 0.1)
+  );
+}
+
+/* ========================================================================
+   SECTION TRANSITION: About KI → Parallax
+   ======================================================================== */
+
+#about-ki {
+  position: relative;
+  z-index: 5;
+}
+
+/* About KI Section - z-index höher als Parallax */
+#about-ki {
+  position: relative;
+  z-index: 10;
+  background: var(--bg-primary);
+}
+
+
+
+/* ========================================================================
+   KEYFRAME ANIMATIONS
+   ======================================================================== */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+
+/* ========================================================================
+   LIGHT MODE - Premium Card Styling
+   ======================================================================== */
+
+/* Light Mode: Academy Cards - Frosted Glass */
+html.light-theme .academy-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+html.light-theme .academy-card:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-8px);
+}
+
+/* Light Mode: Tutorial Cards - Pathway System */
+html.light-theme .tutorial-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+html.light-theme .tutorial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.1),
+    0 0 30px var(--pathway-glow, rgba(88, 166, 255, 0.1));
+}
+
+/* Classic - Light Mode (Standard PLU Blue) */
+html.light-theme .tutorial-card--classic {
+  --pathway-color: rgba(88, 166, 255, 0.35);
+  --pathway-glow: rgba(88, 166, 255, 0.08);
+}
+
+html.light-theme .tutorial-card--classic:hover {
+  border-color: rgba(88, 166, 255, 0.25);
+}
+
+html.light-theme .tutorial-card--classic .card-visual {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08) 0%, 
+    rgba(57, 208, 216, 0.05) 100%
+  );
+}
+
+html.light-theme .tutorial-card--classic .card-badge {
+  background: rgba(88, 166, 255, 0.12);
+  border-color: rgba(88, 166, 255, 0.2);
+  color: #3b82f6;
+}
+
+html.light-theme .tutorial-card--classic .card-link {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: rgba(88, 166, 255, 0.25);
+  color: #3b82f6;
+}
+
+html.light-theme .tutorial-card--classic .card-link:hover {
+  background: linear-gradient(135deg, #58a6ff, #39d0d8);
+  color: white;
+}
+
+/* Modern - Light Mode */
+html.light-theme .tutorial-card--modern {
+  --pathway-color: rgba(168, 85, 247, 0.35);
+  --pathway-glow: rgba(168, 85, 247, 0.06);
+}
+
+html.light-theme .tutorial-card--modern:hover {
+  border-color: rgba(168, 85, 247, 0.18);
+}
+
+html.light-theme .tutorial-card--modern .card-visual {
+  background: linear-gradient(135deg, 
+    rgba(168, 85, 247, 0.06) 0%, 
+    rgba(236, 72, 153, 0.04) 100%
+  );
+}
+
+html.light-theme .tutorial-card--modern .card-badge {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.15);
+  color: #9333ea;
+}
+
+html.light-theme .tutorial-card--modern .card-link {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.2);
+  color: #9333ea;
+}
+
+html.light-theme .tutorial-card--modern .card-link:hover {
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  color: white;
+}
+
+/* Pansonic - Light Mode */
+html.light-theme .tutorial-card--pansonic {
+  --pathway-color: rgba(245, 158, 11, 0.35);
+  --pathway-glow: rgba(245, 158, 11, 0.06);
+}
+
+html.light-theme .tutorial-card--pansonic:hover {
+  border-color: rgba(245, 158, 11, 0.18);
+}
+
+html.light-theme .tutorial-card--pansonic .card-visual {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.06) 0%, 
+    rgba(251, 146, 60, 0.04) 100%
+  );
+}
+
+html.light-theme .tutorial-card--pansonic .card-badge {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+html.light-theme .tutorial-card--pansonic .card-link {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.2);
+  color: #d97706;
+}
+
+html.light-theme .tutorial-card--pansonic .card-link:hover {
+  background: linear-gradient(135deg, #f59e0b, #fb923c);
+  color: white;
+}
+
+/* Light Mode: KI Hub Cards */
+html.light-theme .tutorial-card--ki-hub {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+html.light-theme .tutorial-card--ki-hub:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 0 30px var(--hub-glow);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="violet"] {
+  --hub-glow: rgba(139, 92, 246, 0.06);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="violet"] .card-visual {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(236, 72, 153, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="violet"] .card-badge {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="violet"] .card-link {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="violet"] .card-link:hover {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  color: white;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="orange"] {
+  --hub-glow: rgba(245, 158, 11, 0.06);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="orange"] .card-visual {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(239, 68, 68, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="orange"] .card-badge {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="orange"] .card-link {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="orange"] .card-link:hover {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #1a1a1a;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="pink"] {
+  --hub-glow: rgba(236, 72, 153, 0.06);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="pink"] .card-visual {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(139, 92, 246, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="pink"] .card-badge {
+  background: rgba(236, 72, 153, 0.1);
+  border-color: rgba(236, 72, 153, 0.15);
+  color: #db2777;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="pink"] .card-link {
+  background: rgba(236, 72, 153, 0.08);
+  border-color: rgba(236, 72, 153, 0.15);
+  color: #db2777;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="pink"] .card-link:hover {
+  background: linear-gradient(135deg, #ec4899, #f472b6);
+  color: white;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="amber"] {
+  --hub-glow: rgba(251, 191, 36, 0.06);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="amber"] .card-visual {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.04) 0%, rgba(245, 158, 11, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="amber"] .card-badge {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.15);
+  color: #d97706;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="amber"] .card-link {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.15);
+  color: #d97706;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="amber"] .card-link:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a1a;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="cyan"] {
+  --hub-glow: rgba(57, 208, 216, 0.06);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="cyan"] .card-visual {
+  background: linear-gradient(135deg, rgba(57, 208, 216, 0.05) 0%, rgba(88, 166, 255, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="cyan"] .card-badge {
+  background: rgba(57, 208, 216, 0.1);
+  border-color: rgba(57, 208, 216, 0.15);
+  color: #0d9488;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="cyan"] .card-link {
+  background: rgba(57, 208, 216, 0.08);
+  border-color: rgba(57, 208, 216, 0.15);
+  color: #0d9488;
+}
+
+html.light-theme .tutorial-card--ki-hub[data-hub-theme="cyan"] .card-link:hover {
+  background: linear-gradient(135deg, #39d0d8, #5eead4);
+  color: #0f172a;
+}
+
+/* Light Mode: Target Cards */
+html.light-theme .tutorial-card--target {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+html.light-theme .tutorial-card--target:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 0 30px var(--target-glow);
+}
+
+html.light-theme .tutorial-card--target[data-target-theme="violet"] {
+  --target-glow: rgba(139, 92, 246, 0.06);
+}
+
+html.light-theme .tutorial-card--target[data-target-theme="violet"] .card-visual {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(236, 72, 153, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--target[data-target-theme="cyan"] {
+  --target-glow: rgba(57, 208, 216, 0.06);
+}
+
+html.light-theme .tutorial-card--target[data-target-theme="cyan"] .card-visual {
+  background: linear-gradient(135deg, rgba(57, 208, 216, 0.06) 0%, rgba(88, 166, 255, 0.03) 100%);
+}
+
+html.light-theme .tutorial-card--target[data-target-theme="orange"] {
+  --target-glow: rgba(245, 158, 11, 0.06);
+}
+
+html.light-theme .tutorial-card--target[data-target-theme="orange"] .card-visual {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(251, 146, 60, 0.03) 100%);
+}
+
+html.light-theme .card-features .ph {
+  color: #10b981;
+}
+
+/* Light Mode: Icons less saturated */
+html.light-theme .card-visual i {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  opacity: 0.9;
+}
+
+/* Light Mode: Skills Pathway Titles */
+html.light-theme .tutorial-group__title {
+  color: var(--text-primary);
+}
+
+html.light-theme .tutorial-group__title .text-gradient {
+  background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html.light-theme [data-pathway="modern"] .tutorial-group__title {
+  color: #9333ea;
+}
+
+html.light-theme [data-pathway="modern"] .tutorial-group__title .ph {
+  color: #9333ea;
+}
+
+html.light-theme [data-pathway="pansonic"] .tutorial-group__title {
+  color: #d97706;
+}
+
+html.light-theme [data-pathway="pansonic"] .tutorial-group__title .ph {
+  color: #d97706;
+}
+
+/* Light Mode: Section Backgrounds */
+html.light-theme .section--alt {
+  background: linear-gradient(180deg, 
+    rgba(240, 249, 255, 0.5) 0%, 
+    rgba(224, 242, 254, 0.8) 100%
+  );
+}
+
+/* Light Mode: Disabled button */
+html.light-theme .card-link--disabled {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #94a3b8;
+}
+/* ==========================================================================
+   CARD COMPONENTS
+   BEM-Methodologie: .block__element--modifier
+   
+   Dokumentation für Studenten:
+   - .academy-card = Block
+   - .academy-card__visual = Element
+   - .academy-card--junior = Modifier (Theme)
+   - Keine IDs für Styling!
+   - Keine !important (außer Utilities)
+   ========================================================================== */
+
+/* ========================================================================
+   ACADEMY CARD
+   Hauptkomponente für Academy-Auswahl
+   ======================================================================== */
+
+.academy-card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.academy-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 10px 10px -5px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Card Visual (Bild/Icon Bereich) */
+.academy-card__visual {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15) 0%, 
+    rgba(57, 208, 216, 0.1) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.academy-card__visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 50%
+  );
+}
+
+/* Card Icon Wrapper */
+.academy-card__icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.academy-card__icon-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, 
+    rgba(88, 166, 255, 0.4), 
+    transparent 70%
+  );
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.academy-card__icon svg,
+.academy-card__icon i {
+  font-size: 48px;
+  color: var(--accent-primary);
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Content */
+.academy-card__content {
+  padding: var(--space-6);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.academy-card__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.academy-card__badge {
+  padding: var(--space-1) var(--space-3);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(88, 166, 255, 0.05)
+  );
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.academy-card__badge--age {
+  background: rgba(57, 208, 216, 0.1);
+  border-color: transparent;
+  color: var(--accent-cyan);
+}
+
+.academy-card__title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.academy-card__description {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+.academy-card__features {
+  list-style: none;
+  margin: 0 0 var(--space-6) 0;
+}
+
+.academy-card__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.academy-card__feature svg,
+.academy-card__feature i {
+  color: var(--accent-green);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.academy-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: var(--transition-transform), var(--transition-shadow);
+  box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+}
+
+.academy-card__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.4);
+}
+
+.academy-card__cta--disabled {
+  background: linear-gradient(135deg, 
+    rgba(107, 114, 128, 0.3), 
+    rgba(107, 114, 128, 0.1)
+  );
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.academy-card__cta--disabled:hover {
+  transform: none;
+}
+
+/* ========================================================================
+   THEME VARIANTS - Academy Cards
+   ======================================================================== */
+
+/* Junior Theme */
+.academy-card--junior .academy-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2) 0%, 
+    rgba(139, 92, 246, 0.1) 100%
+  );
+}
+
+.academy-card--junior .academy-card__icon i {
+  color: var(--accent-primary);
+}
+
+.academy-card--junior .academy-card__badge:first-child {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.2), 
+    rgba(88, 166, 255, 0.1)
+  );
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+/* Premium Theme */
+.academy-card--premium .academy-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2) 0%, 
+    rgba(239, 68, 68, 0.1) 100%
+  );
+}
+
+.academy-card--premium .academy-card__icon i {
+  color: var(--accent-orange);
+}
+
+.academy-card--premium .academy-card__badge:first-child {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.2), 
+    rgba(245, 158, 11, 0.1)
+  );
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--accent-orange);
+}
+
+/* Senior Theme */
+.academy-card--senior .academy-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.2) 0%, 
+    rgba(57, 208, 216, 0.1) 100%
+  );
+}
+
+.academy-card--senior .academy-card__icon i {
+  color: var(--accent-green);
+}
+
+.academy-card--senior .academy-card__badge:first-child {
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.2), 
+    rgba(16, 185, 129, 0.1)
+  );
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--accent-green);
+}
+
+/* Mobile: Academy Card Badges zentrieren */
+@media (max-width: 767px) {
+  .academy-card__badges {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .academy-card__title {
+    text-align: center;
+  }
+  
+  .academy-card__description {
+    text-align: center;
+  }
+  
+  .academy-card__features {
+    text-align: center;
+  }
+  
+  .academy-card__cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ========================================================================
+   GENERIC CARDS - Für Content-Seiten (Vision, etc.)
+   ======================================================================== */
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+  padding: var(--space-6);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15), 
+    rgba(88, 166, 255, 0.05)
+  );
+}
+
+.card__icon i {
+  font-size: 24px;
+  color: white;
+}
+
+.card__icon--large {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-4);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+}
+
+.card__icon--large i {
+  font-size: 32px;
+}
+
+.card__title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.card__text {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* Card Modifiers */
+.card--featured {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08) 0%, 
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  border-color: var(--accent-primary);
+}
+
+.card--green {
+  background: linear-gradient(135deg, 
+    var(--bg-primary) 0%, 
+    rgba(16, 185, 129, 0.08) 100%
+  );
+  border-color: var(--accent-green);
+}
+
+.card--small {
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.card--small .card__icon {
+  margin: 0 auto var(--space-4);
+}
+
+.card--value {
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.card--value .card__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--space-4);
+  background: transparent;
+}
+
+.card--value .card__icon i {
+  font-size: 40px;
+}
+
+.card--cta {
+  text-align: center;
+  padding: var(--space-8);
+  background: linear-gradient(135deg, 
+    var(--bg-primary) 0%, 
+    rgba(88, 166, 255, 0.1) 100%
+  );
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.card-grid--4 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+@media (min-width: 768px) {
+  .card-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ========================================================================
+   PLEDGE LIST - Für Vision-Seite
+   ======================================================================== */
+
+.pledge-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.pledge-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+}
+
+.pledge-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: var(--font-bold);
+  font-size: var(--text-sm);
+}
+
+.pledge-item p {
+  margin: 0;
+  color: var(--text-secondary);
+  padding-top: 6px;
+}
+
+.pledge-item strong {
+  color: var(--text-primary);
+}
+
+/* ========================================================================
+   FEATURE LIST - Für Vision-Seite
+   ======================================================================== */
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.feature-list i {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  font-size: 20px;
+}
+
+.feature-list div {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.feature-list strong {
+  color: var(--text-primary);
+}
+
+
+/* ==========================================================================
+   TARGET GROUP CARDS (Bridge Strategy)
+   Klickbare Zielgruppen-Karten für index.html
+   ======================================================================== */
+
+.target-group-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.target-group-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--card-accent, var(--accent-primary));
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2),
+    0 0 0 1px var(--card-accent, var(--accent-primary));
+}
+
+.target-group-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--card-accent, var(--accent-primary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.target-group-card:hover::before {
+  opacity: 1;
+}
+
+/* Visual Area */
+.target-group-card__visual {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.1) 0%, 
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  overflow: hidden;
+}
+
+.target-group-card__visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 70%
+  );
+}
+
+.target-group-card__visual i {
+  font-size: 56px;
+  color: var(--card-accent, var(--accent-primary));
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.target-group-card:hover .target-group-card__visual i {
+  transform: scale(1.1);
+}
+
+/* Badge */
+.target-group-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  z-index: 2;
+}
+
+/* Content Area */
+.target-group-card__content {
+  padding: var(--space-5);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.target-group-card__content h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.target-group-card__desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+/* Features List */
+.target-group-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.target-group-card__features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.target-group-card__features i {
+  color: var(--card-accent, var(--accent-primary));
+  font-size: 16px;
+}
+
+/* CTA */
+.target-group-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, 
+    var(--card-accent, var(--accent-primary)), 
+    var(--card-accent-secondary, var(--accent-violet))
+  );
+  color: white;
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.target-group-card:hover .target-group-card__cta {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.target-group-card__cta i {
+  transition: transform 0.3s ease;
+}
+
+.target-group-card:hover .target-group-card__cta i {
+  transform: translateX(4px);
+}
+
+/* Theme Variants */
+.target-group-card[data-theme="primary"] {
+  --card-accent: var(--accent-primary);
+  --card-accent-secondary: var(--accent-violet);
+}
+
+.target-group-card[data-theme="primary"] .target-group-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.15) 0%, 
+    rgba(139, 92, 246, 0.1) 100%
+  );
+}
+
+.target-group-card[data-theme="cyan"] {
+  --card-accent: var(--accent-cyan);
+  --card-accent-secondary: var(--accent-primary);
+}
+
+.target-group-card[data-theme="cyan"] .target-group-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(57, 208, 216, 0.15) 0%, 
+    rgba(88, 166, 255, 0.1) 100%
+  );
+}
+
+.target-group-card[data-theme="orange"] {
+  --card-accent: var(--accent-orange);
+  --card-accent-secondary: var(--accent-red);
+}
+
+.target-group-card[data-theme="orange"] .target-group-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.15) 0%, 
+    rgba(239, 68, 68, 0.1) 100%
+  );
+}
+
+.target-group-card[data-theme="pink"] {
+  --card-accent: var(--accent-pink);
+  --card-accent-secondary: var(--accent-orange);
+}
+
+.target-group-card[data-theme="pink"] .target-group-card__visual {
+  background: linear-gradient(135deg, 
+    rgba(236, 72, 153, 0.15) 0%, 
+    rgba(245, 158, 11, 0.1) 100%
+  );
+}
+
+/* Light Theme Adjustments */
+.light-theme .target-group-card {
+  background: white;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .target-group-card:hover {
+  border-color: var(--card-accent);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 0 0 1px var(--card-accent);
+}
+
+html.light-theme .target-group-card__badge {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-secondary);
+}
+
+/* Grid Spacing for Target Groups */
+.grid--target-groups {
+  gap: var(--space-5);
+}
+
+@media (min-width: 1024px) {
+  .grid--target-groups {
+    gap: var(--space-6);
+  }
+}
+
+/* Mobile Navigation Target Groups Highlight */
+/* Mobile Navigation Target Groups - Konsistent mit anderen Sections */
+.mobile-nav__section--target .mobile-nav__title {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}

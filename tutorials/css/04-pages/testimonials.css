@@ -1,0 +1,506 @@
+/* ==========================================================================
+   TESTIMONIALS PAGE STYLES
+   Erfolgsgeschichten — Community-Seite im PLU Design-System
+   Struktur folgt vision.css: Hero → Sections → CTA
+   ========================================================================== */
+
+/* ========================================================================
+   1. HERO VARIANTE
+   ======================================================================== */
+
+.hero--testimonials .hero__title {
+  font-size: clamp(2.25rem, 6vw, 4rem);
+}
+
+/* ========================================================================
+   2. TESTIMONIAL GRID
+   ======================================================================== */
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================================================
+   3. STORY CARD (Hauptkomponente)
+   ======================================================================== */
+
+.story-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--card-accent, var(--accent-primary)), 
+    var(--card-accent-secondary, var(--accent-violet))
+  );
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--card-accent, var(--accent-primary));
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 30px var(--card-glow, rgba(88, 166, 255, 0.1));
+}
+
+.story-card:hover::before {
+  opacity: 1;
+}
+
+/* Featured Card — volle Breite */
+.story-card--featured {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.06) 0%, 
+    rgba(139, 92, 246, 0.04) 50%,
+    rgba(57, 208, 216, 0.03) 100%
+  );
+  border: 1px solid rgba(88, 166, 255, 0.2);
+}
+
+@media (min-width: 768px) {
+  .story-card--featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+}
+
+/* ========================================================================
+   4. STORY CARD HEADER
+   ======================================================================== */
+
+.story-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.story-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, 
+    var(--card-accent, var(--accent-primary)), 
+    var(--card-accent-secondary, var(--accent-violet))
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: var(--font-bold);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px var(--card-glow, rgba(88, 166, 255, 0.25));
+}
+
+.story-card__meta h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1) 0;
+}
+
+.story-card__meta p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ========================================================================
+   5. STORY CARD QUOTE
+   ======================================================================== */
+
+.story-card__quote {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-5) 0;
+  position: relative;
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--card-accent, var(--accent-primary));
+}
+
+.story-card__quote strong {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+
+/* ========================================================================
+   6. STORY CARD PROJECT BOX
+   ======================================================================== */
+
+.story-card__project {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.story-card__project-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.story-card__project-visual {
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.story-card__project-visual i {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.story-card__project-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+/* ========================================================================
+   7. STORY CARD LINK
+   ======================================================================== */
+
+.story-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--card-accent, var(--accent-primary));
+  text-decoration: none;
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  transition: gap 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.story-card__link:hover {
+  gap: var(--space-3);
+  text-decoration: underline;
+}
+
+.story-card__link i {
+  font-size: var(--text-xs);
+}
+
+/* ========================================================================
+   8. STORY CARD THEMES
+   ======================================================================== */
+
+.story-card[data-theme="blue"] {
+  --card-accent: var(--accent-primary);
+  --card-accent-secondary: var(--accent-violet);
+  --card-glow: rgba(88, 166, 255, 0.15);
+}
+
+.story-card[data-theme="violet"] {
+  --card-accent: var(--accent-violet);
+  --card-accent-secondary: var(--accent-pink);
+  --card-glow: rgba(139, 92, 246, 0.15);
+}
+
+.story-card[data-theme="cyan"] {
+  --card-accent: var(--accent-cyan);
+  --card-accent-secondary: var(--accent-primary);
+  --card-glow: rgba(57, 208, 216, 0.15);
+}
+
+/* ========================================================================
+   9. CTA SECTION
+   ======================================================================== */
+
+.testimonials-cta {
+  text-align: center;
+  padding: var(--space-20) 0 var(--space-24);
+}
+
+.cta-card {
+  background: linear-gradient(135deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+}
+
+.testimonials-cta .cta-card {
+  position: relative;
+  max-width: 100%;
+  padding: var(--space-20) var(--space-16);
+  background: linear-gradient(135deg,
+    rgba(88, 166, 255, 0.1) 0%,
+    rgba(139, 92, 246, 0.06) 50%,
+    rgba(57, 208, 216, 0.04) 100%
+  );
+  overflow: hidden;
+}
+
+.testimonials-cta .cta-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--accent-primary),
+    var(--accent-violet),
+    var(--accent-cyan)
+  );
+}
+
+.testimonials-cta .cta-card::after {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle,
+    rgba(88, 166, 255, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.testimonials-cta .cta-card__icon {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-violet));
+  margin: 0 auto var(--space-8);
+  box-shadow: 0 0 40px rgba(88, 166, 255, 0.25);
+}
+
+.testimonials-cta .cta-card__icon i {
+  font-size: 48px;
+}
+
+.testimonials-cta .cta-card__title {
+  position: relative;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-5);
+}
+
+.testimonials-cta .cta-card__text {
+  position: relative;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-12);
+}
+
+.testimonials-cta .btn--lg {
+  position: relative;
+  padding: var(--space-4) var(--space-10);
+  font-size: var(--text-lg);
+}
+
+.testimonials-cta .back-link {
+  margin-top: var(--space-16);
+}
+
+/* ========================================================================
+   10. LIGHT MODE OVERRIDES
+   ======================================================================== */
+
+html.light-theme .story-card {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme .story-card:hover {
+  border-color: var(--card-accent, var(--accent-primary));
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme .story-card--featured {
+  background: linear-gradient(135deg, 
+    rgba(88, 166, 255, 0.08) 0%, 
+    rgba(139, 92, 246, 0.05) 100%
+  );
+}
+
+html.light-theme .story-card__quote {
+  color: #4b5563;
+}
+
+html.light-theme .story-card__project {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme .story-card__project-visual {
+  background: rgba(0, 0, 0, 0.03);
+  color: #6b7280;
+}
+
+html.light-theme .testimonials-cta .cta-card {
+  background: linear-gradient(135deg,
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.04) 100%
+  );
+  border-color: rgba(88, 166, 255, 0.15);
+}
+
+html.light-theme .testimonials-cta .cta-card::after {
+  background: radial-gradient(circle,
+    rgba(88, 166, 255, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+/* ========================================================================
+   11. EMAIL MODAL
+   ======================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.email-modal {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-10) var(--space-8);
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .email-modal {
+  transform: translateY(0) scale(1);
+}
+
+.email-modal__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.email-modal__close:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+.email-modal__icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-violet));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+}
+
+.email-modal__icon i {
+  font-size: 36px;
+  color: white;
+}
+
+.email-modal__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.email-modal__text {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.email-modal__image {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Light mode */
+html.light-theme .email-modal__close:hover {
+  background: rgba(0, 0, 0, 0.04);
+}

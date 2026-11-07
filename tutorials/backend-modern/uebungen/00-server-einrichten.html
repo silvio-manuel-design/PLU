@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Side Quest U00: Server einrichten | Backend Quest</title>
+  
+  
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../css/techops.css">
+</head>
+<body>
+  <div class="mission-page">
+    <a href="../index.html" class="back-link">
+      <img src="../assets/logo.svg" width="16" height="16" alt="" style="vertical-align: middle; margin-right: 4px;">
+      [←] Zurück zu Backend Quest
+    </a>
+    
+    <div class="mission-header-bar">
+      <span class="mission-id" style="color: var(--warning);">Side Quest U00</span>
+      <span class="mission-timer">~20 Min • +25 XP</span>
+    </div>
+    
+    <div class="mission-goal">
+      <h2>Ziel</h2>
+      <p>Richte XAMPP ein und starte Apache sowie MySQL.</p>
+    </div>
+    
+    <ol class="step-list">
+      <li class="step-item" id="step-1">
+        <h3>XAMPP herunterladen</h3>
+        <p>Lade XAMPP von apachefriends.org herunter (Windows/Mac/Linux).</p>
+      </li>
+      
+      <li class="step-item" id="step-2">
+        <h3>Installation</h3>
+        <p>Installiere mit Standard-Einstellungen. Merke dir den Installationspfad (z.B. C:\xampp).</p>
+      </li>
+      
+      <li class="step-item" id="step-3">
+        <h3>Control Panel starten</h3>
+        <p>Öffne das XAMPP Control Panel als Administrator.</p>
+      </li>
+      
+      <li class="step-item" id="step-4">
+        <h3>Apache starten</h3>
+        <p>Klicke "Start" neben Apache. Der Port 80 sollte grün werden.</p>
+        <div class="code-block">http://localhost → sollte XAMPP-Seite zeigen</div>
+      </li>
+      
+      <li class="step-item" id="step-5">
+        <h3>MySQL starten</h3>
+        <p>Klicke "Start" neben MySQL. Auch hier sollte grün erscheinen.</p>
+      </li>
+    </ol>
+    
+    <!-- KI Panel -->
+    <div id="ai-panel"></div>
+    
+    <!-- Seed Helper -->
+    <div id="seed-panel"></div>
+    
+    <!-- Self Test -->
+    <div class="self-test">
+      <h2>Self-Test: Läuft der Server?</h2>
+      <button class="btn-mission btn-secondary" onclick="runSelfTest()" id="test-btn">
+        Server-Status prüfen
+      </button>
+      <div class="test-area" id="test-area">
+        Bereit für Test...
+      </div>
+      <div class="test-result" id="test-result"></div>
+      
+      <!-- Live Apache-Status -->
+      <div id="apache-status" style="margin-top: 16px; padding: 12px; background-color: var(--bg-elevated); border-radius: var(--radius); border-left: 4px solid var(--warning);">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="apache-dot" style="width: 12px; height: 12px; border-radius: 50%; background-color: var(--warning); display: inline-block;"></span>
+          <span id="apache-text" style="color: var(--text-muted); font-size: 0.9rem;">Prüfe Apache-Status...</span>
+        </div>
+      </div>
+      
+      <!-- Hinweis falls offline -->
+      <div id="apache-hint" style="display: none; margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">
+        <p><strong>Apache läuft noch nicht:</strong></p>
+        <ol style="margin: 8px 0; padding-left: 20px;">
+          <li>Öffne das XAMPP Control Panel</li>
+          <li>Klicke auf "Start" neben Apache</li>
+          <li>Warte bis die Hintergrundfarbe grün wird</li>
+          <li>Klicke dann erneut "Server-Status prüfen"</li>
+        </ol>
+      </div>
+    </div>
+    
+    <!-- Abgabe Panel -->
+    <div id="abgabe-panel"></div>
+    
+    <!-- Completion -->
+    <div class="completion-section">
+      <div class="completion-reward" id="completion-reward" style="display: none;">
+        [+25 XP Bonus] (Side Quest abgeschlossen)
+      </div>
+      
+      <button class="btn-mission btn-primary" id="complete-btn" onclick="completeSideQuest()" disabled>
+        Side Quest abschließen
+      </button>
+      
+      <a href="../index.html" class="btn-mission btn-secondary" id="back-btn" style="display: none;">
+        Zurück zu Backend Quest
+      </a>
+      
+      <div class="reflection">
+        <h3>Reflexion</h3>
+        <ul>
+          <li>XAMPP bündelt Apache (Webserver) und MySQL (Datenbank).</li>
+          <li>Port 80 ist der Standard-Port für HTTP.</li>
+          <li>localhost = dein eigener Computer als Server.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/main.js"></script>
+  <script src="../js/classroom.js"></script>
+  <script>
+    let testPassed = false;
+    
+    // Automatische Status-Prüfung beim Laden
+    document.addEventListener('DOMContentLoaded', () => {
+      checkApacheStatus();
+      // Alle 5 Sekunden neu prüfen
+      setInterval(checkApacheStatus, 5000);
+    });
+    
+    async function checkApacheStatus() {
+      const dot = document.getElementById('apache-dot');
+      const text = document.getElementById('apache-text');
+      const hint = document.getElementById('apache-hint');
+      
+      if (!dot || !text) return;
+      
+      try {
+        // Versuche localhost zu erreichen
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        
+        await fetch('http://localhost/', {
+          method: 'HEAD',
+          mode: 'no-cors',
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        // Apache läuft!
+        dot.style.backgroundColor = 'var(--success)';
+        text.textContent = '✓ Apache läuft (localhost erreichbar)';
+        text.style.color = 'var(--success)';
+        hint.style.display = 'none';
+        
+      } catch (err) {
+        // Fallback: Bild-Test
+        try {
+          const img = new Image();
+          img.src = 'http://localhost/favicon.ico?' + Date.now();
+          
+          await Promise.race([
+            new Promise((resolve) => { img.onload = resolve; }),
+            new Promise((_, reject) => { img.onerror = () => reject(new Error('Failed')); }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 1500))
+          ]);
+          
+          // Apache läuft!
+          dot.style.backgroundColor = 'var(--success)';
+          text.textContent = '✓ Apache läuft (localhost erreichbar)';
+          text.style.color = 'var(--success)';
+          hint.style.display = 'none';
+          
+        } catch {
+          // Apache läuft nicht
+          dot.style.backgroundColor = 'var(--danger)';
+          text.textContent = '✗ Apache läuft nicht (localhost nicht erreichbar)';
+          text.style.color = 'var(--danger)';
+          hint.style.display = 'block';
+        }
+      }
+    }
+    
+    async function runSelfTest() {
+      const area = document.getElementById('test-area');
+      const result = document.getElementById('test-result');
+      const btn = document.getElementById('test-btn');
+      
+      btn.disabled = true;
+      area.textContent = 'Prüfe Apache-Verbindung...';
+      
+      try {
+        // Echter Test: Versuche localhost zu erreichen
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        await fetch('http://localhost/', {
+          method: 'HEAD',
+          mode: 'no-cors',
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        // Erfolg!
+        testPassed = true;
+        area.textContent = 'Apache läuft!';
+        result.textContent = '[OK] XAMPP/Apache läuft auf localhost. Server ist bereit!';
+        result.className = 'test-result success';
+        document.getElementById('complete-btn').disabled = false;
+        
+        // Mark steps as completed
+        document.querySelectorAll('.step-item').forEach(step => {
+          step.classList.add('completed');
+        });
+        
+      } catch (err) {
+        // Fallback: Bild-Test
+        try {
+          const img = new Image();
+          img.src = 'http://localhost/favicon.ico?' + Date.now();
+          
+          await Promise.race([
+            new Promise((resolve) => { img.onload = resolve; }),
+            new Promise((_, reject) => { img.onerror = () => reject(new Error('Failed')); }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 2000))
+          ]);
+          
+          // Erfolg über Bild-Test!
+          testPassed = true;
+          area.textContent = 'Apache läuft!';
+          result.textContent = '[OK] XAMPP/Apache läuft auf localhost. Server ist bereit!';
+          result.className = 'test-result success';
+          document.getElementById('complete-btn').disabled = false;
+          
+          document.querySelectorAll('.step-item').forEach(step => {
+            step.classList.add('completed');
+          });
+          
+        } catch {
+          // Kein Server erreichbar
+          area.textContent = 'Apache nicht erreichbar';
+          result.textContent = '[X] Apache läuft nicht auf localhost. Bitte XAMPP starten!';
+          result.className = 'test-result error';
+          btn.disabled = false;
+        }
+      }
+    }
+    
+    function completeSideQuest() {
+      console.log('completeSideQuest clicked');
+      
+      if (typeof MissionsAPI === 'undefined') {
+        console.error('MissionsAPI not loaded yet, retrying...');
+        setTimeout(completeSideQuest, 500);
+        return;
+      }
+      
+      console.log('Calling MissionsAPI.completeSideQuest("U00")');
+      const success = MissionsAPI.completeSideQuest('U00');
+      console.log('Result:', success);
+      
+      if (success) {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+      }
+    }
+    
+    function initPage() {
+      if (typeof MissionsAPI === 'undefined' || typeof AIPanel === 'undefined') {
+        setTimeout(initPage, 300);
+        return;
+      }
+      
+      AIPanel.init('U00', 'Server einrichten', 'XAMPP installieren und Apache/MySQL starten');
+      SeedHelper.init();
+      AbgabePanel.init('U00', 'Server einrichten');
+      
+      const status = MissionsAPI.getSideQuestStatus()['U00'];
+      if (status === 'completed') {
+        document.getElementById('completion-reward').style.display = 'block';
+        document.getElementById('complete-btn').style.display = 'none';
+        document.getElementById('back-btn').style.display = 'inline-block';
+        document.getElementById('completion-reward').textContent = '[Bereits abgeschlossen] [+25 XP erhalten]';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', initPage);
+  </script>
+  <!-- Footer -->
+  <footer style="margin-top: 48px; padding: 24px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
+      Entwickelt von: <strong>HTBLA Traun | Medientechnik</strong><br>
+      Prof. Dipl.-Ing. Martin Zoister, akad. BVT
+    </p>
+  </footer>
+</body>
+</html>

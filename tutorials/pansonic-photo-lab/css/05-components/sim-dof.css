@@ -1,0 +1,441 @@
+/* ============================================================
+   Pansonic Photo Lab — Depth of Field Playground
+   Interactive aperture / depth-of-field simulator
+   ============================================================ */
+
+@layer components {
+
+  .photo-sim-dof {
+    margin-block: var(--photo-space-8);
+    background: var(--photo-bg-card);
+    border: 1px solid var(--photo-border-subtle);
+    border-radius: var(--photo-radius-xl);
+    overflow: hidden;
+  }
+
+  /* ── Stage ──────────────────────────────────────────────── */
+  .photo-sim-dof__stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(180deg,
+      #1a2a4a 0%,
+      #2a4060 30%,
+      #3d5a3d 55%,
+      #2d4a2d 75%,
+      #1a301a 100%
+    );
+    overflow: hidden;
+  }
+
+  /* Sun / moon glow */
+  .photo-sim-dof__stage::before {
+    content: '';
+    position: absolute;
+    top: 12%;
+    right: 18%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,220,160,0.8) 0%, rgba(255,200,100,0.2) 50%, transparent 70%);
+    filter: blur(2px);
+    z-index: 1;
+  }
+
+  /* ── Layers ─────────────────────────────────────────────── */
+  .photo-sim-dof__layer {
+    position: absolute;
+    inset: 0;
+    transition: filter 0.4s ease;
+    will-change: filter;
+  }
+
+  /* Background: Mountains */
+  .photo-sim-dof__layer--bg {
+    z-index: 1;
+  }
+
+  .photo-sim-dof__layer--bg::before {
+    content: '';
+    position: absolute;
+    bottom: 35%;
+    left: -10%;
+    width: 60%;
+    height: 40%;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2a4a6a 100%);
+    clip-path: polygon(0% 100%, 30% 20%, 60% 60%, 100% 10%, 100% 100%);
+    opacity: 0.7;
+  }
+
+  .photo-sim-dof__layer--bg::after {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    right: -5%;
+    width: 55%;
+    height: 45%;
+    background: linear-gradient(135deg, #1a3450 0%, #254060 100%);
+    clip-path: polygon(0% 40%, 40% 0%, 70% 30%, 100% 15%, 100% 100%, 0% 100%);
+    opacity: 0.6;
+  }
+
+  /* Midground: Subject (person silhouette) */
+  .photo-sim-dof__layer--mid {
+    z-index: 2;
+  }
+
+  .photo-sim-dof__subject {
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photo-sim-dof__subject-head {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1a2535;
+    border: 2px solid #2a3a4a;
+  }
+
+  .photo-sim-dof__subject-body {
+    width: 44px;
+    height: 70px;
+    background: linear-gradient(180deg, #1a2535 0%, #152030 100%);
+    border-radius: 12px 12px 4px 4px;
+    margin-top: 2px;
+    position: relative;
+  }
+
+  .photo-sim-dof__subject-body::before,
+  .photo-sim-dof__subject-body::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    width: 14px;
+    height: 50px;
+    background: #1a2535;
+    border-radius: 6px;
+  }
+
+  .photo-sim-dof__subject-body::before { left: -12px; transform: rotate(8deg); }
+  .photo-sim-dof__subject-body::after { right: -12px; transform: rotate(-8deg); }
+
+  .photo-sim-dof__subject-label {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Foreground: Grass / leaves */
+  .photo-sim-dof__layer--fg {
+    z-index: 3;
+  }
+
+  .photo-sim-dof__grass {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 22%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 0 5%;
+  }
+
+  .photo-sim-dof__grass-blade {
+    width: 4px;
+    background: linear-gradient(180deg, #4a7a3a 0%, #2d5a2d 100%);
+    border-radius: 2px 2px 0 0;
+    opacity: 0.85;
+  }
+
+  .photo-sim-dof__grass-blade:nth-child(1) { height: 35px; margin-left: 2%; }
+  .photo-sim-dof__grass-blade:nth-child(2) { height: 55px; }
+  .photo-sim-dof__grass-blade:nth-child(3) { height: 28px; }
+  .photo-sim-dof__grass-blade:nth-child(4) { height: 70px; width: 6px; background: #3a6a30; }
+  .photo-sim-dof__grass-blade:nth-child(5) { height: 40px; margin-right: 8%; }
+  .photo-sim-dof__grass-blade:nth-child(6) { height: 60px; }
+  .photo-sim-dof__grass-blade:nth-child(7) { height: 32px; }
+  .photo-sim-dof__grass-blade:nth-child(8) { height: 48px; width: 5px; }
+  .photo-sim-dof__grass-blade:nth-child(9) { height: 65px; }
+  .photo-sim-dof__grass-blade:nth-child(10) { height: 38px; margin-right: 3%; }
+
+  /* Foreground flower */
+  .photo-sim-dof__flower {
+    position: absolute;
+    bottom: 8%;
+    right: 12%;
+    width: 30px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photo-sim-dof__flower-head {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #c75a5a 30%, #8a3a3a 100%);
+    position: relative;
+  }
+
+  .photo-sim-dof__flower-head::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #c75a5a 0deg 30deg, transparent 30deg 45deg, #c75a5a 45deg 75deg, transparent 75deg 90deg, #c75a5a 90deg 120deg, transparent 120deg 135deg, #c75a5a 135deg 165deg, transparent 165deg 180deg, #c75a5a 180deg 210deg, transparent 210deg 225deg, #c75a5a 225deg 255deg, transparent 255deg 270deg, #c75a5a 270deg 300deg, transparent 300deg 315deg, #c75a5a 315deg 345deg, transparent 345deg 360deg);
+    opacity: 0.6;
+  }
+
+  .photo-sim-dof__flower-stem {
+    width: 3px;
+    height: 28px;
+    background: linear-gradient(180deg, #4a7a3a 0%, #3a6a30 100%);
+    border-radius: 1px;
+  }
+
+  /* ── Focus indicator line ───────────────────────────────── */
+  .photo-sim-dof__focus-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--module-accent, var(--photo-accent));
+    opacity: 0;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .photo-sim-dof__focus-line::before {
+    content: 'FOCUS';
+    position: absolute;
+    right: 8px;
+    top: -16px;
+    font-size: 8px;
+    font-weight: var(--photo-font-weight-bold);
+    letter-spacing: 0.1em;
+    color: var(--module-accent, var(--photo-accent));
+    background: var(--photo-bg-base);
+    padding: 1px 6px;
+    border-radius: var(--photo-radius-sm);
+    border: 1px solid var(--module-accent, var(--photo-accent));
+  }
+
+  .photo-sim-dof.is-showing-focus .photo-sim-dof__focus-line {
+    opacity: 0.7;
+  }
+
+  /* ── DOF Visualizer bar ─────────────────────────────────── */
+  .photo-sim-dof__dof-bar {
+    padding: var(--photo-space-4) var(--photo-space-6);
+    background: var(--photo-bg-surface);
+    border-top: 1px solid var(--photo-border-subtle);
+  }
+
+  .photo-sim-dof__dof-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--photo-space-2);
+  }
+
+  .photo-sim-dof__dof-label span {
+    font-size: var(--photo-text-xs);
+    color: var(--photo-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .photo-sim-dof__dof-label strong {
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    font-weight: var(--photo-font-weight-semibold);
+  }
+
+  .photo-sim-dof__dof-track {
+    position: relative;
+    height: 24px;
+    background: var(--photo-bg-base);
+    border-radius: var(--photo-radius-full);
+    border: 1px solid var(--photo-border-subtle);
+    overflow: hidden;
+  }
+
+  .photo-sim-dof__dof-sharp {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    border-radius: var(--photo-radius-full);
+    background: linear-gradient(90deg,
+      color-mix(in srgb, var(--module-accent, var(--photo-accent)) 60%, transparent),
+      var(--module-accent, var(--photo-accent)),
+      color-mix(in srgb, var(--module-accent, var(--photo-accent)) 60%, transparent)
+    );
+    transition: left 0.3s ease, width 0.3s ease;
+  }
+
+  .photo-sim-dof__dof-sharp::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 12px var(--module-accent, var(--photo-accent));
+    opacity: 0.4;
+  }
+
+  .photo-sim-dof__dof-markers {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--photo-space-1);
+    padding: 0 2px;
+  }
+
+  .photo-sim-dof__dof-markers span {
+    font-size: 9px;
+    color: var(--photo-text-muted);
+  }
+
+  /* ── Controls ───────────────────────────────────────────── */
+  .photo-sim-dof__controls {
+    padding: var(--photo-space-6);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--photo-space-6);
+  }
+
+  @media (max-width: 640px) {
+    .photo-sim-dof__controls {
+      grid-template-columns: 1fr;
+      gap: var(--photo-space-4);
+    }
+  }
+
+  .photo-sim-dof__control {
+    display: flex;
+    flex-direction: column;
+    gap: var(--photo-space-2);
+  }
+
+  .photo-sim-dof__control-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--photo-text-sm);
+    font-weight: var(--photo-font-weight-semibold);
+    color: var(--photo-text-primary);
+  }
+
+  .photo-sim-dof__control-value {
+    font-family: var(--photo-font-mono);
+    font-size: var(--photo-text-sm);
+    color: var(--module-accent, var(--photo-accent));
+    font-weight: var(--photo-font-weight-bold);
+    background: var(--photo-bg-surface);
+    padding: 2px 8px;
+    border-radius: var(--photo-radius-sm);
+    border: 1px solid var(--photo-border-subtle);
+  }
+
+  .photo-sim-dof__slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: var(--photo-radius-full);
+    background: var(--photo-border-subtle);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .photo-sim-dof__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--module-accent, var(--photo-accent));
+    border: 3px solid var(--photo-bg-card);
+    box-shadow: 0 0 0 2px var(--module-accent, var(--photo-accent));
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .photo-sim-dof__slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .photo-sim-dof__slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--module-accent, var(--photo-accent));
+    border: 3px solid var(--photo-bg-card);
+    box-shadow: 0 0 0 2px var(--module-accent, var(--photo-accent));
+    cursor: pointer;
+  }
+
+  /* ── Presets ────────────────────────────────────────────── */
+  .photo-sim-dof__presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--photo-space-2);
+    padding: 0 var(--photo-space-6) var(--photo-space-6);
+  }
+
+  .photo-sim-dof__preset {
+    padding: 6px 14px;
+    border-radius: var(--photo-radius-full);
+    border: 1px solid var(--photo-border-subtle);
+    background: var(--photo-bg-surface);
+    color: var(--photo-text-secondary);
+    font-size: var(--photo-text-xs);
+    font-weight: var(--photo-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .photo-sim-dof__preset:hover {
+    border-color: var(--photo-border-default);
+    color: var(--photo-text-primary);
+  }
+
+  .photo-sim-dof__preset.is-active {
+    background: var(--module-accent, var(--photo-accent));
+    color: var(--photo-bg-base);
+    border-color: var(--module-accent, var(--photo-accent));
+    box-shadow: 0 0 16px color-mix(in srgb, var(--module-accent, var(--photo-accent)) 35%, transparent);
+  }
+
+  /* ── Info panel ─────────────────────────────────────────── */
+  .photo-sim-dof__info {
+    padding: var(--photo-space-4) var(--photo-space-6);
+    background: var(--photo-bg-surface);
+    border-top: 1px solid var(--photo-border-subtle);
+    font-size: var(--photo-text-sm);
+    color: var(--photo-text-secondary);
+    line-height: 1.6;
+  }
+
+  .photo-sim-dof__info strong {
+    color: var(--photo-text-primary);
+  }
+
+}

@@ -1,0 +1,155 @@
+/* ============================================
+   KI ACADEMY - FLOATING ACTION BUTTONS (FAB)
+   ============================================ */
+
+/* FAB Container */
+.fab-container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: var(--z-sticky);
+}
+
+@media (max-width: 768px) {
+  .fab-container {
+    bottom: var(--space-4);
+    right: var(--space-4);
+  }
+}
+
+/* Base FAB */
+.fab {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.fab:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.fab:active {
+  transform: translateY(0);
+}
+
+.fab:focus-visible {
+  outline: 2px solid var(--color-apricot);
+  outline-offset: 2px;
+}
+
+.fab svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Individual FAB Styles */
+
+/* Back to Top FAB */
+.fab-back-to-top {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.fab-back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.fab-back-to-top:hover {
+  background: var(--color-apricot);
+  border-color: var(--color-apricot);
+  color: var(--color-white);
+}
+
+/* Theme Toggle FAB */
+.fab-theme:hover {
+  background: var(--color-apricot);
+  border-color: var(--color-apricot);
+  color: var(--color-white);
+}
+
+.fab-theme .theme-icon-sun,
+.fab-theme .theme-icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .fab-theme .theme-icon-sun {
+  display: block;
+}
+
+[data-theme="light"] .fab-theme .theme-icon-moon {
+  display: block;
+}
+
+/* Classroom Mode FAB */
+.fab-classroom {
+  background: linear-gradient(135deg, var(--color-apricot), var(--color-apricot-dark));
+  border-color: transparent;
+  color: var(--color-white);
+}
+
+.fab-classroom:hover {
+  background: linear-gradient(135deg, var(--color-apricot-dark), var(--color-terracotta));
+  box-shadow: var(--shadow-apricot-lg);
+}
+
+/* Hide Classroom FAB on mobile */
+@media (max-width: 1024px) {
+  .fab-classroom {
+    display: none;
+  }
+}
+
+/* Classroom Mode Active State */
+.classroom-mode .fab-classroom {
+  background: var(--color-sage);
+  box-shadow: var(--shadow-sage-lg);
+}
+
+.classroom-mode .fab-classroom:hover {
+  background: var(--color-sage-light);
+}
+
+/* Classroom Mode Styles */
+.classroom-mode {
+  /* These will be enhanced in classroom.js */
+}
+
+.classroom-mode .main-header {
+  background: var(--bg-primary);
+}
+
+.classroom-mode .fab-container {
+  bottom: var(--space-8);
+  right: var(--space-8);
+}
+
+@media (min-width: 1025px) {
+  .classroom-mode .fab {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .classroom-mode .fab svg {
+    width: 32px;
+    height: 32px;
+  }
+}

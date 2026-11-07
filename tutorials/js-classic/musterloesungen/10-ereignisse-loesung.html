@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Musterlösung – Kapitel 10 | JS-Tutorial</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="warnung" style="background:#ffebee; border-left:4px solid #e53935; margin-bottom:24px;">
+    <strong>🔒 Nur für Lehrkraft / Nachbesprechung!</strong><br>
+    Dieser Link ist nicht öffentlich verlinkt.
+  </div>
+
+  <main class="main-content">
+    <section>
+      <h1>🖱️ Musterlösung – Kapitel 10: Ereignisse & Timing</h1>
+
+      <h2>Aufgabe 1: Event-Listener</h2>
+      <h3>Warum kann der Listener nicht entfernt werden?</h3>
+      <p>Der Listener ist eine **anonyme Funktion** – es gibt keine Referenz darauf.<br>
+      Um <code>removeEventListener</code> zu nutzen, braucht man die **gleiche Funktionsreferenz**.</p>
+
+      <h3>Verbesserung:</h3>
+      <pre><code>let zaehler = 0;
+function handleKlick() {
+  zaehler++;
+  document.getElementById("ausgabe").textContent = zaehler;
+}
+const btn = document.getElementById("btn");
+btn.addEventListener("click", handleKlick);
+
+// Später entfernen:
+// btn.removeEventListener("click", handleKlick);</code></pre>
+
+      <h3>Event-Delegation:</h3>
+      <p>✅ Bei dynamischen Inhalten (z. B. per DOM hinzugefügte Buttons) weiß man vorher nicht, 
+      wie viele es gibt.<br>
+      → Man hängt den Listener an ein **übergeordnetes Element** und prüft <code>event.target</code>.<br>
+      → Spart Speicher, vermeidet „tote“ Listener.</p>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle einen Klick-Listener für einen Button, der einen Zähler erhöht.
+Definiere die Listener-Funktion separat, damit sie später mit removeEventListener entfernt werden kann.
+Erkläre, warum anonyme Funktionen nicht entfernt werden können.</code></pre>
+
+      <h2>Aufgabe 2: Timing</h2>
+      <h3>Warum ist das ein Problem?</h3>
+      <p>✅ <code>setInterval</code> läuft **ewig weiter**, auch wenn das Element nicht mehr im DOM ist.<br>
+      → Verbraucht CPU, Speicher, Batterie – besonders auf mobilen Geräten.<br>
+      → Kann zu Fehlern führen, wenn versucht wird, auf nicht existierende Elemente zuzugreifen.</p>
+
+      <h3>Lösung mit Start/Stop:</h3>
+      <pre><code>let uhrIntervall = null;
+
+function starteUhr() {
+  if (uhrIntervall) return; // schon gestartet
+  uhrIntervall = setInterval(() => {
+    const el = document.getElementById("uhr");
+    if (el) {
+      el.textContent = new Date().toLocaleTimeString();
+    }
+  }, 1000);
+}
+
+function stoppeUhr() {
+  if (uhrIntervall) {
+    clearInterval(uhrIntervall);
+    uhrIntervall = null;
+  }
+}</code></pre>
+
+      <h3>Möglicher Prompt:</h3>
+      <pre><code>Erstelle Funktionen starteUhr() und stoppeUhr(), die eine Uhr mit setInterval steuern.
+Speichere die Intervall-ID in einer globalen Variable.
+Füge eine Prüfung ein, ob das Ziel-Element existiert, bevor du es aktualisierst.</code></pre>
+    </section>
+  </main>
+</body>
+</html>

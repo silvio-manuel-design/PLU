@@ -1,0 +1,147 @@
+/* ============================================================
+   PANSONIC VIDEO LAB — Mobile Bottom Action Bar
+   Minimal icon-only thumb-zone navigation.
+   Only visible on mobile (< 768px).
+   ============================================================ */
+
+.video-bottom-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .video-bottom-bar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: calc(var(--video-z-sticky) - 1);
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--video-border-subtle);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  [data-theme="light"] .video-bottom-bar {
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .video-bottom-bar__track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--video-space-2);
+    height: 56px;
+    padding: 0 var(--video-space-5);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Icon-only buttons — compact 36px to match progress ring scale */
+  .video-bottom-bar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--video-radius-md);
+    font-size: var(--video-text-md);
+    color: var(--video-text-primary);
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    transition: all var(--video-transition-fast);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .video-bottom-bar__btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  [data-theme="light"] .video-bottom-bar__btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .video-bottom-bar__btn[aria-disabled="true"] {
+    opacity: 0.25;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  /* Back button — subtle bordered style like mobile header buttons */
+  .video-bottom-bar__btn--back {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .video-bottom-bar__btn--back:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  [data-theme="light"] .video-bottom-bar__btn--back {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme="light"] .video-bottom-bar__btn--back:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Forward button — compact accent */
+  .video-bottom-bar__btn--accent {
+    background: var(--module-accent, var(--video-accent-teal));
+    color: var(--video-text-inverse);
+  }
+
+  .video-bottom-bar__btn--accent:hover {
+    opacity: 0.9;
+    background: var(--module-accent, var(--video-accent-teal));
+  }
+
+  /* Progress center section */
+  .video-bottom-bar__progress {
+    display: flex;
+    align-items: center;
+    gap: var(--video-space-2);
+    flex: 1;
+    justify-content: center;
+    min-width: 0; /* allow flex shrinking */
+  }
+
+  .video-bottom-bar__ring {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .video-bottom-bar__ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--video-text-xs);
+    font-weight: var(--video-font-weight-bold);
+    color: var(--video-text-primary);
+  }
+
+  .video-bottom-bar__name {
+    font-size: var(--video-text-xs);
+    font-weight: var(--video-font-weight-semibold);
+    color: var(--video-text-secondary);
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Offset main content to not hide behind bottom bar */
+  body {
+    padding-bottom: 56px;
+  }
+}

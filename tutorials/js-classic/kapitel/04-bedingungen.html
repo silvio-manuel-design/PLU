@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>04 – Bedingungen | JavaScript-Tutorial</title>
+  <!-- Favicon – nur .ico wie gewünscht -->
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+      <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+      </div>
+      <div class="plu-nav">
+        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
+        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
+      </div>
+      <!-- Hamburger-Button für Mobile -->
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-wrapper">
+        <nav class="nav">
+  <ul class="nav-list">
+    <li><a href="../index.html" class="nav-link">🏠</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">📚 Module ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
+        <li><a href="03-operatoren.html">03. Operatoren</a></li>
+        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
+        <li><a href="05-schleifen.html">05. Schleifen</a></li>
+        <li><a href="06-arrays.html">06. Arrays</a></li>
+        <li><a href="07-funktionen.html">07. Funktionen</a></li>
+        <li><a href="08-objekte.html">08. Objekte</a></li>
+        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
+        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">✏️ Übungen ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
+        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
+        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
+        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
+        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
+        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
+        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
+        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
+        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
+        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
+        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
+        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
+      </ul>
+    </li>
+    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
+    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
+        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
+        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
+      </ul>
+    </li>
+    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
+    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
+  </ul>
+</nav>
+      </div>
+      <!-- Dark Mode Toggle Button -->
+      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <section class="hero-section">
+      <h1>04 – Bedingungen 🔀</h1>
+      <p class="hero-subtitle">Wie dein Programm auf unterschiedliche Situationen reagiert</p>
+    </section>
+
+    <section>
+      <h2>🎯 1. Was sind Bedingungen?</h2>
+      <p>
+        <strong>Bedingungen</strong> erlauben deinem Programm, Entscheidungen zu treffen.  
+        Basierend auf dem Ergebnis (<code>true</code> oder <code>false</code>) wird unterschiedlicher Code ausgeführt.
+      </p>
+    </section>
+
+    <section>
+      <h2>📊 2. Übersicht: Arten von Bedingungen</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Syntax</th>
+            <th>Verwendung</th>
+            <th>Beispiel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>if</code></td>
+            <td>Eine Bedingung prüfen</td>
+            <td><code>if (alter >= 18) { ... }</code></td>
+          </tr>
+          <tr>
+            <td><code>if ... else</code></td>
+            <td>Entweder – oder</td>
+            <td><code>if (punkte >= 50) { ... } else { ... }</code></td>
+          </tr>
+          <tr>
+            <td><code>if ... else if ... else</code></td>
+            <td>Mehrere Fälle prüfen</td>
+            <td><code>if (note == 1) { ... } else if (note == 2) { ... } else { ... }</code></td>
+          </tr>
+          <tr>
+            <td><code>switch</code></td>
+            <td>Viele feste Werte vergleichen</td>
+            <td><code>switch(tag) { case "Mo": ... }</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        „Die Reihenfolge ist strikt:
+        if → (optional mehrere else if) → (optional ein else).
+        Sobald eine Bedingung true ist, werden alle folgenden Fälle übersprungen.“
+      </p>
+    </section>
+
+    <section>
+      <h2>🎯 3. Einleitung & W3Schools</h2>
+      <p>
+        In diesem Kapitel lernst du, wie du mit <code>if</code>, <code>else</code> und logischen Operatoren 
+        komplexe Entscheidungen programmierst – sicher und lesbar.
+      </p>
+      <p>
+        🔗 <a href="https://www.w3schools.com/js/js_if_else.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript If...Else</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>🧠 4. KI-Prompt-Training</h2>
+      <p>
+        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
+        um zu erklären, wann man <code>if...else if...else</code> und wann <code>switch</code> verwendet – 
+        und warum man immer geschweifte Klammern setzen sollte.
+      </p>
+    </section>
+
+    <!-- 5. if -->
+    <section>
+      <h2>✅ 5. Einfaches <code>if</code></h2>
+      <p>
+        Führt Code aus, <strong>nur wenn</strong> die Bedingung <code>true</code> ist.
+      </p>
+      <button onclick="demoIf()">Einfaches if testen</button>
+      <div id="ausgabe-if" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoIf() {
+  const punkte = 85;
+  let nachricht = "Prüfung beendet.";
+
+  if (punkte >= 50) {
+    nachricht += " Du hast bestanden! 🎉";
+  }
+
+  document.getElementById("ausgabe-if").innerHTML = 
+    `&lt;p&gt;Punkte: &lt;strong&gt;${punkte}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;${nachricht}&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <!-- 6. if ... else -->
+    <section>
+      <h2>🔀 6. <code>if ... else</code></h2>
+      <p>
+        <strong>Entweder – oder:</strong> Einer von zwei Blöcken wird ausgeführt.
+      </p>
+      <button onclick="demoIfElse()">if … else testen</button>
+      <div id="ausgabe-if-else" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoIfElse() {
+  const alter = 16;
+
+  let zugang;
+  if (alter >= 18) {
+    zugang = "Zugang erlaubt. 🍺";
+  } else {
+    zugang = "Zugang verweigert. 🧃";
+  }
+
+  document.getElementById("ausgabe-if-else").innerHTML = 
+    `&lt;p&gt;Alter: &lt;strong&gt;${alter}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;${zugang}&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <!-- 7. if ... else if ... else -->
+    <section>
+      <h2>🔢 7. <code>if ... else if ... else</code></h2>
+      <p>
+        Prüft Bedingungen <strong>von oben nach unten</strong> – 
+        der <strong>erste passende Fall</strong> wird ausgeführt.
+      </p>
+      <button onclick="demoIfElseIf()">Notenbewertung testen</button>
+      <div id="ausgabe-if-elseif" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoIfElseIf() {
+  const punkte = 72;
+  let bewertung;
+
+  if (punkte >= 90) {
+    bewertung = "Sehr gut (1)";
+  } else if (punkte >= 80) {
+    bewertung = "Gut (2)";
+  } else if (punkte >= 70) {
+    bewertung = "Befriedigend (3)";
+  } else if (punkte >= 60) {
+    bewertung = "Genügend (4)";
+  } else {
+    bewertung = "Nicht genügend (5) ❌";
+  }
+
+  document.getElementById("ausgabe-if-elseif").innerHTML = 
+    `&lt;p&gt;Punkte: &lt;strong&gt;${punkte}&lt;/strong&gt;&lt;/p&gt;
+     &lt;p&gt;Bewertung: &lt;strong&gt;${bewertung}&lt;/strong&gt;&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <!-- 8. Logische Operatoren -->
+    <section>
+      <h2>🔗 8. Kombinierte Bedingungen</h2>
+      <p>
+        Mit <code>&amp;&amp;</code> (UND) und <code>||</code> (ODER) kannst du mehrere Prüfungen verknüpfen.
+      </p>
+      <button onclick="demoLogikInIf()">Kombinierte Bedingung testen</button>
+      <div id="ausgabe-logik-if" class="ausgabe-bereich"></div>
+      <pre><code class="js-code">function demoLogikInIf() {
+  const alter = 17;
+  const hatEintrittskarte = true;
+
+  let resultat;
+  if (alter >= 18 &amp;&amp; hatEintrittskarte) {
+    resultat = "Eintritt erlaubt.";
+  } else if (alter < 18 &amp;&amp; hatEintrittskarte) {
+    resultat = "Eintritt nur mit Erziehungsberechtigtem.";
+  } else {
+    resultat = "Kein Eintritt – fehlende Karte oder Alter.";
+  }
+
+  document.getElementById("ausgabe-logik-if").innerHTML = 
+    `&lt;p&gt;Alter: ${alter}, Karte: ${hatEintrittskarte ? 'ja' : 'nein'}&lt;/p&gt;
+     &lt;p&gt;${resultat}&lt;/p&gt;`;
+}</code></pre>
+    </section>
+
+    <section class="warnung">
+      <h2>⚠️ 9. Wichtige Regeln für Bedingungen</h2>
+      <ul>
+        <li>Immer <strong>geschweifte Klammern <code>{}</code></strong> verwenden – auch bei einer Zeile!</li>
+        <li>Nie <code>=</code> in Bedingungen verwenden → das ist <strong>Zuweisung</strong>, nicht Vergleich!</li>
+        <li>Vermeide tiefe Verschachtelung – sie macht Code schwer lesbar.</li>
+      </ul>
+      <pre><code class="js-code">// ❌ Schlecht: keine Klammern
+if (x > 5)
+  console.log("Groß");
+  y = 10; // ← Diese Zeile gehört NICHT zur if-Anweisung!
+
+// ✅ Gut: immer Klammern
+if (x > 5) {
+  console.log("Groß");
+  y = 10;
+}</code></pre>
+    </section>
+
+    <section class="kapitel-navigation">
+      <p>🎓 Jetzt kannst du komplexe Entscheidungen programmieren!</p>
+      <a href="./05-schleifen.html" class="nav-button">→ Zu Modul 05: Schleifen</a>
+    </section>
+  </div>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+
+  <footer class="footer">
+    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
+  </footer>
+
+  <script src="../js/04-bedingungen.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.getElementById('back-to-top');
+      if (button) {
+        window.addEventListener('scroll', () => {
+          button.classList.toggle('show', window.scrollY > 600);
+        });
+        button.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
