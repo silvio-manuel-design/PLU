@@ -38,6 +38,14 @@ export function syncToggles() {
   const light = isLight();
   document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
     btn.setAttribute('aria-pressed', String(light));
+    if (btn.hasAttribute('data-theme-icon')) {
+      // Icon-Button (Header): Sonne = wechselt zu Light, Mond = zu Dark
+      const icon = btn.querySelector('.ph');
+      if (icon) icon.className = `ph ${light ? 'ph-moon' : 'ph-sun'}`;
+      btn.setAttribute('aria-label', t('ui.a11y.themeToggle'));
+      btn.title = t(light ? 'ui.theme.toDark' : 'ui.theme.toLight');
+      return;
+    }
     const key = light ? 'ui.theme.toDark' : 'ui.theme.toLight';
     btn.dataset.i18n = key;
     btn.textContent = t(key);

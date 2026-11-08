@@ -1,0 +1,110 @@
+/**
+ * 06-pages/home.css — Homepage (js-classic 2.0)
+ *
+ * Sektions-Rhythmus (dunkel-hell über Tokens), Scroll-Offset für den
+ * fixed Header, Lernziele- und Teaser-Layouts, CTAs.
+ */
+
+.jsc-home-section {
+  padding-block: var(--jsc-space-8);
+  scroll-margin-top: 6rem; /* fixed Header abziehen */
+}
+
+.jsc-home-section--alt {
+  background: var(--jsc-color-surface-1);
+}
+
+.jsc-home-section h2 {
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-4);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-home-lead {
+  margin-top: var(--jsc-space-3);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text-1);
+  max-width: 42rem;
+}
+
+/* CTA-Styles: siehe 05-components/button.css (.jsc-button-System) */
+
+/* Lernziele */
+.jsc-goals {
+  display: grid;
+  gap: var(--jsc-space-4);
+  margin: var(--jsc-space-5) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: goals;
+}
+
+.jsc-goals__item {
+  position: relative;
+  padding: var(--jsc-space-4) var(--jsc-space-4) var(--jsc-space-4) calc(var(--jsc-space-6) + var(--jsc-space-2));
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-0);
+  font-size: var(--jsc-text-1);
+}
+
+.jsc-goals__item::before {
+  counter-increment: goals;
+  content: counter(goals);
+  position: absolute;
+  top: var(--jsc-space-4);
+  left: var(--jsc-space-4);
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--jsc-radius-pill);
+  background: var(--jsc-color-accent-dim);
+  color: var(--jsc-color-accent);
+  font-family: var(--jsc-font-mono);
+  font-weight: var(--jsc-weight-bold);
+}
+
+html[data-theme="light"] .jsc-goals__item::before {
+  color: var(--jsc-color-accent-ink);
+}
+
+@media (min-width: 768px) {
+  .jsc-goals {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* KI-Teaser */
+.jsc-teaser {
+  display: grid;
+  gap: var(--jsc-space-5);
+  align-items: center;
+}
+
+.jsc-teaser__media img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--jsc-radius-l);
+  border: 1px solid var(--jsc-color-border);
+  box-shadow: var(--jsc-shadow-2);
+}
+
+.jsc-teaser__body h3 {
+  margin-top: var(--jsc-space-2);
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-3);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-teaser__body p {
+  margin-top: var(--jsc-space-3);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text-1);
+}
+
+@media (min-width: 1024px) {
+  .jsc-teaser {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -17,6 +17,8 @@ export default {
   'ui.common.next': 'Next',
   'ui.common.prev': 'Back',
   'ui.progress.chapter': 'Chapter',
+  'ui.progress.done': 'completed',
+  'ui.progress.pending': 'not completed yet',
 
   /* Navigation (P2) */
   'ui.nav.home': 'Course',
@@ -48,4 +50,5 @@ export default {
   'ui.a11y.themeToggle': 'Toggle color scheme',
   'ui.a11y.bottomBar': 'Chapter navigation',
   'ui.a11y.closeMenu': 'Close menu',
+  'ui.backToTop': 'Back to top',
 };

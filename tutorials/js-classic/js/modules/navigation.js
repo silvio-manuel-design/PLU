@@ -186,7 +186,7 @@ function renderLangSwitcher() {
   const alternates = [...document.querySelectorAll('link[rel="alternate"][hreflang]')];
   const target = alternates.find((l) => l.hreflang !== current && l.hreflang !== 'x-default');
 
-  const wrap = el('div', 'jsc-lang-switcher');
+  const wrap = el('div', 'jsc-header__action-slot');
   wrap.setAttribute('aria-label', t('ui.a11y.langSwitcher'));
 
   if (!target) {
@@ -195,10 +195,15 @@ function renderLangSwitcher() {
     return wrap;
   }
 
-  const link = el('a', 'jsc-lang-switcher__link', t('ui.langSwitch'));
+  const link = el('a', 'jsc-icon-btn jsc-lang-switcher__link');
   link.href = target.href;
   link.hreflang = target.hreflang;
   link.setAttribute('lang', target.hreflang);
+  link.setAttribute('aria-label', t('ui.a11y.langSwitcher'));
+  link.title = t('ui.langSwitch');
+  const icon = el('i', 'ph ph-translate');
+  icon.setAttribute('aria-hidden', 'true');
+  link.append(icon);
   wrap.append(link);
   return wrap;
 }
@@ -229,13 +234,16 @@ function renderHeader(currentPath) {
   nav.append(list);
 
   const actions = el('div', 'jsc-header__actions');
-  const themeBtn = el('button', 'jsc-theme-toggle');
+  const themeBtn = el('button', 'jsc-icon-btn jsc-theme-toggle');
   themeBtn.type = 'button';
   themeBtn.dataset.themeToggle = '';
+  themeBtn.setAttribute('data-theme-icon', '');
   themeBtn.setAttribute('aria-pressed', String(isLight()));
-  // Kein aria-label: der sichtbare Text ("Helles/Dunkles Design") ist die
-  // Beschriftung; der State liegt in aria-pressed (axe: label-content-name).
-  themeBtn.textContent = t(isLight() ? 'ui.theme.toDark' : 'ui.theme.toLight');
+  themeBtn.setAttribute('aria-label', t('ui.a11y.themeToggle'));
+  themeBtn.title = t(isLight() ? 'ui.theme.toDark' : 'ui.theme.toLight');
+  const themeIcon = el('i', `ph ${isLight() ? 'ph-moon' : 'ph-sun'}`);
+  themeIcon.setAttribute('aria-hidden', 'true');
+  themeBtn.append(themeIcon);
   themeBtn.addEventListener('click', toggleTheme);
 
   actions.append(renderLangSwitcher(), themeBtn);

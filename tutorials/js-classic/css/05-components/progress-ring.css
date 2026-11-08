@@ -1,0 +1,38 @@
+/**
+ * 05-components/progress-ring.css — Fortschrittsring (SVG)
+ *
+ * Track = border-Token, Fortschritt = progress-Token,
+ * bei is-done: success-Token. Reduced Motion: kein Animationszwang.
+ */
+
+.jsc-ring {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  transform: rotate(-90deg);
+}
+
+.jsc-ring__track,
+.jsc-ring__bar {
+  stroke-width: 3;
+}
+
+.jsc-ring__track {
+  stroke: var(--jsc-color-border);
+}
+
+.jsc-ring__bar {
+  stroke: var(--jsc-color-progress);
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--jsc-duration-base) var(--jsc-ease-out);
+}
+
+.jsc-chapter-card.is-done .jsc-ring__bar {
+  stroke: var(--jsc-color-success);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jsc-ring__bar {
+    transition: none;
+  }
+}
