@@ -220,11 +220,16 @@ function renderHeader(currentPath) {
 
   const brand = el('a', 'jsc-header__brand');
   brand.href = NAV.main[0].url;
-  const brandIcon = el('span', 'jsc-header__brand-icon', '〈〉');
-  brandIcon.setAttribute('aria-hidden', 'true');
-  brand.append(brandIcon, document.createTextNode(' js-classic'));
-  const brandSub = el('span', 'jsc-header__brand-sub', '2.0');
-  brand.append(brandSub);
+  const logo = document.createElement('img');
+  logo.src = '/tutorials/js-classic/assets/img/brand/jsc-logo.svg';
+  logo.alt = t('ui.brand.alt');
+  logo.width = 32;
+  logo.height = 32;
+  logo.className = 'jsc-header__logo';
+  const wordmark = el('span', 'jsc-header__wordmark');
+  wordmark.append(document.createTextNode('Java'));
+  wordmark.append(el('span', 'jsc-header__brand-accent', 'Script'));
+  brand.append(logo, wordmark);
 
   const nav = el('nav', 'jsc-nav');
   nav.id = 'jsc-main-nav';
@@ -375,18 +380,116 @@ function renderFooter() {
   const footer = el('footer', 'jsc-footer');
   const inner = el('div', 'jsc-footer__inner jsc-container');
 
-  const license = el('p', 'jsc-footer__license');
-  license.append(
-    el('strong', null, 'js-classic · PANTAM Learning Universe — '),
-    document.createTextNode('Code: MIT · Content: CC BY-NC-SA 4.0')
+  /* --- Hauptbereich: Brand + Link-Spalten --- */
+  const main = el('div', 'jsc-footer__main');
+
+  const brandWrap = el('div', 'jsc-footer__brand-wrap');
+  const logoWrap = el('a', 'jsc-footer__logo');
+  logoWrap.href = NAV.main[0].url;
+  const logoImg = document.createElement('img');
+  logoImg.src = '/tutorials/js-classic/assets/img/brand/jsc-logo.svg';
+  logoImg.alt = t('ui.footer.logoSub');
+  logoImg.width = 40;
+  logoImg.height = 40;
+  const logoText = el('span', 'jsc-footer__logo-text');
+  logoText.append(
+    el('span', 'jsc-footer__logo-title', 'JavaScript Classic'),
+    el('span', 'jsc-footer__logo-subtitle', t('ui.footer.logoSub'))
+  );
+  logoWrap.append(logoImg, logoText);
+  brandWrap.append(
+    logoWrap,
+    el('p', 'jsc-footer__tagline', t('ui.footer.tagline'))
   );
 
-  const infoLink = el('a', 'jsc-footer__link', t('ui.nav.infoAbout'));
-  infoLink.href = '/tutorials/js-classic/info.html';
+  // Classroom-Mode-Platzhalter (Funktionalität = eigenes Paket, B12)
+  const classroom = el('button', 'jsc-footer__classroom');
+  classroom.type = 'button';
+  classroom.disabled = true;
+  classroom.title = t('ui.footer.classroomSoon');
+  const monitorIcon = el('i', 'ph ph-monitor', '');
+  monitorIcon.setAttribute('aria-hidden', 'true');
+  classroom.append(monitorIcon, document.createTextNode(` ${t('ui.footer.classroom')}`));
+  brandWrap.append(classroom);
 
-  inner.append(license, infoLink);
+  /* --- Links-Grid (3 Spalten) --- */
+  const lang = getLanguage();
+  const ch01Url =
+    lang === 'en'
+      ? '/tutorials/js-classic/kapitel/01-introduction-output.html'
+      : '/tutorials/js-classic/kapitel/01-einfuehrung-ausgabe.html';
+
+  const grid = el('div', 'jsc-footer__links-grid');
+
+  const navChapters = el('nav', 'jsc-footer__col');
+  navChapters.setAttribute('aria-label', t('ui.footer.colChapters'));
+  navChapters.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colChapters')));
+  const ulChapters = el('ul', 'jsc-footer__list');
+  ulChapters.append(
+    footerLink('/tutorials/js-classic/#kapitel', t('ui.footer.allChapters')),
+    footerLink(ch01Url, `01. ${t('ui.ch.01')}`),
+    footerLink('/tutorials/js-classic/kapitel/10-ereignisse.html', `10. ${t('ui.ch.10')}`)
+  );
+  navChapters.append(ulChapters);
+
+  const navResources = el('nav', 'jsc-footer__col');
+  navResources.setAttribute('aria-label', t('ui.footer.colResources'));
+  navResources.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colResources')));
+  const ulResources = el('ul', 'jsc-footer__list');
+  const pluHub = footerLink('/tutorials/', t('ui.footer.pluHub'));
+  pluHub.target = '_blank';
+  pluHub.rel = 'noopener';
+  ulResources.append(
+    footerLink('/tutorials/js-classic/uebungen/', t('ui.footer.exercises')),
+    footerLink('/tutorials/js-classic/arbeitsblaetter/', t('ui.footer.worksheets')),
+    footerLink('/tutorials/js-classic/ki-grundlagen.html', t('ui.footer.kiBasics')),
+    pluHub
+  );
+  navResources.append(ulResources);
+
+  const navLegal = el('nav', 'jsc-footer__col');
+  navLegal.setAttribute('aria-label', t('ui.footer.colLegal'));
+  navLegal.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colLegal')));
+  const ulLegal = el('ul', 'jsc-footer__list');
+  ulLegal.append(
+    footerLink('/tutorials/pages/impressum.html', t('ui.footer.imprint')),
+    footerLink('/tutorials/pages/datenschutz.html', t('ui.footer.privacy')),
+    footerLink('/tutorials/pages/disclaimer.html', t('ui.footer.disclaimer'))
+  );
+  navLegal.append(ulLegal);
+
+  grid.append(navChapters, navResources, navLegal);
+  main.append(brandWrap, grid);
+
+  /* --- Bottom-Bar --- */
+  const bottom = el('div', 'jsc-footer__bottom');
+  const legal = el('p', 'jsc-footer__legal');
+  legal.append(
+    document.createTextNode(`${t('ui.footer.legalLine')} · `),
+    el('span', null, t('ui.footer.mitLicense')),
+    document.createTextNode(' · '),
+    el('span', null, t('ui.footer.ccLicense'))
+  );
+  const meta = el('p', 'jsc-footer__meta');
+  const support = el('a', 'jsc-footer__support', '');
+  support.href = '/tutorials/pages/spenden.html';
+  const heart = el('i', 'ph ph-heart', '');
+  heart.setAttribute('aria-hidden', 'true');
+  support.append(heart, document.createTextNode(` ${t('ui.footer.support')}`));
+  meta.append(support);
+  bottom.append(legal, meta);
+
+  inner.append(main, bottom);
   footer.append(inner);
   return footer;
+}
+
+function footerLink(href, label) {
+  const li = el('li', 'jsc-footer__item');
+  const a = el('a', 'jsc-footer__link', label);
+  a.href = href;
+  li.append(a);
+  return li;
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,38 +1,156 @@
 /**
- * 04-components/footer.css — Site-Footer (js-classic 2.0)
+ * 04-components/footer.css — Footer auf PLU-Markenstandard (P4R)
+ *
+ * Aufbau analog python-classic: Brand (Logo + Titel/Sub + Tagline +
+ * Classroom-Platzhalter), 3 Link-Spalten, Bottom-Bar mit Legal + Support.
  */
 
 .jsc-footer {
-  margin-top: var(--jsc-space-7);
+  margin-top: var(--jsc-space-8);
   border-top: 1px solid var(--jsc-color-border);
   background: var(--jsc-color-surface-1);
 }
 
 .jsc-footer__inner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--jsc-space-3);
-  align-items: center;
-  justify-content: space-between;
-  padding-block: var(--jsc-space-5);
+  padding-block: var(--jsc-space-7) var(--jsc-space-4);
 }
 
-.jsc-footer__license {
+/* Hauptbereich: Brand links, Grid rechts */
+.jsc-footer__main {
+  display: grid;
+  gap: var(--jsc-space-6);
+}
+
+@media (min-width: 1024px) {
+  .jsc-footer__main {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+
+/* Brand-Spalte */
+.jsc-footer__logo {
+  display: inline-flex;
+  gap: var(--jsc-space-3);
+  align-items: center;
+  text-decoration: none;
+}
+
+.jsc-footer__logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.jsc-footer__logo-text {
+  display: grid;
+}
+
+.jsc-footer__logo-title {
+  font-family: var(--jsc-font-display);
+  font-weight: var(--jsc-weight-bold);
+  color: var(--jsc-color-ink);
+}
+
+.jsc-footer__logo-subtitle {
   color: var(--jsc-color-ink-muted);
   font-size: var(--jsc-text--1);
+  letter-spacing: 0.08em;
+}
+
+.jsc-footer__tagline {
+  margin-top: var(--jsc-space-3);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text-0);
+}
+
+.jsc-footer__classroom {
+  display: inline-flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  margin-top: var(--jsc-space-4);
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Links-Grid */
+.jsc-footer__links-grid {
+  display: grid;
+  gap: var(--jsc-space-6);
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .jsc-footer__links-grid {
+    grid-template-columns: repeat(3, auto);
+    gap: var(--jsc-space-8);
+  }
+}
+
+.jsc-footer__col-title {
+  color: var(--jsc-color-ink);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jsc-footer__list {
+  margin: var(--jsc-space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-footer__item + .jsc-footer__item {
+  margin-top: var(--jsc-space-2);
 }
 
 .jsc-footer__link {
   color: var(--jsc-color-ink-muted);
   font-size: var(--jsc-text--1);
+  text-decoration: none;
+  transition: color var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-footer__link:hover {
+  color: var(--jsc-color-ink);
+}
+
+/* Bottom-Bar */
+.jsc-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-3);
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--jsc-space-6);
+  padding-top: var(--jsc-space-4);
+  border-top: 1px solid var(--jsc-color-border);
+}
+
+.jsc-footer__legal {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-footer__meta {
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-footer__support {
+  display: inline-flex;
+  gap: var(--jsc-space-1);
+  align-items: center;
+  color: var(--jsc-color-cta);
   font-weight: var(--jsc-weight-semibold);
   text-decoration: none;
 }
 
-.jsc-footer__link:hover {
-  color: var(--jsc-color-accent);
-}
-
-html[data-theme="light"] .jsc-footer__link:hover {
-  color: var(--jsc-color-accent-ink);
+.jsc-footer__support:hover {
+  color: var(--jsc-color-ink);
 }

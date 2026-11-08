@@ -1,8 +1,8 @@
 /**
  * 04-components/header.css — Site-Header (js-classic 2.0)
  *
- * Mobile-first: Zeile bricht um, Nav scrollbar (Details in nav.css).
- * ≥769px: horizontale Ausrichtung (nav.css).
+ * Desktop ≥1024px: 3-Spalten-Grid (Brand links, Nav zentriert, Actions rechts).
+ * Darunter: Mobile-first-Wrap (Nav scrollbar, Bottom-Bar via bottom-bar.css).
  */
 
 .jsc-header {
@@ -25,27 +25,26 @@
 .jsc-header__brand {
   display: inline-flex;
   gap: var(--jsc-space-2);
-  align-items: baseline;
-  font-weight: var(--jsc-weight-bold);
-  font-size: var(--jsc-text-1);
-  color: var(--jsc-color-accent);
+  align-items: center;
   text-decoration: none;
   white-space: nowrap;
 }
 
-.jsc-header__brand-sub {
-  color: var(--jsc-color-ink-muted);
-  font-weight: var(--jsc-weight-medium);
-  font-size: var(--jsc-text--1);
+.jsc-header__logo {
+  display: block;
+  width: 32px;
+  height: 32px;
 }
 
-/* Light: Brand-Text nicht in reinem Gelb (AA-Normaltext) */
-html[data-theme="light"] .jsc-header__brand {
-  color: var(--jsc-color-accent-ink);
-}
-
-.jsc-header__brand-icon {
+.jsc-header__wordmark {
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-2);
   font-weight: var(--jsc-weight-bold);
+  color: var(--jsc-color-ink);
+}
+
+.jsc-header__brand-accent {
+  color: var(--jsc-color-accent);
 }
 
 .jsc-header__actions {
@@ -110,4 +109,19 @@ html[data-theme="light"] .jsc-icon-btn:hover {
 
 .jsc-theme-toggle:not(.jsc-icon-btn):hover {
   background: var(--jsc-color-accent-dim);
+}
+
+/* Desktop ≥1024px: Brand links, Nav zentriert, Actions rechts */
+@media (min-width: 1024px) {
+  .jsc-header__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    flex-wrap: nowrap;
+    gap: var(--jsc-space-4);
+  }
+
+  .jsc-header__actions {
+    margin-left: 0;
+    justify-self: end;
+  }
 }
