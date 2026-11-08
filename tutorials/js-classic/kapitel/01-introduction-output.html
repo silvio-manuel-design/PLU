@@ -6,7 +6,7 @@
     <title>Chapter 01: Introduction &amp; Output · js-classic (PLU)</title>
     <meta
       name="description"
-      content="Learning steps: console.log(), innerHTML, alert() and prompt() — with demos, common mistakes, checklist, reflection, quiz and AI prompt training."
+      content="Learning steps: including JavaScript (external + defer), console.log(), innerHTML, alert() and prompt() — with demos, common mistakes, checklist, reflection, quiz and AI prompt training."
     />
     <link
       rel="canonical"
@@ -31,7 +31,7 @@
     <meta property="og:title" content="Chapter 01: Introduction &amp; Output · js-classic" />
     <meta
       property="og:description"
-      content="Your first output: console, innerHTML and the blockers alert()/prompt() — step by step."
+      content="Learning steps: including JavaScript (external + defer), console.log(), innerHTML, alert() and prompt() — with demos, common mistakes, checklist, reflection, quiz and AI prompt training."
     />
     <meta
       property="og:image"
@@ -90,12 +90,129 @@
         <div class="jsc-hero__content jsc-container">
           <p class="jsc-hero__eyebrow">Chapter 01</p>
           <h1 id="ch-title" class="jsc-hero__title">Introduction &amp; Output</h1>
-          <p class="jsc-hero__sub">Where JavaScript belongs — and how to make content visible.</p>
+          <p class="jsc-hero__sub">The web's third pillar: include it, print it, make it visible.</p>
         </div>
       </section>
 
-      <section class="jsc-step jsc-container" data-step="1" id="schritt-1" aria-labelledby="s1-title">
-        <h2 id="s1-title" class="jsc-step__heading">Your first output: console.log()</h2>
+            <section class="jsc-step jsc-container" data-step="1" id="schritt-1" aria-labelledby="s1-title">
+        <h2 id="s1-title" class="jsc-step__heading">The third pillar — and where JavaScript lives</h2>
+        <div class="jsc-step__why">
+          <p>
+            You already know HTML and CSS — together they build websites that look polished:
+            structure and styling in place. But they are silent. JavaScript is the third pillar of
+            the web: HTML gives content its structure, CSS gives its appearance a shape, and
+            JavaScript gives its behaviour a pulse. No JavaScript means no buttons that react, no
+            forms that validate, no content that moves. Before you write the language, you need to
+            know where it actually lives — because JavaScript never lives alone, it always moves
+            in with HTML.
+          </p>
+        </div>
+        <div class="jsc-step__explain">
+          <p>
+            JavaScript is a <strong>client-side scripting language</strong>: your browser reads and
+            runs the code — not a server somewhere on the web, but right on your device, every time
+            the page loads. A scripting language needs a host: an HTML document. There are three
+            ways to move JavaScript in — and they differ a lot in tidiness.
+          </p>
+          <p>
+            <strong>1. Inline</strong> — JavaScript directly in an HTML attribute. Fast, but messy:
+            content and behaviour mix, and the code cannot be reused anywhere. For school: off
+            limits.
+          </p>
+          <p>
+            <strong>2. Internal</strong> — a <code>&lt;script&gt;</code> element inside the HTML
+            document. Better, but larger projects get cluttered, and multiple pages cannot share
+            the code.
+          </p>
+          <p>
+            <strong>3. External</strong> — the code lives in its own file (e.g. <code>main.js</code>)
+            and is linked in. This is the standard you always follow: structure (HTML), style (CSS)
+            and behaviour (JS) live in three separate files. Everything stays maintainable, the
+            browser can cache the file — and your code works on every page.
+          </p>
+          <figure class="jsc-code-block" data-filename="inline.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">inline.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;!-- 1. Inline — mixing content and behaviour, demo purposes only --&gt;
+&lt;button onclick="alert('Hi!')"&gt;Click me&lt;/button&gt;</code></pre>
+          </figure>
+          <figure class="jsc-code-block" data-filename="intern.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">intern.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;!-- 2. Internal — script inside the document --&gt;
+&lt;script&gt;
+  console.log("Hello from the document!");
+&lt;/script&gt;</code></pre>
+          </figure>
+          <figure class="jsc-code-block" data-filename="index.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">index.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;!-- 3. External — the standard: own file, linked in the head with defer --&gt;
+&lt;script src="main.js" defer&gt;&lt;/script&gt;</code></pre>
+          </figure>
+          <figure class="jsc-code-block" data-filename="main.js">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">main.js</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">// main.js — your JavaScript lives here
+console.log("Hello from main.js!");</code></pre>
+          </figure>
+          <p>
+            <strong>Where does the link go?</strong> In the past, <code>&lt;script&gt;</code> sat at
+            the end of the <code>&lt;body&gt;</code>, so the HTML already existed before the script
+            ran. Today the cleanest spot is the <code>&lt;head&gt;</code> — with the
+            <code>defer</code> attribute: the browser loads <code>main.js</code> in parallel with
+            the HTML but only executes it after the page is fully built. You get both: full loading
+            speed and the certainty that every element exists.
+          </p>
+        </div>
+        <ol class="jsc-step__steps">
+          <li>Create a folder <code>my-first-site</code> with two files: <code>index.html</code> and <code>main.js</code>.</li>
+          <li>Write the basic scaffold into <code>index.html</code> (with <code>&lt;!DOCTYPE html&gt;</code>, <code>head</code> and <code>body</code>).</li>
+          <li>Add inside <code>&lt;head&gt;</code>: <code>&lt;script src="main.js" defer&gt;&lt;/script&gt;</code>.</li>
+          <li>Write into <code>main.js</code>: <code>console.log("JavaScript has moved in!");</code></li>
+          <li>Open the page in your browser and check the console (F12) — your text is there.</li>
+        </ol>
+        <div class="jsc-step__mistakes">
+          <p class="jsc-step__blocklabel">Common mistakes</p>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Path without the dot</p>
+            <p><code>src="/main.js"</code> looks at the server root, <code>src="main.js"</code> looks next to the HTML file. For local projects: almost never use a leading slash.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Script before the element</p>
+            <p>Without <code>defer</code> (or if the script sits in the <code>&lt;head&gt;</code> without it), the code runs before the HTML exists — <code>document.getElementById()</code> finds nothing.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Inline "just for a moment"</p>
+            <p>The one quick <code>onclick</code> almost never stays single. Start with the external file from day one.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Two scripts blocking each other</p>
+            <p>Plain <code>&lt;script&gt;</code> elements stop the page from loading. With <code>defer</code> everything stays smooth.</p>
+          </div>
+        </div>
+        <aside class="jsc-step__tip">
+          <p class="jsc-step__blocklabel">Pro tip</p>
+          <p>Remember the rule of thumb <strong>"external + defer"</strong> — it carries you through the whole school year. The only exception: tiny demos in a single document, as in some exercises here. And: the filename <code>main.js</code> is convention, not law — but conventions read better later.</p>
+        </aside>
+        <ul class="jsc-step__criteria" data-component="jsc-checklist-items">
+          <li>I can explain which pillar of the web HTML, CSS and JavaScript each are.</li>
+          <li>I can distinguish and show the three ways of including JavaScript (inline, internal, external).</li>
+          <li>I can argue why external files are preferred.</li>
+          <li>I can include an external script in the <code>&lt;head&gt;</code> with <code>defer</code> and explain the difference to the end of the <code>body</code>.</li>
+        </ul>
+      </section>
+
+      <section class="jsc-step jsc-container" data-step="2" id="schritt-2" aria-labelledby="s2-title">
+        <h2 id="s2-title" class="jsc-step__heading">Your first output: console.log()</h2>
         <div class="jsc-step__why">
           <p>
             Imagine writing your first program — and… nothing visible happens. That's exactly
@@ -174,8 +291,8 @@
         </ul>
       </section>
 
-      <section class="jsc-step jsc-container" data-step="2" id="schritt-2" aria-labelledby="s2-title">
-        <h2 id="s2-title" class="jsc-step__heading">Output for visitors: innerHTML</h2>
+      <section class="jsc-step jsc-container" data-step="3" id="schritt-3" aria-labelledby="s3-title">
+        <h2 id="s3-title" class="jsc-step__heading">Output for visitors: innerHTML</h2>
         <div class="jsc-step__why">
           <p>
             Only you can see the console. A real website has to show visitors something — a
@@ -257,8 +374,8 @@
         </ul>
       </section>
 
-      <section class="jsc-step jsc-container" data-step="3" id="schritt-3" aria-labelledby="s3-title">
-        <h2 id="s3-title" class="jsc-step__heading">Popups &amp; input: alert() and prompt()</h2>
+      <section class="jsc-step jsc-container" data-step="4" id="schritt-4" aria-labelledby="s4-title">
+        <h2 id="s4-title" class="jsc-step__heading">Popups &amp; input: alert() and prompt()</h2>
         <div class="jsc-step__why">
           <p>
             You will often see <code>alert()</code> and <code>prompt()</code> in old tutorials.
@@ -352,12 +469,16 @@
           data-storage-key="jsc-ch01-check"
           data-chapter="01"
         >
+          <li><label><input type="checkbox" /> <span>I can explain which pillar of the web HTML, CSS and JavaScript each are.</span></label></li>
+          <li><label><input type="checkbox" /> <span>I can distinguish and show the three ways of including JavaScript (inline, internal, external).</span></label></li>
+          <li><label><input type="checkbox" /> <span>I can argue why external files are preferred.</span></label></li>
+          <li><label><input type="checkbox" /> <span>I can include an external script in the <code>&lt;head&gt;</code> with <code>defer</code> and explain the difference to the end of the <code>body</code>.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can explain what the console is for and how to open it.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can show how to write <code>console.log("text")</code> — including quotes and parentheses.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can explain the difference between output in the console and output on the page.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can explain why an element needs an <code>id</code> to be addressed with JavaScript.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can show how <code>innerHTML</code> replaces the content of an element.</span></label></li>
-          <li><label><input type="checkbox" /> <span>I can explain why the script belongs at the end of the <code>body</code>.</span></label></li>
+          <li><label><input type="checkbox" /> <span>I can explain why an external script sits in the head with defer — and what defer does.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can explain why <code>alert()</code> and <code>prompt()</code> block the page.</span></label></li>
           <li><label><input type="checkbox" /> <span>I can explain why <code>document.write()</code> is no longer used.</span></label></li>
         </ul>
@@ -384,6 +505,16 @@
       <section class="jsc-quiz-section jsc-container jsc-home-section--alt" aria-labelledby="quiz-title">
         <h2 id="quiz-title">Quiz</h2>
         <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch01-quiz">
+          <fieldset class="jsc-quiz__question" data-correct="c">
+            <legend>You start a new project. Where do you include your JavaScript most cleanly?</legend>
+            <label><input type="radio" name="ch01-q0" value="a" /> Directly in onclick attributes — that is the fastest way</label>
+            <label><input type="radio" name="ch01-q0" value="b" /> As an internal <code>&lt;script&gt;</code> at the very top of the <code>&lt;head&gt;</code></label>
+            <label><input type="radio" name="ch01-q0" value="c" /> As an external file in the <code>&lt;head&gt;</code> with <code>defer</code></label>
+            <label><input type="radio" name="ch01-q0" value="d" /> As an external file, but with <code>async</code> only — that is the same thing</label>
+            <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+            <template data-feedback="ok"><strong>Exactly — external in the head with defer: load in parallel, execute after the HTML.</strong></template>
+            <template data-feedback="wrong">Think again: inline mixes content and behaviour, internal does not scale, and async executes as soon as the file arrives — without waiting for the HTML.</template>
+          </fieldset>
           <fieldset class="jsc-quiz__question" data-correct="b">
             <legend>Which method is visible to visitors?</legend>
             <label><input type="radio" name="ch01-q1" value="a" /> <code>console.log()</code></label>
