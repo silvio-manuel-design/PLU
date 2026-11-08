@@ -101,4 +101,9 @@ export default {
   'ui.proj.todo': 'Todo-Liste',
   'ui.proj.noten': 'Notenverwaltung',
   'ui.proj.quiz': 'Quiz',
+
+  /* Kapitel 11/12 — Platzhalter (B13, P4R4) */
+  'ui.ch.11': 'Formulare & Validierung',
+  'ui.ch.12': 'Sicherheit & typische Angriffe',
+  'ui.soon': 'folgt bald',
 };

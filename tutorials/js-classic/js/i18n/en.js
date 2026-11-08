@@ -101,4 +101,9 @@ export default {
   'ui.proj.todo': 'To-do List',
   'ui.proj.noten': 'Grade Manager',
   'ui.proj.quiz': 'Quiz',
+
+  /* Chapters 11/12 — placeholders (B13, P4R4) */
+  'ui.ch.11': 'Forms & Validation',
+  'ui.ch.12': 'Security & Common Attacks',
+  'ui.soon': 'coming soon',
 };

@@ -86,12 +86,44 @@ function update(mount) {
   });
 }
 
+function placeholderCard(nr, i18nKey) {
+  const li = document.createElement('li');
+  li.className = 'jsc-chapter-card is-placeholder';
+  li.dataset.module = `m${nr}`;
+  li.setAttribute('aria-disabled', 'true');
+
+  const wrap = document.createElement('span');
+  wrap.className = 'jsc-chapter-card__link';
+
+  const ringWrap = document.createElement('span');
+  ringWrap.className = 'jsc-chapter-card__ring';
+  ringWrap.append(ringSvg(false));
+
+  const nrEl = document.createElement('span');
+  nrEl.className = 'jsc-chapter-card__nr';
+  nrEl.textContent = nr;
+
+  const title = document.createElement('span');
+  title.className = 'jsc-chapter-card__title';
+  title.textContent = t(i18nKey);
+
+  const status = document.createElement('span');
+  status.className = 'jsc-chapter-card__status';
+  status.textContent = t('ui.soon');
+
+  wrap.append(ringWrap, nrEl, title, status);
+  li.append(wrap);
+  return li;
+}
+
 export function initHome() {
   const mount = document.querySelector('[data-component="jsc-chapter-grid"]');
   if (!mount) return;
 
   mount.textContent = '';
   NAV.chaptersMeta.forEach((chapter) => mount.append(card(chapter)));
+  // Platzhalter 11 + 12 (B13): keine Seiten, keine Links — „12 Kapitel" stimmt mit dem Grid überein
+  mount.append(placeholderCard('11', 'ui.ch.11'), placeholderCard('12', 'ui.ch.12'));
 
   window.addEventListener('plu:progress', () => update(mount));
 }
