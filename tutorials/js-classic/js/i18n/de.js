@@ -87,4 +87,18 @@ export default {
   'ui.footer.ccLicense': 'CC BY-NC-SA 4.0',
   'ui.footer.support': 'Unterstützen',
   'ui.footer.logoSub': 'PANTAM LEARNING UNIVERSE',
+
+  /* Mobiles Hauptmenü (P4R3) */
+  'ui.menu.open': 'Menü öffnen',
+  'ui.menu.close': 'Menü schließen',
+  'ui.menu.groupCourse': 'Kurs',
+  'ui.menu.groupChapters': 'Kapitel',
+  'ui.menu.groupLearn': 'Lernen',
+  'ui.menu.groupFinal': 'Abschluss',
+  'ui.menu.groupPlu': 'PLU',
+
+  /* Abschlussprojekte (Eigennamen, im mobilen Menü) */
+  'ui.proj.todo': 'Todo-Liste',
+  'ui.proj.noten': 'Notenverwaltung',
+  'ui.proj.quiz': 'Quiz',
 };

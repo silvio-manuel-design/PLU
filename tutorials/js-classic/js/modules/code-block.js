@@ -10,7 +10,11 @@ export function initCodeBlocks() {
   document.querySelectorAll('.jsc-code-block').forEach((block) => {
     const btn = block.querySelector('[data-copy]');
     const code = block.querySelector('code');
+    const pre = block.querySelector('pre');
     if (!btn || !code) return;
+
+    // Scrollbarer Code per Tastatur erreichbar (axe: scrollable-region-focusable)
+    if (pre) pre.setAttribute('tabindex', '0');
 
     let live = block.querySelector('[data-copy-live]');
     if (!live) {

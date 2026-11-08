@@ -10,26 +10,49 @@
   scroll-margin-top: 6rem; /* fixed Header abziehen */
 }
 
-/* Sektionen als Flächen (python „card-like containment", P4R2):
-   gestapelt, sichtbar vom Seitengrund getrennt. */
+/* Sektionen als Flächen (python „card-like containment", P4R2/P4R3):
+   gestapelt, sichtbar vom Seitengrund getrennt — Border + Lift + Abstand. */
 .jsc-section-card {
-  margin-top: var(--jsc-space-6);
-  padding-block: var(--jsc-space-7);
+  margin-block: var(--jsc-space-8);
+  padding-block: var(--jsc-space-8);
+  border: 1px solid var(--jsc-color-border);
   border-radius: var(--jsc-radius-l);
   background: var(--jsc-color-surface-1);
 }
 
-/* Innere Karten eine Ebene angehoben (Dark surface-2 / Light surface-0) */
+/* Innere Karten eine Ebene angehoben (Dark surface-2 / Light surface-0) + Lift */
 .jsc-chapter-card,
+.jsc-info-card,
 .jsc-goals__item,
 .jsc-teaser__media img {
+  border: 1px solid var(--jsc-color-border);
   background: var(--jsc-color-surface-2);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
 }
 
 html[data-theme="light"] .jsc-chapter-card,
+html[data-theme="light"] .jsc-info-card,
 html[data-theme="light"] .jsc-goals__item,
 html[data-theme="light"] .jsc-teaser__media img {
   background: oklch(100% 0 0); /* surface-0 Light */
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+
+/* Sektions-Headline-Premium: JS-Gelb-Gradient-Strich unter H2 */
+.jsc-home-section h2 {
+  position: relative;
+  padding-bottom: var(--jsc-space-3);
+}
+
+.jsc-home-section h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--jsc-color-accent), transparent);
 }
 
 .jsc-home-section h2 {

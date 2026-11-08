@@ -18,7 +18,7 @@
  *     Return-of-Focus auf den auslösenden Button.
  */
 
-import { NAV } from '../data/nav.js';
+import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS } from '../data/nav.js';
 import { t, getLanguage, onLangChange } from './i18n.js';
 import { isLight, toggleTheme } from './theme.js';
 
@@ -209,6 +209,140 @@ function renderLangSwitcher() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Mobiles Hauptmenü (Disclosure-Panel unter dem Header, <1024px)      */
+/* ------------------------------------------------------------------ */
+
+function menuGroup(title, links) {
+  const group = el('div', 'jsc-mobile-menu__group');
+  group.append(el('p', 'jsc-mobile-menu__group-title', title));
+  const ul = el('ul', 'jsc-mobile-menu__list');
+  links.forEach(({ href, label, current }) => {
+    const li = el('li', 'jsc-mobile-menu__item');
+    const a = el('a', 'jsc-mobile-menu__link', label);
+    a.href = href;
+    if (current) a.setAttribute('aria-current', 'page');
+    li.append(a);
+    ul.append(li);
+  });
+  group.append(ul);
+  return group;
+}
+
+function renderMobileMenu(header) {
+  const idx = currentChapterIndex();
+  const base = '/tutorials/js-classic';
+
+  const panel = el('nav', 'jsc-mobile-menu');
+  panel.id = 'jsc-mobile-menu';
+  panel.setAttribute('aria-label', t('ui.a11y.mainNav'));
+  panel.hidden = true;
+
+  const inner = el('div', 'jsc-mobile-menu__inner jsc-container');
+  inner.append(
+    menuGroup(t('ui.menu.groupCourse'), [
+      { href: `${base}/`, label: t('ui.nav.home'), current: window.location.pathname.replace(/\/$/, '/index.html').endsWith('/js-classic/index.html') || window.location.pathname === '/tutorials/js-classic/' },
+    ]),
+    menuGroup(
+      t('ui.menu.groupChapters'),
+      CHAPTERS.map((ch, i) => ({
+        href: `${base}/kapitel/${ch.slug}.html`,
+        label: `${ch.nr}. ${t(ch.i18n)}`,
+        current: idx === i,
+      }))
+    ),
+    menuGroup(t('ui.menu.groupLearn'), [
+      { href: `${base}/uebungen/`, label: t('ui.nav.exercises') },
+      { href: `${base}/arbeitsblaetter/`, label: t('ui.nav.worksheets') },
+      { href: `${base}/ki-grundlagen.html`, label: t('ui.nav.kiBasics') },
+      { href: `${base}/vscode.html`, label: t('ui.nav.vscode') },
+    ]),
+    menuGroup(
+      t('ui.menu.groupFinal'),
+      FINAL_PROJECTS.map((p) => ({ href: `${base}/abschluss/${p.slug}.html`, label: t(p.i18n) }))
+    ),
+    menuGroup(t('ui.menu.groupPlu'), [
+      { href: `${base}/info.html`, label: t('ui.nav.infoAbout') },
+      { href: `${base}/biblik.html`, label: t('ui.nav.library') },
+    ])
+  );
+  panel.append(inner);
+  header.append(panel);
+
+  const btn = el('button', 'jsc-icon-btn jsc-mobile-menu__toggle');
+  btn.type = 'button';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'jsc-mobile-menu');
+  btn.setAttribute('aria-label', t('ui.menu.open'));
+  const icon = el('i', 'ph ph-list', '');
+  icon.setAttribute('aria-hidden', 'true');
+  btn.append(icon);
+
+  /* --- Interaktionen --- */
+  function focusables() {
+    return [...panel.querySelectorAll('a[href]')];
+  }
+
+  function open() {
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', t('ui.menu.close'));
+    panel.hidden = false;
+    document.documentElement.classList.add('is-menu-open');
+    focusables()[0]?.focus();
+  }
+
+  function close(refocus = true) {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', t('ui.menu.open'));
+    panel.hidden = true;
+    document.documentElement.classList.remove('is-menu-open');
+    if (refocus) btn.focus();
+  }
+
+  const isOpen = () => btn.getAttribute('aria-expanded') === 'true';
+
+  btn.addEventListener('click', () => (isOpen() ? close(false) : open()));
+
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen()) {
+      e.preventDefault();
+      close(true);
+    }
+  });
+
+  panel.addEventListener('keydown', (e) => {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close(true);
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    // Fokus-Zyklus innerhalb des Panels
+    const items = focusables();
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // Klick außerhalb schließt
+  document.addEventListener('click', (e) => {
+    if (isOpen() && !panel.contains(e.target) && !btn.contains(e.target)) close(false);
+  });
+
+  onLangChange(() => {
+    if (isOpen()) close(false);
+  });
+
+  return btn;
+}
+
+/* ------------------------------------------------------------------ */
 /* Header                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -252,8 +386,12 @@ function renderHeader(currentPath) {
   themeBtn.addEventListener('click', toggleTheme);
 
   actions.append(renderLangSwitcher(), themeBtn);
+  const menuBtn = renderMobileMenu(header);
 
-  inner.append(brand, nav, actions);
+  const actionsRow = actions;
+  actionsRow.append(menuBtn);
+
+  inner.append(brand, nav, actionsRow);
   header.append(inner);
   return header;
 }

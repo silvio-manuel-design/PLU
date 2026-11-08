@@ -1,0 +1,100 @@
+/**
+ * 05-components/mobile-menu.css — Mobiles Hauptmenü (P4R3)
+ *
+ * Disclosure-Panel direkt unter dem Header (<1024px), flache Gruppen,
+   intern scrollbar, angestückelt. Button sichtbar <1024px, ≥1024px entfällt
+ * das Menü zugunsten der horizontalen Header-Nav.
+ */
+
+.jsc-mobile-menu__toggle {
+  display: inline-grid;
+}
+
+@media (min-width: 1024px) {
+  .jsc-mobile-menu__toggle {
+    display: none;
+  }
+}
+
+/* Panel unter dem Header (sticky mit dem Header) */
+.jsc-mobile-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: var(--jsc-z-header);
+  max-height: 75vh;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--jsc-color-border);
+  background: var(--jsc-color-surface-2);
+  box-shadow: var(--jsc-shadow-2);
+}
+
+.jsc-mobile-menu[hidden] {
+  display: none;
+}
+
+.jsc-mobile-menu__inner {
+  padding-block: var(--jsc-space-4);
+}
+
+.jsc-mobile-menu__group + .jsc-mobile-menu__group {
+  margin-top: var(--jsc-space-4);
+  padding-top: var(--jsc-space-4);
+  border-top: 1px solid var(--jsc-color-border);
+}
+
+.jsc-mobile-menu__group-title {
+  margin-bottom: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jsc-mobile-menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-mobile-menu__link {
+  display: block;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border-radius: var(--jsc-radius-s);
+  color: var(--jsc-color-ink);
+  text-decoration: none;
+}
+
+.jsc-mobile-menu__link:hover,
+.jsc-mobile-menu__link:focus-visible {
+  background: var(--jsc-color-accent-dim);
+  color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-mobile-menu__link:hover,
+html[data-theme="light"] .jsc-mobile-menu__link:focus-visible {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-mobile-menu__link[aria-current="page"] {
+  color: var(--jsc-color-accent);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+html[data-theme="light"] .jsc-mobile-menu__link[aria-current="page"] {
+  color: var(--jsc-color-accent-ink);
+}
+
+/* Scroll-Lock während das Menü offen ist (JS-Klasse, robuster als :has()) */
+html.is-menu-open,
+html.is-menu-open body {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jsc-mobile-menu {
+    scroll-behavior: auto;
+  }
+}

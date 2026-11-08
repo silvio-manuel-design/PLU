@@ -35,6 +35,12 @@ export const INFO_PAGES = [
   { slug: 'biblik', i18n: 'ui.nav.library' },
 ];
 
+export const FINAL_PROJECTS = [
+  { slug: 'todo-liste', i18n: 'ui.proj.todo' },
+  { slug: 'noten', i18n: 'ui.proj.noten' },
+  { slug: 'quiz', i18n: 'ui.proj.quiz' },
+];
+
 const BASE = '/tutorials/js-classic';
 
 export const NAV = {
