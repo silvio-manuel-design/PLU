@@ -10,32 +10,46 @@
   scroll-margin-top: 6rem; /* fixed Header abziehen */
 }
 
-/* Sektionen als Flächen (python „card-like containment", P4R2/P4R3):
-   gestapelt, sichtbar vom Seitengrund getrennt — Border + Lift + Abstand. */
+/* Sektionen als abwechselnde Full-Bleed-Bänder (P4R5, ersetzt Boxed-Containment):
+   Band über volle Viewport-Breite (100vmax-Shadow + clip-path, kein Markup-Eingriff),
+   ungerade Bänder surface-1, gerade (--alt) surface-2 — die Tonwechsel sind die Trennung. */
 .jsc-section-card {
-  margin-block: var(--jsc-space-8);
-  padding-block: var(--jsc-space-8);
-  border: 1px solid var(--jsc-color-border);
-  border-radius: var(--jsc-radius-l);
-  background: var(--jsc-color-surface-1);
+  --jsc-band-bg: var(--jsc-color-surface-1);
+  --jsc-card-bg: var(--jsc-color-surface-2);
+  --jsc-card-lift: 0 2px 12px rgb(0 0 0 / 0.25);
+
+  margin-block: 0;
+  padding-block: var(--jsc-space-10);
+  border: 0;
+  border-radius: 0;
+  background: var(--jsc-band-bg);
+  box-shadow: 0 0 0 100vmax var(--jsc-band-bg);
+  clip-path: inset(0 -100vmax);
 }
 
-/* Innere Karten eine Ebene angehoben (Dark surface-2 / Light surface-0) + Lift */
+.jsc-section-card--alt {
+  --jsc-band-bg: var(--jsc-color-surface-2);
+  --jsc-card-bg: var(--jsc-color-surface-1);
+  --jsc-card-lift: 0 2px 16px rgb(0 0 0 / 0.35);
+}
+
+/* Innere Karten eine Ebene über dem Band */
 .jsc-chapter-card,
 .jsc-info-card,
 .jsc-goals__item,
 .jsc-teaser__media img {
   border: 1px solid var(--jsc-color-border);
-  background: var(--jsc-color-surface-2);
-  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
+  background: var(--jsc-card-bg);
+  box-shadow: var(--jsc-card-lift);
 }
 
-html[data-theme="light"] .jsc-chapter-card,
-html[data-theme="light"] .jsc-info-card,
-html[data-theme="light"] .jsc-goals__item,
-html[data-theme="light"] .jsc-teaser__media img {
-  background: oklch(100% 0 0); /* surface-0 Light */
-  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+html[data-theme="light"] .jsc-section-card {
+  --jsc-card-bg: oklch(100% 0 0); /* weiß auf Band-1 */
+  --jsc-card-lift: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+
+html[data-theme="light"] .jsc-section-card--alt {
+  --jsc-card-bg: var(--jsc-color-surface-1); /* auf Band-2 eine Ebene runter */
 }
 
 /* Sektions-Headline-Premium: JS-Gelb-Gradient-Strich unter H2 */
