@@ -32,20 +32,33 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    90deg,
-    color-mix(in oklch, var(--jsc-color-surface-0) 78%, transparent) 0%,
-    color-mix(in oklch, var(--jsc-color-surface-0) 55%, transparent) 42%,
-    transparent 60%
+    200deg,
+    transparent 35%,
+    color-mix(in oklch, var(--jsc-color-surface-0) 80%, transparent) 70%
   );
 }
 
+/* Container-Kontext: Content = jsc-container (s. HTML), Textkante = Sektionskante */
 .jsc-hero__content {
   position: relative;
   z-index: 1;
-  max-width: 40rem;
-  margin-inline: 0; /* keine Auto-Zentrierung — Text klebt am linken Gradienten-Rand */
+  max-width: none;
   padding-block: var(--jsc-space-8);
   text-align: left;
+}
+
+.jsc-hero__title {
+  max-width: 40rem;
+}
+
+@media (min-width: 1024px) {
+  .jsc-hero {
+    align-items: flex-end; /* Text ins untere Drittel — Bogen der Grafik nutzen */
+  }
+
+  .jsc-hero__content {
+    padding-block-end: clamp(2rem, 10vh, 6rem);
+  }
 }
 
 .jsc-hero__title,
