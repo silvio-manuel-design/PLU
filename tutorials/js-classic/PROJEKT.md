@@ -122,6 +122,23 @@ i18n-Dictionaries.
   Pfeiltasten, Escape, Tab-raus-schließt; States per `:has()` am Wrapper — §5.9);
   Kapitelübersicht = `<dialog>` mit Focus-Trap, Backdrop-Klick und Return-of-Focus.
 
+## Fonts & Design-DNA
+
+- **Schriftarten lokal via Fontsource** (kein CDN, kein Google-Fonts-Request):
+  Display = Poppins (`@fontsource/poppins`, statische Gewichte 400/600/700 —
+  ein Variable-Paket existiert im Registry nicht), Text = Inter Variable,
+  Code/Mono = JetBrains Mono Variable. Token: `--jsc-font-display`,
+  `--jsc-font-sans`, `--jsc-font-mono` (Fallback-Stacks deklariert, font-display: swap).
+- **Button-System** (`05-components/button.css`): `.jsc-button` als Pill, Größen
+  `sm/md/lg`, Varianten `primary` (Gold-Gradient), `accent` (Teal), `ghost`, `outline`;
+  Hover/Focus `-2px` + Glow (Reduced Motion: nur Farbe/Glow). Neubuttons immer hierauf aufbauen.
+- **Back-to-Top** (`js/modules/back-to-top.js` + `05-components/back-to-top.css`):
+  erscheint nach ~1 Viewport Scrollen, smooth nach oben (Reduced Motion: auto),
+  Label via `ui.backToTop`.
+- **Header-Action-Cluster:** Theme/Sprache als gleichhohe Icon-Buttons (`.jsc-icon-btn`),
+  slot-basiert — ein dritter Action-Button (Classroom-Mode) ist später ohne Umbau einsetzbar.
+  Classroom-Mode selbst ist ein eigenes späteres Paket.
+
 ## Fortschritt & Speicher-Schema
 
 **Kapitel-Fortschritt** (`js/modules/progress.js`, verbindliches Schema):
@@ -173,3 +190,7 @@ Weitere Speicher-Keys: `jsc-theme` (Theme, siehe Site-Chrome), `plu-language` (i
   `progress.js` (`jsc-progress`-Schema + `plu:progress`-Event) und `home.js`; Hero-Bilder
   (18 Assets, AVIF/WebP/JPG × 768/1440/2560) unter `assets/img/home/`. Erste
   Bestandsdatei-Ersetzung: `index.html` (Altstand bleibt im Git-Verlauf).
+- **P3R** (08.11.2026): Homepage-Revision auf Bildwelt v2 „Dark-Neon-Pro" (B12) —
+  Assets v1/v3 → w4 (Hero) + w1 (KI-Teaser), Roboter-Alt-Texte ersetzt; Design-DNA:
+  Poppins/Inter/JetBrains Mono lokal, Button-System (4 Varianten), Back-to-Top,
+  Header-Action-Cluster mit Classroom-Slot-Vorbereitung.

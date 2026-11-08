@@ -50,4 +50,5 @@ export default {
   'ui.a11y.themeToggle': 'Farbschema wechseln',
   'ui.a11y.bottomBar': 'Kapitelnavigation',
   'ui.a11y.closeMenu': 'Menü schließen',
+  'ui.backToTop': 'Nach oben',
 };

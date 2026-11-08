@@ -13,12 +13,17 @@
  */
 
 import '@fontsource-variable/inter/index.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource-variable/jetbrains-mono/index.css';
 import '@phosphor-icons/web/regular';
 
 import { initI18n, setLanguage, getLanguage, t, onLangChange } from './modules/i18n.js';
 import { initTheme } from './modules/theme.js';
 import { initNavigation } from './modules/navigation.js';
 import { initHome } from './modules/home.js';
+import { initBackToTop } from './modules/back-to-top.js';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
@@ -26,6 +31,7 @@ initI18n(de, en);
 initTheme();
 initNavigation();
 initHome();
+initBackToTop();
 
 /* ------------------------------------------------------------------ */
 /* Sprach-Umschalter (P1-Demo für smoke-test*.html; Persistenz via     */
