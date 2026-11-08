@@ -35,6 +35,8 @@ export default defineConfig({
       input: {
         home: resolve(__dirname, 'index.html'),
         homeEn: resolve(__dirname, 'index-en.html'),
+        ch01: resolve(__dirname, 'kapitel/01-einfuehrung-ausgabe.html'),
+        ch01En: resolve(__dirname, 'kapitel/01-introduction-output.html'),
         smokeTest: resolve(__dirname, 'labs/smoke-test.html'),
         smokeTestEn: resolve(__dirname, 'labs/smoke-test-en.html'),
         p2Fundament: resolve(__dirname, 'labs/p2-fundament.html'),

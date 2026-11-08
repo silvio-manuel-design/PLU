@@ -51,4 +51,18 @@ export default {
   'ui.a11y.bottomBar': 'Kapitelnavigation',
   'ui.a11y.closeMenu': 'Menü schließen',
   'ui.backToTop': 'Nach oben',
+
+  /* Kapitel-Komponenten (P4) */
+  'ui.check.done': 'Kapitel abgeschlossen — schön! Weiter zu Kapitel 02.',
+  'ui.check.progress': '%d von %d erledigt',
+  'ui.reflect.saved': 'Automatisch gespeichert',
+  'ui.reflect.aria': 'Deine Antwort (wird lokal gespeichert)',
+  'ui.quiz.check': 'Antworten prüfen',
+  'ui.quiz.retry': 'Nochmal versuchen',
+  'ui.quiz.result': '%d von %d richtig',
+  'ui.media.placeholder': 'Video folgt in Kürze.',
+  'ui.media.load': 'Video laden (datenschutzkonform)',
+  'ui.media.external': 'Externer Inhalt — erst nach Klick geladen.',
+  'ui.demo.run': 'Ausführen',
+  'ui.demo.reset': 'Zurücksetzen',
 };

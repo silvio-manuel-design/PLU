@@ -1,0 +1,150 @@
+/**
+ * 05-components/step.css — Lernschritt-Blöcke (js-classic 2.0)
+ *
+ * Blockfolge: why → explain → demo → steps → mistakes → tip → criteria.
+ * Modul-Akzent via data-module + color-mix (§5.9).
+ */
+
+.jsc-step {
+  padding-block: var(--jsc-space-7);
+  border-top: 1px solid var(--jsc-color-border);
+  scroll-margin-top: 6rem;
+}
+
+.jsc-step:first-of-type {
+  border-top: 0;
+}
+
+.jsc-step__heading {
+  display: flex;
+  gap: var(--jsc-space-3);
+  align-items: baseline;
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-3);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-step__heading::before {
+  content: attr(data-step);
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--jsc-radius-pill);
+  background: var(--module-accent-dim);
+  color: var(--module-accent-text);
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text-0);
+  font-weight: var(--jsc-weight-bold);
+}
+
+/* why-Callout */
+.jsc-step__why {
+  margin-top: var(--jsc-space-4);
+  padding: var(--jsc-space-4) var(--jsc-space-5);
+  border-left: 0.25rem solid var(--module-accent, var(--jsc-color-accent));
+  border-radius: 0 var(--jsc-radius-m) var(--jsc-radius-m) 0;
+  background: var(--jsc-color-surface-1);
+  font-size: var(--jsc-text-1);
+}
+
+/* explain */
+.jsc-step__explain {
+  margin-top: var(--jsc-space-5);
+  max-width: 46rem;
+}
+
+.jsc-step__explain p + figure,
+.jsc-step__explain p + .jsc-code-block {
+  margin-top: var(--jsc-space-3);
+}
+
+/* demo */
+.jsc-step__demo {
+  margin-top: var(--jsc-space-5);
+}
+
+/* steps */
+.jsc-step__steps {
+  margin: var(--jsc-space-5) 0 0;
+  padding-left: var(--jsc-space-6);
+  max-width: 46rem;
+}
+
+.jsc-step__steps li {
+  padding-left: var(--jsc-space-2);
+}
+
+.jsc-step__steps li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+/* mistakes */
+.jsc-step__mistakes {
+  display: grid;
+  gap: var(--jsc-space-3);
+  margin-top: var(--jsc-space-5);
+}
+
+.jsc-step__blocklabel {
+  margin-bottom: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* proTip (Gold-Tinting) */
+.jsc-step__tip {
+  margin-top: var(--jsc-space-5);
+  padding: var(--jsc-space-4) var(--jsc-space-5);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-achievement) 40%, transparent);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--jsc-color-achievement) 12%, var(--jsc-color-surface-0));
+}
+
+/* criteria */
+.jsc-step__criteria {
+  margin: var(--jsc-space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-step__criteria li {
+  position: relative;
+  padding-left: var(--jsc-space-5);
+  color: var(--jsc-color-ink-muted);
+}
+
+.jsc-step__criteria li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--jsc-color-success);
+  font-weight: var(--jsc-weight-bold);
+}
+
+.jsc-step__criteria li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+/* mistake-card (Coral-Tinting) */
+.jsc-mistake-card {
+  padding: var(--jsc-space-4);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-cta) 35%, transparent);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--jsc-color-cta) 9%, var(--jsc-color-surface-0));
+}
+
+.jsc-mistake-card__title {
+  color: var(--jsc-color-cta);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+.jsc-mistake-card p + p {
+  margin-top: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}

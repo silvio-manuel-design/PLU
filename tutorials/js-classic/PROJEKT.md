@@ -139,6 +139,37 @@ i18n-Dictionaries.
   slot-basiert — ein dritter Action-Button (Classroom-Mode) ist später ohne Umbau einsetzbar.
   Classroom-Mode selbst ist ein eigenes späteres Paket.
 
+## Content-Modell Lernschritt
+
+Jedes Kapitel besteht aus **3–5 Lernschritten**; jeder folgt der verbindlichen Blockfolge
+`why → explain → demo → steps → commonMistakes → proTip → successCriteria` (fehlende Blöcke
+erlaubt, Reihenfolge verbindlich). **Markup-Vertrag** (BEM, `jsc-*`):
+
+```html
+<section class="jsc-step" data-step="1" id="schritt-1">
+  <div class="jsc-step__why">…</div>
+  <div class="jsc-step__explain">…</div>
+  <div class="jsc-step__demo" data-component="jsc-demo">…</div>
+  <ol class="jsc-step__steps">…</ol>
+  <div class="jsc-step__mistakes">…</div>
+  <aside class="jsc-step__tip">…</aside>
+  <ul class="jsc-step__criteria" data-component="jsc-checklist-items">…</ul>
+</section>
+```
+
+- `successCriteria` sind **erklärbare Ziele** (B11) — Muster „Ich kann erklären, …" /
+  „Ich kann zeigen, …". Sie speisen die Kapitel-Checkliste und später die Rubric (P5/P8).
+- **Sequenzierung (B3):** DOM-Soforterfolg früh — `innerHTML` vor `alert`/`prompt`;
+  `document.write()` nur als historische Warnung im commonMistakes-Block, nie als Lehrschritt.
+- Kapitel-Seiten binden `js/entry-chapter.js`; Demos nur nach Button-Klick (`alert`/`prompt`
+  ausschließlich im Popups-Lernschritt).
+
+## Kapitel-Storage-Keys
+
+Kapitel 01: `jsc-ch01-check` (Checkliste), `jsc-ch01-reflect` (Reflexion), `jsc-ch01-quiz`
+(Quiz) — via `storage.js` (Namespace `jsc-`). Vollständige Checkliste feuert
+`progress.markDone('01')` → `plu:progress`-Event. Schema je Paket: `jsc-ch<NN>-<komponente>`.
+
 ## Fortschritt & Speicher-Schema
 
 **Kapitel-Fortschritt** (`js/modules/progress.js`, verbindliches Schema):
@@ -194,3 +225,9 @@ Weitere Speicher-Keys: `jsc-theme` (Theme, siehe Site-Chrome), `plu-language` (i
   Assets v1/v3 → w4 (Hero) + w1 (KI-Teaser), Roboter-Alt-Texte ersetzt; Design-DNA:
   Poppins/Inter/JetBrains Mono lokal, Button-System (4 Varianten), Back-to-Top,
   Header-Action-Cluster mit Classroom-Slot-Vorbereitung.
+- **P4** (08.11.2026): Content-Modell „Lernschritt" fixiert (Blockfolge + Markup-Vertrag,
+  erklärbare successCriteria nach B11) + Kapitel-01-Pilot DE+EN — Hero (kap01 v1), drei
+  Lernschritte (console.log / innerHTML / alert+prompt mit document.write-Warnung), Medien-
+  Sektion (Platzhalter, URLs folgen), Checkliste (voll → progress 01), Reflexion, Quiz,
+  KI-Prompt-Training; neue Module checklist/reflection/quiz/demos/media-embed/code-block,
+  `entry-chapter.js`, Kapitel-CSS inkl. Lese-Fortschrittsbalken (@supports, §5.9).

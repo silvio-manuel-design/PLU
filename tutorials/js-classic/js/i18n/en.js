@@ -51,4 +51,18 @@ export default {
   'ui.a11y.bottomBar': 'Chapter navigation',
   'ui.a11y.closeMenu': 'Close menu',
   'ui.backToTop': 'Back to top',
+
+  /* Chapter components (P4) */
+  'ui.check.done': 'Chapter complete — nicely done! On to chapter 02.',
+  'ui.check.progress': '%d of %d done',
+  'ui.reflect.saved': 'Saved automatically',
+  'ui.reflect.aria': 'Your answer (stored locally)',
+  'ui.quiz.check': 'Check answers',
+  'ui.quiz.retry': 'Try again',
+  'ui.quiz.result': '%d of %d correct',
+  'ui.media.placeholder': 'Video coming soon.',
+  'ui.media.load': 'Load video (privacy-friendly)',
+  'ui.media.external': 'External content — loaded only after clicking.',
+  'ui.demo.run': 'Run',
+  'ui.demo.reset': 'Reset',
 };
