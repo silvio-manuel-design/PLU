@@ -17,6 +17,24 @@
   padding-block: var(--jsc-space-7);
 }
 
+/* Full-Bleed-Bänder auf Kapitelseiten (P4R8, 1:1-Prinzip wie Homepage):
+   surface-1/surface-2 alternierend, volle Viewport-Breite, kein Margin —
+   Bänder-Effekt nur ≥768px, Mobile fließt wie bisher. */
+@media (min-width: 768px) {
+  .jsc-band {
+    --jsc-band-bg: var(--jsc-color-surface-1);
+
+    padding-block: var(--jsc-space-10);
+    background: var(--jsc-band-bg);
+    box-shadow: 0 0 0 100vmax var(--jsc-band-bg);
+    clip-path: inset(0 -100vmax);
+  }
+
+  .jsc-band--alt {
+    --jsc-band-bg: var(--jsc-color-surface-2);
+  }
+}
+
 /* Sektionsrhythmus */
 .jsc-media-section,
 .jsc-check-section,

@@ -11,10 +11,18 @@
   scroll-margin-top: 6rem;
 }
 
+@media (min-width: 768px) {
+  .jsc-step {
+    padding-block: var(--jsc-space-10);
+    border-top: 0;
+  }
+}
+
 .jsc-step:first-of-type {
   border-top: 0;
 }
 
+/* Nummer-Badge: große, ausgegraute Zahl links vom Titel (dekorativ) */
 .jsc-step__heading {
   display: flex;
   gap: var(--jsc-space-3);
@@ -25,28 +33,50 @@
 }
 
 .jsc-step__heading::before {
-  content: attr(data-step);
-  display: inline-grid;
+  content: "0" attr(data-step);
   flex-shrink: 0;
-  place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: var(--jsc-radius-pill);
-  background: var(--module-accent-dim);
-  color: var(--module-accent-text);
+  color: var(--jsc-color-ink-muted);
   font-family: var(--jsc-font-mono);
-  font-size: var(--jsc-text-0);
+  font-size: 3rem;
   font-weight: var(--jsc-weight-bold);
+  line-height: 1;
+  opacity: 0.45;
 }
 
-/* why-Callout */
+/* why-Callout → Intro-Card (surface-2 + Lift, Gold-Rand links) */
 .jsc-step__why {
   margin-top: var(--jsc-space-4);
   padding: var(--jsc-space-4) var(--jsc-space-5);
-  border-left: 0.25rem solid var(--module-accent, var(--jsc-color-accent));
+  border-left: 3px solid var(--jsc-color-accent);
   border-radius: 0 var(--jsc-radius-m) var(--jsc-radius-m) 0;
-  background: var(--jsc-color-surface-1);
+  background: var(--jsc-color-surface-2);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
   font-size: var(--jsc-text-1);
+}
+
+html[data-theme="light"] .jsc-step__why {
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+
+/* Lesespalte: Zeilenlänge begrenzen */
+.jsc-step__why p,
+.jsc-step__explain p {
+  max-width: 68ch;
+}
+
+/* Leadlist (P4R8): Einbindungsarten in Schritt 1 — Lead-in fett, Einträge luftig */
+.jsc-leadlist {
+  margin: var(--jsc-space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-leadlist li {
+  max-width: 68ch;
+}
+
+.jsc-leadlist li + li {
+  margin-block: var(--jsc-space-3);
 }
 
 /* explain */
@@ -119,6 +149,11 @@
   color: var(--jsc-color-progress);
 }
 
+/* Light: Teal-Text auf Teal-Tintung dunkler ziehen (AA) */
+html[data-theme="light"] .jsc-step__explain-note strong {
+  color: color-mix(in oklch, var(--jsc-color-progress), var(--jsc-color-ink) 38%);
+}
+
 /* Didaktische Pause (B14, P4R7) — Analogie zur Tip-Box, eigenes Tinting. */
 .jsc-pause {
   margin-block: var(--jsc-space-6);
@@ -136,6 +171,11 @@
   font-size: var(--jsc-text--1);
   font-weight: var(--jsc-weight-semibold);
   letter-spacing: 0.08em;
+}
+
+/* Light: Gold-Text auf Gold-Tintung dunkler ziehen (AA) */
+html[data-theme="light"] .jsc-pause__eyebrow {
+  color: color-mix(in oklch, var(--jsc-color-achievement), var(--jsc-color-ink) 55%);
 }
 
 .jsc-pause__text {
@@ -251,6 +291,11 @@ html[data-theme="light"] .jsc-deepen-list a {
 .jsc-mistake-card__title {
   color: var(--jsc-color-cta);
   font-weight: var(--jsc-weight-semibold);
+}
+
+/* Light: Coral-Titel dunkler ziehen (AA auf der getinteten Karte) */
+html[data-theme="light"] .jsc-mistake-card__title {
+  color: color-mix(in oklch, var(--jsc-color-cta), var(--jsc-color-ink) 32%);
 }
 
 .jsc-mistake-card p + p {
