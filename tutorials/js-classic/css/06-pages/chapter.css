@@ -14,8 +14,18 @@
   max-width: var(--jsc-chapter-max);
 }
 
+/* Kapitelseiten (data-module am body): Header in derselben Breite wie die Sections */
+body[data-module] .jsc-header__inner {
+  max-width: var(--jsc-chapter-max);
+}
+
 .jsc-chapter-hero {
   min-height: 55vh;
+}
+
+/* Kapitel-Hero: Titel darf die volle Containerbreite nutzen (kein 40rem-Limit) */
+.jsc-chapter-hero .jsc-hero__title {
+  max-width: none;
 }
 
 .jsc-chapter-hero .jsc-hero__content {
@@ -23,9 +33,11 @@
 }
 
 /* Sektions-Blocks statt Full-Bleed (P4R10 — ersetzt die Subtil-Bänder):
-   abgesetzte Karten mit Kontrastkante + Lift, Abwechslung surface-1/surface-2. */
+   abgesetzte Karten mit Kontrastkante + Lift, Abwechslung surface-1/surface-2.
+   Border-Kontrast bewusst angehoben (Direktkorrektur Martin 09.11.):
+   Dark deutlich hellere Kante, Light dunklere. */
 .jsc-band {
-  border: 1px solid var(--jsc-color-border);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-border) 55%, var(--jsc-color-ink-muted));
   border-radius: var(--jsc-radius-l);
   background: var(--jsc-color-surface-1);
   box-shadow: 0 4px 20px rgb(0 0 0 / 0.35);
@@ -36,13 +48,14 @@
 }
 
 html[data-theme="light"] .jsc-band {
+  border-color: color-mix(in oklch, var(--jsc-color-border) 65%, var(--jsc-color-ink-muted));
   box-shadow: 0 4px 16px rgb(15 23 42 / 0.1);
 }
 
 .jsc-chapter-main > .jsc-band,
 .jsc-chapter-main > .jsc-band--alt,
 .jsc-chapter-main > .jsc-pause {
-  margin-block: var(--jsc-space-6);
+  margin-block: var(--jsc-space-8);
 }
 
 .jsc-chapter-main > :first-child {
