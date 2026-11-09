@@ -634,9 +634,38 @@ function footerLink(href, label) {
 /* Init                                                                */
 /* ------------------------------------------------------------------ */
 
+/* Mobile/Tablet: Header beim Runterscrollen ausblenden (mehr Platz fürs Tutorial) */
+function bindHeaderAutoHide() {
+  let lastY = window.scrollY;
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (window.innerWidth >= 1024) {
+        document.documentElement.classList.remove('is-header-hidden');
+        lastY = window.scrollY;
+        return;
+      }
+      const y = window.scrollY;
+      const menuOpen = Boolean(document.querySelector('.jsc-mobile-menu:not([hidden])'));
+      if (menuOpen || y < 80) {
+        document.documentElement.classList.remove('is-header-hidden');
+      } else if (y > lastY + 4) {
+        document.documentElement.classList.add('is-header-hidden');
+      } else if (y < lastY - 4) {
+        document.documentElement.classList.remove('is-header-hidden');
+      }
+      lastY = y;
+    },
+    { passive: true }
+  );
+}
+
 export function initNavigation() {
   const mount = document.querySelector('[data-component="jsc-site-chrome"]');
   if (!mount) return;
+
+  bindHeaderAutoHide();
 
   const currentPath = window.location.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
 
