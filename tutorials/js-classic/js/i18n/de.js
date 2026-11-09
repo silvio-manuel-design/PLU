@@ -106,4 +106,32 @@ export default {
   'ui.ch.11': 'Formulare & Validierung',
   'ui.ch.12': 'Sicherheit & typische Angriffe',
   'ui.soon': 'folgt bald',
+
+  /* Playground (P5) */
+  'ui.pg.label': 'Playground',
+  'ui.pg.run': 'Ausführen',
+  'ui.pg.reset': 'Zurücksetzen',
+  'ui.pg.intro': 'Probier es direkt aus — dein erster eigener Code läuft hier im Browser:',
+  'ui.pg.errorPrefix': 'Fehler',
+  'ui.pg.ariaOut': 'Konsolenausgabe',
+
+  /* Reflexion Cheat-Schutz (P5) */
+  'ui.reflect.minHint': 'Schreib in 1–2 Sätzen, was neu für dich war — mindestens 40 Zeichen. (aktuell: %d)',
+  'ui.reflect.trivial': 'Das ist keine Reflexion — schreib ehrlich, was dir aufgefallen ist.',
+  'ui.reflect.chipDone': 'ausgefüllt',
+  'ui.reflect.chipOpen': 'offen',
+
+  /* Export (P5) */
+  'ui.export.copy': 'Meine Antworten kopieren',
+  'ui.export.file': 'Als Datei laden',
+  'ui.export.all': 'Gesamtexport (alle Kapitel)',
+  'ui.export.copied': 'In Zwischenablage kopiert',
+  'ui.export.unsupported': 'Zwischenablage nicht verfügbar — Datei wurde geladen.',
+
+  /* Solution-Gate (P5) */
+  'ui.sol.show': 'Ich habe es versucht — Lösung anzeigen',
+  'ui.sol.hide': 'Lösung ausblenden',
+
+  /* Druck (P5) */
+  'ui.print': 'Drucken',
 };

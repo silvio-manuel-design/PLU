@@ -106,4 +106,32 @@ export default {
   'ui.ch.11': 'Forms & Validation',
   'ui.ch.12': 'Security & Common Attacks',
   'ui.soon': 'coming soon',
+
+  /* Playground (P5) */
+  'ui.pg.label': 'Playground',
+  'ui.pg.run': 'Run',
+  'ui.pg.reset': 'Reset',
+  'ui.pg.intro': 'Try it right away — your first own code runs here in the browser:',
+  'ui.pg.errorPrefix': 'Error',
+  'ui.pg.ariaOut': 'Console output',
+
+  /* Reflection anti-cheat (P5) */
+  'ui.reflect.minHint': 'Write 1–2 sentences about what was new for you — at least 40 characters. (currently: %d)',
+  'ui.reflect.trivial': 'That is not a reflection — honestly write what you noticed.',
+  'ui.reflect.chipDone': 'done',
+  'ui.reflect.chipOpen': 'open',
+
+  /* Export (P5) */
+  'ui.export.copy': 'Copy my answers',
+  'ui.export.file': 'Download file',
+  'ui.export.all': 'Export all chapters',
+  'ui.export.copied': 'Copied to clipboard',
+  'ui.export.unsupported': 'Clipboard unavailable — file was downloaded.',
+
+  /* Solution gate (P5) */
+  'ui.sol.show': 'I tried it — show solution',
+  'ui.sol.hide': 'Hide solution',
+
+  /* Print (P5) */
+  'ui.print': 'Print',
 };

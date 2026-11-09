@@ -9,8 +9,39 @@
 }
 
 .jsc-reflection__item {
+  position: relative;
   display: grid;
   gap: var(--jsc-space-2);
+}
+
+.jsc-reflection__chip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 var(--jsc-space-2);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-pill);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-medium);
+}
+
+.jsc-reflection__chip.is-done {
+  border-color: color-mix(in oklch, var(--jsc-color-progress) 45%, transparent);
+  background: color-mix(in oklch, var(--jsc-color-progress) 12%, var(--jsc-color-surface-0));
+  color: var(--jsc-color-progress);
+}
+
+/* Light: Chip-Text ist Normaltext → Richtung Ink abdunkeln (berechnet 5.6:1 auf Chip-Fläche) */
+html[data-theme="light"] .jsc-reflection__chip.is-done {
+  color: color-mix(in oklch, var(--jsc-color-progress), var(--jsc-color-ink) 40%);
+  border-color: color-mix(in oklch, var(--jsc-color-progress) 55%, var(--jsc-color-border));
+}
+
+.jsc-reflection__hint {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  min-height: 1.1em;
 }
 
 .jsc-reflection__item span {
