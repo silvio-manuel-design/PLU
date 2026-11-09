@@ -9,6 +9,11 @@
   position: relative;
 }
 
+/* Kapitel-Container breiter als Homepage (96rem) */
+.jsc-chapter .jsc-container {
+  max-width: var(--jsc-chapter-max);
+}
+
 .jsc-chapter-hero {
   min-height: 55vh;
 }
@@ -17,22 +22,97 @@
   padding-block: var(--jsc-space-7);
 }
 
-/* Full-Bleed-Bänder auf Kapitelseiten (P4R8, 1:1-Prinzip wie Homepage):
-   surface-1/surface-2 alternierend, volle Viewport-Breite, kein Margin —
-   Bänder-Effekt nur ≥768px, Mobile fließt wie bisher. */
-@media (min-width: 768px) {
-  .jsc-band {
-    --jsc-band-bg: var(--jsc-color-surface-1);
+/* Sektions-Blocks statt Full-Bleed (P4R10 — ersetzt die Subtil-Bänder):
+   abgesetzte Karten mit Kontrastkante + Lift, Abwechslung surface-1/surface-2. */
+.jsc-band {
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-1);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.35);
+}
 
-    padding-block: var(--jsc-space-10);
-    background: var(--jsc-band-bg);
-    box-shadow: 0 0 0 100vmax var(--jsc-band-bg);
-    clip-path: inset(0 -100vmax);
+.jsc-band--alt {
+  background: var(--jsc-color-surface-2);
+}
+
+html[data-theme="light"] .jsc-band {
+  box-shadow: 0 4px 16px rgb(15 23 42 / 0.1);
+}
+
+.jsc-chapter-main > .jsc-band,
+.jsc-chapter-main > .jsc-band--alt,
+.jsc-chapter-main > .jsc-pause {
+  margin-block: var(--jsc-space-6);
+}
+
+.jsc-chapter-main > :first-child {
+  margin-top: 0;
+}
+
+.jsc-chapter-main > :last-child {
+  margin-bottom: 0;
+}
+
+/* Zwei-Spalten-Layout mit Sticky-Rail ab 1280px */
+@media (min-width: 1280px) {
+  .jsc-chapter-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 19rem;
+    gap: var(--jsc-space-8);
+    align-items: start;
   }
 
-  .jsc-band--alt {
-    --jsc-band-bg: var(--jsc-color-surface-2);
+  /* Chip-Jumplist wandert in die Rail */
+  .jsc-chapter .jsc-jumplist {
+    display: none;
   }
+
+  .jsc-chapter-rail {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+    padding: var(--jsc-space-4);
+    border: 1px solid var(--jsc-color-border);
+    border-radius: var(--jsc-radius-l);
+    background: var(--jsc-color-surface-1);
+  }
+}
+
+@media (max-width: 1279px) {
+  .jsc-chapter-rail {
+    display: none;
+  }
+}
+
+.jsc-chapter-rail h2 {
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jsc-chapter-rail ul {
+  margin: var(--jsc-space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-chapter-rail li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+.jsc-chapter-rail a {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  text-decoration: none;
+}
+
+.jsc-chapter-rail a:hover {
+  color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-chapter-rail a:hover {
+  color: var(--jsc-color-accent-ink);
 }
 
 /* Sektionsrhythmus */
