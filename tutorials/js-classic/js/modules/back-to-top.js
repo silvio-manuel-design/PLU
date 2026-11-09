@@ -23,17 +23,12 @@ export function initBackToTop() {
   icon.className = 'ph ph-arrow-up';
   icon.setAttribute('aria-hidden', 'true');
 
-  const label = document.createElement('span');
-  label.textContent = t('ui.backToTop');
-
   btn.setAttribute('aria-label', t('ui.backToTop'));
-  btn.append(icon, label);
+  btn.append(icon);
   document.body.append(btn);
 
   function syncLabel() {
-    const text = t('ui.backToTop');
-    label.textContent = text;
-    btn.setAttribute('aria-label', text);
+    btn.setAttribute('aria-label', t('ui.backToTop'));
   }
   onLangChange(syncLabel);
 

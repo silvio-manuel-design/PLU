@@ -25,6 +25,10 @@ import { initDemoInnerhtml } from './modules/demo-innerhtml.js';
 import { initDemoPopups } from './modules/demo-popups.js';
 import { initMediaEmbed } from './modules/media-embed.js';
 import { initCodeBlocks } from './modules/code-block.js';
+import { initPlaygrounds } from './modules/playground.js';
+import { initSolutionGates } from './modules/solution-gate.js';
+import { initExport } from './modules/export.js';
+import { initScrollSpy } from './modules/scroll-spy.js';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
@@ -40,6 +44,15 @@ initDemoInnerhtml();
 initDemoPopups();
 initMediaEmbed();
 initCodeBlocks();
+initPlaygrounds();
+initSolutionGates();
+initExport();
+initScrollSpy();
+
+/* Drucken-Buttons (P5) */
+document.querySelectorAll('[data-print]').forEach((btn) => {
+  btn.addEventListener('click', () => window.print());
+});
 
 /* Sprach-Umschalter (P1-Demo für smoke-test*.html) */
 const langToggle = document.querySelector('[data-lang-toggle]');

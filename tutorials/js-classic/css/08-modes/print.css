@@ -1,0 +1,128 @@
+/**
+ * 08-modes/print.css — Druck-Ansicht (Kapitel-Worksheets)
+ *
+ * Schwarz auf weiß, alle Farbflächen/Tints entfernt, Chrome ausgeblendet,
+ * saubere Seitenumbrüche. print-color-adjust NICHT setzen.
+ */
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    overflow: visible !important;
+  }
+
+  /* Alle Farbflächen und Tints neutralisieren */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #000 !important;
+    border-color: #999 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Chrome ausblenden */
+  .jsc-header,
+  .jsc-bottom-bar,
+  .jsc-back-to-top,
+  .jsc-chapter-rail,
+  .jsc-jumplist,
+  .jsc-footer,
+  .jsc-mobile-menu,
+  .jsc-mobile-menu__toggle,
+  .jsc-skip-links,
+  .jsc-progressbar {
+    display: none !important;
+  }
+
+  /* Interaktive Elemente ausblenden */
+  button,
+  .jsc-button,
+  .jsc-icon-btn,
+  .jsc-code-block__copy,
+  .jsc-playground__actions,
+  .jsc-export-actions,
+  .jsc-checklist__counter,
+  .jsc-theme-toggle {
+    display: none !important;
+  }
+
+  /* Videos/Embeds ausblenden */
+  .jsc-media-embed,
+  iframe {
+    display: none !important;
+  }
+
+  /* Playground: nur Ausgabe als Beleg, Editor aus */
+  .jsc-playground textarea,
+  .jsc-playground__bar {
+    display: none !important;
+  }
+
+  /* Solution-Gates im Druck immer geöffnet (Lehrer-Beiblatt sichtbar) */
+  .jsc-solution-gate__body {
+    display: block !important;
+  }
+  .jsc-solution-gate__toggle {
+    display: none !important;
+  }
+
+  /* Code als Text, dunkler Kasten weg */
+  pre,
+  .jsc-code-block,
+  .jsc-code-block__pre,
+  .jsc-playground__output,
+  .jsc-demo-console {
+    border: 1px solid #999 !important;
+    background: #fff !important;
+    color: #000 !important;
+    white-space: pre-wrap !important;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  /* Saubere Umbrüche */
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  .jsc-chapter-card,
+  .jsc-info-card,
+  .jsc-goals__item,
+  .jsc-mistake-card,
+  .jsc-summary-card,
+  .jsc-deepen-card,
+  .jsc-step__tip,
+  .jsc-pause,
+  .jsc-quiz__question,
+  .jsc-reflection__item,
+  .jsc-checklist li label,
+  .jsc-code-block {
+    break-inside: avoid;
+  }
+
+  .jsc-step,
+  .jsc-check-section,
+  .jsc-quiz-section,
+  .jsc-reflection-section,
+  .jsc-summary-section {
+    break-before: auto;
+  }
+
+  /* Breite: volles Blatt nutzen */
+  .jsc-chapter .jsc-container,
+  .jsc-chapter-layout {
+    max-width: none !important;
+    display: block !important;
+  }
+
+  body {
+    padding-bottom: 0 !important;
+  }
+}
