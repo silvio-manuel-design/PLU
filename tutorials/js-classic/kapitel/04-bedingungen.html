@@ -1,309 +1,612 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>04 – Bedingungen | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 04: Bedingungen · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: if/else-Grundentscheidungen, kombinierte Bedingungen mit &amp;&amp; und ||, switch für viele Fälle und der ternäre Operator — mit Noten-Rechner-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/04-bedingungen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/04-bedingungen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/04-conditions.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/04-bedingungen.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 04: Bedingungen · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: if/else-Grundentscheidungen, kombinierte Bedingungen mit &amp;&amp; und ||, switch für viele Fälle und der ternäre Operator — mit Noten-Rechner-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m04">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Eine glühende Weggabelung aus Lichtlinien, an der Pfeile in zwei Richtungen zeigen."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 04</p>
+          <h1 id="ch-title" class="jsc-hero__title">Bedingungen</h1>
+          <p class="jsc-hero__sub">Wenn das, dann jenes: Entscheidungen treffen lassen und Programme auf Situationen reagieren lassen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#schritt-1">1 if/else</a>
+        <a href="#schritt-2">2 Kombinieren</a>
+        <a href="#schritt-3">3 switch</a>
+        <a href="#schritt-4">4 Ternär</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">if/else — die Grundentscheidung</h2>
+            <div class="jsc-step__why">
+              <p>
+                Bedingungen sind der Moment, in dem ein Skript vom Blatt Papier lebendig wird:
+                Es reagiert unterschiedlich auf unterschiedliche Eingaben.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>if</code> prüft einen booleschen Ausdruck in Klammern. Ist er wahr, läuft
+                der Block in <code>{}</code>, sonst der <code>else</code>-Zweig. Mit
+                <code>else if</code> kettest du beliebig viele Fälle aneinander — der erste
+                Treffer gewinnt.
+              </p>
+              <figure class="jsc-code-block" data-filename="note.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">note.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const punkte = 87;
+if (punkte &gt;= 90) {
+  console.log("Sehr gut!");
+} else if (punkte &gt;= 70) {
+  console.log("Gut.");
+} else if (punkte &gt;= 50) {
+  console.log("Befriedigend.");
+} else {
+  console.log("Nicht bestanden — versuch es nochmal.");
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="grade" data-grades="Sehr gut,Gut,Befriedigend,Genügend,Nicht genügend" data-invalid="Bitte eine Punktzahl von 0 bis 100 eingeben.">
+              <p class="jsc-demo__title">Noten-Rechner</p>
+              <div class="jsc-demo__row">
+                <label class="jsc-step__blocklabel" for="grade-in">Punkte (0–100)</label>
+                <input class="jsc-demo__input" id="grade-in" data-grade-input type="number" min="0" max="100" inputmode="numeric" />
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-grade-run>Note berechnen</button>
+              </div>
+              <p class="jsc-demo__greeting" data-grade-target aria-live="polite"></p>
+              <p class="jsc-demo__hint">Genau die else-if-Kette aus dem Beispiel — als Demo zum Nachvollziehen.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Klammern nach if vergessen</p>
+                <p><code>if punkte &gt;= 50</code> ohne runde Klammern ist ein Syntaxfehler. Die Bedingung steht IMMER in <code>( )</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Keine {} bei Einzeilern</p>
+                <p>Ohne geschweifte Klammern gilt nur die erste Zeile als Bedingungs-Körper. Spätere Erweiterungen landen dann unbeabsichtigt IMMER im Programm — immer <code>{}</code> setzen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">= statt === in der Bedingung</p>
+                <p><code>if (punkte = 90)</code> weist 90 zu und ist immer wahr — der kapitalste Fehler. Vergleichen: <code>===</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Falsche Reihenfolge der Kette</p>
+                <p>Bei <code>&gt;=</code>-Ketten muss der größte Wert zuerst kommen, sonst frisst ein früher Zweig die späteren. Absteigend bauen!</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Lies else-if-Ketten von oben nach unten wie ein Menü: der erste Treffer gewinnt, der Rest wird übersprungen.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Vergleiche &amp; Logik kombinieren</h2>
+            <div class="jsc-step__why">
+              <p>
+                Echte Bedingungen sind selten einfach: ‚Erwachsen UND Mitglied' oder
+                ‚Wochenende ODER Feiertag'. Kap. 03 liefert die Bausteine — hier steckst du sie
+                zusammen.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Kombiniere Vergleiche mit <code>&amp;&amp;</code> und <code>||</code>. Bei
+                gemischten Bedingungen Klammern setzen — dann bleibt die Priorität klar und
+                lesbar.
+              </p>
+              <figure class="jsc-code-block" data-filename="kombiniert.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">kombiniert.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const alter = 16;
+const elternDa = true;
+if (alter &gt;= 16 &amp;&amp; elternDa) {
+  console.log("Eintritt erlaubt.");
+} else {
+  console.log("Leider nicht.");
+}
+const tag = "Samstag";
+if (tag === "Samstag" || tag === "Sonntag") {
+  console.log("Wochenende!");
+}</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch04">Code</label>
+              <textarea id="pg-ch04" data-pg-code spellcheck="false">const alter = 16;
+if (alter >= 16) {
+  console.log("Darfsehen!");
+} else {
+  console.log("Leider nein.");
+}</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Füge eine Bedingung hinzu: Wenn
+              <code>alter &lt; 14</code> → <code>'Kinderkino'</code>.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Klammern bei gemischten Bedingungen vergessen</p>
+                <p><code>a &amp;&amp; b || c</code> ist ohne Klammern uneindeutig — was zuerst? Schreib <code>(a &amp;&amp; b) || c</code> und meine, was du meinst.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">&amp;&amp; und || ungeklammert mischen</p>
+                <p>JavaScript wertet <code>&amp;&amp;</code> vor <code>||</code> aus — ohne Klammern entsteht Logik, die du so nicht meintest. Klammern sind gratis, nutze sie.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Boolesche Variablen doppelt prüfen</p>
+                <p><code>if (elternDa === true)</code> ist redundant — <code>elternDa</code> ist schon der Wert, den das if braucht: <code>if (elternDa)</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Umständlich negiert statt else</p>
+                <p><code>if (!eingeloggt) { … }</code> UND <code>if (eingeloggt) { … }</code> daneben ist doppelt. Eine Seite reicht — die andere gehört in <code>else</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Eine Variable, die schon true/false ist, braucht keinen Vergleich mehr: <code>if (eingeloggt)</code> statt <code>if (eingeloggt === true)</code>.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Dein Alltag ist voller Bedingungen: Wenn der Wecker klingelt, stehst du auf —
+              sonst drehst du dich um. if/else haben dir das Denken abgeschaut, nicht umgekehrt.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">switch für viele Fälle</h2>
+            <div class="jsc-step__why">
+              <p>
+                Lange else-if-Ketten über denselben Wert werden unleserlich. switch ist die
+                übersichtliche Alternative für 3+ Fälle.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>switch</code> vergleicht einen Wert gegen viele Fälle. <code>break</code>
+                beendet einen Fall — ohne break laufen alle folgenden Fälle mit durch
+                („fall-through"). <code>default</code> fängt alles Übrige ab.
+              </p>
+              <figure class="jsc-code-block" data-filename="switch.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">switch.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const note = 2;
+switch (note) {
+  case 1:
+    console.log("Sehr gut");
+    break;
+  case 2:
+    console.log("Gut");
+    break;
+  case 3:
+    console.log("Befriedigend");
+    break;
+  default:
+    console.log("Bestanden");
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">break vergessen</p>
+                <p>Ohne <code>break</code> laufen alle Fälle AB DEM TREFFER durch — bei Schulnoten kriegst du „Sehr gut Gut Befriedigend" auf einmal.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">case mit Bedingungen</p>
+                <p><code>case punkte &gt;= 50:</code> funktioniert nicht — switch vergleicht Werte mit ===, keine Bereiche. Für Bereiche: if/else.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">default vergessen</p>
+                <p>Was passiert bei Wert 6? Ohne <code>default</code>: nichts — still und heimlich. Der Rest-Fall gehört immer abgedeckt.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">switch für boolesche Bedingungen</p>
+                <p><code>switch (true)</code>-Trickserei gibt es — aber boolesche Logik gehört in if/else. switch ist für feste Werte: Wochentage, Noten, Menüs.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>switch mit break zu vergessen ist die häufigste JS-Falle Nummer 1 in Zeugnis-Programmen — lies deinen Code immer laut beim Durchfallen-Fall.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Der ternäre Operator (kurze Entscheidungen)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Manchmal ist eine Entscheidung nur eine Zeile wert: Ein Wert oder der andere.
+                Der ternäre Operator <code>? :</code> ist die Kurzform.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>bedingung ? wertWennWahr : wertWennFalsch</code> — ideal für Zuweisungen
+                und Template-Literals, wo ein if/else klobig wäre.
+              </p>
+              <figure class="jsc-code-block" data-filename="ternaer.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">ternaer.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const alter = 16;
+const status = alter &gt;= 16 ? "Erwachsen" : "Minderjährig";
+console.log(status);
+const name = "";
+const begruessung = `Hallo, ${name || "Gast"}!`;
+console.log(begruessung);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Mehrfach schachteln</p>
+                <p><code>a ? b : c ? d : e</code> wird unleserlich. Eine Entscheidung = ein ternär; alles Komplexere gehört in if/else.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Für Nebenwirkungen missbrauchen</p>
+                <p><code>bedingung ? console.log(a) : console.log(b)</code> ist machbar, aber unschön — ternär liefert WERTE, if/else macht Aktionen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Den Doppelpunkt vergessen</p>
+                <p><code>alter &gt;= 16 ? "Erwachsen"</code> ohne <code>: …</code> ist ein Syntaxfehler — beide Zweige gehören zur Entscheidung.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Komplexe Bedingungen ohne Klammern</p>
+                <p><code>a &amp;&amp; b ? x : y</code> lässt den Leser raten — Klammern machen es eindeutig: <code>(a &amp;&amp; b) ? x : y</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Ternär ist für EINE Entscheidung zwischen ZWEI Werten. Alles Komplexere gehört in if/else — kein Wettschreiben.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch04-check"
+              data-chapter="04"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann eine if/else-Entscheidung schreiben und die Syntax sicher (Klammern, Blöcke).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann else-if-Ketten in der richtigen Reihenfolge aufbauen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne den = -vs- === -Fehler im if und vermeide ihn.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mehrere Bedingungen mit &amp;&amp; und || kombinieren und klammern.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass eine boolean-Variable direkt ins if gehört.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann eine switch-Anweisung mit break und default korrekt aufbauen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann erklären, wann switch besser als else-if ist und umgekehrt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann den ternären Operator für einfache Zwei-Wert-Entscheidungen nutzen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, wann ternär zu weit geht (Schachteln).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich habe die Noten-Demo oder ein eigenes Beispiel mit if/else, switch UND ternär umgesetzt.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="wochentag.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">wochentag.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const tag = "Samstag";
+switch (tag) {
+  case "Samstag":
+  case "Sonntag":
+    console.log("Wochenende!");
+    break;
+  default:
+    console.log("Schultag.");
+}
+// Bonus: Feiertag abfragen
+const feiertage = ["1.1.", "25.12."];
+const heute = "25.12.";
+if (feiertage.includes(heute) || tag === "Samstag") {
+  console.log("Frei!");
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  switch für feste Werte, if für Bereiche — das ist die Trennlinie.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch04-reflect" data-export-chapter="04" data-export-title="Bedingungen" data-export-checklist="jsc-ch04-check" data-export-quiz="jsc-ch04-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Nenne zwei Entscheidungen aus deinem Alltag, die du als if/else formulieren könntest.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Warum ist <code>if (eingeloggt)</code> besser als <code>if (eingeloggt === true)</code>? Erkläre es in eigenen Worten.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Wo siehst du den größten Unterschied zwischen deinem Denken und dem eines Programms bei Bedingungen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch04-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Was ist der kritische Fehler in <code>if (x = 5)</code>?</legend>
+                <label><input type="radio" name="ch04-q0" value="a" /> Es weist 5 zu und ist immer wahr</label>
+                <label><input type="radio" name="ch04-q0" value="b" /> Es vergleicht korrekt</label>
+                <label><input type="radio" name="ch04-q0" value="c" /> Syntaxfehler</label>
+                <label><input type="radio" name="ch04-q0" value="d" /> x wird 0</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — ein einzelnes = weist zu. Die Bedingung ist damit immer wahr.</strong></template>
+                <template data-feedback="wrong">Denk an die Zuweisung: = packt 5 in x und liefert den Wert zurück — if sieht immer „wahr". Vergleichen heißt ===.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was passiert bei <code>switch</code> ohne <code>break</code>?</legend>
+                <label><input type="radio" name="ch04-q1" value="a" /> Nur der erste Fall läuft</label>
+                <label><input type="radio" name="ch04-q1" value="b" /> Alle Fälle ab dem Treffer laufen durch</label>
+                <label><input type="radio" name="ch04-q1" value="c" /> Ein Fehler</label>
+                <label><input type="radio" name="ch04-q1" value="d" /> Nichts</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — das „fall-through": ab dem Treffer läuft alles Weitere mit, bis ein break kommt.</strong></template>
+                <template data-feedback="wrong">Ohne break stoppt nichts: Der Fall trifft zu, und ALLE folgenden Fälle werden ebenfalls ausgeführt.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>alter &gt;= 16 ? "ja" : "nein"</code> ist…</legend>
+                <label><input type="radio" name="ch04-q2" value="a" /> eine if/else-Kurzform</label>
+                <label><input type="radio" name="ch04-q2" value="b" /> ein Vergleich</label>
+                <label><input type="radio" name="ch04-q2" value="c" /> eine Schleife</label>
+                <label><input type="radio" name="ch04-q2" value="d" /> ein Fehler</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — der ternäre Operator liefert je nach Bedingung einen von zwei Werten.</strong></template>
+                <template data-feedback="wrong">Der Ausdruck entscheidet zwischen zwei Werten — das ist die Kurzform von if/else, kein Vergleich und keine Schleife.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Welche Reihenfolge ist für eine Noten-Kette korrekt?</legend>
+                <label><input type="radio" name="ch04-q3" value="a" /> Aufsteigend</label>
+                <label><input type="radio" name="ch04-q3" value="b" /> Absteigend mit &gt;=</label>
+                <label><input type="radio" name="ch04-q3" value="c" /> Beliebig</label>
+                <label><input type="radio" name="ch04-q3" value="d" /> Alphabetisch</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — der größte Wert zuerst, sonst frisst ein früher Zweig die späteren.</strong></template>
+                <template data-feedback="wrong">Bei &gt;= -Ketten muss der höchste Schwellenwert zuerst prüfen — sonst landet alles schon im ersten Zweig.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>if/else = Verzweigung; else-if-Ketten von groß nach klein bauen.</li>
+                <li>Die größte Falle: <code>=</code> statt <code>===</code> im if.</li>
+                <li>Mehrere Bedingungen: Klammern setzen, &amp;&amp; und || bewusst einsetzen.</li>
+                <li>switch = übersichtlich für viele Fälle eines Werts, break nicht vergessen.</li>
+                <li>Ternär ? : für kurze Zwei-Wert-Wahlen, sonst if/else.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/if...else" target="_blank" rel="noopener">if...else (MDN)</a>
+                  <span>Die vollständige Syntax mit Beispielen.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/switch" target="_blank" rel="noopener">switch (MDN)</a>
+                  <span>Für alle Fälle-Listen (Menüs, Noten, Wochentage).</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Conditional_operator" target="_blank" rel="noopener">Bedingter (ternärer) Operator (MDN)</a>
+                  <span>Kurzform mit Stilregeln.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Bedingungen</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Schreib mir was mit if."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Kein Ziel, kein Kontext, keine Prüfung — das Ergebnis ist Zufall, und du lernst nichts dabei.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI ein Ampel-Steuerungsscript erzeugen (rot/gelb/grün mit unterschiedlichen Wartezeiten). Prüfe: Sind die Bedingungen sauber getrennt? Wo würdest du switch statt if nehmen?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkretes Programm + gezielte Kontrollfragen: Du übst nicht nur das Schreiben, sondern das Prüfen — die wichtigere Hälfte.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt Entscheidungen treffen lassen — dein Programm wählt seinen Weg.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/05-schleifen.html">
+              Weiter zu Kapitel 05: Schleifen
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#schritt-1">1 if/else</a></li>
+            <li><a href="#schritt-2">2 Kombinieren</a></li>
+            <li><a href="#schritt-3">3 switch</a></li>
+            <li><a href="#schritt-4">4 Ternär</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
       </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
-
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>04 – Bedingungen 🔀</h1>
-      <p class="hero-subtitle">Wie dein Programm auf unterschiedliche Situationen reagiert</p>
-    </section>
-
-    <section>
-      <h2>🎯 1. Was sind Bedingungen?</h2>
-      <p>
-        <strong>Bedingungen</strong> erlauben deinem Programm, Entscheidungen zu treffen.  
-        Basierend auf dem Ergebnis (<code>true</code> oder <code>false</code>) wird unterschiedlicher Code ausgeführt.
-      </p>
-    </section>
-
-    <section>
-      <h2>📊 2. Übersicht: Arten von Bedingungen</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Syntax</th>
-            <th>Verwendung</th>
-            <th>Beispiel</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>if</code></td>
-            <td>Eine Bedingung prüfen</td>
-            <td><code>if (alter >= 18) { ... }</code></td>
-          </tr>
-          <tr>
-            <td><code>if ... else</code></td>
-            <td>Entweder – oder</td>
-            <td><code>if (punkte >= 50) { ... } else { ... }</code></td>
-          </tr>
-          <tr>
-            <td><code>if ... else if ... else</code></td>
-            <td>Mehrere Fälle prüfen</td>
-            <td><code>if (note == 1) { ... } else if (note == 2) { ... } else { ... }</code></td>
-          </tr>
-          <tr>
-            <td><code>switch</code></td>
-            <td>Viele feste Werte vergleichen</td>
-            <td><code>switch(tag) { case "Mo": ... }</code></td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        „Die Reihenfolge ist strikt:
-        if → (optional mehrere else if) → (optional ein else).
-        Sobald eine Bedingung true ist, werden alle folgenden Fälle übersprungen.“
-      </p>
-    </section>
-
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        In diesem Kapitel lernst du, wie du mit <code>if</code>, <code>else</code> und logischen Operatoren 
-        komplexe Entscheidungen programmierst – sicher und lesbar.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_if_else.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript If...Else</a>
-      </p>
-    </section>
-
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um zu erklären, wann man <code>if...else if...else</code> und wann <code>switch</code> verwendet – 
-        und warum man immer geschweifte Klammern setzen sollte.
-      </p>
-    </section>
-
-    <!-- 5. if -->
-    <section>
-      <h2>✅ 5. Einfaches <code>if</code></h2>
-      <p>
-        Führt Code aus, <strong>nur wenn</strong> die Bedingung <code>true</code> ist.
-      </p>
-      <button onclick="demoIf()">Einfaches if testen</button>
-      <div id="ausgabe-if" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoIf() {
-  const punkte = 85;
-  let nachricht = "Prüfung beendet.";
-
-  if (punkte >= 50) {
-    nachricht += " Du hast bestanden! 🎉";
-  }
-
-  document.getElementById("ausgabe-if").innerHTML = 
-    `&lt;p&gt;Punkte: &lt;strong&gt;${punkte}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;${nachricht}&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 6. if ... else -->
-    <section>
-      <h2>🔀 6. <code>if ... else</code></h2>
-      <p>
-        <strong>Entweder – oder:</strong> Einer von zwei Blöcken wird ausgeführt.
-      </p>
-      <button onclick="demoIfElse()">if … else testen</button>
-      <div id="ausgabe-if-else" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoIfElse() {
-  const alter = 16;
-
-  let zugang;
-  if (alter >= 18) {
-    zugang = "Zugang erlaubt. 🍺";
-  } else {
-    zugang = "Zugang verweigert. 🧃";
-  }
-
-  document.getElementById("ausgabe-if-else").innerHTML = 
-    `&lt;p&gt;Alter: &lt;strong&gt;${alter}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;${zugang}&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 7. if ... else if ... else -->
-    <section>
-      <h2>🔢 7. <code>if ... else if ... else</code></h2>
-      <p>
-        Prüft Bedingungen <strong>von oben nach unten</strong> – 
-        der <strong>erste passende Fall</strong> wird ausgeführt.
-      </p>
-      <button onclick="demoIfElseIf()">Notenbewertung testen</button>
-      <div id="ausgabe-if-elseif" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoIfElseIf() {
-  const punkte = 72;
-  let bewertung;
-
-  if (punkte >= 90) {
-    bewertung = "Sehr gut (1)";
-  } else if (punkte >= 80) {
-    bewertung = "Gut (2)";
-  } else if (punkte >= 70) {
-    bewertung = "Befriedigend (3)";
-  } else if (punkte >= 60) {
-    bewertung = "Genügend (4)";
-  } else {
-    bewertung = "Nicht genügend (5) ❌";
-  }
-
-  document.getElementById("ausgabe-if-elseif").innerHTML = 
-    `&lt;p&gt;Punkte: &lt;strong&gt;${punkte}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;Bewertung: &lt;strong&gt;${bewertung}&lt;/strong&gt;&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 8. Logische Operatoren -->
-    <section>
-      <h2>🔗 8. Kombinierte Bedingungen</h2>
-      <p>
-        Mit <code>&amp;&amp;</code> (UND) und <code>||</code> (ODER) kannst du mehrere Prüfungen verknüpfen.
-      </p>
-      <button onclick="demoLogikInIf()">Kombinierte Bedingung testen</button>
-      <div id="ausgabe-logik-if" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoLogikInIf() {
-  const alter = 17;
-  const hatEintrittskarte = true;
-
-  let resultat;
-  if (alter >= 18 &amp;&amp; hatEintrittskarte) {
-    resultat = "Eintritt erlaubt.";
-  } else if (alter < 18 &amp;&amp; hatEintrittskarte) {
-    resultat = "Eintritt nur mit Erziehungsberechtigtem.";
-  } else {
-    resultat = "Kein Eintritt – fehlende Karte oder Alter.";
-  }
-
-  document.getElementById("ausgabe-logik-if").innerHTML = 
-    `&lt;p&gt;Alter: ${alter}, Karte: ${hatEintrittskarte ? 'ja' : 'nein'}&lt;/p&gt;
-     &lt;p&gt;${resultat}&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <section class="warnung">
-      <h2>⚠️ 9. Wichtige Regeln für Bedingungen</h2>
-      <ul>
-        <li>Immer <strong>geschweifte Klammern <code>{}</code></strong> verwenden – auch bei einer Zeile!</li>
-        <li>Nie <code>=</code> in Bedingungen verwenden → das ist <strong>Zuweisung</strong>, nicht Vergleich!</li>
-        <li>Vermeide tiefe Verschachtelung – sie macht Code schwer lesbar.</li>
-      </ul>
-      <pre><code class="js-code">// ❌ Schlecht: keine Klammern
-if (x > 5)
-  console.log("Groß");
-  y = 10; // ← Diese Zeile gehört NICHT zur if-Anweisung!
-
-// ✅ Gut: immer Klammern
-if (x > 5) {
-  console.log("Groß");
-  y = 10;
-}</code></pre>
-    </section>
-
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt kannst du komplexe Entscheidungen programmieren!</p>
-      <a href="./05-schleifen.html" class="nav-button">→ Zu Modul 05: Schleifen</a>
-    </section>
-  </div>
-
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="../js/04-bedingungen.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+    </main>
+  </body>
 </html>

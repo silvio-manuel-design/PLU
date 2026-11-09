@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 02: Variables &amp; Data Types · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: variables with let and const, data types (string, number, boolean, undefined), input with prompt(), Number() and template literals — with demos, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/02-variables-datatypes.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/02-variablen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/02-variables-datatypes.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/02-variables-datatypes.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 02: Variables &amp; Data Types · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: variables with let and const, data types (string, number, boolean, undefined), input with prompt(), Number() and template literals — with demos, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m02">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Abstract neon data landscape: glowing containers of different shapes fill with golden particles."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 02</p>
+          <h1 id="ch-title" class="jsc-hero__title">Variables &amp; Data Types</h1>
+          <p class="jsc-hero__sub">Remember what your program knows: name values, store them, and read them correctly.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#schritt-1">1 Declare</a>
+        <a href="#schritt-2">2 Data types</a>
+        <a href="#schritt-3">3 prompt()</a>
+        <a href="#schritt-4">4 Templates</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Declaring variables: let &amp; const</h2>
+            <div class="jsc-step__why">
+              <p>
+                A program without variables is a calculator without a memory key: it can't hold
+                on to anything. Variables give values a name — and names are the most important
+                tool in programming.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                A <strong>variable</strong> is a named storage slot. Use <code>let</code> for
+                values that change; <code>const</code> for values that stay constant. You
+                declare with a keyword and assign with <code>=</code> — read it as „gets".
+              </p>
+              <figure class="jsc-code-block" data-filename="points.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">points.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let points = 0;        // changeable
+const maxPoints = 100; // fixed
+points = 10;           // re-assigning works with let
+// maxPoints = 200;    // Error: const cannot be reset</code></pre>
+              </figure>
+              <p>
+                <strong>Remember:</strong> <code>=</code> is not an equation, it's a command:
+                „take what's on the right and put it into the name on the left."
+              </p>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="counter">
+              <p class="jsc-demo__title">Points counter</p>
+              <p class="jsc-demo__greeting" data-count-target aria-live="polite">0</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-count-add="10"
+                >+10 points</button>
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--ghost jsc-button--sm"
+                  data-count-reset
+                >Reset</button>
+              </div>
+              <p class="jsc-demo__hint">Exactly this happens in your script: a variable you can re-assign on every click.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„= is an equals sign"</p>
+                <p>Wrong — it is an <strong>assignment</strong>. Say „points gets 10", not „points equals 10". The direction matters.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Declaring without a keyword</p>
+                <p><code>points = 10;</code> without <code>let</code>/<code>const</code> creates an implicitly global variable — an error in strict mode, a ticking time bomb otherwise.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Misunderstanding const</p>
+                <p>With objects and arrays the <em>contents</em> can still change — only the reference is fixed. <code>const list = []</code> may be filled, not reassigned.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Names with spaces &amp; special characters</p>
+                <p><code>let my points</code> or umlauts/special characters in names cause errors or pain. Rule: lower case, digits, underscores — and speaking names.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Use <code>const</code> first. Only switch to <code>let</code> when a line really must be reassigned — that prevents half of the chapter-03 mistakes.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Knowing data types: string, number, boolean, undefined</h2>
+            <div class="jsc-step__why">
+              <p>
+                JavaScript automatically sorts every value into a type. If you don't know the
+                types, you'll be surprised why <code>'7' + 3</code> suddenly gives
+                <code>'73'</code>.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The core types: <strong>string</strong> (text in quotes), <strong>number</strong>
+                (integers and decimals), <strong>boolean</strong> (<code>true</code>/<code>false</code>)
+                and <strong>undefined</strong> (nothing assigned yet). <code>typeof</code> checks
+                the type of a value.
+              </p>
+              <figure class="jsc-code-block" data-filename="types.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">types.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(typeof "Hello");      // string
+console.log(typeof 42);           // number
+console.log(typeof true);         // boolean
+let nothingYet;
+console.log(typeof nothingYet);   // undefined</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Mixed quotes</p>
+                <p><code>"Hello'</code> breaks: the start and end of a string must use the same quote type — both <code>"</code> or both <code>'</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">"7" + 3 = "73"</p>
+                <p>A string plus a number produces <strong>concatenation</strong>, not arithmetic. JavaScript only calculates when both sides are numbers — convert first.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Comma instead of dot</p>
+                <p><code>7,5</code> is not a decimal in JavaScript — it creates an unexpected value. Decimals use a dot: <code>7.5</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Confusing undefined with null</p>
+                <p><code>undefined</code> means: never assigned. <code>null</code> means: deliberately set empty. Two different statements, two different values.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Decimals: <code>0.1 + 0.2 === 0.3</code> is <code>false</code> (binary rounding). For money, calculate in cents — <code>199 + 1</code> instead of <code>1.99 + 0.01</code>.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Variables aren't just a computer thing: your phone stores your PIN as a variable,
+              your browser your password. The catch: a program forgets EVERYTHING when it ends —
+              that's what databases are for (summer semester: backend).
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Reading input with prompt()</h2>
+            <div class="jsc-step__why">
+              <p>
+                So far we write values into the code ourselves. Programs only come alive when
+                the USER enters values.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>prompt("What's your name?")</code> opens an input box and returns the
+                entered text — <strong>always as a string</strong>, even for numbers! If you
+                want to calculate, convert with <code>Number()</code>.
+              </p>
+              <figure class="jsc-code-block" data-filename="input.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">input.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const name = prompt("What's your name?");
+console.log("Hello,", name);
+const ageText = prompt("How old are you?");
+const age = Number(ageText); // string → number!
+console.log("Next year:", age + 1);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="prompt-greet">
+              <p class="jsc-demo__title">Greeting demo</p>
+              <p class="jsc-demo__greeting" data-greeting-target aria-live="polite"></p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-prompt-greet
+                  data-prompt="What's your name?"
+                  data-template="Hello, {name}! Welcome back."
+                  data-cancel="You cancelled — that's a decision too."
+                >Enter your name</button>
+              </div>
+              <p class="jsc-demo__hint">prompt() always returns a string — even if you type a number.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Calculating with prompt() directly</p>
+                <p><code>prompt("Age?") + 1</code> gives <code>"161"</code> instead of 17: the string is appended, not added. Run <code>Number()</code> first, then calculate.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Ignoring cancel</p>
+                <p>If someone clicks „Cancel", <code>prompt()</code> returns <code>null</code>. If you don't check for it, you'll later calculate with <code>null</code> and wonder why.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Asking for sensitive data</p>
+                <p><code>prompt()</code> shows text in plain sight and stores nothing safely — never use it for passwords or private data. Learning purposes only.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Overlooking NaN</p>
+                <p><code>Number("abc")</code> gives <code>NaN</code> — and (confusingly) <code>NaN === NaN</code> is false. Check with <code>isNaN(value)</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>NaN means „Not a Number" — yet it IS a number type. JavaScript is full of such surprises; <code>typeof NaN === 'number'</code>.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Template literals &amp; building output</h2>
+            <div class="jsc-step__why">
+              <p>
+                Gluing strings together with <code>+</code> becomes unreadable with longer
+                texts. Template literals are the modern standard.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Instead of quotes you use <strong>backticks</strong>. Inside
+                <code>${'{'}…}</code> you drop values, variables and even calculations directly
+                into the text.
+              </p>
+              <figure class="jsc-code-block" data-filename="output.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">output.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const name = "Ada";
+const points = 87;
+console.log(`${name} scored ${points} points.`);
+console.log(`Only ${100 - points} left to the maximum.`);</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch02">Code</label>
+              <textarea id="pg-ch02" data-pg-code spellcheck="false">let name = "Ada";
+console.log("Hello,", name);
+name = "Grace";
+console.log("Hello,", name);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> extend the output with one line
+              <code>'Grade: A'</code> — written as a template literal with an inserted
+              variable.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Plain quotes with ${}</p>
+                <p><code>"Hello ${name}"</code> with straight quotes replaces nothing — <code>${}</code> only works inside backticks.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Can't find the backtick key</p>
+                <p>On a German keyboard it sits left of Backspace, below Esc — often only visible after pressing space. (`´ ≠ `!)</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Nested quotes</p>
+                <p>Without template literals <code>"He said "Hello""</code> collides. Backticks solve it elegantly: <code>`He said "Hello"`</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting ${}</p>
+                <p><code>`Grade: points`</code> prints „Grade: points" literally — without <code>${}</code> everything is text. The braces are the placeholder command.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Template literals can even calculate: <code>`${'{'}price * 1.2} €`</code> — arithmetic right inside the text. For anything complex, use a variable first.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch02-check"
+              data-chapter="02"
+            >
+              <li><label><input type="checkbox" /> <span>I can explain what a variable is and how it lives in memory.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the difference between let and const and choose deliberately.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I always declare with a keyword, never implicitly global.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the core data types string, number, boolean, undefined and can name them.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can check the type of a value with typeof.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know why "7" + 3 gives "73", and I convert before calculating.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can read input with prompt and know the result is a string.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I convert strings to numbers with Number() and know NaN/isNaN.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can write template literals with backticks and ${}.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can program a small dialogue myself (prompt → calculation → template output).</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="calculator.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">calculator.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const numA = Number(prompt("First number?"));
+const numB = Number(prompt("Second number?"));
+const sum = numA + numB;
+console.log(`${numA} + ${numB} = ${sum}`);</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  const where possible, Number() before every calculation, template literal for
+                  the output — that's the whole chapter in 8 lines.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch02-reflect" data-export-chapter="02" data-export-title="Variables &amp; Data Types" data-export-checklist="jsc-ch02-check" data-export-quiz="jsc-ch02-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Explain in your own words why '7' + 3 = '73'. What does that say about JavaScript?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>When did you last store something to reuse it later — and how does that map to variables?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Which data type do you find hardest and why?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch02-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Which keyword do you use for a value that never changes?</legend>
+                <label><input type="radio" name="ch02-q0" value="a" /> <code>const</code></label>
+                <label><input type="radio" name="ch02-q0" value="b" /> <code>let</code></label>
+                <label><input type="radio" name="ch02-q0" value="c" /> <code>var</code></label>
+                <label><input type="radio" name="ch02-q0" value="d" /> <code>static</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — const is fixed. „Never changes" means const.</strong></template>
+                <template data-feedback="wrong">Think again: let is for changeable values, var is outdated — and JavaScript doesn't really have static.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>What does <code>typeof '42'</code> return?</legend>
+                <label><input type="radio" name="ch02-q1" value="a" /> <code>"string"</code></label>
+                <label><input type="radio" name="ch02-q1" value="b" /> <code>"number"</code></label>
+                <label><input type="radio" name="ch02-q1" value="c" /> <code>NaN</code></label>
+                <label><input type="radio" name="ch02-q1" value="d" /> <code>undefined</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — quotes make the value a string, no matter what's inside.</strong></template>
+                <template data-feedback="wrong">Careful: '42' stands in quotes — the type depends on that, not the content. typeof checks the type.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>prompt()</code> always returns…</legend>
+                <label><input type="radio" name="ch02-q2" value="a" /> a string</label>
+                <label><input type="radio" name="ch02-q2" value="b" /> a number</label>
+                <label><input type="radio" name="ch02-q2" value="c" /> a boolean</label>
+                <label><input type="radio" name="ch02-q2" value="d" /> <code>null</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — prompt() always returns a string. That's why Number() before calculating.</strong></template>
+                <template data-feedback="wrong">Think of the type trap: even the input „16" comes back as text — only Number() turns it into a number.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>What does <code>console.log(`1 + 1 = ${'{'}1+1}`)</code> print?</legend>
+                <label><input type="radio" name="ch02-q3" value="a" /> <code>1 + 1 = 2</code></label>
+                <label><input type="radio" name="ch02-q3" value="b" /> <code>1 + 1 = 11</code></label>
+                <label><input type="radio" name="ch02-q3" value="c" /> an error</label>
+                <label><input type="radio" name="ch02-q3" value="d" /> <code>${'{'}1+1}</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — inside a template literal ${} is evaluated: 1 + 1 = 2.</strong></template>
+                <template data-feedback="wrong">Inside ${} JavaScript calculates normally: 1+1 is 2, not 11.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Variables = named storage slots: let for changeable, const for fixed.</li>
+                <li><code>=</code> assigns, it is NOT an equals sign.</li>
+                <li>The core types: string, number, boolean, undefined — typeof checks them.</li>
+                <li>prompt always returns a string → use Number() before calculating.</li>
+                <li>Template literals (backticks + ${}) build readable texts.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank" rel="noopener">let (MDN)</a>
+                  <span>When do I need this? When you stumble over scopes (ch. 07).</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">Data types and data structures (MDN)</a>
+                  <span>When do I need this? As a reference whenever a typeof confuses you.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank" rel="noopener">Template literals (MDN)</a>
+                  <span>When do I need this? For all texts that contain values.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Variables &amp; Data Types</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Explain variables to me."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>Vague: no goal, no level, no context. The answer will be a generic textbook chapter.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Build a calculator dialogue with the AI: read two numbers, output all four basic arithmetic operations. Check the AI's output: are the types correct? Are the template literals clean?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Task, scope and check criteria are included — and the follow-up „are the types correct?" trains exactly this chapter's knowledge.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now store, read and print values — your program has a memory.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/03-operators.html">
+              On to chapter 03: Operators
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#schritt-1">1 Declare</a></li>
+            <li><a href="#schritt-2">2 Data types</a></li>
+            <li><a href="#schritt-3">3 prompt()</a></li>
+            <li><a href="#schritt-4">4 Templates</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

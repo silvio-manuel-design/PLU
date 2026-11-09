@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 03: Operators · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: calculating with + − * / % and **, comparisons with === and !==, logical operators (&& || !) and assignment shortcuts (+= & Co.) — with playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/03-operators.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/03-operatoren.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/03-operators.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/03-operators.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 03: Operators · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: calculating with + − * / % and **, comparisons with === and !==, logical operators (&& || !) and assignment shortcuts (+= & Co.) — with playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m03">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Neon arithmetic operator symbols floating in a dark workshop of light."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 03</p>
+          <h1 id="ch-title" class="jsc-hero__title">Operators</h1>
+          <p class="jsc-hero__sub">Calculate, compare, combine: the tools that turn values into decisions.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#schritt-1">1 Calculate</a>
+        <a href="#schritt-2">2 Compare</a>
+        <a href="#schritt-3">3 Logic</a>
+        <a href="#schritt-4">4 Shortcuts</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Calculating with numbers: + − * / % **</h2>
+            <div class="jsc-step__why">
+              <p>
+                Operators are the verbs of JavaScript. Everything that happens to values happens
+                through them.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                You know the basic arithmetic — plus <strong>Modulo</strong> (the remainder of a
+                division) and <strong>power</strong> (<code>**</code>). Increment
+                (<code>round++</code>) is the short form of „increase by 1".
+              </p>
+              <figure class="jsc-code-block" data-filename="calculate.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">calculate.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(7 + 3);    // 10
+console.log(7 - 3);    // 4
+console.log(7 * 3);    // 21
+console.log(7 / 2);    // 3.5
+console.log(7 % 2);    // 1 (remainder — even/odd check!)
+console.log(2 ** 10);  // 1024 (power)
+let round = 1;
+round++;               // short for round = round + 1
+console.log(round);    // 2</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch03">Code</label>
+              <textarea id="pg-ch03" data-pg-code spellcheck="false">console.log(7 + 3);
+console.log("7" + 3);
+console.log(2 ** 10);
+console.log(10 / 0);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> add <code>console.log(7 % 2)</code> and
+              <code>console.log(8 % 2)</code> — and explain why the result is exactly 0 or 1.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„7 / 2 is 3"</p>
+                <p>In JavaScript <code>7 / 2</code> is exactly <code>3.5</code> — there's no integer division like in some other languages. Decimals are normal.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„% means percent"</p>
+                <p>No — <code>%</code> is <strong>modulo</strong>, the remainder of a division. <code>7 % 2</code> is 1, not 0.07. For percentages, multiply by 0.07.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Ignoring a++ vs ++a</p>
+                <p><code>a++</code> returns the old value, <code>++a</code> the new one — as a standalone line it hardly matters, in nested expressions it's a trap. Increment first, use it on its own line.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Decimal rounding errors</p>
+                <p><code>0.1 + 0.2</code> gives <code>0.30000000000000004</code>. It's the binary system — for money, calculate in cents and round deliberately.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Modulo is the secret weapon: <code>x % 2 === 0</code> checks even numbers, <code>x % 10</code> grabs the last digit — you'll use modulo in every game.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Comparisons: === !== &gt; &lt; &gt;= &lt;=</h2>
+            <div class="jsc-step__why">
+              <p>
+                Programs decide. Comparisons return true or false — the fuel of every condition
+                (chapter 04).
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>===</code> is the <strong>strict</strong> equality comparison: type AND
+                value must match. <code>!==</code> is its opposite. The result is always a
+                boolean.
+              </p>
+              <figure class="jsc-code-block" data-filename="comparisons.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">comparisons.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(7 === 7);      // true
+console.log("7" === 7);    // false — different types!
+console.log("7" == 7);     // true — BUT NOBODY USES ==
+console.log(10 &gt; 5);       // true
+const points = 87;
+console.log(points &gt;= 50); // true</code></pre>
+              </figure>
+              <p>
+                <strong>The == trap:</strong> <code>==</code> converts types before comparing
+                (<code>"" == 0</code> is true!). That produces unpredictable results — so from
+                today on: only <code>===</code> and <code>!==</code>.
+              </p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">= instead of ===</p>
+                <p><code>if (points = 90)</code> assigns 90 and is ALWAYS true — the most classic bug of all. Mnemonic: „comparison = three strokes, assignment = one."</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Using ==</p>
+                <p>„Loose equality" delivers surprises: <code>"" == 0</code> is true, <code>"0" == false</code> too. Nobody wants that. <code>===</code> always.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Comparing strings lexicographically</p>
+                <p><code>"10" &lt; "9"</code> is true — strings are compared character by character („1" &lt; „9"). Always compare numbers as numbers.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">NaN === NaN</p>
+                <p>Is false — the only value not equal to itself. Check with <code>isNaN(x)</code> or <code>Number.isNaN(x)</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>ESLint automatically bans <code>==</code>. From today: only === and !== — no exceptions, no discussion.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Fun fact: &amp;&amp; and || don't return pure booleans in JavaScript — they return
+              one of the operands. <code>'Ada' || 'Guest'</code> gives you ‚Ada'. Logic as a
+              value — weird, but useful.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Logic: &amp;&amp; || !</h2>
+            <div class="jsc-step__why">
+              <p>
+                Single comparisons are rarely enough. ‚Over 16 AND under 65' — for that you
+                need logical operators.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>&amp;&amp;</code> (AND) is only true if both sides are true.
+                <code>||</code> (OR) is true if at least one side is true. <code>!</code> (NOT)
+                flips the result. JavaScript evaluates left to right and <strong>stops as soon
+                as the result is decided</strong> (short-circuit).
+              </p>
+              <figure class="jsc-code-block" data-filename="logic.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">logic.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const age = 16;
+const driversLicense = true;
+console.log(age &gt;= 16 &amp;&amp; driversLicense); // true
+const weekday = "Saturday";
+console.log(weekday === "Saturday" || weekday === "Sunday"); // true
+const raining = false;
+console.log(!raining); // true</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Confusing &amp;&amp;/|| with words</p>
+                <p>In code they are <strong>symbols</strong>, not words: JavaScript has no <code>and</code> or <code>or</code> — it has <code>&amp;&amp;</code> and <code>||</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting parts of the condition</p>
+                <p><code>age &gt;= 16 &amp;&amp; &lt; 65</code> is an error — the second half has no variable. Full version: <code>age &gt;= 16 &amp;&amp; age &lt; 65</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">!!x without understanding</p>
+                <p>A double <code>!</code> turns a value into a real boolean (<code>!!"Ada"</code> → true). Handy, but only useful once you understand the type conversion.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Surprising short-circuit</p>
+                <p><code>false &amp;&amp; …</code> stops early, <code>true || …</code> too — the right side then never runs. With function calls on the right, side effects can be swallowed.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>|| is also the standard fallback: <code>const name = input || 'Guest';</code> — when input is empty, the fallback kicks in.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Assignment operators: += -= *= /=</h2>
+            <div class="jsc-step__why">
+              <p>
+                <code>points = points + 10</code> is never written in real code. The short
+                forms are the standard in every code you'll ever read.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>+= -= *= /= %=</code> calculate on the right and assign the result
+                directly to the variable on the left. Also works for strings: <code>+=</code>
+                appends text.
+              </p>
+              <figure class="jsc-code-block" data-filename="shortcuts.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">shortcuts.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let points = 0;
+points += 10;   // same as: points = points + 10
+points *= 2;    // double it
+points -= 5;    // subtract
+let log = "";
+log += "Round 1 done. ";
+log += "Round 2 done.";
+console.log(log);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reversing the direction</p>
+                <p><code>10 += points</code> is a syntax error — the variable goes on the left, the value on the right: <code>points += 10</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Calculating without assigning</p>
+                <p><code>points + 10;</code> computes 10 more but discards the result instantly. Without <code>points += 10</code> nothing changes.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">+= on a const</p>
+                <p><code>const x = 0; x += 1;</code> throws an error — const cannot be reassigned, not even via the short form. It has to be let then.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Mixing numbers and strings</p>
+                <p><code>log += 5</code> appends „5" as text when log is a string. Keep types in mind — see chapter 02.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Game counters: <code>hits += 1</code> or <code>hits++</code> — with these you build the highscore system for the final project.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch03-check"
+              data-chapter="03"
+            >
+              <li><label><input type="checkbox" /> <span>I know +, −, *, /, % and ** and what they return.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know that / produces decimals in JavaScript.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can check remainders with modulo (even/odd, last digit).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know increment/decrement and the shortcuts +=, −=, *=, /=.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I use only === and !== for comparisons.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can explain why == is forbidden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can build and combine comparisons with &gt;, &lt;, &gt;=, &lt;=.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can link conditions with &amp;&amp;, || and !.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know that &amp;&amp; and || return one of the operands (short-circuit).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I have the classic operator traps on my radar (assignment vs comparison, string comparisons, NaN).</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="modulo.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">modulo.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const num = Number(prompt("Enter a number:"));
+if (num % 2 === 0) {
+  console.log(`${num} is even.`);
+} else {
+  console.log(`${num} is odd.`);
+}
+if (num % 3 === 0) {
+  console.log(`${num} is divisible by 3.`);
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  A comparison returns a boolean, modulo returns the remainder — together they
+                  are the basis of every condition.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch03-reflect" data-export-chapter="03" data-export-title="Operators" data-export-checklist="jsc-ch03-check" data-export-quiz="jsc-ch03-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Which of the operator traps have you experienced yourself, or which one scares you most? Why?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Explain &amp;&amp; and || to a classmate who has never programmed.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Where could you use modulo in a project of your own?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch03-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>What does <code>7 % 2</code> return?</legend>
+                <label><input type="radio" name="ch03-q0" value="a" /> 1</label>
+                <label><input type="radio" name="ch03-q0" value="b" /> 2</label>
+                <label><input type="radio" name="ch03-q0" value="c" /> 0.5</label>
+                <label><input type="radio" name="ch03-q0" value="d" /> 3</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — 7 divided by 2 leaves a remainder of 1. That's exactly what modulo returns.</strong></template>
+                <template data-feedback="wrong">Think of division with remainder: 7 = 3×2 + 1 — the remainder is 1, not the half.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Which comparison is correct for strict equality?</legend>
+                <label><input type="radio" name="ch03-q1" value="a" /> <code>==</code></label>
+                <label><input type="radio" name="ch03-q1" value="b" /> <code>===</code></label>
+                <label><input type="radio" name="ch03-q1" value="c" /> <code>=</code></label>
+                <label><input type="radio" name="ch03-q1" value="d" /> <code>equals</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — === checks type AND value. The only safe comparison.</strong></template>
+                <template data-feedback="wrong">= only assigns, == converts types (trap!), equals doesn't exist. === is the answer.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>console.log('7' === 7)</code> print?</legend>
+                <label><input type="radio" name="ch03-q2" value="a" /> <code>true</code></label>
+                <label><input type="radio" name="ch03-q2" value="b" /> <code>false</code></label>
+                <label><input type="radio" name="ch03-q2" value="c" /> <code>7</code></label>
+                <label><input type="radio" name="ch03-q2" value="d" /> an error</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — string and number are different types, so false.</strong></template>
+                <template data-feedback="wrong">=== compares the type too: '7' is a string, 7 a number — strict means strict.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="c">
+                <legend><code>let x = 5; x += 3;</code> — what is x?</legend>
+                <label><input type="radio" name="ch03-q3" value="a" /> 5</label>
+                <label><input type="radio" name="ch03-q3" value="b" /> 3</label>
+                <label><input type="radio" name="ch03-q3" value="c" /> 8</label>
+                <label><input type="radio" name="ch03-q3" value="d" /> 53</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — x += 3 is the short form of x = x + 3: 5 + 3 = 8.</strong></template>
+                <template data-feedback="wrong">+= adds and assigns: the old value 5 plus 3 makes 8 — not 53, that would be string concatenation.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Calculating: + − * / % ** — / always produces decimals.</li>
+                <li>Modulo = remainder, the check-everything tool.</li>
+                <li>Comparisons return boolean — always === instead of ==.</li>
+                <li>&amp;&amp; || ! link conditions; || is also the fallback trick.</li>
+                <li>+= &amp; Co. are the shortcuts without which no counter exists.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators" target="_blank" rel="noopener">Expressions and operators (MDN)</a>
+                  <span>The complete reference of all operators.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness" target="_blank" rel="noopener">Equality comparisons and sameness (MDN)</a>
+                  <span>Why === is the only safe comparison.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR" target="_blank" rel="noopener">Logical operators (MDN)</a>
+                  <span>For the short-circuit tricks.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Operators</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Explain operators to me."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No goal, no example, no check. The answer will be a textbook copy — without you understanding any of it.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI explain a program that checks whether a year is a leap year. Can you spot the rules among the operators? (Hint: leap year = divisible by 4, not by 100, except by 400 — check divisibility!)"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete goal plus a knowledge hook: the program needs exactly this chapter's operators — modulo, comparisons, logical AND.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now calculate, compare and combine — the workshop is fully stocked.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/04-conditions.html">
+              On to chapter 04: Conditions
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#schritt-1">1 Calculate</a></li>
+            <li><a href="#schritt-2">2 Compare</a></li>
+            <li><a href="#schritt-3">3 Logic</a></li>
+            <li><a href="#schritt-4">4 Shortcuts</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
