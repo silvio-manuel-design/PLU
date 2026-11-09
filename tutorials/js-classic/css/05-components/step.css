@@ -48,17 +48,23 @@
   margin-top: var(--jsc-space-4);
   padding-block: var(--jsc-space-2);
   font-size: 1.125rem;
-  line-height: 1.65;
+  line-height: 1.75; /* lange volle Zeilen brauchen Luftzufuhr */
   color: var(--jsc-color-ink);
 }
 
 /* Kasten-Optik bleibt exklusiv bei: Profi-Tipp, Pause, Explain-Note, Mistake-Cards */
 
-/* Lesespalte: volle Block-Breite nutzen (kein ch-Limit — wirkt auf breiten
-   Blocks sonst wie unnötig viel Text; Zeilenhöhe 1.65 trägt die Lesbarkeit) */
+/* Lesespalte: volle Block-Breite nutzen (kein ch-Limit); Zeilenhöhe 1.75
+   und Absatzabstand kompensieren die langen Zeilen */
 .jsc-step__why p,
 .jsc-step__explain p {
   max-width: none;
+  line-height: 1.75;
+}
+
+.jsc-step__explain p + p,
+.jsc-step__why p + p {
+  margin-top: var(--jsc-space-5);
 }
 
 /* Lange Code-Tokens im Fließtext umbrechen (sonst Mobile-Overflow) */
@@ -77,7 +83,7 @@
   }
 }
 
-/* Leadlist (P4R8): Einbindungsarten in Schritt 1 — Lead-in fett, Einträge luftig */
+/* Leadlist (P4R8): Einbindungsarten in Schritt 1 — Lead-in als Gold-Chip */
 .jsc-leadlist {
   margin: var(--jsc-space-4) 0 0;
   padding: 0;
@@ -89,7 +95,26 @@
 }
 
 .jsc-leadlist li + li {
-  margin-block: var(--jsc-space-3);
+  margin-block: var(--jsc-space-4);
+}
+
+.jsc-leadlist strong {
+  display: inline-block;
+  padding: 0 var(--jsc-space-2);
+  border-radius: var(--jsc-radius-s);
+  background: var(--jsc-color-accent-dim);
+  color: var(--jsc-color-accent);
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text--1);
+}
+
+html[data-theme="light"] .jsc-leadlist strong {
+  color: var(--jsc-color-accent-ink);
+}
+
+/* Code-Gruppe als eine Einheit: engerer Abstand zwischen den Blöcken */
+.jsc-step__explain .jsc-code-block + .jsc-code-block {
+  margin-top: var(--jsc-space-3);
 }
 
 /* explain */
