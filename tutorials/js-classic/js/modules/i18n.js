@@ -48,12 +48,21 @@ export function tOr(key, vars = {}) {
 
 export function loadTranslations(de, en) {
   translations = { de, en };
-  const saved = localStorage.getItem('plu-language');
-  if (saved && ['de', 'en'].includes(saved)) {
-    currentLang = saved;
+  // P4 (Langtext-Prinzip): Die Seitensprache steht authored im HTML
+  // (eigene Datei pro Sprache, hreflang) — das lang-Attribut dominiert.
+  // localStorage plu-language / Browser-Erkennung nur als Fallback,
+  // wenn kein authored lang vorliegt.
+  const authored = (document.documentElement.lang || '').toLowerCase();
+  if (authored === 'de' || authored === 'en') {
+    currentLang = authored;
   } else {
-    const browserLang = navigator.language || navigator.userLanguage;
-    currentLang = browserLang && browserLang.startsWith('de') ? 'de' : 'en';
+    const saved = localStorage.getItem('plu-language');
+    if (saved && ['de', 'en'].includes(saved)) {
+      currentLang = saved;
+    } else {
+      const browserLang = navigator.language || navigator.userLanguage;
+      currentLang = browserLang && browserLang.startsWith('de') ? 'de' : 'en';
+    }
   }
   document.documentElement.lang = currentLang;
   document.documentElement.dir = RTL_LANGS.has(currentLang) ? 'rtl' : 'ltr';

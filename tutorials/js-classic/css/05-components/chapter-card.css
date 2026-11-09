@@ -8,7 +8,7 @@
 .jsc-chapter-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--jsc-space-4);
+  gap: var(--jsc-space-5); /* luftiges Raster wie python-classic */
   margin: var(--jsc-space-5) 0 0;
   padding: 0;
   list-style: none;
@@ -27,6 +27,7 @@
 }
 
 .jsc-chapter-card {
+  min-height: 10rem; /* einheitliche, ruhige Proportionen im Raster */
   border: 1px solid var(--jsc-color-border);
   border-left: 0.25rem solid var(--module-accent, var(--jsc-color-accent));
   border-radius: var(--jsc-radius-m);
@@ -42,6 +43,21 @@
   box-shadow: var(--jsc-shadow-2), 0 0 1.25rem var(--module-accent-glow, transparent);
 }
 
+.jsc-chapter-card.is-placeholder {
+  opacity: 0.55;
+}
+
+.jsc-chapter-card.is-placeholder:hover,
+.jsc-chapter-card.is-placeholder:focus-within {
+  transform: none;
+  box-shadow: none;
+}
+
+.jsc-chapter-card.is-placeholder .jsc-chapter-card__status {
+  color: var(--jsc-color-ink-muted);
+  font-style: italic;
+}
+
 .jsc-chapter-card__link {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -52,7 +68,7 @@
   column-gap: var(--jsc-space-3);
   align-items: center;
   height: 100%;
-  padding: var(--jsc-space-4);
+  padding: var(--jsc-space-5); /* großzügiges Innenleben wie python-classic */
   color: var(--jsc-color-ink);
   text-decoration: none;
 }
@@ -85,4 +101,13 @@
 .jsc-chapter-card.is-done .jsc-chapter-card__status {
   color: var(--jsc-color-success);
   font-weight: var(--jsc-weight-medium);
+}
+
+/* Light: Modul-Akzent-Nr. und Success-Status auf weißer Karte dunkler ziehen (AA) */
+html[data-theme="light"] .jsc-chapter-card__nr {
+  color: color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)), var(--jsc-color-ink) 48%);
+}
+
+html[data-theme="light"] .jsc-chapter-card.is-done .jsc-chapter-card__status {
+  color: color-mix(in oklch, var(--jsc-color-success), var(--jsc-color-ink) 45%);
 }

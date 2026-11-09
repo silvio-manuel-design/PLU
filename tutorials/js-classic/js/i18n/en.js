@@ -25,7 +25,7 @@ export default {
   'ui.nav.chapters': 'Chapters',
   'ui.nav.exercises': 'Exercises',
   'ui.nav.worksheets': 'Worksheets',
-  'ui.nav.final': 'Capstone Projects',
+  'ui.nav.final': 'Projects',
   'ui.nav.info': 'About',
   'ui.nav.infoAbout': 'About the Course',
   'ui.nav.vscode': 'VS Code',
@@ -51,4 +51,59 @@ export default {
   'ui.a11y.bottomBar': 'Chapter navigation',
   'ui.a11y.closeMenu': 'Close menu',
   'ui.backToTop': 'Back to top',
+
+  /* Chapter components (P4) */
+  'ui.check.done': 'Chapter complete — nicely done! On to chapter 02.',
+  'ui.check.progress': '%d of %d done',
+  'ui.reflect.saved': 'Saved automatically',
+  'ui.reflect.aria': 'Your answer (stored locally)',
+  'ui.quiz.check': 'Check answers',
+  'ui.quiz.retry': 'Try again',
+  'ui.quiz.result': '%d of %d correct',
+  'ui.media.placeholder': 'Video coming soon.',
+  'ui.media.load': 'Load video (privacy-friendly)',
+  'ui.media.external': 'External content — loaded only after clicking.',
+  'ui.demo.run': 'Run',
+  'ui.demo.reset': 'Reset',
+
+  /* Chrome brand standard (P4R) */
+  'ui.brand.alt': 'JavaScript Classic',
+  'ui.footer.tagline': 'Think with AI. Act human.',
+  'ui.footer.colChapters': 'Chapters',
+  'ui.footer.colResources': 'Resources',
+  'ui.footer.colLegal': 'Legal',
+  'ui.footer.allChapters': 'All Chapters',
+  'ui.footer.exercises': 'Exercises',
+  'ui.footer.worksheets': 'Worksheets',
+  'ui.footer.kiBasics': 'AI Basics',
+  'ui.footer.pluHub': 'PLU Hub',
+  'ui.footer.imprint': 'Imprint',
+  'ui.footer.privacy': 'Privacy',
+  'ui.footer.disclaimer': 'Disclaimer',
+  'ui.footer.classroom': 'Classroom Mode',
+  'ui.footer.classroomSoon': 'Coming with the classroom mode package',
+  'ui.footer.legalLine': '© 2026 PANTAM Learning Universe',
+  'ui.footer.mitLicense': 'MIT License',
+  'ui.footer.ccLicense': 'CC BY-NC-SA 4.0',
+  'ui.footer.support': 'Support',
+  'ui.footer.logoSub': 'PANTAM LEARNING UNIVERSE',
+
+  /* Mobiles Hauptmenü (P4R3) */
+  'ui.menu.open': 'Open menu',
+  'ui.menu.close': 'Close menu',
+  'ui.menu.groupCourse': 'Course',
+  'ui.menu.groupChapters': 'Chapters',
+  'ui.menu.groupLearn': 'Learning',
+  'ui.menu.groupFinal': 'Final Projects',
+  'ui.menu.groupPlu': 'PLU',
+
+  /* Capstone projects (proper names, used in the mobile menu) */
+  'ui.proj.todo': 'To-do List',
+  'ui.proj.noten': 'Grade Manager',
+  'ui.proj.quiz': 'Quiz',
+
+  /* Chapters 11/12 — placeholders (B13, P4R4) */
+  'ui.ch.11': 'Forms & Validation',
+  'ui.ch.12': 'Security & Common Attacks',
+  'ui.soon': 'coming soon',
 };

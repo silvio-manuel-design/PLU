@@ -35,6 +35,12 @@ export const INFO_PAGES = [
   { slug: 'biblik', i18n: 'ui.nav.library' },
 ];
 
+export const FINAL_PROJECTS = [
+  { slug: 'todo-liste', i18n: 'ui.proj.todo' },
+  { slug: 'noten', i18n: 'ui.proj.noten' },
+  { slug: 'quiz', i18n: 'ui.proj.quiz' },
+];
+
 const BASE = '/tutorials/js-classic';
 
 export const NAV = {
@@ -51,17 +57,20 @@ export const NAV = {
       })),
     },
     { id: 'exercises', url: `${BASE}/uebungen/`, i18n: 'ui.nav.exercises' },
-    { id: 'worksheets', url: `${BASE}/arbeitsblaetter/`, i18n: 'ui.nav.worksheets' },
     { id: 'final', url: `${BASE}/abschluss/`, i18n: 'ui.nav.final' },
     {
       id: 'info',
       url: `${BASE}/info.html`,
       i18n: 'ui.nav.info',
-      children: INFO_PAGES.map((p) => ({
-        id: `info-${p.slug}`,
-        url: `${BASE}/${p.slug}.html`,
-        i18n: p.i18n,
-      })),
+      children: [
+        ...INFO_PAGES.map((p) => ({
+          id: `info-${p.slug}`,
+          url: `${BASE}/${p.slug}.html`,
+          i18n: p.i18n,
+        })),
+        // Arbeitsblätter: ergänzendes Material — im Infos-Dropdown (zuletzt)
+        { id: 'info-worksheets', url: `${BASE}/arbeitsblaetter/`, i18n: 'ui.nav.worksheets' },
+      ],
     },
   ],
   chaptersMeta: CHAPTERS,

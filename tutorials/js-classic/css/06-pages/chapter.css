@@ -1,0 +1,202 @@
+/**
+ * 06-pages/chapter.css — Kapitel-Seiten (js-classic 2.0)
+ *
+ * Sektionsrhythmus, Scroll-Offset, Kapitel-Hero, Lese-Fortschrittsbalken
+ * via animation-timeline: scroll() MIT @supports-Fallback (§5.9).
+ */
+
+.jsc-chapter {
+  position: relative;
+}
+
+/* Kapitel-Container breiter als Homepage (96rem) */
+.jsc-chapter .jsc-container {
+  max-width: var(--jsc-chapter-max);
+}
+
+/* Kapitelseiten (data-module am body): Header in derselben Breite wie die Sections */
+body[data-module] .jsc-header__inner {
+  max-width: var(--jsc-chapter-max);
+}
+
+.jsc-chapter-hero {
+  min-height: 55vh;
+}
+
+/* Kapitel-Hero: Titel und Sub nutzen die volle Containerbreite
+   (kein 40rem/34rem-Limit — verhindert unschöne Ein-Wort-Umbrüche) */
+.jsc-chapter-hero .jsc-hero__title {
+  max-width: none;
+}
+
+.jsc-chapter-hero .jsc-hero__sub {
+  max-width: none;
+}
+
+.jsc-chapter-hero .jsc-hero__content {
+  padding-block: var(--jsc-space-7);
+}
+
+/* Sektions-Blocks statt Full-Bleed (P4R10 — ersetzt die Subtil-Bänder):
+   abgesetzte Karten mit Kontrastkante + Lift, Abwechslung surface-1/surface-2.
+   Border-Kontrast bewusst angehoben (Direktkorrektur Martin 09.11.):
+   Dark deutlich hellere Kante, Light dunklere. */
+.jsc-band {
+  border: 1px solid color-mix(in oklch, var(--jsc-color-border) 55%, var(--jsc-color-ink-muted));
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-1);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.35);
+}
+
+.jsc-band--alt {
+  background: var(--jsc-color-surface-2);
+}
+
+html[data-theme="light"] .jsc-band {
+  border-color: color-mix(in oklch, var(--jsc-color-border) 65%, var(--jsc-color-ink-muted));
+  box-shadow: 0 4px 16px rgb(15 23 42 / 0.1);
+}
+
+.jsc-chapter-main > .jsc-band,
+.jsc-chapter-main > .jsc-band--alt,
+.jsc-chapter-main > .jsc-pause {
+  margin-block: var(--jsc-space-8);
+}
+
+.jsc-chapter-main > :first-child {
+  margin-top: 0;
+}
+
+.jsc-chapter-main > :last-child {
+  margin-bottom: 0;
+}
+
+/* Zwei-Spalten-Layout mit Sticky-Rail ab 1280px */
+@media (min-width: 1280px) {
+  .jsc-chapter-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 14rem; /* schmale Rail, Gesamtbreite = Homepage */
+    gap: var(--jsc-space-6);
+    align-items: start;
+    /* Abstand zum Hero (Jumplist ist ab hier in der Rail) */
+    margin-top: var(--jsc-space-6);
+  }
+
+  /* Chip-Jumplist wandert in die Rail */
+  .jsc-chapter .jsc-jumplist {
+    display: none;
+  }
+
+  .jsc-chapter-rail {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+    padding: var(--jsc-space-4);
+    border: 1px solid var(--jsc-color-border);
+    border-radius: var(--jsc-radius-l);
+    background: var(--jsc-color-surface-1);
+  }
+}
+
+@media (max-width: 1279px) {
+  .jsc-chapter-rail {
+    display: none;
+  }
+}
+
+.jsc-chapter-rail h2 {
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jsc-chapter-rail ul {
+  margin: var(--jsc-space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-chapter-rail li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+.jsc-chapter-rail a {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  text-decoration: none;
+}
+
+.jsc-chapter-rail a:hover {
+  color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-chapter-rail a:hover {
+  color: var(--jsc-color-accent-ink);
+}
+
+/* Sektionsrhythmus */
+.jsc-media-section,
+.jsc-check-section,
+.jsc-reflection-section,
+.jsc-quiz-section,
+.jsc-prompt-section,
+.jsc-chapter-cta {
+  padding-block: var(--jsc-space-7);
+  scroll-margin-top: 6rem;
+}
+
+.jsc-chapter-cta {
+  text-align: center;
+}
+
+.jsc-chapter-cta__text {
+  margin-bottom: var(--jsc-space-4);
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-2);
+  line-height: var(--jsc-leading-heading);
+}
+
+/* Lese-Fortschrittsbalken (Progressive Enhancement, §5.9) */
+.jsc-progressbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--jsc-z-header);
+  width: 100%;
+  height: 3px;
+  pointer-events: none;
+  background: var(--jsc-color-accent);
+  transform-origin: 0 50%;
+}
+
+@supports (animation-timeline: scroll()) {
+  .jsc-progressbar {
+    animation: jsc-readprogress linear both;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes jsc-readprogress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@supports not (animation-timeline: scroll()) {
+  /* Fallback: Balken via JS-Scroll-Listener (optional) oder unsichtbar lassen —
+     Inhalt ist ohne Effekt vollständig nutzbar. */
+  .jsc-progressbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jsc-progressbar {
+    animation: none;
+    transform: none;
+  }
+}

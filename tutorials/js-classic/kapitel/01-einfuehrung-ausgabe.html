@@ -1,286 +1,690 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>01 – Einführung & Ausgabe | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 01: Einführung &amp; Ausgabe · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Einbinden (extern + defer), console.log(), innerHTML, alert() und prompt() — mit Demos, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/01-einfuehrung-ausgabe.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/01-einfuehrung-ausgabe.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/01-introduction-output.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/01-einfuehrung-ausgabe.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 01: Einführung &amp; Ausgabe · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Einbinden (extern + defer), console.log(), innerHTML, alert() und prompt() — mit Demos, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+    
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m01">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap01/jsc-kap01-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Eine transparente Glas-Anzeigetafel mit türkisfarbenen Leuchtkanten schwebt im dunklen Raum, goldene Lichtströme fliehen in Schräglage durch sie hindurch und zerfallen in glitzernde Partikel."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 01</p>
+          <h1 id="ch-title" class="jsc-hero__title">Einführung &amp; Ausgabe</h1>
+          <p class="jsc-hero__sub">Die dritte Säule des Webs: einbinden, ausgeben, sichtbar machen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#schritt-1">1 Einbinden</a>
+        <a href="#schritt-2">2 Konsole</a>
+        <a href="#schritt-3">3 innerHTML</a>
+        <a href="#schritt-4">4 Popups</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-step jsc-container jsc-band" data-step="1" id="schritt-1" aria-labelledby="s1-title">
+        <h2 id="s1-title" class="jsc-step__heading">Die dritte Säule — und wo JavaScript wohnt</h2>
+        <div class="jsc-step__why">
+          <p>
+            Du kannst Webseiten mit HTML und CSS bauen, die aussehen wie aus einem Guss:
+            Struktur und Gestaltung sitzen. Aber sie sind still. JavaScript ist die dritte Säule
+            des Webs: HTML gibt dem Inhalt seine Struktur, CSS seinem Aussehen seine Gestalt, und
+            JavaScript seinem Verhalten seinen Puls. Ohne JavaScript keine Buttons, die reagieren,
+            keine Formulare, die prüfen, keine Inhalte, die sich bewegen. Bevor du die Sprache
+            schreibst, musst du wissen, wo sie überhaupt wohnt — denn JavaScript lebt nie allein,
+            es zieht immer bei HTML ein.
+          </p>
+        </div>
+        <div class="jsc-step__explain">
+          <p>
+            JavaScript ist eine <strong>clientseitige Skriptsprache</strong>: Der Code wird von
+            deinem Browser gelesen und ausgeführt — nicht von einem Server irgendwo im Netz,
+            sondern direkt auf deinem Gerät, jedes Mal, wenn die Seite lädt. Eine Skriptsprache
+            braucht einen Wirt: ein HTML-Dokument. Es gibt drei Arten, JavaScript einzuziehen —
+            und sie unterscheiden sich stark in Ordnung und Unordnung.
+          </p>
+          <p>
+            Alles, was im Browser läuft und die Besucher sehen und anfassen, nennt man
+            <strong>Frontend</strong> — JavaScript ist die Sprache des Frontends. Das Gegenstück,
+            das <strong>Backend</strong> auf dem Server, kommt im Sommersemester dazu — mit
+            Node.js und PHP.
+          </p>
+          <p class="jsc-step__blocklabel">Die drei Arten — im Vergleich</p>
+          <ul class="jsc-leadlist">
+            <li>
+              <strong>1. Inline</strong> — JavaScript direkt in einem HTML-Attribut. Schnell, aber
+              unordentlich: Inhalt und Verhalten vermischen sich, und der Code ist nirgends wieder
+              verwendbar. Für den Schulalltag: tabu.
+            </li>
+            <li>
+              <strong>2. Intern</strong> — ein <code>&lt;script&gt;</code>-Element direkt im
+              HTML-Dokument. Besser, aber bei größeren Projekten wird die Datei unübersichtlich,
+              und mehrere Seiten können den Code nicht teilen.
+            </li>
+            <li>
+              <strong>3. Extern</strong> — der Code liegt in einer eigenen Datei (z. B.
+              <code>main.js</code>) und wird verlinkt. Das ist der Standard, an dem du dich immer
+              orientierst: Struktur (HTML), Gestalt (CSS) und Verhalten (JS) liegen in drei
+              getrennten Dateien. So bleibt alles wartbar, der Browser kann die Datei cachen — und
+              dein Code ist auf jeder Seite nutzbar.
+            </li>
+          </ul>
+          <figure class="jsc-code-block" data-filename="inline.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">inline.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;!-- 1. Inline — vermischen von Inhalt und Verhalten, nur zu Demo-Zwecken --&gt;
+&lt;button onclick="alert('Hallo!')"&gt;Klick mich&lt;/button&gt;</code></pre>
+          </figure>
+          <figure class="jsc-code-block" data-filename="intern.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">intern.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;!-- 2. Intern — Script direkt im Dokument --&gt;
+&lt;script&gt;
+  console.log("Hallo aus dem Dokument!");
+&lt;/script&gt;</code></pre>
+          </figure>
+          <figure class="jsc-code-block" data-filename="index.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">index.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;!-- 3. Extern — der Standard: eigene Datei, verlinkt im head mit defer --&gt;
+&lt;script src="main.js" defer&gt;&lt;/script&gt;</code></pre>
+          </figure>
+          <figure class="jsc-code-block" data-filename="main.js">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">main.js</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">// main.js — dein JavaScript wohnt hier
+console.log("Hallo aus main.js!");</code></pre>
+          </figure>
+          <p class="jsc-step__blocklabel">Wo der Link hingehört</p>
+          <p>
+            <strong>Wo gehört der Link hin?</strong> Früher stand das <code>&lt;script&gt;</code>
+            am Ende des <code>&lt;body&gt;</code>, damit das HTML schon existiert, bevor das
+            Script läuft. Heute ist der sauberste Platz der <code>&lt;head&gt;</code> — mit dem
+            Attribut <code>defer</code>: Der Browser lädt <code>main.js</code> parallel zum
+            HTML, führt es aber erst aus, nachdem die Seite komplett aufgebaut ist. Du bekommst
+            beides: volle Ladegeschwindigkeit und die Sicherheit, dass alle Elemente bereits
+            existieren.
+          </p>
+        </div>
+        <ol class="jsc-step__steps">
+          <li>Erstelle einen Ordner <code>meine-erste-seite</code> mit zwei Dateien: <code>index.html</code> und <code>main.js</code>.</li>
+          <li>Schreibe in <code>index.html</code> das Grundgerüst (mit <code>&lt;!DOCTYPE html&gt;</code>, <code>head</code> und <code>body</code>).</li>
+          <li>Setze im <code>&lt;head&gt;</code>: <code>&lt;script src="main.js" defer&gt;&lt;/script&gt;</code>.</li>
+          <li>Schreibe in <code>main.js</code>: <code>console.log("JavaScript ist eingezogen!");</code></li>
+          <li>Öffne die Seite im Browser und prüfe die Konsole (F12) — dein Text steht dort.</li>
+        </ol>
+        <div class="jsc-step__mistakes">
+          <p class="jsc-step__blocklabel">Typische Fehler</p>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Pfad ohne Punkt</p>
+            <p><code>src="/main.js"</code> sucht am Server-Stamm, <code>src="main.js"</code> sucht neben der HTML-Datei. Für lokale Projekte: fast immer ohne führenden Slash.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Script vor dem Element</p>
+            <p>Ohne <code>defer</code> (oder wenn das Script im <code>&lt;head&gt;</code> ohne <code>defer</code> steht) läuft der Code, bevor das HTML existiert — <code>document.getElementById()</code> findet dann nichts.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Inline „nur für einen Moment"</p>
+            <p>Der eine schnelle <code>onclick</code> bleibt fast nie bei einem. Fange vom ersten Tag an mit der externen Datei an.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Zwei Scripts, die sich blockieren</p>
+            <p>Normale <code>&lt;script&gt;</code>-Elemente stoppen das Laden der Seite. Mit <code>defer</code> bleibt alles flüssig.</p>
+          </div>
+        </div>
+        <aside class="jsc-step__tip">
+          <p class="jsc-step__blocklabel">Profi-Tipp</p>
+          <p>Merk dir die Faustregel <strong>„extern + defer"</strong> — sie trägt dich durch das ganze Schuljahr. Einzige Ausnahme: winzige Demos in einem einzigen Dokument, wie in manchen Übungen hier. Und: Der Dateiname <code>main.js</code> ist Konvention, kein Gesetz — aber Konventionen lesen sich später leichter.</p>
+        </aside>
+        <ul class="jsc-step__criteria" data-component="jsc-checklist-items">
+          <li>Ich kann erklären, was HTML, CSS und JavaScript jeweils für eine Säule des Webs sind.</li>
+          <li>Ich kann die drei Einbindungsarten (inline, intern, extern) unterscheiden und zeigen.</li>
+          <li>Ich kann begründen, warum externe Dateien bevorzugt werden.</li>
+          <li>Ich kann ein externes Script im <code>&lt;head&gt;</code> mit <code>defer</code> einbinden und den Unterschied zum Ende des <code>body</code> erklären.</li>
+        </ul>
+      </section>
+
+      <section class="jsc-step jsc-container jsc-band" data-step="2" id="schritt-2" aria-labelledby="s2-title">
+        <h2 id="s2-title" class="jsc-step__heading">Deine erste Ausgabe: console.log()</h2>
+        <div class="jsc-step__why">
+          <p>
+            Stell dir vor, du schreibst dein erstes Programm — und es passiert… nichts
+            Sichtbares. Genau hier setzt JavaScript an: Es muss dir sagen, was es tut. Die
+            Konsole ist das Notizbuch deines Programms: alles, was du dir zum Nachdenken
+            notieren willst, landet dort.
+          </p>
+        </div>
+        <div class="jsc-step__explain">
+          <p>
+            <code>console.log()</code> gibt Text oder Werte in der Konsole aus. Die Konsole
+            öffnest du in deinem Browser mit <strong>F12</strong> (Reiter „Konsole"). Sie ist
+            das wichtigste Werkzeug zum Debuggen — und sie unterbricht dein Programm nie.
+          </p>
+          <figure class="jsc-code-block" data-filename="hallo.js">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">hallo.js</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log("Hallo, Welt!");</code></pre>
+          </figure>
+        </div>
+        <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="console">
+          <p class="jsc-demo__title">Konsole ausprobieren</p>
+          <figure class="jsc-code-block" data-filename="demo.js">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">demo.js</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log("Hallo aus der Konsole!");</code></pre>
+          </figure>
+          <div class="jsc-demo__row">
+            <button
+              type="button"
+              class="jsc-button jsc-button--primary jsc-button--sm"
+              data-demo-run
+              data-message="Hallo aus der Konsole!"
+              data-i18n="ui.demo.run"
+            >Ausführen</button>
+            <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini-Konsole"></div>
+          </div>
+        </div>
+        <ol class="jsc-step__steps">
+          <li>Öffne VS Code und erstelle eine Datei <code>hallo.js</code>.</li>
+          <li>Schreibe hinein: <code>console.log("Hallo, Welt!");</code></li>
+          <li>Öffne die Entwicklerkonsole deines Browsers (F12 → Konsole).</li>
+          <li>Führe die Datei in einem HTML-Dokument per <code>&lt;script src="hallo.js"&gt;&lt;/script&gt;</code> aus.</li>
+          <li>Finde deine Ausgabe in der Konsole. Gratuliere — das war dein erstes Programm!</li>
+        </ol>
+        <div class="jsc-step__mistakes">
+          <p class="jsc-step__blocklabel">Typische Fehler</p>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Vergessene Anführungszeichen</p>
+            <p><code>console.log(Hallo)</code> erzeugt einen Fehler, weil JavaScript <code>Hallo</code> als Variable sucht. Text gehört immer in Anführungszeichen: <code>console.log("Hallo")</code>.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Runde Klammern vergessen</p>
+            <p><code>console.log "Hallo"</code> funktioniert nicht — der Aufruf braucht immer <code>()</code>.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Suchen auf der Seite statt in der Konsole</p>
+            <p><code>console.log</code> schreibt nie auf die Webseite. Nichts gefunden? Dann liegt die Ausgabe in der Konsole, nicht im Browserfenster.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Semikolon-Panik</p>
+            <p>Fehlendes <code>;</code> ist in JavaScript meist kein Fehler. Trotzdem immer setzen — es macht das Ende der Anweisung sichtbar.</p>
+          </div>
+        </div>
+        <aside class="jsc-step__tip">
+          <p class="jsc-step__blocklabel">Profi-Tipp</p>
+          <p>Mehrere Werte auf einmal: <code>console.log("Name:", name, "Alter:", alter)</code> — mit Kommas trennen statt Text zusammenzubasteln. Lesbarer, weniger Fehlerquellen.</p>
+        </aside>
+        <ul class="jsc-step__criteria" data-component="jsc-checklist-items">
+          <li>Ich kann erklären, wozu die Konsole dient und wie man sie öffnet.</li>
+          <li>Ich kann zeigen, wie <code>console.log("Text")</code> geschrieben wird — inklusive Anführungszeichen und Klammern.</li>
+          <li>Ich kann den Unterschied zwischen Ausgabe in der Konsole und Ausgabe auf der Seite erklären.</li>
+        </ul>
+      </section>
+
+      <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+        <p class="jsc-pause__eyebrow">
+          <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+        </p>
+        <p class="jsc-pause__text">
+          Kleine Zeitreise: JavaScript wurde 1995 — fast nebenbei — in etwa zehn Tagen geschrieben.
+          Brendan Eich sollte ursprünglich eine kleine Skriptsprache für den Browser bauen, und aus
+          diesen zehn Tagen wurde die am weitesten verbreitete Programmiersprache der Welt. Sie hieß
+          übrigens nicht immer JavaScript — kurz „LiveScript", noch kürzer „Mocha". Was bleibt: Die
+          Sprache, die du gerade lernst, trägt 30 Jahre Geschichte in sich. Kein Druck. 😉
+        </p>
+      </aside>
+
+      <section class="jsc-step jsc-container jsc-band" data-step="3" id="schritt-3" aria-labelledby="s3-title">
+        <h2 id="s3-title" class="jsc-step__heading">Ausgabe für Besucher: innerHTML</h2>
+        <div class="jsc-step__why">
+          <p>
+            Die Konsole sieht nur du. Eine echte Webseite muss Besucher etwas zeigen —
+            einen Willkommensgruß, ein Ergebnis, eine Liste. <code>innerHTML</code> lässt
+            JavaScript direkt in die Seite schreiben: das ist der Moment, in dem deine Seite
+            lebendig wird.
+          </p>
+        </div>
+        <div class="jsc-step__explain">
+          <p>
+            Jedes HTML-Element ist über <code>document.getElementById()</code> erreichbar. Mit
+            <code>innerHTML</code> ersetzt du seinen Inhalt. Das Element braucht eine
+            <code>id</code>.
+          </p>
+          <figure class="jsc-code-block" data-filename="index.html">
+            <figcaption class="jsc-code-block__bar">
+              <span class="jsc-code-block__file">index.html</span>
+              <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+            </figcaption>
+            <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;p id="gruss"&gt;…&lt;/p&gt;
+&lt;script&gt;
+  document.getElementById("gruss").innerHTML = "Willkommen auf meiner Seite!";
+&lt;/script&gt;</code></pre>
+          </figure>
+          <aside class="jsc-step__explain-note">
+            <p>
+              <strong>Was ist das DOM?</strong> Der Browser verwandelt dein HTML beim Laden in einen
+              lebendigen Objektbaum — das <strong>Document Object Model (DOM)</strong>. Jedes Element
+              (<code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;button&gt;</code>) wird zu einem
+              Knoten, den JavaScript erreichen und verändern kann.
+              <code>document.getElementById("gruss")</code> holt genau einen solchen Knoten — und
+              <code>innerHTML</code> verändert ihn. Du hast das DOM gerade benutzt, ohne es zu wissen.
+              Ab jetzt kennst du seinen Namen — in Kapitel 09 lernst du es richtig gut.
+            </p>
+          </aside>
+        </div>
+        <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="innerhtml">
+          <p class="jsc-demo__title">Seite zum Leben erwecken</p>
+          <p class="jsc-demo__greeting" data-greeting-target aria-live="polite"></p>
+          <button
+            type="button"
+            class="jsc-button jsc-button--primary jsc-button--sm"
+            data-demo-run
+            data-message="Willkommen auf meiner Seite! 👋"
+            data-i18n="ui.demo.run"
+          >Ausführen</button>
+        </div>
+        <ol class="jsc-step__steps">
+          <li>Erstelle eine Datei <code>index.html</code> mit einem Absatz: <code>&lt;p id="gruss"&gt;&lt;/p&gt;</code></li>
+          <li>Füge darunter ein <code>&lt;script&gt;</code>-Element hinzu.</li>
+          <li>Schreibe in das Script: <code>document.getElementById("gruss").innerHTML = "Willkommen!"</code></li>
+          <li>Öffne die Seite im Browser — dein Text erscheint.</li>
+        </ol>
+        <div class="jsc-step__mistakes">
+          <p class="jsc-step__blocklabel">Typische Fehler</p>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">ID-Schreibfehler</p>
+            <p><code>getElementById("Gruss")</code> findet nichts, wenn die ID <code>gruss</code> heißt. Groß-/Kleinschreibung zählt — exakt abtippen.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Element ohne id</p>
+            <p>Ohne <code>id</code> kann JavaScript das Element nicht ansprechen. Immer eine vergeben, bevor du sie im Script verwendest.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Script vor dem Element</p>
+            <p>Steht das <code>&lt;script&gt;</code> im HTML vor dem Element, existiert das Element noch nicht. Script ans Ende des <code>body</code> setzen.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Anführungszeichen im String</p>
+            <p><code>innerHTML = "Sie sagte "Hallo""</code> bricht. Innere Anführungszeichen anders setzen: <code>"Sie sagte 'Hallo'"</code>.</p>
+          </div>
+        </div>
+        <aside class="jsc-step__tip">
+          <p class="jsc-step__blocklabel">Profi-Tipp</p>
+          <p>Erst <code>const element = document.getElementById("gruss")</code>, dann <code>element.innerHTML = …</code> — einmal holen, mehrfach nutzen. Spart Tippfehler.</p>
+        </aside>
+        <ul class="jsc-step__criteria" data-component="jsc-checklist-items">
+          <li>Ich kann erklären, warum ein Element eine <code>id</code> braucht, um es mit JavaScript anzusprechen.</li>
+          <li>Ich kann zeigen, wie <code>innerHTML</code> den Inhalt eines Elements ersetzt.</li>
+          <li>Ich kann erklären, warum das Script ans Ende des <code>body</code> gehört.</li>
+        </ul>
+      </section>
+
+      <section class="jsc-step jsc-container jsc-band--alt" data-step="4" id="schritt-4" aria-labelledby="s4-title">
+        <h2 id="s4-title" class="jsc-step__heading">Popups &amp; Eingaben: alert() und prompt()</h2>
+        <div class="jsc-step__why">
+          <p>
+            Du wirst in alten Tutorials oft <code>alert()</code> und <code>prompt()</code>
+            sehen. Du solltest wissen, was sie tun — und warum Profis sie nur selten
+            einsetzen: Beide blockieren die Seite, bis jemand klickt.
+          </p>
+        </div>
+        <div class="jsc-step__explain">
+          <p>
+            <code>alert("Text")</code> zeigt eine Meldung mit OK-Button.
+            <code>prompt("Frage")</code> fragt nach einer Eingabe und liefert sie als Text
+            zurück. Beides stoppt dein Programm und nervt bei häufiger Nutzung — für echte
+            Eingaben verwendet man Formularfelder (kommt später im Kurs).
+          </p>
+        </div>
+        <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="popups">
+          <p class="jsc-demo__title">Blocker spüren</p>
+          <div class="jsc-demo__row">
+            <button
+              type="button"
+              class="jsc-button jsc-button--outline jsc-button--sm"
+              data-demo-alert
+              data-message="Hallo! Dieses Fenster blockiert die Seite."
+            >alert() testen</button>
+            <button
+              type="button"
+              class="jsc-button jsc-button--outline jsc-button--sm"
+              data-demo-prompt
+              data-message="Wie heißt du?"
+            >prompt() testen</button>
+          </div>
+          <p class="jsc-demo__hint">Merke, wie die Seite hinter dem Popup eingefroren ist.</p>
+          <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini-Konsole"></div>
+        </div>
+        <ol class="jsc-step__steps">
+          <li>Schreibe <code>alert("Hallo!")</code> in ein Script und lade die Seite.</li>
+          <li>Ersetze es durch <code>const name = prompt("Wie heißt du?")</code>.</li>
+          <li>Gib den Namen in der Konsole aus: <code>console.log(name)</code>.</li>
+          <li>Vergleiche: Warum ist ein Formularfeld die bessere Lösung? Notiere eine Antwort in deinen eigenen Worten (3 Sätze).</li>
+        </ol>
+        <div class="jsc-step__mistakes">
+          <p class="jsc-step__blocklabel">Typische Fehler</p>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">prompt()-Rückgabe nicht speichern</p>
+            <p><code>prompt("Wie heißt du?")</code> allein verschwindet sofort. Ergebnis in einer Variable auffangen: <code>const name = prompt(…)</code>.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">Mehrere Popups hintereinander</p>
+            <p>Jedes <code>alert()</code> stoppt alles. Vier Popups in Folge = vier Klicks Zwang. Nutze die Konsole für Zwischenwerte.</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">prompt()-Eingabe als Zahl erwarten</p>
+            <p><code>prompt()</code> liefert immer Text. <code>"5" + "3"</code> ergibt <code>"53"</code>. Zahlen erst umwandeln (kommt in Kapitel 03).</p>
+          </div>
+          <div class="jsc-mistake-card">
+            <p class="jsc-mistake-card__title">document.write() aus alten Tutorials</p>
+            <p>⚠️ Historisch: <code>document.write()</code> funktioniert nur während des Seitenladens und löscht danach die ganze Seite. Nie verwenden — <code>innerHTML</code> ist der moderne Ersatz.</p>
+          </div>
+        </div>
+        <aside class="jsc-step__tip">
+          <p class="jsc-step__blocklabel">Profi-Tipp</p>
+          <p>Popups haben einen legitimen Platz: kleine Debug-Meldungen im eigenen Entwicklungsalltag. Aber alles, was User sehen sollen, gehört in die Seite (<code>innerHTML</code>) — nicht in ein Fenster davor.</p>
+        </aside>
+        <ul class="jsc-step__criteria" data-component="jsc-checklist-items">
+          <li>Ich kann erklären, warum <code>alert()</code> und <code>prompt()</code> die Seite blockieren.</li>
+          <li>Ich kann erklären, warum <code>document.write()</code> nicht mehr verwendet wird.</li>
+        </ul>
+      </section>
+
+
+
+      <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+        <h2 id="check-title">Check: Kannst du das schon?</h2>
+        <ul
+          class="jsc-checklist"
+          data-component="jsc-checklist"
+          data-storage-key="jsc-ch01-check"
+          data-chapter="01"
+        >
+          <li><label><input type="checkbox" /> <span>Ich kann erklären, was HTML, CSS und JavaScript jeweils für eine Säule des Webs sind.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann die drei Einbindungsarten (inline, intern, extern) unterscheiden und zeigen.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann begründen, warum externe Dateien bevorzugt werden.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann ein externes Script im <code>&lt;head&gt;</code> mit <code>defer</code> einbinden und den Unterschied zum Ende des <code>body</code> erklären.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann erklären, wozu die Konsole dient und wie man sie öffnet.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann zeigen, wie <code>console.log("Text")</code> geschrieben wird — inklusive Anführungszeichen und Klammern.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann den Unterschied zwischen Ausgabe in der Konsole und Ausgabe auf der Seite erklären.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann erklären, warum ein Element eine <code>id</code> braucht, um es mit JavaScript anzusprechen.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann zeigen, wie <code>innerHTML</code> den Inhalt eines Elements ersetzt.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann erklären, warum ein externes Script mit defer im head steht — und was defer bewirkt.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann erklären, warum <code>alert()</code> und <code>prompt()</code> die Seite blockieren.</span></label></li>
+          <li><label><input type="checkbox" /> <span>Ich kann erklären, warum <code>document.write()</code> nicht mehr verwendet wird.</span></label></li>
+        </ul>
+      </section>
+
+      <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch01-reflect">
+        <h2 id="reflect-title">Reflexion</h2>
+        <div class="jsc-reflection">
+          <label class="jsc-reflection__item">
+            <span>Welche Ausgabemethode war für dich am leichtesten zu verstehen — und warum?</span>
+            <textarea data-reflect rows="3"></textarea>
+          </label>
+          <label class="jsc-reflection__item">
+            <span>Wo könntest du <code>console.log()</code> diese Woche in deinen eigenen Projekten nutzen?</span>
+            <textarea data-reflect rows="3"></textarea>
+          </label>
+          <label class="jsc-reflection__item">
+            <span>Erkläre einem:einer Mitschüler:in in zwei Sätzen, warum <code>document.write()</code> gefährlich ist.</span>
+            <textarea data-reflect rows="3"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+        <h2 id="quiz-title">Quiz</h2>
+        <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch01-quiz">
+          <fieldset class="jsc-quiz__question" data-correct="c">
+            <legend>Du startest ein neues Projekt. Wo bindest du dein JavaScript am saubersten ein?</legend>
+            <label><input type="radio" name="ch01-q0" value="a" /> Direkt in onclick-Attributen, das ist am schnellsten</label>
+            <label><input type="radio" name="ch01-q0" value="b" /> Als internes <code>&lt;script&gt;</code> ganz oben im <code>&lt;head&gt;</code></label>
+            <label><input type="radio" name="ch01-q0" value="c" /> Als externe Datei im <code>&lt;head&gt;</code> mit <code>defer</code></label>
+            <label><input type="radio" name="ch01-q0" value="d" /> Als externe Datei, aber nur mit <code>async</code>, das ist dasselbe</label>
+            <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+            <template data-feedback="ok"><strong>Genau — extern im head mit defer: parallel laden, nach dem HTML ausführen.</strong></template>
+            <template data-feedback="wrong">Überleg nochmal: inline vermischt Inhalt und Verhalten, intern skaliert nicht, und async führt aus, sobald die Datei da ist — ohne auf das HTML zu warten.</template>
+          </fieldset>
+          <fieldset class="jsc-quiz__question" data-correct="b">
+            <legend>Welche Methode ist für Besucher sichtbar?</legend>
+            <label><input type="radio" name="ch01-q1" value="a" /> <code>console.log()</code></label>
+            <label><input type="radio" name="ch01-q1" value="b" /> <code>alert()</code></label>
+            <label><input type="radio" name="ch01-q1" value="c" /> beide nur für Entwickler</label>
+            <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+            <template data-feedback="ok"><strong>Richtig — <code>alert()</code> zeigt ein Popup. Die Konsole sehen nur Entwickler.</strong></template>
+            <template data-feedback="wrong">Richtig — <code>alert()</code> zeigt ein Popup. Die Konsole sehen nur Entwickler.</template>
+          </fieldset>
+          <fieldset class="jsc-quiz__question" data-correct="c">
+            <legend>Was passiert bei <code>document.write()</code> nach dem Seitenladen?</legend>
+            <label><input type="radio" name="ch01-q2" value="a" /> Nichts</label>
+            <label><input type="radio" name="ch01-q2" value="b" /> Text wird ans Ende angehängt</label>
+            <label><input type="radio" name="ch01-q2" value="c" /> Die Seite wird gelöscht</label>
+            <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+            <template data-feedback="ok"><strong><code>document.write()</code> überschreibt das komplette Dokument — deshalb: nie verwenden.</strong></template>
+            <template data-feedback="wrong"><code>document.write()</code> überschreibt das komplette Dokument — deshalb: nie verwenden.</template>
+          </fieldset>
+          <fieldset class="jsc-quiz__question" data-correct="a">
+            <legend>Welcher Code ersetzt den Inhalt des Elements mit <code>id="gruss"</code>?</legend>
+            <label><input type="radio" name="ch01-q3" value="a" /> <code>document.getElementById("gruss").innerHTML = "Hi"</code></label>
+            <label><input type="radio" name="ch01-q3" value="b" /> <code>console.log("gruss")</code></label>
+            <label><input type="radio" name="ch01-q3" value="c" /> <code>alert("gruss")</code></label>
+            <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+            <template data-feedback="ok"><strong><code>innerHTML</code> schreibt in die Seite — die anderen nur in Popup oder Konsole.</strong></template>
+            <template data-feedback="wrong"><code>innerHTML</code> schreibt in die Seite — die anderen nur in Popup oder Konsole.</template>
+          </fieldset>
+          <p class="jsc-quiz__actions">
+            <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+            <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+          </p>
+          <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+        <div class="jsc-summary-card">
+          <h2 id="summary-title">
+            <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+          </h2>
+          <ul class="jsc-summary-list">
+            <li>JavaScript einbinden heißt: externe Datei, im <code>&lt;head&gt;</code>, mit <code>defer</code>.</li>
+            <li>Die Konsole (<code>console.log</code>) ist dein Werkzeug zum Verstehen — Besucher sehen sie nie.</li>
+            <li><code>innerHTML</code> schreibt sichtbar in die Seite — dafür braucht das Element eine <code>id</code>.</li>
+            <li>Der Browser verwandelt HTML in den Objektbaum des DOM — <code>getElementById</code> holt einen Knoten.</li>
+            <li><code>alert()</code> und <code>prompt()</code> blockieren die Seite; <code>document.write()</code> wird nicht mehr verwendet.</li>
+          </ul>
+        </div>
+        <div class="jsc-deepen-card">
+          <h2>
+            <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+          </h2>
+          <ul class="jsc-deepen-list">
+            <li>
+              <a href="https://developer.mozilla.org/de/docs/Learn/JavaScript/First_steps" target="_blank" rel="noopener">JavaScript first steps (MDN)</a>
+              <span>Der komplette Einstiegskurs im Mozilla-Wiki — wenn du ein Thema noch einmal aus anderer Perspektive sehen willst.</span>
+            </li>
+            <li>
+              <a href="https://developer.mozilla.org/de/docs/Web/HTML/Element/script" target="_blank" rel="noopener">Das script-Element (MDN)</a>
+              <span>Referenz aller Attribute von <code>&lt;script&gt;</code> — schau hier nach, wenn du <code>defer</code>, <code>async</code> oder <code>type</code> genauer verstehen willst.</span>
+            </li>
+            <li>
+              <a href="https://developer.mozilla.org/de/docs/Web/API/console/log_static" target="_blank" rel="noopener">console.log() (MDN)</a>
+              <span>Was die Konsole alles kann: Tabellen, Gruppen, Zeitmessung — der Profi-Ersatz für dein erstes <code>console.log</code>.</span>
+            </li>
+          </ul>
+          <p class="jsc-deepen-note">
+            MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+            arbeitet wie die Profis.
+          </p>
+        </div>
+      </section>
+
+      <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+        <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+        <div class="jsc-media-grid">
+          <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+            <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+            <h3>Lernvideo: Einführung &amp; Ausgabe</h3>
+            <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+          </article>
+          <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+            <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+            <h3>Begleit-Präsentation (Notebook-LM)</h3>
+            <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+        <h2 id="prompt-title">KI-Prompt-Training</h2>
+        <p class="jsc-home-lead">
+          Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+          schreiben — das ist die wichtigste neue Fähigkeit.
+        </p>
+        <div class="jsc-prompt-grid">
+          <details class="jsc-prompt-card jsc-prompt-card--bad">
+            <summary>
+              <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+              <span class="jsc-prompt-card__text">„Erklär mir JavaScript-Ausgabe."</span>
+            </summary>
+            <div class="jsc-prompt-card__body">
+              <p class="jsc-step__blocklabel">Warum schlecht?</p>
+              <p>Vage: keine Methode genannt, kein Ziel, kein Level. Die Antwort wird generisch und lang.</p>
+            </div>
+          </details>
+          <details class="jsc-prompt-card jsc-prompt-card--good">
+            <summary>
+              <span class="jsc-prompt-card__label">Guter Prompt</span>
+              <span class="jsc-prompt-card__text">„Du bist mein JavaScript-Tutor. Erkläre mir den Unterschied zwischen <code>console.log()</code> und <code>innerHTML</code> an einem Beispiel einer Begrüßungs-Webseite. Danach gib mir eine Mini-Aufgabe, mit der ich es selbst üben kann — und prüfe meine Lösung streng."</span>
+            </summary>
+            <div class="jsc-prompt-card__body">
+              <p class="jsc-step__blocklabel">Warum gut?</p>
+              <p>Rolle, Gegenstand, Beispielkontext, gewünschte Übung und Feedback sind klar. Die KI liefert genau das, was du brauchst.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+        <p class="jsc-chapter-cta__text">
+          Du kannst jetzt Inhalte sichtbar machen — Konsole für dich, Seite für alle.
+        </p>
+        <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/02-variablen.html">
+          Weiter zu Kapitel 02: Variablen
+        </a>
+      </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#schritt-1">1 Einbinden</a></li>
+            <li><a href="#schritt-2">2 Konsole</a></li>
+            <li><a href="#schritt-3">3 innerHTML</a></li>
+            <li><a href="#schritt-4">4 Popups</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
       </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
-
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>01 – Einführung & Ausgabe 🖨️</h1>
-      <p class="hero-subtitle">Wo JavaScript hingehört und wie du Inhalte ausgibst</p>
-    </section>
-
-    <section>
-      <h2>🎯 1. Was ist JavaScript-Ausgabe?</h2>
-      <p>
-        <strong>Ausgabe</strong> bedeutet, dass JavaScript Inhalte anzeigt – 
-        sei es für Entwickler (Konsole) oder Benutzer (Webseite).  
-        Die Wahl der richtigen Methode ist entscheidend für Benutzerfreundlichkeit und Wartbarkeit.
-      </p>
-    </section>
-
-    <section>
-      <h2>📊 2. Übersicht: Ausgabemethoden in JavaScript</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Methode</th>
-            <th>Verwendung</th>
-            <th>Vorteile</th>
-            <th>Nachteile</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>console.log()</code></td>
-            <td>Für Entwickler (Debugging)</td>
-            <td>Keine Unterbrechung der Seite</td>
-            <td>Nur für Entwickler sichtbar</td>
-          </tr>
-          <tr>
-            <td><code>alert()</code></td>
-            <td>Einfache Benachrichtigung</td>
-            <td>Leicht zu verwenden</td>
-            <td>Blockiert die ganze Seite!</td>
-          </tr>
-          <tr>
-            <td><code>document.write()</code></td>
-            <td>Nur beim Seitenladen</td>
-            <td>Einfach für Anfänger</td>
-            <td><strong>Löscht ganze Seite nach Ladung!</strong> → Vermeiden!</td>
-          </tr>
-          <tr>
-            <td><code>innerHTML</code></td>
-            <td>Dynamische Webseiten</td>
-            <td>Professionell, flexibel, sicher</td>
-            <td>Benötigt Element-ID</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        In diesem Kapitel lernst du, wann du welche Ausgabemethode verwenden sollst – 
-        mit Fokus auf moderne, professionelle Techniken.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_output.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Output</a>
-      </p>
-    </section>
-
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um die Unterschiede zwischen <code>console.log()</code>, <code>alert()</code>, 
-        <code>document.write()</code> und <code>innerHTML</code> zu erklären – 
-        und warum <code>innerHTML</code> die professionelle Wahl ist.
-      </p>
-    </section>
-
-    <!-- 5. console.log -->
-    <section>
-      <div id="ausgabe-console" class="ausgabe-bereich">...</div>
-      <h2>🛠️ 5. <code>console.log()</code> – für Entwickler</h2>
-      <p>
-        Die Konsole ist das wichtigste Werkzeug zum <strong>Debuggen</strong> (Fehlersuchen).  
-        Öffne sie mit <strong>F12 → Reiter „Konsole“</strong>.
-      </p>
-      <button onclick="demoConsole()">In Konsole ausgeben</button>
-      <div class="ausgabe-bereich">
-        <em>Öffne die Konsole (rechte Maustaste - Untersuchen - Konsole), um die Ausgabe zu sehen.</em>
-      </div>
-      <pre><code class="js-code">function demoConsole() {
-  console.log("Hallo aus der Konsole! 👋");
-  console.log("Dieser Text ist nur für Entwickler sichtbar.");
-}</code></pre>
-    </section>
-
-    <!-- 6. alert -->
-    <section>
-      <div id="ausgabe-alert" class="ausgabe-bereich"></div>
-      <h2>⚠️ 6. <code>alert()</code> – einfache Benachrichtigung</h2>
-      <p>
-        <code>alert()</code> zeigt ein Popup-Fenster an – aber es <strong>blockiert die ganze Seite</strong>, 
-        bis der Benutzer auf „OK“ klickt. Deshalb sollte es <strong>selten verwendet</strong> werden.
-      </p>
-      <button onclick="demoAlert()">Als Popup anzeigen</button>
-      <div id="ausgabe-alert" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoAlert() {
-  alert("Hallo aus einem Popup! ⚠️\\n(Dieses Blockieren der Seite ist oft unerwünscht.)");
-}</code></pre>
-    </section>
-
-<!-- 6b. prompt – Benutzereingabe -->
-<section>
-  <h2>⌨️ 6b. <code>prompt()</code> – Eingabe vom Benutzer</h2>
-  <p>
-    Mit <code>prompt()</code> kannst du den Benutzer nach einer Eingabe fragen.  
-    Die Funktion gibt den eingegebenen Text <strong>als String</strong> zurück.
-  </p>
-  <div class="warnung">
-    ⚠️ <strong>Achtung:</strong> <code>prompt()</code> blockiert die Seite – 
-    wie <code>alert()</code>. In professionellen Anwendungen nutzt man stattdessen 
-    <strong>Formularfelder</strong> (siehe Kapitel 12 im HTML/CSS-Tutorial).
-  </div>
-  <button onclick="demoPrompt()">Frage nach Name</button>
-  <div id="ausgabe-prompt" class="ausgabe-bereich"></div>
-  <pre><code class="js-code">function demoPrompt() {
-  const name = prompt("Wie heißt du?");
-  if (name) {
-    document.getElementById("ausgabe-prompt").innerHTML = 
-      `&lt;p&gt;Hallo, &lt;strong&gt;${name}&lt;/strong&gt;! Schön, dich kennenzulernen. 😊&lt;/p&gt;`;
-  } else {
-    document.getElementById("ausgabe-prompt").innerHTML = 
-      "&lt;p&gt;Du hast keinen Namen eingegeben. 😕&lt;/p&gt;";
-  }
-}</code></pre>
-</section>
-
-    <!-- 7. document.write -->
-     <div id="ausgabe-write" class="ausgabe-bereich"></div>
-    <section class="warnung">
-      <h2>❌ 7. <code>document.write()</code> – vermeiden!</h2>
-      <p>
-        <code>document.write()</code> funktioniert <strong>nur während des Seitenladens</strong>.  
-        Wird es danach aufgerufen, <strong>löscht es die ganze Seite</strong>!  
-        → In der Praxis <strong>nie verwenden</strong>.
-      </p>
-      <button onclick="demoDocumentWrite()">document.write() testen</button>
-      <div id="ausgabe-write" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoDocumentWrite() {
-  if (document.readyState === 'loading') {
-    // Funktioniert nur beim Laden
-    document.write("&lt;h2&gt;Neue Seite durch document.write!&lt;/h2&gt;");
-  } else {
-    // Nach dem Laden: Warnung anzeigen
-    document.getElementById("ausgabe-write").innerHTML = 
-      "&lt;p class='warnung'&gt;❌ document.write() funktioniert nur während des Seitenladens!&lt;/p&gt;";
-  }
-}</code></pre>
-    </section>
-
-        <!-- 8. innerHTML -->
-    <section>
-      <div id="ausgabe-bereich" class="ausgabe-bereich"></div>
-      <h2>✅ 8. <code>innerHTML</code> – die professionelle Methode</h2>
-      <p>
-        <code>innerHTML</code> ändert den Inhalt eines HTML-Elements – 
-        ideal für <strong>dynamische Webseiten</strong> (z. B. To-Do-Listen, Chat).
-      </p>
-      <button onclick="demoInnerHTML()">In Seite einfügen</button>
-      <div id="ausgabe-inner" class="ausgabe-bereich"></div> <!-- KORREKTUR: ID hinzugefügt -->
-      <pre><code class="js-code">function demoInnerHTML() {
-  const bereich = document.getElementById("ausgabe-inner");
-  bereich.innerHTML = "&lt;p style='color: #27ae60;'&gt;&lt;strong&gt;Erfolg!&lt;/strong&gt; Dieser Text wurde dynamisch mit JavaScript eingefügt. 🎉&lt;/p&gt;";
-}</code></pre>
-    </section>
-
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt kennst du die professionelle Ausgabemethode für dynamische Webseiten!</p>
-      <a href="./02-variablen.html" class="nav-button">→ Zu Modul 02: Variablen & Datentypen</a>
-    </section>
-  </div>
-
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="../js/01-einfuehrung.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+    </main>
+  </body>
 </html>

@@ -1,0 +1,80 @@
+/**
+ * 05-components/quiz.css — Kapitel-Quiz
+ */
+
+.jsc-quiz__question {
+  min-width: 0;
+  margin: 0;
+  padding: var(--jsc-space-4);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-1);
+}
+
+/* Lange Code-Optionen umbrechen — sonst Mobile-Overflow durch Fieldset-min-content */
+.jsc-quiz__question label {
+  min-width: 0;
+}
+
+.jsc-quiz__question code {
+  overflow-wrap: anywhere;
+}
+
+.jsc-quiz__question + .jsc-quiz__question {
+  margin-top: var(--jsc-space-3);
+}
+
+.jsc-quiz__question legend {
+  padding-inline: var(--jsc-space-2);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+.jsc-quiz__question label {
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: baseline;
+  margin-top: var(--jsc-space-2);
+  cursor: pointer;
+}
+
+.jsc-quiz__question input[type="radio"] {
+  accent-color: var(--module-accent, var(--jsc-color-accent));
+}
+
+.jsc-quiz__feedback {
+  margin-top: var(--jsc-space-3);
+  padding: var(--jsc-space-3);
+  border-radius: var(--jsc-radius-s);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-quiz__feedback:empty {
+  display: none;
+}
+
+.jsc-quiz__feedback.is-correct {
+  background: color-mix(in oklch, var(--jsc-color-success) 14%, var(--jsc-color-surface-0));
+  color: var(--jsc-color-success);
+}
+
+.jsc-quiz__feedback.is-wrong {
+  background: color-mix(in oklch, var(--jsc-color-cta) 12%, var(--jsc-color-surface-0));
+  color: var(--jsc-color-cta);
+}
+
+/* Light: Coral auf Coral-Tintung dunkler ziehen (AA) */
+html[data-theme="light"] .jsc-quiz__feedback.is-wrong {
+  color: color-mix(in oklch, var(--jsc-color-cta), var(--jsc-color-ink) 32%);
+}
+
+.jsc-quiz__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-3);
+  margin-top: var(--jsc-space-4);
+}
+
+.jsc-quiz__result {
+  margin-top: var(--jsc-space-3);
+  font-weight: var(--jsc-weight-semibold);
+}

@@ -18,7 +18,7 @@
  *     Return-of-Focus auf den auslösenden Button.
  */
 
-import { NAV } from '../data/nav.js';
+import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS } from '../data/nav.js';
 import { t, getLanguage, onLangChange } from './i18n.js';
 import { isLight, toggleTheme } from './theme.js';
 
@@ -209,6 +209,140 @@ function renderLangSwitcher() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Mobiles Hauptmenü (Disclosure-Panel unter dem Header, <1024px)      */
+/* ------------------------------------------------------------------ */
+
+function menuGroup(title, links) {
+  const group = el('div', 'jsc-mobile-menu__group');
+  group.append(el('p', 'jsc-mobile-menu__group-title', title));
+  const ul = el('ul', 'jsc-mobile-menu__list');
+  links.forEach(({ href, label, current }) => {
+    const li = el('li', 'jsc-mobile-menu__item');
+    const a = el('a', 'jsc-mobile-menu__link', label);
+    a.href = href;
+    if (current) a.setAttribute('aria-current', 'page');
+    li.append(a);
+    ul.append(li);
+  });
+  group.append(ul);
+  return group;
+}
+
+function renderMobileMenu(header) {
+  const idx = currentChapterIndex();
+  const base = '/tutorials/js-classic';
+
+  const panel = el('nav', 'jsc-mobile-menu');
+  panel.id = 'jsc-mobile-menu';
+  panel.setAttribute('aria-label', t('ui.a11y.mainNav'));
+  panel.hidden = true;
+
+  const inner = el('div', 'jsc-mobile-menu__inner jsc-container');
+  inner.append(
+    menuGroup(t('ui.menu.groupCourse'), [
+      { href: `${base}/`, label: t('ui.nav.home'), current: window.location.pathname.replace(/\/$/, '/index.html').endsWith('/js-classic/index.html') || window.location.pathname === '/tutorials/js-classic/' },
+    ]),
+    menuGroup(
+      t('ui.menu.groupChapters'),
+      CHAPTERS.map((ch, i) => ({
+        href: `${base}/kapitel/${ch.slug}.html`,
+        label: `${ch.nr}. ${t(ch.i18n)}`,
+        current: idx === i,
+      }))
+    ),
+    menuGroup(t('ui.menu.groupLearn'), [
+      { href: `${base}/uebungen/`, label: t('ui.nav.exercises') },
+      { href: `${base}/ki-grundlagen.html`, label: t('ui.nav.kiBasics') },
+      { href: `${base}/vscode.html`, label: t('ui.nav.vscode') },
+    ]),
+    menuGroup(
+      t('ui.menu.groupFinal'),
+      FINAL_PROJECTS.map((p) => ({ href: `${base}/abschluss/${p.slug}.html`, label: t(p.i18n) }))
+    ),
+    menuGroup(t('ui.menu.groupPlu'), [
+      { href: `${base}/info.html`, label: t('ui.nav.infoAbout') },
+      { href: `${base}/biblik.html`, label: t('ui.nav.library') },
+      { href: `${base}/arbeitsblaetter/`, label: t('ui.nav.worksheets') },
+    ])
+  );
+  panel.append(inner);
+  header.append(panel);
+
+  const btn = el('button', 'jsc-icon-btn jsc-mobile-menu__toggle');
+  btn.type = 'button';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'jsc-mobile-menu');
+  btn.setAttribute('aria-label', t('ui.menu.open'));
+  const icon = el('i', 'ph ph-list', '');
+  icon.setAttribute('aria-hidden', 'true');
+  btn.append(icon);
+
+  /* --- Interaktionen --- */
+  function focusables() {
+    return [...panel.querySelectorAll('a[href]')];
+  }
+
+  function open() {
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', t('ui.menu.close'));
+    panel.hidden = false;
+    document.documentElement.classList.add('is-menu-open');
+    focusables()[0]?.focus();
+  }
+
+  function close(refocus = true) {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', t('ui.menu.open'));
+    panel.hidden = true;
+    document.documentElement.classList.remove('is-menu-open');
+    if (refocus) btn.focus();
+  }
+
+  const isOpen = () => btn.getAttribute('aria-expanded') === 'true';
+
+  btn.addEventListener('click', () => (isOpen() ? close(false) : open()));
+
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen()) {
+      e.preventDefault();
+      close(true);
+    }
+  });
+
+  panel.addEventListener('keydown', (e) => {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close(true);
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    // Fokus-Zyklus innerhalb des Panels
+    const items = focusables();
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // Klick außerhalb schließt
+  document.addEventListener('click', (e) => {
+    if (isOpen() && !panel.contains(e.target) && !btn.contains(e.target)) close(false);
+  });
+
+  onLangChange(() => {
+    if (isOpen()) close(false);
+  });
+
+  return btn;
+}
+
+/* ------------------------------------------------------------------ */
 /* Header                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -220,11 +354,16 @@ function renderHeader(currentPath) {
 
   const brand = el('a', 'jsc-header__brand');
   brand.href = NAV.main[0].url;
-  const brandIcon = el('span', 'jsc-header__brand-icon', '〈〉');
-  brandIcon.setAttribute('aria-hidden', 'true');
-  brand.append(brandIcon, document.createTextNode(' js-classic'));
-  const brandSub = el('span', 'jsc-header__brand-sub', '2.0');
-  brand.append(brandSub);
+  const logo = document.createElement('img');
+  logo.src = '/tutorials/js-classic/assets/img/brand/jsc-logo.svg';
+  logo.alt = t('ui.brand.alt');
+  logo.width = 32;
+  logo.height = 32;
+  logo.className = 'jsc-header__logo';
+  const wordmark = el('span', 'jsc-header__wordmark');
+  wordmark.append(document.createTextNode('Java'));
+  wordmark.append(el('span', 'jsc-header__brand-accent', 'Script'));
+  brand.append(logo, wordmark);
 
   const nav = el('nav', 'jsc-nav');
   nav.id = 'jsc-main-nav';
@@ -247,8 +386,12 @@ function renderHeader(currentPath) {
   themeBtn.addEventListener('click', toggleTheme);
 
   actions.append(renderLangSwitcher(), themeBtn);
+  const menuBtn = renderMobileMenu(header);
 
-  inner.append(brand, nav, actions);
+  const actionsRow = actions;
+  actionsRow.append(menuBtn);
+
+  inner.append(brand, nav, actionsRow);
   header.append(inner);
   return header;
 }
@@ -375,27 +518,154 @@ function renderFooter() {
   const footer = el('footer', 'jsc-footer');
   const inner = el('div', 'jsc-footer__inner jsc-container');
 
-  const license = el('p', 'jsc-footer__license');
-  license.append(
-    el('strong', null, 'js-classic · PANTAM Learning Universe — '),
-    document.createTextNode('Code: MIT · Content: CC BY-NC-SA 4.0')
+  /* --- Hauptbereich: Brand + Link-Spalten --- */
+  const main = el('div', 'jsc-footer__main');
+
+  const brandWrap = el('div', 'jsc-footer__brand-wrap');
+  const logoWrap = el('a', 'jsc-footer__logo');
+  logoWrap.href = NAV.main[0].url;
+  const logoImg = document.createElement('img');
+  logoImg.src = '/tutorials/js-classic/assets/img/brand/jsc-logo.svg';
+  logoImg.alt = t('ui.footer.logoSub');
+  logoImg.width = 40;
+  logoImg.height = 40;
+  const logoText = el('span', 'jsc-footer__logo-text');
+  logoText.append(
+    el('span', 'jsc-footer__logo-title', 'JavaScript Classic'),
+    el('span', 'jsc-footer__logo-subtitle', t('ui.footer.logoSub'))
+  );
+  logoWrap.append(logoImg, logoText);
+  brandWrap.append(
+    logoWrap,
+    el('p', 'jsc-footer__tagline', t('ui.footer.tagline'))
   );
 
-  const infoLink = el('a', 'jsc-footer__link', t('ui.nav.infoAbout'));
-  infoLink.href = '/tutorials/js-classic/info.html';
+  // Classroom-Mode-Platzhalter (Funktionalität = eigenes Paket, B12)
+  const classroom = el('button', 'jsc-footer__classroom');
+  classroom.type = 'button';
+  classroom.disabled = true;
+  classroom.title = t('ui.footer.classroomSoon');
+  const monitorIcon = el('i', 'ph ph-monitor', '');
+  monitorIcon.setAttribute('aria-hidden', 'true');
+  classroom.append(monitorIcon, document.createTextNode(` ${t('ui.footer.classroom')}`));
+  brandWrap.append(classroom);
 
-  inner.append(license, infoLink);
+  /* --- Links-Grid (3 Spalten) --- */
+  const lang = getLanguage();
+  const ch01Url =
+    lang === 'en'
+      ? '/tutorials/js-classic/kapitel/01-introduction-output.html'
+      : '/tutorials/js-classic/kapitel/01-einfuehrung-ausgabe.html';
+
+  const grid = el('div', 'jsc-footer__links-grid');
+
+  const navChapters = el('nav', 'jsc-footer__col');
+  navChapters.setAttribute('aria-label', t('ui.footer.colChapters'));
+  navChapters.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colChapters')));
+  const ulChapters = el('ul', 'jsc-footer__list');
+  ulChapters.append(
+    footerLink('/tutorials/js-classic/#kapitel', t('ui.footer.allChapters')),
+    footerLink(ch01Url, `01. ${t('ui.ch.01')}`),
+    footerLink('/tutorials/js-classic/kapitel/10-ereignisse.html', `10. ${t('ui.ch.10')}`)
+  );
+  navChapters.append(ulChapters);
+
+  const navResources = el('nav', 'jsc-footer__col');
+  navResources.setAttribute('aria-label', t('ui.footer.colResources'));
+  navResources.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colResources')));
+  const ulResources = el('ul', 'jsc-footer__list');
+  const pluHub = footerLink('/tutorials/', t('ui.footer.pluHub'));
+  pluHub.target = '_blank';
+  pluHub.rel = 'noopener';
+  ulResources.append(
+    footerLink('/tutorials/js-classic/uebungen/', t('ui.footer.exercises')),
+    footerLink('/tutorials/js-classic/arbeitsblaetter/', t('ui.footer.worksheets')),
+    footerLink('/tutorials/js-classic/ki-grundlagen.html', t('ui.footer.kiBasics')),
+    pluHub
+  );
+  navResources.append(ulResources);
+
+  const navLegal = el('nav', 'jsc-footer__col');
+  navLegal.setAttribute('aria-label', t('ui.footer.colLegal'));
+  navLegal.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colLegal')));
+  const ulLegal = el('ul', 'jsc-footer__list');
+  ulLegal.append(
+    footerLink('/tutorials/pages/impressum.html', t('ui.footer.imprint')),
+    footerLink('/tutorials/pages/datenschutz.html', t('ui.footer.privacy')),
+    footerLink('/tutorials/pages/disclaimer.html', t('ui.footer.disclaimer'))
+  );
+  navLegal.append(ulLegal);
+
+  grid.append(navChapters, navResources, navLegal);
+  main.append(brandWrap, grid);
+
+  /* --- Bottom-Bar --- */
+  const bottom = el('div', 'jsc-footer__bottom');
+  const legal = el('p', 'jsc-footer__legal');
+  legal.append(
+    document.createTextNode(`${t('ui.footer.legalLine')} · `),
+    el('span', null, t('ui.footer.mitLicense')),
+    document.createTextNode(' · '),
+    el('span', null, t('ui.footer.ccLicense'))
+  );
+  const meta = el('p', 'jsc-footer__meta');
+  const support = el('a', 'jsc-footer__support', '');
+  support.href = '/tutorials/pages/spenden.html';
+  const heart = el('i', 'ph ph-heart', '');
+  heart.setAttribute('aria-hidden', 'true');
+  support.append(heart, document.createTextNode(` ${t('ui.footer.support')}`));
+  meta.append(support);
+  bottom.append(legal, meta);
+
+  inner.append(main, bottom);
   footer.append(inner);
   return footer;
+}
+
+function footerLink(href, label) {
+  const li = el('li', 'jsc-footer__item');
+  const a = el('a', 'jsc-footer__link', label);
+  a.href = href;
+  li.append(a);
+  return li;
 }
 
 /* ------------------------------------------------------------------ */
 /* Init                                                                */
 /* ------------------------------------------------------------------ */
 
+/* Mobile/Tablet: Header beim Runterscrollen ausblenden (mehr Platz fürs Tutorial) */
+function bindHeaderAutoHide() {
+  let lastY = window.scrollY;
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (window.innerWidth >= 1024) {
+        document.documentElement.classList.remove('is-header-hidden');
+        lastY = window.scrollY;
+        return;
+      }
+      const y = window.scrollY;
+      const menuOpen = Boolean(document.querySelector('.jsc-mobile-menu:not([hidden])'));
+      if (menuOpen || y < 80) {
+        document.documentElement.classList.remove('is-header-hidden');
+      } else if (y > lastY + 4) {
+        document.documentElement.classList.add('is-header-hidden');
+      } else if (y < lastY - 4) {
+        document.documentElement.classList.remove('is-header-hidden');
+      }
+      lastY = y;
+    },
+    { passive: true }
+  );
+}
+
 export function initNavigation() {
   const mount = document.querySelector('[data-component="jsc-site-chrome"]');
   if (!mount) return;
+
+  bindHeaderAutoHide();
 
   const currentPath = window.location.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
 

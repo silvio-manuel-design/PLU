@@ -1,0 +1,344 @@
+/**
+ * 05-components/step.css — Lernschritt-Blöcke (js-classic 2.0)
+ *
+ * Blockfolge: why → explain → demo → steps → mistakes → tip → criteria.
+ * Modul-Akzent via data-module + color-mix (§5.9).
+ */
+
+.jsc-step {
+  padding-block: var(--jsc-space-7);
+  border-top: 1px solid var(--jsc-color-border);
+  scroll-margin-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .jsc-step {
+    padding-block: var(--jsc-space-10);
+    border-top: 0;
+  }
+}
+
+.jsc-step:first-of-type {
+  border-top: 0;
+}
+
+/* Nummer-Badge: große, ausgegraute Zahl links vom Titel (dekorativ) */
+.jsc-step__heading {
+  display: flex;
+  gap: var(--jsc-space-3);
+  align-items: baseline;
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-3);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-step__heading::before {
+  content: "0" attr(data-step);
+  flex-shrink: 0;
+  color: var(--jsc-color-ink-muted);
+  font-family: var(--jsc-font-mono);
+  font-size: 3rem;
+  font-weight: var(--jsc-weight-bold);
+  line-height: 1;
+  opacity: 0.45;
+}
+
+/* why als Lead-Typografie (P4R10): kein Card-Box mehr — Einstiegs-Lead */
+.jsc-step__why {
+  margin-top: var(--jsc-space-4);
+  padding-block: var(--jsc-space-2);
+  font-size: 1.125rem;
+  line-height: 1.75; /* lange volle Zeilen brauchen Luftzufuhr */
+  color: var(--jsc-color-ink);
+}
+
+/* Kasten-Optik bleibt exklusiv bei: Profi-Tipp, Pause, Explain-Note, Mistake-Cards */
+
+/* Lesespalte: optimales Zeilenmaß (72ch) — Desktop begrenzt, Mobile greift
+   das ch-Limit nicht und bleibt volle Breite. Zeilenhöhe 1.75 + Absatzabstand
+   tragen die Lesbarkeit. */
+.jsc-step__why p,
+.jsc-step__explain p {
+  max-width: 72ch;
+  line-height: 1.75;
+}
+
+.jsc-step__explain p + p,
+.jsc-step__why p + p {
+  margin-top: var(--jsc-space-5);
+}
+
+/* Lange Code-Tokens im Fließtext umbrechen (sonst Mobile-Overflow) */
+.jsc-step code,
+.jsc-step__explain-note code,
+.jsc-checklist code,
+.jsc-summary-list code,
+.jsc-deepen-card code {
+  overflow-wrap: anywhere;
+}
+
+/* Fehlerkarten ab 1200px zweispaltig */
+@media (min-width: 1200px) {
+  .jsc-step__mistakes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Leadlist (P4R8): Einbindungsarten in Schritt 1 — Lead-in als Gold-Chip */
+.jsc-leadlist {
+  margin: var(--jsc-space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-leadlist li {
+  max-width: 72ch;
+}
+
+.jsc-leadlist li + li {
+  margin-block: var(--jsc-space-4);
+}
+
+.jsc-leadlist strong {
+  display: inline-block;
+  padding: 0 var(--jsc-space-2);
+  border-radius: var(--jsc-radius-s);
+  background: var(--jsc-color-accent-dim);
+  color: var(--jsc-color-accent);
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text--1);
+}
+
+html[data-theme="light"] .jsc-leadlist strong {
+  color: var(--jsc-color-accent-ink);
+}
+
+/* Code-Gruppe als eine Einheit: engerer Abstand zwischen den Blöcken */
+.jsc-step__explain .jsc-code-block + .jsc-code-block {
+  margin-top: var(--jsc-space-3);
+}
+
+/* explain */
+.jsc-step__explain {
+  margin-top: var(--jsc-space-5);
+  max-width: none;
+}
+
+.jsc-step__explain p + figure,
+.jsc-step__explain p + .jsc-code-block {
+  margin-top: var(--jsc-space-3);
+}
+
+/* demo */
+.jsc-step__demo {
+  margin-top: var(--jsc-space-5);
+}
+
+/* steps */
+.jsc-step__steps {
+  margin: var(--jsc-space-5) 0 0;
+  padding-left: var(--jsc-space-6);
+  max-width: 46rem;
+}
+
+.jsc-step__steps li {
+  padding-left: var(--jsc-space-2);
+}
+
+.jsc-step__steps li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+/* mistakes */
+.jsc-step__mistakes {
+  display: grid;
+  gap: var(--jsc-space-3);
+  margin-top: var(--jsc-space-5);
+}
+
+.jsc-step__blocklabel {
+  margin-bottom: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* proTip (Gold-Tinting) */
+.jsc-step__tip {
+  margin-top: var(--jsc-space-5);
+  padding: var(--jsc-space-4) var(--jsc-space-5);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-achievement) 40%, transparent);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--jsc-color-achievement) 12%, var(--jsc-color-surface-0));
+}
+
+/* Info-Callout im Explain-Block (z. B. DOM-Mentalmodell, P4R4) —
+   Info-Tinting über den Fortschritts-Teal. */
+.jsc-step__explain-note {
+  margin-top: var(--jsc-space-4);
+  padding: var(--jsc-space-4) var(--jsc-space-5);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-progress) 40%, transparent);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--jsc-color-progress) 10%, var(--jsc-color-surface-0));
+}
+
+.jsc-step__explain-note strong {
+  color: var(--jsc-color-progress);
+}
+
+/* Light: Teal-Text auf Teal-Tintung dunkler ziehen (AA) */
+html[data-theme="light"] .jsc-step__explain-note strong {
+  color: color-mix(in oklch, var(--jsc-color-progress), var(--jsc-color-ink) 38%);
+}
+
+/* Didaktische Pause (B14, P4R7) — Analogie zur Tip-Box, eigenes Tinting. */
+.jsc-pause {
+  margin-block: var(--jsc-space-6);
+  padding: var(--jsc-space-5);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-achievement) 45%, transparent);
+  border-radius: var(--jsc-radius-l);
+  background: color-mix(in oklch, var(--jsc-color-achievement) 10%, var(--jsc-color-surface-0));
+}
+
+.jsc-pause__eyebrow {
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  color: var(--jsc-color-achievement);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+  letter-spacing: 0.08em;
+}
+
+/* Light: Gold-Text auf Gold-Tintung dunkler ziehen (AA) */
+html[data-theme="light"] .jsc-pause__eyebrow {
+  color: color-mix(in oklch, var(--jsc-color-achievement), var(--jsc-color-ink) 55%);
+}
+
+.jsc-pause__text {
+  margin-top: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+}
+
+/* Zusammenfassung + Vertiefen (B14, P4R7) — Karten im Kapitel-Rhythmus. */
+.jsc-summary-section {
+  display: grid;
+  gap: var(--jsc-space-5);
+  padding-block: var(--jsc-space-7);
+}
+
+.jsc-summary-card,
+.jsc-deepen-card {
+  padding: var(--jsc-space-5);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-1);
+}
+
+.jsc-summary-card h2,
+.jsc-deepen-card h2 {
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-2);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-summary-list {
+  margin: var(--jsc-space-3) 0 0;
+  padding-left: var(--jsc-space-5);
+}
+
+.jsc-summary-list li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+.jsc-deepen-list {
+  margin: var(--jsc-space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-deepen-list li {
+  display: grid;
+  gap: var(--jsc-space-1);
+  padding: var(--jsc-space-3) 0;
+  border-top: 1px solid var(--jsc-color-border);
+}
+
+.jsc-deepen-list a {
+  color: var(--jsc-color-accent);
+  font-weight: var(--jsc-weight-semibold);
+  text-decoration: none;
+}
+
+html[data-theme="light"] .jsc-deepen-list a {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-deepen-list a:hover {
+  text-decoration: underline;
+}
+
+.jsc-deepen-list span {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-deepen-note {
+  margin-top: var(--jsc-space-3);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+/* criteria */
+.jsc-step__criteria {
+  margin: var(--jsc-space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-step__criteria li {
+  position: relative;
+  padding-left: var(--jsc-space-5);
+  color: var(--jsc-color-ink-muted);
+}
+
+.jsc-step__criteria li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--jsc-color-success);
+  font-weight: var(--jsc-weight-bold);
+}
+
+.jsc-step__criteria li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+/* mistake-card (Coral-Tinting) */
+.jsc-mistake-card {
+  padding: var(--jsc-space-4);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-cta) 35%, transparent);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--jsc-color-cta) 9%, var(--jsc-color-surface-0));
+}
+
+.jsc-mistake-card__title {
+  color: var(--jsc-color-cta);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+/* Light: Coral-Titel dunkler ziehen (AA auf der getinteten Karte) */
+html[data-theme="light"] .jsc-mistake-card__title {
+  color: color-mix(in oklch, var(--jsc-color-cta), var(--jsc-color-ink) 32%);
+}
+
+.jsc-mistake-card p + p {
+  margin-top: var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}

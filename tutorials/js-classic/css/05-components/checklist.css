@@ -1,0 +1,59 @@
+/**
+ * 05-components/checklist.css — Kapitel-Checkliste
+ *
+ * :has()-basierte Styles (§5.9): abgehakte Items dimmen.
+ */
+
+.jsc-checklist {
+  margin: var(--jsc-space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jsc-checklist li label {
+  display: flex;
+  gap: var(--jsc-space-3);
+  align-items: flex-start;
+  padding: var(--jsc-space-3) var(--jsc-space-4);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-1);
+  cursor: pointer;
+}
+
+.jsc-checklist li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+.jsc-checklist input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.15rem;
+  accent-color: var(--jsc-color-success);
+  cursor: pointer;
+}
+
+.jsc-checklist li:has(input:checked) label {
+  border-color: color-mix(in oklch, var(--jsc-color-success) 45%, var(--jsc-color-border));
+  background: color-mix(in oklch, var(--jsc-color-success) 8%, var(--jsc-color-surface-0));
+}
+
+.jsc-checklist li:has(input:checked) span {
+  color: var(--jsc-color-ink-muted);
+}
+
+.jsc-checklist__counter {
+  margin-top: var(--jsc-space-3);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-checklist__banner {
+  margin-top: var(--jsc-space-3);
+  padding: var(--jsc-space-3) var(--jsc-space-4);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-success) 45%, transparent);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--jsc-color-success) 12%, var(--jsc-color-surface-0));
+  color: var(--jsc-color-success);
+  font-weight: var(--jsc-weight-semibold);
+}

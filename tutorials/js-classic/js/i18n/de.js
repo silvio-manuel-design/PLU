@@ -25,7 +25,7 @@ export default {
   'ui.nav.chapters': 'Kapitel',
   'ui.nav.exercises': 'Übungen',
   'ui.nav.worksheets': 'Arbeitsblätter',
-  'ui.nav.final': 'Abschlussprojekte',
+  'ui.nav.final': 'Projekte',
   'ui.nav.info': 'Infos',
   'ui.nav.infoAbout': 'Über den Kurs',
   'ui.nav.vscode': 'VS Code',
@@ -51,4 +51,59 @@ export default {
   'ui.a11y.bottomBar': 'Kapitelnavigation',
   'ui.a11y.closeMenu': 'Menü schließen',
   'ui.backToTop': 'Nach oben',
+
+  /* Kapitel-Komponenten (P4) */
+  'ui.check.done': 'Kapitel abgeschlossen — schön! Weiter zu Kapitel 02.',
+  'ui.check.progress': '%d von %d erledigt',
+  'ui.reflect.saved': 'Automatisch gespeichert',
+  'ui.reflect.aria': 'Deine Antwort (wird lokal gespeichert)',
+  'ui.quiz.check': 'Antworten prüfen',
+  'ui.quiz.retry': 'Nochmal versuchen',
+  'ui.quiz.result': '%d von %d richtig',
+  'ui.media.placeholder': 'Video folgt in Kürze.',
+  'ui.media.load': 'Video laden (datenschutzkonform)',
+  'ui.media.external': 'Externer Inhalt — erst nach Klick geladen.',
+  'ui.demo.run': 'Ausführen',
+  'ui.demo.reset': 'Zurücksetzen',
+
+  /* Chrome Markenstandard (P4R) */
+  'ui.brand.alt': 'JavaScript Classic',
+  'ui.footer.tagline': 'Mit KI denken. Menschlich handeln.',
+  'ui.footer.colChapters': 'Kapitel',
+  'ui.footer.colResources': 'Ressourcen',
+  'ui.footer.colLegal': 'Rechtliches',
+  'ui.footer.allChapters': 'Alle Kapitel',
+  'ui.footer.exercises': 'Übungen',
+  'ui.footer.worksheets': 'Arbeitsblätter',
+  'ui.footer.kiBasics': 'KI-Grundlagen',
+  'ui.footer.pluHub': 'PLU Hub',
+  'ui.footer.imprint': 'Impressum',
+  'ui.footer.privacy': 'Datenschutz',
+  'ui.footer.disclaimer': 'Disclaimer',
+  'ui.footer.classroom': 'Klassenraum-Modus',
+  'ui.footer.classroomSoon': 'Folgt mit dem Klassenzimmer-Modus-Paket',
+  'ui.footer.legalLine': '© 2026 PANTAM Learning Universe',
+  'ui.footer.mitLicense': 'MIT License',
+  'ui.footer.ccLicense': 'CC BY-NC-SA 4.0',
+  'ui.footer.support': 'Unterstützen',
+  'ui.footer.logoSub': 'PANTAM LEARNING UNIVERSE',
+
+  /* Mobiles Hauptmenü (P4R3) */
+  'ui.menu.open': 'Menü öffnen',
+  'ui.menu.close': 'Menü schließen',
+  'ui.menu.groupCourse': 'Kurs',
+  'ui.menu.groupChapters': 'Kapitel',
+  'ui.menu.groupLearn': 'Lernen',
+  'ui.menu.groupFinal': 'Abschluss',
+  'ui.menu.groupPlu': 'PLU',
+
+  /* Abschlussprojekte (Eigennamen, im mobilen Menü) */
+  'ui.proj.todo': 'Todo-Liste',
+  'ui.proj.noten': 'Notenverwaltung',
+  'ui.proj.quiz': 'Quiz',
+
+  /* Kapitel 11/12 — Platzhalter (B13, P4R4) */
+  'ui.ch.11': 'Formulare & Validierung',
+  'ui.ch.12': 'Sicherheit & typische Angriffe',
+  'ui.soon': 'folgt bald',
 };
