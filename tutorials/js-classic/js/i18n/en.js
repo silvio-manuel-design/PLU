@@ -25,7 +25,7 @@ export default {
   'ui.nav.chapters': 'Chapters',
   'ui.nav.exercises': 'Exercises',
   'ui.nav.worksheets': 'Worksheets',
-  'ui.nav.final': 'Capstone Projects',
+  'ui.nav.final': 'Projects',
   'ui.nav.info': 'About',
   'ui.nav.infoAbout': 'About the Course',
   'ui.nav.vscode': 'VS Code',

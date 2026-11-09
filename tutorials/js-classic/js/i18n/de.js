@@ -25,7 +25,7 @@ export default {
   'ui.nav.chapters': 'Kapitel',
   'ui.nav.exercises': 'Übungen',
   'ui.nav.worksheets': 'Arbeitsblätter',
-  'ui.nav.final': 'Abschlussprojekte',
+  'ui.nav.final': 'Projekte',
   'ui.nav.info': 'Infos',
   'ui.nav.infoAbout': 'Über den Kurs',
   'ui.nav.vscode': 'VS Code',

@@ -252,7 +252,6 @@ function renderMobileMenu(header) {
     ),
     menuGroup(t('ui.menu.groupLearn'), [
       { href: `${base}/uebungen/`, label: t('ui.nav.exercises') },
-      { href: `${base}/arbeitsblaetter/`, label: t('ui.nav.worksheets') },
       { href: `${base}/ki-grundlagen.html`, label: t('ui.nav.kiBasics') },
       { href: `${base}/vscode.html`, label: t('ui.nav.vscode') },
     ]),
@@ -263,6 +262,7 @@ function renderMobileMenu(header) {
     menuGroup(t('ui.menu.groupPlu'), [
       { href: `${base}/info.html`, label: t('ui.nav.infoAbout') },
       { href: `${base}/biblik.html`, label: t('ui.nav.library') },
+      { href: `${base}/arbeitsblaetter/`, label: t('ui.nav.worksheets') },
     ])
   );
   panel.append(inner);
