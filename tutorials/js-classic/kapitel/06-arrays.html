@@ -1,303 +1,619 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>06 – Arrays | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
-      </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 06: Arrays: Listen &amp; Sammlungen · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Arrays anlegen und Elemente lesen, mit for und for...of durchlaufen, mit push/pop/includes verändern und das Zähler-Array — mit Würfel-Statistik-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/06-arrays.html" />
+    <link rel="alternate" hreflang="de" href="06-arrays.html" />
+    <link rel="alternate" hreflang="en" href="06-arrays-lists.html" />
+    <link rel="alternate" hreflang="x-default" href="06-arrays.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 06: Arrays: Listen &amp; Sammlungen · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Arrays anlegen und Elemente lesen, mit for und for...of durchlaufen, mit push/pop/includes verändern und das Zähler-Array — mit Würfel-Statistik-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
 
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>06 – Arrays 📋</h1>
-      <p class="hero-subtitle">Geordnete Listen von Daten – der Schlüssel zu strukturierten Programmen</p>
-    </section>
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m06">
+    <div data-component="jsc-site-chrome"></div>
 
-    <section>
-      <h2>🎯 1. Was ist ein Array?</h2>
-      <p>
-        Ein <strong>Array</strong> ist eine <strong>geordnete Liste von Werten</strong>.  
-        Jeder Wert („Element“) hat eine feste <strong>Position (Index)</strong> – beginnend bei <code>0</code>!
-      </p>
-      <div class="warnung">
-        ⚠️ <strong>Achtung:</strong> Der erste Index ist <code>0</code>, nicht <code>1</code>!  
-        Dies ist die häufigste Fehlerquelle bei Anfängern („Off-by-one error“).
-      </div>
-    </section>
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
 
-    <section>
-      <h2>📊 2. Übersicht: Array-Grundlagen</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Konzept</th>
-            <th>Beispiel</th>
-            <th>Erklärung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Erstellen</strong></td>
-            <td><code>const namen = ["Anna", "Ben"];</code></td>
-            <td>Eckige Klammern <code>[]</code> – Werte durch Komma getrennt</td>
-          </tr>
-          <tr>
-            <td><strong>Zugriff</strong></td>
-            <td><code>namen[0]</code> → <code>"Anna"</code></td>
-            <td>Index in eckigen Klammern – beginnt bei <code>0</code></td>
-          </tr>
-          <tr>
-            <td><strong>Länge</strong></td>
-            <td><code>namen.length</code> → <code>2</code></td>
-            <td>Gibt Anzahl der Elemente zurück</td>
-          </tr>
-          <tr>
-            <td><strong>Ändern</strong></td>
-            <td><code>namen[1] = "Chloé";</code></td>
-            <td>Element an Position 1 wird überschrieben</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Ein langes Glas-Raster mit durchnummerierten Fächern, in denen leuchtende Objekte sortiert liegen."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 06</p>
+          <h1 id="ch-title" class="jsc-hero__title">Arrays: Listen &amp; Sammlungen</h1>
+          <p class="jsc-hero__sub">Viele Werte, eine Variable: Listen aufbauen, durchlaufen und auswerten.</p>
+        </div>
+      </section>
 
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        Arrays sind der erste Schritt zu <strong>strukturierten Daten</strong> – 
-        ohne sie müsstest du hunderte Einzelvariablen erstellen!  
-        Sie bilden die Grundlage für Listen, Tabellen und komplexe Datenstrukturen.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_arrays.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Arrays</a>
-      </p>
-    </section>
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Anlegen</a>
+        <a href="#schritt-2">2 Durchlaufen</a>
+        <a href="#schritt-3">3 Verändern</a>
+        <a href="#schritt-4">4 Zähler-Array</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
 
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um zu erklären, warum der Array-Index bei 0 beginnt – 
-        und wie man mit <code>push</code>, <code>pop</code>, <code>unshift</code>, <code>shift</code> 
-        ein Array verändern kann.
-      </p>
-    </section>
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Du gehst einkaufen. Du schreibst eine Liste: Brot, Milch, Eier. Alles auf einem Blatt. Durchnummeriert.</p>
+              <p>Du musst nicht drei Zettel mitschleppen. Ein Blatt reicht. Die Nummern helfen dir: „Nummer 2 von der Liste."</p>
+              <p>Ein <strong>Array</strong> ist genau das für dein Programm: Eine Liste von Werten auf einem „Blatt" — durchnummeriert und bereit für die Schleife aus Kapitel 05.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Array <span class="jsc-term-card__word-en">/ array</span></p>
+                <p class="jsc-term-card__def">Eine nummerierte Liste von Werten in einer Variable.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie die Einkaufsliste auf einem Blatt.</p>
+                <p class="jsc-term-card__code"><code>const einkauf = ["Brot", "Milch"];</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Index <span class="jsc-term-card__word-en">/ index</span></p>
+                <p class="jsc-term-card__def">Die Nummer eines Elements. Beginnt bei 0!</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie „Nummer 2 auf der Liste" — bei Programmen zählt die 0 als erste.</p>
+                <p class="jsc-term-card__code"><code>einkauf[0]</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Element <span class="jsc-term-card__word-en">/ element</span></p>
+                <p class="jsc-term-card__def">Ein einzelner Wert in der Liste.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> ein Punkt auf der Einkaufsliste.</p>
+                <p class="jsc-term-card__code"><code>"Milch"</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Länge (length) <span class="jsc-term-card__word-en">/ length</span></p>
+                <p class="jsc-term-card__def">Wie viele Elemente die Liste hat.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> die Zahl deiner Listenpunkte.</p>
+                <p class="jsc-term-card__code"><code>einkauf.length</code></p>
+              </div>
+            </div>
+          </div>
 
-    <!-- 5. Array-Grundlagen -->
-    <section>
-      <h2>🔖 5. Array erstellen und auf Elemente zugreifen</h2>
-      <p>
-        Arrays speichern <strong>mehrere Werte in einer Variable</strong>.  
-        Der Zugriff erfolgt über den <strong>Index</strong> (Position).
-      </p>
-      <button onclick="demoArrayGrundlagen()">Zeige Grundlagen</button>
-      <div id="ausgabe-array-grund" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoArrayGrundlagen() {
-  const farben = ["rot", "grün", "blau"];
-  const ersteFarbe = farben[0];   // Index 0 → erstes Element!
-  const letzteFarbe = farben[2];  // Index 2 → drittes Element
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Array anlegen und Elemente lesen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Bisher lag in jeder Variable ein Wert. Echte Daten kommen nie einzeln:
+                Notenlisten, Spielstände, Warenkörbe. Arrays holen dich da ab.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Ein Array legst du mit eckigen Klammern an: <code>["Brot", "Milch"]</code>. Der
+                Zugriff läuft über den <strong>Index</strong> in eckigen Klammern — und der
+                beginnt bei <strong>0</strong>, nicht bei 1. <code>length</code> liefert die
+                Anzahl der Elemente.
+              </p>
+              <figure class="jsc-code-block" data-filename="einkauf.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">einkauf.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const einkauf = ["Brot", "Milch", "Eier", "Butter"];
+console.log(einkauf[0]);      // "Brot" — das ERSTE Element!
+console.log(einkauf[3]);      // "Butter"
+console.log(einkauf.length);  // 4
+console.log(einkauf[einkauf.length - 1]); // letztes Element</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Der Index beginnt bei 1"</p>
+                <p>Nein — er beginnt bei 0. <code>einkauf[1]</code> ist das ZWEITE Element. Diese Umstellung kostet am Anfang jeden Nerven.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Punkt statt Klammer</p>
+                <p><code>einkauf.1</code> ist ein Syntaxfehler — Zahlen als Index brauchen eckige Klammern: <code>einkauf[1]</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">length und Index verwechselt</p>
+                <p><code>length</code> zählt ab 1 (4 Elemente), der Index ab 0 (letzter Index: 3). Deshalb: letztes Element = <code>length - 1</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zugriff jenseits der Liste</p>
+                <p><code>einkauf[10]</code> liefert <code>undefined</code> — kein Fehler, aber gefährlich. Bei unbekannten Listen immer erst <code>length</code> prüfen.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Das letzte Element ist <code>arr[arr.length - 1]</code> — dieser Ausdruck kommt in echtem Code ständig vor. Merk ihn dir.</p>
+            </aside>
+          </section>
 
-  farben[1] = "gelb"; // Ändere das zweite Element
-
-  document.getElementById("ausgabe-array-grund").innerHTML = 
-    `&lt;p&gt;Array: [&lt;em&gt;"${farben.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;
-     &lt;p&gt;Erste Farbe (Index 0): &lt;strong&gt;${ersteFarbe}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;Letzte Farbe (Index 2): &lt;strong&gt;${letzteFarbe}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;Nach Änderung: [&lt;em&gt;"${farben.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;`;
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Arrays mit Schleifen durchlaufen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Der ganze Sinn einer Liste: Sie Punkt für Punkt abarbeiten. Die for-Schleife
+                aus Kapitel 05 trifft hier auf ihre Bestimmung.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die klassische <code>for</code> mit <code>i &lt; arr.length</code> gibt dir den
+                Index — perfekt, wenn du die Position brauchst. Wenn nur die Werte zählen, ist
+                <code>for...of</code> die bequemere Variante.
+              </p>
+              <figure class="jsc-code-block" data-filename="noten.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">noten.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const noten = [2, 1, 3, 1, 4];
+for (let i = 0; i &lt; noten.length; i++) {
+  console.log("Prüfung", i + 1, "→", noten[i]);
+}
+// Kürzer, wenn der Index egal ist:
+for (const note of noten) {
+  console.log("Note:", note);
 }</code></pre>
-    </section>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Off-by-one am Ende</p>
+                <p><code>i &lt;= noten.length</code> greift einmal zu weit → <code>undefined</code> beim letzten Durchlauf. Die Bedingung heißt <code>&lt;</code>, nicht <code>&lt;=</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Index aus for...of erwarten</p>
+                <p><code>for...of</code> liefert die WERTE, keine Nummern. Brauchst du die Position, nimm die klassische for-Schleife.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Array in der Schleife verkleinern</p>
+                <p>Elemente entfernen, während du darüber läufst, verschiebt alle Indexe — die Schleife rutscht dann an Elementen vorbei.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">noten[i] vergessen</p>
+                <p><code>console.log(i)</code> gibt nur die Nummer aus, nicht den Wert. Erst <code>noten[i]</code> holt das Element.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Brauchst du den Index? Klassische for. Geht's nur um die Werte? for...of. Diese eine Entscheidung macht Arrays lesbar.</p>
+            </aside>
+          </section>
 
-    <!-- 6. Wichtige Methoden -->
-    <section>
-      <h2>🛠️ 6. Häufig genutzte Array-Methoden</h2>
-      <p>
-        JavaScript bietet praktische Methoden, um Arrays zu verändern:
-      </p>
-      <ul>
-        <li><code>.push()</code> → Element am <strong>Ende</strong> hinzufügen</li>
-        <li><code>.pop()</code> → Letztes Element <strong>entfernen</strong> und zurückgeben</li>
-        <li><code>.unshift()</code> → Element am <strong>Anfang</strong> hinzufügen</li>
-        <li><code>.shift()</code> → Erstes Element <strong>entfernen</strong> und zurückgeben</li>
-      </ul>
-      <button onclick="demoArrayMethoden()">Array verändern</button>
-      <div id="ausgabe-array-methoden" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoArrayMethoden() {
-  let liste = ["Anna", "Ben"];
-  
-  liste.push("Chloé");     // hinten anhängen
-  liste.unshift("David");  // vorne einfügen
-  const letzter = liste.pop(); // letztes Element entfernen
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Arrays gibt es im echten Leben überall: Der Stundenplan ist ein Array aus
+              Stunden. Dein Klassenbuch ist ein Array aus Einträgen. Deine Playlist ist ein
+              Array aus Songs. Ab jetzt wirst du keine Liste mehr sehen, ohne an Arrays zu
+              denken.
+            </p>
+          </aside>
 
-  document.getElementById("ausgabe-array-methoden").innerHTML = 
-    `&lt;p&gt;Start: ["Anna", "Ben"]&lt;/p&gt;
-     &lt;p&gt;Nach .push("Chloé"): [&lt;em&gt;"${liste.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;
-     &lt;p&gt;Nach .unshift("David"): [&lt;em&gt;"${liste.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;
-     &lt;p&gt;.pop() → entfernt: &lt;strong&gt;${letzter}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;Endstand: [&lt;em&gt;"${liste.join('", "')}"}&lt;/em&gt;]&lt;/p&gt;`;
-}</code></pre>
-    </section>
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Arrays verändern: push, pop, includes</h2>
+            <div class="jsc-step__why">
+              <p>
+                Listen sind lebendig: Etwas dazukaufen, etwas streichen, prüfen, ob etwas
+                schon draufsteht.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>push()</code> hängt hinten an, <code>pop()</code> entfernt hinten (und
+                gibt das Element zurück). <code>includes()</code> prüft, ob ein Wert drin
+                ist; <code>indexOf()</code> findet die Position (<code>-1</code> = nicht
+                gefunden).
+              </p>
+              <figure class="jsc-code-block" data-filename="veraendern.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">veraendern.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const einkauf = ["Brot", "Milch"];
+einkauf.push("Eier");        // hinten anhängen
+console.log(einkauf);        // ["Brot", "Milch", "Eier"]
+const weg = einkauf.pop();   // letztes Element entfernen
+console.log(weg);            // "Eier"
+console.log(einkauf.includes("Milch")); // true
+console.log(einkauf.indexOf("Brot"));   // 0</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch06">Code</label>
+              <textarea id="pg-ch06" data-pg-code spellcheck="false">const einkauf = ["Brot", "Milch", "Eier"];
+console.log(einkauf[0]);
+console.log(einkauf.length);
+einkauf.push("Butter");
+console.log(einkauf);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Hänge zwei weitere Produkte an und lasse dir
+              danach die neue Länge ausgeben.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„push erzeugt ein neues Array"</p>
+                <p>Nein — <code>push</code> verändert das bestehende Array. Eine Kopie bekommst du mit anderen Methoden (dazu später mehr).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">includes ohne Klammern</p>
+                <p><code>einkauf.includes</code> (ohne <code>()</code>) ist die Funktion selbst, nicht das Ergebnis. Aufrufen nicht vergessen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">pop() auf leeres Array</p>
+                <p>Liefert <code>undefined</code> — kein Fehler, aber prüf lieber vorher <code>length</code>, wenn die Liste leer sein kann.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">indexOf mit Truthiness</p>
+                <p><code>if (einkauf.indexOf("Brot"))</code> ist bei Index 0 FALSH — 0 ist falsy! Richtig: <code>!== -1</code> vergleichen oder gleich <code>includes</code> nehmen.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p><code>indexOf("x") !== -1</code> ist dasselbe wie <code>includes("x")</code> — includes ist die moderne, lesbare Version.</p>
+            </aside>
+          </section>
 
-    <!-- 7. Arrays mit Schleifen -->
-    <section>
-      <h2>🔁 7. Arrays mit Schleifen durchlaufen</h2>
-      <p>
-        Mit einer <code>for</code>-Schleife kannst du <strong>jedes Element</strong> bearbeiten – 
-        besonders nützlich für Berechnungen oder Ausgaben.
-      </p>
-      <button onclick="demoArraySchleife()">Durchlaufe Array</button>
-      <div id="ausgabe-array-schleife" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoArraySchleife() {
-  const tiere = ["Hund", "Katze", "Vogel"];
-  let ausgabe = "&lt;ul&gt;";
-  
-  for (let i = 0; i &lt; tiere.length; i++) {
-    ausgabe += `&lt;li&gt;Index ${i}: ${tiere[i]}&lt;/li&gt;`;
-  }
-  ausgabe += "&lt;/ul&gt;";
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Demo: Würfel-Statistik (Arrays in Aktion)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Ein Würfel wird 100 Mal geworfen. Welche Zahl kam wie oft? Mit einem Array
+                ist das zehn Zeilen.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Das Muster heißt <strong>Zähler-Array</strong>: Ein Array mit sechs Zählern
+                (Index 0 bis 5). Die gewürfelte Zahl bestimmt, welcher Zähler hochgeht —
+                <code>counts[wurf - 1]++</code>. Keine sechs Einzelvariablen nötig.
+              </p>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="dice-stats">
+              <p class="jsc-demo__title">Würfel-Statistik</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-stats-roll
+                >100 Würfe</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini-Konsole"></div>
+              </div>
+              <p class="jsc-demo__hint">Index = Würfelzahl − 1. Beobachte, wie gleichmäßig sich die Häufigkeiten verteilen.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Sechs Variablen statt Array</p>
+                <p><code>wuerfel1, wuerfel2, …</code> skaliert nicht — bei 100 Werten schreibst du 100 Zeilen. Das Zähler-Array ersetzt sie alle.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Index 0 ungenutzt verwirrt</p>
+                <p>Beim Zähler-Array für Würfelzahlen liegt Zahl 1 auf Index 0. Wer Index = Zahl denkt, zählt daneben.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zufallszahl falsch skalieren</p>
+                <p><code>Math.random() * 6 + 1</code> ohne Runden ergibt Kommazahlen — immer mit <code>Math.floor()</code> zu einer echten Zahl machen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Array nicht mit 0 füllen</p>
+                <p>Ein leeres Array liefert <code>undefined</code> beim ersten <code>++</code> — das Zähler-Array startet mit sechs Nullen.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Das Zähler-Array ist das wichtigste Array-Muster überhaupt — damit zählst du Treffer, Buchstaben, Klicks, alles.</p>
+            </aside>
+          </section>
 
-  document.getElementById("ausgabe-array-schleife").innerHTML = ausgabe;
-}</code></pre>
-    </section>
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch06-check"
+              data-chapter="06"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann ein Array mit Werten anlegen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann auf Elemente mit dem Index zugreifen und weiß, dass er bei 0 beginnt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit length die Anzahl der Elemente ermitteln.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann das letzte Element sicher auslesen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann eine klassische for-Schleife über ein Array laufen lassen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann for...of nutzen und kenne den Unterschied zur klassischen for.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit push Elemente anhängen und mit pop entfernen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit includes prüfen, ob ein Wert im Array ist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit indexOf die Position eines Werts finden und deute -1 richtig.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich habe das Zähler-Array (Demo) verstanden und kann es erklären.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="sortier-helfer.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">sortier-helfer.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const zahlen = [12, 5, 19, 3, 8];
+let summe = 0;
+let max = zahlen[0];
+for (const z of zahlen) {
+  summe += z;
+  if (z &gt; max) max = z;
+}
+console.log("Durchschnitt:", summe / zahlen.length);
+console.log("Maximum:", max);</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Ein Durchlauf, zwei Zähler — Arrays und Schleifen sind das perfekte Paar.
+                </p>
+              </div>
+            </div>
+          </section>
 
-    <!-- 8. Praxisbeispiel: Noten -->
-    <section>
-      <h2>📊 8. Praxis: Durchschnitt einer Notenliste</h2>
-      <p>
-        Arrays machen <strong>statistische Berechnungen</strong> einfach – 
-        wie den Durchschnitt einer Notenliste.
-      </p>
-      <button onclick="demoNotenDurchschnitt()">Berechne Durchschnitt</button>
-      <div id="ausgabe-noten" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoNotenDurchschnitt() {
-  const noten = [2, 3, 1, 4, 2];
-  let summe = 0;
-  
-  for (let i = 0; i &lt; noten.length; i++) {
-    summe += noten[i];
-  }
-  const durchschnitt = (summe / noten.length).toFixed(2);
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch06-reflect" data-export-chapter="06" data-export-title="Arrays: Listen &amp; Sammlungen" data-export-checklist="jsc-ch06-check" data-export-quiz="jsc-ch06-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Erkläre einem Mitschüler, warum der Index bei 0 beginnt und nicht bei 1.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Wann würdest du for...of nehmen, wann die klassische for? Nenne ein Beispiel für beides.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Welche Liste aus deinem Alltag würdest du als Array programmieren wollen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
 
-  document.getElementById("ausgabe-noten").innerHTML = 
-    `&lt;p&gt;Noten: [&lt;em&gt;${noten.join(", ")}&lt;/em&gt;]&lt;/p&gt;
-     &lt;p&gt;Summe: ${summe}&lt;/p&gt;
-     &lt;p&gt;Durchschnitt: &lt;strong&gt;${durchschnitt}&lt;/strong&gt;&lt;/p&gt;`;
-}</code></pre>
-    </section>
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch06-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was liefert <code>const a = [5,7,9]; a[1]</code>?</legend>
+                <label><input type="radio" name="ch06-q0" value="a" /> 5</label>
+                <label><input type="radio" name="ch06-q0" value="b" /> 7</label>
+                <label><input type="radio" name="ch06-q0" value="c" /> 9</label>
+                <label><input type="radio" name="ch06-q0" value="d" /> Fehler</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — Index 1 ist das zweite Element: 7.</strong></template>
+                <template data-feedback="wrong">Denk an die 0: Index 0 ist die 5, Index 1 die 7. Der Index beginnt bei 0!</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was liefert <code>['a','b'].length</code>?</legend>
+                <label><input type="radio" name="ch06-q1" value="a" /> 1</label>
+                <label><input type="radio" name="ch06-q1" value="b" /> 2</label>
+                <label><input type="radio" name="ch06-q1" value="c" /> 3</label>
+                <label><input type="radio" name="ch06-q1" value="d" /> 'b'</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — zwei Elemente, length zählt 2.</strong></template>
+                <template data-feedback="wrong">length zählt die Elemente, nicht den letzten Index: 2 Stück = 2.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was macht <code>arr.push('x')</code>?</legend>
+                <label><input type="radio" name="ch06-q2" value="a" /> Erzeugt ein neues Array</label>
+                <label><input type="radio" name="ch06-q2" value="b" /> Hängt 'x' hinten an das bestehende an</label>
+                <label><input type="radio" name="ch06-q2" value="c" /> Löscht das erste Element</label>
+                <label><input type="radio" name="ch06-q2" value="d" /> Sortiert das Array</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — push verändert das bestehende Array, es hängt hinten an.</strong></template>
+                <template data-feedback="wrong">push ändert das Original: 'x' kommt ans Ende. Kein neues Array, kein Sortieren.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend><code>let z=[0,0,0]; z[1]++;</code> — Wie sieht z aus?</legend>
+                <label><input type="radio" name="ch06-q3" value="a" /> [1,0,0]</label>
+                <label><input type="radio" name="ch06-q3" value="b" /> [0,1,0]</label>
+                <label><input type="radio" name="ch06-q3" value="c" /> [0,0,1]</label>
+                <label><input type="radio" name="ch06-q3" value="d" /> Fehler</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — Index 1 ist die zweite Stelle: [0,1,0].</strong></template>
+                <template data-feedback="wrong">Die 1 im Index ist die zweite Position. Das Zähler-Array lebt von dieser Stelle!</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
 
-    <section class="warnung">
-      <h2>⚠️ 9. Häufige Fehler & Tipps</h2>
-      <ul>
-        <li><strong>Index beginnt bei 0</strong> → letztes Element: <code>arr[arr.length - 1]</code></li>
-        <li><code>arr[100]</code> auf leerem Array → gibt <code>undefined</code> zurück (kein Fehler!)</li>
-        <li>Verwende <code>.length</code> in Schleifen – nie feste Zahlen!</li>
-        <li>Arrays sind <strong>veränderlich</strong> – <code>const</code> verhindert nur Neuzuweisung!</li>
-      </ul>
-      <pre><code class="js-code">// Korrekt: Länge dynamisch nutzen
-for (let i = 0; i &lt; meinArray.length; i++) { ... }
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Array = nummerierte Liste in einer Variable, Index beginnt bei 0.</li>
+                <li><code>length</code> zählt ab 1 — letztes Element: <code>arr[arr.length-1]</code>.</li>
+                <li>for = mit Index, for...of = nur Werte.</li>
+                <li>push/pop verändern das Array; includes/indexOf prüfen es.</li>
+                <li>Das Zähler-Array zählt alles: Treffer, Häufigkeiten, Ergebnisse.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener">Array (MDN)</a>
+                  <span>Alle Methoden im Überblick.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank" rel="noopener">for...of (MDN)</a>
+                  <span>Die komfortable Schleife für Listen.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Indexed_collections" target="_blank" rel="noopener">Umgang mit Arrays (MDN)</a>
+                  <span>Der komplette Einstiegs-Guide.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
 
-// Falsch: Feste Zahl – bricht bei Änderung
-for (let i = 0; i &lt; 5; i++) { ... } // ❌</code></pre>
-    </section>
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Arrays</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt mit dem nächsten Update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Das Lernvideo wird noch produziert.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Spickzettel zum Ausdrucken</h3>
+                <p class="jsc-media-embed__body" data-media-body>Folgt mit dem Kapitel-Update.</p>
+              </article>
+            </div>
+          </section>
 
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt kannst du strukturierte Daten effizient verwalten!</p>
-      <a href="./07-funktionen.html" class="nav-button">→ Zu Modul 07: Funktionen</a>
-    </section>
-  </div>
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Erklär mir Arrays."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Kein Ziel, kein Beispiel, keine Prüfung — die Antwort bleibt Theorie, die du nicht anwendest.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI ein Programm erklären, das die sechs Lottozahlen zieht und sortiert. Prüfe: Wie wird verhindert, dass Zahlen doppelt vorkommen? (Tipp: includes!)"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkretes Ziel + Wissenshaken: Die Lösung braucht genau includes und Schleifen aus diesem Kapitel.</p>
+                </div>
+              </details>
+            </div>
+          </section>
 
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt Listen bauen und abarbeiten — das Herzstück echter Daten.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/07-funktionen.html">
+              Weiter zu Kapitel 07: Funktionen
+            </a>
+          </section>
+        </div>
 
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="../js/06-arrays.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Anlegen</a></li>
+            <li><a href="#schritt-2">2 Durchlaufen</a></li>
+            <li><a href="#schritt-3">3 Verändern</a></li>
+            <li><a href="#schritt-4">4 Zähler-Array</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
 </html>

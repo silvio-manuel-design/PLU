@@ -133,10 +133,79 @@ function initPattern() {
   });
 }
 
+/** Kap. 06, Schritt 4 — Würfel-Statistik: 100 Würfe ins Zähler-Array */
+function initDiceStats() {
+  document.querySelectorAll('[data-component="jsc-demo"][data-demo="dice-stats"]').forEach((demo) => {
+    const btn = demo.querySelector('[data-stats-roll]');
+    const box = demo.querySelector('[data-console-output]');
+    if (!btn || !box) return;
+
+    btn.addEventListener('click', () => {
+      box.textContent = '';
+      const counts = [0, 0, 0, 0, 0, 0];
+      for (let i = 0; i < 100; i += 1) {
+        counts[Math.floor(Math.random() * 6)] += 1;
+      }
+      counts.forEach((c, i) => logLine(box, `${i + 1}: ${c}`));
+    });
+  });
+}
+
+/** Kap. 09, Schritt 1 — Live-Suche: querySelector im Demo-Scope, Treffer hervorheben */
+function initDomSearch() {
+  document
+    .querySelectorAll('[data-component="jsc-demo"][data-demo="dom-search"]')
+    .forEach((demo) => {
+      const scope = demo.querySelector('[data-search-scope]');
+      if (!scope) return;
+      const box = demo.querySelector('[data-console-output]');
+
+      demo.querySelectorAll('[data-search]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          scope.querySelectorAll('.is-hit').forEach((el) => el.classList.remove('is-hit'));
+          const hits = scope.querySelectorAll(btn.dataset.search);
+          const first = scope.querySelector(btn.dataset.search);
+          if (!box) return;
+          if (first) {
+            first.classList.add('is-hit');
+            const prefix = btn.dataset.found || 'Treffer';
+            logLine(box, `${prefix}: ${btn.dataset.search} → ${hits.length}×, erster: „${first.textContent.trim().slice(0, 40)}“`);
+          } else {
+            logLine(box, `${btn.dataset.search} → null (nichts gefunden)`);
+          }
+        });
+      });
+    });
+}
+
+/** Kap. 09, Schritt 4 — Interaktive Einkaufsliste: bauen und anhängen, Klick = abhaken */
+function initDomList() {
+  document.querySelectorAll('[data-component="jsc-demo"][data-demo="dom-list"]').forEach((demo) => {
+    const input = demo.querySelector('[data-list-input]');
+    const btn = demo.querySelector('[data-list-add]');
+    const list = demo.querySelector('[data-list]');
+    if (!input || !btn || !list) return;
+
+    btn.addEventListener('click', () => {
+      const value = input.value.trim();
+      if (!value) return;
+      const li = document.createElement('li');
+      li.textContent = value;
+      li.addEventListener('click', () => li.classList.toggle('is-done'));
+      list.append(li);
+      input.value = '';
+      input.focus();
+    });
+  });
+}
+
 export function initDemoChapters() {
   initCounter();
   initPromptGreet();
   initGrade();
   initDice();
   initPattern();
+  initDiceStats();
+  initDomSearch();
+  initDomList();
 }

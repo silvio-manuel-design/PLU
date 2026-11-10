@@ -59,6 +59,16 @@ export default {
   'ui.ch.05.teaser': 'Repeat without getting tired: leave repetition to the computer.',
   'ui.ch.05.imgAlt': 'A glowing wheel of recurring light arcs rotating endlessly.',
 
+  /* Chapter meta P7: teaser + hero image alt (chapters 06–09, full rebuild) */
+  'ui.ch.06.teaser': 'Many values, one variable: build lists, loop through them, and use the data.',
+  'ui.ch.06.imgAlt': 'A long glass grid with numbered compartments holding glowing objects in order.',
+  'ui.ch.07.teaser': 'Write it once, use it everywhere: think in building blocks.',
+  'ui.ch.07.imgAlt': 'A glass machine with a funnel on top: spheres flow through visible gears and come out changed at the bottom.',
+  'ui.ch.08.teaser': 'Describe real things: collect, read and change properties.',
+  'ui.ch.08.imgAlt': 'A glass core orbited by small spheres carrying symbols like heart, key and gear.',
+  'ui.ch.09.teaser': 'JavaScript meets HTML: read pages, change them, react to clicks.',
+  'ui.ch.09.imgAlt': 'A glowing tree of golden lines and boxes — roots below, a branching crown above.',
+
   /* Accessibility (P2) */
   'ui.a11y.mainNav': 'Main navigation',
   'ui.a11y.skipToNav': 'Skip to navigation',
