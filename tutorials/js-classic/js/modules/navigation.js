@@ -503,6 +503,9 @@ function renderBottomBar() {
   nextBtn.append(el('span', null, t('ui.common.next')), el('span', 'jsc-bottom-bar__arrow', '→'));
   if (next) {
     nextBtn.href = chapterLink(next);
+  } else if (idx === NAV.chaptersMeta.length - 1) {
+    // P8: letztes Kapitel → Abschluss-Übersicht (Altbestand bis P11, EN-Fallback auf DE)
+    nextBtn.href = '/tutorials/js-classic/abschluss/';
   } else {
     nextBtn.removeAttribute('href');
     nextBtn.classList.add('is-disabled');
@@ -555,22 +558,16 @@ function renderFooter() {
   brandWrap.append(classroom);
 
   /* --- Links-Grid (3 Spalten) --- */
-  const lang = getLanguage();
-  const ch01Url =
-    lang === 'en'
-      ? '/tutorials/js-classic/kapitel/01-introduction-output.html'
-      : '/tutorials/js-classic/kapitel/01-einfuehrung-ausgabe.html';
-
   const grid = el('div', 'jsc-footer__links-grid');
 
   const navChapters = el('nav', 'jsc-footer__col');
   navChapters.setAttribute('aria-label', t('ui.footer.colChapters'));
   navChapters.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colChapters')));
   const ulChapters = el('ul', 'jsc-footer__list');
+  // P8: vollständige 12er-Liste, datengetrieben aus chaptersMeta (EN via slugEn)
   ulChapters.append(
     footerLink('/tutorials/js-classic/#kapitel', t('ui.footer.allChapters')),
-    footerLink(ch01Url, `01. ${t('ui.ch.01')}`),
-    footerLink('/tutorials/js-classic/kapitel/10-ereignisse.html', `10. ${t('ui.ch.10')}`)
+    ...NAV.chaptersMeta.map((ch) => footerLink(chapterLink(ch), `${ch.nr}. ${t(ch.i18n)}`))
   );
   navChapters.append(ulChapters);
 

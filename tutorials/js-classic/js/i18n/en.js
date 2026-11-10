@@ -69,6 +69,14 @@ export default {
   'ui.ch.09.teaser': 'JavaScript meets HTML: read pages, change them, react to clicks.',
   'ui.ch.09.imgAlt': 'A glowing tree of golden lines and boxes — roots below, a branching crown above.',
 
+  /* Chapter meta P8: teaser + hero image alt (chapters 10–12) */
+  'ui.ch.10.teaser': 'Clicks, keys, input: your page reacts — to everything the user does.',
+  'ui.ch.10.imgAlt': 'A glass toggle on a glowing console, a finger of light touching it — fine connection lines orbiting around.',
+  'ui.ch.11.teaser': 'Collect data cleanly: build forms, validate input and show friendly errors.',
+  'ui.ch.11.imgAlt': 'Floating glass input fields and switches in dark space — a form made of light.',
+  'ui.ch.12.teaser': 'Never trust input: understand XSS, validate, build safely.',
+  'ui.ch.12.imgAlt': 'A monumental shield of glass and golden light, standing upright in dark space.',
+
   /* Accessibility (P2) */
   'ui.a11y.mainNav': 'Main navigation',
   'ui.a11y.skipToNav': 'Skip to navigation',

@@ -11,11 +11,16 @@
  */
 
 import { NAV } from '../data/nav.js';
-import { t } from './i18n.js';
+import { t, getLanguage } from './i18n.js';
 import { isDone } from './progress.js';
 
 /* Ring: r = 15.9155 → Umfang ≈ 100 → stroke-dasharray in Prozent */
 const RING_R = 15.9155;
+
+function chapterHref(chapter) {
+  const slug = getLanguage() === 'en' && chapter.slugEn ? chapter.slugEn : chapter.slug;
+  return `/tutorials/js-classic/kapitel/${slug}.html`;
+}
 
 function ringSvg(done) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -50,7 +55,7 @@ function card(chapter) {
 
   const link = document.createElement('a');
   link.className = 'jsc-chapter-card__link';
-  link.href = `/tutorials/js-classic/kapitel/${chapter.slug}.html`;
+  link.href = chapterHref(chapter);
 
   const ringWrap = document.createElement('span');
   ringWrap.className = 'jsc-chapter-card__ring';
@@ -86,44 +91,13 @@ function update(mount) {
   });
 }
 
-function placeholderCard(nr, i18nKey) {
-  const li = document.createElement('li');
-  li.className = 'jsc-chapter-card is-placeholder';
-  li.dataset.module = `m${nr}`;
-  li.setAttribute('aria-disabled', 'true');
-
-  const wrap = document.createElement('span');
-  wrap.className = 'jsc-chapter-card__link';
-
-  const ringWrap = document.createElement('span');
-  ringWrap.className = 'jsc-chapter-card__ring';
-  ringWrap.append(ringSvg(false));
-
-  const nrEl = document.createElement('span');
-  nrEl.className = 'jsc-chapter-card__nr';
-  nrEl.textContent = nr;
-
-  const title = document.createElement('span');
-  title.className = 'jsc-chapter-card__title';
-  title.textContent = t(i18nKey);
-
-  const status = document.createElement('span');
-  status.className = 'jsc-chapter-card__status';
-  status.textContent = t('ui.soon');
-
-  wrap.append(ringWrap, nrEl, title, status);
-  li.append(wrap);
-  return li;
-}
-
 export function initHome() {
   const mount = document.querySelector('[data-component="jsc-chapter-grid"]');
   if (!mount) return;
 
   mount.textContent = '';
+  // P8: 12 echte Karten — Kapitel 11/12 sind datengetrieben Teil von chaptersMeta
   NAV.chaptersMeta.forEach((chapter) => mount.append(card(chapter)));
-  // Platzhalter 11 + 12 (B13): keine Seiten, keine Links — „12 Kapitel" stimmt mit dem Grid überein
-  mount.append(placeholderCard('11', 'ui.ch.11'), placeholderCard('12', 'ui.ch.12'));
 
   window.addEventListener('plu:progress', () => update(mount));
 }

@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 12: Sicherheit &amp; typische Angriffe · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Bedrohungsmodell verstehen, XSS erkennen und abwehren, validieren und escapen und Sicherheit als Gewohnheit — mit XSS-Labor-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/12-sicherheit.html" />
+    <link rel="alternate" hreflang="de" href="12-sicherheit.html" />
+    <link rel="alternate" hreflang="en" href="12-security.html" />
+    <link rel="alternate" hreflang="x-default" href="12-sicherheit.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 12: Sicherheit &amp; typische Angriffe · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Bedrohungsmodell verstehen, XSS erkennen und abwehren, validieren und escapen und Sicherheit als Gewohnheit — mit XSS-Labor-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m12">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap12/jsc-kap12-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Ein monumentaler Schild aus Glas und goldenem Licht, aufrecht stehend in dunklem Raum."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 12</p>
+          <h1 id="ch-title" class="jsc-hero__title">Sicherheit &amp; typische Angriffe</h1>
+          <p class="jsc-hero__sub">Vertraue niemals Eingaben: XSS verstehen, validieren, sicher bauen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Bedrohung</a>
+        <a href="#schritt-2">2 XSS</a>
+        <a href="#schritt-3">3 Werkzeuge</a>
+        <a href="#schritt-4">4 Gewohnheit</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Du schließt deine Haustür ab. Nicht, weil alle Menschen Diebe sind — sondern weil du nicht jeden ungeprüft hereinlässt.</p>
+              <p>Webseiten sind Häuser mit vielen Türen: Eingabefelder, URLs, Formulare. Sicherheit heißt: Türen prüfen, bevor etwas herein darf.</p>
+              <p>Du musst kein Hacker sein, um sicher zu bauen — du musst nur misstrauisch sein. Misstrauen ist hier eine Stärke.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">XSS (Cross-Site Scripting) <span class="jsc-term-card__word-en">/ XSS</span></p>
+                <p class="jsc-term-card__def">Fremder Schadcode, der über Eingaben auf deiner Seite landet.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein Fremder, der dir einen manipulierten Zettel unterschiebt.</p>
+                <p class="jsc-term-card__code"><code>→ textContent statt innerHTML</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Injection <span class="jsc-term-card__word-en">/ injection</span></p>
+                <p class="jsc-term-card__def">Das Einschleusen von Code durch Eingabefelder.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie Einwurf eines falschen Schlüssels.</p>
+                <p class="jsc-term-card__code"><code>→ Kap. 12</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Validierung (serverseitig) <span class="jsc-term-card__word-en">/ server-side validation</span></p>
+                <p class="jsc-term-card__def">Prüfung auf dem Server — die einzig verbindliche.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie die Kontrolle am Eingang, nicht am Briefkasten.</p>
+                <p class="jsc-term-card__code"><code>→ Backend</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">HTTPS <span class="jsc-term-card__word-en">/ HTTPS</span></p>
+                <p class="jsc-term-card__def">Verschlüsselte Verbindung zwischen Browser und Server.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein umschlossener Brief statt einer Postkarte.</p>
+                <p class="jsc-term-card__code"><code>https://</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Das Bedrohungsmodell: Der Browser vertraut dir nicht — und du niemandem</h2>
+            <div class="jsc-step__why">
+              <p>
+                Sicherheit beginnt im Kopf: Wer könnte was mit meinen Eingaben anstellen?
+                Diese Frage stellen Profis jedes Mal.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Der Client ist manipulierbar: DevTools öffnen, Attribute entfernen,
+                JavaScript abschalten. Was der Browser prüft, ist Komfort — der Server muss
+                prüfen. Die Kette für jede Eingabe:
+              </p>
+              <figure class="jsc-code-block" data-filename="prinzip.txt">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">prinzip.txt</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">Eingabe → Validierung → Escaping → erst dann verwenden.</code></pre>
+              </figure>
+              <p>
+                „Niemals vertrauen, immer prüfen" gilt für Daten von Formularen, aus URLs
+                und von anderen Servern gleichermaßen.
+              </p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„required schützt mich"</p>
+                <p>HTML-Attribute sind Komfort für ehrliche Nutzer — kein Schutz. Per DevTools ist jedes Attribut weg.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Meine Schüler sind keine Hacker"</p>
+                <p>Angriffe kommen meist gar nicht von Menschen am Rechner — Bots scannen alles, immer.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Geheimnisse im JS verstecken</p>
+                <p>Alles im Frontend ist sichtbar: API-Keys, Passwörter, interne Pfade gehören NIE ins JavaScript.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Keine Fehlerannahmen</p>
+                <p>Was passiert bei leer? Bei null? Bei einem 10.000-Zeichen-Text? Grenzfälle sind die echten Angriffe.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Erste Sicherheitsfrage bei jeder Eingabe: Was ist das Schlimmste, das hier stehen könnte?</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">XSS verstehen: Wie fremder Code auf deine Seite kommt</h2>
+            <div class="jsc-step__why">
+              <p>
+                XSS ist der Klassiker unter den Web-Angriffen — und er funktioniert noch
+                heute, weil Seiten fremde Eingaben ungeprüft übernehmen.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Das Szenario (defensiv betrachtet): Ein Gästebuch speichert Einträge. Statt
+                als Text ausgegeben zu werden, landet die Eingabe via
+                <code>innerHTML</code> als MARKUP auf der Seite — und Event-Attribute wie
+                <code>onerror</code> werden dabei ausgeführt. Das Labor zeigt den
+                Unterschied live:
+              </p>
+              <figure class="jsc-code-block" data-filename="xss.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">xss.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">// UNSICHER — interpretiert die Eingabe als HTML:
+bereich.innerHTML = eingabe;
+// SICHER — zeigt die Eingabe als reinen Text:
+bereich.textContent = eingabe;</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="xss-lab">
+              <p class="jsc-demo__title">XSS-Labor: ungeprüft vs. geprüft</p>
+              <div class="jsc-demo__row">
+                <label class="jsc-step__blocklabel" for="xss-in">Testeingabe</label>
+                <input class="jsc-demo__input" style="flex: 1 1 12rem; width: auto;" id="xss-in" data-xss-input type="text" value="&lt;b&gt;fett&lt;/b&gt; &lt;img src=x onerror=alert(1)&gt;" autocomplete="off" spellcheck="false" />
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-xss-run>Ausführen</button>
+              </div>
+              <div class="jsc-xss-lab">
+                <div>
+                  <p class="jsc-step__blocklabel">innerHTML (unsicher)</p>
+                  <div class="jsc-xss-pane" data-xss-unsafe></div>
+                </div>
+                <div>
+                  <p class="jsc-step__blocklabel">textContent (sicher)</p>
+                  <div class="jsc-xss-pane" data-xss-safe></div>
+                </div>
+              </div>
+              <p class="jsc-demo__hint">Links wird die Eingabe als HTML interpretiert (die Fettschrift wird WIRKLICH fett), rechts als Text. Genau diese Tür schließt textContent.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">innerHTML für Nutzereingaben</p>
+                <p>Die offene Tür schlechthin. Regel ab heute: Nutzereingabe NIE in innerHTML — textContent ist die Standard-Antwort.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Nur meine Klasse sieht die Seite"</p>
+                <p>Interne Seiten sind im Netz — und Bots finden auch sie. Sicherheit gilt immer, auch bei „versteckten" Seiten.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Sanitizing selbst erfinden</p>
+                <p>Eigene Filter per Regex sind fast immer lückenhaft — später nutzt du bewährte Bibliotheken (DOMPurify & Co.).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">XSS = nur &lt;script&gt;?</p>
+                <p>Auch Event-Attribute (onerror, onclick) und URLs (javascript:) sind Türen. Nicht nur Script-Tags.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Regel ab heute: Nutzereingabe NIEMALS in innerHTML. textContent ist deine Standard-Antwort.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Das Wichtigste zuerst: Du brauchst keine Angst vor Sicherheit zu haben. Die
+              meisten Angriffe scheitern an langweiligen Grundregeln — genau denen aus
+              diesem Kapitel. Langweilig gewinnt.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Validieren und Escapen: Die Werkzeuge</h2>
+            <div class="jsc-step__why">
+              <p>
+                Misstrauen ist die Haltung — Validieren und Escapen sind die Handgriffe.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <strong>Validieren</strong> heißt: nur Zulässiges erlauben (Whitelist, nicht
+                Blacklist). <strong>Escapen</strong> heißt: <code>&lt; &gt; &amp; "</code> in
+                harmlose Zeichenfolgen umwandeln. Dazu <code>trim()</code> und
+                Längenbegrenzung.
+              </p>
+              <figure class="jsc-code-block" data-filename="sanitize.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">sanitize.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function sanitize(text) {
+  return text
+    .replace(/&amp;/g, "&amp;amp;")
+    .replace(/&lt;/g, "&amp;lt;")
+    .replace(/&gt;/g, "&amp;gt;")
+    .replace(/"/g, "&amp;quot;");
+}
+const name = sanitize(eingabe.trim()).slice(0, 50);</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch12">Code</label>
+              <textarea id="pg-ch12" data-pg-code spellcheck="false">function sanitize(text) {
+  return text.replace(/</g, "&amp;lt;").replace(/>/g, "&amp;gt;");
+}
+console.log(sanitize("<script>alert(1)</script>"));</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Ergänze das Escapen von <code>&amp;</code>
+              (Achtung: als ERSTES ersetzen — warum?).
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Blacklist statt Whitelist</p>
+                <p>„Verbiete &lt;script&gt;" vergisst tausend andere Türen. Whitelist: nur Erlaubtes durchlassen — alles andere bleibt draußen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Escapen nur an einer Stelle</p>
+                <p>An drei Stellen ausgeben, an einer escapen = Lücke. Beim Ausgeben escapen — dann gilt es überall.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Keine Längenbegrenzung</p>
+                <p>Unbegrenzte Eingaben erlauben Überflutung und Riesen-Payloads — slice(0, 50) gehört dazu.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Validieren, aber roh weiterverwenden</p>
+                <p>Der Check war da, aber gespeichert wurde die rohe Eingabe — dann nützt die beste Validierung nichts.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Escapen beim AUSGEBEN, nicht beim Speichern — deine Daten bleiben roh, deine Anzeige wird sicher.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Sicherheits-Denken im Alltag eines Entwicklers</h2>
+            <div class="jsc-step__why">
+              <p>
+                Sicherheit ist kein Feature, das du am Ende draufschraubst. Es ist eine
+                Gewohnheit — bei jeder Zeile.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die Alltags-Regeln: HTTPS immer. Passwörter NIE im Klartext speichern
+                (hashen — Server-Thema, aber verstehen). Sensible Daten NIE ins
+                Frontend-JS. Fehlermeldungen geben nichts preis. Und die DevTools sind
+                dein FREUND — dein Werkzeug, nicht der Angriff.
+              </p>
+              <figure class="jsc-code-block" data-filename="alltags-regeln.txt">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">alltags-regeln.txt</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">1. textContent statt innerHTML für Nutzereingaben
+2. Whitelist-Validierung + trim() + Längenlimit
+3. Serverseitig IMMER nochmal prüfen</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Wir sind zu klein für Angriffe"</p>
+                <p>Bots scannen automatisiert ALLES — Kleinheit ist kein Schutz, nur Unsichtbarkeit war nie eine.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Passwörter in JS-Variablen</p>
+                <p>Was im Frontend steht, ist öffentlich. Passwörter gehören (gehasht) in die Datenbank — Thema Backend.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Detaillierte Fehlermeldungen nach außen</p>
+                <p>„SQL-Fehler in Zeile 42" hilft Angreifern mehr als Nutzern — nach außen allgemein, nach innen detailliert.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Sicherheit als Einzel-Thema</p>
+                <p>Wer Sicherheit „später" macht, macht sie nie. Gewohnheit schlägt Sprint — bei jeder Zeile.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Du musst nicht paranoid sein — nur konsequent. Die drei Regeln reichen für den Start: textContent statt innerHTML, Whitelist-Validierung, serverseitig nochmal prüfen.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch12-check"
+              data-chapter="12"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann erklären, warum clientseitige Prüfung allein nicht sicher ist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich verstehe das Prinzip „niemals vertrauen, immer prüfen".</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann XSS mit eigenen Worten erklären.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, warum innerHTML bei Nutzereingaben verboten ist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann die textContent-Regel anwenden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne den Unterschied zwischen Whitelist und Blacklist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann sanitize() für &lt; &gt; &amp; " anwenden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich escpe beim Ausgeben, nicht beim Speichern.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die Alltags-Regeln (HTTPS, keine Klartext-Passwörter, keine Secrets im JS).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann das XSS-Labor erklären und die sichere Variante bauen.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="gaestebuch.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">gaestebuch.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function sanitize(text) {
+  return text
+    .replace(/&amp;/g, "&amp;amp;")
+    .replace(/&lt;/g, "&amp;lt;")
+    .replace(/&gt;/g, "&amp;gt;")
+    .replace(/"/g, "&amp;quot;");
+}
+function eintragHinzufuegen(eingabe) {
+  const text = eingabe.trim();
+  if (!text) return;              // leer? raus
+  const sicher = sanitize(text).slice(0, 50);
+  const eintrag = document.createElement("p");
+  eintrag.textContent = sicher;   // sichere Ausgabe
+  document.querySelector("#buch").append(eintrag);
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Rohe Daten speichern, saubere Ausgabe escapen.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch12-reflect" data-export-chapter="12" data-export-title="Sicherheit &amp; typische Angriffe" data-export-checklist="jsc-ch12-check" data-export-quiz="jsc-ch12-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Erkläre dem Haus-Bild weiter: Welche Tür ist ein Eingabefeld, wer prüft am Eingang?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Warum ist ‚langweilige' Sicherheit oft die beste? Nenne zwei Beispiele.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Schaue dir eine Seite an, die du nutzt: Welche Eingaben gibt es dort? Was könnte das Schlimmste sein?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch12-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Warum schützt <code>required</code> im HTML nicht wirklich?</legend>
+                <label><input type="radio" name="ch12-q0" value="a" /> Browser ignoriert es</label>
+                <label><input type="radio" name="ch12-q0" value="b" /> Es kann per DevTools entfernt werden</label>
+                <label><input type="radio" name="ch12-q0" value="c" /> Es ist zu langsam</label>
+                <label><input type="radio" name="ch12-q0" value="d" /> Es zeigt keine Meldung</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — alles im Client ist manipulierbar. Deshalb prüft der Server.</strong></template>
+                <template data-feedback="wrong">Der Browser gehört dem Nutzer — per DevTools ist jedes Attribut weg. Verbindlich prüft nur der Server.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Wie zeigst du Nutzereingaben sicher an?</legend>
+                <label><input type="radio" name="ch12-q1" value="a" /> innerHTML</label>
+                <label><input type="radio" name="ch12-q1" value="b" /> textContent</label>
+                <label><input type="radio" name="ch12-q1" value="c" /> eval</label>
+                <label><input type="radio" name="ch12-q1" value="d" /> document.write</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — textContent zeigt Text als Text, ohne HTML zu interpretieren.</strong></template>
+                <template data-feedback="wrong">textContent ist die sichere Standard-Antwort: keine Interpretation, keine offene Tür.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Was ist eine Whitelist-Validierung?</legend>
+                <label><input type="radio" name="ch12-q2" value="a" /> Alles verbieten außer erlaubte Muster</label>
+                <label><input type="radio" name="ch12-q2" value="b" /> Alles erlauben außer verbotene</label>
+                <label><input type="radio" name="ch12-q2" value="c" /> Eine Liste von Viren</label>
+                <label><input type="radio" name="ch12-q2" value="d" /> Ein Browser-Plugin</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — nur Erlaubtes kommt durch, der Rest bleibt draußen.</strong></template>
+                <template data-feedback="wrong">Whitelist = nur erlaubte Muster zulassen. Blacklist (verbieten) vergisst immer etwas.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Wann escapst du am besten?</legend>
+                <label><input type="radio" name="ch12-q3" value="a" /> Beim Speichern</label>
+                <label><input type="radio" name="ch12-q3" value="b" /> Beim Ausgeben</label>
+                <label><input type="radio" name="ch12-q3" value="c" /> Vor dem Empfangen</label>
+                <label><input type="radio" name="ch12-q3" value="d" /> Nie</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — roh speichern, beim Ausgeben escapen. So bleiben die Daten sauber.</strong></template>
+                <template data-feedback="wrong">Escapen gehört zur Ausgabe: die Daten bleiben roh, die Anzeige wird sicher.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Der Client ist manipulierbar — der Server muss prüfen.</li>
+                <li>XSS = fremder Code über Eingaben; innerHTML ist die offene Tür.</li>
+                <li>textContent ist die Standard-Antwort.</li>
+                <li>Whitelist validieren, beim Ausgeben escapen.</li>
+                <li>Sicherheit ist Gewohnheit, kein Feature.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Glossary/Cross-site_scripting" target="_blank" rel="noopener">Cross-Site Scripting (MDN)</a>
+                  <span>Der Begriff im Glossar.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/API/Element/textContent" target="_blank" rel="noopener">textContent (MDN)</a>
+                  <span>Die sichere HTML-Manipulation — die Standard-Antwort.</span>
+                </li>
+                <li>
+                  <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP XSS Prevention Cheat Sheet</a>
+                  <span>Die Referenz für Vertiefung.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Sicherheit &amp; typische Angriffe</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt mit dem nächsten Update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Das Lernvideo wird noch produziert.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Spickzettel zum Ausdrucken</h3>
+                <p class="jsc-media-embed__body" data-media-body>Folgt mit dem Kapitel-Update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Erklär mir Hacking."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Vage, ohne Bezug zum Kurs — die Antwort wird generisch und nicht anwendbar.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Bitte die KI, ein UNSICHERES Gästebuch zu zeigen (zum Üben des Erkennens). Findest du die XSS-Lücke? Fordere dann die sichere Version mit textContent — vergleiche beide."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Defensives Lernziel + Vergleichsauftrag — du trainierst das Erkennen der Lücke, nicht das Ausnutzen.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du baust jetzt sicher — misstrauisch gegen Eingaben, konsequent bei jeder Zeile.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/abschluss/">
+              Weiter zum Abschlussbereich
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Bedrohung</a></li>
+            <li><a href="#schritt-2">2 XSS</a></li>
+            <li><a href="#schritt-3">3 Werkzeuge</a></li>
+            <li><a href="#schritt-4">4 Gewohnheit</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
