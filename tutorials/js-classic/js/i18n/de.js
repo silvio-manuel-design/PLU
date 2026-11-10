@@ -69,6 +69,14 @@ export default {
   'ui.ch.09.teaser': 'JavaScript trifft HTML: Seiten lesen, verändern und auf Klicks reagieren lassen.',
   'ui.ch.09.imgAlt': 'Ein leuchtender Baum aus goldenen Linien und Kästen — Wurzeln unten, verzweigte Krone oben.',
 
+  /* Kapitel-Meta P8: Teaser + Hero-Bild-Alt (Kap. 10–12) */
+  'ui.ch.10.teaser': 'Klicks, Tasten, Eingaben: Deine Seite reagiert — auf alles, was der Nutzer tut.',
+  'ui.ch.10.imgAlt': 'Ein gläserner Kippschalter auf einer leuchtenden Konsole, ein Finger aus Licht berührt ihn — um ihn herum kreisen feine Verbindungslinien.',
+  'ui.ch.11.teaser': 'Daten sauber einsammeln: Formulare bauen, prüfen und freundlich Fehler zeigen.',
+  'ui.ch.11.imgAlt': 'Schwebende Glas-Eingabefelder und Schalter in dunklem Raum — ein Formular aus Licht.',
+  'ui.ch.12.teaser': 'Vertraue niemals Eingaben: XSS verstehen, validieren, sicher bauen.',
+  'ui.ch.12.imgAlt': 'Ein monumentaler Schild aus Glas und goldenem Licht, aufrecht stehend in dunklem Raum.',
+
   /* Barrierefreiheit (P2) */
   'ui.a11y.mainNav': 'Hauptnavigation',
   'ui.a11y.skipToNav': 'Zur Navigation springen',

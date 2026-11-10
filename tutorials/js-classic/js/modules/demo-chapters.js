@@ -199,6 +199,129 @@ function initDomList() {
   });
 }
 
+/** Kap. 10, Schritt 3 — Zähler-App: Zustand in Variable, Anzeige im DOM */
+function initTally() {
+  document.querySelectorAll('[data-component="jsc-demo"][data-demo="tally"]').forEach((demo) => {
+    const target = demo.querySelector('[data-tally-target]');
+    if (!target) return;
+    let count = 0;
+    const show = () => { target.textContent = String(count); };
+    demo.querySelector('[data-tally-plus]')?.addEventListener('click', () => { count += 1; show(); });
+    demo.querySelector('[data-tally-minus]')?.addEventListener('click', () => { count -= 1; show(); });
+    demo.querySelector('[data-tally-reset]')?.addEventListener('click', () => { count = 0; show(); });
+    show();
+  });
+}
+
+/** Kap. 10, Schritt 4 — Reaktionstest: auf Grün warten, klicken, ms lesen */
+function initReaction() {
+  document.querySelectorAll('[data-component="jsc-demo"][data-demo="reaction"]').forEach((demo) => {
+    const btn = demo.querySelector('[data-reaction-start]');
+    const pad = demo.querySelector('[data-reaction-pad]');
+    const out = demo.querySelector('[data-reaction-out]');
+    if (!btn || !pad || !out) return;
+
+    let state = 'idle'; // idle | waiting | go
+    let timer = null;
+    let startedAt = 0;
+    const text = (key) => demo.dataset[key] || key;
+
+    function reset(idleText) {
+      if (timer) { clearTimeout(timer); timer = null; }
+      state = 'idle';
+      pad.classList.remove('is-waiting', 'is-go');
+      out.textContent = idleText;
+    }
+
+    btn.addEventListener('click', () => {
+      reset(text('waitText'));
+      state = 'waiting';
+      pad.classList.add('is-waiting');
+      timer = setTimeout(() => {
+        state = 'go';
+        startedAt = Date.now();
+        pad.classList.remove('is-waiting');
+        pad.classList.add('is-go');
+        out.textContent = text('goText');
+      }, 1200 + Math.random() * 2600);
+    });
+
+    pad.addEventListener('click', () => {
+      if (state === 'waiting') {
+        reset(text('earlyText'));
+      } else if (state === 'go') {
+        const ms = Date.now() - startedAt;
+        reset(text('resultText').replace('{ms}', String(ms)));
+      }
+    });
+
+    reset(text('idleText'));
+  });
+}
+
+/** Kap. 11, Schritt 4 — Anmeldeformular mit Live-Validierung (Fehler am Feld) */
+function initFormValidate() {
+  document.querySelectorAll('[data-component="jsc-demo"][data-demo="form-validate"]').forEach((demo) => {
+    const form = demo.querySelector('form');
+    if (!form) return;
+    const fields = [...demo.querySelectorAll('[data-validate]')];
+    const success = demo.querySelector('[data-form-success]');
+
+    function setError(input, message) {
+      const box = demo.querySelector(`[data-error-for="${input.id}"]`);
+      if (box) box.textContent = message;
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
+
+    function check(input) {
+      const value = input.value.trim();
+      const rules = input.dataset.validate.split(' ');
+      if (rules.includes('required') && !value) {
+        setError(input, input.dataset.errorRequired || 'Pflichtfeld.');
+        return false;
+      }
+      if (rules.includes('email') && value && !(value.includes('@') && value.includes('.'))) {
+        setError(input, input.dataset.errorEmail || 'Bitte gültige E-Mail.');
+        return false;
+      }
+      setError(input, '');
+      return true;
+    }
+
+    fields.forEach((input) => input.addEventListener('input', () => check(input)));
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let firstBad = null;
+      fields.forEach((input) => { if (!check(input) && !firstBad) firstBad = input; });
+      if (firstBad) {
+        firstBad.focus();
+        if (success) success.textContent = '';
+        return;
+      }
+      if (success) success.textContent = demo.dataset.successText || 'OK';
+      form.reset();
+      fields.forEach((input) => setError(input, ''));
+    });
+  });
+}
+
+/** Kap. 12, Schritt 2 — XSS-Labor: links innerHTML (interpretiert), rechts textContent (Text) */
+function initXssLab() {
+  document.querySelectorAll('[data-component="jsc-demo"][data-demo="xss-lab"]').forEach((demo) => {
+    const input = demo.querySelector('[data-xss-input]');
+    const btn = demo.querySelector('[data-xss-run]');
+    const unsafe = demo.querySelector('[data-xss-unsafe]');
+    const safe = demo.querySelector('[data-xss-safe]');
+    if (!input || !btn || !unsafe || !safe) return;
+
+    btn.addEventListener('click', () => {
+      unsafe.innerHTML = input.value; // Absicht: die unsichere Seite (Markup wird interpretiert)
+      safe.textContent = input.value; // die sichere Seite (reiner Text)
+    });
+  });
+}
+
 export function initDemoChapters() {
   initCounter();
   initPromptGreet();
@@ -208,4 +331,8 @@ export function initDemoChapters() {
   initDiceStats();
   initDomSearch();
   initDomList();
+  initTally();
+  initReaction();
+  initFormValidate();
+  initXssLab();
 }

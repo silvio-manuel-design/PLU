@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 10: Events &amp; Interaction · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: clicks with addEventListener, reading input via input events, keeping state in the counter app and evaluating keyboard events — with reaction test demo, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/10-events.html" />
+    <link rel="alternate" hreflang="de" href="10-ereignisse.html" />
+    <link rel="alternate" hreflang="en" href="10-events.html" />
+    <link rel="alternate" hreflang="x-default" href="10-ereignisse.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 10: Events &amp; Interaction · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: clicks with addEventListener, reading input via input events, keeping state in the counter app and evaluating keyboard events — with reaction test demo, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m10">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap10/jsc-kap10-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="A glass toggle on a glowing console, a finger of light touching it — fine connection lines orbiting around."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 10</p>
+          <h1 id="ch-title" class="jsc-hero__title">Events &amp; Interaction</h1>
+          <p class="jsc-hero__sub">Clicks, keys, input: your page reacts — to everything the user does.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#getting-started" data-i18n="ui.b17.chip">Getting started</a>
+        <a href="#schritt-1">1 Click</a>
+        <a href="#schritt-2">2 Input</a>
+        <a href="#schritt-3">3 State</a>
+        <a href="#schritt-4">4 Keyboard</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>You sit at the table. The doorbell rings. You get up and open the door. You react to an event.</p>
+              <p>Websites can do that too: a click is an event. A key press is an event. Your program says: “When click — do this.”</p>
+              <p>That turns your page from a poster into a conversation.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Event <span class="jsc-term-card__word-en">/ Ereignis</span></p>
+                <p class="jsc-term-card__def">Something that happens on the page: click, key, input.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like the doorbell.</p>
+                <p class="jsc-term-card__code"><code>click</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">addEventListener <span class="jsc-term-card__word-en">/ addEventListener</span></p>
+                <p class="jsc-term-card__def">The „on-watch" function: registers code for an event.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like „I'll react as soon as it rings."</p>
+                <p class="jsc-term-card__code"><code>btn.addEventListener("click", …)</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Callback <span class="jsc-term-card__word-en">/ Callback</span></p>
+                <p class="jsc-term-card__def">A function that gets called later — when the event fires.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like you getting up when it rings.</p>
+                <p class="jsc-term-card__code"><code>function react() { … }</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Event object <span class="jsc-term-card__word-en">/ Event-Objekt</span></p>
+                <p class="jsc-term-card__def">A folder with info about the event: which key, which element.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like looking through the peephole.</p>
+                <p class="jsc-term-card__code"><code>event.target</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">The first click: addEventListener</h2>
+            <div class="jsc-step__why">
+              <p>
+                Everything you ever clicked on a website ran on events. Now you build it
+                yourself.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The basic pattern has three parts: find the element (chapter 09), listen,
+                react. The third part is a function — the callback that doesn't run
+                immediately but only when the event fires.
+              </p>
+              <figure class="jsc-code-block" data-filename="click.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">click.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const button = document.querySelector("#myButton");
+button.addEventListener("click", function () {
+  console.log("Clicked!");
+});</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch10">Code</label>
+              <textarea id="pg-ch10" data-pg-code spellcheck="false">const clickCounter = { clicks: 0 };
+function click() {
+  clickCounter.clicks++;
+  console.log("Click no.", clickCounter.clicks);
+}
+click();
+click();</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> call <code>click()</code> five times in total and
+              watch how the counter in the object behaves.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Listener on the wrong element</p>
+                <p>If nothing happens, querySelector probably returned <code>null</code> — check the selector before blaming the listener.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Click" instead of „click"</p>
+                <p>Event names are lowercase: <code>"click"</code>, not <code>"Click"</code>. Wrong case never fires.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Calling the callback immediately</p>
+                <p><code>addEventListener("click", react())</code> runs the function NOW and registers its result. Correct: pass <code>react</code> without parentheses.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Script before the HTML</p>
+                <p>If the script runs before the element, querySelector finds nothing. Script with <code>defer</code> in head or at the end of body — see chapter 01.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>These three lines appear in millions of websites — element, listen, react. It's the foundation of interaction.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Reading input: input events and values</h2>
+            <div class="jsc-step__why">
+              <p>
+                Clicks alone are boring — programs want to KNOW what the user typed.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The <code>input</code> event fires on EVERY change in the field. You read
+                the value with <code>element.value</code> — and the event object tells you
+                which field is meant via <code>event.target</code>.
+              </p>
+              <figure class="jsc-code-block" data-filename="input.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">input.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const field = document.querySelector("#name");
+const output = document.querySelector("#output");
+field.addEventListener("input", function (event) {
+  output.textContent = "Hello, " + event.target.value + "!";
+});</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">textContent instead of value</p>
+                <p>For input fields the text lives in <code>.value</code>, not textContent — that holds for the field itself.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">input vs. change</p>
+                <p><code>input</code> fires on every keystroke, <code>change</code> only after leaving the field. For live feedback: input.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting the event parameter</p>
+                <p>Without the parameter <code>function (event)</code> there is no <code>event.target</code> — the classic copy slip.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Not checking for empty</p>
+                <p>Whoever prints „Hello, !" forgot the empty case — check briefly and set a default.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>The pattern ‚input → event → output' connects chapter 02 (values), 09 (DOM) and 10 (events) — you're in the heart of the course.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Event-driven programs don't run top to bottom like a book. They WAIT. That
+              feels strange at first — but that is exactly how your phone works: nothing
+              happens until something happens.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">State and multiple events: the counter app</h2>
+            <div class="jsc-step__why">
+              <p>
+                Real apps remember things between clicks. A counter app is the smallest
+                example of that.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The state variable lives OUTSIDE the listeners — the events change it, the
+                DOM shows it. Plus and minus buttons share the same state.
+              </p>
+              <figure class="jsc-code-block" data-filename="counter.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">counter.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let counter = 0;
+const display = document.querySelector("#number");
+document.querySelector("#plus").addEventListener("click", function () {
+  counter++;
+  display.textContent = counter;
+});
+document.querySelector("#minus").addEventListener("click", function () {
+  counter--;
+  display.textContent = counter;
+});</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="tally">
+              <p class="jsc-demo__title">Counter app</p>
+              <p class="jsc-demo__greeting" data-tally-target aria-live="polite">0</p>
+              <div class="jsc-demo__row">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-tally-plus>+1</button>
+                <button type="button" class="jsc-button jsc-button--outline jsc-button--sm" data-tally-minus>−1</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-tally-reset>Reset</button>
+              </div>
+              <p class="jsc-demo__hint">The state lives in a variable — the DOM only shows it. Just like in the code above.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Looking for state in the DOM</p>
+                <p>„Read the display, add 1, write back" goes wrong — the display is not a database. The variable counts, the DOM shows.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Everything in one listener</p>
+                <p>Two listeners with the same logic? Build a shared function and register it twice — don't copy-paste.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting counter++</p>
+                <p>Only <code>display.textContent = counter</code> shows the same value again and again — only ++ changes the state.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting reset</p>
+                <p>Every counter app needs a way back to 0 — it saves you many clicks while testing.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Rule of thumb: data in variables, display in the DOM. Never use the display as the only truth.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Keyboard &amp; more events: reaction game</h2>
+            <div class="jsc-step__why">
+              <p>
+                Clicks are just one event type. The keyboard opens up a whole playground:
+                arrow keys, Enter, letters.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>keydown</code> fires on every key, <code>event.key</code> returns the
+                key name (<code>"Enter"</code>, <code>"ArrowLeft"</code>, …). You check in
+                the callback what should happen — and build games with it.
+              </p>
+              <figure class="jsc-code-block" data-filename="keyboard.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">keyboard.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    console.log("Enter pressed!");
+  }
+});</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="reaction" data-idle-text="Ready? Press start — then wait for GREEN." data-wait-text="Waiting for green …" data-go-text="NOW!" data-early-text="Too early! Wait until the field turns green." data-result-text="Your reaction time: {ms} ms. Again?">
+              <p class="jsc-demo__title">Reaction test</p>
+              <div class="jsc-demo__row">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-reaction-start>Start</button>
+              </div>
+              <div style="margin-top: var(--jsc-space-3);">
+                <button type="button" class="jsc-reaction-pad" data-reaction-pad aria-label="Reaction pad"></button>
+                <p class="jsc-reaction-out" data-reaction-out aria-live="polite"></p>
+              </div>
+              <p class="jsc-demo__hint">As soon as the field turns green: click. We measure the time in milliseconds — state + event + display in pure form.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">keyCode instead of key</p>
+                <p><code>event.keyCode</code> is old and deprecated — use <code>event.key</code> with the key name.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Wrong key names</p>
+                <p><code>"enter"</code> doesn't work — the name is <code>"Enter"</code> (case-sensitive). Arrow keys: <code>"ArrowLeft"</code> etc.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Listener on the wrong element</p>
+                <p>Global keys (game control) belong on <code>document</code>, field input on the field.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">setTimeout vs. setInterval</p>
+                <p><code>setTimeout</code> = once after X ms, <code>setInterval</code> = over and over. The reaction test needs setTimeout.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Your final project (highscore game) builds on exactly this: state + events + display. You already have everything.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch10-check"
+              data-chapter="10"
+            >
+              <li><label><input type="checkbox" /> <span>I can explain what an event is and which ones exist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can register a click listener with addEventListener.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I pass a function — I don't call it immediately.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can write event names correctly in lowercase.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use an input event and read the value with .value.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use the event object with target.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can keep state in variables and change it via events.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can build multiple listeners that share the same state.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can evaluate keyboard events with event.key.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can implement the pattern input → processing → display in my own mini app.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="color-switcher.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">color-switcher.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let clicks = 0;
+const box = document.querySelector("#box");
+function toggle() {
+  box.classList.toggle("dark");
+}
+box.addEventListener("click", function () {
+  clicks++;
+  toggle();
+  console.log("Click no.", clicks);
+});
+document.addEventListener("keydown", function (event) {
+  if (event.key === " ") {
+    toggle();
+  }
+});</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Two listeners, one state — no UI needs more.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch10-reflect" data-export-chapter="10" data-export-title="Events &amp; Interaction" data-export-checklist="jsc-ch10-check" data-export-quiz="jsc-ch10-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Continue explaining the doorbell picture: what is addEventListener, what is the callback, what is the event object?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Why should state live in a variable and not only in the DOM?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Which events did you already know from websites without realising? Name three.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch10-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Which line registers a function for the click?</legend>
+                <label><input type="radio" name="ch10-q0" value="a" /> <code>button.addEventListener("click", f)</code></label>
+                <label><input type="radio" name="ch10-q0" value="b" /> <code>button.onClick(f)</code></label>
+                <label><input type="radio" name="ch10-q0" value="c" /> <code>listen(button, f)</code></label>
+                <label><input type="radio" name="ch10-q0" value="d" /> <code>button.click(f)</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — addEventListener registers function f for the „click" event.</strong></template>
+                <template data-feedback="wrong">Registering works via addEventListener with event name and function — the other variants don't exist like that.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What is a callback?</legend>
+                <label><input type="radio" name="ch10-q1" value="a" /> An error</label>
+                <label><input type="radio" name="ch10-q1" value="b" /> A function that gets called later</label>
+                <label><input type="radio" name="ch10-q1" value="c" /> A click counter</label>
+                <label><input type="radio" name="ch10-q1" value="d" /> An event name</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — a function you pass along that only runs when the event fires.</strong></template>
+                <template data-feedback="wrong">Callback = „call back": you hand over a function, it gets called back when the event occurs.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Where does an input field's typed text live?</legend>
+                <label><input type="radio" name="ch10-q2" value="a" /> <code>field.text</code></label>
+                <label><input type="radio" name="ch10-q2" value="b" /> <code>field.value</code></label>
+                <label><input type="radio" name="ch10-q2" value="c" /> <code>field.innerHTML</code></label>
+                <label><input type="radio" name="ch10-q2" value="d" /> <code>field.content</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — input fields deliver their text via .value.</strong></template>
+                <template data-feedback="wrong">Input fields are special elements: their text lives in the value property, not in the DOM text.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>event.key</code> return for Enter?</legend>
+                <label><input type="radio" name="ch10-q3" value="a" /> "enter"</label>
+                <label><input type="radio" name="ch10-q3" value="b" /> "Enter"</label>
+                <label><input type="radio" name="ch10-q3" value="c" /> 13</label>
+                <label><input type="radio" name="ch10-q3" value="d" /> true</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — event.key returns the key name: „Enter" (capitalised).</strong></template>
+                <template data-feedback="wrong">The key name is „Enter" — case-sensitive. 13 was the old keyCode.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Events = everything that happens; programs wait and react.</li>
+                <li>Element → addEventListener → callback.</li>
+                <li>Input via input event, value via .value.</li>
+                <li>State in variables, display in the DOM.</li>
+                <li>Keyboard events open the playground for games.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core_scripting/Events" target="_blank" rel="noopener">Introduction to events (MDN)</a>
+                  <span>The complete event guide.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" target="_blank" rel="noopener">addEventListener (MDN)</a>
+                  <span>The on-watch function in detail.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event" target="_blank" rel="noopener">Keyboard events (MDN)</a>
+                  <span>keydown and all key names.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Events &amp; Interaction</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming with the next update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>The learning video is still being produced.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Cheat sheet to print</h3>
+                <p class="jsc-media-embed__body" data-media-body>Coming with the chapter update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Build a game."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No goal, no rules, no check — the result is arbitrary and stays unreviewed.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI explain a reaction test to you. Check: does it use setTimeout? Where does the state live? Can you beat the game without changing the text?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete game plus targeted control questions about state and timing — exactly the chapter's content.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              Your page answers now — click for click, key for key.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/11-forms.html">
+              On to chapter 11: Forms &amp; Validation
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started" data-i18n="ui.b17.railLink">Getting started</a></li>
+            <li><a href="#schritt-1">1 Click</a></li>
+            <li><a href="#schritt-2">2 Input</a></li>
+            <li><a href="#schritt-3">3 State</a></li>
+            <li><a href="#schritt-4">4 Keyboard</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

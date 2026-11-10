@@ -24,7 +24,9 @@ export const CHAPTERS = [
   { nr: '07', slug: '07-funktionen', slugEn: '07-functions', i18n: 'ui.ch.07' },
   { nr: '08', slug: '08-objekte', slugEn: '08-objects', i18n: 'ui.ch.08' },
   { nr: '09', slug: '09-dom', slugEn: '09-the-dom', i18n: 'ui.ch.09' },
-  { nr: '10', slug: '10-ereignisse', i18n: 'ui.ch.10' },
+  { nr: '10', slug: '10-ereignisse', slugEn: '10-events', i18n: 'ui.ch.10' },
+  { nr: '11', slug: '11-formulare', slugEn: '11-forms', i18n: 'ui.ch.11' },
+  { nr: '12', slug: '12-sicherheit', slugEn: '12-security', i18n: 'ui.ch.12' },
 ];
 
 export const INFO_PAGES = [

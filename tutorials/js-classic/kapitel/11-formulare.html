@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 11: Formulare &amp; Validierung · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Formular und Inputs bauen, Werte beim Absenden auslesen, HTML5- und JS-Validierung und Fehler freundlich zeigen — mit Anmeldeformular-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/11-formulare.html" />
+    <link rel="alternate" hreflang="de" href="11-formulare.html" />
+    <link rel="alternate" hreflang="en" href="11-forms.html" />
+    <link rel="alternate" hreflang="x-default" href="11-formulare.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 11: Formulare &amp; Validierung · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Formular und Inputs bauen, Werte beim Absenden auslesen, HTML5- und JS-Validierung und Fehler freundlich zeigen — mit Anmeldeformular-Demo, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m11">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap11/jsc-kap11-hero-v4-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Schwebende Glas-Eingabefelder und Schalter in dunklem Raum — ein Formular aus Licht."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 11</p>
+          <h1 id="ch-title" class="jsc-hero__title">Formulare &amp; Validierung</h1>
+          <p class="jsc-hero__sub">Daten sauber einsammeln: Formulare bauen, prüfen und freundlich Fehler zeigen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Gerüst</a>
+        <a href="#schritt-2">2 Absenden</a>
+        <a href="#schritt-3">3 Prüfen</a>
+        <a href="#schritt-4">4 Fehler-UX</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Du kennst Formulare vom Amt und vom Arzt: Felder, die ausgefüllt werden müssen. Fehlt etwas, sagt dir jemand freundlich Bescheid — nicht unfreundlich.</p>
+              <p>Web-Formulare sind dasselbe: Felder zum Ausfüllen, Prüfung beim Absenden. Und weil du jetzt JavaScript kannst, baust du die Prüfung selbst.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Formular <span class="jsc-term-card__word-en">/ form</span></p>
+                <p class="jsc-term-card__def">Eine Gruppe von Eingabefeldern mit Absende-Knopf.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie das Blatt beim Arzt.</p>
+                <p class="jsc-term-card__code"><code>&lt;form&gt;…&lt;/form&gt;</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Input <span class="jsc-term-card__word-en">/ input</span></p>
+                <p class="jsc-term-card__def">Ein einzelnes Eingabefeld (Text, E-Mail, Zahl …).</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> eine Zeile auf dem Blatt.</p>
+                <p class="jsc-term-card__code"><code>&lt;input type="email"&gt;</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Validierung <span class="jsc-term-card__word-en">/ validation</span></p>
+                <p class="jsc-term-card__def">Das Prüfen der Eingaben vor dem Verarbeiten.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie der Blick der Sekretärin übers Formular.</p>
+                <p class="jsc-term-card__code"><code>feld.checkValidity()</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">submit <span class="jsc-term-card__word-en">/ submit</span></p>
+                <p class="jsc-term-card__def">Das Absende-Ereignis des Formulars.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> abgeben.</p>
+                <p class="jsc-term-card__code"><code>form.addEventListener("submit", …)</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Formular und Inputs bauen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Das HTML-Formular ist das Gerüst: Ohne sauberes Gerüst kann JavaScript
+                nichts retten.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Ein Formular bündelt Felder und den Absende-Knopf. Jedes Feld bekommt ein
+                <strong>sichtbares Label</strong> — per <code>for</code>/<code>id</code>
+                verbunden. Die Input-Typen (<code>text</code>, <code>email</code>,
+                <code>number</code>, <code>checkbox</code>) geben dem Browser schon
+                Hinweise.
+              </p>
+              <figure class="jsc-code-block" data-filename="anmeldung.html">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">anmeldung.html</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">&lt;form id="anmeldung"&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input id="name" type="text" required&gt;
+  &lt;label for="email"&gt;E-Mail&lt;/label&gt;
+  &lt;input id="email" type="email" required&gt;
+  &lt;button type="submit"&gt;Anmelden&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Label ohne for/id-Verbindung</p>
+                <p>Ein Label ohne <code>for</code> (oder Feld nicht im Label) lässt Screenreader und Klick-auf-Label-Ziel im Stich.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">type="email" vergessen</p>
+                <p><code>type="email"</code> bringt Gratis-Prüfung und die passierte Tastatur auf dem Handy — nimm den passenden Typ.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Button ohne type</p>
+                <p>Ein Button im Formular ist automatisch <code>type="submit"</code> — hier gewollt, aber du solltest es wissen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">required vergessen</p>
+                <p>Pflichtfelder brauchen <code>required</code> — sonst merkt es erst dein JavaScript (oder niemand).</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Labels sind Pflicht — für Screenreader, für alle. Ein Feld ohne Label ist ein Formular mit Lücke.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Werte auslesen beim Absenden</h2>
+            <div class="jsc-step__why">
+              <p>
+                Nach dem Klick auf ‚Anmelden' willst du die Werte — sauber und getrimmt.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Das <code>submit</code>-Event feuert beim Absenden. Mit
+                <code>event.preventDefault()</code> verhinderst du das Neuladen der Seite —
+                dann liest du die Werte aus und kürzt sie mit <code>trim()</code>.
+              </p>
+              <figure class="jsc-code-block" data-filename="absenden.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">absenden.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const form = document.querySelector("#anmeldung");
+form.addEventListener("submit", function (event) {
+  event.preventDefault(); // Seite NICHT neu laden
+  const name = document.querySelector("#name").value.trim();
+  const email = document.querySelector("#email").value.trim();
+  console.log(name, email);
+});</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">preventDefault vergessen</p>
+                <p>Die Seite lädt neu, alle Eingaben sind weg — der Klassiker. Erster Befehl im submit-Handler, immer.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">value ohne trim()</p>
+                <p><code>" Ada "</code> mit Leerzeichen zerstört Vergleiche und Speicherung — trim() gehört zum Auslesen dazu.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Falsche Selektoren</p>
+                <p>Die Felder haben <code>id</code>, nicht <code>name</code> — Selektor und Markup müssen zusammenpassen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Absenden vor dem Listener</p>
+                <p>Wer das Formular testet, bevor das Script läuft, schickt es klassisch ab — erst lauschen, dann klicken.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p><code>event.preventDefault()</code> ist der wichtigste Einzeiler dieses Kapitels — ohne ihn startet dein Formular von vorne.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Das beste Formular der Welt ist das, das du nie bemerkst: wenige Felder,
+              klare Worte, sofortige Hilfe. Jedes Feld, das du weglässt, macht das
+              Formular besser.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Validierung: Erst HTML, dann JavaScript</h2>
+            <div class="jsc-step__why">
+              <p>
+                Das HTML prüft schon automatisch (type, required). JavaScript ergänzt die
+                Regeln, die HTML nicht kennt.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                HTML5-Validierung deckt Format und Pflicht ab (<code>required</code>,
+                <code>type</code>, <code>minlength</code>, <code>pattern</code>). Eigene
+                Regeln — wie „gültige E-Mail" — schreibst du als Funktion in JavaScript.
+              </p>
+              <figure class="jsc-code-block" data-filename="validierung.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">validierung.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function istGueltigeEmail(text) {
+  return text.includes("@") &amp;&amp; text.includes(".");
+}
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const email = document.querySelector("#email").value.trim();
+  if (!istGueltigeEmail(email)) {
+    zeigeFehler("email", "Bitte eine gültige E-Mail eingeben.");
+    return;
+  }
+  speichern(email);
+});</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch11">Code</label>
+              <textarea id="pg-ch11" data-pg-code spellcheck="false">function pruefeEmail(text) {
+  return text.includes("@") && text.includes(".");
+}
+console.log(pruefeEmail("ada@example.at"));
+console.log(pruefeEmail("falsch"));</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Erweitere die Prüfung: Die E-Mail soll
+              zusätzlich mindestens 5 Zeichen lang sein.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„HTML-Validierung reicht"</p>
+                <p>Clientseitige Prüfung ist Komfort, kein Schutz — sie lässt sich umgehen (Kapitel 12!). Der Server muss prüfen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Regeln doppelt und widersprüchlich</p>
+                <p>HTML sagt das eine, JS das andere — Nutzer verwirrt. Regeln an EINER Stelle definieren.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Fehler nur per alert()</p>
+                <p>Alert-Ketten sind der unfreundlichste Weg — Fehler gehören ans Feld (Schritt 4).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Validierung im Listener verstreut</p>
+                <p>Prüflogik gehört in kleine Funktionen (wie <code>istGueltigeEmail</code>) — testbar und wiederverwendbar.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Regel: HTML validiert die Eingabe-HÜLLE (Format, Pflicht), JavaScript validiert die BEDEUTUNG (z. B. ‚Schülernummer beginnt mit 2 Ziffern').</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Fehler freundlich zeigen (UX)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Jeder kennt Formulare, die einen anschreien. Freundliche, konkrete
+                Fehlermeldungen sind der Unterschied zwischen frustrierten und fertigen
+                Nutzern.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die Meldung gehört ANS Feld (mit <code>aria-live</code> für Screenreader),
+                der Fokus springt zum ersten Fehlerfeld, und nach der Korrektur
+                verschwindet der Fehler wieder.
+              </p>
+              <figure class="jsc-code-block" data-filename="fehler-ux.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">fehler-ux.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function zeigeFehler(id, nachricht) {
+  const fehler = document.querySelector("#" + id + "-fehler");
+  fehler.textContent = nachricht;
+  fehler.classList.add("sichtbar");
+  document.querySelector("#" + id).setAttribute("aria-invalid", "true");
+  document.querySelector("#" + id).focus();
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="form-validate" data-success-text="Anmeldung erfolgreich — alle Werte geprüft.">
+              <p class="jsc-demo__title">Anmeldeformular mit Live-Validierung</p>
+              <form class="jsc-demo__form" novalidate>
+                <div>
+                  <label for="demo-name">Name</label>
+                  <input class="jsc-demo__input" style="width: 100%;" id="demo-name" type="text" data-validate="required" data-error-required="Bitte gib deinen Namen ein." autocomplete="off" />
+                  <p class="jsc-demo__error" data-error-for="demo-name" aria-live="polite"></p>
+                </div>
+                <div>
+                  <label for="demo-email">E-Mail</label>
+                  <input class="jsc-demo__input" style="width: 100%;" id="demo-email" type="email" data-validate="required email" data-error-required="Bitte gib deine E-Mail ein." data-error-email="Das sieht nicht nach einer E-Mail aus ( @ und . fehlen )." autocomplete="off" />
+                  <p class="jsc-demo__error" data-error-for="demo-email" aria-live="polite"></p>
+                </div>
+                <div>
+                  <button type="submit" class="jsc-button jsc-button--primary jsc-button--sm">Anmelden</button>
+                </div>
+              </form>
+              <p class="jsc-demo__success" data-form-success aria-live="polite"></p>
+              <p class="jsc-demo__hint">Absenden mit leerem oder falschem Feld: Der Fehler erscheint am Feld, Fokus springt dorthin. Korrigieren → Fehler verschwindet.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Alle Fehler als alert-Kette</p>
+                <p>Vier Alerts hintereinander sind pure Frustration — eine Meldung, am richtigen Feld.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Fehler nur farblich</p>
+                <p>Rot allein sagt nichts — immer mit Text (und <code>aria-invalid</code> für Screenreader).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">aria-invalid vergessen</p>
+                <p>Screenreader merken den Fehler nur über das Attribut — setzen beim Fehler, entfernen bei der Korrektur.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Fehler verschwindet nie</p>
+                <p>Nach der Korrektur muss die Meldung weg — sonst glaubt der Nutzer, es stimmt immer noch nicht.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Teste dein Formular mit den Augen eines genervten Menschen um 23 Uhr — dann weißt du, ob die Fehlermeldungen gut sind.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch11-check"
+              data-chapter="11"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann ein Formular mit Labels und sinnvollen Input-Typen bauen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich verbinde Labels korrekt mit ihren Feldern.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann das submit-Event abfangen und preventDefault nutzen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Werte mit trim() sauber auslesen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die HTML5-Validierung (required, type, minlength).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann eigene Validierungs-Funktionen in JS schreiben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich validiere Bedeutung in JS, Format in HTML.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich zeige Fehler am Feld, nicht als alert-Kette.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich setze aria-invalid und fokussiere das erste Fehlerfeld.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass clientseitige Validierung allein NICHT sicher ist (→ Kap. 12).</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="anmeldung.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">anmeldung.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const form = document.querySelector("#anmeldung");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const name = document.querySelector("#name").value.trim();
+  const email = document.querySelector("#email").value.trim();
+  if (!name) {
+    zeigeFehler("name", "Bitte Namen eingeben.");
+    return;
+  }
+  if (!(email.includes("@") &amp;&amp; email.includes("."))) {
+    zeigeFehler("email", "Bitte eine gültige E-Mail eingeben.");
+    return;
+  }
+  console.log("Angemeldet:", name, email);
+  form.reset();
+});</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  HTML zuerst (kostenlos, sofort), JS danach (Bedeutung), Fehler immer am
+                  Feld.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch11-reflect" data-export-chapter="11" data-export-title="Formulare &amp; Validierung" data-export-checklist="jsc-ch11-check" data-export-quiz="jsc-ch11-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Erkläre, warum preventDefault beim submit so wichtig ist — mit einem Alltagsbild.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Nenne zwei Regeln, die HTML prüft, und zwei, die JavaScript prüfen muss.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Schau dir ein Formular im Web an (Anmeldung, Shop): Was würdest du besser machen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch11-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was bewirkt <code>event.preventDefault()</code> beim submit?</legend>
+                <label><input type="radio" name="ch11-q0" value="a" /> Löscht das Formular</label>
+                <label><input type="radio" name="ch11-q0" value="b" /> Verhindert das Neuladen der Seite</label>
+                <label><input type="radio" name="ch11-q0" value="c" /> Sendet das Formular doppelt</label>
+                <label><input type="radio" name="ch11-q0" value="d" /> Nichts</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — preventDefault stoppt das Neuladen, dein Handler behält die Kontrolle.</strong></template>
+                <template data-feedback="wrong">Ohne preventDefault lädt der Browser die Seite neu und alle Eingaben sind weg.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Welches Attribut macht ein Feld pflicht?</legend>
+                <label><input type="radio" name="ch11-q1" value="a" /> <code>type</code></label>
+                <label><input type="radio" name="ch11-q1" value="b" /> <code>required</code></label>
+                <label><input type="radio" name="ch11-q1" value="c" /> <code>check</code></label>
+                <label><input type="radio" name="ch11-q1" value="d" /> <code>must</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — required markiert Pflichtfelder, der Browser prüft mit.</strong></template>
+                <template data-feedback="wrong">required ist das Pflicht-Attribut — der Browser blockiert das Absenden leerer Pflichtfelder.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Woher kommt der eingegebene Wert?</legend>
+                <label><input type="radio" name="ch11-q2" value="a" /> <code>.text</code></label>
+                <label><input type="radio" name="ch11-q2" value="b" /> <code>.value</code></label>
+                <label><input type="radio" name="ch11-q2" value="c" /> <code>.content</code></label>
+                <label><input type="radio" name="ch11-q2" value="d" /> <code>.innerHTML</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — .value liefert den Text eines Eingabefelds.</strong></template>
+                <template data-feedback="wrong">Eingabefelder halten ihren Text in .value — nicht in textContent oder innerHTML.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Warum reicht HTML-Validierung allein nicht?</legend>
+                <label><input type="radio" name="ch11-q3" value="a" /> Sie ist zu langsam</label>
+                <label><input type="radio" name="ch11-q3" value="b" /> Sie kann umgangen werden</label>
+                <label><input type="radio" name="ch11-q3" value="c" /> Sie funktioniert nicht</label>
+                <label><input type="radio" name="ch11-q3" value="d" /> Browser zeigen sie nicht</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — per DevTools ist jedes Attribut weg. Deshalb: Server prüft (Kap. 12).</strong></template>
+                <template data-feedback="wrong">required & Co. lassen sich im Browser entfernen — die einzig verbindliche Prüfung läuft auf dem Server.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Formular = Gerüst, Labels = Pflicht.</li>
+                <li>submit abfangen, preventDefault, Werte trimmen.</li>
+                <li>HTML prüft Format und Pflicht, JS prüft Bedeutung.</li>
+                <li>Fehler freundlich am Feld zeigen, Fokus setzen.</li>
+                <li>Client-Validierung ist Komfort, nicht Sicherheit — Kap. 12 folgt.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form" target="_blank" rel="noopener">Formulare erstellen (MDN)</a>
+                  <span>Das Gerüst richtig bauen.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Extensions/Forms/Form_validation" target="_blank" rel="noopener">Formular-Validierung (MDN)</a>
+                  <span>Client- und Server-Validierung im Überblick.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/API/HTMLObjectElement/validity" target="_blank" rel="noopener">Constraint Validation API (MDN)</a>
+                  <span>validity und checkValidity im Detail.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Formulare &amp; Validierung</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt mit dem nächsten Update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Das Lernvideo wird noch produziert.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Spickzettel zum Ausdrucken</h3>
+                <p class="jsc-media-embed__body" data-media-body>Folgt mit dem Kapitel-Update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Bau ein Formular."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Keine Felder, keine Regeln, keine Fehler-Anzeige definiert — das Ergebnis ist beliebig.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI eine Formular-Validierung zeigen. Prüfe: Gibt sie alert() zurück, oder saubere Feld-Fehler? Fordere sie auf, aria-invalid zu setzen."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkretes Ziel + UX-Prüfkriterien aus dem Kapitel — du bewertest die KI-Lösung mit eigenem Standard.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt Daten sauber einsammeln — und Fehler so zeigen, dass sie niemanden ärgern.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/12-sicherheit.html">
+              Weiter zu Kapitel 12: Sicherheit &amp; typische Angriffe
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Gerüst</a></li>
+            <li><a href="#schritt-2">2 Absenden</a></li>
+            <li><a href="#schritt-3">3 Prüfen</a></li>
+            <li><a href="#schritt-4">4 Fehler-UX</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
