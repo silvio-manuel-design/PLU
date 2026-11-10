@@ -30,6 +30,7 @@ import { initPlaygrounds } from './modules/playground.js';
 import { initSolutionGates } from './modules/solution-gate.js';
 import { initExport } from './modules/export.js';
 import { initScrollSpy } from './modules/scroll-spy.js';
+import { initClassroom } from './modules/classroom.js';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
@@ -50,6 +51,7 @@ initPlaygrounds();
 initSolutionGates();
 initExport();
 initScrollSpy();
+initClassroom();
 
 /* Drucken-Buttons (P5) */
 document.querySelectorAll('[data-print]').forEach((btn) => {

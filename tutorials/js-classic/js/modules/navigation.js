@@ -549,11 +549,12 @@ function renderFooter() {
     el('p', 'jsc-footer__tagline', t('ui.footer.tagline'))
   );
 
-  // Classroom-Mode-Platzhalter (Funktionalität = eigenes Paket, B12)
+  // Classroom-Mode (P9R1): aktiver Toggle — Logik in modules/classroom.js
   const classroom = el('button', 'jsc-footer__classroom');
   classroom.type = 'button';
-  classroom.disabled = true;
-  classroom.title = t('ui.footer.classroomSoon');
+  classroom.dataset.classroomToggle = '';
+  classroom.setAttribute('aria-pressed', 'false');
+  classroom.title = t('ui.classroom.title');
   const monitorIcon = el('i', 'ph ph-monitor', '');
   monitorIcon.setAttribute('aria-hidden', 'true');
   classroom.append(monitorIcon, document.createTextNode(` ${t('ui.footer.classroom')}`));
@@ -563,13 +564,18 @@ function renderFooter() {
   const grid = el('div', 'jsc-footer__links-grid');
 
   const navChapters = el('nav', 'jsc-footer__col');
-  navChapters.setAttribute('aria-label', t('ui.footer.colChapters'));
-  navChapters.append(el('h2', 'jsc-footer__col-title', t('ui.footer.colChapters')));
+  navChapters.setAttribute('aria-label', t('ui.menu.groupLearn'));
+  navChapters.append(el('h2', 'jsc-footer__col-title', t('ui.menu.groupLearn')));
   const ulChapters = el('ul', 'jsc-footer__list');
-  // P8: vollständige 12er-Liste, datengetrieben aus chaptersMeta (EN via slugEn)
+  // P9R1: schlanke Lernen-Spalte (4 Einträge — die 12er-Liste lebt in Dropdown/Mobile/Home)
+  const allChaptersUrl = getLanguage() === 'en'
+    ? '/tutorials/js-classic/index-en.html#chapters'
+    : '/tutorials/js-classic/#kapitel';
   ulChapters.append(
-    footerLink('/tutorials/js-classic/#kapitel', t('ui.footer.allChapters')),
-    ...NAV.chaptersMeta.map((ch) => footerLink(chapterLink(ch), `${ch.nr}. ${t(ch.i18n)}`))
+    footerLink(allChaptersUrl, t('ui.footer.allChapters')),
+    footerLink(chapterLink(NAV.chaptersMeta[0]), `01. ${t('ui.ch.01')}`),
+    footerLink('/tutorials/js-classic/uebungen/', t('ui.footer.exercises')),
+    footerLink('/tutorials/js-classic/arbeitsblaetter.html', t('ui.footer.worksheets'))
   );
   navChapters.append(ulChapters);
 

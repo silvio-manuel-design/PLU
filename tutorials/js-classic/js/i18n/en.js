@@ -28,6 +28,11 @@ export default {
   /* P9: glossary + GitHub page */
   'ui.nav.lexikon': 'Glossary',
   'ui.nav.github': 'GitHub & Submission',
+
+  /* P9R1: classroom mode (B12) */
+  'ui.classroom.title': 'Classroom mode (toggle: Shift+C)',
+  'ui.classroom.on': 'Classroom mode on',
+  'ui.classroom.off': 'Classroom mode off',
   'ui.nav.final': 'Projects',
   'ui.nav.info': 'About',
   'ui.nav.infoAbout': 'About the Course',

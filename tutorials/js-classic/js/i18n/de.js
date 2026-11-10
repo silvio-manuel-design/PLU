@@ -28,6 +28,11 @@ export default {
   /* P9: Lexikon + GitHub-Seite */
   'ui.nav.lexikon': 'Lexikon',
   'ui.nav.github': 'GitHub & Abgabe',
+
+  /* P9R1: Klassenraum-Modus (B12) */
+  'ui.classroom.title': 'Klassenraum-Modus (Umschalten: Shift+C)',
+  'ui.classroom.on': 'Klassenraum-Modus an',
+  'ui.classroom.off': 'Klassenraum-Modus aus',
   'ui.nav.final': 'Projekte',
   'ui.nav.info': 'Infos',
   'ui.nav.infoAbout': 'Über den Kurs',
