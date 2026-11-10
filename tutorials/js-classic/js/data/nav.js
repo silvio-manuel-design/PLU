@@ -20,10 +20,10 @@ export const CHAPTERS = [
   { nr: '03', slug: '03-operatoren', slugEn: '03-operators', i18n: 'ui.ch.03' },
   { nr: '04', slug: '04-bedingungen', slugEn: '04-conditions', i18n: 'ui.ch.04' },
   { nr: '05', slug: '05-schleifen', slugEn: '05-loops', i18n: 'ui.ch.05' },
-  { nr: '06', slug: '06-arrays', i18n: 'ui.ch.06' },
-  { nr: '07', slug: '07-funktionen', i18n: 'ui.ch.07' },
-  { nr: '08', slug: '08-objekte', i18n: 'ui.ch.08' },
-  { nr: '09', slug: '09-dom', i18n: 'ui.ch.09' },
+  { nr: '06', slug: '06-arrays', slugEn: '06-arrays-lists', i18n: 'ui.ch.06' },
+  { nr: '07', slug: '07-funktionen', slugEn: '07-functions', i18n: 'ui.ch.07' },
+  { nr: '08', slug: '08-objekte', slugEn: '08-objects', i18n: 'ui.ch.08' },
+  { nr: '09', slug: '09-dom', slugEn: '09-the-dom', i18n: 'ui.ch.09' },
   { nr: '10', slug: '10-ereignisse', i18n: 'ui.ch.10' },
 ];
 

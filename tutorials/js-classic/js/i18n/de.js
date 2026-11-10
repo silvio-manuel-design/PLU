@@ -59,6 +59,16 @@ export default {
   'ui.ch.05.teaser': 'Wiederholen ohne müde zu werden: Wiederkehrendes dem Computer überlassen.',
   'ui.ch.05.imgAlt': 'Ein leuchtendes Rad aus wiederkehrenden Lichtbögen, das sich in einer endlosen Rotation dreht.',
 
+  /* Kapitel-Meta P7: Teaser + Hero-Bild-Alt (Kap. 06–09, vollrebuild) */
+  'ui.ch.06.teaser': 'Viele Werte, eine Variable: Listen aufbauen, durchlaufen und auswerten.',
+  'ui.ch.06.imgAlt': 'Ein langes Glas-Raster mit durchnummerierten Fächern, in denen leuchtende Objekte sortiert liegen.',
+  'ui.ch.07.teaser': 'Einmal schreiben, überall einsetzen: Code in Bausteinen denken.',
+  'ui.ch.07.imgAlt': 'Eine gläserne Maschine mit Trichter oben: Kugeln fließen durch sichtbare Zahnräder und kommen verändert unten heraus.',
+  'ui.ch.08.teaser': 'Echte Dinge beschreiben: Eigenschaften sammeln, lesen und verändern.',
+  'ui.ch.08.imgAlt': 'Ein gläserner Kern, um den kleine Kugeln mit Symbolen wie Herz, Schlüssel und Zahnrad kreisen.',
+  'ui.ch.09.teaser': 'JavaScript trifft HTML: Seiten lesen, verändern und auf Klicks reagieren lassen.',
+  'ui.ch.09.imgAlt': 'Ein leuchtender Baum aus goldenen Linien und Kästen — Wurzeln unten, verzweigte Krone oben.',
+
   /* Barrierefreiheit (P2) */
   'ui.a11y.mainNav': 'Hauptnavigation',
   'ui.a11y.skipToNav': 'Zur Navigation springen',

@@ -1,292 +1,627 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>07 – Funktionen | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
-      </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 07: Funktionen: Wiederverwendbarer Code · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Funktionen deklarieren und aufrufen, Parameter verstehen, mit return Ergebnisse zurückgeben und kleine Funktionen zusammensetzen — mit Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/07-funktionen.html" />
+    <link rel="alternate" hreflang="de" href="07-funktionen.html" />
+    <link rel="alternate" hreflang="en" href="07-functions.html" />
+    <link rel="alternate" hreflang="x-default" href="07-funktionen.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 07: Funktionen: Wiederverwendbarer Code · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Funktionen deklarieren und aufrufen, Parameter verstehen, mit return Ergebnisse zurückgeben und kleine Funktionen zusammensetzen — mit Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
 
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>07 – Funktionen 📦</h1>
-      <p class="hero-subtitle">Wiederverwendbarer, strukturierter und wartbarer Code</p>
-    </section>
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m07">
+    <div data-component="jsc-site-chrome"></div>
 
-    <section>
-      <h2>🎯 1. Was ist eine Funktion?</h2>
-      <p>
-        Eine <strong>Funktion</strong> ist ein <strong>benannter Code-Block</strong>, 
-        der bei Aufruf ausgeführt wird.  
-        Sie ist das Herzstück jeder Software – ohne Funktionen wäre Code chaotisch und nicht wartbar.
-      </p>
-      <div class="regel">
-        💡 <strong>Merke:</strong> Eine Funktion sollte <strong>eine Aufgabe</strong> erfüllen – 
-        und das <strong>gut</strong> („Single Responsibility Principle“).
-      </div>
-    </section>
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
 
-    <section>
-      <h2>📊 2. Übersicht: Funktionen-Grundlagen</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Konzept</th>
-            <th>Beispiel</th>
-            <th>Beschreibung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Deklaration</strong></td>
-            <td><code>function hallo() { ... }</code></td>
-            <td>Definiert die Funktion („Rezept erstellen“)</td>
-          </tr>
-          <tr>
-            <td><strong>Aufruf</strong></td>
-            <td><code>hallo();</code></td>
-            <td>Führt die Funktion aus („Rezept backen“)</td>
-          </tr>
-          <tr>
-            <td><strong>Parameter</strong></td>
-            <td><code>function gruessen(name) { ... }</code></td>
-            <td>Eingabewerte – machen die Funktion flexibel</td>
-          </tr>
-          <tr>
-            <td><strong>Rückgabewert</strong></td>
-            <td><code>return "Hallo";</code></td>
-            <td>Ergebnis der Funktion – kann in Variablen gespeichert werden</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Eine gläserne Maschine mit Trichter oben: Kugeln fließen durch sichtbare Zahnräder und kommen verändert unten heraus."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 07</p>
+          <h1 id="ch-title" class="jsc-hero__title">Funktionen: Wiederverwendbarer Code</h1>
+          <p class="jsc-hero__sub">Einmal schreiben, überall einsetzen: Code in Bausteinen denken.</p>
+        </div>
+      </section>
 
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        Funktionen sind der Schlüssel zu <strong>sauberem, wartbarem Code</strong>.  
-        Sie verhindern Wiederholung, verbessern Lesbarkeit und isolieren Fehler.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_functions.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Functions</a>
-      </p>
-    </section>
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Aufrufen</a>
+        <a href="#schritt-2">2 Parameter</a>
+        <a href="#schritt-3">3 return</a>
+        <a href="#schritt-4">4 Zusammensetzen</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
 
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um zu erklären, warum Funktionen mit Rückgabewert besser sind als solche ohne – 
-        und wie der Gültigkeitsbereich (Scope) von Variablen in Funktionen funktioniert.
-      </p>
-    </section>
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Du kochst Nudeln. Du weißt, wie es geht: Wasser aufsetzen, Salz, Nudeln, abgießen. Du musst nicht jedes Mal neu nachdenken. Du kannst es — du kannst es sogar einem Freund erklären.</p>
+              <p>Eine <strong>Funktion</strong> ist so ein Wissensspeicher für dein Programm: Einmal geschrieben, so oft du willst benutzt. Du gibst ihr etwas (die Packung Nudeln), sie gibt dir etwas zurück (den Teller Nudeln).</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Funktion <span class="jsc-term-card__word-en">/ function</span></p>
+                <p class="jsc-term-card__def">Ein benannter Baustein mit Code, den du wiederverwenden kannst.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie das Rezept für Nudeln.</p>
+                <p class="jsc-term-card__code"><code>function gruss() { … }</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Parameter <span class="jsc-term-card__word-en">/ parameter</span></p>
+                <p class="jsc-term-card__def">Der Wert, den die Funktion entgegennimmt.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> die Packung Nudeln, die du der Maschine gibst.</p>
+                <p class="jsc-term-card__code"><code>function gruss(name) { … }</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Rückgabe (return) <span class="jsc-term-card__word-en">/ return</span></p>
+                <p class="jsc-term-card__def">Das Ergebnis, das die Funktion liefert.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> der fertige Teller.</p>
+                <p class="jsc-term-card__code"><code>return "Hallo!";</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Aufruf <span class="jsc-term-card__word-en">/ call</span></p>
+                <p class="jsc-term-card__def">Das tatsächliche Benutzen der Funktion.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> „Jetzt koche ich die Nudeln."</p>
+                <p class="jsc-term-card__code"><code>gruss("Ada");</code></p>
+              </div>
+            </div>
+          </div>
 
-    <!-- 5. Funktion ohne Parameter -->
-    <section>
-      <h2>📦 5. Funktion ohne Parameter</h2>
-      <p>
-        Eine einfache Funktion, die immer das Gleiche tut – wie ein Schalter.
-      </p>
-      <button onclick="sagHallo()">Sag Hallo!</button>
-      <div id="ausgabe-hallo" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function sagHallo() {
-  document.getElementById("ausgabe-hallo").innerHTML = 
-    "&lt;p&gt;👋 Hallo! Diese Funktion macht immer dasselbe.&lt;/p&gt;";
-}</code></pre>
-    </section>
-
-    <!-- 6. Funktion mit Parametern -->
-    <section>
-      <h2>🔄 6. Funktion mit Parametern</h2>
-      <p>
-        Parameter machen Funktionen <strong>anpassungsfähig</strong> – wie ein Rezept mit variablen Zutaten.
-      </p>
-      <button onclick="demoParameter()">Grüße mit Namen</button>
-      <div id="ausgabe-param" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function gruessen(name) {
-  return `Hallo, ${name}! Schön, dich zu sehen. 🌟`;
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Funktion deklarieren und aufrufen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Bisher lief dein Code einmal durch, Zeile für Zeile. Funktionen ändern das:
+                Code wartet auf seinen Einsatz, statt sofort zu laufen.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Deklariert wird mit <code>function name() { … }</code>, aufgerufen mit
+                <code>name()</code>. Der Code im Körper läuft NUR beim Aufruf — die
+                Deklaration legt ihn nur bereit.
+              </p>
+              <figure class="jsc-code-block" data-filename="gruss.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">gruss.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function gruss() {
+  console.log("Hallo, Welt!");
 }
+gruss();  // Erst JETZT läuft der Code
+gruss();  // Und noch einmal</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Deklariert, nie aufgerufen</p>
+                <p>Die häufigste Anfängerfrage: „Warum passiert nichts?" — Weil <code>gruss()</code> nirgends steht. Erst der Aufruf startet den Code.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Klammern beim Aufruf vergessen</p>
+                <p><code>gruss</code> ohne <code>()</code> ist die Funktion SELBST (als Wert), kein Aufruf. Die Klammern sind der Startknopf.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Namen doppelt vergeben</p>
+                <p>Zwei Funktionen mit demselben Namen: die zweite überschreibt die erste. Namen sollen einzigartig und sprechend sein.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Funktionen müssen etwas zurückgeben"</p>
+                <p>Nicht nötig. Funktionen dürfen auch nur etwas TUN (anzeigen, ändern) — return ist eine Option, keine Pflicht.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Funktionsnamen sind Verben: gruss, berechne, zeige. Wer ein Verb liest, weiß sofort, was passiert.</p>
+            </aside>
+          </section>
 
-function demoParameter() {
-  const nachricht1 = gruessen("Anna");
-  const nachricht2 = gruessen("Ben");
-  document.getElementById("ausgabe-param").innerHTML = 
-    `&lt;p&gt;${nachricht1}&lt;/p&gt;&lt;p&gt;${nachricht2}&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 7. Rückgabewerte -->
-    <section>
-      <h2>📤 7. Rückgabewerte</h2>
-      <p>
-        Mit <code>return</code> gibt eine Funktion ein Ergebnis zurück – wie ein Taschenrechner.
-      </p>
-      <button onclick="demoReturn()">Berechne Quadrate</button>
-      <div id="ausgabe-return" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function quadrieren(zahl) {
-  return zahl * zahl;
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Parameter: Eingaben machen Funktionen flexibel</h2>
+            <div class="jsc-step__why">
+              <p>
+                Eine Funktion ohne Parameter ist ein Rezept für genau ein Gericht. Mit
+                Parametern wird sie zur Küchenmaschine: Rein damit, was du hast.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Parameter sind Platzhalter in den Klammern der Deklaration. Beim Aufruf
+                werden sie mit echten Werten gefüllt — mehrere durch Komma getrennt.
+              </p>
+              <figure class="jsc-code-block" data-filename="parameter.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">parameter.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function begruessung(name) {
+  console.log("Hallo, " + name + "!");
 }
-
-function demoReturn() {
-  const a = quadrieren(4); // → 16
-  const b = quadrieren(7); // → 49
-  document.getElementById("ausgabe-return").innerHTML = 
-    `&lt;p&gt;4² = &lt;strong&gt;${a}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;7² = &lt;strong&gt;${b}&lt;/strong&gt;&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 8. Gültigkeitsbereich (Scope) -->
-    <section class="warnung">
-      <h2>🔍 8. Gültigkeitsbereich – wo gilt eine Variable?</h2>
-      <p>
-        Variablen in einer Funktion sind <strong>lokal</strong> – außerhalb nicht sichtbar.  
-        Das verhindert unerwartete Nebeneffekte!
-      </p>
-      <button onclick="demoScope()">Zeige Scope-Beispiel</button>
-      <div id="ausgabe-scope" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoScope() {
-  const global = "Ich bin außen sichtbar";
-  
-  function innereFunktion() {
-    const lokal = "Ich existiere nur hier!";
-    return lokal;
-  }
-  
-  document.getElementById("ausgabe-scope").innerHTML = 
-    `&lt;p&gt;Außen: &lt;code&gt;global&lt;/code&gt; = "${global}"&lt;/p&gt;
-     &lt;p&gt;Innen: &lt;code&gt;lokal&lt;/code&gt; = "${innereFunktion()}"&lt;/p&gt;
-     &lt;p class="warnung"&gt;⚠️ „lokal“ ist außerhalb der Funktion &lt;em&gt;nicht zugreifbar&lt;/em&gt;.&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 9. Praxis: Eine Funktion – viele Anwendungen -->
-    <section>
-      <h2>💼 9. Praxis: Eine Funktion – viele Anwendungen</h2>
-      <p>
-        Dieselbe Funktion kann in verschiedenen Kontexten genutzt werden – 
-        das ist der Schlüssel zur Effizienz.
-      </p>
-      <button onclick="demoPraxisFunktion()">Zeige Praxisbeispiel</button>
-      <div id="ausgabe-praxis" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function formatierePreis(betrag) {
-  return `${betrag.toFixed(2)} €`;
+begruessung("Ada");   // Hallo, Ada!
+begruessung("Ben");   // Hallo, Ben!
+function summe(a, b) {
+  console.log(a + b);
 }
+summe(3, 4);  // 7</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reihenfolge vertauscht</p>
+                <p><code>function teile(a, b)</code> mit <code>teile(2, 10)</code> teilt 2 durch 10 — die Reihenfolge der Argumente zählt.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zu wenige Argumente</p>
+                <p><code>summe(3)</code> ergibt <code>NaN</code> — fehlende Parameter sind <code>undefined</code>. Anzahl muss passen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Shadowing-Verwirrung</p>
+                <p>Parameter heißt wie eine Variable außerhalb? Innerhalb der Funktion zählt nur der Parameter — das verwirrt beim Lesen. Namen eindeutig halten.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Parameter sind wichtigere Variablen"</p>
+                <p>Nein — sie sind nur Platzhalter für den Aufruf. Nach außen existieren sie nicht.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Parameter sind wie die Felder eines Formulars: Die Funktion definiert, WAS sie braucht — der Aufrufer füllt sie aus.</p>
+            </aside>
+          </section>
 
-function demoPraxisFunktion() {
-  const preis1 = formatierePreis(12.9);
-  const preis2 = formatierePreis(100);
-  const preis3 = formatierePreis(0.5);
-  
-  document.getElementById("ausgabe-praxis").innerHTML = 
-    `&lt;ul&gt;
-      &lt;li&gt;Kaffee: &lt;strong&gt;${preis1}&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;Laptop: &lt;strong&gt;${preis2}&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;Brötchen: &lt;strong&gt;${preis3}&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;`;
-}</code></pre>
-    </section>
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Funktionen sind übrigens Teamarbeit im Kleinformat: Dein Code sagt der
+              Funktion: „Hier, kümmere dich drum." Die Funktion antwortet: „Erledigt, hier
+              ist das Ergebnis." Guter Code ist ein gut geführtes Gespräch.
+            </p>
+          </aside>
 
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt kannst du sauberen, wiederverwendbaren Code schreiben!</p>
-      <a href="./08-objekte.html" class="nav-button">→ Zu Modul 08: Objekte</a>
-    </section>
-  </div>
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">return: Ergebnisse zurückgeben</h2>
+            <div class="jsc-step__why">
+              <p>
+                Bisher zeigen deine Funktionen etwas an. Mächtig werden sie erst, wenn sie
+                Ergebnisse ZURÜCKGEBEN — damit kannst du weiterrechnen.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>return</code> beendet die Funktion und liefert einen Wert an den
+                Aufrufer. Danach kommt nichts mehr. Der Rückgabewert ist ein ganz normaler
+                Wert: zuweisen, rechnen, ausgeben.
+              </p>
+              <figure class="jsc-code-block" data-filename="return.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">return.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function verdopple(x) {
+  return x * 2;
+}
+const ergebnis = verdopple(21);
+console.log(ergebnis);        // 42
+console.log(verdopple(7) + 1); // 15
+function istVolljaehrig(alter) {
+  return alter &gt;= 18;
+}
+console.log(istVolljaehrig(16)); // false</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch07">Code</label>
+              <textarea id="pg-ch07" data-pg-code spellcheck="false">function begruessung(name) {
+  return "Hallo, " + name + "!";
+}
+console.log(begruessung("Ada"));
+console.log(begruessung("Ben"));</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Schreibe eine Funktion
+              <code>verdreifache(x)</code>, die das Dreifache zurückgibt — und rufe sie mit
+              deiner Lieblingszahl auf.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">console.log mit return verwechselt</p>
+                <p>Anzeigen ist nicht zurückgeben. <code>console.log</code> zeigt dir etwas, <code>return</code> gibt deinem Programm etwas — zwei verschiedene Welten.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Code nach return</p>
+                <p><code>return</code> beendet die Funktion SOFORT. Alles danach ist unreachable — totter Code, der nie läuft.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">return vergessen</p>
+                <p>Eine Funktion ohne <code>return</code> gibt <code>undefined</code> zurück — damit lässt sich nicht weiterrechnen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Mehrere return-Pfade übersehen</p>
+                <p>Bei <code>if/else</code> braucht jeder Zweig sein return — sonst geht ein Weg mit undefined zurück.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>console.log ist für Menschen, return ist für dein Programm. Profi-Regel: Erst return denken, dann anzeigen.</p>
+            </aside>
+          </section>
 
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Kleine Funktionen zusammensetzen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Große Programme sind keine langen Funktionen. Sie sind viele kleine, klare
+                Funktionen, die zusammenarbeiten.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Das Muster: Funktionen rufen andere Funktionen auf. Im Beispiel kombiniert
+                <code>zeigeNote</code> die kleine Helferin <code>noteAlsText</code>. Die
+                Arrow-Funktion siehst du hier nur zum Lesen — selbst schreiben lernst du
+                sie später.
+              </p>
+              <figure class="jsc-code-block" data-filename="bausteine.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">bausteine.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function noteAlsText(note) {
+  if (note === 1) return "Sehr gut";
+  if (note === 2) return "Gut";
+  return "Bestanden";
+}
+function zeigeNote(note) {
+  console.log("Ergebnis: " + noteAlsText(note));
+}
+zeigeNote(2); // Ergebnis: Gut
+// Kurzform (nur lesen, nicht schreiben):
+const verdopple = (x) =&gt; x * 2;</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Eine Funktion für alles</p>
+                <p>Die „mega-Funktion" mit 100 Zeilen kann niemand mehr lesen — auch du in drei Wochen nicht. Klein schneiden.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Arrow-Funktionen sofort selbst schreiben</p>
+                <p>Erst das function-Muster sicher können, dann die Kurzform. Wer mit der Kurzform anfängt, verheddert sich in Klammern.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Rückgabe als Argument nicht erkennen</p>
+                <p><code>zeigeNote(noteAlsText(2))</code>: innen wird zuerst gerechnet, dann übergeben. Von innen nach außen lesen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zu viele Stufen auf einmal</p>
+                <p>Vier Ebenen verschachtelte Aufrufe überfordern am Anfang — baue Schicht für Schicht und teste jede einzeln.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Eine Funktion = eine Aufgabe. Wer zwei Aufgaben sieht, baut zwei Funktionen. Das ist kein Mehraufwand — es ist die Entlastung.</p>
+            </aside>
+          </section>
 
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch07-check"
+              data-chapter="07"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann eine Funktion deklarieren und aufrufen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass Funktionskörper erst beim Aufruf laufen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann einer Funktion Parameter übergeben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mehrere Parameter nutzen und deren Reihenfolge beachten.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit return ein Ergebnis zurückgeben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann erklären, warum return und console.log verschiedene Dinge sind.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann den Rückgabewert einer Funktion weiterverwenden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne das Muster „kleine Funktionen rufen sich gegenseitig".</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Arrow-Funktionen LESEN (Schreiben kommt später).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich halte die Regel „eine Funktion = eine Aufgabe" ein.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="temperatur.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">temperatur.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function celsiusToFahrenheit(c) {
+  return c * 1.8 + 32;
+}
+function bewerte(celsius) {
+  if (celsius &gt;= 25) return "heiß";
+  if (celsius &gt;= 15) return "warm";
+  return "kalt";
+}
+const grad = 20;
+console.log(celsiusToFahrenheit(grad)); // 68
+console.log(bewerte(grad));             // warm</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Jede Funktion eine Aufgabe, das Ergebnis wandert per return weiter.
+                </p>
+              </div>
+            </div>
+          </section>
 
-  <script src="../js/07-funktionen.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch07-reflect" data-export-chapter="07" data-export-title="Funktionen: Wiederverwendbarer Code" data-export-checklist="jsc-ch07-check" data-export-quiz="jsc-ch07-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Erkläre mit deinem eigenen Alltagsbeispiel, was ein Parameter und was die Rückgabe ist.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Warum ist console.log allein nicht genug für echte Programme? Was fehlt?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Schau dir deine Lösungen aus Kapitel 05 an: Wo hätte eine Funktion dir geholfen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch07-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was passiert, wenn man eine Funktion deklariert, aber nie aufruft?</legend>
+                <label><input type="radio" name="ch07-q0" value="a" /> Syntaxfehler</label>
+                <label><input type="radio" name="ch07-q0" value="b" /> Nichts — der Code im Körper läuft nie</label>
+                <label><input type="radio" name="ch07-q0" value="c" /> Sie läuft einmal sofort</label>
+                <label><input type="radio" name="ch07-q0" value="d" /> Fehler beim Speichern</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — erst der Aufruf startet den Code.</strong></template>
+                <template data-feedback="wrong">Die Deklaration legt den Code nur bereit. Ohne Aufruf passiert schlicht nichts.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>function f(x) { return x * 3; }</code> — was liefert <code>f(4)</code>?</legend>
+                <label><input type="radio" name="ch07-q1" value="a" /> 12</label>
+                <label><input type="radio" name="ch07-q1" value="b" /> 43</label>
+                <label><input type="radio" name="ch07-q1" value="c" /> 34</label>
+                <label><input type="radio" name="ch07-q1" value="d" /> undefined</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — 4 × 3 = 12, per return zurückgegeben.</strong></template>
+                <template data-feedback="wrong">Die Funktion rechnet x * 3 und gibt das Ergebnis zurück: 4 mal 3 ist 12.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was ist der Unterschied zwischen return und console.log?</legend>
+                <label><input type="radio" name="ch07-q2" value="a" /> Keiner</label>
+                <label><input type="radio" name="ch07-q2" value="b" /> return gibt an den Aufrufer zurück, console.log zeigt nur an</label>
+                <label><input type="radio" name="ch07-q2" value="c" /> console.log ist schneller</label>
+                <label><input type="radio" name="ch07-q2" value="d" /> return funktioniert nur in Schleifen</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — return liefert, console.log zeigt. Zwei verschiedene Welten.</strong></template>
+                <template data-feedback="wrong">return gibt den Wert an den Aufrufer zurück, damit du weiterrechnen kannst. console.log ist nur die Anzeige für Menschen.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Wie viele Aufgaben sollte eine Funktion haben?</legend>
+                <label><input type="radio" name="ch07-q3" value="a" /> So viele wie nötig</label>
+                <label><input type="radio" name="ch07-q3" value="b" /> Genau eine</label>
+                <label><input type="radio" name="ch07-q3" value="c" /> Mindestens zwei</label>
+                <label><input type="radio" name="ch07-q3" value="d" /> Drei</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — eine Funktion, eine Aufgabe.</strong></template>
+                <template data-feedback="wrong">Kleine Funktionen mit genau einer Aufgabe bleiben lesbar und wiederverwendbar.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Funktion = benannter, wiederverwendbarer Baustein; Körper läuft nur beim Aufruf.</li>
+                <li>Parameter = Eingänge, return = Ausgang.</li>
+                <li>console.log zeigt, return liefert.</li>
+                <li>Kleine Funktionen rufen einander — so entstehen Programme.</li>
+                <li>Eine Funktion, eine Aufgabe.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Functions" target="_blank" rel="noopener">Funktionen (MDN)</a>
+                  <span>Der komplette Einstiegs-Guide.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/return" target="_blank" rel="noopener">return (MDN)</a>
+                  <span>Was return wirklich tut.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">Arrow Functions (MDN)</a>
+                  <span>Die Kurzform — zum Lesen lernen.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Funktionen</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt mit dem nächsten Update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Das Lernvideo wird noch produziert.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Spickzettel zum Ausdrucken</h3>
+                <p class="jsc-media-embed__body" data-media-body>Folgt mit dem Kapitel-Update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Mach mir eine Funktion."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Keine Aufgabe, keine Parameter, keine Rückgabe definiert — das Ergebnis ist Zufall.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI eine Funktion ‚quersumme' erklären. Prüfe: Nimmt sie genau einen Parameter? Gibt sie mit return zurück? Würdest du sie so in dein Kapitel übernehmen?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkretes Ziel + Prüfkriterien aus dem Kapitel (Parameter, return) — du bewertest die KI-Lösung mit eigenem Wissen.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt Code in Bausteinen denken — einmal schreiben, überall einsetzen.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/08-objekte.html">
+              Weiter zu Kapitel 08: Objekte
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Aufrufen</a></li>
+            <li><a href="#schritt-2">2 Parameter</a></li>
+            <li><a href="#schritt-3">3 return</a></li>
+            <li><a href="#schritt-4">4 Zusammensetzen</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
 </html>

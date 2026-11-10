@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 07: Functions: Reusable Code · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: declare and call functions, understand parameters, return results and compose small functions — with playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/07-functions.html" />
+    <link rel="alternate" hreflang="de" href="07-funktionen.html" />
+    <link rel="alternate" hreflang="en" href="07-functions.html" />
+    <link rel="alternate" hreflang="x-default" href="07-funktionen.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 07: Functions: Reusable Code · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: declare and call functions, understand parameters, return results and compose small functions — with playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m07">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap07/jsc-kap07-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="A glass machine with a funnel on top: spheres flow through visible gears and come out changed at the bottom."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 07</p>
+          <h1 id="ch-title" class="jsc-hero__title">Functions: Reusable Code</h1>
+          <p class="jsc-hero__sub">Write it once, use it everywhere: think in building blocks.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#getting-started" data-i18n="ui.b17.chip">Getting started</a>
+        <a href="#schritt-1">1 Call</a>
+        <a href="#schritt-2">2 Parameters</a>
+        <a href="#schritt-3">3 return</a>
+        <a href="#schritt-4">4 Compose</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>You cook pasta. You know how: boil water, add salt, add pasta, drain. You don't rethink it every time. You can do it — you can even explain it to a friend.</p>
+              <p>A <strong>function</strong> is such a memory for your program: written once, used as often as you like. You give it something (a pack of pasta), it hands something back (a plate of pasta).</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Function <span class="jsc-term-card__word-en">/ Funktion</span></p>
+                <p class="jsc-term-card__def">A named building block of code you can reuse.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like the recipe for pasta.</p>
+                <p class="jsc-term-card__code"><code>function greet() { … }</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Parameter <span class="jsc-term-card__word-en">/ Parameter</span></p>
+                <p class="jsc-term-card__def">The value the function receives.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> the pack of pasta you put into the machine.</p>
+                <p class="jsc-term-card__code"><code>function greet(name) { … }</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Return <span class="jsc-term-card__word-en">/ Rückgabe</span></p>
+                <p class="jsc-term-card__def">The result the function delivers.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> the finished plate.</p>
+                <p class="jsc-term-card__code"><code>return "Hello!";</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Call <span class="jsc-term-card__word-en">/ Aufruf</span></p>
+                <p class="jsc-term-card__def">Actually using the function.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> „Now I'm cooking the pasta."</p>
+                <p class="jsc-term-card__code"><code>greet("Ada");</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Declaring and calling functions</h2>
+            <div class="jsc-step__why">
+              <p>
+                So far your code ran once through, line by line. Functions change that: code
+                waits for its mission instead of running immediately.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                You declare with <code>function name() { … }</code> and call with
+                <code>name()</code>. The code in the body only runs ON CALL — the declaration
+                merely prepares it.
+              </p>
+              <figure class="jsc-code-block" data-filename="greet.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">greet.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function greet() {
+  console.log("Hello, world!");
+}
+greet();  // Only NOW the code runs
+greet();  // And once more</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Declared, never called</p>
+                <p>The most common beginner question: „Why does nothing happen?" — because <code>greet()</code> appears nowhere. Only the call starts the code.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting parentheses on the call</p>
+                <p><code>greet</code> without <code>()</code> is the function ITSELF (as a value), not a call. The parentheses are the start button.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Duplicate names</p>
+                <p>Two functions with the same name: the second overwrites the first. Names should be unique and speaking.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Functions must return something"</p>
+                <p>Not required. Functions may also just DO something (show, change) — return is an option, not a duty.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Function names are verbs: greet, calculate, show. Reading a verb, you instantly know what happens.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Parameters: inputs make functions flexible</h2>
+            <div class="jsc-step__why">
+              <p>
+                A function without parameters is a recipe for exactly one dish. With
+                parameters it becomes a kitchen machine: put in whatever you have.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Parameters are placeholders in the declaration's parentheses. On the call
+                they get filled with real values — several separated by commas.
+              </p>
+              <figure class="jsc-code-block" data-filename="parameters.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">parameters.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function greeting(name) {
+  console.log("Hello, " + name + "!");
+}
+greeting("Ada");   // Hello, Ada!
+greeting("Ben");   // Hello, Ben!
+function sum(a, b) {
+  console.log(a + b);
+}
+sum(3, 4);  // 7</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Swapped order</p>
+                <p><code>function divide(a, b)</code> with <code>divide(2, 10)</code> divides 2 by 10 — the order of arguments matters.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Too few arguments</p>
+                <p><code>sum(3)</code> gives <code>NaN</code> — missing parameters are <code>undefined</code>. The count must match.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Shadowing confusion</p>
+                <p>Parameter named like an outside variable? Inside the function only the parameter counts — confusing when reading. Keep names unique.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„Parameters are important variables"</p>
+                <p>No — they're just placeholders for the call. They don't exist outside.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Parameters are like the fields of a form: the function defines WHAT it needs — the caller fills them in.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Functions are teamwork in miniature: your code says “take care of this", the
+              function answers “done, here is the result." Good code is a well-run
+              conversation.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">return: giving results back</h2>
+            <div class="jsc-step__why">
+              <p>
+                So far your functions show something. They become powerful only when they
+                RETURN results — that's what lets you keep calculating.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>return</code> ends the function and hands a value back to the caller.
+                Nothing comes after. The returned value is a completely normal value:
+                assign it, calculate with it, print it.
+              </p>
+              <figure class="jsc-code-block" data-filename="return.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">return.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function double(x) {
+  return x * 2;
+}
+const result = double(21);
+console.log(result);        // 42
+console.log(double(7) + 1); // 15
+function isAdult(age) {
+  return age &gt;= 18;
+}
+console.log(isAdult(16)); // false</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch07">Code</label>
+              <textarea id="pg-ch07" data-pg-code spellcheck="false">function greeting(name) {
+  return "Hello, " + name + "!";
+}
+console.log(greeting("Ada"));
+console.log(greeting("Ben"));</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> write a function <code>triple(x)</code> that
+              returns the triple — and call it with your favourite number.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Confusing console.log with return</p>
+                <p>Showing is not returning. <code>console.log</code> shows you something, <code>return</code> gives your program something — two different worlds.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Code after return</p>
+                <p><code>return</code> ends the function IMMEDIATELY. Everything after it is unreachable — dead code that never runs.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting return</p>
+                <p>A function without <code>return</code> gives back <code>undefined</code> — you can't keep calculating with that.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Missing return paths</p>
+                <p>With <code>if/else</code> every branch needs its return — otherwise one path goes back with undefined.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>console.log is for humans, return is for your program. Pro rule: think return first, display second.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Composing small functions</h2>
+            <div class="jsc-step__why">
+              <p>
+                Big programs are not long functions. They are many small, clear functions
+                working together.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The pattern: functions call other functions. In the example,
+                <code>showGrade</code> combines with the little helper
+                <code>gradeAsText</code>. The arrow function here is for READING only —
+                you'll learn to write it yourself later.
+              </p>
+              <figure class="jsc-code-block" data-filename="blocks.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">blocks.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function gradeAsText(grade) {
+  if (grade === 1) return "Excellent";
+  if (grade === 2) return "Good";
+  return "Passed";
+}
+function showGrade(grade) {
+  console.log("Result: " + gradeAsText(grade));
+}
+showGrade(2); // Result: Good
+// Short form (read only, don't write yet):
+const double = (x) =&gt; x * 2;</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">One function for everything</p>
+                <p>The 100-line „mega function" can be read by nobody — not even you in three weeks. Cut it small.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Writing arrow functions right away</p>
+                <p>First master the function pattern, then the short form. Starting with arrows tangles you in parentheses.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Not spotting a return as argument</p>
+                <p><code>showGrade(gradeAsText(2))</code>: the inner call computes first, then hands over. Read from the inside out.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Too many levels at once</p>
+                <p>Four levels of nested calls overwhelm at first — build layer by layer and test each one separately.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>One function = one job. If you see two jobs, build two functions. That's not extra work — it's relief.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch07-check"
+              data-chapter="07"
+            >
+              <li><label><input type="checkbox" /> <span>I can declare and call a function.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know function bodies only run on call.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can pass parameters to a function.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use multiple parameters and respect their order.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can return a result with return.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can explain why return and console.log are different things.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can keep using a function's return value.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the pattern of small functions calling each other.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can READ arrow functions (writing comes later).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I follow the rule „one function = one job".</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="temperature.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">temperature.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function celsiusToFahrenheit(c) {
+  return c * 1.8 + 32;
+}
+function rate(celsius) {
+  if (celsius &gt;= 25) return "hot";
+  if (celsius &gt;= 15) return "warm";
+  return "cold";
+}
+const degrees = 20;
+console.log(celsiusToFahrenheit(degrees)); // 68
+console.log(rate(degrees));                // warm</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Each function has one job, the result travels on via return.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch07-reflect" data-export-chapter="07" data-export-title="Functions: Reusable Code" data-export-checklist="jsc-ch07-check" data-export-quiz="jsc-ch07-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Explain with your own everyday example what a parameter is and what the return is.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Why is console.log alone not enough for real programs? What's missing?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Look at your solutions from chapter 05: where would a function have helped you?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch07-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What happens when you declare a function but never call it?</legend>
+                <label><input type="radio" name="ch07-q0" value="a" /> Syntax error</label>
+                <label><input type="radio" name="ch07-q0" value="b" /> Nothing — the code in the body never runs</label>
+                <label><input type="radio" name="ch07-q0" value="c" /> It runs once immediately</label>
+                <label><input type="radio" name="ch07-q0" value="d" /> Error when saving</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — only the call starts the code.</strong></template>
+                <template data-feedback="wrong">The declaration merely prepares the code. Without a call, nothing happens at all.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>function f(x) { return x * 3; }</code> — what does <code>f(4)</code> return?</legend>
+                <label><input type="radio" name="ch07-q1" value="a" /> 12</label>
+                <label><input type="radio" name="ch07-q1" value="b" /> 43</label>
+                <label><input type="radio" name="ch07-q1" value="c" /> 34</label>
+                <label><input type="radio" name="ch07-q1" value="d" /> undefined</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — 4 × 3 = 12, returned via return.</strong></template>
+                <template data-feedback="wrong">The function computes x * 3 and returns the result: 4 times 3 is 12.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What is the difference between return and console.log?</legend>
+                <label><input type="radio" name="ch07-q2" value="a" /> None</label>
+                <label><input type="radio" name="ch07-q2" value="b" /> return gives back to the caller, console.log only shows</label>
+                <label><input type="radio" name="ch07-q2" value="c" /> console.log is faster</label>
+                <label><input type="radio" name="ch07-q2" value="d" /> return only works in loops</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — return delivers, console.log shows. Two different worlds.</strong></template>
+                <template data-feedback="wrong">return hands the value back to the caller so you can keep calculating. console.log is just the display for humans.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>How many jobs should a function have?</legend>
+                <label><input type="radio" name="ch07-q3" value="a" /> As many as necessary</label>
+                <label><input type="radio" name="ch07-q3" value="b" /> Exactly one</label>
+                <label><input type="radio" name="ch07-q3" value="c" /> At least two</label>
+                <label><input type="radio" name="ch07-q3" value="d" /> Three</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — one function, one job.</strong></template>
+                <template data-feedback="wrong">Small functions with exactly one job stay readable and reusable.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Function = named, reusable building block; body only runs on call.</li>
+                <li>Parameters = inputs, return = output.</li>
+                <li>console.log shows, return delivers.</li>
+                <li>Small functions call each other — that's how programs grow.</li>
+                <li>One function, one job.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions" target="_blank" rel="noopener">Functions (MDN)</a>
+                  <span>The complete beginner's guide.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return" target="_blank" rel="noopener">return (MDN)</a>
+                  <span>What return really does.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">Arrow functions (MDN)</a>
+                  <span>The short form — learn to read it.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Functions</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming with the next update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>The learning video is still being produced.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Cheat sheet to print</h3>
+                <p class="jsc-media-embed__body" data-media-body>Coming with the chapter update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Make me a function."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No job, no parameters, no return defined — the result is random.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI explain a function ‚digitSum'. Check: does it take exactly one parameter? does it return via return? would you adopt it into your chapter as-is?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete goal plus check criteria from the chapter (parameter, return) — you judge the AI solution with your own knowledge.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now think in building blocks — write once, use everywhere.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/08-objects.html">
+              On to chapter 08: Objects
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started" data-i18n="ui.b17.railLink">Getting started</a></li>
+            <li><a href="#schritt-1">1 Call</a></li>
+            <li><a href="#schritt-2">2 Parameters</a></li>
+            <li><a href="#schritt-3">3 return</a></li>
+            <li><a href="#schritt-4">4 Compose</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

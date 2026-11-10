@@ -1,283 +1,611 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>09 – DOM-Manipulation | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 09: DOM: Webseiten zum Leben erwecken · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Seite lesen mit querySelector, verändern mit textContent und classList, Elemente erzeugen und einfügen und die erste echte App — mit Live-Suche und Einkaufslisten-Demo, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/09-dom.html" />
+    <link rel="alternate" hreflang="de" href="09-dom.html" />
+    <link rel="alternate" hreflang="en" href="09-the-dom.html" />
+    <link rel="alternate" hreflang="x-default" href="09-dom.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 09: DOM: Webseiten zum Leben erwecken · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Seite lesen mit querySelector, verändern mit textContent und classList, Elemente erzeugen und einfügen und die erste echte App — mit Live-Suche und Einkaufslisten-Demo, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m09">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Ein leuchtender Baum aus goldenen Linien und Kästen — Wurzeln unten, verzweigte Krone oben."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 09</p>
+          <h1 id="ch-title" class="jsc-hero__title">DOM: Webseiten zum Leben erwecken</h1>
+          <p class="jsc-hero__sub">JavaScript trifft HTML: Seiten lesen, verändern und auf Klicks reagieren lassen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Lesen</a>
+        <a href="#schritt-2">2 Verändern</a>
+        <a href="#schritt-3">3 Erzeugen</a>
+        <a href="#schritt-4">4 Erste App</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Dein HTML baut ein Haus: Wände, Türen, Fenster. Bisher war das Haus leer und still — sobald der Browser fertig gebaut hat.</p>
+              <p>Das <strong>DOM</strong> ist der Bauplan dieses Hauses, den der Browser aus deinem HTML macht. Und JavaScript kann den Plan verändern, während du hineinschaust: Ein Fenster einfärben, eine Tür öffnen, ein Zimmer dazubauen.</p>
+              <p>Du hast das DOM schon in Kapitel 01 kennengelernt. Jetzt wird es dein Werkzeug.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">DOM <span class="jsc-term-card__word-en">/ DOM</span></p>
+                <p class="jsc-term-card__def">Der Bauplan der Seite, den der Browser aus dem HTML macht.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie der Grundriss eines Hauses.</p>
+                <p class="jsc-term-card__code"><code>document</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Element <span class="jsc-term-card__word-en">/ element</span></p>
+                <p class="jsc-term-card__def">Ein Teil der Seite: Absatz, Button, Bild.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein Möbelstück im Haus.</p>
+                <p class="jsc-term-card__code"><code>&lt;p&gt;…&lt;/p&gt;</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">querySelector <span class="jsc-term-card__word-en">/ querySelector</span></p>
+                <p class="jsc-term-card__def">Die Suchfunktion: Findet ein Element per CSS-Auswahl.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie „Zeig mir den roten Stuhl im Wohnzimmer."</p>
+                <p class="jsc-term-card__code"><code>document.querySelector("#titel")</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">textContent <span class="jsc-term-card__word-en">/ textContent</span></p>
+                <p class="jsc-term-card__def">Der Text, der IN einem Element steht.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> der Zettel, der am Kühlschrank klebt.</p>
+                <p class="jsc-term-card__code"><code>el.textContent = "Neu!";</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Die Seite lesen: querySelector</h2>
+            <div class="jsc-step__why">
+              <p>
+                JavaScript kann nichts ändern, bevor es das Element gefunden hat. Die Suche
+                ist der erste Schritt jedes DOM-Programms.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>document.querySelector</code> nimmt CSS-Selektoren (<code>#id</code>,
+                <code>.klasse</code>, <code>element</code>) und liefert das erste
+                Treffer-Element — oder <code>null</code>, wenn nichts passt.
+              </p>
+              <figure class="jsc-code-block" data-filename="suche.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">suche.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const titel = document.querySelector("#titel");
+const ersteKarte = document.querySelector(".karte");
+console.log(titel.textContent); // liest den Text des Elements</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="dom-search">
+              <p class="jsc-demo__title">Live-Suche</p>
+              <div class="jsc-demo__scope" data-search-scope>
+                <p class="jsc-demo__fake-title" id="demo-titel">Meine erste Seite</p>
+                <div class="jsc-demo__fake-card karte">Karte 1: Arrays</div>
+                <div class="jsc-demo__fake-card karte">Karte 2: Objekte</div>
+              </div>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-search="#demo-titel"
+                  data-found="Treffer"
+                >#demo-titel suchen</button>
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--outline jsc-button--sm"
+                  data-search=".karte"
+                  data-found="Treffer"
+                >.karte suchen</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini-Konsole"></div>
+              </div>
+              <p class="jsc-demo__hint">Beobachte: querySelector liefert nur den ERSTEN Treffer — die Suche läuft in diesem Demo-Bereich.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Punkt bei Klassen vergessen</p>
+                <p><code>querySelector("karte")</code> sucht ein <code>&lt;karte&gt;</code>-ELEMENT. Klassen brauchen den Punkt: <code>".karte"</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Groß-/Kleinschreibung in der ID</p>
+                <p><code>#Titel</code> findet <code>id="titel"</code> nicht. IDs sind case-sensitiv — exakt abtippen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„querySelector liefert alle"</p>
+                <p>Nein — nur das ERSTE Element. Für alle Treffer gibt es querySelectorAll (Ausblick, kommt später).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">null nicht prüfen</p>
+                <p>Wenn nichts gefunden wird, kommt <code>null</code> zurück — der Zugriff darauf wirft einen Fehler. Immer prüfen!</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Devtools öffnen, $0 und document.querySelector ausprobieren — die Konsole ist dein DOM-Labor.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Die Seite verändern: textContent &amp; classList</h2>
+            <div class="jsc-step__why">
+              <p>
+                Lesen war der Anfang. Jetzt wird geschrieben: Text ändern, Elemente ein-
+                und ausblenden, Farben per Klasse umschalten.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>textContent</code> setzt Text — sicher, ohne HTML-Parsing.
+                <code>classList</code> mit <code>add</code>/<code>remove</code>/<code>toggle</code>
+                schaltet Zustände per Klasse.
+              </p>
+              <figure class="jsc-code-block" data-filename="veraendern.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">veraendern.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const status = document.querySelector("#status");
+status.textContent = "Bereit!";            // Text ändern
+const karte = document.querySelector(".karte");
+karte.classList.add("aktiv");              // Klasse hinzufügen
+karte.classList.remove("aktiv");           // entfernen
+karte.classList.toggle("aktiv");           // umschalten</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">innerHTML für reinen Text</p>
+                <p><code>textContent</code> ist sicherer — es parst kein HTML. Nur wenn du wirklich HTML einfügen willst (und es vertraust), innerHTML.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">classList falsch zugewiesen</p>
+                <p><code>karte.classList = "aktiv"</code> überschreibt die ganze Liste — richtig: <code>classList.add("aktiv")</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Klasse ohne CSS</p>
+                <p>Die Klasse „aktiv" muss im Stylesheet eine Regel haben — sonst passiert sichtbar nichts.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Kinder zerstört</p>
+                <p><code>textContent</code> ersetzt ALLES im Element — vorhandene Kinder-Elemente sind danach weg.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Zustände per Klasse steuern, nicht per style-Attribut: <code>.aktiv { … }</code> im CSS — JavaScript schaltet nur um, das Design bleibt im Stylesheet.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Das DOM-Prinzip ist über 20 Jahre alt — und es ist heute noch DAS Fundament
+              jeder Website, die du benutzt. Wer das DOM versteht, versteht, wie das Web
+              WIRKLICH funktioniert.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Elemente erzeugen und einfügen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Bisher haben wir bestanden umgebaut. Jetzt bauen wir NEUES: Listeneinträge,
+                Karten, ganze Bereiche — zur Laufzeit.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Das Muster heißt „bauen und anhängen": Erst mit <code>createElement</code>
+                das Element fertig machen, Inhalt füllen — dann mit <code>append</code> ans
+                Ende oder <code>prepend</code> an den Anfang einfügen.
+              </p>
+              <figure class="jsc-code-block" data-filename="erzeugen.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">erzeugen.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const liste = document.querySelector("#einkauf");
+const eintrag = document.createElement("li");
+eintrag.textContent = "Butter";
+liste.append(eintrag);      // ans Ende der Liste</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">append vergessen</p>
+                <p>Das Element existiert dann nur im Gedächtnis — sichtbar wird es erst durch append/prepend.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„#li" im createElement</p>
+                <p><code>createElement("#li")</code> denkt an einen Selektor — falsch. Es braucht den reinen Tag-Namen: <code>"li"</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reihenfolge durcheinander</p>
+                <p>Text vor dem Anhängen setzen oder danach — beides ok. Durcheinander bringt es nur, wer den Überblick verliert.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Eltern-Element null</p>
+                <p>Wenn <code>querySelector</code> nichts findet, ist <code>liste</code> null — <code>append</code> darauf wirft einen Fehler.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Das Muster heißt „bauen und anhängen": Erst das Element fertig machen, dann einfügen. So bleibt dein Code lesbar.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Demo: Interaktive Einkaufsliste (erste echte App)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Suche, verändern, erzeugen — alles zusammen ergibt deine erste echte App:
+                Eingabe, Button, Liste. Kapitel 10 macht sie noch reaktionsschneller.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Eingabefeld + Button → neuer Eintrag in der Liste. Eintrag anklickbar zum
+                Abhaken (<code>classList.toggle</code>). Events kommen erst in Kapitel 10
+                dran — hier siehst sie nur in Aktion.
+              </p>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="dom-list">
+              <p class="jsc-demo__title">Interaktive Einkaufsliste</p>
+              <div class="jsc-demo__row">
+                <label class="jsc-step__blocklabel" for="list-in">Neuer Eintrag</label>
+                <input class="jsc-demo__input" id="list-in" data-list-input type="text" autocomplete="off" />
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-list-add>Hinzufügen</button>
+              </div>
+              <ul class="jsc-demo__list" data-list>
+                <li>Brot</li>
+              </ul>
+              <p class="jsc-demo__hint">Tippe etwas ein und klicke auf einen Eintrag — er wird abgehakt (classList.toggle in Aktion).</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Input-Wert vergessen</p>
+                <p>Der Text steckt in <code>input.value</code> — ohne ihn auszulesen, hängst du Leeres an.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Button reagiert nicht</p>
+                <p>Ohne Events passiert bei Klicks nichts. Wie ein Klick eine Funktion auslöst, erklärt Kapitel 10 (addEventListener).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Leere Einträge</p>
+                <p>Leere Eingabe nicht prüfen → die Liste voller Leerzeilen. Kurz <code>value.trim()</code> abfragen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Falsches Eltern-Element</p>
+                <p>append auf den falschen Container und der Eintrag taucht an der falschen Stelle auf — Ziel immer per querySelector holen.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Diese Demo ist dein Blueprint für das Abschlussprojekt: Eingabe → Verarbeitung → Anzeige. Alles, was du ab jetzt baust, folgt diesem Muster.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch09-check"
+              data-chapter="09"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann erklären, was das DOM ist und woher es kommt (HTML).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Elemente mit querySelector per ID, Klasse und Elementname finden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann den Text eines Elements mit textContent lesen und setzen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, warum textContent für reinen Text sicherer ist als innerHTML.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Klassen mit classList add/remove/toggle steuern.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit createElement neue Elemente bauen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Elemente mit append/prepend in die Seite einfügen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann das Muster „bauen und anhängen" sicher anwenden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich habe die Einkaufslisten-Demo verstanden und weiß, wofür Events gebraucht werden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann den Ablauf Eingabe → Verarbeitung → Anzeige erklären.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="farb-app.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">farb-app.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const button = document.querySelector("#theme-btn");
+button.addEventListener("click", () =&gt; {
+  document.body.classList.toggle("dark");
+});
+const nameInput = document.querySelector("#name");
+const gruss = document.querySelector("#gruss");
+nameInput.addEventListener("input", () =&gt; {
+  gruss.textContent = "Hallo, " + nameInput.value + "!";
+});</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Ein Button, eine Klasse — das Zustands-Muster des gesamten Webs.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch09-reflect" data-export-chapter="09" data-export-title="DOM: Webseiten zum Leben erwecken" data-export-checklist="jsc-ch09-check" data-export-quiz="jsc-ch09-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Erkläre deinem Nachbarn das Haus-Bild: Was ist HTML, was das DOM, was JavaScript?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Wo würdest du Zustände per Klasse umschalten, wo per textContent? Nenne je ein Beispiel.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Was hat dich an der Einkaufslisten-Demo am meisten überrascht?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch09-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was liefert <code>document.querySelector('#titel')</code>, wenn es das Element nicht gibt?</legend>
+                <label><input type="radio" name="ch09-q0" value="a" /> Fehler-Dialog</label>
+                <label><input type="radio" name="ch09-q0" value="b" /> <code>null</code></label>
+                <label><input type="radio" name="ch09-q0" value="c" /> undefined-Element</label>
+                <label><input type="radio" name="ch09-q0" value="d" /> Leerstring</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — querySelector liefert null, wenn nichts passt. Immer prüfen!</strong></template>
+                <template data-feedback="wrong">Bei keinem Treffer kommt null zurück — darum den Rückgabewert immer prüfen, bevor du darauf zugreifst.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Wie änderst du den Text eines Elements sicher?</legend>
+                <label><input type="radio" name="ch09-q1" value="a" /> <code>el.innerHTML = x</code></label>
+                <label><input type="radio" name="ch09-q1" value="b" /> <code>el.textContent = x</code></label>
+                <label><input type="radio" name="ch09-q1" value="c" /> <code>el.text = x</code></label>
+                <label><input type="radio" name="ch09-q1" value="d" /> <code>changeText(el)</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — textContent setzt Text, ohne HTML zu parsen. Die sichere Wahl.</strong></template>
+                <template data-feedback="wrong">textContent ist der sichere Weg für reinen Text — kein HTML-Parsing, keine Überraschungen.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was macht <code>el.classList.toggle('aktiv')</code>?</legend>
+                <label><input type="radio" name="ch09-q2" value="a" /> Löscht die Klasse</label>
+                <label><input type="radio" name="ch09-q2" value="b" /> Fügt sie hinzu, falls sie fehlt — sonst entfernt sie sie</label>
+                <label><input type="radio" name="ch09-q2" value="c" /> Ersetzt alle Klassen</label>
+                <label><input type="radio" name="ch09-q2" value="d" /> Wirft einen Fehler</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — toggle schaltet um: da → weg, weg → da.</strong></template>
+                <template data-feedback="wrong">Genau das ist der Sinn von toggle: fehlt die Klasse, wird sie gesetzt; ist sie da, wird sie entfernt.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>In welcher Reihenfolge baut man ein neues Element ein?</legend>
+                <label><input type="radio" name="ch09-q3" value="a" /> Anhängen → Bauen</label>
+                <label><input type="radio" name="ch09-q3" value="b" /> Bauen → Anhängen</label>
+                <label><input type="radio" name="ch09-q3" value="c" /> Nur Bauen</label>
+                <label><input type="radio" name="ch09-q3" value="d" /> Nur Anhängen</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — „bauen und anhängen": erst fertig machen, dann einfügen.</strong></template>
+                <template data-feedback="wrong">Das Muster heißt bauen und anhängen: createElement, Inhalt füllen, dann append.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>DOM = Bauplan der Seite; document ist der Eingang.</li>
+                <li>querySelector findet per CSS-Selektor — null prüfen!</li>
+                <li>textContent für Text, classList für Zustände.</li>
+                <li>createElement + append bauen neue Teile.</li>
+                <li>Eingabe → Verarbeitung → Anzeige ist das Grundmuster jeder App.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/API/Document_Object_Model/Introduction" target="_blank" rel="noopener">Einführung in das DOM (MDN)</a>
+                  <span>Der offizielle Einstieg.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/API/Document/querySelector" target="_blank" rel="noopener">document.querySelector (MDN)</a>
+                  <span>Die Suchfunktion im Detail.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/API/Element/classList" target="_blank" rel="noopener">classList (MDN)</a>
+                  <span>Zustände per Klasse.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: DOM</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt mit dem nächsten Update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Das Lernvideo wird noch produziert.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Spickzettel zum Ausdrucken</h3>
+                <p class="jsc-media-embed__body" data-media-body>Folgt mit dem Kapitel-Update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Bau mir was mit DOM."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Kein Ziel, keine Elemente, keine Prüfung — das Ergebnis ist beliebig und bleibt ungeprüft.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI eine Like-Button-Komponente erzeugen (Klick → Zähler + Farbwechsel). Prüfe: Nutzt sie classList statt style? Findet sie das Element sauber per querySelector?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkrete Komponente + Prüfkriterien aus dem Kapitel (classList, querySelector) — du bewertest die KI-Lösung fachlich.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt Seiten lesen, verändern und befüllen — dein erstes Werkzeug als Web-Entwickler.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/10-ereignisse.html">
+              Weiter zu Kapitel 10: Ereignisse
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Lesen</a></li>
+            <li><a href="#schritt-2">2 Verändern</a></li>
+            <li><a href="#schritt-3">3 Erzeugen</a></li>
+            <li><a href="#schritt-4">4 Erste App</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
       </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
-
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>09 – DOM-Manipulation 🌐</h1>
-      <p class="hero-subtitle">Brücke zwischen HTML & JavaScript – Inhalte dynamisch steuern</p>
-    </section>
-
-    <section>
-      <h2>🎯 1. Was ist der DOM?</h2>
-      <p>
-        Der <strong>Document Object Model (DOM)</strong> ist eine programmierbare Repräsentation deiner Webseite.  
-        Der Browser wandelt HTML in einen <strong>Baum aus Objekten</strong> um – den DOM-Baum.
-      </p>
-      <div class="dom-tree">
-&lt;html&gt;
-└── &lt;head&gt;
-│   └── &lt;title&gt;
-└── &lt;body&gt;
-    ├── &lt;h1&gt;
-    ├── &lt;button&gt;
-    └── &lt;div id="output"&gt;
-      </div>
-      <p>
-        Mit JavaScript kannst du diesen Baum <strong>durchsuchen, ändern, erweitern oder löschen</strong>.
-      </p>
-    </section>
-
-    <section>
-      <h2>📊 2. Übersicht: DOM-Methoden</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Aufgabe</th>
-            <th>Methode</th>
-            <th>Beispiel</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Element finden</td>
-            <td><code>querySelector()</code></td>
-            <td><code>document.querySelector("#id")</code></td>
-          </tr>
-          <tr>
-            <td>Text ändern</td>
-            <td><code>.textContent</code></td>
-            <td><code>el.textContent = "Hallo";</code></td>
-          </tr>
-          <tr>
-            <td>HTML ändern</td>
-            <td><code>.innerHTML</code></td>
-            <td><code>el.innerHTML = "&lt;strong&gt;Hallo&lt;/strong&gt;";</code></td>
-          </tr>
-          <tr>
-            <td>Neues Element</td>
-            <td><code>createElement()</code></td>
-            <td><code>const li = document.createElement("li");</code></td>
-          </tr>
-          <tr>
-            <td>Stil ändern</td>
-            <td><code>.style</code></td>
-            <td><code>el.style.color = "red";</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        DOM-Manipulation ist der Schlüssel zu <strong>dynamischen Webseiten</strong>.  
-        Ohne sie wäre JavaScript „blind“ gegenüber deiner HTML-Struktur.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript HTML DOM</a>
-      </p>
-    </section>
-
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um zu erklären, wann man <code>.textContent</code> und wann <code>.innerHTML</code> verwendet – 
-        und wie man sicher neue Elemente im DOM erstellt.
-      </p>
-    </section>
-
-    <!-- 5. Elemente finden -->
-    <section>
-      <h2>🔍 5. Elemente im DOM finden</h2>
-      <p>
-        Bevor du ein Element ändern kannst, musst du es <strong>adressieren</strong>.  
-        Die moderne Methode: <code>querySelector()</code> mit CSS-Selektoren.
-      </p>
-      <button onclick="demoSuchen()">Zeige Element-Suche</button>
-      <div id="demo-suchen-ausgabe" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoSuchen() {
-  const h1 = document.querySelector("h1");
-  const button = document.querySelector("button");
-  
-  document.getElementById("demo-suchen-ausgabe").innerHTML = 
-    `&lt;p&gt;Gefunden: &lt;code&gt;h1&lt;/code&gt;-Text = „${h1.textContent}“&lt;/p&gt;
-     &lt;p&gt;Button-Text = „${button.textContent}“&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 6. Inhalte ändern -->
-    <section class="warnung">
-      <h2>✏️ 6. Inhalte ändern: Text vs. HTML</h2>
-      <p>
-        ⚠️ <strong>Sicherheit:</strong> <code>innerHTML</code> kann XSS-Angriffe ermöglichen!  
-        → Für Benutzereingaben <strong>immer <code>.textContent</code> verwenden</strong>.
-      </p>
-      <button onclick="demoInhalt()">Text vs. HTML testen</button>
-      <div id="demo-inhalt-ausgabe" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoInhalt() {
-  const bereich = document.getElementById("demo-inhalt-ausgabe");
-  
-  bereich.textContent = "Dieser Text enthält &lt;strong&gt;kein HTML&lt;/strong&gt;!";
-  setTimeout(() => {
-    bereich.innerHTML = "Dieser Text enthält &lt;strong&gt;fettes HTML&lt;/strong&gt;!";
-  }, 1500);
-}</code></pre>
-    </section>
-
-    <!-- 7. Elemente erstellen -->
-    <section>
-      <h2>➕ 7. Neue Elemente erstellen</h2>
-      <p>
-        Dynamische Webseiten fügen oft Inhalte zur Laufzeit hinzu (z. B. neue Kommentare).
-      </p>
-      <button onclick="demoErstellen()">Neues Element erstellen</button>
-      <div id="demo-erstellen-liste"></div>
-      <pre><code class="js-code">function demoErstellen() {
-  const liste = document.getElementById("demo-erstellen-liste");
-  
-  const neuesLi = document.createElement("li");
-  neuesLi.textContent = "🕗 " + new Date().toLocaleTimeString();
-  
-  if (liste.children.length === 0) {
-    const ul = document.createElement("ul");
-    ul.appendChild(neuesLi);
-    liste.appendChild(ul);
-  } else {
-    liste.querySelector("ul").appendChild(neuesLi);
-  }
-}</code></pre>
-    </section>
-
-    <!-- 8. Stil & Attribute -->
-    <section>
-      <h2>🎨 8. Stil und Attribute ändern</h2>
-      <p>
-        Du kannst auch das Aussehen und Verhalten von Elementen steuern.
-      </p>
-      <button onclick="demoStil()">Farbe ändern</button>
-      <button onclick="demoAttribut()">Attribut ändern</button>
-      <div id="demo-stil-ziel" style="padding: 1rem; margin: 1rem 0; border: 1px solid #ccc;">
-        Dieser Bereich ändert sich.
-      </div>
-      <pre><code class="js-code">function demoStil() {
-  const div = document.getElementById("demo-stil-ziel");
-  div.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-}
-
-function demoAttribut() {
-  const div = document.getElementById("demo-stil-ziel");
-  div.setAttribute("data-geaendert", "ja");
-  div.textContent = "Attribut 'data-geaendert' wurde gesetzt!";
-}</code></pre>
-    </section>
-
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt kannst du Webseiten dynamisch steuern!</p>
-      <a href="./10-ereignisse.html" class="nav-button">→ Zu Modul 10: Ereignisse & Timing</a>
-    </section>
-  </div>
-
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="../js/09-dom.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+    </main>
+  </body>
 </html>

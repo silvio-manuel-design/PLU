@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 06: Arrays: Lists &amp; Collections · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: create arrays and read elements, loop with for and for...of, change arrays with push/pop/includes and the counter-array pattern — with dice stats demo, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/06-arrays-lists.html" />
+    <link rel="alternate" hreflang="de" href="06-arrays.html" />
+    <link rel="alternate" hreflang="en" href="06-arrays-lists.html" />
+    <link rel="alternate" hreflang="x-default" href="06-arrays.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 06: Arrays: Lists &amp; Collections · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: create arrays and read elements, loop with for and for...of, change arrays with push/pop/includes and the counter-array pattern — with dice stats demo, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m06">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap06/jsc-kap06-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="A long glass grid with numbered compartments holding glowing objects in order."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 06</p>
+          <h1 id="ch-title" class="jsc-hero__title">Arrays: Lists &amp; Collections</h1>
+          <p class="jsc-hero__sub">Many values, one variable: build lists, loop through them, and use the data.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#getting-started" data-i18n="ui.b17.chip">Getting started</a>
+        <a href="#schritt-1">1 Create</a>
+        <a href="#schritt-2">2 Loop</a>
+        <a href="#schritt-3">3 Change</a>
+        <a href="#schritt-4">4 Counter array</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>You go shopping. You write a list: bread, milk, eggs. Everything on one piece of paper. Numbered.</p>
+              <p>You don't carry three notes around. One paper is enough. The numbers help you: “Number 2 on the list.”</p>
+              <p>An <strong>array</strong> is exactly that for your program: a list of values on one “paper” — numbered and ready for the loop from chapter 05.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Array <span class="jsc-term-card__word-en">/ Array</span></p>
+                <p class="jsc-term-card__def">A numbered list of values in one variable.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like the shopping list on one piece of paper.</p>
+                <p class="jsc-term-card__code"><code>const shopping = ["bread", "milk"];</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Index <span class="jsc-term-card__word-en">/ Index</span></p>
+                <p class="jsc-term-card__def">The number of an element. It starts at 0!</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like „number 2 on the list" — in programs, 0 counts as first.</p>
+                <p class="jsc-term-card__code"><code>shopping[0]</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Element <span class="jsc-term-card__word-en">/ Element</span></p>
+                <p class="jsc-term-card__def">A single value in the list.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> one item on the shopping list.</p>
+                <p class="jsc-term-card__code"><code>"milk"</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Length <span class="jsc-term-card__word-en">/ Länge</span></p>
+                <p class="jsc-term-card__def">How many elements the list has.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> the count of your list items.</p>
+                <p class="jsc-term-card__code"><code>shopping.length</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Creating arrays and reading elements</h2>
+            <div class="jsc-step__why">
+              <p>
+                So far every variable held one value. Real data never comes alone: grade
+                lists, game scores, shopping carts. Arrays catch you there.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                You create an array with square brackets: <code>["bread", "milk"]</code>.
+                Access works via the <strong>index</strong> in square brackets — and it
+                starts at <strong>0</strong>, not 1. <code>length</code> returns the number
+                of elements.
+              </p>
+              <figure class="jsc-code-block" data-filename="shopping.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">shopping.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const shopping = ["bread", "milk", "eggs", "butter"];
+console.log(shopping[0]);      // "bread" — the FIRST element!
+console.log(shopping[3]);      // "butter"
+console.log(shopping.length);  // 4
+console.log(shopping[shopping.length - 1]); // last element</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„The index starts at 1"</p>
+                <p>No — it starts at 0. <code>shopping[1]</code> is the SECOND element. This shift costs everyone nerves at first.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Dot instead of brackets</p>
+                <p><code>shopping.1</code> is a syntax error — numbers as an index need square brackets: <code>shopping[1]</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Confusing length and index</p>
+                <p><code>length</code> counts from 1 (4 elements), the index from 0 (last index: 3). That's why the last element is <code>length - 1</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reading past the list</p>
+                <p><code>shopping[10]</code> returns <code>undefined</code> — no error, but dangerous. With unknown lists, check <code>length</code> first.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>The last element is <code>arr[arr.length - 1]</code> — this expression appears constantly in real code. Memorise it.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Looping through arrays</h2>
+            <div class="jsc-step__why">
+              <p>
+                The whole point of a list: working through it item by item. The for loop
+                from chapter 05 meets its destiny here.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The classic <code>for</code> with <code>i &lt; arr.length</code> gives you
+                the index — perfect when you need the position. When only the values matter,
+                <code>for...of</code> is the more comfortable variant.
+              </p>
+              <figure class="jsc-code-block" data-filename="grades.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">grades.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const grades = [2, 1, 3, 1, 4];
+for (let i = 0; i &lt; grades.length; i++) {
+  console.log("Exam", i + 1, "→", grades[i]);
+}
+// Shorter, when the index doesn't matter:
+for (const grade of grades) {
+  console.log("Grade:", grade);
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Off-by-one at the end</p>
+                <p><code>i &lt;= grades.length</code> reaches one step too far → <code>undefined</code> on the last pass. The condition is <code>&lt;</code>, not <code>&lt;=</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Expecting an index from for...of</p>
+                <p><code>for...of</code> delivers the VALUES, no numbers. If you need the position, use the classic for loop.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Shrinking the array inside the loop</p>
+                <p>Removing elements while iterating shifts every index — the loop then skips over items.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting grades[i]</p>
+                <p><code>console.log(i)</code> only prints the number, not the value. Only <code>grades[i]</code> fetches the element.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Need the index? Classic for. Only the values? for...of. This one decision makes arrays readable.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Arrays are everywhere: your timetable is an array of lessons, your playlist an
+              array of songs. From now on you won't see a list without thinking of arrays.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Changing arrays: push, pop, includes</h2>
+            <div class="jsc-step__why">
+              <p>
+                Lists are alive: add something, cross something off, check whether something
+                is already on it.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>push()</code> appends at the end, <code>pop()</code> removes at the
+                end (and returns the element). <code>includes()</code> checks whether a
+                value is inside; <code>indexOf()</code> finds the position (<code>-1</code> =
+                not found).
+              </p>
+              <figure class="jsc-code-block" data-filename="change.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">change.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const shopping = ["bread", "milk"];
+shopping.push("eggs");       // append at the end
+console.log(shopping);       // ["bread", "milk", "eggs"]
+const gone = shopping.pop(); // remove the last element
+console.log(gone);           // "eggs"
+console.log(shopping.includes("milk")); // true
+console.log(shopping.indexOf("bread")); // 0</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch06">Code</label>
+              <textarea id="pg-ch06" data-pg-code spellcheck="false">const shopping = ["bread", "milk", "eggs"];
+console.log(shopping[0]);
+console.log(shopping.length);
+shopping.push("butter");
+console.log(shopping);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> append two more products and print the new length
+              afterwards.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„push creates a new array"</p>
+                <p>No — <code>push</code> changes the existing array. A copy needs other methods (more on that later).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">includes without parentheses</p>
+                <p><code>shopping.includes</code> (without <code>()</code>) is the function itself, not the result. Don't forget to call it.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">pop() on an empty array</p>
+                <p>Returns <code>undefined</code> — no error, but better check <code>length</code> first when the list can be empty.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">indexOf with truthiness</p>
+                <p><code>if (shopping.indexOf("bread"))</code> is FALSE at index 0 — 0 is falsy! Compare properly with <code>!== -1</code> or just use <code>includes</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p><code>indexOf("x") !== -1</code> is the same as <code>includes("x")</code> — includes is the modern, readable version.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Demo: Dice statistics (arrays in action)</h2>
+            <div class="jsc-step__why">
+              <p>
+                A die is rolled 100 times. Which number came up how often? With an array,
+                that's ten lines.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The pattern is called a <strong>counter array</strong>: an array with six
+                counters (index 0 to 5). The rolled number decides which counter goes up —
+                <code>counts[roll - 1]++</code>. No six separate variables needed.
+              </p>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="dice-stats">
+              <p class="jsc-demo__title">Dice statistics</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-stats-roll
+                >100 rolls</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini console"></div>
+              </div>
+              <p class="jsc-demo__hint">Index = die value − 1. Watch how evenly the frequencies spread.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Six variables instead of an array</p>
+                <p><code>dice1, dice2, …</code> doesn't scale — with 100 values you write 100 lines. The counter array replaces them all.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Confusion about index 0</p>
+                <p>In a counter array for die values, number 1 lives at index 0. If you think index = value, you count beside the mark.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Badly scaled random numbers</p>
+                <p><code>Math.random() * 6 + 1</code> without rounding gives decimals — always turn it into a real number with <code>Math.floor()</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Not filling the array with 0</p>
+                <p>An empty array returns <code>undefined</code> on the first <code>++</code> — the counter array starts with six zeros.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>The counter array is the most important array pattern of all — it counts hits, letters, clicks, everything.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch06-check"
+              data-chapter="06"
+            >
+              <li><label><input type="checkbox" /> <span>I can create an array with values.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can access elements via the index and know it starts at 0.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can get the number of elements with length.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can safely read the last element.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can run a classic for loop over an array.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use for...of and know the difference to the classic for.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can append elements with push and remove them with pop.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can check with includes whether a value is in the array.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can find a value's position with indexOf and interpret -1 correctly.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I understand the counter array (demo) and can explain it.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="sort-helper.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">sort-helper.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const numbers = [12, 5, 19, 3, 8];
+let sum = 0;
+let max = numbers[0];
+for (const n of numbers) {
+  sum += n;
+  if (n &gt; max) max = n;
+}
+console.log("Average:", sum / numbers.length);
+console.log("Maximum:", max);</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  One pass, two counters — arrays and loops are the perfect pair.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch06-reflect" data-export-chapter="06" data-export-title="Arrays: Lists &amp; Collections" data-export-checklist="jsc-ch06-check" data-export-quiz="jsc-ch06-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Explain to a classmate why the index starts at 0 and not at 1.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>When would you use for...of, when the classic for? Name an example for each.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Which list from your daily life would you want to program as an array?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch06-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>const a = [5,7,9]; a[1]</code> return?</legend>
+                <label><input type="radio" name="ch06-q0" value="a" /> 5</label>
+                <label><input type="radio" name="ch06-q0" value="b" /> 7</label>
+                <label><input type="radio" name="ch06-q0" value="c" /> 9</label>
+                <label><input type="radio" name="ch06-q0" value="d" /> Error</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — index 1 is the second element: 7.</strong></template>
+                <template data-feedback="wrong">Remember the 0: index 0 is the 5, index 1 the 7. The index starts at 0!</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>['a','b'].length</code> return?</legend>
+                <label><input type="radio" name="ch06-q1" value="a" /> 1</label>
+                <label><input type="radio" name="ch06-q1" value="b" /> 2</label>
+                <label><input type="radio" name="ch06-q1" value="c" /> 3</label>
+                <label><input type="radio" name="ch06-q1" value="d" /> 'b'</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — two elements, length counts 2.</strong></template>
+                <template data-feedback="wrong">length counts the elements, not the last index: 2 items = 2.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>arr.push('x')</code> do?</legend>
+                <label><input type="radio" name="ch06-q2" value="a" /> Creates a new array</label>
+                <label><input type="radio" name="ch06-q2" value="b" /> Appends 'x' to the existing one</label>
+                <label><input type="radio" name="ch06-q2" value="c" /> Deletes the first element</label>
+                <label><input type="radio" name="ch06-q2" value="d" /> Sorts the array</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — push changes the existing array, it appends at the end.</strong></template>
+                <template data-feedback="wrong">push changes the original: 'x' lands at the end. No new array, no sorting.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend><code>let z=[0,0,0]; z[1]++;</code> — what does z look like?</legend>
+                <label><input type="radio" name="ch06-q3" value="a" /> [1,0,0]</label>
+                <label><input type="radio" name="ch06-q3" value="b" /> [0,1,0]</label>
+                <label><input type="radio" name="ch06-q3" value="c" /> [0,0,1]</label>
+                <label><input type="radio" name="ch06-q3" value="d" /> Error</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — index 1 is the second slot: [0,1,0].</strong></template>
+                <template data-feedback="wrong">The 1 in the index means the second position. The counter array lives off this idea!</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Array = numbered list in one variable, index starts at 0.</li>
+                <li><code>length</code> counts from 1 — last element: <code>arr[arr.length-1]</code>.</li>
+                <li>for = with index, for...of = values only.</li>
+                <li>push/pop change the array; includes/indexOf check it.</li>
+                <li>The counter array counts everything: hits, frequencies, results.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener">Array (MDN)</a>
+                  <span>All methods at a glance.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank" rel="noopener">for...of (MDN)</a>
+                  <span>The comfortable loop for lists.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections" target="_blank" rel="noopener">Indexed collections (MDN)</a>
+                  <span>The complete beginner's guide.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Arrays</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming with the next update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>The learning video is still being produced.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Cheat sheet to print</h3>
+                <p class="jsc-media-embed__body" data-media-body>Coming with the chapter update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Explain arrays to me."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No goal, no example, no check — the answer stays theory you never apply.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI explain a program that draws six lottery numbers and sorts them. Check: how does it prevent duplicate numbers? (Hint: includes!)"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete goal plus knowledge hook: the solution needs exactly includes and loops from this chapter.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now build lists and work through them — the heart of real data.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/07-functions.html">
+              On to chapter 07: Functions
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started" data-i18n="ui.b17.railLink">Getting started</a></li>
+            <li><a href="#schritt-1">1 Create</a></li>
+            <li><a href="#schritt-2">2 Loop</a></li>
+            <li><a href="#schritt-3">3 Change</a></li>
+            <li><a href="#schritt-4">4 Counter array</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

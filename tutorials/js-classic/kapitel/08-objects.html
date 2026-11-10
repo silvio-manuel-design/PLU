@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 08: Objects: Data With Names · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: create objects and read properties, set/delete/add values, methods and arrays of objects — with playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/kapitel/08-objects.html" />
+    <link rel="alternate" hreflang="de" href="08-objekte.html" />
+    <link rel="alternate" hreflang="en" href="08-objects.html" />
+    <link rel="alternate" hreflang="x-default" href="08-objekte.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 08: Objects: Data With Names · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: create objects and read properties, set/delete/add values, methods and arrays of objects — with playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m08">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap08/jsc-kap08-hero-v4-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="A glass core orbited by small spheres carrying symbols like heart, key and gear."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 08</p>
+          <h1 id="ch-title" class="jsc-hero__title">Objects: Data With Names</h1>
+          <p class="jsc-hero__sub">Describe real things: collect, read and change properties.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#getting-started" data-i18n="ui.b17.chip">Getting started</a>
+        <a href="#schritt-1">1 Create</a>
+        <a href="#schritt-2">2 Change</a>
+        <a href="#schritt-3">3 Methods</a>
+        <a href="#schritt-4">4 Arrays of objects</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Picture an ID card. Name: Ada. Age: 16. Class: 2a. Everything on one card. Every field has a label.</p>
+              <p>You don't need five notes for one person. One card is enough. And you find everything instantly: “the age field.”</p>
+              <p>An <strong>object</strong> is exactly that for your program: a collection of labelled values. One thing — with everything belonging to it, in one place.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Object <span class="jsc-term-card__word-en">/ Objekt</span></p>
+                <p class="jsc-term-card__def">Labelled values about ONE thing, in curly braces.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like an ID card.</p>
+                <p class="jsc-term-card__code"><code>const student = { name: "Ada" };</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Property <span class="jsc-term-card__word-en">/ Eigenschaft</span></p>
+                <p class="jsc-term-card__def">One labelled field of the object.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> one field on the ID card.</p>
+                <p class="jsc-term-card__code"><code>age: 16</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Key <span class="jsc-term-card__word-en">/ Schlüssel</span></p>
+                <p class="jsc-term-card__def">The label of the field.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> the caption „age" on the form.</p>
+                <p class="jsc-term-card__code"><code>name</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Method <span class="jsc-term-card__word-en">/ Methode</span></p>
+                <p class="jsc-term-card__def">A function living INSIDE an object.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> a skill of the person — „Ada can calculate."</p>
+                <p class="jsc-term-card__code"><code>greet() { … }</code></p>
+              </div>
+            </div>
+          </div>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Creating objects and reading properties</h2>
+            <div class="jsc-step__why">
+              <p>
+                So far: variables for single values, arrays for lists. But the world consists
+                of things, not lists. Objects describe things.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                An object collects labelled values in <code>{ key: value, … }</code>. You
+                read with a dot (<code>.name</code>) or brackets (<code>["name"]</code>). And
+                objects can live inside objects.
+              </p>
+              <figure class="jsc-code-block" data-filename="object.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">object.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const student = {
+  name: "Ada",
+  age: 16,
+  class: "2a"
+};
+console.log(student.name);      // "Ada"
+console.log(student.age);       // 16
+console.log(student["class"]);  // "2a" — brackets work too
+const course = {
+  title: "JavaScript Classic",
+  teacher: { name: "Mr Meier" } // object inside object
+};
+console.log(course.teacher.name); // "Mr Meier"</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch08">Code</label>
+              <textarea id="pg-ch08" data-pg-code spellcheck="false">const student = { name: "Ada", age: 16, favouriteSubject: "Media" };
+console.log(student.name);
+console.log(student.age);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> print a third property of your object — e.g.
+              <code>student.favouriteSubject</code>.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Space in the key</p>
+                <p><code>fach note: "MT"</code> without quotes is a syntax error. Keys with spaces need quotes — better: underscores.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Dot vs. brackets mixed up</p>
+                <p>If the key sits in a variable, only brackets work: <code>obj[key]</code>. The dot demands a fixed name.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Comma panic</p>
+                <p>A comma after the last entry is allowed (trailing comma) — no error. But between entries it's mandatory.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reading dot chains blindly</p>
+                <p><code>course.teacher.name</code> reads from the outside in: course → teacher → name. Every dot opens the next thing.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Bracket notation for dynamic keys: <code>obj[key]</code> — when the key sits in a variable, only the bracket works.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Changing objects: set, delete, add</h2>
+            <div class="jsc-step__why">
+              <p>
+                ID cards change: someone moves, gets older, picks a new subject. Objects are
+                alive.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                You overwrite values with <code>=</code>, create new properties by simply
+                setting them — and <code>delete</code> removes a field.
+              </p>
+              <figure class="jsc-code-block" data-filename="change.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">change.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const student = { name: "Ada", age: 16 };
+student.age = 17;                 // change
+student.favouriteSubject = "MT";  // add
+delete student.favouriteSubject;  // remove
+console.log(student);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„const forbids changes"</p>
+                <p>With objects, const only locks the REFERENCE — the contents stay freely changeable. This confuses everyone at first.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Overusing delete</p>
+                <p>Constantly deleting and re-adding fields loses the shape. Adjust the structure instead of clearing fields away.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Space field with a dot</p>
+                <p><code>obj.fach note</code> breaks instantly — fields with spaces only via brackets: <code>obj["fach note"]</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reassigning a const object</p>
+                <p><code>student = { … }</code> on a const variable is an error — the reference is fixed. Changing contents works, resetting doesn't.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>const with objects means: THIS object stays — not: its contents freeze. That confuses everyone at first.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Objects are all around you: your phone has properties (colour, storage) and
+              methods (call, take photos). Your bike, your pen, your bag. Programming with
+              objects means describing the world the way it really is.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Methods: functions inside objects</h2>
+            <div class="jsc-step__why">
+              <p>
+                A thing without abilities is just a data store. Methods make objects come
+                alive: they can DO things.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                A method is a function as a property — called with
+                <code>obj.method()</code>. <code>this</code> appears here as a preview only:
+                inside a method it points at its own object.
+              </p>
+              <figure class="jsc-code-block" data-filename="method.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">method.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const greeter = {
+  language: "de",
+  greet(name) {
+    if (this.language === "de") {
+      return "Hallo, " + name + "!";
+    }
+    return "Hello, " + name + "!";
+  }
+};
+console.log(greeter.greet("Ada")); // Hallo, Ada!
+greeter.language = "en";
+console.log(greeter.greet("Ada")); // Hello, Ada!</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Calling a method without ()</p>
+                <p><code>greeter.greet</code> is the function itself, not a result — the parentheses execute it.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forcing this too early</p>
+                <p>Understand the object pattern first, then this. Juggling with this too early means fighting windmills.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Calling a method outside the object</p>
+                <p><code>greet("Ada")</code> alone doesn't exist — the method lives IN the object and needs its owner in front.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Arrow function + this</p>
+                <p>Writing methods as arrow functions breaks this — just remember: normal function syntax in objects.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p><code>this</code> is for later — just remember: inside a method, this points at the object it lives in. You don't need more right now.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Arrays of objects: the real data</h2>
+            <div class="jsc-step__why">
+              <p>
+                A class is a list of students. Every student is an object. Arrays of objects
+                are THE data format of real life.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Array + object + for...of: you walk the list with the loop from chapter 06,
+                each element is an ID card from this chapter.
+              </p>
+              <figure class="jsc-code-block" data-filename="class.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">class.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const schoolClass = [
+  { name: "Ada", age: 16 },
+  { name: "Ben", age: 17 },
+  { name: "Cleo", age: 16 }
+];
+for (const student of schoolClass) {
+  console.log(student.name + " is " + student.age);
+}
+console.log(schoolClass[1].name); // "Ben"</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Does [1] return the name?</p>
+                <p><code>schoolClass[1]</code> is a whole object — only <code>.name</code> fetches the name from it. Brackets first, then the dot.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">JSON syntax with =</p>
+                <p>In objects it's <code>name: "Ada"</code> — a colon, not an equals sign. The = comes from JSON templates.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Mixing up brackets</p>
+                <p>Array = square <code>[ ]</code>, object = curly <code>{ }</code>. In alternation: <code>[{ … }, { … }]</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„All objects need identical fields"</p>
+                <p>JavaScript allows different fields — clean code keeps them uniform anyway. Uniformity wins.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Arrays of objects + for...of — with this one pattern you can solve almost any real data task. It's the linchpin of the course.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch08-check"
+              data-chapter="08"
+            >
+              <li><label><input type="checkbox" /> <span>I can create an object with properties.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can read properties with a dot and with brackets.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know when bracket notation is needed.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can change, add and delete properties.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can explain why const doesn't lock an object's contents.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can define a method and call it with parentheses.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know this points at the own object (a preview is enough).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can nest objects and read dot chains.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can build an array of objects and loop it with for...of.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can apply the „array of objects" pattern to my own idea.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="classbook.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">classbook.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const schoolClass = [
+  { name: "Ada", age: 16 },
+  { name: "Ben", age: 17 },
+  { name: "Cleo", age: 15 }
+];
+function averageAge(schoolClass) {
+  let sum = 0;
+  for (const student of schoolClass) {
+    sum += student.age;
+  }
+  return sum / schoolClass.length;
+}
+console.log(averageAge(schoolClass)); // 16</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Array for the list, object for the person, for...of for the loop.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch08-reflect" data-export-chapter="08" data-export-title="Objects: Data With Names" data-export-checklist="jsc-ch08-check" data-export-quiz="jsc-ch08-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Describe three things from your daily life as objects: which properties? which methods?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>When do you take an array, when an object? Formulate a rule of thumb.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>What was harder for you to understand: index (array) or key (object)? Why?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch08-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>const p = { name: 'Ada', age: 16 };</code> — what does <code>p.name</code> return?</legend>
+                <label><input type="radio" name="ch08-q0" value="a" /> Ada</label>
+                <label><input type="radio" name="ch08-q0" value="b" /> name</label>
+                <label><input type="radio" name="ch08-q0" value="c" /> age</label>
+                <label><input type="radio" name="ch08-q0" value="d" /> undefined</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — the dot fetches the value behind the key name: „Ada".</strong></template>
+                <template data-feedback="wrong">The dot reads the property: p.name returns the value behind „name" — Ada.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>p.age = 17</code> do to a const object?</legend>
+                <label><input type="radio" name="ch08-q1" value="a" /> Error</label>
+                <label><input type="radio" name="ch08-q1" value="b" /> Changes the value — const only locks the reference</label>
+                <label><input type="radio" name="ch08-q1" value="c" /> Deletes the object</label>
+                <label><input type="radio" name="ch08-q1" value="d" /> Nothing</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — const only locks the reference, the contents are free.</strong></template>
+                <template data-feedback="wrong">const with objects means: THIS object stays. Its contents may change.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend><code>const k = [{name:'A'},{name:'B'}];</code> — what does <code>k[0].name</code> return?</legend>
+                <label><input type="radio" name="ch08-q2" value="a" /> B</label>
+                <label><input type="radio" name="ch08-q2" value="b" /> A</label>
+                <label><input type="radio" name="ch08-q2" value="c" /> [object Object]</label>
+                <label><input type="radio" name="ch08-q2" value="d" /> Error</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — brackets first (first object), then the dot (name): A.</strong></template>
+                <template data-feedback="wrong">k[0] is the first object, .name fetches its name field: A.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What is a method?</legend>
+                <label><input type="radio" name="ch08-q3" value="a" /> A loop</label>
+                <label><input type="radio" name="ch08-q3" value="b" /> A function inside an object</label>
+                <label><input type="radio" name="ch08-q3" value="c" /> A data type</label>
+                <label><input type="radio" name="ch08-q3" value="d" /> A parameter</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — a method is a function that lives inside an object.</strong></template>
+                <template data-feedback="wrong">Methods are the object's abilities: functions living IN it, called with ().</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Object = labelled values in <code>{}</code> — like an ID card.</li>
+                <li>Dot for fixed keys, brackets for dynamic ones.</li>
+                <li>const locks the reference, not the contents.</li>
+                <li>Methods = the object's abilities, called with ().</li>
+                <li>Array of objects + for...of = the standard pattern of real data.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects" target="_blank" rel="noopener">Objects (MDN)</a>
+                  <span>The complete beginner's guide.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" target="_blank" rel="noopener">this (MDN)</a>
+                  <span>For later — when methods call you.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects#objects_and_properties" target="_blank" rel="noopener">Object properties (MDN)</a>
+                  <span>Reading, setting, deleting in detail.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Objects</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming with the next update.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>The learning video is still being produced.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Cheat sheet to print</h3>
+                <p class="jsc-media-embed__body" data-media-body>Coming with the chapter update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Show me objects."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No goal, no review — you get some example you can't judge.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI show you a shopping cart object (items, prices, method totalPrice). Check: are prices numbers and names text? Tell the AI where you would do better."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete object plus check criteria from the chapter (types, method) — and the prompt to improve it yourself.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now translate the world into things — with properties and abilities.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/09-the-dom.html">
+              On to chapter 09: The DOM
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started" data-i18n="ui.b17.railLink">Getting started</a></li>
+            <li><a href="#schritt-1">1 Create</a></li>
+            <li><a href="#schritt-2">2 Change</a></li>
+            <li><a href="#schritt-3">3 Methods</a></li>
+            <li><a href="#schritt-4">4 Arrays of objects</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
