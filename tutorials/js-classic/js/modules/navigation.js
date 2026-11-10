@@ -41,8 +41,11 @@ function pageUrl(path) {
 function currentChapterIndex() {
   const path = window.location.pathname.replace(/\/$/, '');
   return NAV.chaptersMeta.findIndex((ch) => {
-    const chapterPath = `/tutorials/js-classic/kapitel/${ch.slug}.html`.replace(/\/$/, '');
-    return path === chapterPath || path.endsWith(`/${ch.slug}.html`);
+    const slugs = [ch.slug, ch.slugEn].filter(Boolean);
+    return slugs.some((slug) => {
+      const chapterPath = `/tutorials/js-classic/kapitel/${slug}.html`.replace(/\/$/, '');
+      return path === chapterPath || path.endsWith(`/${slug}.html`);
+    });
   });
 }
 
@@ -245,7 +248,7 @@ function renderMobileMenu(header) {
     menuGroup(
       t('ui.menu.groupChapters'),
       CHAPTERS.map((ch, i) => ({
-        href: `${base}/kapitel/${ch.slug}.html`,
+        href: chapterLink(ch),
         label: `${ch.nr}. ${t(ch.i18n)}`,
         current: idx === i,
       }))
@@ -401,7 +404,8 @@ function renderHeader(currentPath) {
 /* ------------------------------------------------------------------ */
 
 function chapterLink(chapter) {
-  return `/tutorials/js-classic/kapitel/${chapter.slug}.html`;
+  const slug = getLanguage() === 'en' && chapter.slugEn ? chapter.slugEn : chapter.slug;
+  return `/tutorials/js-classic/kapitel/${slug}.html`;
 }
 
 function renderTocDialog(bar) {

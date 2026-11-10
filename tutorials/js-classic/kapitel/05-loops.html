@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 05: Loops · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: the for loop, while and do...while, break and continue, and nested loops with patterns — with dice simulator and pattern painter, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/05-loops.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="05-schleifen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="05-loops.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="05-schleifen.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 05: Loops · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: the for loop, while and do...while, break and continue, and nested loops with patterns — with dice simulator and pattern painter, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m05">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="A glowing wheel of recurring light arcs rotating endlessly."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 05</p>
+          <h1 id="ch-title" class="jsc-hero__title">Loops</h1>
+          <p class="jsc-hero__sub">Repeat without getting tired: leave repetition to the computer.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#getting-started" data-i18n="ui.b17.chip">Getting started</a>
+        <a href="#schritt-1">1 for</a>
+        <a href="#schritt-2">2 while</a>
+        <a href="#schritt-3">3 break/continue</a>
+        <a href="#schritt-4">4 Patterns</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>A song has a chorus. The chorus comes back again and again. Your brain knows: one more time. You sing it ten times — without thinking.</p>
+              <p>A <strong>loop</strong> is that for programs: repeat something until a goal is reached. You write the instruction once. The computer repeats it a thousand times. It never gets tired. It never complains.</p>
+              <p>That is the superpower of programming: repetition without fatigue.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Loop <span class="jsc-term-card__word-en">/ Schleife</span></p>
+                <p class="jsc-term-card__def">Repeating an instruction until a goal is reached.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like the chorus of a song.</p>
+                <p class="jsc-term-card__code"><code>for (let i = 1; i &lt;= 5; i++)</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Iteration <span class="jsc-term-card__word-en">/ Durchlauf</span></p>
+                <p class="jsc-term-card__def">A single repetition step.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> a single chorus.</p>
+                <p class="jsc-term-card__code"><code>`i` — in every pass</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Counter <span class="jsc-term-card__word-en">/ Zähler</span></p>
+                <p class="jsc-term-card__def">A variable that counts the passes.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like „time 1, time 2, time 3“ on a note.</p>
+                <p class="jsc-term-card__code"><code>let i = 1; i++</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Infinite loop <span class="jsc-term-card__word-en">/ Endlosschleife</span></p>
+                <p class="jsc-term-card__def">A loop that never stops. Usually a slip.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like a song without an end button.</p>
+                <p class="jsc-term-card__code"><code>condition never false</code></p>
+              </div>
+            </div>
+          </div>
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">The for loop (counter-controlled)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Drawing 100 boxes? A human needs hours, a computer milliseconds. Loops are the
+                reason programming pays off at all.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The <code>for</code> loop has three parts in its head: <strong>start</strong>
+                (<code>let i = 1</code>), <strong>condition</strong> (<code>i &lt;= 5</code>) and
+                <strong>step</strong> (<code>i++</code>). Before every pass it checks: condition
+                true? Then the block runs, then the step — round and round.
+              </p>
+              <figure class="jsc-code-block" data-filename="rounds.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">rounds.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let i = 1; i &lt;= 5; i++) {
+  console.log("Round", i);
+}
+// Output: Round 1 … Round 5
+for (let i = 0; i &lt; 10; i += 2) {
+  console.log(i); // 0 2 4 6 8
+}</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch05">Code</label>
+              <textarea id="pg-ch05" data-pg-code spellcheck="false">for (let i = 1; i <= 5; i++) {
+  console.log("Round", i);
+}</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> change the loop to count backwards from 5 to 1.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Infinite loop</p>
+                <p>If you forget the step (<code>i++</code>), the condition stays true forever — the browser freezes. Rescue: close the tab (then F5).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Off-by-one</p>
+                <p><code>&lt;=</code> instead of <code>&lt;</code> makes the loop run once too often (or too rarely). Test with small numbers: 1 to 5 should run exactly 5 times.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Using i outside the loop</p>
+                <p><code>let i</code> in the loop head only lives INSIDE the loop (block scope). If you need the counter afterwards, declare <code>let i;</code> before.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Changing the condition in the body</p>
+                <p>Anyone who resets the counter variable inside the block fights against the loop. Changes belong in the head's step part.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Count from 0 when iterating over arrays (coming in chapter 06) — from 1 only when it's really about ‚round 1..n'.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">while &amp; do...while (condition-controlled)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Sometimes you don't know HOW OFTEN in advance — only UNTIL WHEN: ‚keep playing
+                until the level is done.'
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>while</code> checks the condition BEFORE every pass — it can run 0 times.
+                <code>do...while</code> checks AFTER the first pass — so it runs at least once.
+              </p>
+              <figure class="jsc-code-block" data-filename="dice.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">dice.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let dice = 0;
+let roll = 0;
+while (dice !== 6) {
+  dice = Math.floor(Math.random() * 6) + 1;
+  roll++;
+  console.log("Roll", roll, "→", dice);
+}
+console.log("First 6 after", roll, "rolls!");</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="dice">
+              <p class="jsc-demo__title">Dice simulator</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-dice-roll
+                  data-roll="Roll"
+                  data-success="First 6 after {n} rolls!"
+                >Roll the dice</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini console"></div>
+              </div>
+              <p class="jsc-demo__hint">The simulator runs the while loop from the example — a different result every time.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Condition never reached</p>
+                <p>If the condition never becomes false: infinite loop. The tab hangs — F5 (after closing) is the rescue; saving beforehand was smart.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting the counter in the body</p>
+                <p><code>while (roll &lt; 10) { console.log(roll); }</code> without <code>roll++</code> runs forever — the counter belongs inside the loop.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Misunderstanding do...while</p>
+                <p>„Check first, then run" is while. do...while runs FIRST — the check comes after. At least one pass is guaranteed.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Wrong loop type</p>
+                <p>Clear counting → for. Waiting for an event → while. If you maintain a counter in a while, ask yourself: wasn't that a for after all?</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>for = when you know the count; while = when you wait for an event. If you maintain the counter yourself in a while, consider whether it should be a for after all.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              A computer runs a million repetitions without complaining — but it would never
+              forget to increment the counter. Infinite loops are almost always human
+              forgetfulness, not computer stubbornness.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">break &amp; continue (exit &amp; skip)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Sometimes a loop must stop early (found it!) or skip a pass (invalid) — without
+                ending the whole loop.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>break</code> leaves the loop entirely. <code>continue</code> jumps
+                straight to the next pass. Both belong in your toolkit, used sparingly and
+                deliberately — they change the „normal" flow.
+              </p>
+              <figure class="jsc-code-block" data-filename="exit.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">exit.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let i = 1; i &lt;= 20; i++) {
+  if (i % 3 === 0) continue; // skip multiples of 3
+  if (i &gt; 15) break;         // stop after that
+  console.log(i);
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">break in nested loops</p>
+                <p><code>break</code> only aborts the INNERMOST loop — the outer one keeps running. To stop everything you need a flag variable.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Unreadable continue at the top</p>
+                <p>Several <code>continue</code> conditions at the loop start confuse. Sometimes a clean <code>if</code> around the rest is more readable.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">break instead of a proper condition</p>
+                <p><code>for (let i = 1; ; i++) { if (i &gt; 5) break; }</code> is possible, but the condition belongs in the head — break is for EARLY exits.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting continue → else chain</p>
+                <p>Anyone who shuns <code>continue</code> builds long else chains. A skipped pass is often the more honest structure.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>break is your friend when searching: ‚run through the list until you find the element, then get out.' — saves cycles.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Nested loops &amp; patterns</h2>
+            <div class="jsc-step__why">
+              <p>
+                One box is boring — a 10×10 grid is a pattern. Nested loops build rows and
+                columns.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                The outer loop counts <strong>rows</strong>, the inner one
+                <strong>columns</strong>. Total passes are the product of the limits — 3×5
+                makes 15 passes.
+              </p>
+              <figure class="jsc-code-block" data-filename="pattern.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">pattern.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let row = 1; row &lt;= 3; row++) {
+  let output = "";
+  for (let col = 1; col &lt;= 5; col++) {
+    output += "*";
+  }
+  console.log(output);
+}
+// *****
+// *****
+// *****</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="pattern">
+              <p class="jsc-demo__title">Pattern painter</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-pattern="rect"
+                  data-rows="5"
+                  data-cols="8"
+                >Rectangle</button>
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--outline jsc-button--sm"
+                  data-pattern="tri"
+                  data-rows="5"
+                >Triangle</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini console"></div>
+              </div>
+              <p class="jsc-demo__hint">The rectangle uses two full loops — the triangle's inner limit grows with the row.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Line break inside the inner loop</p>
+                <p>Calling <code>console.log</code> INSIDE the inner loop gives single stars instead of rows. Collect in a variable, print outside.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Same counter for both loops</p>
+                <p><code>for (let i... ) { for (let i... )</code> collides — every loop needs its own counter (e.g. <code>row</code>/<code>col</code>).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Swapped order</p>
+                <p>Which loop is outer, which inner? Rule of thumb: the OUTER one stands for what changes the LEAST often (rows), the INNER for the frequent (columns).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Ignoring O(n²)</p>
+                <p>100×100 are 10,000 passes — with nested loops effort grows quadratically. Big grids need patience (or smarter algorithms).</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>The 10×10 star pattern is the ‚Hello World' of nested loops — if you can do that, you can do arrays and later DOM grids.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch05-check"
+              data-chapter="05"
+            >
+              <li><label><input type="checkbox" /> <span>I can explain and safely write the for loop structure (start, condition, step).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the off-by-one trap and can choose &lt;= vs &lt; deliberately.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can build a while loop and know when it must be while instead of for.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the difference between while and do...while.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can spot an infinite loop and know how to stop it.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use break to leave a loop early.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use continue to skip passes.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can nest two loops and predict the result.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can draw a star pattern (rectangle) with nested loops.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I have implemented at least one mini project of my own with a loop.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="fizzbuzz.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">fizzbuzz.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let i = 1; i &lt;= 20; i++) {
+  if (i % 15 === 0) {
+    console.log("FizzBuzz");
+  } else if (i % 3 === 0) {
+    console.log("Fizz");
+  } else if (i % 5 === 0) {
+    console.log("Buzz");
+  } else {
+    console.log(i);
+  }
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  % checks divisibility, no continue/break needed — the order of the conditions
+                  is everything (both first!).
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch05-reflect" data-export-chapter="05" data-export-title="Loops" data-export-checklist="jsc-ch05-check" data-export-quiz="jsc-ch05-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Where in daily life would you use a loop if you could? Describe the pass and the exit condition.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Which is worse: an infinite loop or a loop that runs one time too few? Argue your case.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Explain break and continue so a classmate can't confuse them.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch05-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>What's missing here? <code>for (let i = 0; i &lt; 5; )</code></legend>
+                <label><input type="radio" name="ch05-q0" value="a" /> The step i++</label>
+                <label><input type="radio" name="ch05-q0" value="b" /> A parenthesis</label>
+                <label><input type="radio" name="ch05-q0" value="c" /> A semicolon</label>
+                <label><input type="radio" name="ch05-q0" value="d" /> Nothing</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — without i++ i stays at 0, the condition stays true: infinite loop.</strong></template>
+                <template data-feedback="wrong">The third part of the loop head is missing: the step. Without it i never changes — and the loop runs forever.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What does <code>continue</code> do?</legend>
+                <label><input type="radio" name="ch05-q1" value="a" /> Ends the loop</label>
+                <label><input type="radio" name="ch05-q1" value="b" /> Skips the current pass</label>
+                <label><input type="radio" name="ch05-q1" value="c" /> Jumps to the end of the loop</label>
+                <label><input type="radio" name="ch05-q1" value="d" /> Throws an error</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — continue skips the rest of the current pass and jumps to the next one.</strong></template>
+                <template data-feedback="wrong">The loop continues — only the current pass is skipped. Ending the loop is what break does.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>How often does this body run? <code>for (let i=1; i&lt;=3; i++) for (let j=1; j&lt;=4; j++)</code></legend>
+                <label><input type="radio" name="ch05-q2" value="a" /> 7</label>
+                <label><input type="radio" name="ch05-q2" value="b" /> 12</label>
+                <label><input type="radio" name="ch05-q2" value="c" /> 9</label>
+                <label><input type="radio" name="ch05-q2" value="d" /> 4</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — 3 × 4 = 12: the inner loop runs completely for every outer pass.</strong></template>
+                <template data-feedback="wrong">With nested loops the passes multiply: 3 (outer) × 4 (inner) = 12.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>When does <code>do...while</code> make sense?</legend>
+                <label><input type="radio" name="ch05-q3" value="a" /> When at least one pass must be guaranteed</label>
+                <label><input type="radio" name="ch05-q3" value="b" /> Always</label>
+                <label><input type="radio" name="ch05-q3" value="c" /> Never</label>
+                <label><input type="radio" name="ch05-q3" value="d" /> Only with break</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — do...while checks AFTER the first pass, so it runs at least once.</strong></template>
+                <template data-feedback="wrong">The difference to while is the timing of the check: do...while starts running first and checks afterwards.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>for = count known; while = wait for an event.</li>
+                <li>The step (i++) belongs to the for — without it: infinite.</li>
+                <li>break = get out entirely; continue = skip one.</li>
+                <li>Nested loops build grids: rows × columns.</li>
+                <li>Off-by-one is the most common loop trap — test with small numbers!</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for" target="_blank" rel="noopener">for (MDN)</a>
+                  <span>Syntax + all variants.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while" target="_blank" rel="noopener">while (MDN)</a>
+                  <span>For event loops.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break" target="_blank" rel="noopener">break/continue (MDN)</a>
+                  <span>Control in the middle of a pass.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Loops</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Make me a loop."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No task, no exit condition, no check criterion — the result is arbitrary and goes unreviewed.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI generate a small number guessing game (computer picks a number, user guesses, hints ‚higher/lower'). Review the AI: which loop type was chosen and why?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete game plus targeted question about the loop choice — you learn to QUESTION decisions, not just accept them.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now repeat without getting tired — the computer takes over.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/06-arrays.html">
+              On to chapter 06: Arrays
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started" data-i18n="ui.b17.railLink">Getting started</a></li>
+            <li><a href="#schritt-1">1 for</a></li>
+            <li><a href="#schritt-2">2 while</a></li>
+            <li><a href="#schritt-3">3 break/continue</a></li>
+            <li><a href="#schritt-4">4 Patterns</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

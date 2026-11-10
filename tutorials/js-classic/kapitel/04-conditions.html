@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chapter 04: Conditions · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Learning steps: if/else decisions, combined conditions with &amp;&amp; and ||, switch for many cases and the ternary operator — with grade calculator demo, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/04-conditions.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="04-bedingungen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="04-conditions.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="04-bedingungen.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 04: Conditions · js-classic" />
+    <meta
+      property="og:description"
+      content="Learning steps: if/else decisions, combined conditions with &amp;&amp; and ||, switch for many cases and the ternary operator — with grade calculator demo, playground, typical mistakes, checklist, reflection, quiz and AI prompt training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.jpg"
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m04">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap04/jsc-kap04-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="A glowing junction of light lines with arrows pointing two ways."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Chapter 04</p>
+          <h1 id="ch-title" class="jsc-hero__title">Conditions</h1>
+          <p class="jsc-hero__sub">If this, then that: let programs make decisions and react to situations.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this chapter">
+        <a href="#getting-started" data-i18n="ui.b17.chip">Getting started</a>
+        <a href="#schritt-1">1 if/else</a>
+        <a href="#schritt-2">2 Combine</a>
+        <a href="#schritt-3">3 switch</a>
+        <a href="#schritt-4">4 Ternary</a>
+        <a href="#check-title">✓ Checklist</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>You make decisions all day. If it rains, you take an umbrella. If not, you leave it at home. You check the world. Then you act.</p>
+              <p>A program can do the same. It checks a condition. Then it runs one path or the other.</p>
+              <p>Most important: the program reads your condition. It never decides on its own. You give it the rules.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Condition <span class="jsc-term-card__word-en">/ Bedingung</span></p>
+                <p class="jsc-term-card__def">A check that returns true or false.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like „is it raining right now?“</p>
+                <p class="jsc-term-card__code"><code>if (age &gt;= 16)</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Branch <span class="jsc-term-card__word-en">/ Verzweigung</span></p>
+                <p class="jsc-term-card__def">The point where the program chooses the path.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like a fork in the road.</p>
+                <p class="jsc-term-card__code"><code>if … else …</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Code block <span class="jsc-term-card__word-en">/ Code-Block</span></p>
+                <p class="jsc-term-card__def">Several lines that belong together. Stands in curly braces.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like a work step with several parts.</p>
+                <p class="jsc-term-card__code"><code>{ … }</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Decision <span class="jsc-term-card__word-en">/ Entscheidung</span></p>
+                <p class="jsc-term-card__def">The result of the check: this path or that one.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like your umbrella decision in the morning.</p>
+                <p class="jsc-term-card__code"><code>age &gt;= 16 ? "yes" : "no"</code></p>
+              </div>
+            </div>
+          </div>
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">if/else — the basic decision</h2>
+            <div class="jsc-step__why">
+              <p>
+                Conditions are the moment a script comes alive off the paper: it reacts
+                differently to different inputs.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>if</code> checks a boolean expression in parentheses. If it's true, the
+                block in <code>{}</code> runs, otherwise the <code>else</code> branch. With
+                <code>else if</code> you chain as many cases as you like — the first match
+                wins.
+              </p>
+              <figure class="jsc-code-block" data-filename="grade.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">grade.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const points = 87;
+if (points &gt;= 90) {
+  console.log("Excellent!");
+} else if (points &gt;= 70) {
+  console.log("Good.");
+} else if (points &gt;= 50) {
+  console.log("Satisfactory.");
+} else {
+  console.log("Failed — try again.");
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="grade" data-grades="Very good,Good,Satisfactory,Sufficient,Fail" data-invalid="Please enter a score from 0 to 100.">
+              <p class="jsc-demo__title">Grade calculator</p>
+              <div class="jsc-demo__row">
+                <label class="jsc-step__blocklabel" for="grade-in">Points (0–100)</label>
+                <input class="jsc-demo__input" id="grade-in" data-grade-input type="number" min="0" max="100" inputmode="numeric" />
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-grade-run>Calculate grade</button>
+              </div>
+              <p class="jsc-demo__greeting" data-grade-target aria-live="polite"></p>
+              <p class="jsc-demo__hint">Exactly the else-if chain from the example — as a demo to trace along.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting parentheses after if</p>
+                <p><code>if points &gt;= 50</code> without parentheses is a syntax error. The condition ALWAYS goes in <code>( )</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">No {} for one-liners</p>
+                <p>Without braces only the first line belongs to the condition. Later additions then ALWAYS run — always set <code>{}</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">= instead of ===</p>
+                <p><code>if (points = 90)</code> assigns 90 and is always true — the costliest mistake. Compare with <code>===</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Wrong chain order</p>
+                <p>With <code>&gt;=</code> chains the largest value must come first, or an early branch swallows the later ones. Build descending!</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Read else-if chains top to bottom like a menu: the first match wins, the rest is skipped.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Combining comparisons &amp; logic</h2>
+            <div class="jsc-step__why">
+              <p>
+                Real conditions are rarely simple: ‚adult AND member' or ‚weekend OR holiday'.
+                Chapter 03 delivered the building blocks — here you assemble them.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Combine comparisons with <code>&amp;&amp;</code> and <code>||</code>. With mixed
+                conditions, add parentheses — that keeps precedence clear and readable.
+              </p>
+              <figure class="jsc-code-block" data-filename="combined.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">combined.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const age = 16;
+const parentsAround = true;
+if (age &gt;= 16 &amp;&amp; parentsAround) {
+  console.log("Entry allowed.");
+} else {
+  console.log("Sorry, no.");
+}
+const day = "Saturday";
+if (day === "Saturday" || day === "Sunday") {
+  console.log("Weekend!");
+}</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch04">Code</label>
+              <textarea id="pg-ch04" data-pg-code spellcheck="false">const age = 16;
+if (age >= 16) {
+  console.log("Allowed to watch!");
+} else {
+  console.log("Sorry, no.");
+}</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Run</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Reset</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Console output"></div>
+            </div>
+            <p>
+              <strong>Your task:</strong> add a condition: when <code>age &lt; 14</code> →
+              <code>'Kids cinema'</code>.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting parentheses in mixed conditions</p>
+                <p><code>a &amp;&amp; b || c</code> is ambiguous without parentheses — which first? Write <code>(a &amp;&amp; b) || c</code> and mean what you write.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Mixing &amp;&amp; and || unparenthesized</p>
+                <p>JavaScript evaluates <code>&amp;&amp;</code> before <code>||</code> — without parentheses you get logic you didn't intend. Parentheses are free, use them.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Double-checking boolean variables</p>
+                <p><code>if (loggedIn === true)</code> is redundant — <code>loggedIn</code> already IS the value if needs: <code>if (loggedIn)</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Awkward negation instead of else</p>
+                <p><code>if (!loggedIn) { … }</code> PLUS <code>if (loggedIn) { … }</code> is doubled. One side is enough — the other belongs in <code>else</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>A variable that already is true/false needs no comparison: <code>if (loggedIn)</code> instead of <code>if (loggedIn === true)</code>.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Teaching break">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> TEACHING BREAK
+            </p>
+            <p class="jsc-pause__text">
+              Your day is full of conditions: when the alarm rings you get up — otherwise you
+              turn around. if/else learned from you, not the other way around.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">switch for many cases</h2>
+            <div class="jsc-step__why">
+              <p>
+                Long else-if chains over the same value become unreadable. switch is the tidy
+                alternative for 3+ cases.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>switch</code> compares one value against many cases. <code>break</code>
+                ends a case — without break all following cases run through („fall-through").
+                <code>default</code> catches everything else.
+              </p>
+              <figure class="jsc-code-block" data-filename="switch.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">switch.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const grade = 2;
+switch (grade) {
+  case 1:
+    console.log("Very good");
+    break;
+  case 2:
+    console.log("Good");
+    break;
+  case 3:
+    console.log("Satisfactory");
+    break;
+  default:
+    console.log("Passed");
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting break</p>
+                <p>Without <code>break</code> all cases FROM THE MATCH onward run — with school grades you get „Very good Good Satisfactory" at once.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">case with conditions</p>
+                <p><code>case points &gt;= 50:</code> doesn't work — switch compares values with ===, no ranges. For ranges: if/else.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting default</p>
+                <p>What happens for value 6? Without <code>default</code>: nothing — silently. The rest case should always be covered.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">switch for boolean conditions</p>
+                <p><code>switch (true)</code> tricks exist — but boolean logic belongs in if/else. switch is for fixed values: weekdays, grades, menus.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Forgetting break in a switch is JavaScript trap #1 in report-card programs — always read your code aloud at the fall-through case.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">The ternary operator (short decisions)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Sometimes a decision is only worth one line: one value or the other. The
+                ternary operator <code>? :</code> is the short form.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>condition ? valueIfTrue : valueIfFalse</code> — ideal for assignments and
+                template literals where an if/else would be clunky.
+              </p>
+              <figure class="jsc-code-block" data-filename="ternary.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">ternary.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const age = 16;
+const status = age &gt;= 16 ? "Adult" : "Minor";
+console.log(status);
+const name = "";
+const greeting = `Hello, ${name || "Guest"}!`;
+console.log(greeting);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typical mistakes</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Nesting multiple ternaries</p>
+                <p><code>a ? b : c ? d : e</code> becomes unreadable. One decision = one ternary; anything complex belongs in if/else.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Abusing it for side effects</p>
+                <p><code>condition ? console.log(a) : console.log(b)</code> is possible but ugly — ternary delivers VALUES, if/else does ACTIONS.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Forgetting the colon</p>
+                <p><code>age &gt;= 16 ? "Adult"</code> without <code>: …</code> is a syntax error — both branches belong to the decision.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Complex conditions without parentheses</p>
+                <p><code>a &amp;&amp; b ? x : y</code> makes the reader guess — parentheses make it unambiguous: <code>(a &amp;&amp; b) ? x : y</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Pro tip</p>
+              <p>Ternary is for ONE decision between TWO values. Anything more complex belongs in if/else — no golfing.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: can you do this yet?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch04-check"
+              data-chapter="04"
+            >
+              <li><label><input type="checkbox" /> <span>I can write an if/else decision with correct syntax (parentheses, blocks).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can build else-if chains in the right order.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the = vs === mistake in if and avoid it.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can combine multiple conditions with &amp;&amp; and || and use parentheses.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know a boolean variable goes directly into if.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can build a switch statement correctly with break and default.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can explain when switch beats else-if and vice versa.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can use the ternary operator for simple two-value decisions.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know when ternary goes too far (nesting).</span></label></li>
+              <li><label><input type="checkbox" /> <span>I have implemented the grade demo or my own example with if/else, switch AND ternary.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="weekday.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">weekday.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const day = "Saturday";
+switch (day) {
+  case "Saturday":
+  case "Sunday":
+    console.log("Weekend!");
+    break;
+  default:
+    console.log("School day.");
+}
+// Bonus: check for a holiday
+const holidays = ["01-01", "12-25"];
+const today = "12-25";
+if (holidays.includes(today) || day === "Saturday") {
+  console.log("Day off!");
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  switch for fixed values, if for ranges — that's the dividing line.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch04-reflect" data-export-chapter="04" data-export-title="Conditions" data-export-checklist="jsc-ch04-check" data-export-quiz="jsc-ch04-quiz">
+            <h2 id="reflect-title">Reflection</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Name two decisions from your daily life that you could phrase as if/else.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Why is <code>if (loggedIn)</code> better than <code>if (loggedIn === true)</code>? Explain in your own words.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Where do you see the biggest difference between your thinking and a program's thinking when it comes to conditions?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch04-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>What is the critical bug in <code>if (x = 5)</code>?</legend>
+                <label><input type="radio" name="ch04-q0" value="a" /> It assigns 5 and is always true</label>
+                <label><input type="radio" name="ch04-q0" value="b" /> It compares correctly</label>
+                <label><input type="radio" name="ch04-q0" value="c" /> A syntax error</label>
+                <label><input type="radio" name="ch04-q0" value="d" /> x becomes 0</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — a single = assigns. The condition is thereby always true.</strong></template>
+                <template data-feedback="wrong">Think assignment: = puts 5 into x and returns the value — if always sees „true". Comparing means ===.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>What happens in a <code>switch</code> without <code>break</code>?</legend>
+                <label><input type="radio" name="ch04-q1" value="a" /> Only the first case runs</label>
+                <label><input type="radio" name="ch04-q1" value="b" /> All cases from the match onward run through</label>
+                <label><input type="radio" name="ch04-q1" value="c" /> An error</label>
+                <label><input type="radio" name="ch04-q1" value="d" /> Nothing</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — the „fall-through": from the match onward everything runs until a break appears.</strong></template>
+                <template data-feedback="wrong">Without break nothing stops: the case matches, and ALL following cases execute as well.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>age &gt;= 16 ? "yes" : "no"</code> is…</legend>
+                <label><input type="radio" name="ch04-q2" value="a" /> a short form of if/else</label>
+                <label><input type="radio" name="ch04-q2" value="b" /> a comparison</label>
+                <label><input type="radio" name="ch04-q2" value="c" /> a loop</label>
+                <label><input type="radio" name="ch04-q2" value="d" /> an error</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — the ternary operator returns one of two values depending on the condition.</strong></template>
+                <template data-feedback="wrong">The expression decides between two values — that's the short form of if/else, not a comparison and not a loop.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Which order is correct for a grade chain?</legend>
+                <label><input type="radio" name="ch04-q3" value="a" /> Ascending</label>
+                <label><input type="radio" name="ch04-q3" value="b" /> Descending with &gt;=</label>
+                <label><input type="radio" name="ch04-q3" value="c" /> Any order</label>
+                <label><input type="radio" name="ch04-q3" value="d" /> Alphabetical</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Exactly — the largest value first, or an early branch swallows the later ones.</strong></template>
+                <template data-feedback="wrong">With &gt;= chains the highest threshold must check first — otherwise everything lands in the first branch already.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>if/else = branching; build else-if chains from large to small.</li>
+                <li>The biggest trap: <code>=</code> instead of <code>===</code> in if.</li>
+                <li>Multiple conditions: set parentheses, use &amp;&amp; and || deliberately.</li>
+                <li>switch = tidy for many cases of one value, don't forget break.</li>
+                <li>Ternary ? : for short two-value choices, otherwise if/else.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Go deeper
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else" target="_blank" rel="noopener">if...else (MDN)</a>
+                  <span>The complete syntax with examples.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch" target="_blank" rel="noopener">switch (MDN)</a>
+                  <span>For all case lists (menus, grades, weekdays).</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator" target="_blank" rel="noopener">Conditional (ternary) operator (MDN)</a>
+                  <span>Short form with style rules.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) is the free reference of the web — looking things
+                up there means working like the pros.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Watch &amp; Listen</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Learning video: Conditions</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Companion presentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video coming soon.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">AI Prompt Training</h2>
+            <p class="jsc-home-lead">
+              In this course you work with AI assistants throughout. Learn to write good
+              prompts — that's the most important new skill.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„Write me something with if."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>No goal, no context, no check — the result is random and you learn nothing from it.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Have the AI generate a traffic-light control script (red/yellow/green with different waiting times). Check: are the conditions cleanly separated? Where would you use switch instead of if?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>Concrete program plus targeted control questions: you practise not just writing but reviewing — the more important half.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Chapter closing">
+            <p class="jsc-chapter-cta__text">
+              You can now let programs make decisions — your program chooses its path.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/05-loops.html">
+              On to chapter 05: Loops
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started" data-i18n="ui.b17.railLink">Getting started</a></li>
+            <li><a href="#schritt-1">1 if/else</a></li>
+            <li><a href="#schritt-2">2 Combine</a></li>
+            <li><a href="#schritt-3">3 switch</a></li>
+            <li><a href="#schritt-4">4 Ternary</a></li>
+            <li><a href="#didaktische-pause">Teaching break</a></li>
+            <li><a href="#check-title">Checklist</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflection</a></li>
+            <li><a href="#summary-title">Summary</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

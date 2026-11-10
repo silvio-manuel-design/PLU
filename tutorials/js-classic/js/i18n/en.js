@@ -43,6 +43,22 @@ export default {
   'ui.ch.09': 'DOM',
   'ui.ch.10': 'Events',
 
+  /* Chapter meta P6: teaser + hero image alt (chapters 02–05, full rebuild) */
+  'ui.ch.02.teaser': 'Remember what your program knows: name values, store them, and read them correctly.',
+  'ui.ch.02.imgAlt': 'Abstract neon data landscape: glowing containers of different shapes fill with golden particles.',
+
+  /* B17 intro block + terms box (P6R2) */
+  'ui.b17.understandEyebrow': "FIRST, LET'S UNDERSTAND",
+  'ui.b17.termsEyebrow': "WORDS YOU'RE LEARNING NOW",
+  'ui.b17.railLink': 'Getting started',
+  'ui.b17.chip': 'Getting started',
+  'ui.ch.03.teaser': 'Calculate, compare, combine: the tools that turn values into decisions.',
+  'ui.ch.03.imgAlt': 'Neon arithmetic operator symbols floating in a dark workshop of light.',
+  'ui.ch.04.teaser': 'If this, then that: let programs make decisions and react to situations.',
+  'ui.ch.04.imgAlt': 'A glowing junction of light lines with arrows pointing two ways.',
+  'ui.ch.05.teaser': 'Repeat without getting tired: leave repetition to the computer.',
+  'ui.ch.05.imgAlt': 'A glowing wheel of recurring light arcs rotating endlessly.',
+
   /* Accessibility (P2) */
   'ui.a11y.mainNav': 'Main navigation',
   'ui.a11y.skipToNav': 'Skip to navigation',

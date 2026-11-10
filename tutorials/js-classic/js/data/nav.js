@@ -15,11 +15,11 @@
  */
 
 export const CHAPTERS = [
-  { nr: '01', slug: '01-einfuehrung-ausgabe', i18n: 'ui.ch.01' },
-  { nr: '02', slug: '02-variablen', i18n: 'ui.ch.02' },
-  { nr: '03', slug: '03-operatoren', i18n: 'ui.ch.03' },
-  { nr: '04', slug: '04-bedingungen', i18n: 'ui.ch.04' },
-  { nr: '05', slug: '05-schleifen', i18n: 'ui.ch.05' },
+  { nr: '01', slug: '01-einfuehrung-ausgabe', slugEn: '01-introduction-output', i18n: 'ui.ch.01' },
+  { nr: '02', slug: '02-variablen', slugEn: '02-variables-datatypes', i18n: 'ui.ch.02' },
+  { nr: '03', slug: '03-operatoren', slugEn: '03-operators', i18n: 'ui.ch.03' },
+  { nr: '04', slug: '04-bedingungen', slugEn: '04-conditions', i18n: 'ui.ch.04' },
+  { nr: '05', slug: '05-schleifen', slugEn: '05-loops', i18n: 'ui.ch.05' },
   { nr: '06', slug: '06-arrays', i18n: 'ui.ch.06' },
   { nr: '07', slug: '07-funktionen', i18n: 'ui.ch.07' },
   { nr: '08', slug: '08-objekte', i18n: 'ui.ch.08' },

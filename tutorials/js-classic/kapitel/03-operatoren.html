@@ -1,308 +1,635 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>03 – Operatoren | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 03: Operatoren · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Rechnen mit + − * / % und **, Vergleiche mit === und !==, logische Verknüpfungen (&& || !) und Zuweisungs-Kurzformen (+= & Co.) — mit Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/03-operatoren.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="03-operatoren.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="03-operators.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="03-operatoren.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 03: Operatoren · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Rechnen mit + − * / % und **, Vergleiche mit === und !==, logische Verknüpfungen (&& || !) und Zuweisungs-Kurzformen (+= & Co.) — mit Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m03">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap03/jsc-kap03-hero-v3-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Neon-Symbole von Rechenzeichen schweben in einer dunklen Werkstatt aus Licht."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 03</p>
+          <h1 id="ch-title" class="jsc-hero__title">Operatoren</h1>
+          <p class="jsc-hero__sub">Rechnen, vergleichen, verknüpfen: die Werkzeuge, mit denen Werte zu Entscheidungen werden.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Rechnen</a>
+        <a href="#schritt-2">2 Vergleiche</a>
+        <a href="#schritt-3">3 Logik</a>
+        <a href="#schritt-4">4 Kurzformen</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>In der Mathematik kennst du Zeichen: Plus, Minus, Mal, Geteilt. Sie verbinden zwei Dinge. 7 + 3 macht 10.</p>
+              <p>In JavaScript gibt es dieselben Zeichen — und ein paar mehr. Ein Zeichen, das zwei Werte verbindet, heißt <strong>Operator</strong>.</p>
+              <p>Die große Überraschung: Vergleiche sind auch Operatoren. „Ist 7 größer als 3?“ liefert wahr oder falsch. Damit kann das Programm entscheiden.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Operator <span class="jsc-term-card__word-en">/ operator</span></p>
+                <p class="jsc-term-card__def">Ein Zeichen, das Werte verbindet oder vergleicht.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie Plus und Minus aus dem Matheheft.</p>
+                <p class="jsc-term-card__code"><code>7 + 3</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Ausdruck <span class="jsc-term-card__word-en">/ expression</span></p>
+                <p class="jsc-term-card__def">Ein Stück Code, das ein Ergebnis liefert.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie eine kleine Rechnung.</p>
+                <p class="jsc-term-card__code"><code>punkte &gt;= 50</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">wahr/falsch (boolean) <span class="jsc-term-card__word-en">/ true/false</span></p>
+                <p class="jsc-term-card__def">Das Ergebnis eines Vergleichs. Nur diese zwei Möglichkeiten.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ja oder nein.</p>
+                <p class="jsc-term-card__code"><code>console.log(10 &gt; 5); // true</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Zuweisung <span class="jsc-term-card__word-en">/ assignment</span></p>
+                <p class="jsc-term-card__def">Etwas in eine Variable geben. Das Zeichen ist = .</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie etwas in deinen Spind legen.</p>
+                <p class="jsc-term-card__code"><code>punkte = 10;</code></p>
+              </div>
+            </div>
+          </div>
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Rechnen mit Zahlen: + − * / % **</h2>
+            <div class="jsc-step__why">
+              <p>
+                Operatoren sind die Verben von JavaScript. Alles, was mit Werten passiert,
+                passiert durch sie.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die Grundrechenarten kennst du — dazu kommen <strong>Modulo</strong> (Rest einer
+                Division) und <strong>Potenz</strong> (<code>**</code>). Inkrement
+                (<code>runde++</code>) ist die Kurzform für „um 1 erhöhen".
+              </p>
+              <figure class="jsc-code-block" data-filename="rechnen.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">rechnen.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(7 + 3);    // 10
+console.log(7 - 3);    // 4
+console.log(7 * 3);    // 21
+console.log(7 / 2);    // 3.5
+console.log(7 % 2);    // 1 (Rest — gerade/ungerade prüfen!)
+console.log(2 ** 10);  // 1024 (Potenz)
+let runde = 1;
+runde++;               // Kurzform für runde = runde + 1
+console.log(runde);    // 2</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch03">Code</label>
+              <textarea id="pg-ch03" data-pg-code spellcheck="false">console.log(7 + 3);
+console.log("7" + 3);
+console.log(2 ** 10);
+console.log(10 / 0);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Ergänze <code>console.log(7 % 2)</code> und
+              <code>console.log(8 % 2)</code> — und erkläre, warum das Ergebnis genau 0 oder 1
+              ist.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„7 / 2 ist 3"</p>
+                <p>In JavaScript gibt <code>7 / 2</code> exakt <code>3.5</code> — es gibt keine Integer-Division wie in manchen anderen Sprachen. Kommazahlen sind normal.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„% ist Prozent"</p>
+                <p>Nein — <code>%</code> ist <strong>Modulo</strong>, der Rest einer Division. <code>7 % 2</code> ist 1, nicht 0.07. Für Prozente multiplizierst du mit 0.07.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">a++ vs ++a ignorieren</p>
+                <p><code>a++</code> liefert den alten Wert, <code>++a</code> den neuen — als Einzeiler fast immer egal, in verschachtelten Ausdrücken eine Falle. Erst erhöhen, dann verwenden: eigene Zeile.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Rundungsfehler bei Kommazahlen</p>
+                <p><code>0.1 + 0.2</code> ergibt <code>0.30000000000000004</code>. Liegt am Binärsystem — bei Geld in Cent rechnen und Rundung bewusst einsetzen.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Modulo ist der Geheimtipp: <code>x % 2 === 0</code> prüft gerade Zahlen, <code>x % 10</code> holt die Einerstelle — du wirst Modulo in jedem Spiel brauchen.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Vergleiche: === !== &gt; &lt; &gt;= &lt;=</h2>
+            <div class="jsc-step__why">
+              <p>
+                Programme entscheiden. Vergleiche liefern true oder false — der Treibstoff
+                jeder Bedingung (Kapitel 04).
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>===</code> ist der <strong>strikte</strong> Gleichheitsvergleich: Typ UND
+                Wert müssen übereinstimmen. <code>!==</code> ist das Gegenteil. Das Ergebnis ist
+                immer ein boolean.
+              </p>
+              <figure class="jsc-code-block" data-filename="vergleiche.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">vergleiche.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(7 === 7);      // true
+console.log("7" === 7);    // false — verschiedene Typen!
+console.log("7" == 7);     // true — ABER NIEMAND VERWENDET ==
+console.log(10 &gt; 5);       // true
+const punkte = 87;
+console.log(punkte &gt;= 50); // true</code></pre>
+              </figure>
+              <p>
+                <strong>Die ==-Falle:</strong> <code>==</code> wandelt Typen vor dem Vergleich um
+                (<code>"" == 0</code> ist true!). Das erzeugt unvorhersehbare Ergebnisse —
+                deshalb gilt ab heute: nur <code>===</code> und <code>!==</code>.
+              </p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">= statt ===</p>
+                <p><code>if (punkte = 90)</code> weist 90 zu und ist IMMER wahr — der klassischste Fehler überhaupt. Merkhilfe: „Vergleich = drei Striche, Zuweisung = einer."</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">== verwenden</p>
+                <p>„Loose equality" liefert Überraschungen: <code>"" == 0</code> ist true, <code>"0" == false</code> auch. Niemand will das. <code>===</code> immer.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Strings lexikographisch verglichen</p>
+                <p><code>"10" &lt; "9"</code> ist true — Strings werden Buchstabe für Buchstabe verglichen („1" &lt; „9"). Zahlen immer als Zahlen vergleichen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">NaN === NaN</p>
+                <p>Ist false — der einzige Wert, der nicht mit sich selbst identisch ist. Prüfen mit <code>isNaN(x)</code> oder <code>Number.isNaN(x)</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>ESLint regelt <code>==</code> automatisch weg. Ab heute: nur === und !== — ohne Ausnahme, ohne Diskussion.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Wusstest du, dass <code>&amp;&amp;</code> und <code>||</code> in JavaScript keine
+              reinen Booleans liefern, sondern einen der Operanden? <code>"Ada" || "Gast"</code>
+              ergibt ‚Ada'. Logik als Wert — verrückt, aber nützlich.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Logik: &amp;&amp; || !</h2>
+            <div class="jsc-step__why">
+              <p>
+                Einzelne Vergleiche reichen selten. ‚Über 16 UND unter 65' — dafür brauchst du
+                logische Verknüpfungen.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>&amp;&amp;</code> (UND) ist nur wahr, wenn beide Seiten wahr sind.
+                <code>||</code> (ODER) ist wahr, wenn mindestens eine Seite wahr ist.
+                <code>!</code> (NICHT) kehrt um. JavaScript wertet von links nach rechts aus und
+                <strong>bricht ab, sobald das Ergebnis feststeht</strong> (Kurzschluss).
+              </p>
+              <figure class="jsc-code-block" data-filename="logik.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">logik.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const alter = 16;
+const fuehrerschein = true;
+console.log(alter &gt;= 16 &amp;&amp; fuehrerschein); // true
+const wochentag = "Samstag";
+console.log(wochentag === "Samstag" || wochentag === "Sonntag"); // true
+const regnet = false;
+console.log(!regnet); // true</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">&amp;&amp;/|| mit „und/oder" verwechseln</p>
+                <p>In Code sind es <strong>Symbole</strong>, keine Wörter: <code>and</code> oder <code>or</code> gibt es in JavaScript nicht — <code>&amp;&amp;</code> und <code>||</code> schon.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Bedingungen nicht klammern</p>
+                <p><code>alter &gt;= 16 &amp;&amp; &lt; 65</code> ist ein Fehler — die zweite Hälfte hat keine Variable. Vollständig: <code>alter &gt;= 16 &amp;&amp; alter &lt; 65</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">!!x unverstanden</p>
+                <p>Doppeltes <code>!</code> wandelt einen Wert in einen echten boolean um (<code>!!"Ada"</code> → true). Praktisch, aber erst sinnvoll, wenn du die Typumwandlung verstehst.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Kurzschluss überrascht</p>
+                <p><code>false &amp;&amp; …</code> bricht ab, <code>true || …</code> ebenfalls — der rechte Teil läuft dann GAR NICHT. Bei Funktionsaufrufen rechts kann das Nebenwirkungen verschlucken.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>|| ist auch der Standard-Fallback: <code>const name = eingabe || 'Gast';</code> — wenn eingabe leer ist, greift der Fallback.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Zuweisungs-Operatoren: += -= *= /=</h2>
+            <div class="jsc-step__why">
+              <p>
+                <code>punkte = punkte + 10</code> schreibt man in echt nie. Die Kurzformen sind
+                Standard in jedem Code, den du je lesen wirst.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>+= -= *= /= %=</code> rechnen rechts und weisen das Ergebnis direkt der
+                linken Variable zu. Auch für Strings: <code>+=</code> hängt Text an.
+              </p>
+              <figure class="jsc-code-block" data-filename="kurzformen.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">kurzformen.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let punkte = 0;
+punkte += 10;   // wie: punkte = punkte + 10
+punkte *= 2;    // verdoppeln
+punkte -= 5;    // abziehen
+let log = "";
+log += "Runde 1 geschafft. ";
+log += "Runde 2 geschafft.";
+console.log(log);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Richtung verwechseln</p>
+                <p><code>10 += punkte</code> ist ein Syntaxfehler — die Variable muss links stehen, der Wert rechts: <code>punkte += 10</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Rechnen ohne zuweisen</p>
+                <p><code>punkte + 10;</code> berechnet 10 mehr, verwirft das Ergebnis aber sofort. Ohne <code>punkte += 10</code> ändert sich nichts.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">+= bei const</p>
+                <p><code>const x = 0; x += 1;</code> wirft einen Fehler — const kann nicht neu zugewiesen werden, auch nicht per Kurzform. Dann muss es let sein.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zahlen und Strings mischen</p>
+                <p><code>log += 5</code> hängt „5" als Text an, wenn log ein String ist. Typen im Blick behalten — siehe Kapitel 02.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Counters in Spielen: <code>treffer += 1</code> bzw. <code>treffer++</code> — damit baust du das Highscore-System fürs Abschlussprojekt.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch03-check"
+              data-chapter="03"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kenne +, −, *, /, % und ** und weiß, was sie liefern.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass / in JavaScript Kommazahlen ergibt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit Modulo Reste prüfen (gerade/ungerade, Einerstelle).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne Inkrement/Dekrement und die Kurzformen +=, −=, *=, /=.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich verwende ausschließlich === und !== für Vergleiche.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann erklären, warum == verboten ist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Vergleiche mit &gt;, &lt;, &gt;=, &lt;= aufbauen und kombinieren.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Bedingungen mit &amp;&amp;, || und ! verknüpfen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass &amp;&amp; und || einen der Operanden zurückgeben (Kurzschluss).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich habe die klassischen Operatoren-Fallen (Zuweisung statt Vergleich, String-Vergleiche, NaN) im Blick.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="modulo.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">modulo.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const zahl = Number(prompt("Gib eine Zahl ein:"));
+if (zahl % 2 === 0) {
+  console.log(`${zahl} ist gerade.`);
+} else {
+  console.log(`${zahl} ist ungerade.`);
+}
+if (zahl % 3 === 0) {
+  console.log(`${zahl} ist durch 3 teilbar.`);
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  Ein Vergleich liefert boolean, Modulo liefert den Rest — beide zusammen sind
+                  die Basis jeder Bedingung.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch03-reflect" data-export-chapter="03" data-export-title="Operatoren" data-export-checklist="jsc-ch03-check" data-export-quiz="jsc-ch03-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Welche der Operatoren-Fallen hast du schon selbst erlebt oder fürchtest du am meisten? Warum?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Erkläre &amp;&amp; und || einem Mitschüler, der noch nie programmiert hat.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Wozu könntest du Modulo in einem eigenen Projekt einsetzen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch03-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Was liefert <code>7 % 2</code>?</legend>
+                <label><input type="radio" name="ch03-q0" value="a" /> 1</label>
+                <label><input type="radio" name="ch03-q0" value="b" /> 2</label>
+                <label><input type="radio" name="ch03-q0" value="c" /> 0.5</label>
+                <label><input type="radio" name="ch03-q0" value="d" /> 3</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — 7 geteilt durch 2 bleibt 1 Rest. Genau das liefert Modulo.</strong></template>
+                <template data-feedback="wrong">Denk an die Division mit Rest: 7 = 3×2 + 1 — der Rest ist 1, nicht die Hälfte.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Welcher Vergleich ist korrekt für strikte Gleichheit?</legend>
+                <label><input type="radio" name="ch03-q1" value="a" /> <code>==</code></label>
+                <label><input type="radio" name="ch03-q1" value="b" /> <code>===</code></label>
+                <label><input type="radio" name="ch03-q1" value="c" /> <code>=</code></label>
+                <label><input type="radio" name="ch03-q1" value="d" /> <code>equals</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — === prüft Typ UND Wert. Der einzige sichere Vergleich.</strong></template>
+                <template data-feedback="wrong">= weist nur zu, == wandelt Typen um (Falle!), equals gibt es nicht. === ist die Antwort.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was gibt <code>console.log('7' === 7)</code> aus?</legend>
+                <label><input type="radio" name="ch03-q2" value="a" /> <code>true</code></label>
+                <label><input type="radio" name="ch03-q2" value="b" /> <code>false</code></label>
+                <label><input type="radio" name="ch03-q2" value="c" /> <code>7</code></label>
+                <label><input type="radio" name="ch03-q2" value="d" /> einen Fehler</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — string und number sind verschiedene Typen, also false.</strong></template>
+                <template data-feedback="wrong">=== vergleicht auch den Typ: '7' ist ein string, 7 eine number — strikt bedeutet strikt.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="c">
+                <legend><code>let x = 5; x += 3;</code> — Was ist x?</legend>
+                <label><input type="radio" name="ch03-q3" value="a" /> 5</label>
+                <label><input type="radio" name="ch03-q3" value="b" /> 3</label>
+                <label><input type="radio" name="ch03-q3" value="c" /> 8</label>
+                <label><input type="radio" name="ch03-q3" value="d" /> 53</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — x += 3 ist die Kurzform für x = x + 3: 5 + 3 = 8.</strong></template>
+                <template data-feedback="wrong">+= addiert und weist zu: der alte Wert 5 plus 3 ergibt 8 — nicht 53, das wäre String-Verkettung.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Rechnen: + − * / % ** — / ergibt immer Kommazahlen.</li>
+                <li>Modulo = Rest, der Prüf-Allrounder.</li>
+                <li>Vergleiche liefern boolean — immer === statt ==.</li>
+                <li>&amp;&amp; || ! verknüpfen Bedingungen; || ist auch der Fallback-Trick.</li>
+                <li>+= &amp; Co. sind die Kurzformen, ohne die kein Counter existiert.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators" target="_blank" rel="noopener">Ausdrücke und Operatoren (MDN)</a>
+                  <span>Das komplette Nachschlagewerk aller Operatoren.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Equality_comparisons_and_sameness" target="_blank" rel="noopener">Gleichheitsvergleiche und Gleichheit (MDN)</a>
+                  <span>Warum === der einzige sichere Vergleich ist.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Logical_OR" target="_blank" rel="noopener">Logische Operatoren (MDN)</a>
+                  <span>Für die Kurzschluss-Tricks.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Operatoren</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Erklär mir Operatoren."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Kein Ziel, kein Beispiel, keine Prüfung. Die Antwort wird ein Abdruck des Lehrbuchs — ohne dass du etwas davon verstehst.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI ein Programm erklären, das prüft, ob ein Jahr ein Schaltjahr ist. Findest du die Regeln in den Operatoren wieder? (Hinweis: Schaltjahr = durch 4, nicht durch 100, außer durch 400 — Teilbarkeit prüfen!)"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkretes Ziel + Wissenshäkchen: Das Programm braucht genau die Operatoren dieses Kapitels — Modulo, Vergleiche, logisches UND.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt rechnen, vergleichen und verknüpfen — die Werkstatt ist voll.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/04-bedingungen.html">
+              Weiter zu Kapitel 04: Bedingungen
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Rechnen</a></li>
+            <li><a href="#schritt-2">2 Vergleiche</a></li>
+            <li><a href="#schritt-3">3 Logik</a></li>
+            <li><a href="#schritt-4">4 Kurzformen</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
       </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
-
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>03 – Operatoren ⚖️</h1>
-      <p class="hero-subtitle">Wie Werte verarbeitet, verglichen und kombiniert werden</p>
-    </section>
-
-    <section>
-      <h2>🎯 1. Was sind Operatoren?</h2>
-      <p>
-        <strong>Operatoren</strong> verarbeiten Werte (Operanden) und erzeugen ein neues Ergebnis.  
-        Sie sind die <strong>Grundbausteine jeder Berechnung, Entscheidung und Logik</strong> in JavaScript.
-      </p>
-      <p>
-        Beispiele:  
-        - <code>5 + 3</code> → <code>+</code> ist der Operator, <code>5</code> und <code>3</code> sind Operanden  
-        - <code>alter >= 18</code> → <code>>=</code> ist der Operator, <code>alter</code> und <code>18</code> sind Operanden
-      </p>
-    </section>
-
-    <section>
-      <h2>📊 2. Übersicht: Arten von Operatoren</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Typ</th>
-            <th>Beispiele</th>
-            <th>Beschreibung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Arithmetisch</strong></td>
-            <td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></td>
-            <td>Mathematische Berechnungen</td>
-          </tr>
-          <tr>
-            <td><strong>Zuweisung</strong></td>
-            <td><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code></td>
-            <td>Werte zuweisen oder verändern</td>
-          </tr>
-          <tr>
-            <td><strong>Vergleich</strong></td>
-            <td><code>==</code>, <code>===</code>, <code>&lt;</code>, <code>&gt;=</code></td>
-            <td>Werte vergleichen – Ergebnis ist <code>true</code> oder <code>false</code></td>
-          </tr>
-          <tr>
-            <td><strong>Logisch</strong></td>
-            <td><code>&amp;&amp;</code>, <code>||</code>, <code>!</code></td>
-            <td>Bedingungen kombinieren</td>
-          </tr>
-          <tr>
-            <td><strong>Ternär</strong></td>
-            <td><code>Bedingung ? wahr : falsch</code></td>
-            <td>Kurzform für einfache <code>if/else</code>-Entscheidungen</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        In diesem Kapitel lernst du alle wichtigen Operatoren kennen – 
-        mit Fokus auf Sicherheit (<code>===</code> statt <code>==</code>) und Lesbarkeit.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_operators.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Operators</a>
-      </p>
-    </section>
-
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um den Unterschied zwischen <code>==</code> und <code>===</code> zu erklären – 
-        und warum der ternäre Operator manchmal besser ist als eine <code>if/else</code>-Abfrage.
-      </p>
-    </section>
-
-    <!-- 5. Arithmetische Operatoren -->
-    <section>
-      <h2>🧮 5. Arithmetische Operatoren</h2>
-      <p>Berechnungen mit Zahlen – aber Vorsicht: <code>+</code> verbindet auch Texte!</p>
-      <button onclick="demoArithmetik()">Zeige Beispiele</button>
-      <div id="ausgabe-arithmetik" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoArithmetik() {
-  const zahl1 = 10;
-  const zahl2 = 3;
-  const text1 = "Hallo";
-  const text2 = "Welt";
-
-  document.getElementById("ausgabe-arithmetik").innerHTML = 
-    `&lt;ul&gt;
-      &lt;li&gt;${zahl1} + ${zahl2} = &lt;strong&gt;${zahl1 + zahl2}&lt;/strong&gt; (Addition)&lt;/li&gt;
-      &lt;li&gt;${zahl1} - ${zahl2} = &lt;strong&gt;${zahl1 - zahl2}&lt;/strong&gt; (Subtraktion)&lt;/li&gt;
-      &lt;li&gt;${zahl1} * ${zahl2} = &lt;strong&gt;${zahl1 * zahl2}&lt;/strong&gt; (Multiplikation)&lt;/li&gt;
-      &lt;li&gt;${zahl1} / ${zahl2} = &lt;strong&gt;${zahl1 / zahl2}&lt;/strong&gt; (Division)&lt;/li&gt;
-      &lt;li&gt;${zahl1} % ${zahl2} = &lt;strong&gt;${zahl1 % zahl2}&lt;/strong&gt; (Rest bei Division)&lt;/li&gt;
-      &lt;li&gt;"${text1}" + "${text2}" = &lt;strong&gt;"${text1 + text2}"&lt;/strong&gt; (Textverkettung!)&lt;/li&gt;
-      &lt;li class="warnung"&gt;⚠️ "5" + 3 = "${"5" + 3}" (nicht 8!) – Vorsicht bei gemischten Typen!&lt;/li&gt;
-    &lt;/ul&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 6. Zuweisungsoperatoren -->
-    <section>
-      <h2>🔄 6. Zuweisungsoperatoren</h2>
-      <p>Kurzschreibweisen, um Werte zu verändern – spart Schreibarbeit!</p>
-      <button onclick="demoZuweisung()">Zeige Beispiele</button>
-      <div id="ausgabe-zuweisung" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoZuweisung() {
-  let x = 5;
-  x += 3;  // gleich wie: x = x + 3;
-  let y = 10;
-  y *= 2;  // gleich wie: y = y * 2;
-
-  document.getElementById("ausgabe-zuweisung").innerHTML = 
-    `&lt;ul&gt;
-      &lt;li&gt;Start: x = 5 → nach &lt;code&gt;x += 3&lt;/code&gt;: &lt;strong&gt;${x}&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;Start: y = 10 → nach &lt;code&gt;y *= 2&lt;/code&gt;: &lt;strong&gt;${y}&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 7. Vergleichsoperatoren -->
-    <section class="warnung">
-      <h2>⚠️ 7. Vergleichsoperatoren – Achtung: <code>==</code> vs <code>===</code></h2>
-      <p>
-        <code>==</code> vergleicht <strong>nur den Wert</strong> (mit automatischer Typumwandlung!),  
-        <code>===</code> vergleicht <strong>Wert und Typ</strong> (sicher!).
-      </p>
-      <p><strong>Beispiel:</strong> <code>5 == "5"</code> ist <code>true</code>, aber <code>5 === "5"</code> ist <code>false</code>.</p>
-      
-      <button onclick="demoVergleich()">Vergleiche testen</button>
-      <div id="ausgabe-vergleich" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoVergleich() {
-  const ergebnis1 = (5 == "5");   // true – lockere Gleichheit
-  const ergebnis2 = (5 === "5");  // false – strenge Gleichheit
-
-  document.getElementById("ausgabe-vergleich").innerHTML = 
-    `&lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;5 == "5"&lt;/code&gt; → &lt;strong&gt;${ergebnis1}&lt;/strong&gt; (⚠️ Typumwandlung!)&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;5 === "5"&lt;/code&gt; → &lt;strong&gt;${ergebnis2}&lt;/strong&gt; (✅ sicherer Vergleich)&lt;/li&gt;
-      &lt;li class="regel"&gt;💡 Immer &lt;code&gt;===&lt;/code&gt; und &lt;code&gt;!==&lt;/code&gt; verwenden!&lt;/li&gt;
-    &lt;/ul&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 8. Logische Operatoren -->
-    <section>
-      <h2>🔗 8. Logische Operatoren</h2>
-      <p>Kombinieren von Bedingungen:</p>
-      <ul>
-        <li><code>&amp;&amp;</code> (UND): Beide Bedingungen müssen <code>true</code> sein</li>
-        <li><code>||</code> (ODER): Mindestens eine Bedingung muss <code>true</code> sein</li>
-        <li><code>!</code> (NICHT): Kehrt den Wahrheitswert um</li>
-      </ul>
-      <button onclick="demoLogik()">Logik testen</button>
-      <div id="ausgabe-logik" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoLogik() {
-  const a = true;
-  const b = false;
-
-  document.getElementById("ausgabe-logik").innerHTML = 
-    `&lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;${a} &amp;&amp; ${b}&lt;/code&gt; (UND) → &lt;strong&gt;${a &amp;&amp; b}&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;${a} || ${b}&lt;/code&gt; (ODER) → &lt;strong&gt;${a || b}&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;!${a}&lt;/code&gt; (NICHT) → &lt;strong&gt;${!a}&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 9. Ternärer Operator -->
-    <section>
-      <h2>❓ 9. Ternärer Operator – Kurzform für if/else</h2>
-      <p>Der ternäre Operator ist eine kompakte Alternative zu einfachen <code>if/else</code>-Blöcken.</p>
-      <pre><code class="js-code">// Syntax
-Bedingung ? Ausdruck_wenn_wahr : Ausdruck_wenn_falsch
-
-// Beispiel
-const zugang = (alter >= 18) ? "erlaubt" : "nicht erlaubt";</code></pre>
-      <p>✅ <strong>Vorteil</strong>: Sehr kompakt für einfache Entscheidungen.<br>
-      ❌ <strong>Nachteil</strong>: Bei komplexen Bedingungen wird der Code unleserlich – dann lieber <code>if...else</code> verwenden!</p>
-      
-      <button onclick="demoTernaer()">Ternären Operator testen</button>
-      <div id="ausgabe-ternär" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoTernaer() {
-  const alter = 17;
-  const zugang = (alter >= 18) ? "erlaubt" : "nicht erlaubt";
-
-  document.getElementById("ausgabe-ternär").innerHTML = 
-    `&lt;p&gt;Alter: &lt;strong&gt;${alter}&lt;/strong&gt;&lt;/p&gt;
-     &lt;p&gt;Zugang: &lt;strong&gt;${zugang}&lt;/strong&gt; (mit ternärem Operator)&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt beherrschst du die Grundbausteine jeder Berechnung und Entscheidung!</p>
-      <a href="./04-bedingungen.html" class="nav-button">→ Zu Modul 04: Bedingungen</a>
-    </section>
-  </div>
-
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="../js/03-operatoren.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+    </main>
+  </body>
 </html>

@@ -43,6 +43,22 @@ export default {
   'ui.ch.09': 'DOM',
   'ui.ch.10': 'Ereignisse',
 
+  /* Kapitel-Meta P6: Teaser + Hero-Bild-Alt (Kap. 02–05, vollrebuild) */
+  'ui.ch.02.teaser': 'Merken, was das Programm weiß: Werte benennen, speichern und richtig lesen.',
+  'ui.ch.02.imgAlt': 'Abstrakte Neon-Datenlandschaft: Leuchtende Behälter unterschiedlicher Form füllen sich mit goldenen Partikeln.',
+
+  /* B17 Einstiegs-Block + Begriffsbox (P6R2) */
+  'ui.b17.understandEyebrow': 'ERST MAL VERSTEHEN',
+  'ui.b17.termsEyebrow': 'WÖRTER, DIE DU JETZT LERNST',
+  'ui.b17.railLink': 'Einstieg',
+  'ui.b17.chip': 'Einstieg',
+  'ui.ch.03.teaser': 'Rechnen, vergleichen, verknüpfen: die Werkzeuge, mit denen Werte zu Entscheidungen werden.',
+  'ui.ch.03.imgAlt': 'Neon-Symbole von Rechenzeichen schweben in einer dunklen Werkstatt aus Licht.',
+  'ui.ch.04.teaser': 'Wenn das, dann jenes: Entscheidungen treffen lassen und Programme auf Situationen reagieren lassen.',
+  'ui.ch.04.imgAlt': 'Eine glühende Weggabelung aus Lichtlinien, an der Pfeile in zwei Richtungen zeigen.',
+  'ui.ch.05.teaser': 'Wiederholen ohne müde zu werden: Wiederkehrendes dem Computer überlassen.',
+  'ui.ch.05.imgAlt': 'Ein leuchtendes Rad aus wiederkehrenden Lichtbögen, das sich in einer endlosen Rotation dreht.',
+
   /* Barrierefreiheit (P2) */
   'ui.a11y.mainNav': 'Hauptnavigation',
   'ui.a11y.skipToNav': 'Zur Navigation springen',

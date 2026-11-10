@@ -1,285 +1,655 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>02 – Variablen & Datentypen | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-      <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="../index.html"><img src="../assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 02: Variablen &amp; Datentypen · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: Variablen mit let und const, Datentypen (string, number, boolean, undefined), Eingaben mit prompt(), Number() und Template-Literals — mit Demos, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic/kapitel/02-variablen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="02-variablen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="02-variables-datatypes.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="02-variablen.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 02: Variablen &amp; Datentypen · js-classic" />
+    <meta
+      property="og:description"
+      content="Lernschritte: Variablen mit let und const, Datentypen (string, number, boolean, undefined), Eingaben mit prompt(), Number() und Template-Literals — mit Demos, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m02">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap02/jsc-kap02-hero-v4-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Abstrakte Neon-Datenlandschaft: Leuchtende Behälter unterschiedlicher Form füllen sich mit goldenen Partikeln."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 02</p>
+          <h1 id="ch-title" class="jsc-hero__title">Variablen &amp; Datentypen</h1>
+          <p class="jsc-hero__sub">Merken, was das Programm weiß: Werte benennen, speichern und richtig lesen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 Deklarieren</a>
+        <a href="#schritt-2">2 Datentypen</a>
+        <a href="#schritt-3">3 prompt()</a>
+        <a href="#schritt-4">4 Templates</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Du hast einen Spind in der Schule. Auf dem Spind steht dein Name. Du legst etwas hinein. Später holst du es wieder heraus.</p>
+              <p>Dein Nachbar hat seinen eigenen Spind. Sein Name steht drauf. Deine Sachen und seine Sachen vermischen sich nie.</p>
+              <p>Das ist eine <strong>Variable</strong>: ein benannter Platz, an dem das Programm etwas aufbewahrt. Der Name gehört zum Platz. Der Inhalt kann wechseln.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Variable <span class="jsc-term-card__word-en">/ variable</span></p>
+                <p class="jsc-term-card__def">Ein benannter Platz im Speicher des Programms.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie dein Spind mit Namensschild.</p>
+                <p class="jsc-term-card__code"><code>let punkte = 0;</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Wert <span class="jsc-term-card__word-en">/ value</span></p>
+                <p class="jsc-term-card__def">Das, was gerade in der Variable liegt.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> das, was heute in deinem Spind ist.</p>
+                <p class="jsc-term-card__code"><code>punkte = 10;</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Text (string) <span class="jsc-term-card__word-en">/ text (string)</span></p>
+                <p class="jsc-term-card__def">Ein Wert aus Buchstaben. Steht in Anführungszeichen.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein Zettel mit einer Botschaft.</p>
+                <p class="jsc-term-card__code"><code>let name = "Ada";</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Zahl (number) <span class="jsc-term-card__word-en">/ number</span></p>
+                <p class="jsc-term-card__def">Ein Wert, mit dem man rechnen kann.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie der Stand deines Guthabens.</p>
+                <p class="jsc-term-card__code"><code>let alter = 16;</code></p>
+              </div>
+            </div>
+          </div>
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Variablen deklarieren: let &amp; const</h2>
+            <div class="jsc-step__why">
+              <p>
+                Ein Programm ohne Variablen ist ein Rechner ohne Memory-Taste: Es kann nichts
+                behalten. Variablen geben Werten einen Namen — und Namen sind das wichtigste
+                Werkzeug beim Programmieren.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Eine <strong>Variable</strong> ist ein benannter Speicherplatz. <code>let</code>
+                verwendest du für Werte, die sich ändern; <code>const</code> für Werte, die
+                konstant bleiben. Deklariert wird mit einem Schlüsselwort, zugewiesen mit
+                <code>=</code> — gesprochen: „wird".
+              </p>
+              <figure class="jsc-code-block" data-filename="punkte.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">punkte.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let punkte = 0;        // veränderbar
+const maxPunkte = 100; // fest
+punkte = 10;           // neu zuweisen geht bei let
+// maxPunkte = 200;    // Fehler: const kann nicht neu gesetzt werden</code></pre>
+              </figure>
+              <p>
+                <strong>Merke:</strong> <code>=</code> ist keine Gleichung, sondern ein Befehl:
+                „Nimm das auf der rechten Seite und packe es in den Namen auf der linken."
+              </p>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="counter">
+              <p class="jsc-demo__title">Punkte-Zähler</p>
+              <p class="jsc-demo__greeting" data-count-target aria-live="polite">0</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-count-add="10"
+                >+10 Punkte</button>
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--ghost jsc-button--sm"
+                  data-count-reset
+                >Reset</button>
+              </div>
+              <p class="jsc-demo__hint">Genau das passiert in deinem Script: Eine Variable, die sich bei jedem Klick neu zuweisen lässt.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">„= ist ein Gleichheitszeichen"</p>
+                <p>Falsch — es ist eine <strong>Zuweisung</strong>. Sprich „punkte wird 10", nicht „punkte ist gleich 10". Die Richtung ist entscheidend.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Ohne Schlüsselwort deklarieren</p>
+                <p><code>punkte = 10;</code> ohne <code>let</code>/<code>const</code> erzeugt eine implizit globale Variable — im Strict Mode ein Fehler, sonst eine tickende Zeitbombe.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">const falsch verstehen</p>
+                <p>Bei Objekten und Arrays ist der <em>Inhalt</em> durchaus änderbar — nur die Referenz ist fest. <code>const liste = []</code> darfst du füllen, nicht neu zuweisen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Namen mit Leerzeichen &amp; Sonderzeichen</p>
+                <p><code>let meine punkte</code> oder Umlaute/Sonderzeichen im Namen führen zu Fehlern oder Ärger. Regel: Kleinbuchstaben, Ziffern, Unterstriche — und sprechende Namen.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Erst <code>const</code> verwenden. Erst wenn die Zeile wirklich neu zugewiesen werden muss, auf <code>let</code> wechseln — das verhindert halb die Kapitel-03-Fehler.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">Datentypen kennen: string, number, boolean, undefined</h2>
+            <div class="jsc-step__why">
+              <p>
+                JavaScript sortiert jeden Wert automatisch in einen Typ. Wer die Typen nicht
+                kennt, wundert sich, warum <code>'7' + 3</code> plötzlich <code>'73'</code>
+                ergibt.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die Kern-Typen: <strong>string</strong> (Text in Anführungszeichen),
+                <strong>number</strong> (ganze und Kommazahlen), <strong>boolean</strong>
+                (<code>true</code>/<code>false</code>) und <strong>undefined</strong> (noch
+                nichts zugewiesen). Mit <code>typeof</code> prüfst du den Typ eines Werts —
+                direkt im Playground unten testbar.
+              </p>
+              <figure class="jsc-code-block" data-filename="typen.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">typen.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(typeof "Hallo");      // string
+console.log(typeof 42);           // number
+console.log(typeof true);         // boolean
+let nochNichts;
+console.log(typeof nochNichts);   // undefined</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Gemischte Anführungszeichen</p>
+                <p><code>"Hallo'</code> bricht: Anfang und Ende eines Strings müssen zum selben Zeichentyp gehören — beide <code>"</code> oder beide <code>'</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">"7" + 3 = "73"</p>
+                <p>Ein String plus eine Zahl ergibt <strong>Verkettung</strong>, keine Rechnung. JavaScript rechnet nur, wenn beide Seiten Zahlen sind — vor dem Rechnen umwandeln.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Komma statt Punkt</p>
+                <p><code>7,5</code> ist in JavaScript kein Komma — es entsteht ein unerwarteter Wert. Kommazahlen schreibt man mit Punkt: <code>7.5</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">undefined mit null verwechseln</p>
+                <p><code>undefined</code> heißt: nie zugewiesen. <code>null</code> heißt: bewusst leer gesetzt. Zwei verschiedene Aussagen, zwei verschiedene Werte.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Kommazahlen: <code>0.1 + 0.2 === 0.3</code> ist <code>false</code> (Rundungsfehler im Binärsystem). Bei Geldbeträgen in Cent rechnen — <code>199 + 1</code> statt <code>1.99 + 0.01</code>.</p>
+            </aside>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Variablen gibt es übrigens nicht nur im Computer: Dein Handy merkt sich deine PIN
+              als Variable, dein Browser dein Passwort. Der Unterschied: Ein Programm vergisst
+              ALLES, wenn es endet — darum gibt es Datenbanken (Kapitel für den Sommer:
+              Backend).
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">Werte einlesen mit prompt()</h2>
+            <div class="jsc-step__why">
+              <p>
+                Bisher schreiben wir Werte selbst in den Code. Programme werden erst lebendig,
+                wenn der USER Werte eingibt.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>prompt("Wie heißt du?")</code> öffnet ein Eingabefenster und liefert den
+                eingegebenen Text zurück — <strong>immer als String</strong>, auch bei Zahlen!
+                Willst du damit rechnen, wandele mit <code>Number()</code> um.
+              </p>
+              <figure class="jsc-code-block" data-filename="eingabe.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">eingabe.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const name = prompt("Wie heißt du?");
+console.log("Hallo,", name);
+const alterText = prompt("Wie alt bist du?");
+const alter = Number(alterText); // string → number!
+console.log("Nächstes Jahr:", alter + 1);</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="prompt-greet">
+              <p class="jsc-demo__title">Begrüßungs-Demo</p>
+              <p class="jsc-demo__greeting" data-greeting-target aria-live="polite"></p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-prompt-greet
+                  data-prompt="Wie heißt du?"
+                  data-template="Hallo, {name}! Willkommen zurück."
+                  data-cancel="Du hast abgebrochen — auch eine Entscheidung."
+                >Namen eingeben</button>
+              </div>
+              <p class="jsc-demo__hint">prompt() liefert immer einen String — auch, wenn du eine Zahl eintippst.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">prompt-Ergebnis direkt rechnen</p>
+                <p><code>prompt("Alter?") + 1</code> ergibt <code>"161"</code> statt 17: Der String wird angehängt, nicht addiert. Erst <code>Number()</code>, dann rechnen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Abbrechen ignorieren</p>
+                <p>Klickt jemand „Abbrechen", liefert <code>prompt()</code> <code>null</code>. Wer das nicht prüft, rechnet später mit <code>null</code> und wundert sich.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Sensible Daten abfragen</p>
+                <p><code>prompt()</code> zeigt den Text im Klartext und speichert nichts sicher — nie für Passwörter oder private Daten verwenden. Nur Lernzwecke.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">NaN übersehen</p>
+                <p><code>Number("abc")</code> ergibt <code>NaN</code> — und <code>NaN === NaN</code> ist (irritierenderweise) false. Prüfen mit <code>isNaN(wert)</code>.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>NaN heißt „Not a Number" — es IST trotzdem ein number-Typ. JavaScript ist voller solcher Überraschungen; <code>typeof NaN === 'number'</code>.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Template-Literals &amp; Ausgabe bauen</h2>
+            <div class="jsc-step__why">
+              <p>
+                Strings zusammenzimmern mit <code>+</code> wird bei längeren Texten unleserlich.
+                Template-Literals sind der moderne Standard.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Statt Anführungszeichen setzt du <strong>Backticks</strong> (diese
+                rückwärts geneigten Hochkommas). Innerhalb von <code>${'{'}…}</code> setzt du
+                Werte, Variablen und sogar Rechnungen direkt in den Text.
+              </p>
+              <figure class="jsc-code-block" data-filename="ausgabe.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">ausgabe.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const name = "Ada";
+const punkte = 87;
+console.log(`${name} hat ${punkte} Punkte erreicht.`);
+console.log(`Noch ${100 - punkte} bis zur Maximalpunktzahl.`);</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch02">Code</label>
+              <textarea id="pg-ch02" data-pg-code spellcheck="false">let name = "Ada";
+console.log("Hallo,", name);
+name = "Grace";
+console.log("Hallo,", name);</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Erweitere die Ausgabe um eine Zeile
+              <code>'Note: 1'</code> — geschrieben als Template-Literal mit eingesetzter
+              Variable.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Normale Anführungszeichen mit ${}…</p>
+                <p><code>"Hallo ${name}"</code> mit geraden Anführungszeichen ersetzt nichts — <code>${}</code> funktioniert ausschließlich in Backticks.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Backtick-Taste nicht finden</p>
+                <p>Auf deutscher Tastatur liegt der Backtick links neben der Backspace-Taste, unter Esc — oft erst nach Leertaste sichtbar. (`´ ≠ `!)</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Verschachtelte Anführungszeichen</p>
+                <p>Ohne Template-Literal kollidieren <code>"Er sagte "Hallo""</code>. Backticks lösen das elegant: <code>`Er sagte "Hallo"`</code>.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">${} vergessen</p>
+                <p><code>`Note: punkte`</code> gibt wörtlich „Note: punkte" aus — ohne <code>${}</code> ist alles Text. Die geschweiften Klammern sind der Platzhalter-Befehl.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Template-Literals können auch rechnen: <code>`${'{'}preis * 1.2} €`</code> — Rechnen direkt im Text. Für alles Komplexere: vorher in eine Variable.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch02-check"
+              data-chapter="02"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann erklären, was eine Variable ist und wie sie im Speicher lebt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne den Unterschied zwischen let und const und wähle bewusst.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich deklariere immer mit Schlüsselwort, nie implizit global.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die Kern-Datentypen string, number, boolean, undefined und kann sie benennen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit typeof den Typ eines Werts prüfen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, warum "7" + 3 "73" ergibt, und wandle vor dem Rechnen um.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Eingaben mit prompt einlesen und weiß, dass das Ergebnis ein string ist.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich wandle strings mit Number() in Zahlen um und kenne NaN/isNaN.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann Template-Literals mit Backticks und ${} schreiben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann einen kleinen Dialog (prompt → Rechnung → template-Ausgabe) selbst programmieren.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="rechner.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">rechner.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const zahlA = Number(prompt("Erste Zahl?"));
+const zahlB = Number(prompt("Zweite Zahl?"));
+const summe = zahlA + zahlB;
+console.log(`${zahlA} + ${zahlB} = ${summe}`);</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  const wo möglich, Number() vor jeder Rechnung, Template-Literal für die
+                  Ausgabe — das ist das volle Kapitel in 8 Zeilen.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch02-reflect" data-export-chapter="02" data-export-title="Variablen &amp; Datentypen" data-export-checklist="jsc-ch02-check" data-export-quiz="jsc-ch02-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Erkläre mit eigenen Worten, warum '7' + 3 = '73' ist. Was sagt das über JavaScript aus?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Wann hast du zuletzt etwas gespeichert, um es später wiederzuverwenden — und wie überträgt sich das auf Variablen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Welchen Datentyp findest du am schwierigsten und warum?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch02-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Welches Schlüsselwort verwendest du für einen Wert, der sich nie ändert?</legend>
+                <label><input type="radio" name="ch02-q0" value="a" /> <code>const</code></label>
+                <label><input type="radio" name="ch02-q0" value="b" /> <code>let</code></label>
+                <label><input type="radio" name="ch02-q0" value="c" /> <code>var</code></label>
+                <label><input type="radio" name="ch02-q0" value="d" /> <code>static</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — const ist fest. Wer „nie ändert" sagt, meint const.</strong></template>
+                <template data-feedback="wrong">Überleg nochmal: let ist für veränderbare Werte, var ist veraltet — und static gibt es in JavaScript so nicht.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Was liefert <code>typeof '42'</code>?</legend>
+                <label><input type="radio" name="ch02-q1" value="a" /> <code>"string"</code></label>
+                <label><input type="radio" name="ch02-q1" value="b" /> <code>"number"</code></label>
+                <label><input type="radio" name="ch02-q1" value="c" /> <code>NaN</code></label>
+                <label><input type="radio" name="ch02-q1" value="d" /> <code>undefined</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — Anführungszeichen machen den Wert zum string, egal was darin steht.</strong></template>
+                <template data-feedback="wrong">Achtung: '42' steht in Anführungszeichen — der Typ hängt davon ab, nicht vom Inhalt. typeof prüft den Typ.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend><code>prompt()</code> liefert immer…</legend>
+                <label><input type="radio" name="ch02-q2" value="a" /> einen string</label>
+                <label><input type="radio" name="ch02-q2" value="b" /> eine number</label>
+                <label><input type="radio" name="ch02-q2" value="c" /> einen boolean</label>
+                <label><input type="radio" name="ch02-q2" value="d" /> <code>null</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — prompt() liefert immer einen string. Deshalb Number() vor dem Rechnen.</strong></template>
+                <template data-feedback="wrong">Denk an die Typen-Falle: Auch die Eingabe „16" kommt als Text zurück — erst Number() macht daraus eine Zahl.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Was gibt <code>console.log(`1 + 1 = ${'{'}1+1}`)</code> aus?</legend>
+                <label><input type="radio" name="ch02-q3" value="a" /> <code>1 + 1 = 2</code></label>
+                <label><input type="radio" name="ch02-q3" value="b" /> <code>1 + 1 = 11</code></label>
+                <label><input type="radio" name="ch02-q3" value="c" /> einen Fehler</label>
+                <label><input type="radio" name="ch02-q3" value="d" /> <code>${'{'}1+1}</code></label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — im Template-Literal wird ${} ausgewertet: 1 + 1 = 2.</strong></template>
+                <template data-feedback="wrong">Innerhalb von ${} rechnet JavaScript ganz normal: 1+1 ergibt 2, nicht 11.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>Variablen = benannte Speicherplätze: let für Änderbares, const für Festes.</li>
+                <li><code>=</code> weist zu, es ist KEIN Gleichheitszeichen.</li>
+                <li>Die Kern-Typen: string, number, boolean, undefined — typeof prüft sie.</li>
+                <li>prompt liefert immer string → vor dem Rechnen Number() verwenden.</li>
+                <li>Template-Literals (Backticks + ${}) bauen lesbare Texte.</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/let" target="_blank" rel="noopener">let (MDN)</a>
+                  <span>Wann brauche ich das? Wenn du über Geltungsbereiche stolperst (Kap. 07).</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">Datentypen und Datenstrukturen (MDN)</a>
+                  <span>Wann brauche ich das? Als Nachschlagewerk, wenn ein typeof dich verwirrt.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Template_literals" target="_blank" rel="noopener">Template-Literals (MDN)</a>
+                  <span>Wann brauche ich das? Für alle Texte, die Werte enthalten.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Variablen &amp; Datentypen</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+              </article>
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-presentation" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation (Notebook-LM)</h3>
+                <p class="jsc-media-embed__body" data-media-body>Video folgt in Kürze.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Erklär mir Variablen."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Vage: kein Ziel, kein Level, kein Kontext. Die Antwort wird ein allgemeines Kapitel aus einem Lehrbuch.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Baue mit der KI einen Taschenrechner-Dialog: Zwei Zahlen einlesen, alle vier Grundrechnungsarten ausgeben. Prüfe die KI-Ausgabe: Sind die Typen richtig? Sind die Template-Literals sauber?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Aufgabe, Umfang und Prüfkriterien stehen drin — und die Nachfrage „Sind die Typen richtig?" trainiert genau das Kapitelwissen.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt Werte speichern, einlesen und ausgeben — dein Programm hat ein Gedächtnis.
+            </p>
+            <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic/kapitel/03-operatoren.html">
+              Weiter zu Kapitel 03: Operatoren
+            </a>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 Deklarieren</a></li>
+            <li><a href="#schritt-2">2 Datentypen</a></li>
+            <li><a href="#schritt-3">3 prompt()</a></li>
+            <li><a href="#schritt-4">4 Templates</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
       </div>
-      <div class="plu-nav">
-        <a href="../../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="../index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="06-arrays.html">06. Arrays</a></li>
-        <li><a href="07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="08-objekte.html">08. Objekte</a></li>
-        <li><a href="09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="../uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="../uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="../uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="../uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="../uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="../uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="../uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="../uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="../uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="../uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="../uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="../ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="../vscode.html" class="nav-link">💻 VS Code:</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="../abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="../abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="../abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="../bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="../info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
-
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>02 – Variablen & Datentypen 🧮</h1>
-      <p class="hero-subtitle">Behälter für Werte – und wie sie funktionieren</p>
-    </section>
-
-    <section>
-      <h2>🎯 1. Was ist eine Variable?</h2>
-      <p>
-        Eine Variable ist ein <strong>Behälter für einen Wert</strong>. 
-        In JavaScript deklariert man sie mit <code>let</code> oder <code>const</code>.
-      </p>
-    </section>
-
-    <section>
-      <h2>📊 2. Übersicht: Deklarationsarten & Datentypen</h2>
-      
-      <h3>Variablen-Deklaration</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Schlüsselwort</th>
-            <th>Beschreibung</th>
-            <th>Beispiel</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>const</code></td>
-            <td>Unveränderlich (Standardwahl!)</td>
-            <td><code>const name = "Anna";</code></td>
-          </tr>
-          <tr>
-            <td><code>let</code></td>
-            <td>Veränderlich (nur wenn nötig)</td>
-            <td><code>let punkte = 0;</code></td>
-          </tr>
-          <tr class="warnung">
-            <td><code>var</code></td>
-            <td>Veraltet – niemals verwenden!</td>
-            <td><code>var alt = 10; // ❌</code></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>Häufige Datentypen</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Typ</th>
-            <th>Beispiel</th>
-            <th>Beschreibung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>string</code></td>
-            <td><code>"Hallo"</code></td>
-            <td>Text</td>
-          </tr>
-          <tr>
-            <td><code>number</code></td>
-            <td><code>42</code>, <code>3.14</code></td>
-            <td>Ganze und Kommazahlen</td>
-          </tr>
-          <tr>
-            <td><code>boolean</code></td>
-            <td><code>true</code>, <code>false</code></td>
-            <td>Wahrheitswerte</td>
-          </tr>
-          <tr>
-            <td><code>null</code></td>
-            <td><code>null</code></td>
-            <td>Absichtlich „leer“</td>
-          </tr>
-          <tr>
-            <td><code>undefined</code></td>
-            <td><code>let x;</code></td>
-            <td>Nicht initialisiert</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <h2>🎯 3. Einleitung & W3Schools</h2>
-      <p>
-        In diesem Kapitel lernst du, wie man Variablen deklariert, 
-        welche Datentypen JavaScript kennt und warum <code>const</code> oft besser ist als <code>let</code>.
-      </p>
-      <p>
-        🔗 <a href="https://www.w3schools.com/js/js_variables.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Variables</a><br>
-        🔗 <a href="https://www.w3schools.com/js/js_datatypes.asp" target="_blank" rel="noopener noreferrer">W3Schools – JavaScript Data Types</a>
-      </p>
-    </section>
-
-    <section>
-      <h2>🧠 4. KI-Prompt-Training</h2>
-      <p>
-        <strong>Aufgabe:</strong> Formuliere einen Prompt, mit dem du KI um Hilfe bitten würdest, 
-        um den Unterschied zwischen <code>let</code> und <code>const</code> zu erklären – 
-        und warum man <code>var</code> vermeiden sollte. 
-        Außerdem: Zeig mir, wie ich mit Template-Literalen dynamische Texte erstelle.
-      </p>
-    </section>
-
-    <!-- 5. const vs let -->
-    <section>
-      <h2>🔖 5. <code>const</code> vs. <code>let</code></h2>
-      <p>
-        <code>const</code> ist die <strong>Standardwahl</strong> – 
-        nur wenn du den Wert ändern musst, verwende <code>let</code>.
-      </p>
-      <button onclick="demoConstLet()">Teste const und let</button>
-      <div id="ausgabe-const-let" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoConstLet() {
-  const name = "Anna";  // const = unveränderlich
-  let alter = 16;       // let = veränderlich
-
-  // name = "Ben";      // ❌ Fehler! const kann nicht geändert werden.
-  alter = 17;           // ✅ Erlaubt bei let.
-
-  document.getElementById("ausgabe-const-let").innerHTML =
-    `&lt;p&gt;Name: &lt;strong&gt;${name}&lt;/strong&gt; (const – unveränderlich)&lt;/p&gt;` +
-    `&lt;p&gt;Alter: &lt;strong&gt;${alter}&lt;/strong&gt; (let – veränderlich)&lt;/p&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 6. Datentypen -->
-    <section>
-      <h2>🧮 6. Datentypen und <code>typeof</code></h2>
-      <p>
-        JavaScript ist <strong>dynamisch getypt</strong> – der Typ wird automatisch erkannt.
-      </p>
-      <button onclick="demoDatentypen()">Zeige Datentypen</button>
-      <div id="ausgabe-daten" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoDatentypen() {
-  const text = "Hallo Welt";        // string
-  const zahl = 42;                  // number
-  const punktzahl = 3.14;           // number
-  const istSchueler = true;         // boolean
-  const nichts = null;              // null
-  let undefiniert;                  // undefined
-
-  document.getElementById("ausgabe-daten").innerHTML = 
-    `&lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;text&lt;/code&gt;: "${text}" → &lt;em&gt;${typeof text}&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;zahl&lt;/code&gt;: ${zahl} → &lt;em&gt;${typeof zahl}&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;punktzahl&lt;/code&gt;: ${punktzahl} → &lt;em&gt;${typeof punktzahl}&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;istSchueler&lt;/code&gt;: ${istSchueler} → &lt;em&gt;${typeof istSchueler}&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;nichts&lt;/code&gt;: ${nichts} → &lt;em&gt;${typeof nichts}&lt;/em&gt; (⚠️ Sonderfall!)&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;undefiniert&lt;/code&gt;: ${undefiniert} → &lt;em&gt;${typeof undefiniert}&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;`;
-}</code></pre>
-    </section>
-
-    <!-- 7. Template-Literale -->
-    <section>
-      <h2>🔤 7. Template-Literale</h2>
-      <p>
-        Mit <strong>Backticks</strong> (<code>`</code>) kannst du dynamische Texte erstellen.
-      </p>
-      <button onclick="demoTemplate()">Template-Literal testen</button>
-      <div id="ausgabe-template" class="ausgabe-bereich"></div>
-      <pre><code class="js-code">function demoTemplate() {
-  const schueler = ["Anna", "Ben", "Chloé"];
-  const html = `&lt;ul&gt;
-  ${schueler.map(name =&gt; `&lt;li&gt;Hallo, ${name}!&lt;/li&gt;`).join('')}
-&lt;/ul&gt;`;
-  document.getElementById("ausgabe-template").innerHTML = html;
-}</code></pre>
-    </section>
-
-    <section class="kapitel-navigation">
-      <p>🎓 Jetzt verstehst du, wie Variablen und Datentypen funktionieren!</p>
-      <a href="./03-operatoren.html" class="nav-button">→ Zu Modul 03: Operatoren</a>
-    </section>
-  </div>
-
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="../js/02-variablen.js"></script>
-  <script src="../js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+    </main>
+  </body>
 </html>
