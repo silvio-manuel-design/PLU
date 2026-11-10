@@ -1,210 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📖 Bibliothek | JavaScript-Tutorial</title>
-  <!-- Favicon – nur .ico wie gewünscht -->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <a href="index.html"><img src="assets/logo.svg" alt="JavaScript Classic" height="40"></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bibliothek · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Bibliothek: Mit Referenzen arbeiten lernen — MDN, GitHub, Git und VS Code-Doku, plus alle Kapitel-Vertiefungen gesammelt."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/bibliothek.html" />
+    <link rel="alternate" hreflang="de" href="bibliothek.html" />
+    <link rel="alternate" hreflang="en" href="bibliothek-en.html" />
+    <link rel="alternate" hreflang="x-default" href="bibliothek.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bibliothek · js-classic" />
+    <meta
+      property="og:description"
+      content="Nachschlagen, verstehen, abwandeln: Referenzen richtig nutzen."
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="./css/js-classic.css" />
+    <script type="module" src="/js/entry-global.js"></script>
+  </head>
+  <body>
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main">
+      <section class="jsc-hero--slim jsc-container" aria-labelledby="page-title">
+        <span class="jsc-hero__icon ph ph-books" aria-hidden="true"></span>
+        <h1 id="page-title" class="jsc-hero__title">Bibliothek</h1>
+        <p class="jsc-hero__sub">Nachschlagen, verstehen, abwandeln: Referenzen richtig nutzen.</p>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte der Seite">
+        <a href="#arbeiten">Mit Referenzen arbeiten</a>
+        <a href="#referenzen">Die wichtigsten Referenzen</a>
+        <a href="#vertiefungen">Kapitel-Vertiefungen</a>
+        <a href="#downloads">Downloads</a>
+      </nav>
+
+      <section class="jsc-understand jsc-container" id="einstieg" aria-labelledby="einstieg-title">
+        <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+          <i class="ph ph-lightbulb" aria-hidden="true"></i>
+          <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+        </h2>
+        <div class="jsc-understand__body">
+          <p>Kein Entwickler kennt alles auswendig. Profis sind schnell im Nachschlagen — das ist kein Betrug, sondern Handwerk.</p>
+          <p>Diese Seite sammelt die Referenzen, die zu diesem Kurs passen — und zeigt, wie du mit ihnen arbeitest.</p>
+        </div>
+      </section>
+      <div class="jsc-terms jsc-container">
+        <p class="jsc-terms__eyebrow">
+          <i class="ph ph-book-open" aria-hidden="true"></i>
+          <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+        </p>
+        <div class="jsc-terms__grid">
+          <div class="jsc-term-card">
+            <p class="jsc-term-card__word">Referenz <span class="jsc-term-card__word-en">/ reference</span></p>
+            <p class="jsc-term-card__def">Die offizielle Dokumentation einer Sprache.</p>
+            <p class="jsc-term-card__life"><strong>Alltag:</strong> wie das Wörterbuch.</p>
+            <p class="jsc-term-card__code"><code>MDN</code></p>
+          </div>
+          <div class="jsc-term-card">
+            <p class="jsc-term-card__word">MDN <span class="jsc-term-card__word-en">/ MDN</span></p>
+            <p class="jsc-term-card__def">Die beste JavaScript-Referenz im Web.</p>
+            <p class="jsc-term-card__code"><code>developer.mozilla.org</code></p>
+          </div>
+          <div class="jsc-term-card">
+            <p class="jsc-term-card__word">Abwandeln <span class="jsc-term-card__word-en">/ adapt</span></p>
+            <p class="jsc-term-card__def">Ein Beispiel verstehen und für dein Problem umbauen.</p>
+            <p class="jsc-term-card__code"><code>→ eigener Code</code></p>
+          </div>
+        </div>
       </div>
-      <div class="plu-nav">
-        <a href="../index.html" class="plu-link">← ZUM PLU HUB</a>
-        <a href="../pages/spenden.html" class="support-btn">❤️ SUPPORT</a>
-      </div>
-      <!-- Hamburger-Button für Mobile -->
-      <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Menü öffnen/schließen">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-wrapper">
-        <nav class="nav">
-  <ul class="nav-list">
-    <li><a href="index.html" class="nav-link">🏠</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">📚 Module ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="kapitel/01-einfuehrung-ausgabe.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="kapitel/02-variablen.html">02. Variablen & Datentypen</a></li>
-        <li><a href="kapitel/03-operatoren.html">03. Operatoren</a></li>
-        <li><a href="kapitel/04-bedingungen.html">04. Bedingungen</a></li>
-        <li><a href="kapitel/05-schleifen.html">05. Schleifen</a></li>
-        <li><a href="kapitel/06-arrays.html">06. Arrays</a></li>
-        <li><a href="kapitel/07-funktionen.html">07. Funktionen</a></li>
-        <li><a href="kapitel/08-objekte.html">08. Objekte</a></li>
-        <li><a href="kapitel/09-dom.html">09. DOM-Manipulation</a></li>
-        <li><a href="kapitel/10-ereignisse.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">✏️ Übungen ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="uebungen/hinweise.html">ℹ️ Konzept & Hinweise</a></li>
-        <li><a href="uebungen/00-abgabe.html">00. Abgabe einrichten</a></li>
-        <li><a href="uebungen/01-einfuehrung-ausgabe-aufgaben.html">01. Einführung & Ausgabe</a></li>
-        <li><a href="uebungen/02-variablen-aufgaben.html">02. Variablen & Datentypen</a></li>
-        <li><a href="uebungen/03-operatoren-aufgaben.html">03. Operatoren</a></li>
-        <li><a href="uebungen/04-bedingungen-aufgaben.html">04. Bedingungen</a></li>
-        <li><a href="uebungen/05-schleifen-aufgaben.html">05. Schleifen</a></li>
-        <li><a href="uebungen/06-arrays-aufgaben.html">06. Arrays</a></li>
-        <li><a href="uebungen/07-funktionen-aufgaben.html">07. Funktionen</a></li>
-        <li><a href="uebungen/08-objekte-aufgaben.html">08. Objekte</a></li>
-        <li><a href="uebungen/09-dom-aufgaben.html">09. DOM-Manipulation</a></li>
-        <li><a href="uebungen/10-ereignisse-aufgaben.html">10. Ereignisse & Timing</a></li>
-      </ul>
-    </li>
-    <li><a href="ki-grundlagen.html" class="nav-link">🧠 KI</a></li>
-    <li><a href="vscode.html" class="nav-link">💻 VS Code</a></li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link">🚀 Abschluss ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="abschluss/todo-liste.html">📝 Todo-Liste</a></li>
-        <li><a href="abschluss/noten.html">📊 Notenverwaltung</a></li>
-        <li><a href="abschluss/quiz.html">🧠 JavaScript-Quiz</a></li>
-      </ul>
-    </li>
-    <li><a href="bibliothek.html" class="nav-link">📖 Library</a></li>
-    <li><a href="info.html" class="nav-link">ℹ️</a></li>
-  </ul>
-</nav>
-      </div>
-      <!-- Dark Mode Toggle Button -->
-      <button id="dark-mode-toggle" aria-label="Dark Mode umschalten" title="Hell/Dunkel umschalten">🌓</button>
-    </div>
-  </header>
 
-  <div class="main-content">
-    <section class="hero-section">
-      <h1>📖 Bibliothek</h1>
-      <p class="hero-subtitle">Deine zentrale Quelle für Skripten, Referenzen und vertrauenswürdige Web-Ressourcen</p>
-    </section>
+      <section class="jsc-container jsc-band" id="arbeiten" aria-labelledby="arbeiten-title">
+        <h2 id="arbeiten-title" class="jsc-step__heading">Mit Referenzen arbeiten</h2>
+        <div class="jsc-mini-grid">
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">1</p>
+            <p class="jsc-mini-card__title">Suchen</p>
+            <p class="jsc-mini-card__text">Begriff + „mdn" in die Suchmaschine — z. B. <code>array includes mdn</code>.</p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">2</p>
+            <p class="jsc-mini-card__title">Beispiel lesen</p>
+            <p class="jsc-mini-card__text">Erst das Code-Beispiel, dann die Erklärung — so bleibt es hängen.</p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">3</p>
+            <p class="jsc-mini-card__title">Abwandeln</p>
+            <p class="jsc-mini-card__text">Im Playground testen, dann in dein Projekt übernehmen.</p>
+          </div>
+        </div>
+      </section>
 
-    <!-- 1. Eigene Skripten -->
-    <section>
-      <h2>📘 1. Beurteilungsraster, Skripten</h2>
-      <p>
-        Diese Zusammenfassungen enthalten die <strong>wesentlichen Punkte</strong> aus dem Unterricht –  
-        kompakt, prüfungsrelevant und auf deine Lernziele zugeschnitten.
-      </p>
-      <ul>        
-        <li><a href="assets/pdfs/Allgemeines Beurteilungsraster Javascript.pdf" target="_blank">Beurteilungsraster Kapitel/Projekt (PDF)</a></li>
-      </ul>
-      <ul>        
-        <li><a href="assets/pdf/js-grundlagen.pdf" target="_blank">JavaScript-Grundlagen (PDF)<strong>...fehlt noch!</strong></a></li>
-        <li><a href="assets/pdf/dom-ereignisse.pdf" target="_blank">DOM & Ereignisse (PDF)<strong>...fehlt noch!</strong></a></li>
-        <li><a href="assets/pdf/kompendium-w3schools.pdf" target="_blank">Kompendium: W3Schools im Überblick (PDF)<strong>...fehlt noch!</strong></a></li>
-        <li><a href="assets/pdf/js-tutorial-gesamt.pdf" target="_blank">JavaScript-Tutorial – Komplettversion (PDF)<strong>...fehlt noch!</strong></a></li>
-      </ul>
-      <div class="regel">
-        💡 <strong>Tipp:</strong> Lade dir die PDFs herunter – sie sind offline verfügbar und ideal zum Wiederholen!
-      </div>
-    </section>
+      <section class="jsc-container jsc-band--alt" id="referenzen" aria-labelledby="referenzen-title">
+        <h2 id="referenzen-title" class="jsc-step__heading">Die wichtigsten Referenzen</h2>
+        <div class="jsc-deepen-card">
+          <ul class="jsc-deepen-list">
+            <li>
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript" target="_blank" rel="noopener">MDN JavaScript (deutsch)</a>
+              <span>Die JavaScript-Referenz — auf Deutsch.</span>
+            </li>
+            <li>
+              <a href="https://developer.mozilla.org/de/docs/Web/API/Document_Object_Model" target="_blank" rel="noopener">MDN Web-API / DOM</a>
+              <span>Der DOM-Teil der Referenz — für Kapitel 09.</span>
+            </li>
+            <li>
+              <a href="https://docs.github.com/de" target="_blank" rel="noopener">GitHub-Dokumentation</a>
+              <span>Alles zu Repos, Commits und Zusammenarbeit.</span>
+            </li>
+            <li>
+              <a href="https://git-scm.com/book/de/v2" target="_blank" rel="noopener">Git-Dokumentation (Pro Git, deutsch)</a>
+              <span>Das Git-Buch — kostenlos und vollständig.</span>
+            </li>
+            <li>
+              <a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">VS Code-Dokumentation</a>
+              <span>Editor-Grundlagen und Extensions.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <!-- 2. Lernkarten & Cheat Sheets -->
-    <section>
-      <h2>🃏 2. Lernkarten & Cheat Sheets</h2>
-      <p>
-        Für schnelles Nachschlagen und Wiederholen – druckfreundlich im A4-Format.
-      </p>
-      <ul>
-        <li><a href="assets/pdf/js-cheat-sheet.pdf" target="_blank">JavaScript Cheat Sheet (A4)<strong>...fehlt noch!</strong></a></li>
-        <li><a href="assets/pdf/dom-ereignisse-uebersicht.pdf" target="_blank">DOM & Ereignisse – Übersicht<strong>...fehlt noch!</strong></a></li>
-      </ul>
-    </section>
+      <section class="jsc-container jsc-band" id="vertiefungen" aria-labelledby="vertiefungen-title">
+        <h2 id="vertiefungen-title" class="jsc-step__heading">Die Kapitel-Vertiefungen</h2>
+        <p>Alle MDN-Links aus den Vertiefen-Cards der Kapitel — gesammelt an einem Ort.</p>
+        <div class="jsc-mini-grid">
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 01</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Learn/JavaScript/First_steps" target="_blank" rel="noopener">JavaScript first steps</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/HTML/Element/script" target="_blank" rel="noopener">Das script-Element</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/console/log_static" target="_blank" rel="noopener">console.log()</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 02</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/let" target="_blank" rel="noopener">let</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">Datentypen und Datenstrukturen</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Template_literals" target="_blank" rel="noopener">Template-Literals</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 03</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators" target="_blank" rel="noopener">Ausdrücke und Operatoren</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Equality_comparisons_and_sameness" target="_blank" rel="noopener">Gleichheitsvergleiche</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Logical_OR" target="_blank" rel="noopener">Logische Operatoren</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 04</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/if...else" target="_blank" rel="noopener">if...else</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/switch" target="_blank" rel="noopener">switch</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Conditional_operator" target="_blank" rel="noopener">Ternärer Operator</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 05</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/for" target="_blank" rel="noopener">for</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/while" target="_blank" rel="noopener">while</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/break" target="_blank" rel="noopener">break/continue</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 06</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener">Array</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank" rel="noopener">for...of</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Indexed_collections" target="_blank" rel="noopener">Indexed collections</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 07</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Functions" target="_blank" rel="noopener">Funktionen</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/return" target="_blank" rel="noopener">return</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">Arrow Functions</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 08</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Working_with_Objects" target="_blank" rel="noopener">Objekte</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/this" target="_blank" rel="noopener">this</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Working_with_objects#objects_and_properties" target="_blank" rel="noopener">Eigene Eigenschaften</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 09</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Web/API/Document_Object_Model/Introduction" target="_blank" rel="noopener">Einführung in das DOM</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/Document/querySelector" target="_blank" rel="noopener">querySelector</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/Element/classList" target="_blank" rel="noopener">classList</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 10</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Core_scripting/Events" target="_blank" rel="noopener">Einführung in Events</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/EventTarget/addEventListener" target="_blank" rel="noopener">addEventListener</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/Element/keydown_event" target="_blank" rel="noopener">Tastatur-Events</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 11</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form" target="_blank" rel="noopener">Formulare erstellen</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Learn_web_development/Extensions/Forms/Form_validation" target="_blank" rel="noopener">Formular-Validierung</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/HTMLObjectElement/validity" target="_blank" rel="noopener">Constraint Validation API</a>
+            </p>
+          </div>
+          <div class="jsc-mini-card">
+            <p class="jsc-mini-card__nr">Kap. 12</p>
+            <p class="jsc-mini-card__text">
+              <a href="https://developer.mozilla.org/de/docs/Glossary/Cross-site_scripting" target="_blank" rel="noopener">Cross-Site Scripting</a> ·
+              <a href="https://developer.mozilla.org/de/docs/Web/API/Element/textContent" target="_blank" rel="noopener">textContent</a> ·
+              <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP XSS Prevention</a>
+            </p>
+          </div>
+        </div>
+      </section>
 
-    <!-- 3. Externe Ressourcen -->
-    <section>
-      <h2>🌍 3. Externe Ressourcen – geprüft & empfohlen</h2>
-      <p>
-        Diese Online-Quellen sind <strong>vertrauenswürdig**, **aktuell** und **technisch präzise**:
-      </p>
-      <ul>
-        <li>
-          <a href="https://www.w3schools.com/js/" target="_blank">W3Schools – JavaScript Tutorial</a><br>
-          → Interaktive Beispiele, klare Erklärungen, ideal zum Nachschlagen
-        </li>
-        <li>
-          <a href="https://developer.mozilla.org/de/docs/Web/JavaScript" target="_blank">MDN Web Docs – JavaScript</a><br>
-          → Die offizielle Referenz von Mozilla – technisch präzise
-        </li>
-        <li>
-          <a href="https://caniuse.com/" target="_blank">Can I Use – Browser-Kompatibilität</a><br>
-          → Prüfe, ob ein Feature in deinem Browser funktioniert
-        </li>
-      </ul>
-      <div class="regel">
-        💡 <strong>Merke:</strong> Nutze externe Quellen als <em>Ergänzung</em> – nicht als Ersatz für eigenes Denken!
-      </div>
-    </section>
-
-    <!-- 4. W3Schools – Kapitelverweise -->
-    <section>
-      <h2>📚 4. Direktlinks zu W3Schools</h2>
-      <p>
-        Schnellzugriff auf die passenden Kapitel – thematisch sortiert:
-      </p>
-      <ul>
-        <li><a href="https://www.w3schools.com/js/js_intro.asp" target="_blank">Einführung in JavaScript</a></li>
-        <li><a href="https://www.w3schools.com/js/js_variables.asp" target="_blank">Variablen & Datentypen</a></li>
-        <li><a href="https://www.w3schools.com/js/js_operators.asp" target="_blank">Operatoren</a></li>
-        <li><a href="https://www.w3schools.com/js/js_if_else.asp" target="_blank">Bedingungen</a></li>
-        <li><a href="https://www.w3schools.com/js/js_loop_for.asp" target="_blank">Schleifen</a></li>
-        <li><a href="https://www.w3schools.com/js/js_arrays.asp" target="_blank">Arrays</a></li>
-        <li><a href="https://www.w3schools.com/js/js_functions.asp" target="_blank">Funktionen</a></li>
-        <li><a href="https://www.w3schools.com/js/js_objects.asp" target="_blank">Objekte</a></li>
-        <li><a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank">DOM-Manipulation</a></li>
-        <li><a href="https://www.w3schools.com/js/js_events.asp" target="_blank">Ereignisse & Timing</a></li>
-      </ul>
-    </section>
-
-    <!-- 5. KI als Lernunterstützung -->
-    <section>
-      <h2>🧠 5. KI als Lernunterstützung</h2>
-      <p>
-        Wie du KI sinnvoll in dein Lernen einbindest, erfährst du auf der zentralen Seite:
-      </p>
-      <p style="text-align: center; margin: 20px 0;">
-        <a href="ki-grundlagen.html" class="nav-button">→ KI-Grundlagen lesen</a>
-      </p>
-      <p>
-        Dort lernst du, wie du Prompts formulierst, die dir <strong>wirklich helfen</strong> – statt dich abzulenken.
-      </p>
-    </section>
-
-    <!-- Abschluss -->
-    <section class="kapitel-navigation">
-      <p>🎓 Deine Bibliothek ist jetzt dein ständiger Begleiter.</p>
-      <a href="index.html" class="nav-button">→ Zurück zur Startseite</a>
-    </section>
-  </div>
-
-  <!-- Back-to-Top Button -->
-  <button id="back-to-top" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <p>JavaScript-Tutorial – HTBLA und Fachschule Traun | Medientechnik</p>
-  </footer>
-
-  <script src="js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const button = document.getElementById('back-to-top');
-      if (button) {
-        window.addEventListener('scroll', () => {
-          button.classList.toggle('show', window.scrollY > 600);
-        });
-        button.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
-</body>
+      <section class="jsc-container jsc-band--alt" id="downloads" aria-labelledby="downloads-title">
+        <h2 id="downloads-title" class="jsc-step__heading">Downloads</h2>
+        <div class="jsc-mini-card">
+          <p class="jsc-mini-card__text">
+            Spickzettel folgen mit den Kapitel-Medien — Kapitel 01 zuerst. Bis dahin:
+            Die Druckansicht jedes Kapitels bringt Checkliste und Reflexion sauber aufs
+            Papier (im Kapitel auf „Drucken" klicken).
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>

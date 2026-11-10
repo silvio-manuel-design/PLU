@@ -25,6 +25,9 @@ export default {
   'ui.nav.chapters': 'Chapters',
   'ui.nav.exercises': 'Exercises',
   'ui.nav.worksheets': 'Worksheets',
+  /* P9: glossary + GitHub page */
+  'ui.nav.lexikon': 'Glossary',
+  'ui.nav.github': 'GitHub & Submission',
   'ui.nav.final': 'Projects',
   'ui.nav.info': 'About',
   'ui.nav.infoAbout': 'About the Course',

@@ -25,6 +25,9 @@ export default {
   'ui.nav.chapters': 'Kapitel',
   'ui.nav.exercises': 'Übungen',
   'ui.nav.worksheets': 'Arbeitsblätter',
+  /* P9: Lexikon + GitHub-Seite */
+  'ui.nav.lexikon': 'Lexikon',
+  'ui.nav.github': 'GitHub & Abgabe',
   'ui.nav.final': 'Projekte',
   'ui.nav.info': 'Infos',
   'ui.nav.infoAbout': 'Über den Kurs',

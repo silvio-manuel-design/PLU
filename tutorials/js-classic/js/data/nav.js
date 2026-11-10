@@ -32,9 +32,11 @@ export const CHAPTERS = [
 export const INFO_PAGES = [
   { slug: 'info', i18n: 'ui.nav.infoAbout' },
   { slug: 'vscode', i18n: 'ui.nav.vscode' },
+  { slug: 'github', i18n: 'ui.nav.github' },
   { slug: 'ki-grundlagen', i18n: 'ui.nav.kiBasics' },
-  // Altbestand-Dateiname bleibt bis zur Neuerstellung der Seite (P9) — nicht umbenennen.
-  { slug: 'biblik', i18n: 'ui.nav.library' },
+  { slug: 'bibliothek', i18n: 'ui.nav.library' },
+  // P9: Arbeitsblätter als echte Seite (ersetzt den Ordner-Index)
+  { slug: 'arbeitsblaetter', i18n: 'ui.nav.worksheets' },
 ];
 
 export const FINAL_PROJECTS = [
@@ -58,21 +60,19 @@ export const NAV = {
         i18n: ch.i18n,
       })),
     },
+    // P9: Lexikon als 6. Top-Punkt (nach Kapitel, vor Übungen)
+    { id: 'lexikon', url: `${BASE}/lexikon.html`, i18n: 'ui.nav.lexikon' },
     { id: 'exercises', url: `${BASE}/uebungen/`, i18n: 'ui.nav.exercises' },
     { id: 'final', url: `${BASE}/abschluss/`, i18n: 'ui.nav.final' },
     {
       id: 'info',
       url: `${BASE}/info.html`,
       i18n: 'ui.nav.info',
-      children: [
-        ...INFO_PAGES.map((p) => ({
-          id: `info-${p.slug}`,
-          url: `${BASE}/${p.slug}.html`,
-          i18n: p.i18n,
-        })),
-        // Arbeitsblätter: ergänzendes Material — im Infos-Dropdown (zuletzt)
-        { id: 'info-worksheets', url: `${BASE}/arbeitsblaetter/`, i18n: 'ui.nav.worksheets' },
-      ],
+      children: INFO_PAGES.map((p) => ({
+        id: `info-${p.slug}`,
+        url: `${BASE}/${p.slug}.html`,
+        i18n: p.i18n,
+      })),
     },
   ],
   chaptersMeta: CHAPTERS,
