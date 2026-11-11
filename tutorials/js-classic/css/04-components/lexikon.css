@@ -238,6 +238,123 @@ html[data-theme="light"] .jsc-term-card__chap a {
   text-align: center;
 }
 
+/* --- P9R4: Kachel-Pfad (12-Kapitel-Weg, info.html) ------------------- */
+
+.jsc-path-grid {
+  list-style: none;
+  display: grid;
+  gap: var(--jsc-space-3);
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  padding: 0;
+  margin: 0;
+}
+
+.jsc-path-tile {
+  display: block;
+  padding: var(--jsc-space-3) var(--jsc-space-4);
+  background: var(--jsc-color-surface-2);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.jsc-path-tile:hover {
+  border-color: var(--tile-accent);
+  transform: translateY(-2px);
+}
+
+.jsc-path-tile:focus-visible {
+  outline: 2px solid var(--jsc-color-accent);
+  outline-offset: 2px;
+}
+
+.jsc-path-tile__nr {
+  display: block;
+  font-family: var(--jsc-font-mono);
+  font-size: 0.85rem;
+  /* Kontrast-sichere Variante der Kachel-Akzentfarbe (AA auf surface-2) */
+  color: color-mix(in oklch, var(--tile-accent), white 20%);
+  margin-bottom: var(--jsc-space-1);
+}
+
+html[data-theme="light"] .jsc-path-tile__nr {
+  color: color-mix(in oklch, var(--tile-accent), var(--jsc-color-ink) 45%);
+}
+
+.jsc-path-tile__title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: var(--jsc-weight-semibold);
+  line-height: var(--jsc-leading-heading);
+}
+
+/* --- P9R4: Stepper (GitHub-Seite, Schüler/Lehrer-Anleitungen) -------- */
+
+.jsc-stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--jsc-space-4);
+}
+
+.jsc-stepper__item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: var(--jsc-space-4);
+  position: relative;
+}
+
+.jsc-stepper__item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 1.125rem;
+  top: 2.5rem;
+  bottom: -0.5rem;
+  width: 2px;
+  background: var(--jsc-color-border);
+}
+
+.jsc-stepper__nr {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--jsc-radius-s);
+  border: 1px solid var(--jsc-color-accent);
+  color: var(--jsc-color-accent);
+  font-weight: var(--jsc-weight-bold);
+  background: var(--jsc-color-surface-2);
+}
+
+html[data-theme="light"] .jsc-stepper__nr {
+  border-color: var(--jsc-color-accent-ink);
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-stepper__title {
+  font-weight: var(--jsc-weight-semibold);
+  margin: 0 0 var(--jsc-space-1);
+}
+
+.jsc-stepper__text {
+  margin: 0;
+  max-width: 72ch;
+}
+
+/* --- P9R4: Nummern auf Mini-Karten sichtbar (KI-Regeln, Bibliothek) -- */
+
+.jsc-mini-card__nr {
+  font-size: 1.25rem;
+  font-weight: var(--jsc-weight-bold);
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  margin-bottom: var(--jsc-space-2);
+}
+
+html[data-theme="light"] .jsc-mini-card__nr {
+  color: var(--jsc-color-accent-ink);
+}
+
 /* --- Print (Lexikon + Info-Seiten) ----------------------------------- */
 
 @media print {
