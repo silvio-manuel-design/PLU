@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../css/js-classic.css" />
     <script type="module" src="/js/entry-chapter.js"></script>
   </head>
-  <body>
+  <body data-module="m11">
     <div data-component="jsc-site-chrome"></div>
 
     <main id="main">
@@ -72,140 +72,103 @@
         </div>
       </section>
 
-      <div class="jsc-info-main jsc-container">
-        <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
-          <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
-          <p>Du baust ein Formular mit Name, E-Mail und Passwort. HTML prüft die ersten Fehler, JavaScript die restlichen. Die Fehlermeldungen erscheinen direkt beim Feld — freundlich, aber klar.</p>
-          <p>
-            <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/kapitel/11-formulare.html">← Zurück zu Kapitel 11</a>
-          </p>
-        </section>
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
+            <p>Du baust ein Formular mit Name, E-Mail und Passwort. HTML prüft die ersten Fehler, JavaScript die restlichen. Die Fehlermeldungen erscheinen direkt beim Feld — freundlich, aber klar.</p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/kapitel/11-formulare.html">← Zurück zu Kapitel 11</a>
+            </p>
+          </section>
 
-        <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
-          <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
-          <p>Hake jede Zeile erst ab, wenn dein Code es wirklich tut.</p>
-          <ul
-            class="jsc-checklist"
-            data-component="jsc-checklist"
-            data-storage-key="jsc-lab-11-req"
-          >
-            <li><label><input type="checkbox" /> <span>Drei Felder: Name (min. 3 Zeichen), E-Mail, Passwort (min. 8 Zeichen).</span></label></li>
-            <li><label><input type="checkbox" /> <span>HTML-Validierung via <code>required</code>, <code>type="email"</code>, <code>minlength</code>.</span></label></li>
-            <li><label><input type="checkbox" /> <span><code>submit</code> wird per <code>preventDefault</code> abgefangen und neu geprüft.</span></label></li>
-            <li><label><input type="checkbox" /> <span>Fehlermeldungen erscheinen im Element neben dem Feld (<code>aria-live</code>).</span></label></li>
-            <li><label><input type="checkbox" /> <span>Bei Erfolg erscheint ein grüner Bestätigungstext.</span></label></li>
-          </ul>
-          <p class="jsc-check-actions">
-            <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
-              <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
-            </button>
-          </p>
-        </section>
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
+            <p>Hake jede Zeile erst ab, wenn dein Code es wirklich tut.</p>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-lab-11-req"
+            >
+              <li><label><input type="checkbox" /> <span>Drei Felder: Name (min. 3 Zeichen), E-Mail, Passwort (min. 8 Zeichen).</span></label></li>
+              <li><label><input type="checkbox" /> <span>HTML-Validierung via <code>required</code>, <code>type="email"</code>, <code>minlength</code>.</span></label></li>
+              <li><label><input type="checkbox" /> <span><code>submit</code> wird per <code>preventDefault</code> abgefangen und neu geprüft.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Fehlermeldungen erscheinen im Element neben dem Feld (<code>aria-live</code>).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Bei Erfolg erscheint ein grüner Bestätigungstext.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+          </section>
 
-        <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
-          <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
-          <ol>
-            <li>Baue das Formular mit den drei Feldern und <code>required</code>.</li>
-            <li>Füge je Feld ein <code>&lt;p class="fehler" aria-live="polite"&gt;</code> hinzu.</li>
-            <li>
-              <p>Beim submit:</p>
-            <figure class="jsc-code-block" data-filename="main.js">
-              <figcaption class="jsc-code-block__bar">
-                <span class="jsc-code-block__file">main.js</span>
-                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
-              </figcaption>
-              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">event.preventDefault();
-// dann Werte prüfen</code></pre>
-            </figure>
-            </li>
-            <li>Schreibe die Fehlermeldungen in die <code>fehler</code>-Elemente.</li>
-            <li>Bei Erfolg: <code>formular.reset()</code> und Bestätigung anzeigen.</li>
-          </ol>
-        </section>
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
+            <ol>
+              <li>Baue das Formular mit den drei Feldern und <code>required</code>.</li>
+              <li>Füge je Feld ein <code>&lt;p class="fehler" aria-live="polite"&gt;</code> hinzu.</li>
+              <li>
+                <p>Beim submit:</p>
+              <figure class="jsc-code-block" data-filename="main.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">main.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">event.preventDefault();
+  // dann Werte prüfen</code></pre>
+              </figure>
+              </li>
+              <li>Schreibe die Fehlermeldungen in die <code>fehler</code>-Elemente.</li>
+              <li>Bei Erfolg: <code>formular.reset()</code> und Bestätigung anzeigen.</li>
+            </ol>
+          </section>
 
-        <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
-          <h2 id="ki-title" class="jsc-step__heading">Arbeite mit der KI</h2>
-          <p>Regel: Validierung doppelt: HTML zuerst, JS als Ergänzung. Nie nur eins.</p>
-          <p>Starter-Prompt — kopiere ihn und fülle ihn aus:</p>
-            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
-              <figcaption class="jsc-code-block__bar">
-                <span class="jsc-code-block__file">starter-prompt.txt</span>
-                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
-              </figcaption>
-              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript (Kapitel: Formulare). Baue ein Anmeldeformular mit required, type=email, minlength und JavaScript-Prüfung beim submit. Nutze preventDefault und aria-live für Fehlermeldungen. Erkläre, warum HTML-Validierung allein nicht reicht.</code></pre>
-            </figure>
-          <p>Drei Prüf-Fragen:</p>
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Arbeite mit der KI</h2>
+            <p>Regel: Validierung doppelt: HTML zuerst, JS als Ergänzung. Nie nur eins.</p>
+            <p>Starter-Prompt — kopiere ihn und fülle ihn aus:</p>
+              <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">starter-prompt.txt</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript (Kapitel: Formulare). Baue ein Anmeldeformular mit required, type=email, minlength und JavaScript-Prüfung beim submit. Nutze preventDefault und aria-live für Fehlermeldungen. Erkläre, warum HTML-Validierung allein nicht reicht.</code></pre>
+              </figure>
+            <p>Drei Prüf-Fragen:</p>
+            <ul>
+              <li>Was macht <code>preventDefault()</code>?</li>
+              <li>Warum <code>aria-live</code>?</li>
+              <li>Was prüft <code>type="email"</code> wirklich?</li>
+            </ul>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/ki-grundlagen.html">KI-Grundlagen öffnen</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Abgabe</h2>
+            <p>Speichere die Seite als <code>uebung-11.html</code> und lade sie in dein GitHub-Repository hoch. Die genaue Deadline sagt dir deine Lehrkraft.</p>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Alle Übungen">
+          <h2>Alle Übungen</h2>
           <ul>
-            <li>Was macht <code>preventDefault()</code>?</li>
-            <li>Warum <code>aria-live</code>?</li>
-            <li>Was prüft <code>type="email"</code> wirklich?</li>
+            <li><a href="lab-01-ausgabe.html">Übung 01</a></li>
+            <li><a href="lab-02-steckbrief.html">Übung 02</a></li>
+            <li><a href="lab-03-warenkorb.html">Übung 03</a></li>
+            <li><a href="lab-04-noten.html">Übung 04</a></li>
+            <li><a href="lab-05-countdown.html">Übung 05</a></li>
+            <li><a href="lab-06-einkaufsliste.html">Übung 06</a></li>
+            <li><a href="lab-07-umrechner.html">Übung 07</a></li>
+            <li><a href="lab-08-mediathek.html">Übung 08</a></li>
+            <li><a href="lab-09-klickzaehler.html">Übung 09</a></li>
+            <li><a href="lab-10-reaktion.html">Übung 10</a></li>
+            <li><a href="lab-11-anmeldung.html" aria-current="page" class="is-active">Übung 11</a></li>
+            <li><a href="lab-12-xss-labor.html">Übung 12</a></li>
           </ul>
-          <p>
-            <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/ki-grundlagen.html">KI-Grundlagen öffnen</a>
-          </p>
-        </section>
-
-        <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
-          <h2 id="sub-title" class="jsc-step__heading">Abgabe</h2>
-          <p>Speichere die Seite als <code>uebung-11.html</code> und lade sie in dein GitHub-Repository hoch. Die genaue Deadline sagt dir deine Lehrkraft.</p>
-        </section>
-
-        <section class="jsc-container jsc-band--alt" id="loesung" aria-labelledby="sol-title">
-          <h2 id="sol-title" class="jsc-step__heading">Musterlösung</h2>
-          <div class="jsc-solution-gate" data-component="jsc-solution-gate">
-            <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
-            <div class="jsc-solution-gate__body" hidden>
-            <figure class="jsc-code-block" data-filename="anmeldung.html">
-              <figcaption class="jsc-code-block__bar">
-                <span class="jsc-code-block__file">anmeldung.html</span>
-                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
-              </figcaption>
-              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-html">&lt;form id="anmeldung"&gt;
-  &lt;p&gt;&lt;label&gt;Name: &lt;input name="name" required minlength="3" /&gt;&lt;/label&gt;&lt;/p&gt;
-  &lt;p class="fehler" id="fehler-name" aria-live="polite"&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;label&gt;E-Mail: &lt;input name="email" type="email" required /&gt;&lt;/label&gt;&lt;/p&gt;
-  &lt;p class="fehler" id="fehler-email" aria-live="polite"&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;label&gt;Passwort: &lt;input name="passwort" type="password" required minlength="8" /&gt;&lt;/label&gt;&lt;/p&gt;
-  &lt;p class="fehler" id="fehler-passwort" aria-live="polite"&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;button type="submit"&gt;Anmelden&lt;/button&gt;&lt;/p&gt;
-&lt;/form&gt;
-&lt;p id="erfolg" aria-live="polite"&gt;&lt;/p&gt;</code></pre>
-            </figure>
-            <figure class="jsc-code-block" data-filename="main.js">
-              <figcaption class="jsc-code-block__bar">
-                <span class="jsc-code-block__file">main.js</span>
-                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
-              </figcaption>
-              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">const formular = document.getElementById("anmeldung");
-formular.addEventListener("submit", (event) =&gt; {
-  event.preventDefault();
-  const name = formular.name.value.trim();
-  const mail = formular.email.value.trim();
-  const pass = formular.passwort.value;
-  let ok = true;
-
-  formular.querySelectorAll(".fehler").forEach(e =&gt; e.textContent = "");
-  if (name.length &lt; 3) {
-    document.getElementById("fehler-name").textContent = "Name braucht mindestens 3 Zeichen.";
-    ok = false;
-  }
-  if (!mail.includes("@")) {
-    document.getElementById("fehler-email").textContent = "E-Mail sieht nicht gültig aus.";
-    ok = false;
-  }
-  if (pass.length &lt; 8) {
-    document.getElementById("fehler-passwort").textContent = "Passwort: mindestens 8 Zeichen.";
-    ok = false;
-  }
-  if (ok) {
-    formular.reset();
-    document.getElementById("erfolg").textContent = "Anmeldung geprüft — alles passt!";
-  }
-});</code></pre>
-            </figure>
-            </div>
-          </div>
-        </section>
+        </aside>
       </div>
     </main>
   </body>

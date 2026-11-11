@@ -30,7 +30,7 @@ html[data-theme="light"] .jsc-lab-card__body h3 a { color: var(--jsc-color-accen
 .jsc-lab-card__meta {
   color: var(--jsc-color-ink-muted);
   font-size: var(--jsc-text--1);
-  margin: 0 0 var(--jsc-space-3);
+  margin: 0 0 var(--jsc-space-4); /* P10R: war space-3 */
 }
 
 /* Fortschrittszeile */
@@ -55,3 +55,56 @@ html[data-theme="light"] .jsc-lab-card__body h3 a { color: var(--jsc-color-accen
 }
 
 /* Labs: Erklär-/Fazit-Karten im Band (Lab 12) — Standard-Kartenstyles nutzen */
+
+/* P10R: eigenständiger Button-Absatz in Lab-Bändern (Rhythmus wie check-actions) */
+.jsc-lab .jsc-lab-actions {
+  margin: var(--jsc-space-5) 0 0;
+}
+.jsc-lab .jsc-lab-actions:first-child {
+  margin-top: 0;
+}
+
+/* P10R: Code-Block nach Einleitungszeile bekommt Luft (KI-Karte, Schritte) */
+.jsc-lab .jsc-code-block {
+  margin-top: var(--jsc-space-4);
+}
+.jsc-lab .jsc-code-block:first-child {
+  margin-top: 0;
+}
+
+/* P10R: Hero→Layout-Abstand auf Labs (kein Jumplist; <1280, ab 1280 übernimmt chapter.css space-6) */
+.jsc-hero + .jsc-chapter-layout:has(> .jsc-info-main.jsc-lab) {
+  margin-top: var(--jsc-space-8);
+}
+
+/* P10R: Kapitel-Akzent pro Karte (Wiedererkennung zum Kapitelgrid) */
+.jsc-lab-card[data-module] {
+  border-color: color-mix(in oklch,
+    var(--module-accent, var(--jsc-color-border)) 55%,
+    var(--jsc-color-border));
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25),
+              0 0 1.25rem var(--module-accent-glow, transparent);
+}
+html[data-theme="light"] .jsc-lab-card[data-module] {
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+.jsc-lab-card__num {
+  display: inline-block;
+  font-weight: var(--jsc-weight-bold);
+  font-size: var(--jsc-text-2);
+  line-height: 1;
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  margin-bottom: var(--jsc-space-2);
+}
+
+/* P10R: aktiver Rail-Eintrag in Labs (Rail ist Geschwister von .jsc-lab) */
+.jsc-chapter-layout .jsc-chapter-rail .is-active {
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  font-weight: var(--jsc-weight-semibold);
+}
+
+/* P10R: Light-Kontrast AA für Akzent-Text (25 %-Token-Mix reicht für 22px/700 + 14px/600 nicht) */
+html[data-theme="light"] .jsc-lab-card__num,
+html[data-theme="light"] .jsc-chapter-layout .jsc-chapter-rail .is-active {
+  color: color-mix(in oklch, var(--module-accent) 55%, var(--jsc-color-ink));
+}
