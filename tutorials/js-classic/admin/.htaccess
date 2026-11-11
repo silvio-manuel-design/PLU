@@ -1,0 +1,28 @@
+# HTTPS erzwingen (ausser lokal im Test) — braucht mod_rewrite;
+# ohne mod_rewrite bleibt der Redirect wirkungslos, die Seite läuft trotzdem
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} !on
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Sicherheitsheader serverseitig (Pilsl-Muster — auth.php setzt denselben
+# Satz per PHP, falls mod_headers auf dem Server fehlt)
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+# Rate-Limit-Zähler gegen Direktzugriff sperren
+<IfModule mod_authz_core.c>
+  <Files "_login_state.json">
+    Require all denied
+  </Files>
+</IfModule>
+
+# Keine Verzeichnisliste
+Options -Indexes
