@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { cpSync } from 'node:fs';
 import { defineConfig } from 'vite';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -22,6 +23,14 @@ export default defineConfig({
           }
           next();
         });
+      },
+    },
+    {
+      // P9R1: assets/ (Hero-Bilder + Kapitel-Medien) in den Build kopieren —
+      // sonst fehlen sie im dist (werden per absolutem Pfad referenziert)
+      name: 'jsc-copy-assets',
+      closeBundle() {
+        cpSync(resolve(__dirname, 'assets'), resolve(__dirname, 'dist/assets'), { recursive: true });
       },
     },
   ],

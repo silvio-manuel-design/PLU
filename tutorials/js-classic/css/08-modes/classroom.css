@@ -1,0 +1,78 @@
+/**
+ * 08-modes/classroom.css — Klassenraum-Modus (P9R1, B12)
+ *
+ * Für Smart-Displays (10–12 m Leseabstand). Basis: rem-Skalierung auf
+ * 130 %, dazu gezielte Vergrößerungen, wo rem nicht trägt.
+ * Aktiv via html.is-classroom (Toggle: Footer-Button / Shift+C).
+ */
+
+html.is-classroom {
+  font-size: 130%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.is-classroom {
+    transition: font-size var(--jsc-duration-base) var(--jsc-ease-out);
+  }
+}
+
+/* Buttons/Inputs: Touch- und Distanztauglichkeit */
+html.is-classroom .jsc-button,
+html.is-classroom .jsc-icon-btn,
+html.is-classroom input,
+html.is-classroom textarea,
+html.is-classroom select {
+  min-height: 3rem;
+}
+
+/* Icons in Header/Bottom-Bar: +25 % */
+html.is-classroom .jsc-header__logo,
+html.is-classroom .jsc-icon-btn,
+html.is-classroom .jsc-bottom-bar__btn,
+html.is-classroom .jsc-bottom-bar__toc {
+  font-size: 1.25em;
+}
+
+/* Zeilenhöhe Fließtext */
+html.is-classroom .jsc-step__why,
+html.is-classroom .jsc-step__explain,
+html.is-classroom .jsc-understand__body {
+  line-height: 1.85;
+}
+
+/* Karten-Padding */
+html.is-classroom .jsc-mini-card,
+html.is-classroom .jsc-term-card,
+html.is-classroom .jsc-understand,
+html.is-classroom .jsc-demo {
+  padding: var(--jsc-space-6);
+}
+
+/* Code-Blöcke: Lesbarkeit am Display */
+html.is-classroom .jsc-code-block__pre,
+html.is-classroom .jsc-code-block__code,
+html.is-classroom .jsc-playground textarea,
+html.is-classroom .jsc-playground__output {
+  font-size: 0.9rem;
+}
+
+/* Rail ausblenden — volle Breite für den Inhalt */
+html.is-classroom .jsc-chapter-rail {
+  display: none;
+}
+
+html.is-classroom .jsc-chapter-layout {
+  grid-template-columns: 1fr;
+}
+
+/* Bottom-Bar: größere Hit-Areas */
+html.is-classroom .jsc-bottom-bar__btn,
+html.is-classroom .jsc-bottom-bar__toc {
+  min-height: 3.5rem;
+  padding-inline: var(--jsc-space-5);
+}
+
+/* Video: volle Breite im Medien-Grid */
+html.is-classroom .jsc-media-embed video {
+  width: 100%;
+}
