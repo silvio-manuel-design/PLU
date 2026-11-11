@@ -587,8 +587,7 @@ function renderFooter() {
   pluHub.target = '_blank';
   pluHub.rel = 'noopener';
   ulResources.append(
-    footerLink('/tutorials/js-classic/uebungen/', t('ui.footer.exercises')),
-    footerLink('/tutorials/js-classic/arbeitsblaetter.html', t('ui.footer.worksheets')),
+    // P9R5: Duplikate entfernt — Übungen/Arbeitsblätter leben in der Lernen-Spalte
     // P9: Lexikon + GitHub & Abgabe in der Ressourcen-Spalte
     footerLink('/tutorials/js-classic/lexikon.html', t('ui.nav.lexikon')),
     footerLink('/tutorials/js-classic/github.html', t('ui.nav.github')),
