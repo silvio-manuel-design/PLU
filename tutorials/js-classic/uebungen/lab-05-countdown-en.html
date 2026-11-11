@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab 05 — Countdown & Tables · Exercises · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Exercise for chapter 05: build a countdown and the ones table with for and while loops. With requirements, AI starter prompt and model solution."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/uebungen/lab-05-countdown-en.html" />
+    <link rel="alternate" hreflang="de" href="lab-05-countdown.html" />
+    <link rel="alternate" hreflang="en" href="lab-05-countdown-en.html" />
+    <link rel="alternate" hreflang="x-default" href="lab-05-countdown.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Lab 05 — Countdown & Tables · js-classic" />
+    <meta property="og:description" content="Exercise for chapter 05: build a countdown and the ones table with for and while loops. With requirements, AI starter prompt and model solution." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-2560.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m05">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="lab-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap05/jsc-kap05-hero-v4-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Endless ribbon-like light loops in gold and teal"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Exercise 05 · Chapter 05</p>
+          <h1 id="lab-title" class="jsc-hero__title">Lab 05 — Countdown & Tables</h1>
+          <p class="jsc-hero__sub">Loops repeat themselves. You build a countdown and a times table. Time: about 30 min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Your task</h2>
+            <p>You code two classics. A countdown counts from ten to zero. Next to it, a loop builds the ones table as a list. Everything appears on the page — line by line.</p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/kapitel/05-loops.html">← Back to chapter 05</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Requirements</h2>
+            <p>Only tick a line when your code really does it.</p>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-lab-05-req"
+            >
+              <li><label><input type="checkbox" /> <span>A <strong>for loop</strong> counts down from 10 to 0 and writes each number into the HTML.</span></label></li>
+              <li><label><input type="checkbox" /> <span>A second loop builds <code>1 x 1 = 1</code> to <code>1 x 10 = 10</code>.</span></label></li>
+              <li><label><input type="checkbox" /> <span>The output uses <code>createElement</code> and <code>appendChild</code> — no string hacking.</span></label></li>
+              <li><label><input type="checkbox" /> <span>A <strong>while loop</strong> counts the total lines and stops at 20.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Each loop has a short comment.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Step by step</h2>
+            <ol>
+              <li>Add a container <code>&lt;ul id="countdown"&gt;</code> to the HTML.</li>
+              <li>
+                <p>Write the for loop:</p>
+              <figure class="jsc-code-block" data-filename="main.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">main.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">for (let i = 10; i &gt;= 0; i--)</code></pre>
+              </figure>
+              </li>
+              <li>Create one <code>&lt;li&gt;</code> per iteration and append it to the list.</li>
+              <li>Build the ones table into a second list.</li>
+              <li>Count the lines with while and show the total.</li>
+            </ol>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Work with AI</h2>
+            <p>Rule: Loops are AI's bread. Your job: understand the direction.</p>
+            <p>Starter prompt — copy it and fill in your details:</p>
+              <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">starter-prompt.txt</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">I am learning JavaScript (chapter: loops). Write me three examples: a for loop counting backwards, a for loop for the ones table, and a while loop with a counter. Explain start, condition and step.</code></pre>
+              </figure>
+            <p>Three check questions:</p>
+            <ul>
+              <li>When do you need <code>i--</code> instead of <code>i++</code>?</li>
+              <li>What changes between <code>i &gt;= 0</code> and <code>i &gt; 0</code>?</li>
+              <li>When is while dangerous?</li>
+            </ul>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/ki-en.html">Open AI basics</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Submission</h2>
+            <p>Save the page as <code>exercise-05.html</code> and upload it to your GitHub repository. Your teacher announces the exact deadline.</p>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="All exercises">
+          <h2>All exercises</h2>
+          <ul>
+            <li><a href="lab-01-ausgabe-en.html">Exercise 01</a></li>
+            <li><a href="lab-02-steckbrief-en.html">Exercise 02</a></li>
+            <li><a href="lab-03-warenkorb-en.html">Exercise 03</a></li>
+            <li><a href="lab-04-noten-en.html">Exercise 04</a></li>
+            <li><a href="lab-05-countdown-en.html" aria-current="page" class="is-active">Exercise 05</a></li>
+            <li><a href="lab-06-einkaufsliste-en.html">Exercise 06</a></li>
+            <li><a href="lab-07-umrechner-en.html">Exercise 07</a></li>
+            <li><a href="lab-08-mediathek-en.html">Exercise 08</a></li>
+            <li><a href="lab-09-klickzaehler-en.html">Exercise 09</a></li>
+            <li><a href="lab-10-reaktion-en.html">Exercise 10</a></li>
+            <li><a href="lab-11-anmeldung-en.html">Exercise 11</a></li>
+            <li><a href="lab-12-xss-labor-en.html">Exercise 12</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

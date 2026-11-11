@@ -1,0 +1,110 @@
+/* 05-components/labs.css — Übungen (Labs): Übersichtskarten, Fortschritt, CTA-Doppelbutton */
+
+/* Übersichts-Karten */
+.jsc-lab-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--jsc-space-3);
+  padding: var(--jsc-space-5);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-border) 55%, var(--jsc-color-ink-muted));
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-2);
+  min-height: 10rem; /* python-classic-Kartenrhythmus */
+}
+.jsc-lab-card__thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--jsc-radius-m);
+}
+.jsc-lab-card__eyebrow {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 var(--jsc-space-1);
+}
+.jsc-lab-card__body h3 { margin: 0 0 var(--jsc-space-2); }
+.jsc-lab-card__body h3 a { color: var(--jsc-color-accent); }
+html[data-theme="light"] .jsc-lab-card__body h3 a { color: var(--jsc-color-accent-ink); }
+.jsc-lab-card__meta {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  margin: 0 0 var(--jsc-space-4); /* P10R: war space-3 */
+}
+
+/* Fortschrittszeile */
+.jsc-lab-progress {
+  color: var(--jsc-color-ink-muted);
+  font-weight: var(--jsc-weight-semibold);
+  margin: 0 0 var(--jsc-space-5);
+}
+
+/* Erledigt-Toggle */
+.jsc-lab-toggle[aria-pressed="true"] {
+  border-color: var(--jsc-color-success, #3fb27f);
+  color: var(--jsc-color-success, #3fb27f);
+}
+
+/* Kapitel-CTA: zwei Buttons nebeneinander, umbrechen auf schmal */
+.jsc-chapter-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-4);
+  align-items: center;
+}
+
+/* Labs: Erklär-/Fazit-Karten im Band (Lab 12) — Standard-Kartenstyles nutzen */
+
+/* P10R: eigenständiger Button-Absatz in Lab-Bändern (Rhythmus wie check-actions) */
+.jsc-lab .jsc-lab-actions {
+  margin: var(--jsc-space-5) 0 0;
+}
+.jsc-lab .jsc-lab-actions:first-child {
+  margin-top: 0;
+}
+
+/* P10R: Code-Block nach Einleitungszeile bekommt Luft (KI-Karte, Schritte) */
+.jsc-lab .jsc-code-block {
+  margin-top: var(--jsc-space-4);
+}
+.jsc-lab .jsc-code-block:first-child {
+  margin-top: 0;
+}
+
+/* P10R: Hero→Layout-Abstand auf Labs (kein Jumplist; <1280, ab 1280 übernimmt chapter.css space-6) */
+.jsc-hero + .jsc-chapter-layout:has(> .jsc-info-main.jsc-lab) {
+  margin-top: var(--jsc-space-8);
+}
+
+/* P10R: Kapitel-Akzent pro Karte (Wiedererkennung zum Kapitelgrid) */
+.jsc-lab-card[data-module] {
+  border-color: color-mix(in oklch,
+    var(--module-accent, var(--jsc-color-border)) 55%,
+    var(--jsc-color-border));
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25),
+              0 0 1.25rem var(--module-accent-glow, transparent);
+}
+html[data-theme="light"] .jsc-lab-card[data-module] {
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+.jsc-lab-card__num {
+  display: inline-block;
+  font-weight: var(--jsc-weight-bold);
+  font-size: var(--jsc-text-2);
+  line-height: 1;
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  margin-bottom: var(--jsc-space-2);
+}
+
+/* P10R: aktiver Rail-Eintrag in Labs (Rail ist Geschwister von .jsc-lab) */
+.jsc-chapter-layout .jsc-chapter-rail .is-active {
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  font-weight: var(--jsc-weight-semibold);
+}
+
+/* P10R: Light-Kontrast AA für Akzent-Text (25 %-Token-Mix reicht für 22px/700 + 14px/600 nicht) */
+html[data-theme="light"] .jsc-lab-card__num,
+html[data-theme="light"] .jsc-chapter-layout .jsc-chapter-rail .is-active {
+  color: color-mix(in oklch, var(--module-accent) 55%, var(--jsc-color-ink));
+}
