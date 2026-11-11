@@ -264,8 +264,10 @@ function renderMobileMenu(header) {
     ),
     menuGroup(t('ui.menu.groupPlu'), [
       { href: `${base}/info.html`, label: t('ui.nav.infoAbout') },
-      { href: `${base}/biblik.html`, label: t('ui.nav.library') },
-      { href: `${base}/arbeitsblaetter/`, label: t('ui.nav.worksheets') },
+      { href: `${base}/bibliothek.html`, label: t('ui.nav.library') },
+      // P9: Lexikon nach Bibliothek
+      { href: `${base}/lexikon.html`, label: t('ui.nav.lexikon') },
+      { href: `${base}/arbeitsblaetter.html`, label: t('ui.nav.worksheets') },
     ])
   );
   panel.append(inner);
@@ -580,7 +582,10 @@ function renderFooter() {
   pluHub.rel = 'noopener';
   ulResources.append(
     footerLink('/tutorials/js-classic/uebungen/', t('ui.footer.exercises')),
-    footerLink('/tutorials/js-classic/arbeitsblaetter/', t('ui.footer.worksheets')),
+    footerLink('/tutorials/js-classic/arbeitsblaetter.html', t('ui.footer.worksheets')),
+    // P9: Lexikon + GitHub & Abgabe in der Ressourcen-Spalte
+    footerLink('/tutorials/js-classic/lexikon.html', t('ui.nav.lexikon')),
+    footerLink('/tutorials/js-classic/github.html', t('ui.nav.github')),
     footerLink('/tutorials/js-classic/ki-grundlagen.html', t('ui.footer.kiBasics')),
     pluHub
   );
@@ -672,11 +677,12 @@ export function initNavigation() {
 
   const skip = renderSkipLinks();
   const header = renderHeader(currentPath);
-  const bar = renderBottomBar();
+  // P9: Bottom-Bar nur auf Kapitelseiten (Prev/Next = Kapitel-Sequenz)
+  const bar = currentChapterIndex() >= 0 ? renderBottomBar() : null;
   const footer = renderFooter();
 
   mount.before(skip, header);
-  document.body.append(bar, footer);
+  document.body.append(...(bar ? [bar, footer] : [footer]));
   mount.remove();
 
   // Sprachwechsel → Chrome neu rendern (aus Dictionaries)

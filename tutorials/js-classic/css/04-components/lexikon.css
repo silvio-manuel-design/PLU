@@ -1,0 +1,376 @@
+/**
+ * 04-components/lexikon.css — JS-Lexikon + Info-Hub-Seiten (P9)
+ *
+ * Enthält: Slim-Hero (Info-Seiten ohne Bild), Lexikon-Suche,
+ * Buchstabenleiste, Begriffs-Sektionen, Mini-Karten-Raster.
+ * Nutzt bestehende Komponenten: jsc-understand, jsc-terms/jsc-term-card,
+ * jsc-band, jsc-step, jsc-deepen-card.
+ */
+
+/* --- Slim-Hero (Info-Seiten: Icon statt Bild, Gold-Akzent) ---------- */
+
+.jsc-hero--slim {
+  padding-block: var(--jsc-space-8) var(--jsc-space-6);
+}
+
+.jsc-hero--slim .jsc-hero__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--jsc-space-4);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-accent) 45%, var(--jsc-color-border));
+  border-radius: var(--jsc-radius-l);
+  background: color-mix(in oklch, var(--jsc-color-accent) 12%, var(--jsc-color-surface-1));
+  color: var(--jsc-color-accent);
+  font-size: 1.75rem;
+  box-shadow: 0 0 1.25rem var(--jsc-color-accent-glow);
+}
+
+html[data-theme="light"] .jsc-hero--slim .jsc-hero__icon {
+  color: var(--jsc-color-accent-ink);
+  box-shadow: none;
+}
+
+.jsc-hero--slim .jsc-hero__title {
+  margin-bottom: var(--jsc-space-3);
+}
+
+/* --- Mini-Karten-Raster (Info-/Arbeitsblatt-Seiten) ------------------ */
+
+.jsc-mini-grid {
+  display: grid;
+  gap: var(--jsc-space-4);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .jsc-mini-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .jsc-mini-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.jsc-mini-card {
+  display: grid;
+  gap: var(--jsc-space-2);
+  align-content: start;
+  padding: var(--jsc-space-4);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-2);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
+}
+
+html[data-theme="light"] .jsc-mini-card {
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+
+.jsc-mini-card__nr {
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+html[data-theme="light"] .jsc-mini-card__nr {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-mini-card__title {
+  font-size: var(--jsc-text-1);
+  font-weight: var(--jsc-weight-semibold);
+}
+
+.jsc-mini-card__text {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  line-height: var(--jsc-leading-body);
+}
+
+.jsc-mini-card__meta {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+/* --- Lexikon: Suche + Buchstabenleiste ------------------------------- */
+
+.jsc-lex-searchbar {
+  position: sticky;
+  top: calc(var(--jsc-header-height, 4rem) + var(--jsc-space-2));
+  z-index: var(--jsc-z-header);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--jsc-space-3);
+  margin-top: var(--jsc-space-6);
+  margin-bottom: var(--jsc-space-4);
+  padding: var(--jsc-space-3) var(--jsc-space-4);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  background: var(--jsc-color-surface-1);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
+}
+
+html[data-theme="light"] .jsc-lex-searchbar {
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+
+.jsc-lex-searchbar label {
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-medium);
+}
+
+.jsc-lex-searchbar input {
+  flex: 1 1 14rem;
+  padding: var(--jsc-space-2) var(--jsc-space-3);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-0);
+  color: var(--jsc-color-ink);
+  font-size: var(--jsc-text-0);
+}
+
+.jsc-lex-searchbar input:focus-visible {
+  outline: 2px solid var(--jsc-color-accent);
+  outline-offset: 2px;
+}
+
+.jsc-lex-count {
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.jsc-lex-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-1);
+  margin-bottom: var(--jsc-space-5);
+  list-style: none;
+}
+
+.jsc-lex-letters a,
+.jsc-lex-letters span {
+  display: inline-block;
+  min-width: 2rem;
+  padding: var(--jsc-space-1) var(--jsc-space-2);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-pill);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+  font-weight: var(--jsc-weight-medium);
+  text-align: center;
+  text-decoration: none;
+}
+
+.jsc-lex-letters a:hover {
+  color: var(--jsc-color-accent);
+  border-color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-lex-letters a:hover {
+  color: var(--jsc-color-accent-ink);
+  border-color: var(--jsc-color-accent-ink);
+}
+
+.jsc-lex-letters span.is-empty {
+  opacity: 0.35;
+}
+
+.jsc-lex-section {
+  margin-bottom: var(--jsc-space-6);
+}
+
+.jsc-lex-section > h2 {
+  margin-bottom: var(--jsc-space-3);
+  color: var(--jsc-color-accent);
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text-2);
+}
+
+html[data-theme="light"] .jsc-lex-section > h2 {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-lex-grid {
+  display: grid;
+  gap: var(--jsc-space-4);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .jsc-lex-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Karten = bestehende .jsc-term-card + Kapitel-Link-Zeile */
+.jsc-term-card__chap {
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-term-card__chap a {
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  font-weight: var(--jsc-weight-medium);
+  text-decoration: none;
+}
+
+.jsc-term-card__chap a:hover {
+  text-decoration: underline;
+}
+
+html[data-theme="light"] .jsc-term-card__chap a {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-lex-empty {
+  padding: var(--jsc-space-5);
+  border: 1px dashed var(--jsc-color-border);
+  border-radius: var(--jsc-radius-l);
+  color: var(--jsc-color-ink-muted);
+  text-align: center;
+}
+
+/* --- P9R4: Kachel-Pfad (12-Kapitel-Weg, info.html) ------------------- */
+
+.jsc-path-grid {
+  list-style: none;
+  display: grid;
+  gap: var(--jsc-space-3);
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  padding: 0;
+  margin: 0;
+}
+
+.jsc-path-tile {
+  display: block;
+  padding: var(--jsc-space-3) var(--jsc-space-4);
+  background: var(--jsc-color-surface-2);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.jsc-path-tile:hover {
+  border-color: var(--tile-accent);
+  transform: translateY(-2px);
+}
+
+.jsc-path-tile:focus-visible {
+  outline: 2px solid var(--jsc-color-accent);
+  outline-offset: 2px;
+}
+
+.jsc-path-tile__nr {
+  display: block;
+  font-family: var(--jsc-font-mono);
+  font-size: 0.85rem;
+  /* Kontrast-sichere Variante der Kachel-Akzentfarbe (AA auf surface-2) */
+  color: color-mix(in oklch, var(--tile-accent), white 20%);
+  margin-bottom: var(--jsc-space-1);
+}
+
+html[data-theme="light"] .jsc-path-tile__nr {
+  color: color-mix(in oklch, var(--tile-accent), var(--jsc-color-ink) 45%);
+}
+
+.jsc-path-tile__title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: var(--jsc-weight-semibold);
+  line-height: var(--jsc-leading-heading);
+}
+
+/* --- P9R4: Stepper (GitHub-Seite, Schüler/Lehrer-Anleitungen) -------- */
+
+.jsc-stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--jsc-space-4);
+}
+
+.jsc-stepper__item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: var(--jsc-space-4);
+  position: relative;
+}
+
+.jsc-stepper__item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 1.125rem;
+  top: 2.5rem;
+  bottom: -0.5rem;
+  width: 2px;
+  background: var(--jsc-color-border);
+}
+
+.jsc-stepper__nr {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--jsc-radius-s);
+  border: 1px solid var(--jsc-color-accent);
+  color: var(--jsc-color-accent);
+  font-weight: var(--jsc-weight-bold);
+  background: var(--jsc-color-surface-2);
+}
+
+html[data-theme="light"] .jsc-stepper__nr {
+  border-color: var(--jsc-color-accent-ink);
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-stepper__title {
+  font-weight: var(--jsc-weight-semibold);
+  margin: 0 0 var(--jsc-space-1);
+}
+
+.jsc-stepper__text {
+  margin: 0;
+  max-width: 72ch;
+}
+
+/* --- P9R4: Nummern auf Mini-Karten sichtbar (KI-Regeln, Bibliothek) -- */
+
+.jsc-mini-card__nr {
+  font-size: 1.25rem;
+  font-weight: var(--jsc-weight-bold);
+  color: var(--module-accent-text, var(--jsc-color-accent));
+  margin-bottom: var(--jsc-space-2);
+}
+
+html[data-theme="light"] .jsc-mini-card__nr {
+  color: var(--jsc-color-accent-ink);
+}
+
+/* --- Print (Lexikon + Info-Seiten) ----------------------------------- */
+
+@media print {
+  .jsc-lex-searchbar,
+  .jsc-lex-letters,
+  .jsc-hero--slim .jsc-hero__icon {
+    display: none !important;
+  }
+
+  .jsc-lex-section {
+    break-inside: avoid-page;
+    margin-bottom: var(--jsc-space-4);
+  }
+
+  .jsc-lex-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--jsc-space-2);
+  }
+}

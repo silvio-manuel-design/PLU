@@ -25,6 +25,7 @@ import { initNavigation } from './modules/navigation.js';
 import { initHome } from './modules/home.js';
 import { initBackToTop } from './modules/back-to-top.js';
 import { initExport } from './modules/export.js';
+import { initLexikon } from './modules/lexikon.js';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
@@ -34,6 +35,7 @@ initNavigation();
 initHome();
 initBackToTop();
 initExport();
+initLexikon();
 
 /* ------------------------------------------------------------------ */
 /* Sprach-Umschalter (P1-Demo für smoke-test*.html; Persistenz via     */
