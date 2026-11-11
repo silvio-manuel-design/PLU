@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projekt 1 — Highscore-Spiel · Projekte · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Abschlussprojekt 1: Baue ein Klick-Spiel mit Zähler, 20-Sekunden-Runde und Highscore im localStorage. Mit Anforderungen, Schritt-für-Schritt-Anleitung und Reflexion."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/projekte/projekt-1-highscore-game.html" />
+    <link rel="alternate" hreflang="de" href="projekt-1-highscore-game.html" />
+    <link rel="alternate" hreflang="en" href="projekt-1-highscore-game-en.html" />
+    <link rel="alternate" hreflang="x-default" href="projekt-1-highscore-game.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Projekt 1 — Highscore-Spiel · js-classic" />
+    <meta property="og:description" content="Abschlussprojekt 1: Baue ein Klick-Spiel mit Zähler, 20-Sekunden-Runde und Highscore im localStorage. Mit Anforderungen, Schritt-für-Schritt-Anleitung und Reflexion." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-2560.jpg" />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m10">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="page-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-game-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Leuchtende Glas-Anzeigetafel mit stilisierten Lichtbalken eines Punktestands, goldene Partikel steigen auf"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">PROJEKT 1 VON 3</p>
+          <h1 id="page-title" class="jsc-hero__title">Highscore-Spiel</h1>
+          <p class="jsc-hero__sub">Baue ein Klick-Spiel mit Zähler und Highscore. Der Rekord überlebt das Neuladen. Zeit: ca. 90 Min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
+            <p>Ein quadratisches Ziel springt zufällig im Spielfeld herum. Jeder Treffer zählt einen Punkt. Nach 20 Sekunden endet die Runde. Der Highscore landet im <strong>localStorage</strong> und bleibt beim Neuladen erhalten.</p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="index.html">← Zurück zu den Projekten</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
+            <p>Hake jede Zeile erst ab, wenn dein Code es wirklich tut.</p>
+          <ul
+            class="jsc-checklist"
+            data-component="jsc-checklist"
+            data-storage-key="jsc-proj-1-req"
+          >
+            <li><label><input type="checkbox" /> <span>Ein Element dient als Ziel und springt bei jedem Treffer.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Ein Zähler zeigt die Punkte der laufenden Runde.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Nach 20 Sekunden stoppt das Spiel und zeigt das Ergebnis.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Der Highscore wird in <strong>localStorage</strong> gespeichert und angezeigt.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Ein Button startet eine neue Runde und setzt den Zähler zurück.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Das Layout bleibt bei 360 px ohne Scrollen spielbar.</span></label></li>
+          </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
+          <ol>
+            <li>Lege <code>projekt-1-highscore.html</code> an. Baue Spielfeld, Ziel-Element und Zähler in HTML und CSS.</li>
+            <li>
+              <p>Schreibe einen Klick-Listener auf das Ziel. Erhöhe den Zähler und verschiebe das Ziel per Zufallszahlen.</p>
+            <figure class="jsc-code-block" data-filename="main.js">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">main.js</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">ziel.addEventListener("click", () =&gt; { punkte++; zielVerschieben(); });</code></pre>
+            </figure>
+            </li>
+            <li>Starte mit <code>setInterval</code> eine 20-Sekunden-Uhr. Danach deaktiviere das Ziel und zeige das Ergebnis.</li>
+            <li>Lies beim Laden den Highscore aus dem <strong>localStorage</strong>. Nach der Runde speichere den besseren Wert.</li>
+            <li>Baue den „Noch einmal"-Button. Er setzt Zähler und Ziel zurück.</li>
+            <li>Teste das Spiel auf 360 px. Das Spielfeld darf nicht scrollen.</li>
+            <li>Frage die KI nach einem Verbesserungsvorschlag. Setze genau einen um.</li>
+            <li>Prüfe alle Anforderungen oben ab und hake sie ab.</li>
+          </ol>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Arbeite mit der KI</h2>
+            <p>Regel: Die KI darf helfen. Das Spiel musst du trotzdem erklären können.</p>
+            <p>Starter-Prompt — kopiere ihn und fülle ihn aus:</p>
+            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">starter-prompt.txt</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript. Baue mit mir ein Klick-Spiel: Ziel springt zufällig, Zähler zählt, 20 Sekunden Runde, Highscore in localStorage. Erkläre mir danach, warum du setInterval und nicht setTimeout nimmst.</code></pre>
+            </figure>
+            <p>Drei Prüf-Fragen:</p>
+            <ul>
+              <li>Warum bleibt der Highscore nach dem Neuladen da?</li>
+              <li>Was macht <code>parseInt</code> beim Auslesen?</li>
+              <li>Warum deaktivieren wir das Ziel nach der Runde?</li>
+            </ul>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/ki-grundlagen.html">KI-Grundlagen öffnen</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Abgabe</h2>
+            <p>Speichere die Datei als <code>projekt-1-highscore.html</code> und lade sie in dein GitHub-Repository hoch. Die genaue Deadline sagt dir deine Lehrkraft.</p>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-1-reflect">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Was hat dir beim Highscore-Spiel am meisten Spaß gemacht?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Welcher Teil war schwerer als gedacht?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Erkläre einem Laien, was localStorage tut.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+            <p class="jsc-reflection__actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span>Reflexion drucken</span>
+              </button>
+            </p>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Alle Projekte">
+          <h2>Alle Projekte</h2>
+          <ul>
+            <li><a href="projekt-1-highscore-game.html" aria-current="page" class="is-active">Projekt 1</a></li>
+            <li><a href="projekt-2-formular-meister.html">Projekt 2</a></li>
+            <li><a href="projekt-3-sicherheits-audit.html">Projekt 3</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

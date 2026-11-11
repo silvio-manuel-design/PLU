@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projekt 2 — Formular-Meister · Projekte · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Abschlussprojekt 2: Baue ein Anmeldeformular mit vier Feldern und Validierung per submit-Event und preventDefault. Mit Anforderungen und Reflexion."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/projekte/projekt-2-formular-meister.html" />
+    <link rel="alternate" hreflang="de" href="projekt-2-formular-meister.html" />
+    <link rel="alternate" hreflang="en" href="projekt-2-formular-meister-en.html" />
+    <link rel="alternate" hreflang="x-default" href="projekt-2-formular-meister.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Projekt 2 — Formular-Meister · js-classic" />
+    <meta property="og:description" content="Abschlussprojekt 2: Baue ein Anmeldeformular mit vier Feldern und Validierung per submit-Event und preventDefault. Mit Anforderungen und Reflexion." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-2560.jpg" />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m11">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="page-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/projekte/jsc-capstone-form-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Schwebende Glas-Formularfelder und Checkboxen, verbunden von einem goldenen Prüf-Haken aus Licht"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">PROJEKT 2 VON 3</p>
+          <h1 id="page-title" class="jsc-hero__title">Formular-Meister</h1>
+          <p class="jsc-hero__sub">Baue ein Anmeldeformular, das alles prüft. Fehlermeldungen erscheinen direkt am Feld. Zeit: ca. 90 Min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
+            <p>Ein Anmeldeformular mit vier Feldern: Name, E-Mail, Passwort und Alter. Beim Absenden prüft JavaScript jedes Feld. Gefundene Fehler erscheinen als Text unter dem Feld. Erst ein fehlerfreies Formular wird abgeschickt.</p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="index.html">← Zurück zu den Projekten</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
+            <p>Hake jede Zeile erst ab, wenn dein Code es wirklich tut.</p>
+          <ul
+            class="jsc-checklist"
+            data-component="jsc-checklist"
+            data-storage-key="jsc-proj-2-req"
+          >
+            <li><label><input type="checkbox" /> <span>Vier Eingabefelder: Name, E-Mail, Passwort, Alter.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Das <strong>submit</strong>-Event wird per <code>preventDefault</code> gestoppt.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Name braucht mindestens zwei Zeichen.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Die E-Mail enthält genau ein <code>@</code> und einen Punkt danach.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Das Passwort hat mindestens acht Zeichen.</span></label></li>
+            <li><label><input type="checkbox" /> <span>Fehlermeldungen erscheinen unter dem betroffenen Feld.</span></label></li>
+          </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
+          <ol>
+            <li>Lege <code>projekt-2-formular-meister.html</code> an. Baue das Formular mit Labels und einem Absende-Button.</li>
+            <li>
+              <p>Fange das <strong>submit</strong>-Event ab und stoppe es mit <code>preventDefault</code>.</p>
+            <figure class="jsc-code-block" data-filename="main.js">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">main.js</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">formular.addEventListener("submit", (event) =&gt; {
+  event.preventDefault();
+  // Prüfungen hier
+});</code></pre>
+            </figure>
+            </li>
+            <li>Prüfe das Namensfeld. Zeige eine Fehlermeldung unter dem Feld.</li>
+            <li>Prüfe die E-Mail auf genau ein <code>@</code> und einen Punkt danach.</li>
+            <li>Prüfe das Passwort auf mindestens acht Zeichen.</li>
+            <li>Prüfe das Alter auf eine Zahl größer null.</li>
+            <li>Bei Fehlern: Meldungen anzeigen, Absenden blockieren. Ohne Fehler: Erfolgsmeldung zeigen.</li>
+            <li>Teste jeden Fehlertyp einzeln. Dann ein fehlerfreies Formular.</li>
+            <li>Frage die KI nach einer Verbesserung. Setze genau einen Vorschlag um.</li>
+          </ol>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Arbeite mit der KI</h2>
+            <p>Regel: Die KI schreibt gern Validierung. Du musst jede Bedingung erklären können.</p>
+            <p>Starter-Prompt — kopiere ihn und fülle ihn aus:</p>
+            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">starter-prompt.txt</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript. Baue mit mir ein Anmeldeformular mit vier Feldern und Validierung per submit-Event und preventDefault. Fehlermeldungen erscheinen unter den Feldern. Erkläre mir danach jede Prüfung.</code></pre>
+            </figure>
+            <p>Drei Prüf-Fragen:</p>
+            <ul>
+              <li>Warum brauchen wir <code>preventDefault</code>?</li>
+              <li>Warum reicht ein einfaches <code>includes('@')</code> nicht für E-Mails?</li>
+              <li>Woher weiß das Skript, welches Feld falsch ist?</li>
+            </ul>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/ki-grundlagen.html">KI-Grundlagen öffnen</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Abgabe</h2>
+            <p>Speichere die Datei als <code>projekt-2-formular-meister.html</code> und lade sie in dein GitHub-Repository hoch. Die genaue Deadline sagt dir deine Lehrkraft.</p>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-2-reflect">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Welche Validierung hat dich selbst überrascht?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Warum ist gute Fehlermeldung Benutzerfreundlichkeit und nicht Zwang?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Was würdest du beim nächsten Formular anders bauen?</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+            <p class="jsc-reflection__actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span>Reflexion drucken</span>
+              </button>
+            </p>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Alle Projekte">
+          <h2>Alle Projekte</h2>
+          <ul>
+            <li><a href="projekt-1-highscore-game.html">Projekt 1</a></li>
+            <li><a href="projekt-2-formular-meister.html" aria-current="page" class="is-active">Projekt 2</a></li>
+            <li><a href="projekt-3-sicherheits-audit.html">Projekt 3</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
