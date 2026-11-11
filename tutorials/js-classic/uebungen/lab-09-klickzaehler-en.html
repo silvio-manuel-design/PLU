@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab 09 — Click Counter · Exercises · js-classic (PLU)</title>
+    <meta
+      name="description"
+      content="Exercise for chapter 09: build a click counter with textContent, classList and reset. With requirements, AI starter prompt and model solution."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/uebungen/lab-09-klickzaehler-en.html" />
+    <link rel="alternate" hreflang="de" href="lab-09-klickzaehler.html" />
+    <link rel="alternate" hreflang="en" href="lab-09-klickzaehler-en.html" />
+    <link rel="alternate" hreflang="x-default" href="lab-09-klickzaehler.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Lab 09 — Click Counter · js-classic" />
+    <meta property="og:description" content="Exercise for chapter 09: build a click counter with textContent, classList and reset. With requirements, AI starter prompt and model solution." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-2560.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body>
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="lab-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/kap09/jsc-kap09-hero-v4-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="A scan light cone highlights a single element in a grid"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Exercise 09 · Chapter 09</p>
+          <h1 id="lab-title" class="jsc-hero__title">Lab 09 — Click Counter</h1>
+          <p class="jsc-hero__sub">The DOM is your stage. You build a counter that listens and answers. Time: about 30 min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-info-main jsc-container">
+        <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+          <h2 id="aufgabe-title" class="jsc-step__heading">Your task</h2>
+          <p>You build a page with a big button. Every click counts up — and the page reacts: from ten clicks the colour changes, from twenty a text appears.</p>
+          <p>
+            <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/kapitel/09-the-dom.html">← Back to chapter 09</a>
+          </p>
+        </section>
+
+        <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+          <h2 id="req-title" class="jsc-step__heading">Requirements</h2>
+          <p>Only tick a line when your code really does it.</p>
+          <ul
+            class="jsc-checklist"
+            data-component="jsc-checklist"
+            data-storage-key="jsc-lab-09-req"
+          >
+            <li><label><input type="checkbox" /> <span>A button and a display element with <code>id</code>.</span></label></li>
+            <li><label><input type="checkbox" /> <span><code>textContent</code> updates the count after every click.</span></label></li>
+            <li><label><input type="checkbox" /> <span>From 10 clicks the display gets the class <code>is-hot</code> (colour via CSS).</span></label></li>
+            <li><label><input type="checkbox" /> <span>From 20 clicks a paragraph appears saying „Click master".</span></label></li>
+            <li><label><input type="checkbox" /> <span>A reset button sets the count back to zero.</span></label></li>
+          </ul>
+          <p class="jsc-check-actions">
+            <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+              <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+            </button>
+          </p>
+        </section>
+
+        <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+          <h2 id="steps-title" class="jsc-step__heading">Step by step</h2>
+          <ol>
+            <li>Add a button (<code>id="btn"</code>) and a display (<code>id="count"</code>).</li>
+            <li>Create <code>let count = 0;</code>.</li>
+            <li>
+              <p>In the click handler:</p>
+            <figure class="jsc-code-block" data-filename="main.js">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">main.js</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">count++;
+countEl.textContent = count;</code></pre>
+            </figure>
+            </li>
+            <li>Add <code>is-hot</code> from 10 — with <code>classList.add</code>.</li>
+            <li>Add the reset with a second handler.</li>
+          </ol>
+        </section>
+
+        <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+          <h2 id="ki-title" class="jsc-step__heading">Work with AI</h2>
+          <p>Rule: AI writes DOM code blindfolded. Understand `classList`.</p>
+          <p>Starter prompt — copy it and fill in your details:</p>
+            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">starter-prompt.txt</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">I am learning JavaScript (chapter: the DOM). Build a click counter with textContent, classList.add and a reset button. Explain the difference between textContent and innerHTML for this task.</code></pre>
+            </figure>
+          <p>Three check questions:</p>
+          <ul>
+            <li>What does <code>classList.toggle</code> do?</li>
+            <li>When <code>textContent</code>, when <code>innerHTML</code>?</li>
+            <li>Why does <code>count++</code> count reliably?</li>
+          </ul>
+          <p>
+            <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic/ki-en.html">Open AI basics</a>
+          </p>
+        </section>
+
+        <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+          <h2 id="sub-title" class="jsc-step__heading">Submission</h2>
+          <p>Save the page as <code>exercise-09.html</code> and upload it to your GitHub repository. Your teacher announces the exact deadline.</p>
+        </section>
+
+        <section class="jsc-container jsc-band--alt" id="loesung" aria-labelledby="sol-title">
+          <h2 id="sol-title" class="jsc-step__heading">Model solution</h2>
+          <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+            <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">I tried it — show solution</button>
+            <div class="jsc-solution-gate__body" hidden>
+            <figure class="jsc-code-block" data-filename="main.js">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">main.js</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">let count = 0;
+const display = document.getElementById("count");
+const btn = document.getElementById("btn");
+
+btn.addEventListener("click", () =&gt; {
+  count++;
+  display.textContent = count;
+  display.classList.toggle("is-hot", count &gt;= 10);
+  document.getElementById("master").hidden = count &lt; 20;
+});
+document.getElementById("reset").addEventListener("click", () =&gt; {
+  count = 0;
+  display.textContent = count;
+  display.classList.remove("is-hot");
+  document.getElementById("master").hidden = true;
+});</code></pre>
+            </figure>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
