@@ -116,6 +116,77 @@ html[data-theme="light"] .jsc-band {
   background: linear-gradient(90deg, var(--jsc-color-accent), transparent);
 }
 
+/* --- P11R3: Kapitel-Sektions-H2 — Modul-Akzent-Strich -------------------
+   Orientierung im Kapitel: Jeder Band-H2 bekommt den Gradient-Strich,
+   in Kapitelfarbe (Info-Seiten-Regel oben bleibt unangetastet). */
+
+.jsc-chapter-main .jsc-band h2::after,
+.jsc-chapter-main .jsc-band--alt h2::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: var(--jsc-space-2);
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--module-accent, var(--jsc-color-accent)),
+    transparent
+  );
+}
+
+.jsc-chapter-main .jsc-band h2,
+.jsc-chapter-main .jsc-band--alt h2 {
+  margin-bottom: var(--jsc-space-5);
+}
+
+/* --- P11R3: Kapitelnummer-Wasserzeichen im Hero -----------------------
+   Riesige, transparente Kapitelnummer — Orientierung beim Vortragen.
+   Ziffer pro Modul (12 Regeln), Dekoration → im Druck weg. */
+
+.jsc-chapter-hero::after {
+  content: "";
+  position: absolute;
+  right: var(--jsc-container-gutter);
+  bottom: var(--jsc-space-4);
+  z-index: 0;
+  font-family: var(--jsc-font-display);
+  font-size: clamp(6rem, 14vw, 11rem);
+  font-weight: var(--jsc-weight-bold);
+  line-height: 1;
+  color: color-mix(
+    in oklch,
+    var(--module-accent, var(--jsc-color-accent)) 18%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.jsc-chapter-hero .jsc-hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+[data-module="m01"] .jsc-chapter-hero::after { content: "01"; }
+[data-module="m02"] .jsc-chapter-hero::after { content: "02"; }
+[data-module="m03"] .jsc-chapter-hero::after { content: "03"; }
+[data-module="m04"] .jsc-chapter-hero::after { content: "04"; }
+[data-module="m05"] .jsc-chapter-hero::after { content: "05"; }
+[data-module="m06"] .jsc-chapter-hero::after { content: "06"; }
+[data-module="m07"] .jsc-chapter-hero::after { content: "07"; }
+[data-module="m08"] .jsc-chapter-hero::after { content: "08"; }
+[data-module="m09"] .jsc-chapter-hero::after { content: "09"; }
+[data-module="m10"] .jsc-chapter-hero::after { content: "10"; }
+[data-module="m11"] .jsc-chapter-hero::after { content: "11"; }
+[data-module="m12"] .jsc-chapter-hero::after { content: "12"; }
+
+@media print {
+  /* Spezifität wie die Modul-Regeln (0,2,1) — sonst greift content: none nicht */
+  [data-module] .jsc-chapter-hero::after {
+    content: none;
+  }
+}
+
 /* Understand + Terms auf Kapitel-Hauptspalten-Proportion (58rem ≈ 928px) */
 .jsc-info-main > .jsc-understand,
 .jsc-info-main > .jsc-terms {
@@ -203,6 +274,30 @@ html[data-theme="light"] .jsc-band {
 .jsc-chapter-rail a[aria-current="true"] {
   color: var(--jsc-color-accent);
   font-weight: var(--jsc-weight-semibold);
+}
+
+/* --- P11R3: Fortschrittsbalken in der Rail -----------------------------
+   Zeigt den Kapitel-Checklisten-Stand (sprachneutral via progressbar).
+   Rail ist <1280px ohnehin versteckt — kein Media-Query nötig. */
+
+.jsc-rail-progress {
+  margin: var(--jsc-space-3) 0 0;
+}
+
+.jsc-rail-progress__track {
+  display: block;
+  height: 0.375rem;
+  border-radius: var(--jsc-radius-pill);
+  background: var(--jsc-color-surface-2);
+  overflow: hidden;
+}
+
+.jsc-rail-progress__bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--jsc-color-progress);
+  transition: width var(--jsc-duration-base) var(--jsc-ease-out);
 }
 
 html[data-theme="light"] .jsc-chapter-rail a:hover {
