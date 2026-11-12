@@ -103,9 +103,9 @@ function downloadFile(text, nr) {
   URL.revokeObjectURL(url);
 }
 
-function buildButtons(section, nr) {
-  const wrap = document.createElement('p');
-  wrap.className = 'jsc-export-actions';
+function buildButtons(section, nr, mount) {
+  const wrap = mount || document.createElement('p');
+  if (!mount) wrap.className = 'jsc-export-actions';
 
   const note = document.createElement('span');
   note.className = 'jsc-export-note';
@@ -141,11 +141,17 @@ function buildButtons(section, nr) {
 }
 
 export function initExport() {
-  // Pro Kapitel: unten in der Reflexion-Sektion
+  // Pro Kapitel: in die vorhandene Reflexions-Aktionszeile
   document.querySelectorAll('[data-component="jsc-reflection"][data-export-chapter]').forEach((section) => {
     if (section.querySelector('.jsc-export-actions')) return;
+    const actions = section.querySelector('.jsc-reflection__actions');
+    if (actions && actions.querySelector('[data-i18n="ui.export.copy"]')) return;
     const nr = section.dataset.exportChapter;
-    section.append(buildButtons(section, nr));
+    if (actions) {
+      buildButtons(section, nr, actions);
+    } else {
+      section.append(buildButtons(section, nr));
+    }
   });
 
   // Gesamtexport (Homepage)
