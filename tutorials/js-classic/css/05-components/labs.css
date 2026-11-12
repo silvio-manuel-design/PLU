@@ -77,16 +77,34 @@ html[data-theme="light"] .jsc-lab-card__body h3 a { color: var(--jsc-color-accen
   margin-top: var(--jsc-space-8);
 }
 
-/* P10R: Kapitel-Akzent pro Karte (Wiedererkennung zum Kapitelgrid) */
+/* P11R7: Ruheprinzip (1:1 FIX-Termkarten-Muster, 623e26a) — im Raster
+   darf keine Karte leuchten. Ruhe = feine Akzent-Kante + neutraler
+   Schatten; Glow gehört auf die Interaktion. */
 .jsc-lab-card[data-module] {
   border-color: color-mix(in oklch,
-    var(--module-accent, var(--jsc-color-border)) 55%,
+    var(--module-accent, var(--jsc-color-accent)) 28%,
     var(--jsc-color-border));
-  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25),
-              0 0 1.25rem var(--module-accent-glow, transparent);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
+  transition:
+    transform var(--jsc-duration-fast) var(--jsc-ease-out),
+    box-shadow var(--jsc-duration-fast) var(--jsc-ease-out);
 }
+
+.jsc-lab-card[data-module]:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 2px 12px rgb(0 0 0 / 0.25),
+    0 0 1.25rem var(--module-accent-glow, transparent);
+}
+
 html[data-theme="light"] .jsc-lab-card[data-module] {
   box-shadow: 0 2px 10px rgb(15 23 42 / 0.08);
+}
+
+html[data-theme="light"] .jsc-lab-card[data-module]:hover {
+  box-shadow:
+    0 2px 10px rgb(15 23 42 / 0.08),
+    0 0 1.25rem var(--module-accent-glow, transparent);
 }
 .jsc-lab-card__num {
   display: inline-block;

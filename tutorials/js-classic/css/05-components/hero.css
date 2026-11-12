@@ -110,3 +110,23 @@ html[data-theme="light"] .jsc-hero__eyebrow {
     min-height: 80vh;
   }
 }
+
+/* --- P11R7: Ken-Burns-Einstieg ----------------------------------------
+   Sehr langsame Zoom-Bewegung beim Laden, einmalig (12 s).
+   Bewegung darf nie nerven — sie darf nur atmen. */
+@keyframes jsc-hero-kenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+
+.jsc-hero__media img {
+  animation: jsc-hero-kenburns 12s var(--jsc-ease-out) 1 both;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jsc-hero__media img {
+    animation: none;
+  }
+}
+
