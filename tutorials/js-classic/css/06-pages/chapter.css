@@ -381,7 +381,26 @@ html[data-theme="light"] .jsc-chapter-rail a:hover {
   }
 }
 
-/* Hero-Präsenz: Kapitelauftritt würdiger (war 55vh). */
+/* P11R7: Kapitel-Hero 62vh → 50vh — würdevoller Auftritt, aber der
+   Text bleibt der Protagonist (Martin-Befund 12.11.). Der Akzent-Scrim
+   unten hält die Präsenz auch bei reduzierter Höhe. */
 .jsc-chapter-hero {
-  min-height: 62vh;
+  min-height: 50vh;
+}
+
+/* P11R7: Akzent-Scrim — feine Modulfarbe bindet den Hero ans Kapitel.
+   Haarlinie am Bildunterrand, weich auslaufend (kein harter Balken). */
+.jsc-chapter-hero::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0.2rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 85%, transparent) 20%,
+    color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 85%, transparent) 80%,
+    transparent
+  );
+  z-index: 1;
 }
