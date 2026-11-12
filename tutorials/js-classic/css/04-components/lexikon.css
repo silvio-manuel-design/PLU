@@ -342,6 +342,40 @@ html[data-theme="light"] .jsc-stepper__nr {
   max-width: 72ch;
 }
 
+/* --- P11R3: Stepper-light — gefüllte Kachel in Modulfarbe -------------
+   Für Verfahren in Kapiteln (Pilot: kap01, .jsc-step__steps → Stepper). */
+
+.jsc-stepper--light {
+  /* FIX: Abstand zum Text darüber — war bei .jsc-step__steps space-5,
+     Stepper erbt sonst margin: 0 und klebt am Absatz darüber. */
+  margin-top: var(--jsc-space-5);
+  /* FIX: ruhigerer Rhythmus bei einzeiligen Verfahrens-Schritten. */
+  gap: var(--jsc-space-3);
+}
+
+.jsc-stepper--light:first-child {
+  margin-top: 0;
+}
+
+.jsc-stepper--light .jsc-stepper__nr {
+  border-color: transparent;
+  background: var(--module-accent, var(--jsc-color-accent));
+  color: var(--jsc-color-surface-0); /* Dark: dunkle Ziffer auf Neon */
+  font-family: var(--jsc-font-mono);
+}
+
+html[data-theme="light"] .jsc-stepper--light .jsc-stepper__nr {
+  color: var(--jsc-color-ink); /* Light: dunkle Ziffer auf Neon */
+}
+
+.jsc-stepper--light .jsc-stepper__item:not(:last-child)::before {
+  background: color-mix(
+    in oklch,
+    var(--module-accent, var(--jsc-color-accent)) 40%,
+    var(--jsc-color-border)
+  );
+}
+
 /* --- P9R4: Nummern auf Mini-Karten sichtbar (KI-Regeln, Bibliothek) -- */
 
 .jsc-mini-card__nr {
