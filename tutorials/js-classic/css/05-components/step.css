@@ -173,6 +173,36 @@ html[data-theme="light"] .jsc-leadlist strong {
   margin-top: 0;
 }
 
+/* --- P11R2: Blocklabel farbpsychologisch zuordnen ----------------------
+   „Profi-Tipp" = Gold (Belohnung), „Typische Fehler" = Coral (Gefahr).
+   Beide Selektor-Staffelungen nötig: Basis (0,1,0) + explain/why (0,2,0). */
+
+.jsc-step__tip > .jsc-step__blocklabel,
+.jsc-step__explain .jsc-step__tip > .jsc-step__blocklabel,
+.jsc-step__why .jsc-step__tip > .jsc-step__blocklabel {
+  color: var(--jsc-color-achievement);
+}
+
+.jsc-step__mistakes > .jsc-step__blocklabel,
+.jsc-step__explain .jsc-step__mistakes > .jsc-step__blocklabel,
+.jsc-step__why .jsc-step__mistakes > .jsc-step__blocklabel {
+  color: var(--jsc-color-cta);
+}
+
+/* Light: AA auf den getinteten Karten */
+html[data-theme="light"] .jsc-step__tip > .jsc-step__blocklabel,
+html[data-theme="light"] .jsc-step__explain .jsc-step__tip > .jsc-step__blocklabel,
+html[data-theme="light"] .jsc-step__why .jsc-step__tip > .jsc-step__blocklabel {
+  color: color-mix(in oklch, var(--jsc-color-achievement), var(--jsc-color-ink) 55%);
+}
+
+html[data-theme="light"] .jsc-step__mistakes > .jsc-step__blocklabel,
+html[data-theme="light"] .jsc-step__explain .jsc-step__mistakes > .jsc-step__blocklabel,
+html[data-theme="light"] .jsc-step__why .jsc-step__mistakes > .jsc-step__blocklabel {
+  color: color-mix(in oklch, var(--jsc-color-cta), var(--jsc-color-ink) 40%);
+}
+
+
 /* proTip (Gold-Tinting) */
 .jsc-step__tip {
   margin-top: var(--jsc-space-5);
@@ -201,28 +231,29 @@ html[data-theme="light"] .jsc-step__explain-note strong {
   color: color-mix(in oklch, var(--jsc-color-progress), var(--jsc-color-ink) 38%);
 }
 
-/* Didaktische Pause (B14, P4R7) — Analogie zur Tip-Box, eigenes Tinting. */
+/* Didaktische Pause (B14, P4R7; P11R2: Gold → Teal — Pause = Ruhe/Atmen,
+   Gold bleibt Profi-Tipp/Belohnung). Analogie zur Tip-Box, eigenes Tinting. */
 .jsc-pause {
   margin-block: var(--jsc-space-6);
   padding: var(--jsc-space-5);
-  border: 1px solid color-mix(in oklch, var(--jsc-color-achievement) 45%, transparent);
+  border: 1px solid color-mix(in oklch, var(--jsc-color-progress) 45%, transparent);
   border-radius: var(--jsc-radius-l);
-  background: color-mix(in oklch, var(--jsc-color-achievement) 10%, var(--jsc-color-surface-0));
+  background: color-mix(in oklch, var(--jsc-color-progress) 10%, var(--jsc-color-surface-0));
 }
 
 .jsc-pause__eyebrow {
   display: flex;
   gap: var(--jsc-space-2);
   align-items: center;
-  color: var(--jsc-color-achievement);
+  color: var(--jsc-color-progress);
   font-size: var(--jsc-text--1);
   font-weight: var(--jsc-weight-semibold);
   letter-spacing: 0.08em;
 }
 
-/* Light: Gold-Text auf Gold-Tintung dunkler ziehen (AA) */
+/* Light: Teal-Text auf Teal-Tinting dunkler ziehen (AA) */
 html[data-theme="light"] .jsc-pause__eyebrow {
-  color: color-mix(in oklch, var(--jsc-color-achievement), var(--jsc-color-ink) 55%);
+  color: color-mix(in oklch, var(--jsc-color-progress), var(--jsc-color-ink) 55%);
 }
 
 .jsc-pause__text {

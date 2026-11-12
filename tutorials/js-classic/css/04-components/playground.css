@@ -89,3 +89,47 @@
 .jsc-playground__line.is-error {
   color: var(--jsc-color-cta);
 }
+
+/* --- P11R2: Instrumenten-Ebene -----------------------------------------
+   Playground = Arbeitsfläche, abgesetzt von Lese-Karten: dunkler Grund,
+   Punkt-Raster (Werkstatt), Akzent-Rahmen in Modulfarbe. Demo ist bereits
+   akzentuiert (demo.css) — Playground holt nach. */
+
+.jsc-playground {
+  border-color: color-mix(
+    in oklch,
+    var(--module-accent, var(--jsc-color-accent)) 45%,
+    var(--jsc-color-border)
+  );
+  background:
+    radial-gradient(
+      circle,
+      color-mix(in oklch, var(--jsc-color-ink) 8%, transparent) 1px,
+      transparent 1px
+    )
+    0 0 / 1.25rem 1.25rem,
+    var(--jsc-color-surface-0);
+  box-shadow:
+    0 2px 12px rgb(0 0 0 / 0.3),
+    0 0 1.5rem var(--module-accent-glow, transparent);
+}
+
+html[data-theme="light"] .jsc-playground {
+  background:
+    radial-gradient(
+      circle,
+      color-mix(in oklch, var(--jsc-color-ink) 10%, transparent) 1px,
+      transparent 1px
+    )
+    0 0 / 1.25rem 1.25rem,
+    var(--jsc-color-surface-1);
+  box-shadow: 0 2px 10px rgb(15 23 42 / 0.1);
+}
+
+/* Print: Raster/Fläche neutral, Lesbarkeit zuerst */
+@media print {
+  .jsc-playground {
+    background: var(--jsc-color-surface-1);
+    box-shadow: none;
+  }
+}
