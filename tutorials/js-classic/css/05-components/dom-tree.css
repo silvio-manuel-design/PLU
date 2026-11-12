@@ -1,0 +1,195 @@
+/**
+ * 05-components/dom-tree.css — „Vom HTML zum Baum" (P11R6)
+ *
+ * Zwei-Panel-Spiegel: HTML-Code links, DOM-Baum rechts.
+ * is-linked hebt beide Seiten gemeinsam hervor (Hover + Fokus).
+ */
+
+.jsc-domtree {
+  margin-top: var(--jsc-space-6);
+}
+
+.jsc-domtree__title {
+  font-family: var(--jsc-font-display);
+  font-size: var(--jsc-text-1);
+  line-height: var(--jsc-leading-heading);
+}
+
+.jsc-domtree__hint {
+  margin: var(--jsc-space-2) 0 0;
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-domtree__panes {
+  display: grid;
+  gap: var(--jsc-space-4);
+  margin-top: var(--jsc-space-4);
+}
+
+@media (min-width: 768px) {
+  .jsc-domtree__panes {
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--jsc-space-5);
+  }
+}
+
+.jsc-domtree__pane-label {
+  margin: 0 0 var(--jsc-space-2);
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.jsc-domtree__pre {
+  margin: 0;
+  padding: var(--jsc-space-3) var(--jsc-space-4);
+  border: 1px solid var(--jsc-color-border);
+  border-radius: var(--jsc-radius-m);
+  background: color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 7%, var(--jsc-color-surface-0));
+  font-family: var(--jsc-font-mono);
+  font-size: var(--jsc-text--1);
+  line-height: var(--jsc-leading-body);
+  overflow-x: auto;
+}
+
+.jsc-domtree__line {
+  display: block;
+  padding: 0.15em 0.5em;
+  border-radius: var(--jsc-radius-s);
+  cursor: default;
+  transition: background-color var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-domtree__line--in1 { padding-left: 1.75em; }
+.jsc-domtree__line--in2 { padding-left: 3em; }
+
+.jsc-domtree__line:hover,
+.jsc-domtree__line.is-linked {
+  background: color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 14%, transparent);
+}
+
+.jsc-domtree__line:focus-visible {
+  outline: 2px solid var(--module-accent, var(--jsc-color-accent));
+  outline-offset: 1px;
+}
+
+.jsc-domtree__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.jsc-domtree__edge {
+  fill: none;
+  stroke: var(--jsc-color-border);
+  stroke-width: 1.5;
+}
+
+.jsc-domtree__node {
+  cursor: default;
+}
+
+.jsc-domtree__node-box {
+  fill: var(--jsc-color-surface-1);
+  stroke: var(--jsc-color-border);
+  stroke-width: 1;
+  transition:
+    stroke var(--jsc-duration-fast) var(--jsc-ease-out),
+    filter var(--jsc-duration-fast) var(--jsc-ease-out);
+}
+
+.jsc-domtree__node--doc .jsc-domtree__node-box {
+  stroke: var(--module-accent, var(--jsc-color-accent));
+}
+
+.jsc-domtree__node--attr .jsc-domtree__node-box {
+  stroke-dasharray: 5 4;
+}
+
+.jsc-domtree__node--text .jsc-domtree__node-box {
+  fill: transparent;
+}
+
+.jsc-domtree__node-text {
+  fill: var(--jsc-color-ink);
+  font-family: var(--jsc-font-mono);
+  font-size: 14px;
+}
+
+.jsc-domtree__node:hover .jsc-domtree__node-box,
+.jsc-domtree__node.is-linked .jsc-domtree__node-box {
+  stroke: var(--module-accent, var(--jsc-color-accent));
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 45%, transparent));
+}
+
+.jsc-domtree__node:focus-visible {
+  outline: none;
+}
+
+.jsc-domtree__node:focus-visible .jsc-domtree__node-box {
+  stroke: var(--module-accent, var(--jsc-color-accent));
+  stroke-width: 2;
+}
+
+.jsc-domtree__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--jsc-space-3) var(--jsc-space-4);
+  margin: var(--jsc-space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--jsc-color-ink-muted);
+  font-size: var(--jsc-text--1);
+}
+
+.jsc-domtree__legend li {
+  display: flex;
+  gap: var(--jsc-space-2);
+  align-items: center;
+}
+
+/* P11R6-§7: Legenden-Chips spiegeln die Knoten-Optik exakt — alle vier
+   klar lesbar. Dokument führt als einziger die Akzentfarbe (Wurzel). */
+.jsc-domtree__chip {
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 3px;
+  border: 1px solid color-mix(in oklch, var(--jsc-color-ink-muted) 60%, transparent);
+  background: var(--jsc-color-surface-2);
+}
+
+.jsc-domtree__chip--doc {
+  border-color: var(--module-accent, var(--jsc-color-accent));
+  background: color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 14%, var(--jsc-color-surface-2));
+}
+
+.jsc-domtree__chip--attr {
+  border-style: dashed;
+}
+
+/* Text-Knoten: durchsichtig wie der Knoten selbst — aber immer
+   sichtbar umrandet, sonst verschwindet der Chip im Dark. */
+.jsc-domtree__chip--text {
+  background: transparent;
+  border-style: dashed;
+}
+
+.jsc-domtree__status {
+  margin: var(--jsc-space-3) 0 0;
+  min-height: 1.4em;
+  color: var(--module-accent, var(--jsc-color-accent));
+  font-size: var(--jsc-text--1);
+}
+
+/* Light: dezenteres Tinting, weicherer Schatten */
+html[data-theme="light"] .jsc-domtree__pre {
+  background: color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 5%, var(--jsc-color-surface-0));
+}
+
+html[data-theme="light"] .jsc-domtree__node:hover .jsc-domtree__node-box,
+html[data-theme="light"] .jsc-domtree__node.is-linked .jsc-domtree__node-box {
+  filter: drop-shadow(0 0 4px color-mix(in oklch, var(--module-accent, var(--jsc-color-accent)) 30%, transparent));
+}
