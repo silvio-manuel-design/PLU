@@ -125,4 +125,35 @@
   body {
     padding-bottom: 0 !important;
   }
+
+  /* P11R5: Worksheet-Isolation — bei Klick auf einen Drucken-Button
+     wird nur die eigene Sektion gedruckt. Prinzip: an jedem markierten
+     Vorfahren werden alle Kindelemente ausgeblendet, die NICHT selbst
+     zur Markierungs-Kette gehören. So verschwinden alle fremden
+     Sektionen komplett aus dem Druck-LAYOUT (keine Leerseiten —
+     display: none statt visibility). */
+  /* BEFUND-IX: Paket-Selektor `.is-print-keep > *:not(.is-print-keep)`
+     blendete auch die Kinder der ZIEL-Sektion aus (sie trägt selbst
+     is-print-keep); die Variante mit komplexem :not(.is-print-keep *)
+     wird vom Parser fallengelassen. Korrigiert mit :has(): Ausblenden
+     nur auf Kettengliedern, die ein weiteres Kettenglied umschließen
+     (alle Stufen oberhalb des Ziels). JS unverändert wortfertig. */
+  html.is-print-root .is-print-keep:has(> .is-print-keep) > *:not(.is-print-keep) {
+    display: none !important;
+  }
+
+  /* Die Ziel-Sektion selbst: Band-Fläche neutral, volle Breite. */
+  html.is-print-root .is-print-keep.jsc-band,
+  html.is-print-root .is-print-keep.jsc-band--alt {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    border: none !important;
+  }
+
+  /* Aktionszeilen im Druck komplett leer — Buttons ohnehin ausgeblendet */
+  .jsc-reflection__actions,
+  .jsc-check-actions {
+    display: none !important;
+  }
 }

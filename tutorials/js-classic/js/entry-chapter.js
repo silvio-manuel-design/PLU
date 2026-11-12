@@ -55,8 +55,36 @@ initRailProgress();
 initClassroom();
 
 /* Drucken-Buttons (P5) */
+/* Drucken-Buttons (P5, P11R5: Worksheet-Isolation — Button druckt
+   nur seine eigene Sektion als sauberes Arbeitsblatt) */
 document.querySelectorAll('[data-print]').forEach((btn) => {
-  btn.addEventListener('click', () => window.print());
+  btn.addEventListener('click', () => {
+    const target =
+      btn.closest('section') ||
+      btn.closest('.jsc-band, .jsc-band--alt');
+    if (!target) {
+      window.print();
+      return;
+    }
+    /* Vorfahren-Kette markieren: nur dieser Ast bleibt im Druck. */
+    const kept = [];
+    let el = target;
+    while (el && el.nodeType === 1) {
+      el.classList.add('is-print-keep');
+      kept.push(el);
+      el = el.parentElement;
+    }
+    document.documentElement.classList.add('is-print-root');
+    const cleanup = () => {
+      kept.forEach((n) => n.classList.remove('is-print-keep'));
+      document.documentElement.classList.remove('is-print-root');
+      window.removeEventListener('afterprint', cleanup);
+    };
+    window.addEventListener('afterprint', cleanup);
+    window.print();
+    /* Fallback: falls afterprint nicht feuert (Safari) */
+    setTimeout(cleanup, 2000);
+  });
 });
 
 /* Sprach-Umschalter (P1-Demo für smoke-test*.html) */
