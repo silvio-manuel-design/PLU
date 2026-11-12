@@ -63,7 +63,7 @@ export const NAV = {
     // P9: Lexikon als 6. Top-Punkt (nach Kapitel, vor Übungen)
     { id: 'lexikon', url: `${BASE}/lexikon.html`, i18n: 'ui.nav.lexikon' },
     { id: 'exercises', url: `${BASE}/uebungen/`, i18n: 'ui.nav.exercises' },
-    { id: 'final', url: `${BASE}/abschluss/`, i18n: 'ui.nav.final' },
+    { id: 'final', url: `${BASE}/projekte/`, i18n: 'ui.nav.final' },
     {
       id: 'info',
       url: `${BASE}/info.html`,
