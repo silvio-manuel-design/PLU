@@ -36,8 +36,7 @@
 /* Innere Karten eine Ebene über dem Band */
 .jsc-chapter-card,
 .jsc-info-card,
-.jsc-goals__item,
-.jsc-teaser__media img {
+.jsc-goals__item {
   border: 1px solid var(--jsc-color-border);
   background: var(--jsc-card-bg);
   box-shadow: var(--jsc-card-lift);
@@ -132,42 +131,115 @@ html[data-theme="light"] .jsc-goals__item::before {
   }
 }
 
-/* KI-Teaser */
-.jsc-teaser {
+/* P9R4: Gesamtexport-Button als eigene Zeile unter dem Kapitel-Grid */
+.jsc-export-all {
+  margin-top: var(--jsc-space-6);
+  justify-self: start;
+}
+
+/* --- P11R1: KI-Teaser als Full-Bleed-Bildband --------------------------------
+   Bild = Vollfläche, Text auf Scrim-Gradienten (theme-konsistent über
+   surface-0 gemischt). Mobile: Inhalt unten, vertikaler Scrim. */
+
+.jsc-teaser-hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  gap: var(--jsc-space-5);
   align-items: center;
+  min-block-size: clamp(30rem, 62vh, 42rem);
+  padding-block: var(--jsc-space-10);
+  overflow: hidden;
 }
 
-.jsc-teaser__media img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--jsc-radius-l);
-  border: 1px solid var(--jsc-color-border);
-  box-shadow: var(--jsc-shadow-2);
+.jsc-teaser-hero__media,
+.jsc-teaser-hero__media picture,
+.jsc-teaser-hero__media img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
 }
 
-.jsc-teaser__body h3 {
+.jsc-teaser-hero__media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.jsc-teaser-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--jsc-color-surface-0) 92%, transparent) 0%,
+    color-mix(in oklch, var(--jsc-color-surface-0) 78%, transparent) 42%,
+    color-mix(in oklch, var(--jsc-color-surface-0) 30%, transparent) 70%,
+    transparent 100%
+  );
+}
+
+.jsc-teaser-hero__inner {
+  position: relative;
+}
+
+.jsc-teaser-hero__inner .jsc-hero__eyebrow {
+  color: var(--jsc-color-accent);
+}
+
+html[data-theme="light"] .jsc-teaser-hero__inner .jsc-hero__eyebrow {
+  color: var(--jsc-color-accent-ink);
+}
+
+.jsc-teaser-hero__title {
+  max-width: 20ch;
   margin-top: var(--jsc-space-2);
   font-family: var(--jsc-font-display);
-  font-size: var(--jsc-text-3);
+  font-size: var(--jsc-text-4);
   line-height: var(--jsc-leading-heading);
 }
 
-.jsc-teaser__body p {
+.jsc-teaser-hero__text {
+  max-width: 46ch;
   margin-top: var(--jsc-space-3);
   color: var(--jsc-color-ink-muted);
   font-size: var(--jsc-text-1);
 }
 
-@media (min-width: 1024px) {
-  .jsc-teaser {
-    grid-template-columns: 1fr 1fr;
+.jsc-teaser-hero__actions {
+  margin-top: var(--jsc-space-5);
+}
+
+/* Mobile: Inhalt unten andocken, vertikaler Scrim */
+@media (max-width: 767px) {
+  .jsc-teaser-hero {
+    align-items: end;
+    min-block-size: clamp(34rem, 74vh, 44rem);
+  }
+
+  .jsc-teaser-hero__scrim {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--jsc-color-surface-0) 40%, transparent) 0%,
+      color-mix(in oklch, var(--jsc-color-surface-0) 88%, transparent) 46%,
+      color-mix(in oklch, var(--jsc-color-surface-0) 97%, transparent) 100%
+    );
   }
 }
 
-/* P9R4: Gesamtexport-Button als eigene Zeile unter dem Kapitel-Grid */
-.jsc-export-all {
-  margin-top: var(--jsc-space-6);
-  justify-self: start;
+/* Print: Bildband weg, Inhalt als normale Sektion lesbar */
+@media print {
+  .jsc-teaser-hero {
+    min-block-size: auto;
+    padding-block: var(--jsc-space-6);
+    overflow: visible;
+    border: 1px solid var(--jsc-color-border);
+  }
+
+  .jsc-teaser-hero__media,
+  .jsc-teaser-hero__scrim {
+    display: none;
+  }
 }
