@@ -6,7 +6,12 @@
 
 .jsc-back-to-top {
   position: fixed;
-  right: var(--jsc-space-4);
+  /* FIX: Am Container-Rand andocken, nicht am Viewport-Rand — auf
+     breiten Screens schwebte der Button weit weg vom Content. */
+  right: max(
+    var(--jsc-space-4),
+    calc((100vw - var(--jsc-container-max)) / 2 + var(--jsc-space-4))
+  );
   bottom: calc(var(--jsc-space-4) + env(safe-area-inset-bottom, 0px));
   z-index: var(--jsc-z-overlay);
   opacity: 0;
