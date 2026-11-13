@@ -134,7 +134,7 @@ export default {
   'ui.footer.colChapters': 'Kapitel',
   'ui.footer.colResources': 'Ressourcen',
   'ui.footer.colLegal': 'Rechtliches',
-  'ui.footer.allChapters': 'Alle Kapitel',
+  'ui.footer.allChapters': 'Kapitel',
   'ui.footer.exercises': 'Labs',
   'ui.footer.worksheets': 'Arbeitsblätter',
   'ui.footer.kiBasics': 'KI-Grundlagen',

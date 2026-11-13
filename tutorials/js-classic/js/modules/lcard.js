@@ -13,7 +13,7 @@ import { isDone } from './progress.js';
 import { get } from './storage.js';
 
 const RING_R = 15.9155;
-const IMG_BASE = '/tutorials/js-classic/assets/img/chapters';
+const IMG_BASE = '/tutorials/js-classic/assets/img';
 
 function hrefFor(dir, slug, slugEn) {
   const s = getLanguage() === 'en' && slugEn ? slugEn : slug;
@@ -46,7 +46,7 @@ function ringSvg(pct) {
 }
 
 function labState(nr) {
-  const saved = get(`lab-${nr}-req`, []);
+  const saved = get(`jsc-lab-${nr}-req`, []);
   const done = Array.isArray(saved) ? saved.filter(Boolean).length : 0;
   return { done, total: Array.isArray(saved) ? saved.length : 0 };
 }
@@ -65,7 +65,7 @@ function media(img) {
   return fig;
 }
 
-function shell(nr, mod) {
+function shell(nr, mod, img) {
   const li = document.createElement('li');
   li.className = 'jsc-lcard';
   li.dataset.module = mod;
@@ -79,7 +79,7 @@ function shell(nr, mod) {
   nrel.className = 'jsc-lcard__nr';
   nrel.textContent = nr;
   li.append(link);
-  link.append(media(CHAPTERS[Number(nr) - 1].img), body);
+  link.append(media(img), body);
   body.append(toprow);
   toprow.append(nrel);
   return { li, link, body, toprow };
@@ -87,7 +87,7 @@ function shell(nr, mod) {
 
 function chapterCard(ch) {
   const done = isDone(ch.nr);
-  const { li, link, body, toprow } = shell(ch.nr, `m${ch.nr}`);
+  const { li, link, body, toprow } = shell(ch.nr, `m${ch.nr}`, ch.img);
   li.classList.toggle('is-done', done);
   link.href = hrefFor('kapitel', ch.slug, ch.slugEn);
   toprow.append(ringSvg(done ? 100 : 0));
@@ -105,7 +105,7 @@ function chapterCard(ch) {
 function labCard(lab) {
   const st = labState(lab.nr);
   const pct = st.total ? Math.round((st.done / st.total) * 100) : 0;
-  const { li, link, body, toprow } = shell(lab.nr, `m${lab.nr}`);
+  const { li, link, body, toprow } = shell(lab.nr, `m${lab.nr}`, lab.img);
   li.dataset.lab = lab.nr;
   const complete = st.total > 0 && st.done === st.total;
   li.classList.toggle('is-done', complete);
