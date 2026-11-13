@@ -39,6 +39,11 @@ export default {
   'ui.lab.10': 'Reaction Test',
   'ui.lab.11': 'Signup Form',
   'ui.lab.12': 'XSS Lab',
+  /* P13: learning card */
+  'ui.lcard.chapter': 'Chapter %s',
+  'ui.lcard.meta': '~%s min · with AI · submit via GitHub',
+  'ui.lcard.req': '%d of %d requirements',
+  'ui.lcard.done': 'Lab done',
   'ui.nav.worksheets': 'Worksheets',
   /* P9: glossary + GitHub page */
   'ui.nav.lexikon': 'Glossary',
