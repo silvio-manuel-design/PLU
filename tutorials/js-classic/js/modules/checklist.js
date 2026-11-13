@@ -60,4 +60,25 @@ export function initChecklist() {
 
     refresh();
   });
+
+  // P11R10: Step-Kriterien (jsc-checklist-items) — abhakbar, persistiert via
+  // storage.js. Bewusst OHNE Banner, Zähler und markDone: das bleibt der
+  // Haupt-Checkliste vorbehalten.
+  document.querySelectorAll('[data-component="jsc-checklist-items"]').forEach((list) => {
+    const key = list.dataset.storageKey;
+    if (!key) return;
+    const boxes = [...list.querySelectorAll('input[type="checkbox"]')];
+    if (!boxes.length) return;
+
+    const saved = get(key, []);
+    boxes.forEach((box, i) => {
+      box.checked = Boolean(saved[i]);
+    });
+
+    boxes.forEach((box) => {
+      box.addEventListener('change', () => {
+        set(key, boxes.map((b) => b.checked));
+      });
+    });
+  });
 }
