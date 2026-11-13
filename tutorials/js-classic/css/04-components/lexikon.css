@@ -252,10 +252,18 @@ html[data-theme="light"] .jsc-term-card__chap a {
 .jsc-path-tile {
   display: block;
   padding: var(--jsc-space-3) var(--jsc-space-4);
-  background: var(--jsc-color-surface-2);
-  border: 1px solid var(--jsc-color-border);
+  /* P11R8: Regressions-Fix — Bestand surface-2 = neuer band--alt-Farbton
+     (P11R4) → Karte unsichtbar. Jetzt eine Stufe dunkler + Akzent-Tönung,
+     plus eigene Textfarbe (vorher Browser-Default). */
+  background: color-mix(in oklch, var(--tile-accent, var(--jsc-color-accent)) 6%, var(--jsc-color-surface-1));
+  border: 1px solid color-mix(in oklch, var(--tile-accent, var(--jsc-color-accent)) 45%, var(--jsc-color-border));
+  color: var(--jsc-color-ink);
   border-radius: var(--jsc-radius-m);
   transition: border-color 160ms ease, transform 160ms ease;
+}
+
+html[data-theme="light"] .jsc-path-tile {
+  background: color-mix(in oklch, var(--tile-accent, var(--jsc-color-accent)) 5%, var(--jsc-color-surface-1));
 }
 
 .jsc-path-tile:hover {

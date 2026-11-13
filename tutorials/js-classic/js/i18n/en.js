@@ -166,7 +166,6 @@ export default {
   /* Export (P5) */
   'ui.export.copy': 'Copy my answers',
   'ui.export.file': 'Download file',
-  'ui.export.all': 'Export all chapters',
   'ui.export.copied': 'Copied to clipboard',
   'ui.export.unsupported': 'Clipboard unavailable — file was downloaded.',
 
