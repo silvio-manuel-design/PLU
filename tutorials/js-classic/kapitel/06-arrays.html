@@ -276,7 +276,9 @@ for (const note of noten) {
                 <code>push()</code> hängt hinten an, <code>pop()</code> entfernt hinten (und
                 gibt das Element zurück). <code>includes()</code> prüft, ob ein Wert drin
                 ist; <code>indexOf()</code> findet die Position (<code>-1</code> = nicht
-                gefunden).
+                gefunden). <code>unshift()</code> und <code>shift()</code> arbeiten wie
+                <code>push</code> und <code>pop</code> — nur vorne. <code>join()</code>
+                verbindet das Array zu einem Text, <code>sort()</code> sortiert es.
               </p>
               <figure class="jsc-code-block" data-filename="veraendern.js">
                 <figcaption class="jsc-code-block__bar">
@@ -291,6 +293,30 @@ console.log(weg);            // "Eier"
 console.log(einkauf.includes("Milch")); // true
 console.log(einkauf.indexOf("Brot"));   // 0</code></pre>
               </figure>
+              <figure class="jsc-code-block" data-filename="mehr-methoden.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">mehr-methoden.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">const warteliste = ["Anna", "Ben"];
+warteliste.unshift("Cleo");  // vorne einreihen
+console.log(warteliste);     // ["Cleo", "Anna", "Ben"]
+warteliste.shift();          // erste:r geht — Rückgabe: "Cleo"
+const dran = warteliste.join(" → ");
+console.log(dran);           // "Anna → Ben"
+warteliste.push("Dora", "Emil");
+warteliste.sort();           // alphabetisch (als Text sortiert!)
+console.log(warteliste);     // ["Anna", "Ben", "Dora", "Emil"]</code></pre>
+              </figure>
+              <aside class="jsc-step__explain-note">
+                <p>
+                  <strong>Was ist eine Methode?</strong> Methoden sind Funktionen, die an einem
+                  Wert hängen: <code>push</code>, <code>pop</code>, <code>join</code> und
+                  <code>sort</code> zum Beispiel. Auch <code>console.log</code> ist eine — sie
+                  wohnt im <code>console</code>-Objekt. Warum das so ist, zeigt dir
+                  <a href="/tutorials/js-classic/kapitel/08-objekte.html">Kapitel 08</a>.
+                </p>
+              </aside>
             </div>
             <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
             <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
@@ -332,15 +358,30 @@ console.log(einkauf);</textarea>
                 <p class="jsc-mistake-card__title">indexOf mit Truthiness</p>
                 <p><code>if (einkauf.indexOf("Brot"))</code> ist bei Index 0 FALSCH — 0 ist falsy! Richtig: <code>!== -1</code> vergleichen oder gleich <code>includes</code> nehmen.</p>
               </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">sort sortiert als Text</p>
+                <p><code>[10, 2, 1].sort()</code> ergibt <code>[1, 10, 2]</code> — als Text
+                sortiert steht „10“ vor „2“. Zahlensortierung braucht eine Vergleichsfunktion —
+                die kommt später.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Rückgabe von shift und push verwechselt</p>
+                <p><code>shift()</code> und <code>pop()</code> geben das entfernte Element zurück.
+                <code>push()</code> und <code>unshift()</code> liefern die neue Länge — nicht das
+                Array.</p>
+              </div>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Profi-Tipp</p>
-              <p><code>indexOf("x") !== -1</code> ist dasselbe wie <code>includes("x")</code> — includes ist die moderne, lesbare Version.</p>
+              <p><code>indexOf("x") !== -1</code> ist dasselbe wie <code>includes("x")</code> — includes ist die moderne, lesbare Version. Für Ausgaben ist <code>join(", ")</code> Gold wert: aus <code>["Brot", "Milch"]</code> wird der Text <code>"Brot, Milch"</code>.</p>
             </aside>
             <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch06-s3-criteria">
               <li><label><input type="checkbox" /> <span>Ich kann mit push Elemente anhängen und mit pop entfernen.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann mit includes prüfen, ob ein Wert im Array ist.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann mit indexOf die Position eines Werts finden und deute -1 richtig.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit unshift und shift vorne einfügen und entfernen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit join ein Array zu einem Text machen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass sort() als Text sortiert.</span></label></li>
             </ul>
           </section>
 
@@ -417,6 +458,9 @@ console.log(einkauf);</textarea>
               <li><label><input type="checkbox" /> <span>Ich kann mit includes prüfen, ob ein Wert im Array ist.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann mit indexOf die Position eines Werts finden und deute -1 richtig.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich habe das Zähler-Array (Demo) verstanden und kann es erklären.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit unshift und shift vorne einfügen und entfernen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann mit join ein Array zu einem Text machen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich weiß, dass sort() als Text sortiert.</span></label></li>
             </ul>
             <p class="jsc-check-actions">
               <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
@@ -531,7 +575,8 @@ console.log("Maximum:", max);</code></pre>
                 <li>Array = nummerierte Liste in einer Variable, Index beginnt bei 0.</li>
                 <li><code>length</code> zählt ab 1 — letztes Element: <code>arr[arr.length - 1]</code>.</li>
                 <li>for = mit Index, for...of = nur Werte.</li>
-                <li>push/pop verändern das Array; includes/indexOf prüfen es.</li>
+                <li>push/pop hinten, unshift/shift vorne: So veränderst du das Array.</li>
+                <li>includes/indexOf prüfen, join macht Text, sort sortiert.</li>
                 <li>Das Zähler-Array zählt alles: Treffer, Häufigkeiten, Ergebnisse.</li>
               </ul>
             </div>
