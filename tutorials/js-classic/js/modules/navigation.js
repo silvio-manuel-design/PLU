@@ -18,7 +18,7 @@
  *     Return-of-Focus auf den auslösenden Button.
  */
 
-import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS } from '../data/nav.js';
+import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS, LABS } from '../data/nav.js';
 import { t, getLanguage, onLangChange } from './i18n.js';
 import { isLight, toggleTheme } from './theme.js';
 
@@ -253,8 +253,17 @@ function renderMobileMenu(header) {
         current: idx === i,
       }))
     ),
+    menuGroup(
+      t('ui.menu.groupLabs'),
+      [
+        { href: `${base}/uebungen/`, label: t('ui.nav.labsOverview') },
+        ...LABS.map((lab) => ({
+          href: labLink(lab),
+          label: `Lab ${lab.nr} · ${t(lab.i18n)}`,
+        })),
+      ]
+    ),
     menuGroup(t('ui.menu.groupLearn'), [
-      { href: `${base}/uebungen/`, label: t('ui.nav.exercises') },
       { href: `${base}/ki-grundlagen.html`, label: t('ui.nav.kiBasics') },
       { href: `${base}/vscode.html`, label: t('ui.nav.vscode') },
     ]),
@@ -408,6 +417,11 @@ function renderHeader(currentPath) {
 function chapterLink(chapter) {
   const slug = getLanguage() === 'en' && chapter.slugEn ? chapter.slugEn : chapter.slug;
   return `/tutorials/js-classic/kapitel/${slug}.html`;
+}
+
+function labLink(lab) {
+  const slug = getLanguage() === 'en' && lab.slugEn ? lab.slugEn : lab.slug;
+  return `/tutorials/js-classic/uebungen/${slug}.html`;
 }
 
 function renderTocDialog(bar) {
