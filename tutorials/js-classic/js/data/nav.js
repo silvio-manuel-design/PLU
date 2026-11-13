@@ -72,6 +72,8 @@ export const NAV = {
       children: CHAPTERS.map((ch) => ({
         id: `ch-${ch.nr}`,
         url: `${BASE}/kapitel/${ch.slug}.html`,
+        urlEn: `${BASE}/kapitel/${ch.slugEn}.html`,
+        nr: ch.nr,
         i18n: ch.i18n,
       })),
     },
@@ -83,10 +85,12 @@ export const NAV = {
       url: `${BASE}/uebungen/`,
       i18n: 'ui.nav.exercises',
       children: [
-        { id: 'labs-overview', url: `${BASE}/uebungen/`, i18n: 'ui.nav.labsOverview' },
+        { id: 'labs-overview', url: `${BASE}/uebungen/`, urlEn: `${BASE}/uebungen/index-en.html`, i18n: 'ui.nav.labsOverview' },
         ...LABS.map((lab) => ({
           id: `lab-${lab.nr}`,
           url: `${BASE}/uebungen/${lab.slug}.html`,
+          urlEn: `${BASE}/uebungen/${lab.slugEn}.html`,
+          nr: lab.nr,
           i18n: lab.i18n,
         })),
       ],

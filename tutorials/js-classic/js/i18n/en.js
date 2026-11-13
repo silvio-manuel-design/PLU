@@ -23,9 +23,9 @@ export default {
   /* Navigation (P2) */
   'ui.nav.home': 'Course',
   'ui.nav.chapters': 'Chapters',
-  'ui.nav.exercises': 'JS Labs',
+  'ui.nav.exercises': 'Labs',
   'ui.nav.labsOverview': 'Overview',
-  'ui.menu.groupLabs': 'JS Labs',
+  'ui.menu.groupLabs': 'Labs',
   /* P12: lab titles for the JS Labs dropdown */
   'ui.lab.01': 'First Output',
   'ui.lab.02': 'Profile Card Generator',
@@ -130,7 +130,7 @@ export default {
   'ui.footer.colResources': 'Resources',
   'ui.footer.colLegal': 'Legal',
   'ui.footer.allChapters': 'All Chapters',
-  'ui.footer.exercises': 'JS Labs',
+  'ui.footer.exercises': 'Labs',
   'ui.footer.worksheets': 'Worksheets',
   'ui.footer.kiBasics': 'AI Basics',
   'ui.footer.pluHub': 'PLU Hub',
