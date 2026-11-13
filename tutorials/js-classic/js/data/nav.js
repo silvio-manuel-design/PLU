@@ -30,18 +30,18 @@ export const CHAPTERS = [
 ];
 
 export const LABS = [
-  { nr: '01', slug: 'lab-01-ausgabe', slugEn: 'lab-01-ausgabe-en', i18n: 'ui.lab.01', mins: '30', img: 'labs/lab01/jsc-lab01-card-v1' },
-  { nr: '02', slug: 'lab-02-steckbrief', slugEn: 'lab-02-steckbrief-en', i18n: 'ui.lab.02', mins: '30', img: 'labs/lab02/jsc-lab02-card-v1' },
-  { nr: '03', slug: 'lab-03-warenkorb', slugEn: 'lab-03-warenkorb-en', i18n: 'ui.lab.03', mins: '30', img: 'labs/lab03/jsc-lab03-card-v1' },
-  { nr: '04', slug: 'lab-04-noten', slugEn: 'lab-04-noten-en', i18n: 'ui.lab.04', mins: '30', img: 'labs/lab04/jsc-lab04-card-v1' },
-  { nr: '05', slug: 'lab-05-countdown', slugEn: 'lab-05-countdown-en', i18n: 'ui.lab.05', mins: '30', img: 'labs/lab05/jsc-lab05-card-v1' },
-  { nr: '06', slug: 'lab-06-einkaufsliste', slugEn: 'lab-06-einkaufsliste-en', i18n: 'ui.lab.06', mins: '30', img: 'labs/lab06/jsc-lab06-card-v1' },
-  { nr: '07', slug: 'lab-07-umrechner', slugEn: 'lab-07-umrechner-en', i18n: 'ui.lab.07', mins: '30', img: 'labs/lab07/jsc-lab07-card-v1' },
-  { nr: '08', slug: 'lab-08-mediathek', slugEn: 'lab-08-mediathek-en', i18n: 'ui.lab.08', mins: '30', img: 'labs/lab08/jsc-lab08-card-v1' },
-  { nr: '09', slug: 'lab-09-klickzaehler', slugEn: 'lab-09-klickzaehler-en', i18n: 'ui.lab.09', mins: '30', img: 'labs/lab09/jsc-lab09-card-v1' },
-  { nr: '10', slug: 'lab-10-reaktion', slugEn: 'lab-10-reaktion-en', i18n: 'ui.lab.10', mins: '30', img: 'labs/lab10/jsc-lab10-card-v1' },
-  { nr: '11', slug: 'lab-11-anmeldung', slugEn: 'lab-11-anmeldung-en', i18n: 'ui.lab.11', mins: '30', img: 'labs/lab11/jsc-lab11-card-v1' },
-  { nr: '12', slug: 'lab-12-xss-labor', slugEn: 'lab-12-xss-labor-en', i18n: 'ui.lab.12', mins: '40', img: 'labs/lab12/jsc-lab12-card-v1' },
+  { nr: '01', slug: 'lab-01-ausgabe', slugEn: 'lab-01-ausgabe-en', i18n: 'ui.lab.01', mins: '30', img: 'labs/lab01/jsc-lab01-hero-v1' },
+  { nr: '02', slug: 'lab-02-steckbrief', slugEn: 'lab-02-steckbrief-en', i18n: 'ui.lab.02', mins: '30', img: 'labs/lab02/jsc-lab02-hero-v1' },
+  { nr: '03', slug: 'lab-03-warenkorb', slugEn: 'lab-03-warenkorb-en', i18n: 'ui.lab.03', mins: '30', img: 'labs/lab03/jsc-lab03-hero-v1' },
+  { nr: '04', slug: 'lab-04-noten', slugEn: 'lab-04-noten-en', i18n: 'ui.lab.04', mins: '30', img: 'labs/lab04/jsc-lab04-hero-v1' },
+  { nr: '05', slug: 'lab-05-countdown', slugEn: 'lab-05-countdown-en', i18n: 'ui.lab.05', mins: '30', img: 'labs/lab05/jsc-lab05-hero-v1' },
+  { nr: '06', slug: 'lab-06-einkaufsliste', slugEn: 'lab-06-einkaufsliste-en', i18n: 'ui.lab.06', mins: '30', img: 'labs/lab06/jsc-lab06-hero-v1' },
+  { nr: '07', slug: 'lab-07-umrechner', slugEn: 'lab-07-umrechner-en', i18n: 'ui.lab.07', mins: '30', img: 'labs/lab07/jsc-lab07-hero-v1' },
+  { nr: '08', slug: 'lab-08-mediathek', slugEn: 'lab-08-mediathek-en', i18n: 'ui.lab.08', mins: '30', img: 'labs/lab08/jsc-lab08-hero-v1' },
+  { nr: '09', slug: 'lab-09-klickzaehler', slugEn: 'lab-09-klickzaehler-en', i18n: 'ui.lab.09', mins: '30', img: 'labs/lab09/jsc-lab09-hero-v1' },
+  { nr: '10', slug: 'lab-10-reaktion', slugEn: 'lab-10-reaktion-en', i18n: 'ui.lab.10', mins: '30', img: 'labs/lab10/jsc-lab10-hero-v1' },
+  { nr: '11', slug: 'lab-11-anmeldung', slugEn: 'lab-11-anmeldung-en', i18n: 'ui.lab.11', mins: '30', img: 'labs/lab11/jsc-lab11-hero-v1' },
+  { nr: '12', slug: 'lab-12-xss-labor', slugEn: 'lab-12-xss-labor-en', i18n: 'ui.lab.12', mins: '40', img: 'labs/lab12/jsc-lab12-hero-v1' },
 ];
 
 export const INFO_PAGES = [
