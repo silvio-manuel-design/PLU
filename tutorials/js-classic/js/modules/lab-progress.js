@@ -12,7 +12,7 @@ import { get } from './storage.js';
 const progressEl = document.querySelector('[data-lab-progress]');
 
 function labDone(nr) {
-  const saved = get(`lab-${nr}-req`, []);
+  const saved = get(`jsc-lab-${nr}-req`, []);
   return Array.isArray(saved) && saved.length > 0 && saved.every(Boolean);
 }
 

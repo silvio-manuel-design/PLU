@@ -591,7 +591,7 @@ function renderFooter() {
     footerLink(allChaptersUrl, t('ui.footer.allChapters')),
     footerLink(chapterLink(NAV.chaptersMeta[0]), `01. ${t('ui.ch.01')}`),
     footerLink('/tutorials/js-classic/uebungen/', t('ui.footer.exercises')),
-    footerLink('/tutorials/js-classic/arbeitsblaetter.html', t('ui.footer.worksheets'))
+    footerLink(labLink(LABS[0]), `01. ${t('ui.lab.01')}`)
   );
   navChapters.append(ulChapters);
 
