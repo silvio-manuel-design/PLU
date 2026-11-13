@@ -23,9 +23,9 @@ export default {
   /* Navigation (P2) */
   'ui.nav.home': 'Kurs',
   'ui.nav.chapters': 'Kapitel',
-  'ui.nav.exercises': 'JS-Labs',
+  'ui.nav.exercises': 'Labs',
   'ui.nav.labsOverview': 'Übersicht',
-  'ui.menu.groupLabs': 'JS-Labs',
+  'ui.menu.groupLabs': 'Labs',
   /* P12: Lab-Titel fürs JS-Labs-Dropdown */
   'ui.lab.01': 'Erste Ausgaben',
   'ui.lab.02': 'Steckbrief-Generator',
@@ -130,7 +130,7 @@ export default {
   'ui.footer.colResources': 'Ressourcen',
   'ui.footer.colLegal': 'Rechtliches',
   'ui.footer.allChapters': 'Alle Kapitel',
-  'ui.footer.exercises': 'JS-Labs',
+  'ui.footer.exercises': 'Labs',
   'ui.footer.worksheets': 'Arbeitsblätter',
   'ui.footer.kiBasics': 'KI-Grundlagen',
   'ui.footer.pluHub': 'PLU Hub',

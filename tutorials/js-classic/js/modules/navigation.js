@@ -167,9 +167,11 @@ function navItem(entry, currentPath) {
   const sub = el('ul', 'jsc-nav__sub');
   entry.children.forEach((child) => {
     const li = el('li', 'jsc-nav__sub-item');
-    const link = el('a', 'jsc-nav__sub-link', t(child.i18n));
-    link.href = child.url;
-    if (currentPath === pageUrl(child.url)) link.setAttribute('aria-current', 'page');
+    const label = child.nr ? `${child.nr} · ${t(child.i18n)}` : t(child.i18n);
+    const link = el('a', 'jsc-nav__sub-link', label);
+    const href = getLanguage() === 'en' && child.urlEn ? child.urlEn : child.url;
+    link.href = href;
+    if (currentPath === pageUrl(href)) link.setAttribute('aria-current', 'page');
     li.append(link);
     sub.append(li);
   });
