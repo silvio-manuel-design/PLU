@@ -153,35 +153,4 @@ export function initExport() {
       section.append(buildButtons(section, nr));
     }
   });
-
-  // Gesamtexport (Homepage)
-  const allMount = document.querySelector('[data-export-all]');
-  if (allMount && !allMount.querySelector('button')) {
-    const note = document.createElement('span');
-    note.className = 'jsc-export-note';
-    note.setAttribute('aria-live', 'polite');
-
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'jsc-button jsc-button--outline jsc-button--sm';
-    btn.dataset.i18n = 'ui.export.all';
-    btn.textContent = t('ui.export.all');
-
-    btn.addEventListener('click', () => {
-      const lang = getLanguage();
-      const sections = [...document.querySelectorAll('[data-component="jsc-reflection"][data-export-chapter]')];
-      const parts = sections.map((s) => {
-        const data = readChapter(s);
-        return buildText(data, { nr: s.dataset.exportChapter });
-      });
-      const header =
-        '# PLU JavaScript Classic — ' +
-        (lang === 'de' ? 'Meine Antworten (Gesamtexport)' : 'My answers (all chapters)') +
-        `\n${lang === 'de' ? 'Exportiert am' : 'Exported on'}: ${stamp()}\n`;
-      const text = header + '\n\n' + parts.join('\n\n---\n\n');
-      copyText(text, note);
-    });
-
-    allMount.append(btn, note);
-  }
 }

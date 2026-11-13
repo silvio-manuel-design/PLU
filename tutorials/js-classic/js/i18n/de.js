@@ -166,7 +166,6 @@ export default {
   /* Export (P5) */
   'ui.export.copy': 'Meine Antworten kopieren',
   'ui.export.file': 'Als Datei laden',
-  'ui.export.all': 'Gesamtexport (alle Kapitel)',
   'ui.export.copied': 'In Zwischenablage kopiert',
   'ui.export.unsupported': 'Zwischenablage nicht verfügbar — Datei wurde geladen.',
 
