@@ -341,29 +341,37 @@ html[data-theme="light"] .jsc-deepen-list a {
   font-size: var(--jsc-text--1);
 }
 
-/* criteria */
+/* criteria — interaktive „Ich kann…"-Liste (P11R10).
+   Vorher: statischer ✓-Haken per ::before („vorabgehakt"). Jetzt echte Checkboxen. */
 .jsc-step__criteria {
   margin: var(--jsc-space-5) 0 0;
   padding: 0;
   list-style: none;
 }
 
-.jsc-step__criteria li {
-  position: relative;
-  padding-left: var(--jsc-space-5);
+.jsc-step__criteria li + li {
+  margin-top: var(--jsc-space-2);
+}
+
+.jsc-step__criteria label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--jsc-space-2);
+  cursor: pointer;
   color: var(--jsc-color-ink-muted);
 }
 
-.jsc-step__criteria li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--jsc-color-success);
-  font-weight: var(--jsc-weight-bold);
+.jsc-step__criteria input[type="checkbox"] {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  transform: translateY(0.125em);
+  accent-color: var(--module-accent, var(--jsc-color-accent));
 }
 
-.jsc-step__criteria li + li {
-  margin-top: var(--jsc-space-2);
+.jsc-step__criteria input:checked + span {
+  color: var(--jsc-color-ink);
 }
 
 /* mistake-card (Coral-Tinting) */
