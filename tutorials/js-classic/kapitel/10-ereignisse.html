@@ -159,6 +159,24 @@ button.addEventListener("click", function () {
   console.log("Geklickt!");
 });</code></pre>
               </figure>
+              <p>
+                Ein Listener muss nicht für immer laufen: <code>removeEventListener</code>
+                meldet ihn wieder ab. Das klappt nur mit einer benannten Funktion — eine
+                anonyme kann der Browser nicht wiedererkennen. Soll der Listener nur einmal
+                feuern, reicht die Option <code>{ once: true }</code>.
+              </p>
+              <figure class="jsc-code-block" data-filename="hoeren-auf.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">hoeren-auf.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function reagiere() {
+  console.log("Geklickt!");
+}
+button.addEventListener("click", reagiere);
+button.removeEventListener("click", reagiere); // wieder abmelden
+button.addEventListener("click", reagiere, { once: true }); // nur einmal</code></pre>
+              </figure>
             </div>
             <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
             <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
@@ -202,6 +220,12 @@ klick();</textarea>
                 <p class="jsc-mistake-card__title">Script vor dem HTML</p>
                 <p>Läuft das Script vor dem Element, findet querySelector nichts. Script mit <code>defer</code> im head oder ans body-Ende — siehe Kapitel 01.</p>
               </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">removeEventListener mit anonymer Funktion</p>
+                <p><code>removeEventListener("click", function () { … })</code> entfernt nichts —
+                die anonyme Funktion ist eine andere als beim Anmelden. Immer eine benannte
+                Funktion verwenden.</p>
+              </div>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Profi-Tipp</p>
@@ -212,6 +236,7 @@ klick();</textarea>
               <li><label><input type="checkbox" /> <span>Ich kann einen Klick-Listener mit addEventListener registrieren.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich übergebe eine Funktion — ich rufe sie nicht sofort auf.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann Eventnamen korrekt klein schreiben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann einen Listener mit removeEventListener und benannter Funktion wieder abmelden.</span></label></li>
             </ul>
           </section>
 
@@ -376,6 +401,33 @@ document.querySelector("#minus").addEventListener("click", function () {
 });</code></pre>
               </figure>
             </div>
+            <p class="jsc-step__blocklabel">Event-Landkarte</p>
+            <ul class="jsc-leadlist">
+              <li>
+                <strong>submit</strong> — feuert beim Absenden eines Formulars. Dein Einstieg
+                in Kapitel 11.
+              </li>
+              <li>
+                <strong>focus</strong> / <strong>blur</strong> — ein Feld wird betreten oder
+                verlassen. Ideal für Live-Validierung.
+              </li>
+              <li>
+                <strong>mouseenter</strong> — die Maus betritt ein Element (einmalig, nicht bei
+                jeder Bewegung).
+              </li>
+              <li>
+                <strong>mousemove</strong> — feuert bei jeder Mausbewegung. Sparsam nutzen:
+                sehr viele Events!
+              </li>
+              <li>
+                <strong>keyup</strong> — eine Taste wird losgelassen. Sinnvolle Ergänzung zu
+                keydown.
+              </li>
+              <li>
+                <strong>DOMContentLoaded</strong> — das HTML ist fertig geparst. Sicherer
+                Startpunkt für dein Script.
+              </li>
+            </ul>
             <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="reaction" data-idle-text="Bereit? Start drücken — dann auf GRÜN warten." data-wait-text="Warte auf Grün …" data-go-text="JETZT!" data-early-text="Zu früh! Erst warten, bis das Feld grün wird." data-result-text="Deine Reaktionszeit: {ms} ms. Nochmal?">
               <p class="jsc-demo__title">Reaktionstest</p>
               <div class="jsc-demo__row">
@@ -405,6 +457,11 @@ document.querySelector("#minus").addEventListener("click", function () {
                 <p class="jsc-mistake-card__title">setTimeout vs. setInterval</p>
                 <p><code>setTimeout</code> = einmal nach X ms, <code>setInterval</code> = immer wieder. Der Reaktionstest braucht setTimeout.</p>
               </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">mousemove übernutzen</p>
+                <p><code>mousemove</code> feuert Dutzende Male pro Sekunde. Im Callback nur das
+                Nötigste tun — sonst wird die Seite zäh.</p>
+              </div>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Profi-Tipp</p>
@@ -413,6 +470,7 @@ document.querySelector("#minus").addEventListener("click", function () {
             <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch10-s4-criteria">
               <li><label><input type="checkbox" /> <span>Ich kann Tastatur-Events mit event.key auswerten.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann das Muster Eingabe → Verarbeitung → Anzeige in einer eigenen Mini-App umsetzen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die Event-Landkarte: submit, focus, mouseenter, keyup und DOMContentLoaded.</span></label></li>
             </ul>
           </section>
 
@@ -434,6 +492,8 @@ document.querySelector("#minus").addEventListener("click", function () {
               <li><label><input type="checkbox" /> <span>Ich kann mehrere Listener aufbauen, die denselben Zustand teilen.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann Tastatur-Events mit event.key auswerten.</span></label></li>
               <li><label><input type="checkbox" /> <span>Ich kann das Muster Eingabe → Verarbeitung → Anzeige in einer eigenen Mini-App umsetzen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann einen Listener mit removeEventListener und benannter Funktion wieder abmelden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die Event-Landkarte: submit, focus, mouseenter, keyup und DOMContentLoaded.</span></label></li>
             </ul>
             <p class="jsc-check-actions">
               <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>

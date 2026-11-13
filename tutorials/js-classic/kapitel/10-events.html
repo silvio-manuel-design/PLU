@@ -159,6 +159,24 @@ button.addEventListener("click", function () {
   console.log("Clicked!");
 });</code></pre>
               </figure>
+              <p>
+                A listener doesn't have to run forever: <code>removeEventListener</code>
+                unregisters it. That only works with a named function — an anonymous one can't
+                be recognised again. If the listener should fire only once, the
+                <code>{ once: true }</code> option is enough.
+              </p>
+              <figure class="jsc-code-block" data-filename="unlisten.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">unlisten.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">function react() {
+  console.log("Clicked!");
+}
+button.addEventListener("click", react);
+button.removeEventListener("click", react); // unregister again
+button.addEventListener("click", react, { once: true }); // only once</code></pre>
+              </figure>
             </div>
             <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
             <p data-i18n="ui.pg.intro">Try it right away — your own code runs here in the browser:</p>
@@ -202,6 +220,12 @@ click();</textarea>
                 <p class="jsc-mistake-card__title">Script before the HTML</p>
                 <p>If the script runs before the element, querySelector finds nothing. Script with <code>defer</code> in head or at the end of body — see chapter 01.</p>
               </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">removeEventListener with an anonymous function</p>
+                <p><code>removeEventListener("click", function () { … })</code> removes nothing —
+                the anonymous function is a different one from registration. Always use a named
+                function.</p>
+              </div>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Pro tip</p>
@@ -212,6 +236,7 @@ click();</textarea>
               <li><label><input type="checkbox" /> <span>I can register a click listener with addEventListener.</span></label></li>
               <li><label><input type="checkbox" /> <span>I pass a function — I don't call it immediately.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can write event names correctly in lowercase.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can unregister a listener with removeEventListener and a named function.</span></label></li>
             </ul>
           </section>
 
@@ -375,6 +400,32 @@ document.querySelector("#minus").addEventListener("click", function () {
 });</code></pre>
               </figure>
             </div>
+            <p class="jsc-step__blocklabel">Event map</p>
+            <ul class="jsc-leadlist">
+              <li>
+                <strong>submit</strong> — fires when a form is submitted. Your gateway to
+                chapter 11.
+              </li>
+              <li>
+                <strong>focus</strong> / <strong>blur</strong> — a field is entered or left.
+                Ideal for live validation.
+              </li>
+              <li>
+                <strong>mouseenter</strong> — the mouse enters an element (once, not on every
+                move).
+              </li>
+              <li>
+                <strong>mousemove</strong> — fires on every mouse movement. Use sparingly: very
+                many events!
+              </li>
+              <li>
+                <strong>keyup</strong> — a key is released. A sensible companion to keydown.
+              </li>
+              <li>
+                <strong>DOMContentLoaded</strong> — the HTML is fully parsed. A safe starting
+                point for your script.
+              </li>
+            </ul>
             <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="reaction" data-idle-text="Ready? Press start — then wait for GREEN." data-wait-text="Waiting for green …" data-go-text="NOW!" data-early-text="Too early! Wait until the field turns green." data-result-text="Your reaction time: {ms} ms. Again?">
               <p class="jsc-demo__title">Reaction test</p>
               <div class="jsc-demo__row">
@@ -404,6 +455,11 @@ document.querySelector("#minus").addEventListener("click", function () {
                 <p class="jsc-mistake-card__title">setTimeout vs. setInterval</p>
                 <p><code>setTimeout</code> = once after X ms, <code>setInterval</code> = over and over. The reaction test needs setTimeout.</p>
               </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Overusing mousemove</p>
+                <p><code>mousemove</code> fires dozens of times per second. Do the minimum in
+                the callback — or the page turns sluggish.</p>
+              </div>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Pro tip</p>
@@ -412,6 +468,7 @@ document.querySelector("#minus").addEventListener("click", function () {
             <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch10-s4-criteria">
               <li><label><input type="checkbox" /> <span>I can evaluate keyboard events with event.key.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can implement the pattern input → processing → display in my own mini app.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the event map: submit, focus, mouseenter, keyup and DOMContentLoaded.</span></label></li>
             </ul>
           </section>
 
@@ -433,6 +490,8 @@ document.querySelector("#minus").addEventListener("click", function () {
               <li><label><input type="checkbox" /> <span>I can build multiple listeners that share the same state.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can evaluate keyboard events with event.key.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can implement the pattern input → processing → display in my own mini app.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can unregister a listener with removeEventListener and a named function.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know the event map: submit, focus, mouseenter, keyup and DOMContentLoaded.</span></label></li>
             </ul>
             <p class="jsc-check-actions">
               <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
