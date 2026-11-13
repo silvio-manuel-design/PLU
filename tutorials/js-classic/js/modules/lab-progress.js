@@ -15,8 +15,8 @@ const progressEl = document.querySelector('[data-lab-progress]');
 if (toggles.length) {
   const lang = document.documentElement.lang === 'en' ? 'en' : 'de';
   const TPL = {
-    de: (n, total) => `${n} von ${total} Übungen erledigt`,
-    en: (n, total) => `${n} of ${total} exercises done`,
+    de: (n, total) => `${n} von ${total} Labs erledigt`,
+    en: (n, total) => `${n} of ${total} labs done`,
   };
 
   let storage = null;

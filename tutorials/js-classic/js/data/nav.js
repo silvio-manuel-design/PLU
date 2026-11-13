@@ -29,6 +29,21 @@ export const CHAPTERS = [
   { nr: '12', slug: '12-sicherheit', slugEn: '12-security', i18n: 'ui.ch.12' },
 ];
 
+export const LABS = [
+  { nr: '01', slug: 'lab-01-ausgabe', slugEn: 'lab-01-ausgabe-en', i18n: 'ui.lab.01' },
+  { nr: '02', slug: 'lab-02-steckbrief', slugEn: 'lab-02-steckbrief-en', i18n: 'ui.lab.02' },
+  { nr: '03', slug: 'lab-03-warenkorb', slugEn: 'lab-03-warenkorb-en', i18n: 'ui.lab.03' },
+  { nr: '04', slug: 'lab-04-noten', slugEn: 'lab-04-noten-en', i18n: 'ui.lab.04' },
+  { nr: '05', slug: 'lab-05-countdown', slugEn: 'lab-05-countdown-en', i18n: 'ui.lab.05' },
+  { nr: '06', slug: 'lab-06-einkaufsliste', slugEn: 'lab-06-einkaufsliste-en', i18n: 'ui.lab.06' },
+  { nr: '07', slug: 'lab-07-umrechner', slugEn: 'lab-07-umrechner-en', i18n: 'ui.lab.07' },
+  { nr: '08', slug: 'lab-08-mediathek', slugEn: 'lab-08-mediathek-en', i18n: 'ui.lab.08' },
+  { nr: '09', slug: 'lab-09-klickzaehler', slugEn: 'lab-09-klickzaehler-en', i18n: 'ui.lab.09' },
+  { nr: '10', slug: 'lab-10-reaktion', slugEn: 'lab-10-reaktion-en', i18n: 'ui.lab.10' },
+  { nr: '11', slug: 'lab-11-anmeldung', slugEn: 'lab-11-anmeldung-en', i18n: 'ui.lab.11' },
+  { nr: '12', slug: 'lab-12-xss-labor', slugEn: 'lab-12-xss-labor-en', i18n: 'ui.lab.12' },
+];
+
 export const INFO_PAGES = [
   { slug: 'info', i18n: 'ui.nav.infoAbout' },
   { slug: 'vscode', i18n: 'ui.nav.vscode' },
@@ -62,7 +77,20 @@ export const NAV = {
     },
     // P9: Lexikon als 6. Top-Punkt (nach Kapitel, vor Übungen)
     { id: 'lexikon', url: `${BASE}/lexikon.html`, i18n: 'ui.nav.lexikon' },
-    { id: 'exercises', url: `${BASE}/uebungen/`, i18n: 'ui.nav.exercises' },
+    // P12: JS-Labs als Dropdown (D2) — Übersicht + 12 Labs aus LABS
+    {
+      id: 'labs',
+      url: `${BASE}/uebungen/`,
+      i18n: 'ui.nav.exercises',
+      children: [
+        { id: 'labs-overview', url: `${BASE}/uebungen/`, i18n: 'ui.nav.labsOverview' },
+        ...LABS.map((lab) => ({
+          id: `lab-${lab.nr}`,
+          url: `${BASE}/uebungen/${lab.slug}.html`,
+          i18n: lab.i18n,
+        })),
+      ],
+    },
     { id: 'final', url: `${BASE}/projekte/`, i18n: 'ui.nav.final' },
     {
       id: 'info',
