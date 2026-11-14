@@ -55,9 +55,9 @@ export const INFO_PAGES = [
 ];
 
 export const FINAL_PROJECTS = [
-  { slug: 'todo-liste', i18n: 'ui.proj.todo' },
-  { slug: 'noten', i18n: 'ui.proj.noten' },
-  { slug: 'quiz', i18n: 'ui.proj.quiz' },
+  { slug: 'projekt-schul-dashboard', i18n: 'ui.cap.01' },
+  { slug: 'projekt-bullet-journal', i18n: 'ui.cap.02' },
+  { slug: 'projekt-dein-spiel', i18n: 'ui.cap.03' },
 ];
 
 const BASE = '/tutorials/js-classic';
@@ -99,6 +99,18 @@ export const NAV = {
       ],
     },
     { id: 'final', url: `${BASE}/projekte/`, i18n: 'ui.nav.final' },
+    {
+      id: 'capstone',
+      url: `${BASE}/abschluss/`,
+      urlEn: `${BASE}/abschluss/index-en.html`,
+      i18n: 'ui.nav.capstone',
+      children: [
+        { id: 'capstone-overview', url: `${BASE}/abschluss/`, urlEn: `${BASE}/abschluss/index-en.html`, i18n: 'ui.nav.capstoneOverview' },
+        { id: 'cap-01', url: `${BASE}/abschluss/projekt-schul-dashboard.html`, urlEn: `${BASE}/abschluss/projekt-schul-dashboard-en.html`, nr: '01', i18n: 'ui.cap.01' },
+        { id: 'cap-02', url: `${BASE}/abschluss/projekt-bullet-journal.html`, urlEn: `${BASE}/abschluss/projekt-bullet-journal-en.html`, nr: '02', i18n: 'ui.cap.02' },
+        { id: 'cap-03', url: `${BASE}/abschluss/projekt-dein-spiel.html`, urlEn: `${BASE}/abschluss/projekt-dein-spiel-en.html`, nr: '03', i18n: 'ui.cap.03' },
+      ],
+    },
     {
       id: 'info',
       url: `${BASE}/info.html`,
