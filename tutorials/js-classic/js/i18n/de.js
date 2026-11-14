@@ -130,7 +130,7 @@ export default {
   'ui.demo.reset': 'Zurücksetzen',
 
   /* Chrome Markenstandard (P4R) */
-  'ui.brand.alt': 'JavaScript Classic',
+  'ui.brand.alt': 'JavaScript V2',
   'ui.footer.tagline': 'Mit KI denken. Menschlich handeln.',
   'ui.footer.colChapters': 'Kapitel',
   'ui.footer.colResources': 'Ressourcen',
