@@ -69,13 +69,16 @@ export const NAV = {
       id: 'chapters',
       url: `${BASE}/kapitel/01-einfuehrung-ausgabe.html`,
       i18n: 'ui.nav.chapters',
-      children: CHAPTERS.map((ch) => ({
+      children: [
+        { id: 'chapters-overview', url: `${BASE}/kapitel/`, urlEn: `${BASE}/kapitel/index-en.html`, i18n: 'ui.nav.labsOverview' },
+        ...CHAPTERS.map((ch) => ({
         id: `ch-${ch.nr}`,
         url: `${BASE}/kapitel/${ch.slug}.html`,
         urlEn: `${BASE}/kapitel/${ch.slugEn}.html`,
         nr: ch.nr,
         i18n: ch.i18n,
       })),
+      ],
     },
     // P9: Lexikon als 6. Top-Punkt (nach Kapitel, vor Übungen)
     { id: 'lexikon', url: `${BASE}/lexikon.html`, i18n: 'ui.nav.lexikon' },
