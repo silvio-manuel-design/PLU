@@ -585,8 +585,8 @@ function renderFooter() {
   const ulChapters = el('ul', 'jsc-footer__list');
   // P9R1: schlanke Lernen-Spalte (4 Einträge — die 12er-Liste lebt in Dropdown/Mobile/Home)
   const allChaptersUrl = getLanguage() === 'en'
-    ? '/tutorials/js-classic/index-en.html#chapters'
-    : '/tutorials/js-classic/#kapitel';
+    ? '/tutorials/js-classic/kapitel/index-en.html'
+    : '/tutorials/js-classic/kapitel/';
   ulChapters.append(
     footerLink(allChaptersUrl, t('ui.footer.allChapters')),
     footerLink(chapterLink(NAV.chaptersMeta[0]), `01. ${t('ui.ch.01')}`),
