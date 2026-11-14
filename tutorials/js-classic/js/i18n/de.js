@@ -43,6 +43,7 @@ export default {
   'ui.lcard.chapter': 'Kapitel %s',
   'ui.lcard.meta': 'ca. %s Min · mit KI · Abgabe per GitHub',
   'ui.lcard.req': '%d von %d Anforderungen',
+  'ui.lcard.reqTotal': '%d Anforderungen',
   'ui.lcard.done': 'Lab erledigt',
   'ui.nav.worksheets': 'Arbeitsblätter',
   /* P9: Lexikon + GitHub-Seite */
