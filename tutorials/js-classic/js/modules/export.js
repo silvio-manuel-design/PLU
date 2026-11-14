@@ -54,7 +54,7 @@ function readChapter(section) {
 function buildText(chapter, opts) {
   const lang = getLanguage();
   const lines = [];
-  lines.push('# PLU JavaScript Classic — ' + (lang === 'de' ? 'Meine Antworten' : 'My answers'));
+  lines.push('# PLU JavaScript V2 — ' + (lang === 'de' ? 'Meine Antworten' : 'My answers'));
   lines.push(`${lang === 'de' ? 'Kapitel' : 'Chapter'} ${opts.nr}: ${chapter.title}`);
   lines.push(`${lang === 'de' ? 'Exportiert am' : 'Exported on'}: ${stamp()}`);
   lines.push('');

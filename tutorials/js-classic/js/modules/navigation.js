@@ -377,8 +377,8 @@ function renderHeader(currentPath) {
   logo.height = 32;
   logo.className = 'jsc-header__logo';
   const wordmark = el('span', 'jsc-header__wordmark');
-  wordmark.append(document.createTextNode('Java'));
-  wordmark.append(el('span', 'jsc-header__brand-accent', 'Script'));
+  wordmark.append(document.createTextNode('JavaScript '));
+  wordmark.append(el('span', 'jsc-header__brand-accent', 'V2'));
   brand.append(logo, wordmark);
 
   const nav = el('nav', 'jsc-nav');
@@ -556,7 +556,7 @@ function renderFooter() {
   logoImg.height = 40;
   const logoText = el('span', 'jsc-footer__logo-text');
   logoText.append(
-    el('span', 'jsc-footer__logo-title', 'JavaScript Classic'),
+    el('span', 'jsc-footer__logo-title', 'JavaScript V2'),
     el('span', 'jsc-footer__logo-subtitle', t('ui.footer.logoSub'))
   );
   logoWrap.append(logoImg, logoText);

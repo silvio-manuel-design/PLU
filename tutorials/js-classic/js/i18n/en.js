@@ -130,7 +130,7 @@ export default {
   'ui.demo.reset': 'Reset',
 
   /* Chrome brand standard (P4R) */
-  'ui.brand.alt': 'JavaScript Classic',
+  'ui.brand.alt': 'JavaScript V2',
   'ui.footer.tagline': 'Think with AI. Act human.',
   'ui.footer.colChapters': 'Chapters',
   'ui.footer.colResources': 'Resources',
