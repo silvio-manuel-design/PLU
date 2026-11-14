@@ -160,10 +160,12 @@ export default {
   'ui.menu.groupFinal': 'Abschluss',
   'ui.menu.groupPlu': 'PLU',
 
-  /* Abschlussprojekte (Eigennamen, im mobilen Menü) */
-  'ui.proj.todo': 'Todo-Liste',
-  'ui.proj.noten': 'Notenverwaltung',
-  'ui.proj.quiz': 'Quiz',
+  /* Abschlussprojekt (Eigennamen, im mobilen Menü) */
+  'ui.nav.capstone': 'Abschluss',
+  'ui.nav.capstoneOverview': 'Übersicht',
+  'ui.cap.01': 'Schul-Dashboard',
+  'ui.cap.02': 'Bullet-Journal',
+  'ui.cap.03': 'Dein Spiel',
 
   /* Kapitel 11/12 — Platzhalter (B13, P4R4) */
   'ui.ch.11': 'Formulare & Validierung',

@@ -160,10 +160,12 @@ export default {
   'ui.menu.groupFinal': 'Final Projects',
   'ui.menu.groupPlu': 'PLU',
 
-  /* Capstone projects (proper names, used in the mobile menu) */
-  'ui.proj.todo': 'To-do List',
-  'ui.proj.noten': 'Grade Manager',
-  'ui.proj.quiz': 'Quiz',
+  /* Final project (proper names, mobile menu) */
+  'ui.nav.capstone': 'Final',
+  'ui.nav.capstoneOverview': 'Overview',
+  'ui.cap.01': 'School Dashboard',
+  'ui.cap.02': 'Bullet Journal',
+  'ui.cap.03': 'Your Game',
 
   /* Chapters 11/12 — placeholders (B13, P4R4) */
   'ui.ch.11': 'Forms & Validation',
