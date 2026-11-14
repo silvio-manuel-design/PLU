@@ -45,10 +45,10 @@ function ringSvg(pct) {
   return svg;
 }
 
-function labState(nr) {
+function labState(nr, total) {
   const saved = get(`jsc-lab-${nr}-req`, []);
   const done = Array.isArray(saved) ? saved.filter(Boolean).length : 0;
-  return { done, total: Array.isArray(saved) ? saved.length : 0 };
+  return { done, total };
 }
 
 function media(img) {
@@ -103,7 +103,7 @@ function chapterCard(ch) {
 }
 
 function labCard(lab) {
-  const st = labState(lab.nr);
+  const st = labState(lab.nr, lab.req);
   const pct = st.total ? Math.round((st.done / st.total) * 100) : 0;
   const { li, link, body, toprow } = shell(lab.nr, `m${lab.nr}`, lab.img);
   li.dataset.lab = lab.nr;
@@ -126,7 +126,9 @@ function labCard(lab) {
   status.className = 'jsc-lcard__status';
   status.textContent = complete
     ? t('ui.lcard.done')
-    : t('ui.lcard.req').replace('%d', String(st.done)).replace('%d', String(st.total));
+    : st.done > 0
+      ? t('ui.lcard.req').replace('%d', String(st.done)).replace('%d', String(st.total))
+      : t('ui.lcard.reqTotal').replace('%d', String(st.total));
   body.append(eyebrow, title, meta, status);
   return li;
 }
