@@ -45,7 +45,7 @@ export default {
   'ui.lcard.req': '%d of %d requirements',
   'ui.lcard.reqTotal': '%d requirements',
   'ui.lcard.done': 'Lab done',
-  'ui.nav.worksheets': 'Worksheets',
+  'ui.nav.worksheets': 'Learning Materials',
   /* P9: glossary + GitHub page */
   'ui.nav.lexikon': 'Glossary',
   'ui.nav.github': 'GitHub & Submission',
@@ -137,7 +137,7 @@ export default {
   'ui.footer.colLegal': 'Legal',
   'ui.footer.allChapters': 'Chapters',
   'ui.footer.exercises': 'Labs',
-  'ui.footer.worksheets': 'Worksheets',
+  'ui.footer.worksheets': 'Learning Materials',
   'ui.footer.kiBasics': 'AI Basics',
   'ui.footer.pluHub': 'PLU Hub',
   'ui.footer.imprint': 'Imprint',
