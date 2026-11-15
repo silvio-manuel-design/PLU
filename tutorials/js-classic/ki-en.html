@@ -6,7 +6,7 @@
     <title>AI Basics · JavaScript V2 (PLU)</title>
     <meta
       name="description"
-      content="AI basics: ask smarter, learn better — the three rules, good and bad prompts, spotting AI mistakes and honest AI use at school."
+      content="AI basics: ask smarter, learn better — the three rules, the five fundamentals of prompting, spotting AI mistakes and honest AI use at school."
     />
     <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/ki-en.html" />
     <link rel="alternate" hreflang="de" href="ki-grundlagen.html" />
@@ -16,8 +16,9 @@
     <meta property="og:title" content="AI Basics · JavaScript V2" />
     <meta
       property="og:description"
-      content="Ask smarter, learn better: AI as a tool — not a shortcut."
+      content="Ask smarter, learn better: the three rules, five prompting fundamentals and honest AI use at school."
     />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.jpg" />
     <meta property="og:locale" content="en_US" />
     <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
 
@@ -28,125 +29,220 @@
     <div data-component="jsc-site-chrome"></div>
 
     <main id="main">
-      <section class="jsc-hero--slim jsc-container" aria-labelledby="page-title">
-        <span class="jsc-hero__icon ph ph-robot" aria-hidden="true"></span>
-        <h1 id="page-title" class="jsc-hero__title">AI Basics</h1>
-        <p class="jsc-hero__sub">Ask smarter, learn better: AI as a tool — not a shortcut.</p>
-      </section>
-
-      <nav class="jsc-jumplist jsc-container" aria-label="Sections of this page">
-        <a href="#regeln">The three rules</a>
-        <a href="#prompts">Good &amp; bad prompts</a>
-        <a href="#fehler">Spotting AI mistakes</a>
-        <a href="#schule">AI &amp; school</a>
-      </nav>
-      <div class="jsc-info-main jsc-container">
-
-      <section class="jsc-understand jsc-container" id="getting-started" aria-labelledby="getting-started-title">
-        <h2 id="getting-started-title" class="jsc-understand__eyebrow">
-          <i class="ph ph-lightbulb" aria-hidden="true"></i>
-          <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
-        </h2>
-        <div class="jsc-understand__body">
-          <p>An AI is like a very well-read classmate: it knows many answers — but not always the right one. It explains patiently. And it errs confidently.</p>
-          <p>In this course you work WITH the AI: in the prompt training at the end of every chapter. The rules for it are here.</p>
+      <section class="jsc-hero jsc-chapter-hero jsc-hero--sub-narrow" aria-labelledby="page-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Two calm orbital light cores — a larger golden one and a smaller teal one — circling each other, connected by a fine stream of drifting particles"
+            />
+          </picture>
         </div>
-      </section>
-      <div class="jsc-terms jsc-container">
-        <p class="jsc-terms__eyebrow">
-          <i class="ph ph-book-open" aria-hidden="true"></i>
-          <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
-        </p>
-        <div class="jsc-terms__grid">
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Prompt <span class="jsc-term-card__word-en">/ Prompt</span></p>
-            <p class="jsc-term-card__def">Your request to the AI.</p>
-            <p class="jsc-term-card__code"><code>„Explain loops with an everyday example"</code></p>
-          </div>
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Hallucination <span class="jsc-term-card__word-en">/ Halluzination</span></p>
-            <p class="jsc-term-card__def">An answer that sounds right — but is wrong.</p>
-            <p class="jsc-term-card__life"><strong>Everyday:</strong> like a friend who made something up.</p>
-            <p class="jsc-term-card__code"><code>→ check it!</code></p>
-          </div>
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Fact check <span class="jsc-term-card__word-en">/ Quellenprüfung</span></p>
-            <p class="jsc-term-card__def">Verify every AI answer — in the course or on MDN.</p>
-            <p class="jsc-term-card__code"><code>MDN</code></p>
-          </div>
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Prompt training <span class="jsc-term-card__word-en">/ Prompt-Training</span></p>
-            <p class="jsc-term-card__def">Exercise at chapter's end: judge AI answers.</p>
-            <p class="jsc-term-card__code"><code>→ chapters</code></p>
-          </div>
-        </div>
-      </div>
-
-      <section class="jsc-container jsc-band" id="regeln" aria-labelledby="regeln-title">
-        <h2 id="regeln-title" class="jsc-step__heading">The three rules</h2>
-        <div class="jsc-mini-grid">
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__nr">1</p>
-            <p class="jsc-mini-card__title">Understand it yourself first, then ask the AI</p>
-            <p class="jsc-mini-card__text">If you know nothing, you can't judge the answer. Read first, ask second.</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__nr">2</p>
-            <p class="jsc-mini-card__title">Check every AI answer</p>
-            <p class="jsc-mini-card__text">In the course, in the playground or on MDN. Confidently wrong is the most common error type.</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__nr">3</p>
-            <p class="jsc-mini-card__title">Rewrite it in your own words</p>
-            <p class="jsc-mini-card__text">Rewriting AI answers IS the learning. If you copy, you learn nothing.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="jsc-container jsc-band--alt" id="prompts" aria-labelledby="prompts-title">
-        <h2 id="prompts-title" class="jsc-step__heading">Good prompts, bad prompts</h2>
-        <div class="jsc-mini-grid">
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__title">Bad: „do the task"</p>
-            <p class="jsc-mini-card__text">No goal, no context — the answer will be arbitrary.</p>
-            <p class="jsc-mini-card__meta">Good: „Show me an example of a for loop with comments, then explain line 3"</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__title">Bad: „explain code"</p>
-            <p class="jsc-mini-card__text">Which code? Which level? The AI has to guess.</p>
-            <p class="jsc-mini-card__meta">Good: „Explain this function line by line, as if I were a beginner: [paste code]"</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__title">Bad: „it doesn't work"</p>
-            <p class="jsc-mini-card__text">Without error message and code, nobody can help.</p>
-            <p class="jsc-mini-card__meta">Good: „This code throws ‚x is not defined' — line 4. What's the cause? [paste code + error]"</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="jsc-container jsc-band" id="fehler" aria-labelledby="fehler-title">
-        <h2 id="fehler-title" class="jsc-step__heading">How to spot AI mistakes</h2>
-        <div class="jsc-mini-card">
-          <p class="jsc-mini-card__text">
-            <strong>Warning signs:</strong> overly general answers, outdated syntax, invented
-            methods, missing brackets. <strong>Antidote:</strong> test in the playground and
-            cross-check on MDN — two minutes that clear up every self-doubt.
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">PANTAM LEARNING UNIVERSE</p>
+          <h1 id="page-title" class="jsc-hero__title">AI Basics</h1>
+          <p class="jsc-hero__sub">Ask smarter, learn better: AI as a tool — not a shortcut. The three rules, the five fundamentals of prompting and honest use at school.</p>
+          <p class="jsc-hero__ctas">
+            <a class="jsc-button jsc-button--outline" href="/tutorials/pages/ki-charter.html">Read the platform's AI charter</a>
           </p>
         </div>
       </section>
 
-      <section class="jsc-container jsc-band--alt" id="schule" aria-labelledby="schule-title">
-        <h2 id="schule-title" class="jsc-step__heading">AI &amp; school</h2>
-        <div class="jsc-mini-card">
-          <p class="jsc-mini-card__text">
-            <strong>Honesty in homework:</strong> the reflections in this course have cheat
-            protection — platitudes don't count. <strong>AI as a learning partner is
-            allowed</strong> (ask, check, have things explained) — <strong>as a replacement
-            it is not</strong> (submitting without understanding). Your teacher's rule always
-            applies.
-          </p>
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-understand jsc-container" id="getting-started" aria-labelledby="getting-started-title">
+            <h2 id="getting-started-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">FIRST, LET'S UNDERSTAND</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>An AI is like a very well-read classmate: it knows many answers — but not always the right one. It explains patiently. And it errs confidently.</p>
+              <p>In this course you work WITH the AI: in the prompt training at the end of every chapter. The rules for it are here.</p>
+            </div>
+          </section>
+          <div class="jsc-terms jsc-container" id="words">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WORDS YOU'RE LEARNING NOW</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Prompt <span class="jsc-term-card__word-en">/ Prompt</span></p>
+                <p class="jsc-term-card__def">Your request to the AI.</p>
+                <p class="jsc-term-card__code"><code>„Explain loops with an everyday example"</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Hallucination <span class="jsc-term-card__word-en">/ Halluzination</span></p>
+                <p class="jsc-term-card__def">An answer that sounds right — but is wrong.</p>
+                <p class="jsc-term-card__life"><strong>Everyday:</strong> like a friend who made something up.</p>
+                <p class="jsc-term-card__code"><code>→ check it!</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Fact check <span class="jsc-term-card__word-en">/ Quellenprüfung</span></p>
+                <p class="jsc-term-card__def">Verify every AI answer — in the course or on MDN.</p>
+                <p class="jsc-term-card__code"><code>MDN</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Prompt training <span class="jsc-term-card__word-en">/ Prompt-Training</span></p>
+                <p class="jsc-term-card__def">Exercise at chapter's end: judge AI answers.</p>
+                <p class="jsc-term-card__code"><code>→ chapters</code></p>
+              </div>
+            </div>
+            <p>You can dig deeper into prompt and hallucination in the <a href="/tutorials/pages/lexikon.html">PLU lexicon</a> — 74 AI terms with everyday examples.</p>
+          </div>
+
+          <section class="jsc-container jsc-band" id="regeln" aria-labelledby="regeln-title">
+            <h2 id="regeln-title" class="jsc-step__heading">The three rules</h2>
+            <div class="jsc-mini-grid">
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__nr">1</p>
+                <p class="jsc-mini-card__title">Understand it yourself first, then ask the AI</p>
+                <p class="jsc-mini-card__text">If you know nothing, you can't judge the answer. Read first, ask second.</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__nr">2</p>
+                <p class="jsc-mini-card__title">Check every AI answer</p>
+                <p class="jsc-mini-card__text">In the course, in the playground or on MDN. Confidently wrong is the most common error type.</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__nr">3</p>
+                <p class="jsc-mini-card__title">Rewrite it in your own words</p>
+                <p class="jsc-mini-card__text">Rewriting AI answers IS the learning. If you copy, you learn nothing.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="grundregeln" aria-labelledby="grundregeln-title">
+            <h2 id="grundregeln-title" class="jsc-step__heading">The five fundamentals of prompting</h2>
+            <p>Five moves that turn an arbitrary answer into a useful one. They come in this order — from role to system prompt.</p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Role</p>
+                  <p class="jsc-stepper__text">Give the AI a role — it plays it seriously. „You are my patient JavaScript coach for beginners. Explain to me …" — one clear role sets level, tone and expectation in a single sentence.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Context</p>
+                  <p class="jsc-stepper__text">Provide everything the AI needs: your level, the goal, the code, the error message. The more context, the better the answer. „It doesn't work" helps no one — the full error text does.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Iteration</p>
+                  <p class="jsc-stepper__text">The first prompt is rarely the best. Asking follow-ups is not a weakness: „Shorter." / „More precisely." / „Show me a counterexample." You negotiate your way to a good answer, step by step.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Chain of Thought</p>
+                  <p class="jsc-stepper__text">Ask for visible thinking: „Explain your reasoning step by step before you give the answer." That way you see where the AI takes a wrong turn — and you learn more than from the answer itself.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">System prompts</p>
+                  <p class="jsc-stepper__text">Set ground rules for the whole chat: „Always answer with an everyday example." / „Check your answer yourself first." Whatever stands as a system prompt, you don't have to rewrite in every prompt.</p>
+                </div>
+              </li>
+            </ol>
+            <p>Three of these terms are ready to read in the <a href="/tutorials/pages/lexikon.html">PLU lexicon</a>: Chain of Thought, System Prompt and Prompt.</p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="prompts" aria-labelledby="prompts-title">
+            <h2 id="prompts-title" class="jsc-step__heading">Good prompts, bad prompts</h2>
+            <div class="jsc-mini-grid">
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__title">Bad: „do the task"</p>
+                <p class="jsc-mini-card__text">No goal, no context — the answer will be arbitrary.</p>
+                <p class="jsc-mini-card__meta">Good: „Show me an example of a for loop with comments, then explain line 3"</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__title">Bad: „explain code"</p>
+                <p class="jsc-mini-card__text">Which code? Which level? The AI has to guess.</p>
+                <p class="jsc-mini-card__meta">Good: „Explain this function line by line, as if I were a beginner: [paste code]"</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__title">Bad: „it doesn't work"</p>
+                <p class="jsc-mini-card__text">Without error message and code, nobody can help.</p>
+                <p class="jsc-mini-card__meta">Good: „This code throws ‚x is not defined' — line 4. What's the cause? [paste code + error]"</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="fehler" aria-labelledby="fehler-title">
+            <h2 id="fehler-title" class="jsc-step__heading">How to spot AI mistakes</h2>
+            <div class="jsc-mini-card">
+              <p class="jsc-mini-card__text">
+                <strong>Warning signs:</strong> overly general answers, outdated syntax, invented
+                methods, missing brackets. <strong>Antidote:</strong> test in the playground and
+                cross-check on MDN — two minutes that clear up every self-doubt.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schule" aria-labelledby="schule-title">
+            <h2 id="schule-title" class="jsc-step__heading">AI &amp; school</h2>
+            <div class="jsc-mini-card">
+              <p class="jsc-mini-card__text"><strong>Homework honesty:</strong> the reflections in this course have cheat protection — platitudes don't count. The basic rule is simple:</p>
+              <ul class="jsc-leadlist">
+                <li><strong>Allowed:</strong> AI as a learning partner — ask, have things explained, have answers checked.</li>
+                <li><strong>Not allowed:</strong> AI as a replacement — submitting something you haven't understood.</li>
+                <li><strong>Declare:</strong> with every submission, two or three sentences: „What did I work with, where did the AI help?" That's not a punishment — it shows that you think.</li>
+              </ul>
+              <p class="jsc-mini-card__text">Your teacher's rule always applies. And the responsibility for the result lies with you: the AI doesn't get a grade — you do.</p>
+            </div>
+          </section>
         </div>
-      </section>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#getting-started">Getting started</a></li>
+            <li><a href="#words">Words</a></li>
+            <li><a href="#regeln">The three rules</a></li>
+            <li><a href="#grundregeln">The five fundamentals</a></li>
+            <li><a href="#prompts">Good &amp; bad prompts</a></li>
+            <li><a href="#fehler">How to spot AI mistakes</a></li>
+            <li><a href="#schule">AI &amp; school</a></li>
+          </ul>
+        </aside>
       </div>
     </main>
   </body>

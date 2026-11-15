@@ -6,7 +6,7 @@
     <title>KI-Grundlagen · JavaScript V2 (PLU)</title>
     <meta
       name="description"
-      content="KI-Grundlagen: Klüger fragen, besser lernen — die drei Regeln, gute und schlechte Prompts, KI-Fehler erkennen und der ehrliche Umgang in der Schule."
+      content="KI-Grundlagen: Klüger fragen, besser lernen — die drei Regeln, die fünf Grundregeln des Promptings, KI-Fehler erkennen und der ehrliche Umgang mit KI in der Schule."
     />
     <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic/ki-grundlagen.html" />
     <link rel="alternate" hreflang="de" href="ki-grundlagen.html" />
@@ -16,8 +16,9 @@
     <meta property="og:title" content="KI-Grundlagen · JavaScript V2" />
     <meta
       property="og:description"
-      content="Klüger fragen, besser lernen: KI als Werkzeug — nicht als Abkürzung."
+      content="Klüger fragen, besser lernen: die drei Regeln, fünf Grundregeln des Promptings und der ehrliche Umgang mit KI in der Schule."
     />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.jpg" />
     <meta property="og:locale" content="de_DE" />
     <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic/assets/favicon.svg">
 
@@ -28,125 +29,221 @@
     <div data-component="jsc-site-chrome"></div>
 
     <main id="main">
-      <section class="jsc-hero--slim jsc-container" aria-labelledby="page-title">
-        <span class="jsc-hero__icon ph ph-robot" aria-hidden="true"></span>
-        <h1 id="page-title" class="jsc-hero__title">KI-Grundlagen</h1>
-        <p class="jsc-hero__sub">Klüger fragen, besser lernen: KI als Werkzeug — nicht als Abkürzung.</p>
-      </section>
-
-      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte der Seite">
-        <a href="#regeln">Die drei Regeln</a>
-        <a href="#prompts">Gute &amp; schlechte Prompts</a>
-        <a href="#fehler">KI-Fehler erkennen</a>
-        <a href="#schule">KI &amp; Schule</a>
-      </nav>
-      <div class="jsc-info-main jsc-container">
-
-      <section class="jsc-understand jsc-container" id="einstieg" aria-labelledby="einstieg-title">
-        <h2 id="einstieg-title" class="jsc-understand__eyebrow">
-          <i class="ph ph-lightbulb" aria-hidden="true"></i>
-          <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
-        </h2>
-        <div class="jsc-understand__body">
-          <p>Eine KI ist wie ein sehr belesener Mitschüler: Sie kennt viele Antworten — aber nicht immer die richtige. Sie erklärt geduldig. Sie irrt sich selbstbewusst.</p>
-          <p>In diesem Kurs arbeitest du MIT der KI: im Prompt-Training am Ende jedes Kapitels. Die Regeln dafür stehen hier.</p>
+      <section class="jsc-hero jsc-chapter-hero jsc-hero--sub-narrow" aria-labelledby="page-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-768.avif   768w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-768.webp   768w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-768.jpg   768w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic/assets/img/chapters/info/jsc-ki-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Zwei ruhige orbitale Lichtkerne — ein größerer goldener und ein kleinerer teal-farbener — kreisen einander und sind durch einen feinen Strom aus Partikeln verbunden"
+            />
+          </picture>
         </div>
-      </section>
-      <div class="jsc-terms jsc-container">
-        <p class="jsc-terms__eyebrow">
-          <i class="ph ph-book-open" aria-hidden="true"></i>
-          <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
-        </p>
-        <div class="jsc-terms__grid">
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Prompt <span class="jsc-term-card__word-en">/ prompt</span></p>
-            <p class="jsc-term-card__def">Deine Anfrage an die KI.</p>
-            <p class="jsc-term-card__code"><code>„Erkläre mir Schleifen mit einem Alltagsbeispiel"</code></p>
-          </div>
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Halluzination <span class="jsc-term-card__word-en">/ hallucination</span></p>
-            <p class="jsc-term-card__def">Eine Antwort, die klingt richtig — aber falsch ist.</p>
-            <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein Freund, der etwas erfunden hat.</p>
-            <p class="jsc-term-card__code"><code>→ prüfen!</code></p>
-          </div>
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Quellenprüfung <span class="jsc-term-card__word-en">/ fact check</span></p>
-            <p class="jsc-term-card__def">Jede KI-Antwort gegenprüfen — im Kurs oder bei MDN.</p>
-            <p class="jsc-term-card__code"><code>MDN</code></p>
-          </div>
-          <div class="jsc-term-card">
-            <p class="jsc-term-card__word">Prompt-Training <span class="jsc-term-card__word-en">/ prompt training</span></p>
-            <p class="jsc-term-card__def">Übung am Kapitelende: KI-Antworten bewerten.</p>
-            <p class="jsc-term-card__code"><code>→ Kapitel</code></p>
-          </div>
-        </div>
-      </div>
-
-      <section class="jsc-container jsc-band" id="regeln" aria-labelledby="regeln-title">
-        <h2 id="regeln-title" class="jsc-step__heading">Die drei Regeln</h2>
-        <div class="jsc-mini-grid">
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__nr">1</p>
-            <p class="jsc-mini-card__title">Erst selbst verstehen, dann KI fragen</p>
-            <p class="jsc-mini-card__text">Wer nichts weiß, kann die Antwort nicht beurteilen. Erst lesen, dann fragen.</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__nr">2</p>
-            <p class="jsc-mini-card__title">Jede KI-Antwort prüfen</p>
-            <p class="jsc-mini-card__text">Im Kurs, im Playground oder bei MDN. Selbstbewusst falsch ist die häufigste Fehlerart.</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__nr">3</p>
-            <p class="jsc-mini-card__title">Umschreiben in eigene Worte</p>
-            <p class="jsc-mini-card__text">KI-Antworten umschreiben — das IST das Lernen. Wer kopiert, lernt nichts.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="jsc-container jsc-band--alt" id="prompts" aria-labelledby="prompts-title">
-        <h2 id="prompts-title" class="jsc-step__heading">Gute Prompts, schlechte Prompts</h2>
-        <div class="jsc-mini-grid">
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__title">Schlecht: „mach die Aufgabe"</p>
-            <p class="jsc-mini-card__text">Kein Ziel, kein Kontext — die Antwort wird beliebig.</p>
-            <p class="jsc-mini-card__meta">Gut: „Zeig mir ein Beispiel für for-Schleifen mit Kommentaren, dann erkläre Zeile 3"</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__title">Schlecht: „erklär Code"</p>
-            <p class="jsc-mini-card__text">Welcher Code? Welches Level? Die KI rät.</p>
-            <p class="jsc-mini-card__meta">Gut: „Erkläre mir diese Funktion Zeile für Zeile, als wäre ich Anfänger: [Code einfügen]"</p>
-          </div>
-          <div class="jsc-mini-card">
-            <p class="jsc-mini-card__title">Schlecht: „geht nicht"</p>
-            <p class="jsc-mini-card__text">Ohne Fehlermeldung und Code hilft dir niemand.</p>
-            <p class="jsc-mini-card__meta">Gut: „Dieser Code wirft ‚x is not defined' — Zeile 4. Was ist die Ursache? [Code + Fehler einfügen]"</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="jsc-container jsc-band" id="fehler" aria-labelledby="fehler-title">
-        <h2 id="fehler-title" class="jsc-step__heading">Woran du KI-Fehler erkennst</h2>
-        <div class="jsc-mini-card">
-          <p class="jsc-mini-card__text">
-            <strong>Warnsignale:</strong> zu allgemeine Antworten, veraltete Syntax,
-            erfundene Methoden, fehlende Klammern. <strong>Gegenmittel:</strong> im
-            Playground testen und bei MDN gegenprüfen — zwei Minuten, die jeden
-            Selbstzweifel klären.
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">PANTAM LEARNING UNIVERSE</p>
+          <h1 id="page-title" class="jsc-hero__title">KI-Grundlagen</h1>
+          <p class="jsc-hero__sub">Klüger fragen, besser lernen: KI als Werkzeug — nicht als Abkürzung. Die drei Regeln, die fünf Grundregeln des Promptings und der ehrliche Umgang in der Schule.</p>
+          <p class="jsc-hero__ctas">
+            <a class="jsc-button jsc-button--outline" href="/tutorials/pages/ki-charter.html">Zum KI-Charter der Plattform</a>
           </p>
         </div>
       </section>
 
-      <section class="jsc-container jsc-band--alt" id="schule" aria-labelledby="schule-title">
-        <h2 id="schule-title" class="jsc-step__heading">KI &amp; Schule</h2>
-        <div class="jsc-mini-card">
-          <p class="jsc-mini-card__text">
-            <strong>Hausübung-Ehrlichkeit:</strong> Die Reflexionen im Kurs haben einen
-            Cheat-Schutz — Floskeln zählen nicht. <strong>KI als Lernpartner ist erlaubt</strong>
-            (fragen, prüfen, erklären lassen) — <strong>als Ersatz nicht</strong> (abgeben,
-            ohne es verstanden zu haben). Die Regel deiner Lehrkraft gilt immer.
-          </p>
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-understand jsc-container" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Eine KI ist wie ein sehr belesener Mitschüler: Sie kennt viele Antworten — aber nicht immer die richtige. Sie erklärt geduldig. Sie irrt sich selbstbewusst.</p>
+              <p>In diesem Kurs arbeitest du MIT der KI: im Prompt-Training am Ende jedes Kapitels. Die Regeln dafür stehen hier.</p>
+            </div>
+          </section>
+          <div class="jsc-terms jsc-container" id="begriffe">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Prompt <span class="jsc-term-card__word-en">/ prompt</span></p>
+                <p class="jsc-term-card__def">Deine Anfrage an die KI.</p>
+                <p class="jsc-term-card__code"><code>„Erkläre mir Schleifen mit einem Alltagsbeispiel"</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Halluzination <span class="jsc-term-card__word-en">/ hallucination</span></p>
+                <p class="jsc-term-card__def">Eine Antwort, die klingt richtig — aber falsch ist.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein Freund, der etwas erfunden hat.</p>
+                <p class="jsc-term-card__code"><code>→ prüfen!</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Quellenprüfung <span class="jsc-term-card__word-en">/ fact check</span></p>
+                <p class="jsc-term-card__def">Jede KI-Antwort gegenprüfen — im Kurs oder bei MDN.</p>
+                <p class="jsc-term-card__code"><code>MDN</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Prompt-Training <span class="jsc-term-card__word-en">/ prompt training</span></p>
+                <p class="jsc-term-card__def">Übung am Kapitelende: KI-Antworten bewerten.</p>
+                <p class="jsc-term-card__code"><code>→ Kapitel</code></p>
+              </div>
+            </div>
+            <p>Prompt und Halluzination kannst du im <a href="/tutorials/pages/lexikon.html">PLU-Lexikon</a> vertiefen — dort stehen 74 KI-Begriffe mit Alltagsbeispielen.</p>
+          </div>
+
+          <section class="jsc-container jsc-band" id="regeln" aria-labelledby="regeln-title">
+            <h2 id="regeln-title" class="jsc-step__heading">Die drei Regeln</h2>
+            <div class="jsc-mini-grid">
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__nr">1</p>
+                <p class="jsc-mini-card__title">Erst selbst verstehen, dann KI fragen</p>
+                <p class="jsc-mini-card__text">Wer nichts weiß, kann die Antwort nicht beurteilen. Erst lesen, dann fragen.</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__nr">2</p>
+                <p class="jsc-mini-card__title">Jede KI-Antwort prüfen</p>
+                <p class="jsc-mini-card__text">Im Kurs, im Playground oder bei MDN. Selbstbewusst falsch ist die häufigste Fehlerart.</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__nr">3</p>
+                <p class="jsc-mini-card__title">Umschreiben in eigene Worte</p>
+                <p class="jsc-mini-card__text">KI-Antworten umschreiben — das IST das Lernen. Wer kopiert, lernt nichts.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="grundregeln" aria-labelledby="grundregeln-title">
+            <h2 id="grundregeln-title" class="jsc-step__heading">Die 5 Grundregeln des Promptings</h2>
+            <p>Fünf Handgriffe, mit denen aus einer beliebigen Antwort eine brauchbare wird. Sie stehen in dieser Reihenfolge — von der Rolle bis zum System Prompt.</p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Rolle</p>
+                  <p class="jsc-stepper__text">Gib der KI eine Rolle — sie spielt sie ernsthaft. „Du bist mein geduldiger JavaScript-Coach für Anfängerinnen und Anfänger. Erkläre mir …" — eine klare Rolle setzt Level, Ton und Erwartung in einem einzigen Satz.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Kontext</p>
+                  <p class="jsc-stepper__text">Liefere alles, was die KI braucht: dein Level, das Ziel, der Code, die Fehlermeldung. Je mehr Kontext, desto treffsicher die Antwort. „Geht nicht" hilft niemandem — der volle Fehlertext schon.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Iteration</p>
+                  <p class="jsc-stepper__text">Der erste Prompt ist selten der beste. Nachfragen ist keine Schwäche: „Kürzer." / „Genauer." / „Zeig mir ein Gegenbeispiel." Du verhandelst dich Schritt für Schritt zur guten Antwort.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Chain of Thought</p>
+                  <p class="jsc-stepper__text">Bitte um sichtbares Denken: „Erkläre deine Überlegung Schritt für Schritt, bevor du die Antwort gibst." So siehst du, wo die KI falsch abbiegt — und lernst dabei mehr als von der Antwort selbst.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">System Prompts</p>
+                  <p class="jsc-stepper__text">Lege Grundregeln fest, die für den ganzen Chat gelten: „Antworte immer mit einem Alltagsbeispiel." / „Prüfe deine Antwort vorher selbst." Was einmal als System Prompt steht, muss du nicht in jeden Prompt neu schreiben.</p>
+                </div>
+              </li>
+            </ol>
+            <p>Drei dieser Begriffe stehen im <a href="/tutorials/pages/lexikon.html">PLU-Lexikon</a> zum Nachlesen bereit: Chain of Thought, System Prompt und Prompt.</p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="prompts" aria-labelledby="prompts-title">
+            <h2 id="prompts-title" class="jsc-step__heading">Gute Prompts, schlechte Prompts</h2>
+            <div class="jsc-mini-grid">
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__title">Schlecht: „mach die Aufgabe"</p>
+                <p class="jsc-mini-card__text">Kein Ziel, kein Kontext — die Antwort wird beliebig.</p>
+                <p class="jsc-mini-card__meta">Gut: „Zeig mir ein Beispiel für for-Schleifen mit Kommentaren, dann erkläre Zeile 3"</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__title">Schlecht: „erklär Code"</p>
+                <p class="jsc-mini-card__text">Welcher Code? Welches Level? Die KI rät.</p>
+                <p class="jsc-mini-card__meta">Gut: „Erkläre mir diese Funktion Zeile für Zeile, als wäre ich Anfänger: [Code einfügen]"</p>
+              </div>
+              <div class="jsc-mini-card">
+                <p class="jsc-mini-card__title">Schlecht: „geht nicht"</p>
+                <p class="jsc-mini-card__text">Ohne Fehlermeldung und Code hilft dir niemand.</p>
+                <p class="jsc-mini-card__meta">Gut: „Dieser Code wirft ‚x is not defined' — Zeile 4. Was ist die Ursache? [Code + Fehler einfügen]"</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="fehler" aria-labelledby="fehler-title">
+            <h2 id="fehler-title" class="jsc-step__heading">Woran du KI-Fehler erkennst</h2>
+            <div class="jsc-mini-card">
+              <p class="jsc-mini-card__text">
+                <strong>Warnsignale:</strong> zu allgemeine Antworten, veraltete Syntax,
+                erfundene Methoden, fehlende Klammern. <strong>Gegenmittel:</strong> im
+                Playground testen und bei MDN gegenprüfen — zwei Minuten, die jeden
+                Selbstzweifel klären.
+              </p>
+            </div>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schule" aria-labelledby="schule-title">
+            <h2 id="schule-title" class="jsc-step__heading">KI &amp; Schule</h2>
+            <div class="jsc-mini-card">
+              <p class="jsc-mini-card__text"><strong>Hausübung-Ehrlichkeit:</strong> Die Reflexionen im Kurs haben einen Cheat-Schutz — Floskeln zählen nicht. Die Grundregel ist einfach:</p>
+              <ul class="jsc-leadlist">
+                <li><strong>Erlaubt:</strong> KI als Lernpartnerin — fragen, erklären lassen, Antworten prüfen lassen.</li>
+                <li><strong>Nicht erlaubt:</strong> KI als Ersatz — abgeben, ohne es verstanden zu haben.</li>
+                <li><strong>Deklariere:</strong> Bei jeder Abgabe zwei, drei Sätze: „Womit habe ich gearbeitet, wo hat die KI geholfen?" Das ist keine Strafe — es zeigt, dass du denkst.</li>
+              </ul>
+              <p class="jsc-mini-card__text">Die Regel deiner Lehrkraft gilt immer. Und die Verantwortung für das Ergebnis liegt bei dir: Die KI bekommt keine Note — du schon.</p>
+            </div>
+          </section>
         </div>
-      </section>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg">Einstieg</a></li>
+            <li><a href="#begriffe">Begriffe</a></li>
+            <li><a href="#regeln">Die drei Regeln</a></li>
+            <li><a href="#grundregeln">Die 5 Grundregeln</a></li>
+            <li><a href="#prompts">Gute &amp; schlechte Prompts</a></li>
+            <li><a href="#fehler">KI-Fehler erkennen</a></li>
+            <li><a href="#schule">KI &amp; Schule</a></li>
+          </ul>
+        </aside>
       </div>
     </main>
   </body>
