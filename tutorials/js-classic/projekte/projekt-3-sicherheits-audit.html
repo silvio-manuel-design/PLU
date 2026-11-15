@@ -66,7 +66,7 @@
         </div>
         <div class="jsc-hero__overlay" aria-hidden="true"></div>
         <div class="jsc-hero__content jsc-container">
-          <p class="jsc-hero__eyebrow">PROJEKT 3 VON 3</p>
+          <p class="jsc-hero__eyebrow">PROJEKT 3 VON 3 — ANWENDUNG IN DER PRAXIS</p>
           <h1 id="page-title" class="jsc-hero__title">Sicherheits-Audit</h1>
           <p class="jsc-hero__sub">Du bekommst unsicheren Code und findest die Lücken. Danach schließt du sie. Zeit: ca. 120 Min.</p>
         </div>
@@ -77,6 +77,7 @@
           <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
             <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
             <p>Die Aufgabenstellung unten enthält eine Seite mit vier Sicherheitslücken. Finde jede Lücke und beschreibe sie in zwei Sätzen. Danach schreibst du eine korrigierte Version. Dein Bericht und die Datei gehören beide in die Abgabe.</p>
+            <p>Lies den Code zweimal, bevor du anfängst — die Hälfte der Lücken sieht man erst beim zweiten Lesen.</p>
             <figure class="jsc-code-block" data-filename="gaestebuch-unsicher.html">
               <figcaption class="jsc-code-block__bar">
                 <span class="jsc-code-block__file">gaestebuch-unsicher.html</span>
@@ -101,15 +102,36 @@
             </p>
           </section>
 
-          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+                    <section class="jsc-container jsc-band--alt" id="mittel" aria-labelledby="mittel-title">
+            <h2 id="mittel-title" class="jsc-step__heading">Erlaubte Mittel</h2>
+            <p class="jsc-step__blocklabel">Erlaubt</p>
+            <ul class="jsc-leadlist">
+              <li><strong>Alles aus Kapitel 01–12</strong> — du brauchst kaum neuen Code, sondern vor allem scharfe Augen.</li>
+            </ul>
+            <p class="jsc-step__blocklabel">Nicht erlaubt</p>
+            <ul class="jsc-leadlist">
+              <li>Die Lösung einer anderen Schülerin oder eines anderen Schülers übernehmen.</li>
+            </ul>
+          </section>
+
+          <section class="jsc-container jsc-band" id="design" aria-labelledby="design-title">
+            <h2 id="design-title" class="jsc-step__heading">Design</h2>
+            <p class="jsc-step__blocklabel">Vorgaben</p>
+            <ul class="jsc-leadlist">
+              <li>Deine korrigierte Datei sieht aus wie das Original — nur sicherer.</li>
+              <li>Der Audit-Bericht steht als HTML-Kommentar am Dateianfang.</li>
+              <li>Teste mit der XSS-Eingabe aus Schritt 5, bevor du abgibst.</li>
+            </ul>
+          </section>
+
+<section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
             <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
-            <p>Hake jede Zeile erst ab, wenn dein Code es wirklich tut.</p>
+            <p>Finde alle vier Lücken und beschreibe jede in zwei Sätzen. Hake jede Zeile erst ab, wenn dein Code es wirklich tut.</p>
           <ul
             class="jsc-checklist"
             data-component="jsc-checklist"
             data-storage-key="jsc-proj-3-req"
           >
-            <li><label><input type="checkbox" /> <span>Vier Lücken sind gefunden und je in zwei Sätzen beschrieben.</span></label></li>
             <li><label><input type="checkbox" /> <span>Lücke 1: <strong>innerHTML</strong> mit Nutzereingabe ermöglicht <strong>XSS</strong>.</span></label></li>
             <li><label><input type="checkbox" /> <span>Lücke 2: Das <strong>onclick</strong>-Attribut mischt HTML und JavaScript.</span></label></li>
             <li><label><input type="checkbox" /> <span>Lücke 3: <strong>eval</strong> führt beliebigen Code aus.</span></label></li>
@@ -126,17 +148,62 @@
 
           <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
             <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
-          <ol>
-            <li>Lies den unsicheren Code zweimal. Notiere auffällige Stellen.</li>
-            <li>Finde alle vier Lücken. Beschreibe jede in zwei Sätzen.</li>
-            <li>Erstelle <code>projekt-3-sicherheits-audit.html</code>. Setze deinen Bericht als HTML-Kommentar an den Dateianfang.</li>
-            <li>Schreibe die Seite neu: <strong>textContent</strong> statt innerHTML, <strong>addEventListener</strong> statt onclick.</li>
-            <li>Entferne die eval-Funktion komplett. Sie hat hier nichts verloren.</li>
-            <li>Ersetze <strong>var</strong> durch <strong>let</strong> oder <strong>const</strong>.</li>
-            <li>Teste das Gästebuch mit einer Eingabe wie <code>&lt;img src=x onerror=alert(1)&gt;</code>. Nichts darf ausgeführt werden.</li>
-            <li>Lass die KI deine Lösung gegenprüfen. Prüfe ihre Kritik selbst nach.</li>
-            <li>Vergleiche mit den Anforderungen und hake alles ab.</li>
-          </ol>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Lesen und notieren</p>
+                  <p class="jsc-stepper__text">
+                    Lies den unsicheren Code zweimal. Notiere auffällige Stellen, bevor du urteilst.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Vier Lücken</p>
+                  <p class="jsc-stepper__text">
+                    Finde alle vier Lücken. Beschreibe jede in zwei Sätzen — in deinen eigenen Worten.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Datei anlegen</p>
+                  <p class="jsc-stepper__text">
+                    Erstelle <code>projekt-3-sicherheits-audit.html</code>. Setze deinen Bericht als HTML-Kommentar an den Dateianfang.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Korrigieren</p>
+                  <p class="jsc-stepper__text">
+                    Schreibe die Seite neu: <strong>textContent</strong> statt innerHTML, <strong>addEventListener</strong> statt onclick. Entferne <strong>eval</strong> komplett und ersetze <strong>var</strong> durch <strong>let</strong> oder <strong>const</strong>.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">XSS-Test</p>
+                  <p class="jsc-stepper__text">
+                    Teste das Gästebuch mit einer Eingabe wie <code>&lt;img src=x onerror=alert(1)&gt;</code>. Nichts darf ausgeführt werden.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">6</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Schliff</p>
+                  <p class="jsc-stepper__text">
+                    Lass die KI deine Lösung gegenprüfen. Prüfe ihre Kritik selbst nach und hake dann alle Anforderungen ab.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </section>
 
           <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
@@ -150,8 +217,8 @@
               </figcaption>
               <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript-Sicherheit. Hier ist unsicherer Code mit vier Lücken: [Code einfügen]. Finde die Lücken mit mir und erkläre mir jede kurz. Danach zeigst du mir eine sichere Variante.</code></pre>
             </figure>
-            <p>Drei Prüf-Fragen:</p>
-            <ul>
+            <p class="jsc-step__blocklabel">Drei Prüf-Fragen</p>
+            <ul class="jsc-leadlist">
               <li>Warum ist innerHTML mit Nutzereingabe gefährlich?</li>
               <li>Was macht <code>eval</code> so riskant?</li>
               <li>Warum ist <code>addEventListener</code> sauberer als <code>onclick</code>?</li>
@@ -166,7 +233,7 @@
             <p>Speichere die korrigierte Datei als <code>projekt-3-sicherheits-audit.html</code> und lade sie in dein GitHub-Repository hoch. Der Audit-Bericht steht als Kommentar in der Datei. Die genaue Deadline sagt dir deine Lehrkraft.</p>
           </section>
 
-          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-3-reflect">
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" id="reflexion" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-3-reflect">
             <h2 id="reflect-title">Reflexion</h2>
             <div class="jsc-reflection">
               <label class="jsc-reflection__item">
@@ -190,12 +257,18 @@
           </section>
         </div>
 
-        <aside class="jsc-chapter-rail" aria-label="Alle Projekte">
-          <h2>Alle Projekte</h2>
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
           <ul>
-            <li><a href="projekt-1-highscore-game.html">Projekt 1</a></li>
-            <li><a href="projekt-2-formular-meister.html">Projekt 2</a></li>
-            <li><a href="projekt-3-sicherheits-audit.html" aria-current="page" class="is-active">Projekt 3</a></li>
+            <li><a href="index.html">Alle Projekte</a></li>
+            <li><a href="#aufgabe">Aufgabe</a></li>
+            <li><a href="#mittel">Erlaubte Mittel</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#anforderungen">Anforderungen</a></li>
+            <li><a href="#schritte">Schritte</a></li>
+            <li><a href="#ki">KI</a></li>
+            <li><a href="#abgabe">Abgabe</a></li>
+            <li><a href="#reflexion">Reflexion</a></li>
           </ul>
         </aside>
       </div>

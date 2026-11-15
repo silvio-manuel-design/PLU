@@ -66,7 +66,7 @@
         </div>
         <div class="jsc-hero__overlay" aria-hidden="true"></div>
         <div class="jsc-hero__content jsc-container">
-          <p class="jsc-hero__eyebrow">PROJECT 1 OF 3</p>
+          <p class="jsc-hero__eyebrow">PROJECT 1 OF 3 — YOUR PLAYGROUND</p>
           <h1 id="page-title" class="jsc-hero__title">Highscore Game</h1>
           <p class="jsc-hero__sub">Build a click game with counter and high score. The record survives reloading. Time: about 90 min.</p>
         </div>
@@ -77,12 +77,35 @@
           <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
             <h2 id="aufgabe-title" class="jsc-step__heading">Your task</h2>
             <p>A square target jumps randomly around the play field. Every hit scores one point. After 20 seconds the round ends. The high score goes to <strong>localStorage</strong> and survives reloading.</p>
+            <p>You build the game in a single HTML file: playfield, target and counter are HTML and CSS, all the logic is JavaScript. No framework, no library — only what you learned in chapters 01 to 10.</p>
             <p class="jsc-lab-actions">
               <a class="jsc-button jsc-button--outline" href="index-en.html">← Back to the projects</a>
             </p>
           </section>
 
-          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+                    <section class="jsc-container jsc-band--alt" id="mittel" aria-labelledby="mittel-title">
+            <h2 id="mittel-title" class="jsc-step__heading">Allowed tools</h2>
+            <p class="jsc-step__blocklabel">Allowed</p>
+            <ul class="jsc-leadlist">
+              <li><strong>Everything from chapters 01–10</strong> — variables, conditions, loops, functions, DOM and events including <code>localStorage</code>.</li>
+            </ul>
+            <p class="jsc-step__blocklabel">Not allowed</p>
+            <ul class="jsc-leadlist">
+              <li>Taking over finished games or code snippets, external libraries, <code>fetch</code> and server code.</li>
+            </ul>
+          </section>
+
+          <section class="jsc-container jsc-band" id="design" aria-labelledby="design-title">
+            <h2 id="design-title" class="jsc-step__heading">Design</h2>
+            <p class="jsc-step__blocklabel">Guidelines</p>
+            <ul class="jsc-leadlist">
+              <li>The playfield stays on one screen without scrolling — even at 360 px.</li>
+              <li>Target and counter are clearly visible, the high score sits at the edge of the playfield.</li>
+              <li>You pick colours and type yourself — one accent is enough.</li>
+            </ul>
+          </section>
+
+<section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
             <h2 id="req-title" class="jsc-step__heading">Requirements</h2>
             <p>Only tick a line when your code really does it.</p>
           <ul
@@ -106,25 +129,69 @@
 
           <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
             <h2 id="steps-title" class="jsc-step__heading">Step by step</h2>
-          <ol>
-            <li>Create <code>project-1-highscore.html</code>. Build play field, target element and counter in HTML and CSS.</li>
-            <li>
-              <p>Write a click listener on the target. Raise the counter and move the target with random numbers.</p>
-            <figure class="jsc-code-block" data-filename="main.js">
-              <figcaption class="jsc-code-block__bar">
-                <span class="jsc-code-block__file">main.js</span>
-                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
-              </figcaption>
-              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">ziel.addEventListener("click", () =&gt; { punkte++; zielVerschieben(); });</code></pre>
-            </figure>
-            </li>
-            <li>Start a 20-second clock with <code>setInterval</code>. Then disable the target and show the result.</li>
-            <li>Read the high score from <strong>localStorage</strong> on load. After the round, store the better value.</li>
-            <li>Build the “Play again” button. It resets counter and target.</li>
-            <li>Test the game at 360 px. The play field must not scroll.</li>
-            <li>Ask AI for one improvement. Implement exactly one.</li>
-            <li>Check off every requirement above.</li>
-          </ol>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Create the file</p>
+                  <p class="jsc-stepper__text">
+                    Create <code>project-1-highscore.html</code>. Build the playfield, target element and counter in HTML and CSS.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Click listener</p>
+                  <p class="jsc-stepper__text">
+                    Write a click listener on the target. Increase the counter and move the target with random numbers.
+                    <figure class="jsc-code-block" data-filename="main.js">
+                      <figcaption class="jsc-code-block__bar">
+                        <span class="jsc-code-block__file">main.js</span>
+                        <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+                      </figcaption>
+                      <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-js">ziel.addEventListener("click", () =&gt; { punkte++; zielVerschieben(); });</code></pre>
+                    </figure>
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Round time</p>
+                  <p class="jsc-stepper__text">
+                    Start a 20-second clock with <code>setInterval</code>. Then disable the target and show the result.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">High score</p>
+                  <p class="jsc-stepper__text">
+                    On load, read the high score from <strong>localStorage</strong>. After the round, save the better value.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Restart and test</p>
+                  <p class="jsc-stepper__text">
+                    Build the "play again" button. It resets counter and target. Test the game at 360 px — the playfield must not scroll.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">6</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Polish</p>
+                  <p class="jsc-stepper__text">
+                    Ask AI for one improvement. Implement exactly one, then check off all requirements.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </section>
 
           <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
@@ -138,8 +205,8 @@
               </figcaption>
               <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">I am learning JavaScript. Build a click game with me: a target jumps randomly, a counter counts, 20-second round, high score in localStorage. Then explain why you use setInterval and not setTimeout.</code></pre>
             </figure>
-            <p>Three check questions:</p>
-            <ul>
+            <p class="jsc-step__blocklabel">Three check questions</p>
+            <ul class="jsc-leadlist">
               <li>Why does the high score survive reloading?</li>
               <li>What does <code>parseInt</code> do when reading?</li>
               <li>Why do we disable the target after the round?</li>
@@ -154,7 +221,7 @@
             <p>Save the file as <code>project-1-highscore.html</code> and upload it to your GitHub repository. Your teacher announces the exact deadline.</p>
           </section>
 
-          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-1-reflect">
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" id="reflexion" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-1-reflect">
             <h2 id="reflect-title">Reflection</h2>
             <div class="jsc-reflection">
               <label class="jsc-reflection__item">
@@ -178,12 +245,18 @@
           </section>
         </div>
 
-        <aside class="jsc-chapter-rail" aria-label="All projects">
-          <h2>All projects</h2>
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
           <ul>
-            <li><a href="projekt-1-highscore-game-en.html" aria-current="page" class="is-active">Project 1</a></li>
-            <li><a href="projekt-2-formular-meister-en.html">Project 2</a></li>
-            <li><a href="projekt-3-sicherheits-audit-en.html">Project 3</a></li>
+            <li><a href="index-en.html">All Projects</a></li>
+            <li><a href="#aufgabe">Task</a></li>
+            <li><a href="#mittel">Allowed tools</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#anforderungen">Requirements</a></li>
+            <li><a href="#schritte">Steps</a></li>
+            <li><a href="#ki">AI</a></li>
+            <li><a href="#abgabe">Submission</a></li>
+            <li><a href="#reflexion">Reflection</a></li>
           </ul>
         </aside>
       </div>

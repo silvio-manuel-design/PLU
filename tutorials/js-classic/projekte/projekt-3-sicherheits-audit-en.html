@@ -66,7 +66,7 @@
         </div>
         <div class="jsc-hero__overlay" aria-hidden="true"></div>
         <div class="jsc-hero__content jsc-container">
-          <p class="jsc-hero__eyebrow">PROJECT 3 OF 3</p>
+          <p class="jsc-hero__eyebrow">PROJECT 3 OF 3 — A REAL-WORLD APPLICATION</p>
           <h1 id="page-title" class="jsc-hero__title">Security Audit</h1>
           <p class="jsc-hero__sub">You get insecure code and find the holes. Then you close them. Time: about 120 min.</p>
         </div>
@@ -77,6 +77,7 @@
           <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
             <h2 id="aufgabe-title" class="jsc-step__heading">Your task</h2>
             <p>The task below contains a page with four security holes. Find every hole and describe it in two sentences. Then write a corrected version. Your report and the file both belong to the submission.</p>
+            <p>Read the code twice before you start — half the holes only show on the second read.</p>
             <figure class="jsc-code-block" data-filename="gaestebuch-unsicher.html">
               <figcaption class="jsc-code-block__bar">
                 <span class="jsc-code-block__file">gaestebuch-unsicher.html</span>
@@ -101,15 +102,36 @@
             </p>
           </section>
 
-          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+                    <section class="jsc-container jsc-band--alt" id="mittel" aria-labelledby="mittel-title">
+            <h2 id="mittel-title" class="jsc-step__heading">Allowed tools</h2>
+            <p class="jsc-step__blocklabel">Allowed</p>
+            <ul class="jsc-leadlist">
+              <li><strong>Everything from chapters 01–12</strong> — you hardly need new code, mostly sharp eyes.</li>
+            </ul>
+            <p class="jsc-step__blocklabel">Not allowed</p>
+            <ul class="jsc-leadlist">
+              <li>Taking over another student's solution.</li>
+            </ul>
+          </section>
+
+          <section class="jsc-container jsc-band" id="design" aria-labelledby="design-title">
+            <h2 id="design-title" class="jsc-step__heading">Design</h2>
+            <p class="jsc-step__blocklabel">Guidelines</p>
+            <ul class="jsc-leadlist">
+              <li>Your corrected file looks like the original — only safer.</li>
+              <li>The audit report sits as an HTML comment at the top of the file.</li>
+              <li>Test with the XSS input from step 5 before you submit.</li>
+            </ul>
+          </section>
+
+<section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
             <h2 id="req-title" class="jsc-step__heading">Requirements</h2>
-            <p>Only tick a line when your code really does it.</p>
+            <p>Find all four holes and describe each in two sentences. Only check a line when your code or report really does it.</p>
           <ul
             class="jsc-checklist"
             data-component="jsc-checklist"
             data-storage-key="jsc-proj-3-req"
           >
-            <li><label><input type="checkbox" /> <span>Four holes are found, each described in two sentences.</span></label></li>
             <li><label><input type="checkbox" /> <span>Hole 1: <strong>innerHTML</strong> with user input enables <strong>XSS</strong>.</span></label></li>
             <li><label><input type="checkbox" /> <span>Hole 2: The <strong>onclick</strong> attribute mixes HTML and JavaScript.</span></label></li>
             <li><label><input type="checkbox" /> <span>Hole 3: <strong>eval</strong> executes arbitrary code.</span></label></li>
@@ -126,17 +148,62 @@
 
           <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
             <h2 id="steps-title" class="jsc-step__heading">Step by step</h2>
-          <ol>
-            <li>Read the insecure code twice. Write down suspicious spots.</li>
-            <li>Find all four holes. Describe each in two sentences.</li>
-            <li>Create <code>project-3-security-audit.html</code>. Put your report as an HTML comment at the top.</li>
-            <li>Rewrite the page: <strong>textContent</strong> instead of innerHTML, <strong>addEventListener</strong> instead of onclick.</li>
-            <li>Remove the eval function completely. It has no business here.</li>
-            <li>Replace <strong>var</strong> with <strong>let</strong> or <strong>const</strong>.</li>
-            <li>Test the guestbook with an input like <code>&lt;img src=x onerror=alert(1)&gt;</code>. Nothing may execute.</li>
-            <li>Let AI double-check your solution. Verify its criticism yourself.</li>
-            <li>Compare with the requirements and check off everything.</li>
-          </ol>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Read and note</p>
+                  <p class="jsc-stepper__text">
+                    Read the insecure code twice. Note suspicious spots before you judge.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Four holes</p>
+                  <p class="jsc-stepper__text">
+                    Find all four holes. Describe each in two sentences — in your own words.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Create the file</p>
+                  <p class="jsc-stepper__text">
+                    Create <code>project-3-security-audit.html</code>. Put your report as an HTML comment at the top of the file.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Fix it</p>
+                  <p class="jsc-stepper__text">
+                    Rewrite the page: <strong>textContent</strong> instead of innerHTML, <strong>addEventListener</strong> instead of onclick. Remove <strong>eval</strong> completely and replace <strong>var</strong> with <strong>let</strong> or <strong>const</strong>.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">XSS test</p>
+                  <p class="jsc-stepper__text">
+                    Test the guestbook with an input like <code>&lt;img src=x onerror=alert(1)&gt;</code>. Nothing must execute.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">6</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Polish</p>
+                  <p class="jsc-stepper__text">
+                    Have AI review your solution. Check its criticism yourself, then check off all requirements.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </section>
 
           <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
@@ -150,8 +217,8 @@
               </figcaption>
               <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">I am learning JavaScript security. Here is insecure code with four holes: [paste code]. Find the holes with me and explain each briefly. Then show me a safe version.</code></pre>
             </figure>
-            <p>Three check questions:</p>
-            <ul>
+            <p class="jsc-step__blocklabel">Three check questions</p>
+            <ul class="jsc-leadlist">
               <li>Why is innerHTML with user input dangerous?</li>
               <li>What makes <code>eval</code> so risky?</li>
               <li>Why is <code>addEventListener</code> cleaner than <code>onclick</code>?</li>
@@ -166,7 +233,7 @@
             <p>Save the corrected file as <code>project-3-security-audit.html</code> and upload it to your GitHub repository. The audit report sits as a comment in the file. Your teacher announces the exact deadline.</p>
           </section>
 
-          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-3-reflect">
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" id="reflexion" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-proj-3-reflect">
             <h2 id="reflect-title">Reflection</h2>
             <div class="jsc-reflection">
               <label class="jsc-reflection__item">
@@ -190,12 +257,18 @@
           </section>
         </div>
 
-        <aside class="jsc-chapter-rail" aria-label="All projects">
-          <h2>All projects</h2>
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
           <ul>
-            <li><a href="projekt-1-highscore-game-en.html">Project 1</a></li>
-            <li><a href="projekt-2-formular-meister-en.html">Project 2</a></li>
-            <li><a href="projekt-3-sicherheits-audit-en.html" aria-current="page" class="is-active">Project 3</a></li>
+            <li><a href="index-en.html">All Projects</a></li>
+            <li><a href="#aufgabe">Task</a></li>
+            <li><a href="#mittel">Allowed tools</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#anforderungen">Requirements</a></li>
+            <li><a href="#schritte">Steps</a></li>
+            <li><a href="#ki">AI</a></li>
+            <li><a href="#abgabe">Submission</a></li>
+            <li><a href="#reflexion">Reflection</a></li>
           </ul>
         </aside>
       </div>
