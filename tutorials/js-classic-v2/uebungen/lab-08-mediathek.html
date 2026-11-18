@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab 08 — Deine Mediathek · Übungen · JavaScript V2 (PLU)</title>
+    <meta
+      name="description"
+      content="Übung zu Kapitel 08: Baue eine Mediathek mit drei Objekten, Methode und Top-Markierung. Mit Anforderungen, KI-Starter-Prompt und Musterlösung."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic-v2/uebungen/lab-08-mediathek.html" />
+    <link rel="alternate" hreflang="de" href="lab-08-mediathek.html" />
+    <link rel="alternate" hreflang="en" href="lab-08-mediathek-en.html" />
+    <link rel="alternate" hreflang="x-default" href="lab-08-mediathek.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Lab 08 — Deine Mediathek · JavaScript V2" />
+    <meta property="og:description" content="Übung zu Kapitel 08: Baue eine Mediathek mit drei Objekten, Methode und Top-Markierung. Mit Anforderungen, KI-Starter-Prompt und Musterlösung." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-2560.jpg" />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic-v2/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m08">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="lab-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-768.avif   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-768.webp   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-768.jpg   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab08/jsc-lab08-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Drei schwebende Glasregale, ein einzelner Leerplatz im Scheinwerferlicht"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Übung 08 · Kapitel 08</p>
+          <h1 id="lab-title" class="jsc-hero__title">Lab 08 — Deine Mediathek</h1>
+          <p class="jsc-hero__sub">Objekte beschreiben die Welt. Du baust eine Mediathek mit drei Einträgen. Zeit: ca. 30 Min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
+            <p>
+              Du legst drei Objekte an — dein Lieblingsfilm, dein Lieblingsbuch und dein
+              Lieblingslied. Jedes hat Titel, Jahr und Bewertung. Deine Seite listet alle
+              drei auf und markiert die beste Bewertung.
+            </p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Dein Kursleiter gibt das aktuelle Lab bekannt.</p>
+                  <p class="jsc-stepper__text">Die enthaltene Aufgabe ist aufbauend auf den vorhergehenden Labs.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Öffne das Lab und lies die Aufgabe.</p>
+                  <p class="jsc-stepper__text">Unten findest du die Anforderungen.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Löse die Aufgabe mit Unterstützung von KI.</p>
+                  <p class="jsc-stepper__text">Nutze den Starter-Prompt im Lab.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Prüfe den Code.</p>
+                  <p class="jsc-stepper__text">Beantworte dir selbst die Fragen in den Anforderungen ehrlich.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Lade die Datei in dein GitHub-Repo hoch.</p>
+                  <p class="jsc-stepper__text">Anleitung: GitHub &amp; Abgabe.</p>
+                </div>
+              </li>
+            </ol>
+            <p class="jsc-step__blocklabel">Deine zwei Werte — du brauchst kein Heft und keinen Stift</p>
+            <ul class="jsc-leadlist">
+              <li>
+                <strong>Dein Kürzel:</strong> deine Schul-ID + deine Initialen, klein, ohne
+                Punkt. Beispiel: <code>12345ms</code>
+              </li>
+              <li>
+                <strong>Deine Zahl:</strong> die letzte Ziffer deiner Schul-ID. Beispiel:
+                Schul-ID <code>12345</code> → Zahl <code>5</code>
+              </li>
+            </ul>
+            <p>
+              Am Ende zeigt deine Seite drei Einträge und ein Top-Label. Deine Werke, deine
+              Bewertungen — und dein Kürzel im Titel.
+            </p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic-v2/kapitel/08-objekte.html">← Zurück zu Kapitel 08</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="mittel" aria-labelledby="mittel-title">
+            <h2 id="mittel-title" class="jsc-step__heading">Erlaubte Mittel</h2>
+            <p>Du arbeitest nur mit dem, was du in Kapitel 01–08 gelernt hast. Alles andere ist verboten.</p>
+            <p class="jsc-step__blocklabel">Erlaubt</p>
+            <ul class="jsc-leadlist">
+              <li><strong>Variablen:</strong> <code>const</code> und <code>let</code></li>
+              <li><strong>Texte und Zahlen</strong> (Strings, Numbers)</li>
+              <li><strong>Eingabe:</strong> <code>prompt()</code></li>
+              <li><strong>Texte zusammenbauen:</strong> Template-Literals (Backticks <code>`</code> und <code>${`{`}…}</code>)</li>
+              <li><strong>Verzweigungen:</strong> <code>if</code>, <code>else</code></li>
+              <li><strong>Schleifen:</strong> <code>for</code></li>
+              <li><strong>Arrays</strong></li>
+              <li><strong>Objekte:</strong> Eigenschaften, Methoden, <code>this</code>, Punkt- und Klammernotation</li>
+              <li><strong>Funktionen:</strong> <code>return</code>, Parameter</li>
+              <li><strong>Ausgabe:</strong> <code>console.log</code>, <code>innerHTML</code>, <code>getElementById</code></li>
+              <li><strong>HTML/CSS:</strong> Grundgerüst, Einbindung mit <code>defer</code></li>
+            </ul>
+            <p class="jsc-step__blocklabel">Nicht erlaubt</p>
+            <ul class="jsc-leadlist">
+              <li>Events und <code>addEventListener</code> — die kommen in Kapitel 09 und 10</li>
+              <li>Formulare — die kommen in Kapitel 11</li>
+            </ul>
+            <aside class="jsc-step__explain-note">
+              <p>
+                Wenn die KI dir Code schickt mit Wörtern aus der Liste „Nicht erlaubt" — nicht verwenden.
+                Frage die KI lieber: „Erkläre mir …". Du baust selbst.
+              </p>
+            </aside>
+          </section>
+
+          <section class="jsc-container jsc-band" id="design" aria-labelledby="design-title">
+            <h2 id="design-title" class="jsc-step__heading">Design-Vorgaben</h2>
+            <p>
+              Deine Seite ist dunkel. Dein Kürzel steht im Titel. Das Top-Werk hebt sich
+              deutlich ab.
+            </p>
+            <p class="jsc-step__blocklabel">Vorgaben</p>
+            <ul class="jsc-leadlist">
+              <li>Dunkler Hintergrund, wie die Kapitel-Seiten</li>
+              <li>Dein Kürzel im Titel der Seite, gut sichtbar</li>
+              <li>Die drei Einträge stehen untereinander, gut lesbar</li>
+              <li>Der Top-Eintrag ist farblich oder mit einem Label markiert</li>
+            </ul>
+            <aside class="jsc-step__explain-note">
+              <p>Dein Lieblingswerk bekommt als Bewertung deine Zahl. Ist sie größer als 5, nimm 5.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
+            <p>Hake jede Zeile ab, wenn dein Code es wirklich tut. Am Ende druckst du die Liste als PDF.</p>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-lab-08-req"
+            >
+              <li><label><input type="checkbox" /> <span><code>index.html</code>, <code>css/style.css</code> und <code>js/main.js</code> liegen im Ordner <code>uebung-08/</code> und sind verlinkt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Drei Objekte mit <code>titel</code>, <code>jahr</code>, <code>bewertung</code> (1–5, Number) — dein Lieblingsfilm, dein Lieblingsbuch, dein Lieblingslied.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Alle Objekte liegen in einem Array <code>mediathek</code>.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Eine Schleife gibt jeden Eintrag als formatierten Satz aus — zum Beispiel mit <code>innerHTML</code>.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Der Eintrag mit der höchsten Bewertung bekommt ein „Top"-Label; ein Objekt hat eine Methode <code>beschreibung()</code>, die einen Satz zurückgibt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Die Überschrift <code>h1</code> zeigt dein Kürzel; das Script ist im head mit <code>defer</code> eingebunden.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
+            <p>Sechs Schritte. Plane ca. 20 Minuten. Nach jedem Schritt lädst du deine Seite neu.</p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Ordner anlegen</p>
+                  <p class="jsc-stepper__text">
+                    Ordner <code>uebung-08/</code> anlegen. Darin <code>index.html</code>,
+                    <code>css/</code> und <code>js/</code>. <code>css/style.css</code> und
+                    <code>js/main.js</code> anlegen und verlinken.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Gerüst und Design</p>
+                  <p class="jsc-stepper__text">
+                    Überschrift <code>h1</code> mit deinem Kürzel. Dunkler Hintergrund in
+                    <code>style.css</code>. Ein Element mit <code>id="liste"</code> für die Ausgabe.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Drei Objekte</p>
+                  <p class="jsc-stepper__text">
+                    Film, Buch und Lied als Objekte anlegen — je mit <code>titel</code>,
+                    <code>jahr</code> und <code>bewertung</code>. Dein Lieblingswerk bekommt
+                    deine Zahl als Bewertung (maximal 5).
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Array und Schleife</p>
+                  <p class="jsc-stepper__text">
+                    Die drei Objekte in das Array <code>mediathek</code> legen. Eine
+                    <code>for</code>-Schleife schreibt jeden Eintrag als Satz in
+                    <code>#liste</code>.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Top und Methode</p>
+                  <p class="jsc-stepper__text">
+                    Mit <code>Math.max</code> die beste Bewertung finden und den Eintrag
+                    markieren. Auf einem Objekt die Methode <code>beschreibung()</code> schreiben.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">6</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Testen und abhaken</p>
+                  <p class="jsc-stepper__text">
+                    Seite neu laden: drei Sätze, ein Top-Label, keine Fehler in der Konsole.
+                    Dann die Anforderungen abhaken.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Arbeite mit der KI</h2>
+            <aside class="jsc-step__explain-note">
+              <p>
+                <strong>Die Regel:</strong> Die KI erklärt dir, du baust selbst. Lass dir Code
+                erklären — nicht abliefern. Wenn du Code von der KI nimmst, musst du jede Zeile
+                erklären können.
+              </p>
+            </aside>
+            <p class="jsc-step__blocklabel">Dein Starter-Prompt</p>
+            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">starter-prompt.txt</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript, Kapitel 08 (Objekte). Erlaubt sind nur: alles aus Kapitel 01–07 plus Objekte, Methoden und this — keine DOM-Events, keine Formulare.
+Mein Kürzel ist [KÜRZEL], meine Zahl ist [ZAHL]. Erkläre mir Schritt für Schritt, wie ich drei Objekte für eine Mediathek baue, sie in ein Array lege und mit einer Schleife als Sätze ausgebe. Erkläre Punktnotation und Klammernotation. Schreibe mir kein fertiges Programm.</code></pre>
+            </figure>
+            <p class="jsc-step__blocklabel">Drei Prüf-Fragen</p>
+            <ol>
+              <li><code>mediathek.titel</code> oder <code>mediathek["titel"]</code> — wann was?</li>
+              <li>Was ist <code>this</code> in einer Methode?</li>
+              <li>Warum liegen Objekte oft in Arrays?</li>
+            </ol>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic-v2/ki-grundlagen.html">KI-Grundlagen öffnen</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Abgabe</h2>
+            <p>
+              Du lädst dein Ergebnis in dein GitHub-Repository hoch. Dein Ordner heißt
+              <code>uebung-08/</code>. Dein Ordner sieht so aus:
+            </p>
+            <figure class="jsc-code-block" data-filename="uebung-08/">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">uebung-08/</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">uebung-08/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── screenshot.png        (Bild deiner laufenden Seite)
+└── anforderungen.pdf     (Anforderungen abgehakt und gedruckt)</code></pre>
+            </figure>
+            <aside class="jsc-step__explain-note">
+              <p>
+                <strong>So machst du das PDF:</strong> Hake alle Anforderungen ab, die dein Code
+                wirklich erfüllt. Dann drückst du den Drucken-Knopf auf dieser Seite. Als Ziel
+                wählst du „PDF speichern". Das PDF ist dein Versprechen — im Fachgespräch frage
+                ich dich zu jeder angehakten Zeile. Die Deadline sagt dir deine Lehrkraft.
+              </p>
+            </aside>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="/tutorials/js-classic-v2/uebungen/">Alle Labs</a></li>
+            <li><a href="#aufgabe">Aufgabe</a></li>
+            <li><a href="#mittel">Erlaubte Mittel</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#anforderungen">Anforderungen</a></li>
+            <li><a href="#schritte">Schritte</a></li>
+            <li><a href="#ki">KI</a></li>
+            <li><a href="#abgabe">Abgabe</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

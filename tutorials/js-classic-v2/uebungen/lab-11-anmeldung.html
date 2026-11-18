@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab 11 — Anmelde-Formular · Übungen · JavaScript V2 (PLU)</title>
+    <meta
+      name="description"
+      content="Übung zu Kapitel 11: Baue ein Anmeldeformular mit HTML-Validierung, preventDefault und aria-live. Mit Anforderungen, KI-Starter-Prompt und Musterlösung."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic-v2/uebungen/lab-11-anmeldung.html" />
+    <link rel="alternate" hreflang="de" href="lab-11-anmeldung.html" />
+    <link rel="alternate" hreflang="en" href="lab-11-anmeldung-en.html" />
+    <link rel="alternate" hreflang="x-default" href="lab-11-anmeldung.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Lab 11 — Anmelde-Formular · JavaScript V2" />
+    <meta property="og:description" content="Übung zu Kapitel 11: Baue ein Anmeldeformular mit HTML-Validierung, preventDefault und aria-live. Mit Anforderungen, KI-Starter-Prompt und Musterlösung." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-2560.jpg" />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic-v2/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m11">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="lab-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-768.avif   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-768.webp   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-768.jpg   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab11/jsc-lab11-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Ein gläsernes Tor, ein goldener Schlüssel liegt in zwei Schlüssellöchern"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Übung 11 · Kapitel 11</p>
+          <h1 id="lab-title" class="jsc-hero__title">Lab 11 — Anmelde-Formular</h1>
+          <p class="jsc-hero__sub">Formulare brauchen Regeln. Du baust ein Anmeldeformular, das wirklich prüft. Zeit: ca. 30 Min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Deine Aufgabe</h2>
+            <p>
+              Du baust ein Formular mit Name, E-Mail und Passwort. HTML prüft die ersten
+              Fehler, JavaScript die restlichen. Die Fehlermeldungen erscheinen direkt beim
+              Feld — freundlich, aber klar.
+            </p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Dein Kursleiter gibt das aktuelle Lab bekannt.</p>
+                  <p class="jsc-stepper__text">Die enthaltene Aufgabe ist aufbauend auf den vorhergehenden Labs.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Öffne das Lab und lies die Aufgabe.</p>
+                  <p class="jsc-stepper__text">Unten findest du die Anforderungen.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Löse die Aufgabe mit Unterstützung von KI.</p>
+                  <p class="jsc-stepper__text">Nutze den Starter-Prompt im Lab.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Prüfe den Code.</p>
+                  <p class="jsc-stepper__text">Beantworte dir selbst die Fragen in den Anforderungen ehrlich.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Lade die Datei in dein GitHub-Repo hoch.</p>
+                  <p class="jsc-stepper__text">Anleitung: GitHub &amp; Abgabe.</p>
+                </div>
+              </li>
+            </ol>
+            <p class="jsc-step__blocklabel">Deine zwei Werte — du brauchst kein Heft und keinen Stift</p>
+            <ul class="jsc-leadlist">
+              <li>
+                <strong>Dein Kürzel:</strong> deine Schul-ID + deine Initialen, klein, ohne
+                Punkt. Beispiel: <code>12345ms</code>
+              </li>
+              <li>
+                <strong>Deine Zahl:</strong> die letzte Ziffer deiner Schul-ID. Beispiel:
+                Schul-ID <code>12345</code> → Zahl <code>5</code>
+              </li>
+            </ul>
+            <p>
+              Am Ende prüft dein Formular wirklich — HTML zuerst, JavaScript danach. Dein
+              Kürzel steht im Titel.
+            </p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic-v2/kapitel/11-formulare.html">← Zurück zu Kapitel 11</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="mittel" aria-labelledby="mittel-title">
+            <h2 id="mittel-title" class="jsc-step__heading">Erlaubte Mittel</h2>
+            <p>Du arbeitest nur mit dem, was du in Kapitel 01–11 gelernt hast. Alles andere ist verboten.</p>
+            <p class="jsc-step__blocklabel">Erlaubt</p>
+            <ul class="jsc-leadlist">
+              <li><strong>Variablen:</strong> <code>const</code> und <code>let</code></li>
+              <li><strong>Texte und Zahlen</strong> (Strings, Numbers)</li>
+              <li><strong>Verzweigungen:</strong> <code>if</code>, <code>else</code></li>
+              <li><strong>Schleifen:</strong> <code>for</code></li>
+              <li><strong>Arrays und Objekte</strong></li>
+              <li><strong>Funktionen:</strong> <code>return</code>, Parameter</li>
+              <li><strong>DOM:</strong> <code>getElementById</code>, <code>textContent</code>, <code>addEventListener</code></li>
+              <li><strong>Formulare:</strong> <code>required</code>, <code>type="email"</code>, <code>minlength</code>, submit-Event, <code>preventDefault</code>, <code>aria-live</code>, <code>form.reset()</code></li>
+              <li><strong>HTML/CSS:</strong> Grundgerüst, Einbindung mit <code>defer</code></li>
+            </ul>
+            <p class="jsc-step__blocklabel">Nicht erlaubt</p>
+            <ul class="jsc-leadlist">
+              <li>Reguläre Ausdrücke (regex) — die brauchst du hier nicht</li>
+              <li><code>fetch</code> und Server-Code — der kommt später</li>
+            </ul>
+            <aside class="jsc-step__explain-note">
+              <p>
+                Wenn die KI dir Code schickt mit Wörtern aus der Liste „Nicht erlaubt" — nicht verwenden.
+                Frage die KI lieber: „Erkläre mir …". Du baust selbst.
+              </p>
+            </aside>
+          </section>
+
+          <section class="jsc-container jsc-band" id="design" aria-labelledby="design-title">
+            <h2 id="design-title" class="jsc-step__heading">Design-Vorgaben</h2>
+            <p>
+              Deine Seite ist dunkel. Dein Kürzel steht im Titel. Das Formular steht im
+              Mittelpunkt — freundlich und klar.
+            </p>
+            <p class="jsc-step__blocklabel">Vorgaben</p>
+            <ul class="jsc-leadlist">
+              <li>Dunkler Hintergrund, wie die Kapitel-Seiten</li>
+              <li>Dein Kürzel im Titel der Seite, gut sichtbar</li>
+              <li>Die drei Felder stehen untereinander, jedes mit Platz für seine Fehlermeldung</li>
+              <li>Dein Passwort-Feld verlangt mindestens 6 + deine Zahl Zeichen</li>
+              <li>Fehlermeldungen sind auffällig, der Erfolg grün</li>
+            </ul>
+            <aside class="jsc-step__explain-note">
+              <p>Alles andere gestaltest du frei. Überrasche mich gern.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Anforderungen</h2>
+            <p>Hake jede Zeile ab, wenn dein Code es wirklich tut. Am Ende druckst du die Liste als PDF.</p>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-lab-11-req"
+            >
+              <li><label><input type="checkbox" /> <span><code>index.html</code>, <code>css/style.css</code> und <code>js/main.js</code> liegen im Ordner <code>uebung-11/</code> und sind verlinkt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Drei Felder — Name (min. 3 Zeichen), E-Mail, Passwort (min. 6 + deine Zahl Zeichen) — mit HTML-Validierung via <code>required</code>, <code>type="email"</code>, <code>minlength</code>.</span></label></li>
+              <li><label><input type="checkbox" /> <span><code>submit</code> wird per <code>preventDefault</code> abgefangen und neu geprüft.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Fehlermeldungen erscheinen im Element neben dem Feld (<code>aria-live</code>).</span></label></li>
+              <li><label><input type="checkbox" /> <span>Bei Erfolg erscheint ein grüner Bestätigungstext und das Formular wird zurückgesetzt.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Die Überschrift <code>h1</code> zeigt dein Kürzel; das Script ist im head mit <code>defer</code> eingebunden.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Schritt für Schritt</h2>
+            <p>Sechs Schritte. Plane ca. 20 Minuten. Nach jedem Schritt lädst du deine Seite neu.</p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Ordner anlegen</p>
+                  <p class="jsc-stepper__text">
+                    Ordner <code>uebung-11/</code> anlegen. Darin <code>index.html</code>,
+                    <code>css/</code> und <code>js/</code>. <code>css/style.css</code> und
+                    <code>js/main.js</code> anlegen und verlinken.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Gerüst und Formular</p>
+                  <p class="jsc-stepper__text">
+                    Überschrift <code>h1</code> mit deinem Kürzel. Dunkler Hintergrund. Das
+                    Formular mit drei Feldern, <code>required</code> und <code>minlength</code>
+                    (Passwort: 6 + deine Zahl).
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Fehler-Elemente</p>
+                  <p class="jsc-stepper__text">
+                    Zu jedem Feld ein <code>&lt;p class="fehler" aria-live="polite"&gt;&lt;/p&gt;</code>
+                    daneben — Platz für die Meldung.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Submit-Handler</p>
+                  <p class="jsc-stepper__text">
+                    <code>addEventListener("submit", …)</code> auf dem Formular. Als Erstes
+                    <code>event.preventDefault()</code>, dann die Werte prüfen.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Meldungen und Erfolg</p>
+                  <p class="jsc-stepper__text">
+                    Fehler in die <code>fehler</code>-Elemente schreiben. Bei Erfolg:
+                    <code>formular.reset()</code> und grüner Bestätigungstext.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">6</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Testen und abhaken</p>
+                  <p class="jsc-stepper__text">
+                    Falsche Eingaben testen, dann richtige. Meldungen und Erfolg prüfen, dann
+                    die Anforderungen abhaken.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Arbeite mit der KI</h2>
+            <aside class="jsc-step__explain-note">
+              <p>
+                <strong>Die Regel:</strong> Die KI erklärt dir, du baust selbst. Lass dir Code
+                erklären — nicht abliefern. Wenn du Code von der KI nimmst, musst du jede Zeile
+                erklären können.
+              </p>
+            </aside>
+            <p class="jsc-step__blocklabel">Dein Starter-Prompt</p>
+            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">starter-prompt.txt</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">Ich lerne JavaScript, Kapitel 11 (Formulare). Erlaubt sind nur: alles aus Kapitel 01–10 plus Formulare, required, type="email", minlength, preventDefault und aria-live — keine regulären Ausdrücke, kein Server-Code.
+Mein Kürzel ist [KÜRZEL], meine Zahl ist [ZAHL]. Erkläre mir Schritt für Schritt, wie ich ein Anmeldeformular baue, das HTML-Validierung und JavaScript-Prüfung kombiniert. Erkläre, warum HTML-Validierung allein nicht reicht. Schreibe mir kein fertiges Programm.</code></pre>
+            </figure>
+            <p class="jsc-step__blocklabel">Drei Prüf-Fragen</p>
+            <ol>
+              <li>Was macht <code>preventDefault()</code>?</li>
+              <li>Warum <code>aria-live</code>?</li>
+              <li>Was prüft <code>type="email"</code> wirklich?</li>
+            </ol>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic-v2/ki-grundlagen.html">KI-Grundlagen öffnen</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Abgabe</h2>
+            <p>
+              Du lädst dein Ergebnis in dein GitHub-Repository hoch. Dein Ordner heißt
+              <code>uebung-11/</code>. Dein Ordner sieht so aus:
+            </p>
+            <figure class="jsc-code-block" data-filename="uebung-11/">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">uebung-11/</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">uebung-11/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── screenshot.png        (Bild deiner laufenden Seite)
+└── anforderungen.pdf     (Anforderungen abgehakt und gedruckt)</code></pre>
+            </figure>
+            <aside class="jsc-step__explain-note">
+              <p>
+                <strong>So machst du das PDF:</strong> Hake alle Anforderungen ab, die dein Code
+                wirklich erfüllt. Dann drückst du den Drucken-Knopf auf dieser Seite. Als Ziel
+                wählst du „PDF speichern". Das PDF ist dein Versprechen — im Fachgespräch frage
+                ich dich zu jeder angehakten Zeile. Die Deadline sagt dir deine Lehrkraft.
+              </p>
+            </aside>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="/tutorials/js-classic-v2/uebungen/">Alle Labs</a></li>
+            <li><a href="#aufgabe">Aufgabe</a></li>
+            <li><a href="#mittel">Erlaubte Mittel</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#anforderungen">Anforderungen</a></li>
+            <li><a href="#schritte">Schritte</a></li>
+            <li><a href="#ki">KI</a></li>
+            <li><a href="#abgabe">Abgabe</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
