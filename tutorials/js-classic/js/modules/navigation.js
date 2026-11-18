@@ -22,6 +22,8 @@ import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS, LABS } from '../data/nav.js'
 import { t, getLanguage, onLangChange } from './i18n.js';
 import { isLight, toggleTheme } from './theme.js';
 
+const COURSE_HOME = '/tutorials/js-classic/';
+
 /* ------------------------------------------------------------------ */
 /* Hilfen                                                              */
 /* ------------------------------------------------------------------ */
@@ -233,7 +235,7 @@ function menuGroup(title, links) {
   return group;
 }
 
-function renderMobileMenu(header) {
+function renderMobileMenu(header, currentPath) {
   const idx = currentChapterIndex();
   const base = '/tutorials/js-classic';
 
@@ -243,44 +245,31 @@ function renderMobileMenu(header) {
   panel.hidden = true;
 
   const inner = el('div', 'jsc-mobile-menu__inner jsc-container');
-  inner.append(
-    menuGroup(t('ui.menu.groupCourse'), [
-      { href: `${base}/`, label: t('ui.nav.home'), current: window.location.pathname.replace(/\/$/, '/index.html').endsWith('/js-classic/index.html') || window.location.pathname === '/tutorials/js-classic/' },
-    ]),
-    menuGroup(
-      t('ui.menu.groupChapters'),
-      CHAPTERS.map((ch, i) => ({
-        href: chapterLink(ch),
-        label: `${ch.nr}. ${t(ch.i18n)}`,
-        current: idx === i,
-      }))
-    ),
-    menuGroup(
-      t('ui.menu.groupLabs'),
-      [
-        { href: `${base}/uebungen/`, label: t('ui.nav.labsOverview') },
-        ...LABS.map((lab) => ({
-          href: labLink(lab),
-          label: `Lab ${lab.nr} · ${t(lab.i18n)}`,
-        })),
-      ]
-    ),
-    menuGroup(t('ui.menu.groupLearn'), [
-      { href: `${base}/ki-grundlagen.html`, label: t('ui.nav.kiBasics') },
-      { href: `${base}/vscode.html`, label: t('ui.nav.vscode') },
-    ]),
-    menuGroup(
-      t('ui.menu.groupFinal'),
-      FINAL_PROJECTS.map((p) => ({ href: `${base}/abschluss/${p.slug}.html`, label: t(p.i18n) }))
-    ),
-    menuGroup(t('ui.menu.groupPlu'), [
-      { href: `${base}/info.html`, label: t('ui.nav.infoAbout') },
-      { href: `${base}/bibliothek.html`, label: t('ui.nav.library') },
-      // P9: Lexikon nach Bibliothek
-      { href: `${base}/lexikon.html`, label: t('ui.nav.lexikon') },
-      { href: `${base}/arbeitsblaetter.html`, label: t('ui.nav.worksheets') },
-    ])
-  );
+
+  /* P33: Gruppen generisch aus NAV.main — gleiche Quelle wie die Desktop-Topnav.
+     Dropdown-Children werden 1:1 zu Gruppen, Einzelpunkte (Lexikon) zu 1er-Gruppen. */
+  const en = getLanguage() === 'en';
+  const resolve = (entry) => (en && entry.urlEn ? entry.urlEn : entry.url);
+  const groups = NAV.main.map((entry) => {
+    if (entry.children) {
+      return menuGroup(
+        t(entry.i18n),
+        entry.children.map((c) => {
+          const href = resolve(c);
+          return {
+            href,
+            label: c.nr ? `${c.nr} · ${t(c.i18n)}` : t(c.i18n),
+            current: currentPath === pageUrl(href),
+          };
+        })
+      );
+    }
+    const href = resolve(entry);
+    return menuGroup(t(entry.i18n), [
+      { href, label: t(entry.i18n), current: currentPath === pageUrl(href) },
+    ]);
+  });
+  inner.append(...groups);
   panel.append(inner);
   header.append(panel);
 
@@ -369,7 +358,7 @@ function renderHeader(currentPath) {
   const inner = el('div', 'jsc-header__inner jsc-container');
 
   const brand = el('a', 'jsc-header__brand');
-  brand.href = NAV.main[0].url;
+  brand.href = COURSE_HOME;
   const logo = document.createElement('img');
   logo.src = '/tutorials/js-classic/assets/img/brand/jsc-logo.svg';
   logo.alt = t('ui.brand.alt');
@@ -402,7 +391,7 @@ function renderHeader(currentPath) {
   themeBtn.addEventListener('click', toggleTheme);
 
   actions.append(renderLangSwitcher(), themeBtn);
-  const menuBtn = renderMobileMenu(header);
+  const menuBtn = renderMobileMenu(header, currentPath);
 
   const actionsRow = actions;
   actionsRow.append(menuBtn);
@@ -548,7 +537,7 @@ function renderFooter() {
 
   const brandWrap = el('div', 'jsc-footer__brand-wrap');
   const logoWrap = el('a', 'jsc-footer__logo');
-  logoWrap.href = NAV.main[0].url;
+  logoWrap.href = COURSE_HOME;
   const logoImg = document.createElement('img');
   logoImg.src = '/tutorials/js-classic/assets/img/brand/jsc-logo.svg';
   logoImg.alt = t('ui.footer.logoSub');
