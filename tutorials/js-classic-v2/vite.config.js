@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { cpSync } from 'node:fs';
+import * as path from 'node:path';
+import { cpSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -33,6 +34,68 @@ export default defineConfig({
         cpSync(resolve(__dirname, 'assets'), resolve(__dirname, 'dist/assets'), { recursive: true });
       },
     },
+    (() => {
+      /* P37: Vite wertet <link rel="alternate" href="..."> als Asset-Referenz
+         und biegt sie auf assets/<name>-<hash>.html um (SEO- und Switcher-Bruch).
+         Fix: hrefs in den gebauten Seiten auf den relativen Originalpfad
+         zurückdrehen und die unverarbeiteten HTML-Duplikate entfernen.
+         Umsetzung als closeBundle (fs): Vite schreibt die fertigen HTML-Seiten
+         erst NACH generateBundle — das Bundle dient nur der HASH→Original-Auflösung.
+         IIFE: Plugin-Kontext ist hook-lokal, Bundle-Referenz per Closure sichern. */
+      let htmlOrig = null; // assets/x-HASH.html → originalFileName (dist-relativ)
+      return {
+        name: 'jsc-hreflang-restore',
+        apply: 'build',
+        generateBundle(_opts, bundle) {
+          /* Mapping VOR dem Löschen aufbauen (Duplikate verschwinden sonst
+             aus dem Bundle, bevor closeBundle sie auflösen kann). */
+          htmlOrig = new Map();
+          for (const [fileName, chunk] of Object.entries(bundle)) {
+            const origs = chunk.originalFileNames ||
+              (chunk.originalFileName ? [chunk.originalFileName] : []);
+            for (const o of origs) {
+              if (o.endsWith('.html')) htmlOrig.set(fileName, o);
+            }
+          }
+          for (const [fileName] of Object.entries(bundle)) {
+            if (/^assets\/[^/]+-[^/]+\.html$/.test(fileName)) {
+              delete bundle[fileName];
+            }
+          }
+        },
+        closeBundle() {
+          if (!htmlOrig || !htmlOrig.size) return;
+          const asPosix = (p) => p.split(path.sep).join(path.posix.sep);
+          const toRel = (fromDistRel, toDistRel) =>
+            path.posix.relative(path.posix.dirname(fromDistRel), toDistRel);
+          const walk = (dir) => {
+            const out = [];
+            for (const ent of readdirSync(dir, { withFileTypes: true })) {
+              const full = path.join(dir, ent.name);
+              if (ent.isDirectory()) out.push(...walk(full));
+              else if (ent.name.endsWith('.html')) out.push(full);
+            }
+            return out;
+          };
+          const distDir = resolve(__dirname, 'dist');
+          for (const file of walk(distDir)) {
+            const rel = asPosix(path.relative(distDir, file));
+            let src = readFileSync(file, 'utf8');
+            const fixed = src.replace(
+              /(<link[^>]*rel="alternate"[^>]*href=")([^"]+)(")/g,
+              (m, pre, href, post) => {
+                const hit = href.match(/\/assets\/[^/]+\.html$/);
+                if (!hit) return m;
+                const hashed = `assets/${hit[0].split('/assets/')[1]}`;
+                const orig = htmlOrig.get(hashed);
+                return orig ? pre + toRel(rel, orig) + post : m;
+              }
+            );
+            if (fixed !== src) writeFileSync(file, fixed);
+          }
+        },
+      };
+    })(),
   ],
   server: {
     port: 5173,
