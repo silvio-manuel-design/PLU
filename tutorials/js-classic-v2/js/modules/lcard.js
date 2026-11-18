@@ -7,17 +7,17 @@
  * `plu:progress` aktualisiert Kapitel-Ringe live.
  */
 
-import { CHAPTERS, LABS } from '../data/nav.js';
+import { CHAPTERS, LABS, BASE } from '../data/nav.js';
 import { t, getLanguage } from './i18n.js';
 import { isDone } from './progress.js';
 import { get } from './storage.js';
 
 const RING_R = 15.9155;
-const IMG_BASE = '/tutorials/js-classic-v2/assets/img';
+const IMG_BASE = `${BASE}/assets/img`;
 
 function hrefFor(dir, slug, slugEn) {
   const s = getLanguage() === 'en' && slugEn ? slugEn : slug;
-  return `/tutorials/js-classic-v2/${dir}/${s}.html`;
+  return `${BASE}/${dir}/${s}.html`;
 }
 
 function ringSvg(pct) {
