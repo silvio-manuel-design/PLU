@@ -98,7 +98,18 @@ export const NAV = {
         })),
       ],
     },
-    { id: 'final', url: `${BASE}/projekte/`, i18n: 'ui.nav.final' },
+    {
+      id: 'final',
+      url: `${BASE}/projekte/`,
+      urlEn: `${BASE}/projekte/index-en.html`,
+      i18n: 'ui.nav.final',
+      children: [
+        { id: 'final-overview', url: `${BASE}/projekte/`, urlEn: `${BASE}/projekte/index-en.html`, i18n: 'ui.nav.finalOverview' },
+        { id: 'proj-01', url: `${BASE}/projekte/projekt-1-highscore-game.html`, urlEn: `${BASE}/projekte/projekt-1-highscore-game-en.html`, nr: '01', i18n: 'ui.proj.01' },
+        { id: 'proj-02', url: `${BASE}/projekte/projekt-2-formular-meister.html`, urlEn: `${BASE}/projekte/projekt-2-formular-meister-en.html`, nr: '02', i18n: 'ui.proj.02' },
+        { id: 'proj-03', url: `${BASE}/projekte/projekt-3-sicherheits-audit.html`, urlEn: `${BASE}/projekte/projekt-3-sicherheits-audit-en.html`, nr: '03', i18n: 'ui.proj.03' },
+      ],
+    },
     {
       id: 'capstone',
       url: `${BASE}/abschluss/`,

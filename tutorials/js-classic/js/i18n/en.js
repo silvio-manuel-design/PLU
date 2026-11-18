@@ -55,6 +55,11 @@ export default {
   'ui.classroom.on': 'Classroom mode on',
   'ui.classroom.off': 'Classroom mode off',
   'ui.nav.final': 'Projects',
+  'ui.nav.finalOverview': 'Overview',
+  /* P29: project titles for the nav dropdown */
+  'ui.proj.01': 'Highscore Game',
+  'ui.proj.02': 'Form Master',
+  'ui.proj.03': 'Security Audit',
   'ui.nav.info': 'About',
   'ui.nav.infoAbout': 'About the Course',
   'ui.nav.vscode': 'VS Code',

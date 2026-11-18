@@ -55,6 +55,11 @@ export default {
   'ui.classroom.on': 'Klassenraum-Modus an',
   'ui.classroom.off': 'Klassenraum-Modus aus',
   'ui.nav.final': 'Projekte',
+  'ui.nav.finalOverview': 'Übersicht',
+  /* P29: Projekte-Titel fürs Nav-Dropdown */
+  'ui.proj.01': 'Highscore-Spiel',
+  'ui.proj.02': 'Formular-Meister',
+  'ui.proj.03': 'Sicherheits-Audit',
   'ui.nav.info': 'Infos',
   'ui.nav.infoAbout': 'Über den Kurs',
   'ui.nav.vscode': 'VS Code',
