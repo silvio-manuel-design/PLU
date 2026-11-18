@@ -64,7 +64,6 @@ const BASE = '/tutorials/js-classic';
 
 export const NAV = {
   main: [
-    { id: 'home', url: `${BASE}/`, i18n: 'ui.nav.home' },
     {
       id: 'chapters',
       url: `${BASE}/kapitel/01-einfuehrung-ausgabe.html`,
