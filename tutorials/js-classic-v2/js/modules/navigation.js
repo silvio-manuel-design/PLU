@@ -18,11 +18,11 @@
  *     Return-of-Focus auf den auslösenden Button.
  */
 
-import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS, LABS } from '../data/nav.js';
+import { NAV, CHAPTERS, INFO_PAGES, FINAL_PROJECTS, LABS, BASE } from '../data/nav.js';
 import { t, getLanguage, onLangChange } from './i18n.js';
 import { isLight, toggleTheme } from './theme.js';
 
-const COURSE_HOME = '/tutorials/js-classic-v2/';
+const COURSE_HOME = `${BASE}/`;
 
 /* ------------------------------------------------------------------ */
 /* Hilfen                                                              */
@@ -45,7 +45,7 @@ function currentChapterIndex() {
   return NAV.chaptersMeta.findIndex((ch) => {
     const slugs = [ch.slug, ch.slugEn].filter(Boolean);
     return slugs.some((slug) => {
-      const chapterPath = `/tutorials/js-classic-v2/kapitel/${slug}.html`.replace(/\/$/, '');
+      const chapterPath = `${BASE}/kapitel/${slug}.html`.replace(/\/$/, '');
       return path === chapterPath || path.endsWith(`/${slug}.html`);
     });
   });
@@ -357,7 +357,7 @@ function renderHeader(currentPath) {
   const brand = el('a', 'jsc-header__brand');
   brand.href = COURSE_HOME;
   const logo = document.createElement('img');
-  logo.src = '/tutorials/js-classic-v2/assets/img/brand/jsc-logo.svg';
+  logo.src = `${BASE}/assets/img/brand/jsc-logo.svg`;
   logo.alt = t('ui.brand.alt');
   logo.width = 32;
   logo.height = 32;
@@ -404,12 +404,12 @@ function renderHeader(currentPath) {
 
 function chapterLink(chapter) {
   const slug = getLanguage() === 'en' && chapter.slugEn ? chapter.slugEn : chapter.slug;
-  return `/tutorials/js-classic-v2/kapitel/${slug}.html`;
+  return `${BASE}/kapitel/${slug}.html`;
 }
 
 function labLink(lab) {
   const slug = getLanguage() === 'en' && lab.slugEn ? lab.slugEn : lab.slug;
-  return `/tutorials/js-classic-v2/uebungen/${slug}.html`;
+  return `${BASE}/uebungen/${slug}.html`;
 }
 
 function renderTocDialog(bar) {
@@ -509,7 +509,7 @@ function renderBottomBar() {
     nextBtn.href = chapterLink(next);
   } else if (idx === NAV.chaptersMeta.length - 1) {
     // P8: letztes Kapitel → Abschluss-Übersicht (Altbestand bis P11, EN-Fallback auf DE)
-    nextBtn.href = '/tutorials/js-classic-v2/abschluss/';
+    nextBtn.href = `${BASE}/abschluss/`;
   } else {
     nextBtn.removeAttribute('href');
     nextBtn.classList.add('is-disabled');
@@ -536,7 +536,7 @@ function renderFooter() {
   const logoWrap = el('a', 'jsc-footer__logo');
   logoWrap.href = COURSE_HOME;
   const logoImg = document.createElement('img');
-  logoImg.src = '/tutorials/js-classic-v2/assets/img/brand/jsc-logo.svg';
+  logoImg.src = `${BASE}/assets/img/brand/jsc-logo.svg`;
   logoImg.alt = t('ui.footer.logoSub');
   logoImg.width = 40;
   logoImg.height = 40;
@@ -571,12 +571,12 @@ function renderFooter() {
   const ulChapters = el('ul', 'jsc-footer__list');
   // P9R1: schlanke Lernen-Spalte (4 Einträge — die 12er-Liste lebt in Dropdown/Mobile/Home)
   const allChaptersUrl = getLanguage() === 'en'
-    ? '/tutorials/js-classic-v2/kapitel/index-en.html'
-    : '/tutorials/js-classic-v2/kapitel/';
+    ? `${BASE}/kapitel/index-en.html`
+    : `${BASE}/kapitel/`;
   ulChapters.append(
     footerLink(allChaptersUrl, t('ui.footer.allChapters')),
     footerLink(chapterLink(NAV.chaptersMeta[0]), `01. ${t('ui.ch.01')}`),
-    footerLink('/tutorials/js-classic-v2/uebungen/', t('ui.footer.exercises')),
+    footerLink(`${BASE}/uebungen/`, t('ui.footer.exercises')),
     footerLink(labLink(LABS[0]), `01. ${t('ui.lab.01')}`)
   );
   navChapters.append(ulChapters);
@@ -591,9 +591,9 @@ function renderFooter() {
   ulResources.append(
     // P9R5: Duplikate entfernt — Übungen/Arbeitsblätter leben in der Lernen-Spalte
     // P9: Lexikon + GitHub & Abgabe in der Ressourcen-Spalte
-    footerLink('/tutorials/js-classic-v2/lexikon.html', t('ui.nav.lexikon')),
-    footerLink('/tutorials/js-classic-v2/github.html', t('ui.nav.github')),
-    footerLink('/tutorials/js-classic-v2/ki-grundlagen.html', t('ui.footer.kiBasics')),
+    footerLink(`${BASE}/lexikon.html`, t('ui.nav.lexikon')),
+    footerLink(`${BASE}/github.html`, t('ui.nav.github')),
+    footerLink(`${BASE}/ki-grundlagen.html`, t('ui.footer.kiBasics')),
     pluHub
   );
   navResources.append(ulResources);

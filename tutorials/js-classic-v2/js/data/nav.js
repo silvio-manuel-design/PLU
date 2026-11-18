@@ -60,7 +60,11 @@ export const FINAL_PROJECTS = [
   { slug: 'projekt-dein-spiel', i18n: 'ui.cap.03' },
 ];
 
-const BASE = '/tutorials/js-classic-v2';
+/* P35: Base aus Vite (Test-Builds: vite build --base=/javascript/) —
+   Fallback für statisches Serving ohne Vite. */
+export const BASE = import.meta.env.BASE_URL === '/'
+  ? '/tutorials/js-classic-v2'
+  : import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export const NAV = {
   main: [
