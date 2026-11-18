@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitel 05: Schleifen · JavaScript V2 (PLU)</title>
+    <meta
+      name="description"
+      content="Lernschritte: die for-Schleife, while und do...while, break und continue sowie verschachtelte Schleifen mit Mustern — mit Würfel-Simulator und Muster-Maler, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <link
+      rel="canonical"
+      href="https://www.pantam.at/tutorials/js-classic-v2/kapitel/05-schleifen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="05-schleifen.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="05-loops.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="05-schleifen.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kapitel 05: Schleifen · JavaScript V2" />
+    <meta
+      property="og:description"
+      content="Lernschritte: die for-Schleife, while und do...while, break und continue sowie verschachtelte Schleifen mit Mustern — mit Würfel-Simulator und Muster-Maler, Playground, typischen Fehlern, Checkliste, Reflexion, Quiz und KI-Prompt-Training."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pantam.at/tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.jpg"
+    />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic-v2/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m05">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main" class="jsc-chapter">
+      <div class="jsc-progressbar" aria-hidden="true"></div>
+
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="ch-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-768.avif   768w,
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.avif 1440w,
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-768.webp   768w,
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.webp 1440w,
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.jpg"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-768.jpg   768w,
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-1440.jpg 1440w,
+                /tutorials/js-classic-v2/assets/img/chapters/kap05/jsc-kap05-hero-v2-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              fetchpriority="high"
+              decoding="async"
+              alt="Ein leuchtendes Rad aus wiederkehrenden Lichtbögen, das sich in einer endlosen Rotation dreht."
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Kapitel 05</p>
+          <h1 id="ch-title" class="jsc-hero__title">Schleifen</h1>
+          <p class="jsc-hero__sub">Wiederholen ohne müde zu werden: Wiederkehrendes dem Computer überlassen.</p>
+        </div>
+      </section>
+
+      <nav class="jsc-jumplist jsc-container" aria-label="Abschnitte des Kapitels">
+        <a href="#einstieg" data-i18n="ui.b17.chip">Einstieg</a>
+        <a href="#schritt-1">1 for</a>
+        <a href="#schritt-2">2 while</a>
+        <a href="#schritt-3">3 break/continue</a>
+        <a href="#schritt-4">4 Muster</a>
+        <a href="#check-title">✓ Checkliste</a>
+        <a href="#quiz-title">Quiz</a>
+      </nav>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-chapter-main">
+          <section class="jsc-understand" id="einstieg" aria-labelledby="einstieg-title">
+            <h2 id="einstieg-title" class="jsc-understand__eyebrow">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.understandEyebrow">ERST MAL VERSTEHEN</span>
+            </h2>
+            <div class="jsc-understand__body">
+              <p>Ein Song hat einen Refrain. Der Refrain kommt immer wieder. Dein Gehirn weiß: noch einmal. Du singst ihn zehn Mal — ohne nachzudenken.</p>
+              <p>Eine <strong>Schleife</strong> ist das für Programme: Wiederhole etwas, bis ein Ziel erreicht ist. Du schreibst die Anweisung einmal. Der Computer wiederholt sie tausend Mal. Er wird nicht müde. Er meckert nicht.</p>
+              <p>Das ist die Superkraft des Programmierens: Wiederholung ohne Ermüdung.</p>
+            </div>
+          </section>
+          <div class="jsc-terms">
+            <p class="jsc-terms__eyebrow">
+              <i class="ph ph-book-open" aria-hidden="true"></i>
+              <span data-i18n="ui.b17.termsEyebrow">WÖRTER, DIE DU JETZT LERNST</span>
+            </p>
+            <div class="jsc-terms__grid">
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Schleife <span class="jsc-term-card__word-en">/ loop</span></p>
+                <p class="jsc-term-card__def">Wiederholung einer Anweisung, bis ein Ziel erreicht ist.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie der Refrain eines Songs.</p>
+                <p class="jsc-term-card__code"><code>for (let i = 1; i &lt;= 5; i++)</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Durchlauf <span class="jsc-term-card__word-en">/ iteration</span></p>
+                <p class="jsc-term-card__def">Ein einzelner Wiederholungs-Schritt.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> ein einzelner Refrain.</p>
+                <p class="jsc-term-card__code"><code>`i` — in jedem Umlauf</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Zähler <span class="jsc-term-card__word-en">/ counter</span></p>
+                <p class="jsc-term-card__def">Eine Variable, die die Durchläufe zählt.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie „Mal 1, Mal 2, Mal 3“ auf einem Zettel.</p>
+                <p class="jsc-term-card__code"><code>let i = 1; i++</code></p>
+              </div>
+              <div class="jsc-term-card">
+                <p class="jsc-term-card__word">Endlosschleife <span class="jsc-term-card__word-en">/ infinite loop</span></p>
+                <p class="jsc-term-card__def">Eine Schleife, die nie aufhört. Meist ein Versehen.</p>
+                <p class="jsc-term-card__life"><strong>Alltag:</strong> wie ein Song ohne Ende-Knopf.</p>
+                <p class="jsc-term-card__code"><code>Bedingung nie false</code></p>
+              </div>
+            </div>
+          </div>
+          <section class="jsc-step jsc-container jsc-band" data-step="01" id="schritt-1" aria-labelledby="s1-title">
+            <h2 id="s1-title" class="jsc-step__heading">Die for-Schleife (zähler-gesteuert)</h2>
+            <div class="jsc-step__why">
+              <p>
+                100 Kästchen malen? Ein Mensch braucht Stunden, ein Computer Millisekunden.
+                Schleifen sind der Grund, warum Programmieren sich überhaupt lohnt.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die <code>for</code>-Schleife hat drei Teile im Kopf: <strong>Start</strong>
+                (<code>let i = 1</code>), <strong>Bedingung</strong> (<code>i &lt;= 5</code>) und
+                <strong>Schritt</strong> (<code>i++</code>). Vor jedem Durchlauf wird geprüft:
+                Bedingung wahr? Dann läuft der Block, danach der Schritt — rundum.
+              </p>
+              <figure class="jsc-code-block" data-filename="runden.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">runden.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let i = 1; i &lt;= 5; i++) {
+  console.log("Runde", i);
+}
+// Ausgabe: Runde 1 … Runde 5
+for (let i = 0; i &lt; 10; i += 2) {
+  console.log(i); // 0 2 4 6 8
+}</code></pre>
+              </figure>
+            </div>
+            <p class="jsc-step__blocklabel" data-i18n="ui.pg.label">Playground</p>
+            <p data-i18n="ui.pg.intro">Probier es direkt aus — dein erster eigener Code läuft hier im Browser:</p>
+            <div class="jsc-playground" data-component="jsc-playground">
+              <div class="jsc-playground__bar">
+                <span class="jsc-playground__file">playground.js</span>
+              </div>
+              <label class="jsc-step__blocklabel jsc-playground__label" for="pg-ch05">Code</label>
+              <textarea id="pg-ch05" data-pg-code spellcheck="false">for (let i = 1; i <= 5; i++) {
+  console.log("Runde", i);
+}</textarea>
+              <div class="jsc-playground__actions">
+                <button type="button" class="jsc-button jsc-button--primary jsc-button--sm" data-pg-run data-i18n="ui.pg.run">Ausführen</button>
+                <button type="button" class="jsc-button jsc-button--ghost jsc-button--sm" data-pg-reset data-i18n="ui.pg.reset">Zurücksetzen</button>
+              </div>
+              <div class="jsc-playground__output" data-pg-output role="log" aria-live="polite" aria-label="Konsolenausgabe"></div>
+            </div>
+            <p>
+              <strong>Deine Aufgabe:</strong> Ändere die Schleife so, dass sie rückwärts von 5
+              bis 1 zählt.
+            </p>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Endlos-Schleife</p>
+                <p>Vergisst du den Schritt (<code>i++</code>), bleibt die Bedingung für immer wahr — der Browser friert ein. Rettung: Tab schließen (bzw. F5 danach).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Off-by-one</p>
+                <p><code>&lt;=</code> statt <code>&lt;</code> lässt die Schleife einmal zu oft laufen (oder zu selten). Mit kleinen Zahlen testen: 1 bis 5 soll genau 5× laufen.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">i außerhalb nutzen</p>
+                <p><code>let i</code> im Schleifenkopf lebt nur IN der Schleife (Block-Scope). Brauchst du den Zähler danach, vorher mit <code>let i;</code> deklarieren.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Bedingung im Körper verändern</p>
+                <p>Wer die Zählvariable im Block neu setzt, kämpft gegen die Schleife. Veränderungen gehören in den Schritt-Teil des Kopfes.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Zähl ab 0, wenn du über Arrays läufst (kommt in Kapitel 06) — ab 1 nur, wenn es wirklich um ‚Runde 1..n' geht.</p>
+            </aside>
+            <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch05-s1-criteria">
+              <li><label><input type="checkbox" /> <span>Ich kann den Aufbau der for-Schleife (Start, Bedingung, Schritt) erklären und sicher schreiben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die Off-by-one-Falle und kann &lt;= vs &lt; bewusst wählen.</span></label></li>
+            </ul>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="02" id="schritt-2" aria-labelledby="s2-title">
+            <h2 id="s2-title" class="jsc-step__heading">while &amp; do...while (bedingungs-gesteuert)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Manchmal weißt du vorher nicht, WIE OFT — nur, BIS WANN: ‚Spiele weiter, bis
+                das Level geschafft ist.'
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>while</code> prüft die Bedingung VOR jedem Durchlauf — kann also 0×
+                laufen. <code>do...while</code> prüft NACH dem ersten Durchlauf — läuft also
+                mindestens einmal.
+              </p>
+              <figure class="jsc-code-block" data-filename="wuerfel.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">wuerfel.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">let wuerfel = 0;
+let wurf = 0;
+while (wuerfel !== 6) {
+  wuerfel = Math.floor(Math.random() * 6) + 1;
+  wurf++;
+  console.log("Wurf", wurf, "→", wuerfel);
+}
+console.log("Nach", wurf, "Würfen die erste 6!");</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="dice">
+              <p class="jsc-demo__title">Würfel-Simulator</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-dice-roll
+                  data-roll="Wurf"
+                  data-success="Nach {n} Würfen die erste 6!"
+                >Würfeln</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini-Konsole"></div>
+              </div>
+              <p class="jsc-demo__hint">Der Simulator führt die while-Schleife aus dem Beispiel aus — jedes Mal ein anderes Ergebnis.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Bedingung nie erreicht</p>
+                <p>Wenn die Bedingung nie false wird: Endlos-Schleife. Der Tab hängt — F5 (nach dem Schließen) ist die Rettung, das Speichern vorher war klug.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zähler im Körper vergessen</p>
+                <p><code>while (wurf &lt; 10) { console.log(wurf); }</code> ohne <code>wurf++</code> im Körper läuft ewig — der Zähler gehört in die Schleife.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">do...while falsch verstehen</p>
+                <p>„Erst prüfen, dann laufen" ist while. do...while läuft ERST — die Prüfung kommt danach. Mindestens ein Durchlauf ist garantiert.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">falsche Schleifenart</p>
+                <p>Klare Zählung → for. Ereignis abwarten → while. Wenn du im while einen Zähler pflegst, frag dich: war das nicht doch eine for?</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>for = wenn du die Anzahl kennst; while = wenn du ein Ereignis erwartest. Wenn du im while den Zähler selbst pflegst, überleg dir, ob es nicht doch eine for ist.</p>
+            </aside>
+            <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch05-s2-criteria">
+              <li><label><input type="checkbox" /> <span>Ich kann eine while-Schleife bauen und weiß, wann sie while statt for sein muss.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne den Unterschied zwischen while und do...while.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann eine Endlosschleife erkennen und weiß, wie ich sie stoppe.</span></label></li>
+            </ul>
+          </section>
+
+          <aside class="jsc-pause jsc-container jsc-band--alt" id="didaktische-pause" aria-label="Didaktische Pause">
+            <p class="jsc-pause__eyebrow">
+              <i class="ph ph-coffee" aria-hidden="true"></i> DIDAKTISCHE PAUSE
+            </p>
+            <p class="jsc-pause__text">
+              Ein Computer führt eine Million Wiederholungen ohne zu meckern aus — aber ER
+              würde nie vergessen, den Zähler zu erhöhen. Endlosschleifen sind fast immer
+              menschliches Vergessen, nicht Computer-Trotz.
+            </p>
+          </aside>
+
+          <section class="jsc-step jsc-container jsc-band" data-step="03" id="schritt-3" aria-labelledby="s3-title">
+            <h2 id="s3-title" class="jsc-step__heading">break &amp; continue (Ausstieg &amp; Überspringen)</h2>
+            <div class="jsc-step__why">
+              <p>
+                Manchmal muss eine Schleife früher aufhören (gefunden!) oder einen Durchlauf
+                überspringen (ungültig) — ohne die ganze Schleife zu beenden.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                <code>break</code> verlässt die Schleife komplett. <code>continue</code>
+                springt sofort zum nächsten Durchlauf. Beide gehören sparsam und bewusst
+                eingesetzt — sie ändern den „normalen" Fluss.
+              </p>
+              <figure class="jsc-code-block" data-filename="ausstieg.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">ausstieg.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let i = 1; i &lt;= 20; i++) {
+  if (i % 3 === 0) continue; // 3er überspringen
+  if (i &gt; 15) break;         // danach Schluss
+  console.log(i);
+}</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">break in verschachtelten Schleifen</p>
+                <p><code>break</code> bricht nur die INNERSTE Schleife ab — die äußere läuft weiter. Wer „alles stoppen" will, braucht eine Flag-Variable.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">continue am Anfang unleserlich</p>
+                <p>Mehrere <code>continue</code>-Bedingungen am Schleifenanfang verwirren. Manchmal ist ein sauberes <code>if</code> um den Rest lesbarer.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">break statt korrekter Bedingung</p>
+                <p><code>for (let i = 1; ; i++) { if (i &gt; 5) break; }</code> ist möglich, aber die Bedingung gehört in den Kopf — break ist für den FRÜHEN Ausstieg.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">continue vergessen → else-Kette</p>
+                <p>Wer <code>continue</code> scheut, baut lange else-Ketten auf. Ein überspringender Durchlauf ist oft die ehrlichere Struktur.</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>break ist dein Freund bei der Suche: ‚Durchlaufe die Liste, bis du das Element findest, dann raus.' — spart Zyklen.</p>
+            </aside>
+            <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch05-s3-criteria">
+              <li><label><input type="checkbox" /> <span>Ich kann break einsetzen, um eine Schleife frühzeitig zu verlassen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann continue nutzen, um Durchläufe zu überspringen.</span></label></li>
+            </ul>
+          </section>
+
+          <section class="jsc-step jsc-container jsc-band--alt" data-step="04" id="schritt-4" aria-labelledby="s4-title">
+            <h2 id="s4-title" class="jsc-step__heading">Verschachtelte Schleifen &amp; Muster</h2>
+            <div class="jsc-step__why">
+              <p>
+                Ein Kästchen ist langweilig — ein 10×10-Raster ist ein Muster. Verschachtelte
+                Schleifen bauen Zeilen und Spalten.
+              </p>
+            </div>
+            <div class="jsc-step__explain">
+              <p>
+                Die äußere Schleife zählt <strong>Zeilen</strong>, die innere
+                <strong>Spalten</strong>. Die Gesamtdurchläufe sind das Produkt der Grenzen —
+                3×5 sind 15 Durchläufe.
+              </p>
+              <figure class="jsc-code-block" data-filename="muster.js">
+                <figcaption class="jsc-code-block__bar">
+                  <span class="jsc-code-block__file">muster.js</span>
+                  <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                </figcaption>
+                <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let zeile = 1; zeile &lt;= 3; zeile++) {
+  let ausgabe = "";
+  for (let spalte = 1; spalte &lt;= 5; spalte++) {
+    ausgabe += "*";
+  }
+  console.log(ausgabe);
+}
+// *****
+// *****
+// *****</code></pre>
+              </figure>
+            </div>
+            <div class="jsc-step__demo jsc-demo" data-component="jsc-demo" data-demo="pattern">
+              <p class="jsc-demo__title">Muster-Maler</p>
+              <div class="jsc-demo__row">
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--primary jsc-button--sm"
+                  data-pattern="rect"
+                  data-rows="5"
+                  data-cols="8"
+                >Rechteck</button>
+                <button
+                  type="button"
+                  class="jsc-button jsc-button--outline jsc-button--sm"
+                  data-pattern="tri"
+                  data-rows="5"
+                >Dreieck</button>
+                <div class="jsc-demo-console" data-console-output role="log" aria-label="Mini-Konsole"></div>
+              </div>
+              <p class="jsc-demo__hint">Das Rechteck nutzt zwei volle Schleifen — beim Dreieck wächst die innere Grenze mit der Zeile.</p>
+            </div>
+            <div class="jsc-step__mistakes">
+              <p class="jsc-step__blocklabel">Typische Fehler</p>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Zeilenumbruch in der inneren Schleife</p>
+                <p>Wer <code>console.log</code> IN der inneren Schleife aufruft, bekommt Einzel-Sterne statt Zeilen. Sammeln in einer Variablen, außer ausgeben.</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Derselbe Zähler für beide Schleifen</p>
+                <p><code>for (let i... ) { for (let i... )</code> kollidiert — jede Schleife braucht ihren eigenen Zähler (z. B. <code>zeile</code>/<code>spalte</code>).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">Reihenfolge vertauscht</p>
+                <p>Welche Schleife ist äußer, welche inner? Faustregel: die ÄUSSERE steht für das, was sich am SELTENSTEN ändert (Zeilen), die INNERE für das Häufige (Spalten).</p>
+              </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">O(n²) ignorieren</p>
+                <p>100×100 sind 10.000 Durchläufe — bei verschachtelten Schleifen wächst der Aufwand quadratisch. Große Raster brauchen Geduld (oder schlauere Verfahren).</p>
+              </div>
+            </div>
+            <aside class="jsc-step__tip">
+              <p class="jsc-step__blocklabel">Profi-Tipp</p>
+              <p>Das 10×10-Muster aus Sternen ist das ‚Hello World' der verschachtelten Schleifen — wer das kann, kann Arrays und später DOM-Raster.</p>
+            </aside>
+            <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch05-s4-criteria">
+              <li><label><input type="checkbox" /> <span>Ich kann zwei Schleifen verschachteln und das Ergebnis vorhersagen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann ein Sternchen-Muster (Rechteck) mit verschachtelten Schleifen zeichnen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich habe mindestens ein eigenes Mini-Projekt mit einer Schleife umgesetzt.</span></label></li>
+            </ul>
+          </section>
+
+          <section class="jsc-check-section jsc-container jsc-band" aria-labelledby="check-title">
+            <h2 id="check-title">Check: Kannst du das schon?</h2>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-ch05-check"
+              data-chapter="05"
+            >
+              <li><label><input type="checkbox" /> <span>Ich kann den Aufbau der for-Schleife (Start, Bedingung, Schritt) erklären und sicher schreiben.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne die Off-by-one-Falle und kann &lt;= vs &lt; bewusst wählen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann eine while-Schleife bauen und weiß, wann sie while statt for sein muss.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kenne den Unterschied zwischen while und do...while.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann eine Endlosschleife erkennen und weiß, wie ich sie stoppe.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann break einsetzen, um eine Schleife frühzeitig zu verlassen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann continue nutzen, um Durchläufe zu überspringen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann zwei Schleifen verschachteln und das Ergebnis vorhersagen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich kann ein Sternchen-Muster (Rechteck) mit verschachtelten Schleifen zeichnen.</span></label></li>
+              <li><label><input type="checkbox" /> <span>Ich habe mindestens ein eigenes Mini-Projekt mit einer Schleife umgesetzt.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+            <div class="jsc-solution-gate" data-component="jsc-solution-gate">
+              <button type="button" class="jsc-button jsc-button--ghost jsc-solution-gate__toggle" data-sol-toggle data-i18n="ui.sol.show">Ich habe es versucht — Lösung anzeigen</button>
+              <div class="jsc-solution-gate__body" hidden>
+                <figure class="jsc-code-block" data-filename="fizzbuzz.js">
+                  <figcaption class="jsc-code-block__bar">
+                    <span class="jsc-code-block__file">fizzbuzz.js</span>
+                    <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Kopieren</button>
+                  </figcaption>
+                  <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">for (let i = 1; i &lt;= 20; i++) {
+  if (i % 15 === 0) {
+    console.log("FizzBuzz");
+  } else if (i % 3 === 0) {
+    console.log("Fizz");
+  } else if (i % 5 === 0) {
+    console.log("Buzz");
+  } else {
+    console.log(i);
+  }
+}</code></pre>
+                </figure>
+                <p class="jsc-solution-gate__why">
+                  % prüft Teilbarkeit, continue/break nicht nötig — Reihenfolge der Bedingungen
+                  ist alles (beide zuerst!).
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="jsc-reflection-section jsc-container jsc-band--alt" aria-labelledby="reflect-title" data-component="jsc-reflection" data-storage-key="jsc-ch05-reflect" data-export-chapter="05" data-export-title="Schleifen" data-export-checklist="jsc-ch05-check" data-export-quiz="jsc-ch05-quiz">
+            <h2 id="reflect-title">Reflexion</h2>
+            <div class="jsc-reflection">
+              <label class="jsc-reflection__item">
+                <span>Wo im Alltag würdest du eine Schleife einsetzen, wenn du könntest? Beschreibe Durchlauf und Abbruchbedingung.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Was ist schlimmer: eine Endlosschleife oder eine Schleife, die einmal zu wenig läuft? Begründe.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+              <label class="jsc-reflection__item">
+                <span>Erkläre break und continue so, dass ein Mitschüler sie nicht verwechselt.</span>
+                <textarea data-reflect rows="3"></textarea>
+              </label>
+            </div>
+            <p class="jsc-reflection__actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Drucken</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-quiz-section jsc-container jsc-band" aria-labelledby="quiz-title">
+            <h2 id="quiz-title">Quiz</h2>
+            <div class="jsc-quiz" data-component="jsc-quiz" data-storage-key="jsc-ch05-quiz">
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Was fehlt hier? <code>for (let i = 0; i &lt; 5; )</code></legend>
+                <label><input type="radio" name="ch05-q0" value="a" /> Der Schritt i++</label>
+                <label><input type="radio" name="ch05-q0" value="b" /> Eine Klammer</label>
+                <label><input type="radio" name="ch05-q0" value="c" /> Ein Semikolon</label>
+                <label><input type="radio" name="ch05-q0" value="d" /> Nichts</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — ohne i++ bleibt i bei 0, die Bedingung bleibt wahr: Endlosschleife.</strong></template>
+                <template data-feedback="wrong">Der dritte Teil im Schleifenkopf fehlt: der Schritt. Ohne ihn ändert sich i nie — und die Schleife läuft ewig.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Was macht <code>continue</code>?</legend>
+                <label><input type="radio" name="ch05-q1" value="a" /> Beendet die Schleife</label>
+                <label><input type="radio" name="ch05-q1" value="b" /> Überspringt den aktuellen Durchlauf</label>
+                <label><input type="radio" name="ch05-q1" value="c" /> Springt ans Ende der Schleife</label>
+                <label><input type="radio" name="ch05-q1" value="d" /> Wirft einen Fehler</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — continue überspringt den Rest des aktuellen Durchlaufs und springt zum nächsten.</strong></template>
+                <template data-feedback="wrong">Die Schleife läuft weiter — nur der aktuelle Durchlauf wird übrig übersprungen. Beenden tut das break.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="b">
+                <legend>Wie oft läuft dieser Körper? <code>for (let i=1; i&lt;=3; i++) for (let j=1; j&lt;=4; j++)</code></legend>
+                <label><input type="radio" name="ch05-q2" value="a" /> 7</label>
+                <label><input type="radio" name="ch05-q2" value="b" /> 12</label>
+                <label><input type="radio" name="ch05-q2" value="c" /> 9</label>
+                <label><input type="radio" name="ch05-q2" value="d" /> 4</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Richtig — 3 × 4 = 12: die innere Schleife läuft komplett für jeden äußeren Durchlauf.</strong></template>
+                <template data-feedback="wrong">Bei verschachtelten Schleifen multiplizieren sich die Durchläufe: 3 (außen) × 4 (innen) = 12.</template>
+              </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="a">
+                <legend>Wann ist <code>do...while</code> sinnvoll?</legend>
+                <label><input type="radio" name="ch05-q3" value="a" /> Wenn mindestens ein Durchlauf garantiert sein soll</label>
+                <label><input type="radio" name="ch05-q3" value="b" /> Immer</label>
+                <label><input type="radio" name="ch05-q3" value="c" /> Nie</label>
+                <label><input type="radio" name="ch05-q3" value="d" /> Nur mit break</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Genau — do...while prüft NACH dem ersten Durchlauf, läuft also sicher mindestens einmal.</strong></template>
+                <template data-feedback="wrong">Der Unterschied zur while liegt im Zeitpunkt der Prüfung: do...while läuft erst einmal los und prüft danach.</template>
+              </fieldset>
+              <p class="jsc-quiz__actions">
+                <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Antworten prüfen</button>
+                <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Nochmal versuchen</button>
+              </p>
+              <p class="jsc-quiz__result" data-quiz-result aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="jsc-summary-section jsc-container jsc-band--alt" aria-labelledby="summary-title">
+            <div class="jsc-summary-card">
+              <h2 id="summary-title">
+                <i class="ph ph-list-checks" aria-hidden="true"></i> Zusammenfassung
+              </h2>
+              <ul class="jsc-summary-list">
+                <li>for = Anzahl bekannt; while = Ereignis abwarten.</li>
+                <li>Der Schritt (i++) gehört zur for — ohne ihn: Endlos.</li>
+                <li>break = ganz raus; continue = einen überspringen.</li>
+                <li>Verschachtelte Schleifen bauen Raster: Zeilen × Spalten.</li>
+                <li>Off-by-one ist die häufigste Schleifen-Falle — Teste mit kleinen Zahlen!</li>
+              </ul>
+            </div>
+            <div class="jsc-deepen-card">
+              <h2>
+                <i class="ph ph-books" aria-hidden="true"></i> Vertiefen
+              </h2>
+              <ul class="jsc-deepen-list">
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/for" target="_blank" rel="noopener">for (MDN)</a>
+                  <span>Syntax + alle Varianten.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/while" target="_blank" rel="noopener">while (MDN)</a>
+                  <span>Für Ereignis-Schleifen.</span>
+                </li>
+                <li>
+                  <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/break" target="_blank" rel="noopener">break/continue (MDN)</a>
+                  <span>Kontrolle mitten im Durchlauf.</span>
+                </li>
+              </ul>
+              <p class="jsc-deepen-note">
+                MDN (Mozilla Developer Network) ist die freie Referenz des Webs — wer dort nachschlägt,
+                arbeitet wie die Profis.
+              </p>
+            </div>
+          </section>
+
+                              <section class="jsc-media-section jsc-container jsc-band" aria-labelledby="media-title">
+            <h2 id="media-title">Anschauen &amp; Nachhören</h2>
+            <div class="jsc-media-grid">
+              <article class="jsc-media-embed" data-component="jsc-media-embed" data-video-url="">
+                <span class="jsc-media-embed__icon ph ph-play-circle" aria-hidden="true"></span>
+                <h3>Lernvideo: Schleifen</h3>
+                <p class="jsc-media-embed__body" data-media-body>Das Lernvideo wird nachgeliefert.</p>
+              </article>
+              <article class="jsc-media-embed">
+                <span class="jsc-media-embed__icon ph ph-file-pdf" aria-hidden="true"></span>
+                <h3>Begleit-Präsentation</h3>
+                <p class="jsc-media-embed__body">Die Präsentation zum Kapitel — als PDF zum Nacharbeiten. Folgt mit dem Kapitel-Update.</p>
+              </article>
+              <article class="jsc-media-embed">
+                <span class="jsc-media-embed__icon ph ph-file-text" aria-hidden="true"></span>
+                <h3>Spickzettel zum Ausdrucken</h3>
+                <p class="jsc-media-embed__body">Alle Kernpunkte des Kapitels auf einer Seite, zum Ausdrucken. Folgt mit dem Kapitel-Update.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="jsc-prompt-section jsc-container jsc-band--alt" aria-labelledby="prompt-title">
+            <h2 id="prompt-title">KI-Prompt-Training</h2>
+            <p class="jsc-home-lead">
+              Du arbeitest im Kurs grundsätzlich mit KI-Assistenten. Lern, gute Prompts zu
+              schreiben — das ist die wichtigste neue Fähigkeit.
+            </p>
+            <div class="jsc-prompt-grid">
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Schlechter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Mach mir eine Schleife."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum schlecht?</p>
+                  <p>Keine Aufgabe, keine Abbruchbedingung, kein Prüfkriterium — das Ergebnis ist beliebig und bleibt ungeprüft.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Guter Prompt</span>
+                  <span class="jsc-prompt-card__text">„Lass dir von der KI ein kleines Zahlenratespiel erzeugen (Computer denkt Zahl, User rät, Hinweise ‚größer/kleiner'). Prüfe die KI: Welche Schleifenart wurde gewählt und warum?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Warum gut?</p>
+                  <p>Konkretes Spiel plus gezielte Rückfrage zur Schleifenwahl — du lernst, Entscheidungen zu HINTERFRAGEN, nicht nur zu übernehmen.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="jsc-chapter-cta jsc-container jsc-band--alt" aria-label="Kapitelabschluss">
+            <p class="jsc-chapter-cta__text">
+              Du kannst jetzt wiederholen ohne müde zu werden — der Computer übernimmt.
+            </p>
+            <div class="jsc-chapter-cta__actions">
+              <a class="jsc-button jsc-button--primary jsc-button--lg" href="/tutorials/js-classic-v2/kapitel/06-arrays.html">
+                Weiter zu Kapitel 06: Arrays
+              </a>
+              <a class="jsc-button jsc-button--outline jsc-button--lg" href="/tutorials/js-classic-v2/uebungen/lab-05-countdown.html">
+                Übung 05: Countdown & Tabelle
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="Auf dieser Seite">
+          <h2>Auf dieser Seite</h2>
+          <ul>
+            <li><a href="#einstieg" data-i18n="ui.b17.railLink">Einstieg</a></li>
+            <li><a href="#schritt-1">1 for</a></li>
+            <li><a href="#schritt-2">2 while</a></li>
+            <li><a href="#schritt-3">3 break/continue</a></li>
+            <li><a href="#schritt-4">4 Muster</a></li>
+            <li><a href="#didaktische-pause">Didaktische Pause</a></li>
+            <li><a href="#check-title">Checkliste</a></li>
+            <li><a href="#quiz-title">Quiz</a></li>
+            <li><a href="#reflect-title">Reflexion</a></li>
+            <li><a href="#summary-title">Zusammenfassung</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

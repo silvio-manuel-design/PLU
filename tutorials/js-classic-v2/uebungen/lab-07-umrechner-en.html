@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab 07 — Mini Converter · Exercises · JavaScript V2 (PLU)</title>
+    <meta
+      name="description"
+      content="Exercise for chapter 07: build three converter functions with return, parameters and JSDoc. With requirements, AI starter prompt and model solution."
+    />
+    <link rel="canonical" href="https://www.pantam.at/tutorials/js-classic-v2/uebungen/lab-07-umrechner-en.html" />
+    <link rel="alternate" hreflang="de" href="lab-07-umrechner.html" />
+    <link rel="alternate" hreflang="en" href="lab-07-umrechner-en.html" />
+    <link rel="alternate" hreflang="x-default" href="lab-07-umrechner.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Lab 07 — Mini Converter · JavaScript V2" />
+    <meta property="og:description" content="Exercise for chapter 07: build three converter functions with return, parameters and JSDoc. With requirements, AI starter prompt and model solution." />
+    <meta property="og:image" content="https://www.pantam.at/tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-2560.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="icon" type="image/svg+xml" href="/tutorials/js-classic-v2/assets/favicon.svg">
+
+    <link rel="stylesheet" href="../css/js-classic.css" />
+    <script type="module" src="/js/entry-chapter.js"></script>
+  </head>
+  <body data-module="m07">
+    <div data-component="jsc-site-chrome"></div>
+
+    <main id="main">
+      <section class="jsc-hero jsc-chapter-hero" aria-labelledby="lab-title">
+        <div class="jsc-hero__media">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-768.avif   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-1440.avif 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-2560.avif 2560w
+              "
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-768.webp   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-1440.webp 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-2560.webp 2560w
+              "
+              sizes="100vw"
+            />
+            <img
+              src="/tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-1440.jpg"
+              srcset="
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-768.jpg   768w,
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-1440.jpg 1440w,
+                /tutorials/js-classic-v2/assets/img/labs/lab07/jsc-lab07-hero-v1-2560.jpg 2560w
+              "
+              sizes="100vw"
+              width="2560"
+              height="1437"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt="Two oval glass portals, light shifting from gold to teal between them"
+            />
+          </picture>
+        </div>
+        <div class="jsc-hero__overlay" aria-hidden="true"></div>
+        <div class="jsc-hero__content jsc-container">
+          <p class="jsc-hero__eyebrow">Exercise 07 · Chapter 07</p>
+          <h1 id="lab-title" class="jsc-hero__title">Lab 07 — Mini Converter</h1>
+          <p class="jsc-hero__sub">Functions package your knowledge. You build three converters with clean returns. Time: about 30 min.</p>
+        </div>
+      </section>
+
+      <div class="jsc-chapter-layout jsc-container">
+        <div class="jsc-info-main jsc-lab">
+          <section class="jsc-container jsc-band" id="aufgabe" aria-labelledby="aufgabe-title">
+            <h2 id="aufgabe-title" class="jsc-step__heading">Your task</h2>
+            <p>
+              You write three small tools: Celsius to Fahrenheit, km/h to m/s, and a price
+              formatter. Each function gets input, calculation and return — nothing more.
+            </p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Your course leader announces the current lab.</p>
+                  <p class="jsc-stepper__text">Its task builds on the previous labs.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Open the lab and read the task.</p>
+                  <p class="jsc-stepper__text">The requirements are at the bottom.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Solve the task with AI support.</p>
+                  <p class="jsc-stepper__text">Use the starter prompt inside the lab.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Check the code.</p>
+                  <p class="jsc-stepper__text">Answer the questions in the requirements honestly.</p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Upload the file to your GitHub repository.</p>
+                  <p class="jsc-stepper__text">Guide: GitHub &amp; Abgabe.</p>
+                </div>
+              </li>
+            </ol>
+            <p class="jsc-step__blocklabel">Your two values — you need no notebook and no pen</p>
+            <ul class="jsc-leadlist">
+              <li>
+                <strong>Your code:</strong> your school ID + your initials, lower case, no dot.
+                Example: <code>12345ms</code>
+              </li>
+              <li>
+                <strong>Your number:</strong> the last digit of your school ID. Example:
+                school ID <code>12345</code> → number <code>5</code>
+              </li>
+            </ul>
+            <p>
+              In the end, your page shows three results. Each calculation lives in its own
+              function. Your code is in the title.
+            </p>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic-v2/kapitel/07-functions.html">← Back to chapter 07</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="mittel" aria-labelledby="mittel-title">
+            <h2 id="mittel-title" class="jsc-step__heading">Allowed tools</h2>
+            <p>You only use what you learned in chapters 01–07. Everything else is forbidden.</p>
+            <p class="jsc-step__blocklabel">Allowed</p>
+            <ul class="jsc-leadlist">
+              <li><strong>Variables:</strong> <code>const</code> and <code>let</code></li>
+              <li><strong>Text and numbers</strong> (strings, numbers)</li>
+              <li><strong>Input:</strong> <code>prompt()</code></li>
+              <li><strong>Building text:</strong> template literals (backticks <code>`</code> and <code>${`{`}…}</code>)</li>
+              <li><strong>Branches:</strong> <code>if</code>, <code>else</code></li>
+              <li><strong>Loops:</strong> <code>for</code></li>
+              <li><strong>Arrays</strong></li>
+              <li><strong>Functions:</strong> <code>return</code>, parameters, JSDoc</li>
+              <li><strong>Output:</strong> <code>console.log</code>, <code>innerHTML</code>, <code>getElementById</code></li>
+              <li><strong>HTML/CSS:</strong> basic structure, embedded with <code>defer</code></li>
+            </ul>
+            <p class="jsc-step__blocklabel">Not allowed</p>
+            <ul class="jsc-leadlist">
+              <li>Objects and methods — they come in chapter 08</li>
+              <li>Events and <code>addEventListener</code> — they come in chapters 09 and 10</li>
+              <li>Forms — they come in chapter 11</li>
+            </ul>
+            <aside class="jsc-step__explain-note">
+              <p>
+                If the AI sends you code with words from the “Not allowed” list — do not use it.
+                Rather ask the AI: “Explain to me …”. You build it yourself.
+              </p>
+            </aside>
+          </section>
+
+          <section class="jsc-container jsc-band" id="design" aria-labelledby="design-title">
+            <h2 id="design-title" class="jsc-step__heading">Design guidelines</h2>
+            <p>
+              Your page is dark. Your code is in the title. You read the three results at
+              a glance.
+            </p>
+            <p class="jsc-step__blocklabel">Guidelines</p>
+            <ul class="jsc-leadlist">
+              <li>Dark background, like the chapter pages</li>
+              <li>Your code in the page title, clearly visible</li>
+              <li>The three results are listed one below the other, clearly separated</li>
+              <li>The functions live in <code>js/main.js</code>; the HTML stays clean</li>
+            </ul>
+            <aside class="jsc-step__explain-note">
+              <p>Everything else you design freely. Surprise me.</p>
+            </aside>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="anforderungen" aria-labelledby="req-title">
+            <h2 id="req-title" class="jsc-step__heading">Requirements</h2>
+            <p>Tick every line only when your code really does it. At the end, print the list as a PDF.</p>
+            <ul
+              class="jsc-checklist"
+              data-component="jsc-checklist"
+              data-storage-key="jsc-lab-07-req"
+            >
+              <li><label><input type="checkbox" /> <span><code>index.html</code>, <code>css/style.css</code> and <code>js/main.js</code> are in the folder <code>uebung-07/</code> and linked.</span></label></li>
+              <li><label><input type="checkbox" /> <span><code>celsiusToFahrenheit(c)</code> — formula <code>c * 9 / 5 + 32</code>, with <code>return</code> and one sentence of JSDoc.</span></label></li>
+              <li><label><input type="checkbox" /> <span><code>kmhToMs(k)</code> — formula <code>k / 3.6</code>, result rounded to two decimals, with JSDoc.</span></label></li>
+              <li><label><input type="checkbox" /> <span><code>formatPrice(amount)</code> — returns a string with <code>€</code> and <code>toFixed(2)</code>, with JSDoc.</span></label></li>
+              <li><label><input type="checkbox" /> <span>A small test page calls all three functions — with 100 °C, your number km/h and 3.1415 € — and shows the results.</span></label></li>
+              <li><label><input type="checkbox" /> <span>The heading <code>h1</code> shows your code; the script is embedded in the head with <code>defer</code>.</span></label></li>
+            </ul>
+            <p class="jsc-check-actions">
+              <button type="button" class="jsc-button jsc-button--outline jsc-button--sm jsc-print-btn" data-print>
+                <i class="ph ph-printer" aria-hidden="true"></i> <span data-i18n="ui.print">Print</span>
+              </button>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="schritte" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="jsc-step__heading">Step by step</h2>
+            <p>Six steps. Plan about 20 minutes. After each step, reload your page.</p>
+            <ol class="jsc-stepper jsc-stepper--light">
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">1</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Create the folder</p>
+                  <p class="jsc-stepper__text">
+                    Create the folder <code>uebung-07/</code>. Inside it <code>index.html</code>,
+                    <code>css/</code> and <code>js/</code>. Create <code>css/style.css</code> and
+                    <code>js/main.js</code> and link them.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">2</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Skeleton and design</p>
+                  <p class="jsc-stepper__text">
+                    Heading <code>h1</code> with your code. Dark background in
+                    <code>style.css</code>. An element with <code>id="ergebnis"</code> for the
+                    three outputs.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">3</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">First function</p>
+                  <p class="jsc-stepper__text">
+                    Write <code>celsiusToFahrenheit(c)</code>: parameter, calculation,
+                    <code>return</code>. One sentence of JSDoc above it.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">4</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Two more functions</p>
+                  <p class="jsc-stepper__text">
+                    <code>kmhToMs(k)</code> with a rounded result.
+                    <code>formatPrice(amount)</code> with <code>toFixed(2)</code> and €.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">5</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Write the test page</p>
+                  <p class="jsc-stepper__text">
+                    Call all three functions: with 100, your number and 3.1415. Write the
+                    results into <code>#ergebnis</code> with <code>innerHTML</code>.
+                  </p>
+                </div>
+              </li>
+              <li class="jsc-stepper__item">
+                <span class="jsc-stepper__nr" aria-hidden="true">6</span>
+                <div class="jsc-stepper__body">
+                  <p class="jsc-stepper__title">Console and test</p>
+                  <p class="jsc-stepper__text">
+                    Reload the page and check: three results, no errors in the console. Then
+                    tick the requirements.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="jsc-container jsc-band--alt" id="ki" aria-labelledby="ki-title">
+            <h2 id="ki-title" class="jsc-step__heading">Work with the AI</h2>
+            <aside class="jsc-step__explain-note">
+              <p>
+                <strong>The rule:</strong> the AI explains, you build yourself. Have code
+                explained to you — not delivered. If you take code from the AI, you must be able
+                to explain every line.
+              </p>
+            </aside>
+            <p class="jsc-step__blocklabel">Your starter prompt</p>
+            <figure class="jsc-code-block" data-filename="starter-prompt.txt">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">starter-prompt.txt</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">I am learning JavaScript, chapter 07 (functions). Only allowed: variables, prompt(), template literals, if/else, loops, arrays and functions with return and JSDoc — no objects, no events, no forms.
+My code is [CODE], my number is [NUMBER]. Explain to me step by step how I write three converters: celsiusToFahrenheit, kmhToMs and formatPrice. Show me how to test them with 100, my number and 3.1415. Do not write a finished program for me.</code></pre>
+            </figure>
+            <p class="jsc-step__blocklabel">Three check questions</p>
+            <ol>
+              <li>What is the difference between <code>return</code> and <code>console.log()</code> — in one sentence?</li>
+              <li>Why round before the <code>return</code>?</li>
+              <li>What is a parameter?</li>
+            </ol>
+            <p class="jsc-lab-actions">
+              <a class="jsc-button jsc-button--outline" href="/tutorials/js-classic-v2/ki-grundlagen.html">Open AI basics</a>
+            </p>
+          </section>
+
+          <section class="jsc-container jsc-band" id="abgabe" aria-labelledby="sub-title">
+            <h2 id="sub-title" class="jsc-step__heading">Submission</h2>
+            <p>
+              You upload your result to your GitHub repository. Your folder is called
+              <code>uebung-07/</code>. Your folder looks like this:
+            </p>
+            <figure class="jsc-code-block" data-filename="uebung-07/">
+              <figcaption class="jsc-code-block__bar">
+                <span class="jsc-code-block__file">uebung-07/</span>
+                <button type="button" class="jsc-code-block__copy" data-copy data-i18n="ui.common.copy">Copy</button>
+              </figcaption>
+              <pre class="jsc-code-block__pre"><code class="jsc-code-block__code language-text">uebung-07/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── screenshot.png        (image of your running page)
+└── anforderungen.pdf     (requirements ticked and printed)</code></pre>
+            </figure>
+            <aside class="jsc-step__explain-note">
+              <p>
+                <strong>How to make the PDF:</strong> tick every requirement your code really
+                fulfils. Then press the print button on this page. Choose “Save as PDF” as the
+                target. The PDF is your promise — in the technical talk I will ask you about
+                every ticked line. Your teacher tells you the deadline.
+              </p>
+            </aside>
+          </section>
+        </div>
+
+        <aside class="jsc-chapter-rail" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="/tutorials/js-classic-v2/uebungen/">All labs</a></li>
+            <li><a href="#aufgabe">Task</a></li>
+            <li><a href="#mittel">Allowed tools</a></li>
+            <li><a href="#design">Design</a></li>
+            <li><a href="#anforderungen">Requirements</a></li>
+            <li><a href="#schritte">Steps</a></li>
+            <li><a href="#ki">AI</a></li>
+            <li><a href="#abgabe">Submission</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
