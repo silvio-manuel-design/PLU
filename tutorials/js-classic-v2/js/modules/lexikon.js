@@ -59,4 +59,18 @@ export function initLexikon() {
   });
 
   apply();
+
+  /* P41: Deep-Link-Ankunft — bei #term-… Suchfeld leeren, Karte sichtbar machen
+     und sanft hinscrollen. Buchstabenanker (#lex-A …) bleiben natives Verhalten. */
+  function revealTerm() {
+    if (!/^#term-/.test(location.hash)) return;
+    const card = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!card) return;
+    input.value = '';
+    apply();
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  revealTerm();
+  window.addEventListener('hashchange', revealTerm);
 }
