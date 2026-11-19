@@ -16,16 +16,18 @@
 
 .jsc-hero__media,
 .jsc-hero__media picture,
-.jsc-hero__media img {
+.jsc-hero__media img,
+.jsc-hero__media video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.jsc-hero__media img {
+.jsc-hero__media img,
+.jsc-hero__media video {
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
 }
 
 .jsc-hero__overlay {
@@ -65,11 +67,11 @@ html[data-theme="light"] .jsc-hero__overlay {
 
 @media (min-width: 1024px) {
   .jsc-hero {
-    align-items: flex-end; /* Text ins untere Drittel — Bogen der Grafik nutzen */
+    align-items: flex-start; /* P43: Text ins obere Drittel — ruhigster Bildraum des Videos */
   }
 
   .jsc-hero__content {
-    padding-block-end: clamp(2rem, 10vh, 6rem);
+    padding-block-start: clamp(4rem, 20vh, 12rem);
   }
 }
 
@@ -126,7 +128,7 @@ html[data-theme="light"] .jsc-hero__eyebrow {
 
 @media (min-width: 1024px) {
   .jsc-hero {
-    min-height: 80vh;
+    min-height: 100vh; /* P43: Fullscreen-Hero — Video füllt die erste Ansicht */
   }
 }
 
@@ -146,6 +148,11 @@ html[data-theme="light"] .jsc-hero__eyebrow {
 @media (prefers-reduced-motion: reduce) {
   .jsc-hero__media img {
     animation: none;
+  }
+
+  /* --- P43: Hero-Motion-Video — bei Bewegungsreduktion Fallback-Bild ------- */
+  .jsc-hero__media video {
+    display: none;
   }
 }
 
