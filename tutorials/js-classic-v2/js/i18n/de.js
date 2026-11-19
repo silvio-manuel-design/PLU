@@ -85,7 +85,6 @@ export default {
   'ui.b17.understandEyebrow': 'ERST MAL VERSTEHEN',
   'ui.b17.termsEyebrow': 'WÖRTER, DIE DU JETZT LERNST',
   'ui.b17.railLink': 'Einstieg',
-  'ui.b17.chip': 'Einstieg',
   'ui.ch.03.teaser': 'Rechnen, vergleichen, verknüpfen: die Werkzeuge, mit denen Werte zu Entscheidungen werden.',
   'ui.ch.03.imgAlt': 'Neon-Symbole von Rechenzeichen schweben in einer dunklen Werkstatt aus Licht.',
   'ui.ch.04.teaser': 'Wenn das, dann jenes: Entscheidungen treffen lassen und Programme auf Situationen reagieren lassen.',
