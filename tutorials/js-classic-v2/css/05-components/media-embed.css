@@ -62,3 +62,49 @@
   width: 100%;
   border-radius: var(--jsc-radius-m);
 }
+
+/* P44: YouTube-Fassade (lokales Poster + Play-Button) */
+.jsc-media-embed__poster {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--jsc-radius-m);
+  background: var(--jsc-color-surface-1);
+}
+
+.jsc-media-embed__poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Dezentes Abdunkeln — weißer Button-Text kontrastiert auch im Light-Theme */
+.jsc-media-embed__poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.15));
+  pointer-events: none;
+}
+
+.jsc-media-embed__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.jsc-media-embed__play:hover,
+.jsc-media-embed__play:focus-visible {
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 0.25), 0 0 24px var(--jsc-color-accent);
+}
+
+.jsc-media-embed__note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
