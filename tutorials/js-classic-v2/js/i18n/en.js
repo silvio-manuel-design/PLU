@@ -130,6 +130,11 @@ export default {
   'ui.media.placeholder': 'Video coming soon.',
   'ui.media.load': 'Load video (privacy-friendly)',
   'ui.media.external': 'External content — loaded only after clicking.',
+  'ui.media.play': 'Play video: {{title}}',
+  'ui.media.playLabel': 'Play video',
+  'ui.media.watch': 'Watch on YouTube',
+  'ui.media.channel': 'Channel: Pantam, Art-Culture-Education',
+  'ui.media.externalHint': '(external link, opens new window)',
   'ui.demo.run': 'Run',
   'ui.demo.reset': 'Reset',
 
