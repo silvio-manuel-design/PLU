@@ -96,10 +96,15 @@
   transform: translate(-50%, -50%);
   z-index: 1;
   cursor: pointer;
+  /* Kein Transform-Übergang: Button steht fix, Hover = nur Glow */
+  transition: box-shadow var(--jsc-duration-fast) var(--jsc-ease-out);
 }
 
-.jsc-media-embed__play:hover,
-.jsc-media-embed__play:focus-visible {
+/* P44n: Zentrierung schlägt den Basis-Lift (translateY) des Button-Systems —
+   höhere Spezifität, Position bleibt auf Hover/Fokus exakt stehen */
+.jsc-media-embed .jsc-media-embed__play:hover,
+.jsc-media-embed .jsc-media-embed__play:focus-visible {
+  transform: translate(-50%, -50%);
   box-shadow: 0 0 0 4px rgb(255 255 255 / 0.25), 0 0 24px var(--jsc-color-accent);
 }
 
@@ -107,4 +112,10 @@
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+/* P44n: Einzelne Media-Karte über volle Breite */
+.jsc-media-grid--single,
+.jsc-media-grid--single > .jsc-media-embed {
+  grid-template-columns: 1fr;
 }

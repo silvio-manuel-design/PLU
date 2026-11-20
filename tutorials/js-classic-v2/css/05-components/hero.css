@@ -27,6 +27,12 @@
 .jsc-hero__media img,
 .jsc-hero__media video {
   object-fit: cover;
+  object-position: center;
+}
+
+/* P44n: Bottom-Positionierung nur auf der Startseite (P43-Wunschbild) */
+.jsc-hero--home .jsc-hero__media img,
+.jsc-hero--home .jsc-hero__media video {
   object-position: center bottom;
 }
 
@@ -67,10 +73,20 @@ html[data-theme="light"] .jsc-hero__overlay {
 
 @media (min-width: 1024px) {
   .jsc-hero {
-    align-items: flex-start; /* P43: Text ins obere Drittel — ruhigster Bildraum des Videos */
+    align-items: flex-end; /* Text ins untere Drittel — Bogen der Grafik nutzen */
   }
 
   .jsc-hero__content {
+    padding-block-end: clamp(2rem, 10vh, 6rem);
+  }
+
+  /* P44n: P43-Startseiten-Hero — Text im oberen Drittel, Fullscreen */
+  .jsc-hero--home {
+    align-items: flex-start;
+  }
+
+  .jsc-hero--home .jsc-hero__content {
+    padding-block-end: 0;
     padding-block-start: clamp(4rem, 20vh, 12rem);
   }
 }
@@ -128,7 +144,12 @@ html[data-theme="light"] .jsc-hero__eyebrow {
 
 @media (min-width: 1024px) {
   .jsc-hero {
-    min-height: 100vh; /* P43: Fullscreen-Hero — Video füllt die erste Ansicht */
+    min-height: 80vh;
+  }
+
+  /* P44n: Fullscreen-Hero nur auf der Startseite (Hero-Motion-Video) */
+  .jsc-hero--home {
+    min-height: 100vh;
   }
 }
 
