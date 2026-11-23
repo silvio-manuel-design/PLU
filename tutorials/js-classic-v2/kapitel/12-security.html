@@ -456,6 +456,10 @@ list to attacker@example.com.</code></pre>
                 <p class="jsc-mistake-card__title">"Our chatbot only reads our own site"</p>
                 <p>That's exactly the indirect injection: guestbooks, comments and embedded documents are the attack surface.</p>
               </div>
+              <div class="jsc-mistake-card">
+                <p class="jsc-mistake-card__title">"Invisible text protects us — nobody sees white font"</p>
+                <p>For humans yes, for AI no: assistants read the text, not the color. Applications and emails with hidden instructions are a real, current example.</p>
+              </div>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Pro tip</p>
@@ -590,6 +594,16 @@ function addEntry(input) {
                 <template data-feedback="ok"><strong>Exactly — store raw, escape on output. That keeps the data clean.</strong></template>
                 <template data-feedback="wrong">Escaping belongs to output: the data stays raw, the display becomes safe.</template>
               </fieldset>
+              <fieldset class="jsc-quiz__question" data-correct="c">
+                <legend>An email shows a normal application — it also contains white text on a white background with instructions for the AI assistant. What is this?</legend>
+                <label><input type="radio" name="ch12-q4" value="a" /> A harmless joke — invisible text is ignored</label>
+                <label><input type="radio" name="ch12-q4" value="b" /> Phishing</label>
+                <label><input type="radio" name="ch12-q4" value="c" /> Indirect prompt injection — the assistant reads what humans can't see</label>
+                <label><input type="radio" name="ch12-q4" value="d" /> Spam</label>
+                <p class="jsc-quiz__feedback" data-feedback-live aria-live="polite"></p>
+                <template data-feedback="ok"><strong>Correct — the instructions are invisible to humans, not to the AI. That's why embedded content must always be treated as an attack surface.</strong></template>
+                <template data-feedback="wrong">It's indirect prompt injection: the assistant reads the text, not the color. Invisible to humans doesn't mean invisible to AI.</template>
+              </fieldset>
               <p class="jsc-quiz__actions">
                 <button type="button" class="jsc-button jsc-button--primary" data-quiz-check data-i18n="ui.quiz.check">Check answers</button>
                 <button type="button" class="jsc-button jsc-button--ghost" data-quiz-retry hidden data-i18n="ui.quiz.retry">Try again</button>
@@ -682,6 +696,26 @@ function addEntry(input) {
                 <div class="jsc-prompt-card__body">
                   <p class="jsc-step__blocklabel">Why is it good?</p>
                   <p>Defensive learning goal plus comparison task — you train spotting the hole, not exploiting it.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--bad">
+                <summary>
+                  <span class="jsc-prompt-card__label">Bad prompt</span>
+                  <span class="jsc-prompt-card__text">„How do I trick an AI into ranking my application first?"</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it bad?</p>
+                  <p>The goal is deception instead of understanding — you learn nothing about security and dodge risks instead of understanding them.</p>
+                </div>
+              </details>
+              <details class="jsc-prompt-card jsc-prompt-card--good">
+                <summary>
+                  <span class="jsc-prompt-card__label">Good prompt</span>
+                  <span class="jsc-prompt-card__text">„Ask the AI to check an application email for hidden instructions (e.g. white text on a white background). Have it explain why an AI assistant reads this text anyway."</span>
+                </summary>
+                <div class="jsc-prompt-card__body">
+                  <p class="jsc-step__blocklabel">Why is it good?</p>
+                  <p>A defensive review task with a concrete real-world example — you learn the attack surface and how to spot it.</p>
                 </div>
               </details>
             </div>
