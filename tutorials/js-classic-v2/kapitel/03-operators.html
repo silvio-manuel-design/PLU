@@ -218,7 +218,7 @@ console.log(10 / 0);</textarea>
             </aside>
             <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch03-s1-criteria">
               <li><label><input type="checkbox" /> <span>I know +, −, *, /, % and ** and what they return.</span></label></li>
-              <li><label><input type="checkbox" /> <span>I know that / produces decimals in JavaScript.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know that / always produces a Number value — no remainder, no integer division (6 / 2 = 3, 7 / 2 = 3.5).</span></label></li>
               <li><label><input type="checkbox" /> <span>I can check remainders with modulo (even/odd, last digit).</span></label></li>
             </ul>
           </section>
@@ -244,15 +244,16 @@ console.log(10 / 0);</textarea>
                 </figcaption>
                 <pre class="jsc-code-block__pre"><code class="jsc-code-block__code">console.log(7 === 7);      // true
 console.log("7" === 7);    // false — different types!
-console.log("7" == 7);     // true — BUT NOBODY USES ==
+console.log("7" == 7);     // true — == converts types (banned in this course)
 console.log(10 &gt; 5);       // true
 const points = 87;
 console.log(points &gt;= 50); // true</code></pre>
               </figure>
               <p>
                 <strong>The == trap:</strong> <code>==</code> converts types before comparing
-                (<code>"" == 0</code> is true!). That produces unpredictable results — so from
-                today on: only <code>===</code> and <code>!==</code>.
+                (<code>"" == 0</code> is true!). That produces unpredictable results — real-world
+                code rarely uses <code>==</code> because of that. In this course the rule is:
+                only <code>===</code> and <code>!==</code>.
               </p>
             </div>
             <div class="jsc-step__mistakes">
@@ -263,7 +264,7 @@ console.log(points &gt;= 50); // true</code></pre>
               </div>
               <div class="jsc-mistake-card">
                 <p class="jsc-mistake-card__title">Using ==</p>
-                <p>„Loose equality" delivers surprises: <code>"" == 0</code> is true, <code>"0" == false</code> too. Nobody wants that. <code>===</code> always.</p>
+                <p>„Loose equality" delivers surprises: <code>"" == 0</code> is true, <code>"0" == false</code> too. Legacy code still uses <code>==</code> — you write new code with <code>===</code>.</p>
               </div>
               <div class="jsc-mistake-card">
                 <p class="jsc-mistake-card__title">Comparing strings lexicographically</p>
@@ -276,11 +277,11 @@ console.log(points &gt;= 50); // true</code></pre>
             </div>
             <aside class="jsc-step__tip">
               <p class="jsc-step__blocklabel">Pro tip</p>
-              <p>ESLint automatically bans <code>==</code>. From today: only === and !== — no exceptions, no discussion.</p>
+              <p>ESLint warns about <code>==</code> (the <code>eqeqeq</code> rule, depending on your config). From today: only === and !== — that's established practice.</p>
             </aside>
             <ul class="jsc-step__criteria" data-component="jsc-checklist-items" data-storage-key="jsc-ch03-s2-criteria">
               <li><label><input type="checkbox" /> <span>I use only === and !== for comparisons.</span></label></li>
-              <li><label><input type="checkbox" /> <span>I can explain why == is forbidden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can explain why we avoid == in this course.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can build and combine comparisons with &gt;, &lt;, &gt;=, &lt;=.</span></label></li>
               <li><label><input type="checkbox" /> <span>I have the classic operator traps on my radar (assignment vs comparison, string comparisons, NaN).</span></label></li>
             </ul>
@@ -421,11 +422,11 @@ console.log(log);</code></pre>
               data-chapter="03"
             >
               <li><label><input type="checkbox" /> <span>I know +, −, *, /, % and ** and what they return.</span></label></li>
-              <li><label><input type="checkbox" /> <span>I know that / produces decimals in JavaScript.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I know that / always produces a Number value — no remainder, no integer division (6 / 2 = 3, 7 / 2 = 3.5).</span></label></li>
               <li><label><input type="checkbox" /> <span>I can check remainders with modulo (even/odd, last digit).</span></label></li>
               <li><label><input type="checkbox" /> <span>I know increment/decrement and the shortcuts +=, −=, *=, /=.</span></label></li>
               <li><label><input type="checkbox" /> <span>I use only === and !== for comparisons.</span></label></li>
-              <li><label><input type="checkbox" /> <span>I can explain why == is forbidden.</span></label></li>
+              <li><label><input type="checkbox" /> <span>I can explain why we avoid == in this course.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can build and combine comparisons with &gt;, &lt;, &gt;=, &lt;=.</span></label></li>
               <li><label><input type="checkbox" /> <span>I can link conditions with &amp;&amp;, || and !.</span></label></li>
               <li><label><input type="checkbox" /> <span>I know that &amp;&amp; and || return one of the operands (short-circuit).</span></label></li>
@@ -542,7 +543,7 @@ if (num % 3 === 0) {
                 <i class="ph ph-list-checks" aria-hidden="true"></i> Summary
               </h2>
               <ul class="jsc-summary-list">
-                <li>Calculating: + − * / % ** — / always produces decimals.</li>
+                <li>Calculating: + − * / % ** — / always produces a Number (no integer division, no remainder).</li>
                 <li>Modulo = remainder, the check-everything tool.</li>
                 <li>Comparisons return boolean — always === instead of ==.</li>
                 <li>&amp;&amp; || ! link conditions; || is also the fallback trick.</li>
