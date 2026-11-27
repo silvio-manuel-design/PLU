@@ -149,8 +149,12 @@
             You can build websites with HTML and CSS that look polished:
             structure and styling in place. But they are silent. JavaScript is the third pillar of
             the web: HTML gives content its structure, CSS gives its appearance a shape, and
-            JavaScript gives its behaviour a pulse. No JavaScript means no buttons that react, no
-            forms that validate, no content that moves. Before you write the language, you need to
+            JavaScript gives its behaviour a pulse. Hardly any real interaction without
+            JavaScript: CSS can already do a lot today (hover, transitions) and forms can be
+            submitted without JS — but anything that reacts and validates individually needs
+            JavaScript. And it doesn't just run top to bottom: it waits event-driven for
+            clicks and keys (the event loop — more on that in chapter 10). Before you write
+            the language, you need to
             know where it actually lives — because JavaScript never lives alone, it always moves
             in with HTML.
           </p>
@@ -440,9 +444,11 @@ console.log("I am", 16, "years old");</textarea>
         </div>
         <div class="jsc-step__explain">
           <p>
-            Every HTML element can be reached via <code>document.getElementById()</code>. With
+            Every HTML element is reachable via <code>document.getElementById()</code>. With
             <code>innerHTML</code> you replace its content. The element needs an
-            <code>id</code>.
+            <code>id</code>. One caution to take along: <code>innerHTML</code> interprets text
+            as HTML — your own fixed text is fine, but foreign or user input never belongs in
+            it (XSS, see chapter 12).
           </p>
           <figure class="jsc-code-block" data-filename="index.html">
             <figcaption class="jsc-code-block__bar">
