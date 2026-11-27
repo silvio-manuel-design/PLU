@@ -154,9 +154,9 @@ button.addEventListener("click", function () {
               </figure>
               <p>
                 A listener doesn't have to run forever: <code>removeEventListener</code>
-                unregisters it. That only works with a named function — an anonymous one can't
-                be recognised again. If the listener should fire only once, the
-                <code>{ once: true }</code> option is enough.
+                unregisters it. What matters is the same function reference — an anonymous
+                function works too if you store it in a variable first. If the listener should
+                fire only once, the <code>{ once: true }</code> option is enough.
               </p>
               <figure class="jsc-code-block" data-filename="unlisten.js">
                 <figcaption class="jsc-code-block__bar">
@@ -216,8 +216,8 @@ click();</textarea>
               <div class="jsc-mistake-card">
                 <p class="jsc-mistake-card__title">removeEventListener with an anonymous function</p>
                 <p><code>removeEventListener("click", function () { … })</code> removes nothing —
-                the anonymous function is a different one from registration. Always use a named
-                function.</p>
+                the anonymous function is a different one from registration. Store the function
+                in a variable and unregister exactly that reference.</p>
               </div>
             </div>
             <aside class="jsc-step__tip">
