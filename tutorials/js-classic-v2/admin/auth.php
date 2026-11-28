@@ -89,7 +89,7 @@ function jsc_rate_locksec(): int
 }
 
 // true = gesperrt; $restSec liefert die Restzeit in Sekunden
-function jsc_rate_locked(int &$restSec = null): bool
+function jsc_rate_locked(?int &$restSec = null): bool
 {
     $state = jsc_rate_state();
     $ip = jsc_client_ip();
