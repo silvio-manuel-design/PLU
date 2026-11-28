@@ -56,7 +56,7 @@ $joinFiles = static function (array $files): string {
       <header class="top">
         <h1>Musterlösungen · JavaScript V2</h1>
         <p class="meta">
-          Eingeloggt als Lehrkraft. <a href="logout.php">Abmelden</a>
+          Eingeloggt als Lehrkraft. <a href="passwort.php">Passwort ändern</a> · <a href="logout.php">Abmelden</a>
         </p>
       </header>
 
